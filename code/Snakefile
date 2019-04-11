@@ -52,7 +52,7 @@ bed10up_dir = dir_data + "bed_10up/"
 nuc10up_dir = dir_data + "nuc_10up/"
 nuc10up_clean_dir= dir_data + "nuc_10upclean/"
 bedClean_dir = dir_data + "bed_clean/"
-bedClean_sort_dir = dir_dta + "bed_clean_sort/"
+bedClean_sort_dir = dir_data + "bed_clean_sort/"
 bamclean_dir = dir_data + "bam_clean/"
 bamclean_sort_dir= dir_data + "sort_clean/"
 
@@ -76,7 +76,7 @@ rule all:
        expand(fastqc_dir + "{samples}_fastqc.html", samples = samples),
        expand(bam_dir + "{samples}.bam", samples = samples),
        expand(sort_dir + "{samples}-sort.bam", samples=samples),
-       expand(sort_dir + "{samples}-sort.bam.bai, samples=samples),
+       expand(sort_dir + "{samples}-sort.bam.bai", samples=samples),
        expand(bam_waspfilt + "{samples}-waspfilt.bam", samples=samples),
        expand(sort_waspfilt_dir + "{samples}-waspfilt.sort.bam", samples=samples),
        expand(sort_waspfilt_dir + "{samples}-waspfilt.sort.bam.bai", samples=samples),
@@ -181,9 +181,9 @@ rule nuc10up:
        nuc10up_dir + "{samples}-10upnuc.txt"
     params:
        genomeFA
-    shell: "bedtools nuc -s -seq -fi {params} -bed {input} > {output}
+    shell: "bedtools nuc -s -seq -fi {params} -bed {input} > {output}"
 
-run clean10up:
+rule clean10up:
     input:
        nuc10up_dir + "{samples}-10upnuc.txt"
     output:
@@ -214,7 +214,7 @@ rule cleanBam:
        bamfile= sort_waspfilt_dir + "{samples}-waspfilt.sort.bam"
     output:
        bamclean_dir + "{samples}-clean.bam"
-    shell: "python filterBamforMP.pysam2_gen.py {input.bedfile} {input.bamfile} {output}
+    shell: "python filterBamforMP.pysam2_gen.py {input.bedfile} {input.bamfile} {output}"
 
 
 rule sort_cleanBam:
