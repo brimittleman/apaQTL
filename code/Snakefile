@@ -6,9 +6,9 @@
 #config_proc.yaml
 #
 #to configure job submission settings for cluster, edit
-#cluster_proc.json and submit-snakemake.sh
+#cluster.json and submit-snakemake.sh
 
-#to run on RCC midway2 use 'bash submit-snakemake_proc.sh'
+#to run on RCC midway2 use 'bash submit-snakemake.sh'
 
 import glob
 import os
@@ -129,7 +129,7 @@ rule index_bam:
         sort_dir + "{samples}-sort.bam"
     output:
         sort_dir + "{samples}-sort.bam.bai"
-    shell: "samtools index {index}"
+    shell: "samtools index {input}"
 
 rule filter_wasp:
     input:
@@ -150,7 +150,7 @@ rule index_waspfilterbam:
        sort_waspfilt_dir + "{samples}-waspfilt.sort.bam"
     output:
        sort_waspfilt_dir + "{samples}-waspfilt.sort.bam.bai"
-    shell: "samtools index {index}"
+    shell: "samtools index {input}"
 
 rule bam2bed:
     input:
@@ -221,12 +221,12 @@ rule sort_cleanBam:
     input:
        bamclean_dir + "{samples}-clean.bam"
     output:
-       bamclean_sort_dir + "{sampples}-clean.sort.bam"
+       bamclean_sort_dir + "{samples}-clean.sort.bam"
     shell: "samtools sort {input} > {output}"
 
 rule index_cleanBam:
     input:
-       bamclean_sort_dir + "{sampples}-clean.sort.bam"
+       bamclean_sort_dir + "{samples}-clean.sort.bam"
     output:
-       bamclean_sort_dir + "{sampples}-clean.sort.bam.bai"
+       bamclean_sort_dir + "{samples}-clean.sort.bam.bai"
     shell: "samtools index {input} > {output}"
