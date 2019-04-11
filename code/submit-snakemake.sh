@@ -7,7 +7,7 @@ snakemake \
     --ri \
     -j 500 \
     --rerun-incomplete \
-    --cluster-config cluster_proc.json \
+    --cluster-config cluster.json \
     -c "sbatch \
         --mem={cluster.mem} \
         --nodes={cluster.n} \
