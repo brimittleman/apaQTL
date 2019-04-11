@@ -12,10 +12,10 @@ navbar:
   right:
   - icon: fa-github
     text: Source code
-    href: https://github.com/brimittleman/apaQTL
+    href: https/github.com/brimittleman/apaQTL
 output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: journal
     highlight: textmate
