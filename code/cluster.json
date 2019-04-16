@@ -1,0 +1,43 @@
+{
+    "__default__" :
+    {
+        "mem" : 4000,
+        "n" : 2,
+        "tasks" : 2,
+        "name" : "{rule}-{wildcards}",
+        "logfile": "log/snake-{rule}-{wildcards}-%j.out"
+    },
+"fastqc" :
+    {
+             "mem" : 50000
+    },
+"starmap" :
+    {
+             "mem": 50000,
+             "tasks" : 8
+    },
+"sort_bam" :
+    {
+             "mem": 8000
+    },
+"index_bam":
+    {
+             "mem": 8000
+    },
+"sort_waspfilterbam":
+    {
+             "mem": 8000
+    },
+"index_waspfilterbam":
+    {
+             "mem":8000
+    },
+"sort_cleanBam":
+    {
+             "mem":8000
+    },
+"index_cleanBam":
+    {
+             "mem":8000
+    }
+}

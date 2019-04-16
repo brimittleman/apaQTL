@@ -11,7 +11,7 @@ def main(Bamin, out):
         #vw=read.split(\t)[-1]
         if read.has_tag('vW'):
             x= read.get_tag('vW')
-            print(x)
+            #print(x)
             if x == 1:
                 k+=1
                 finalBam.write(read)
@@ -21,8 +21,8 @@ def main(Bamin, out):
         else:
           finalBam.write(read)
   
-    print("with wv" + n)
-    print("pass filter" + k)
+    #print("with wv" + n)
+    #print("pass filter" + k)
     bamfile.close()
     finalBam.close()
     

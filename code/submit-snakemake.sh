@@ -5,8 +5,11 @@ source activate three-prime-env
 snakemake \
     -kp \
     --ri \
-    -j 500 \
+    -j 450 \
     --rerun-incomplete \
+    --max-jobs-per-second 5 \
+    --latency-wait 60 \
+    --configfile config.yaml \
     --cluster-config cluster.json \
     -c "sbatch \
         --mem={cluster.mem} \
@@ -14,5 +17,5 @@ snakemake \
         --tasks-per-node={cluster.tasks} \
         --partition=broadwl \
         --job-name={cluster.name} \
-	--output={cluster.logfile}" \
+        --output={cluster.logfile}" \
     $*

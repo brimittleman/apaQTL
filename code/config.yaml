@@ -1,0 +1,15 @@
+#Snakemakeconfiguration file
+#
+dir_proj: /project2/gilad/briana/apaQTL/
+dir_anno: /project2/gilad/briana/genome_anotation_data/
+dir_genome: /project2/gilad/briana/genome_anotation_data/star_genome
+file_vcf: /project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt.vcf
+file_genomeFA: /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa
+#
+file_chromorder: /project2/gilad/briana/genome_anotation_data/chromOrder.num.txt
+chrom_lenght: /project2/gilad/briana/genome_anotation_data/chrom.length.txt
+ref_flat: /project2/gilad/briana/genome_anotation_data/gencode.v19.annotation2.nochr.refFlat
+ribosome_intervals: /project2/gilad/briana/genome_anotation_data/hg19.rRNA.intervals
+peaknameanno: /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed
+scripts: /project2/gilad/briana/apaQTL/code/
+dir_log: /project2/gilad/briana/apaQTL/code/log/
