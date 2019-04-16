@@ -40,6 +40,8 @@ rule all:
     input:
        mergeBam_dir + "AllSamplesMerged.sort.bam",
        mergeBam_dir + "AllSamplesMerged.sort.bam.bai",
+       mergeBambyFrac_dir + "Nuclear.SamplesMerged.bam",
+       mergeBambyFrac_dir + "Total.SamplesMerged.bam",
        expand(mergeBambyFrac_dir + "{fractions}.SamplesMerged.sort.bam", fractions = fractions),
        expand(mergeBambyFrac_dir + "{fractions}.SamplesMerged.sort.bam.bai", fractions = fractions),
        mergeBG + "AllSamplesMerged.bg",
@@ -54,7 +56,7 @@ rule mergeAllbam:
         directory(bamclean_sort_dir)
     output:
         mergeBam_dir + "AllSamplesMerged.bam"
-    shell: "mergeAllBam.sh {input} {output}"
+    shell: "samtools merge {output} {input}*.bam"
 
 rule sortMergeBam:
     input:
@@ -71,13 +73,19 @@ rule indexMergeBam:
     shell: "samtools index {input}"
 
 
-rule mergebyFracbam:
+rule mergebyFracbam_T:
     input:
         directory(bamclean_sort_dir)
     output:
-        total=mergeBambyFrac_dir + "Total.SamplesMerged.bam",
-        nuclear=mergeBambyFrac_dir+ "Nuclear.SamplesMerged.bam"
-    shell: "mergeByFracBam.sh {input} {output.total} {output.nuclear}"
+        mergeBambyFrac_dir + "Total.SamplesMerged.bam"
+    shell: "samtools merge {output} {input}*T*.bam"
+
+rule mergebyFracbam_N:
+    input:
+        directory(bamclean_sort_dir)
+    output:
+        mergeBambyFrac_dir + "Nuclear.SamplesMerged.bam"
+    shell: "samtools merge {output} {input}*N*.bam"
 
 
 rule sortMergebyFrac:
@@ -113,7 +121,7 @@ rule sortCoverage:
        mergeBG + "AllSamplesMerged.coverage.txt"
     output:
        mergeBG + "AllSamplesMerged.coverage.sort.txt"
-    shell: "sort -k1, -k2,2n {input} > {output}"
+    shell: "sort -k1,1 -k2,2n {input} > {output}"
 
 rule callPeaks:
     input:

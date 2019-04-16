@@ -6,5 +6,9 @@
         "tasks" : 2,
         "name" : "{rule}-{wildcards}",
         "logfile": "log/snake-{rule}-{wildcards}-%j.out"
+    },
+"peaks2saf" :
+    {
+           "mem": 40000
     }
 }
