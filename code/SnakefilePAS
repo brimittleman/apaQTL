@@ -1,0 +1,125 @@
+#SnakefilePAS
+#
+#This file will run the pipeline to go from bam files to the  inclusive PAS
+#
+#To configure the paths to data files and other settings, edit
+#config.yaml
+#
+#to configure job submission settings for cluster, edit
+#clusterPAS.json and submit-snakemakePAS.sh
+
+
+import glob
+import os
+from snakemake.utils import R
+
+
+
+configfile: "config.yaml"
+
+dir_proj= config["dir_proj"]
+dir_data= dir_proj + "data/"
+output= dir_proj + "output/"
+bamclean_sort_dir= dir_data + "sort_clean/"
+mergeBam_dir= dir_data + "mergedBam/"
+mergeBambyFrac_dir= dir_data + "mergedbyFracBam/"
+mergeBG= dir_data + "mergedBG/"
+inclusivePeaks= dir_data + "inclusivePeaks/"
+
+
+samples = set(glob_wildcards(bamclean_sort_dir + "{samples}.clean.sort.bam").samples)
+
+
+fractions = ["Total", "Nuclear"]
+
+chromosomes= ["1" ,"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
+
+peaknameanno= config["peaknameanno"]
+
+rule all:
+    input:
+       mergeBam_dir + "AllSamplesMerged.sort.bam",
+       mergeBam_dir + "AllSamplesMerged.sort.bam.bai",
+       expand(mergeBambyFrac_dir + "{fractions}.SamplesMerged.sort.bam", fractions = fractions),
+       expand(mergeBambyFrac_dir + "{fractions}.SamplesMerged.sort.bam.bai", fractions = fractions),
+       mergeBG + "AllSamplesMerged.bg",
+       mergeBG + "AllSamplesMerged.coverage.txt",
+       mergeBG + "AllSamplesMerged.coverage.sort.txt",
+       expand(inclusivePeaks + "APApeaks.chr{chromosomes}.bed", chromosomes=chromosomes),
+
+
+
+rule mergeAllbam:
+    input:
+        directory(bamclean_sort_dir)
+    output:
+        mergeBam_dir + "AllSamplesMerged.bam"
+    shell: "mergeAllBam.sh {input} {output}"
+
+rule sortMergeBam:
+    input:
+        mergeBam_dir + "AllSamplesMerged.bam"
+    output:
+        mergeBam_dir + "AllSamplesMerged.sort.bam"
+    shell: "samtools sort -o {output} {input}"
+
+rule indexMergeBam:
+    input:
+        mergeBam_dir + "AllSamplesMerged.sort.bam"
+    output:
+        mergeBam_dir + "AllSamplesMerged.sort.bam.bai"
+    shell: "samtools index {input}"
+
+
+rule mergebyFracbam:
+    input:
+        directory(bamclean_sort_dir)
+    output:
+        total=mergeBambyFrac_dir + "Total.SamplesMerged.bam",
+        nuclear=mergeBambyFrac_dir+ "Nuclear.SamplesMerged.bam"
+    shell: "mergeByFracBam.sh {input} {output.total} {output.nuclear}"
+
+
+rule sortMergebyFrac:
+    input:
+       mergeBambyFrac_dir + "{fraction}.SamplesMerged.bam"
+    output:
+       mergeBambyFrac_dir + "{fraction}.SamplesMerged.sort.bam"
+    shell: "samtools sort -o {output} {input}"
+
+rule indexMergebyFrac:
+    input:
+       mergeBambyFrac_dir + "{fraction}.SamplesMerged.sort.bam"
+    output:
+       mergeBambyFrac_dir + "{fraction}.SamplesMerged.sort.bam.bai"
+    shell: "samtools index {input}"
+
+rule bam2bedgraph:
+    input:
+       mergeBam_dir + "AllSamplesMerged.sort.bam"
+    output:
+       mergeBG + "AllSamplesMerged.bg"
+    shell: "bedtools genomecov -ibam {input} -bg -split > {output}"
+
+rule bedgraph2cov:
+    input:
+       mergeBG + "AllSamplesMerged.bg"
+    output:
+       mergeBG + "AllSamplesMerged.coverage.txt"
+    shell: "python bg_to_cov.py {input} {output}"
+
+rule sortCoverage:
+    input:
+       mergeBG + "AllSamplesMerged.coverage.txt"
+    output:
+       mergeBG + "AllSamplesMerged.coverage.sort.txt"
+    shell: "sort -k1, -k2,2n {input} > {output}"
+
+rule callPeaks:
+    input:
+       infile= mergeBG + "AllSamplesMerged.coverage.sort.txt"
+    params:
+       chrom = "{chromosomes}"
+    output:
+       inclusivePeaks + "APApeaks.chr{chromosomes}.bed"
+    shell: "python callPeaksYL.py {params} {input.infile} {output}"
