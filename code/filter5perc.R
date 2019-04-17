@@ -12,15 +12,15 @@ opt_parser <- OptionParser(option_list=option_list)
 opt <- parse_args(opt_parser)
 
 
-totalPeakUs=read.table(opt$pheno, header = T, stringsAsFactors = F) %>% separate(chrom, sep = ":", into = c("chr", "start", "end", "id")) %>% separate(id, sep="_", into=c("gene", "strand", "peak"))
+totalPeakUs=read.table(opt$pheno, header = T, stringsAsFactors = F) %>% separate(chrom, sep = ":", into = c("chr", "start", "end", "id")) %>% separate(id, sep="_", into=c("gene", "loc", "strand", "peak"))
 
 
-ind=colnames(totalPeakUs)[7:dim(totalPeakUs)[2]]
+ind=colnames(totalPeakUs)[8:dim(totalPeakUs)[2]]
 totalPeakUs_CountNum=read.table(opt$numeric, col.names = ind)
 
 
 #numeric with anno
-totalPeak=as.data.frame(cbind(totalPeakUs[,1:6], totalPeakUs_CountNum))
+totalPeak=as.data.frame(cbind(totalPeakUs[,1:7], totalPeakUs_CountNum))
 
 
 #mean
@@ -29,7 +29,7 @@ totalPeakUs_CountNum_mean=rowMeans(totalPeakUs_CountNum)
 
 
 #append mean to anno
-TotalPeakUSMean=as.data.frame(cbind(totalPeakUs[,1:6],totalPeakUs_CountNum_mean))
+TotalPeakUSMean=as.data.frame(cbind(totalPeakUs[,1:7],totalPeakUs_CountNum_mean))
 
 
 TotalPeakUSMean_5per= TotalPeakUSMean %>% filter(totalPeakUs_CountNum_mean>=.05)

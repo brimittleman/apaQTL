@@ -1,5 +1,5 @@
-def main(inFile, outF)
-    outfile=open(outF, "w")
+def main(inFile, outF):
+    outFile=open(outF, "w")
     outFile.write("GeneID\tChr\tStart\tEnd\tStrand\n")
     for ln in open(inFile, "r"):
         chrom, start, end, peak, cov, strand, score, anno = ln.split()
@@ -73,6 +73,6 @@ if __name__ == "__main__":
     import numpy as np
     from misc_helper import *
     import sys
-    inFile =sys.argv[1]
-    outFile= sys.argv[2]
-    main(inFile, outFile)
+    infile =sys.argv[1]
+    outfile= sys.argv[2]
+    main(infile, outfile)

@@ -1,0 +1,204 @@
+#SnakefilefiltPAS
+#
+#This file will run the pipeline to go from inclusive PeaKS to the filteres PAS
+#
+#To configure the paths to data files and other settings, edit
+#config.yaml
+#
+#to configure job submission settings for cluster, edit
+#clusterfiltPAS.json and submit-snakemakefiltPAS.sh
+
+import glob
+import os
+from snakemake.utils import R
+
+
+configfile: "config.yaml"
+
+
+dir_proj= config["dir_proj"]
+dir_data= dir_proj + "data/"
+bamclean_sort_dir= dir_data + "sort_clean/"
+inclusivePeaks= dir_data + "inclusivePeaks/"
+mergePeakFC= dir_data + "inclusivePeaks_FC/"
+filterpeaks= dir_data + "filterPeaks/"
+assignedPeaks= dir_data + "assignedPeaks/"
+quantPeaks= dir_data + "peakCoverage/"
+phenotype= dir_data + "phenotype/"
+phenotype5perc= dir_data + "phenotype_5perc/"
+peak5perc= dir_data + "peaks_5perc/"
+PAS = dir_data + "PAS/"
+
+fractions = ["Total", "Nuclear"]
+
+
+
+rule all:
+    input:
+       inclusivePeaks + "APApeaks.ALLChrom.bed",
+       inclusivePeaks + "APApeaks.ALLChrom.SAF",
+       mergePeakFC + "APAPeaks.Quant.fc",
+       filterpeaks + "APApeaks.ALLChrom.Filtered.Named.bed",
+       filterpeaks + "APApeaks.ALLChrom.Filtered.sort.bed",
+       assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF",
+       quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.fc",
+       quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.fc",
+       expand(quantPeaks + "file_id_mapping_{fractions}_Transcript.txt", fractions=fractions),
+       expand(phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.fc", fractions=fractions),
+       expand(phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.CountsOnlyNumeric", fractions=fractions),
+       expand(peak5perc + "APApeak_Peaks_GeneLocAnno.{fractions}.5perc.fc", fractions=fractions),
+       expand(phenotype5perc + "APApeak_Phenotype_GeneLocAnno.{fractions}.5perc.fc", fractions=fractions),
+       peak5perc + "APApeak_Peaks_GeneLocAnno.5perc.bed",
+       PAS + "APAPAS_GeneLocAnno.5perc.bed"
+
+rule mergePeaks:
+    input:
+       directory(inclusivePeaks)
+    output:
+       inclusivePeaks + "APApeaks.ALLChrom.bed"
+    shell: "bash mergePeaks.sh {input} {output}"
+
+rule peaks2saf:
+    input:
+       inclusivePeaks + "APApeaks.ALLChrom.bed"
+    output:
+       inclusivePeaks + "APApeaks.ALLChrom.SAF"
+    shell: "python bed2saf.py {input} {output}"
+
+rule peakFC:
+    input:
+       annotation= inclusivePeaks + "APApeaks.ALLChrom.SAF",
+       inputdir= directory(bamclean_sort_dir)
+    output:
+       mergePeakFC + "APAPeaks.Quant.fc"
+    shell: "featureCounts -a {input.annotation} -F SAF -o {output} {input.inputdir}*.sort.bam -s 1"
+
+rule filterPeaks:
+    input:
+       mergePeakFC + "APAPeaks.Quant.fc"
+    output:
+       filterpeaks + "APApeaks.ALLChrom.Filtered.bed"
+    shell: "python filterpeaks.py {input} {output}"
+
+rule sort_filtered:
+    input:
+       filterpeaks + "APApeaks.ALLChrom.Filtered.bed"
+    output:
+       filterpeaks + "APApeaks.ALLChrom.Filtered.sort.bed"
+    shell: "sort -k1,1 -k2,2n {input} > {output}"
+
+rule namePeaks:
+    input:
+      filterpeaks + "APApeaks.ALLChrom.Filtered.sort.bed"
+    output:
+      filterpeaks + "APApeaks.ALLChrom.Filtered.Named.bed"
+    shell: "python namePeaks.py {input} {output}"
+
+
+rule assignGenes:
+    input:
+      peaks= filterpeaks + "APApeaks.ALLChrom.Filtered.Named.bed",
+      anno= config["peaknameanno"]
+    output:
+      assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnno.bed"
+    shell: "bedtools map -a {input.peaks} -b {input.anno} -c 4 -S -o distinct > {output}"
+
+rule parseGeneLoc:
+    input:
+      assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnno.bed"
+    output:
+      assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF"
+    shell: "python chooseAnno2SAF.py {input} {output}"
+
+
+rule quantassign2paredPeakT:
+    input:
+      anno= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF",
+      inputdir= directory(bamclean_sort_dir)
+    output:
+      quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.fc",
+    shell: "featureCounts -O -a {input.anno} -F SAF -o {output} {input.inputdir}*T*.bam -s 1"
+
+rule quantassign2paredPeakN:
+    input:
+      anno= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF",
+      inputdir= directory(bamclean_sort_dir)
+    output:
+      quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.fc",
+    shell: "featureCounts -O -a {input.anno} -F SAF -o {output} {input.inputdir}*N*.bam -s 1"
+
+rule fixFCheader:
+    input:
+        quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.{fractions}.Quant.fc"
+    output:
+        quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.{fractions}.Quant.Fixed.fc"
+    shell: "python fixFChead.py {input} {output}"
+
+rule makefileID:
+   input:
+       quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.{fractions}.Quant.Fixed.fc"
+   output:
+       quantPeaks + "file_id_mapping_{fractions}_Transcript_head.txt"
+   shell: "python makeFileID.py {input} {output}"
+
+rule removetop:
+   input:
+      quantPeaks + "file_id_mapping_{fractions}_Transcript_head.txt"
+   output:
+      quantPeaks + "file_id_mapping_{fractions}_Transcript.txt"
+   shell: "tail -n +2 {input} > {output}"
+
+rule makePheno:
+   input:
+      peaks=quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.{fractions}.Quant.Fixed.fc",
+      indid= quantPeaks + "file_id_mapping_{fractions}_Transcript.txt"
+   output:
+      phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.fc"
+   shell: "python makePheno.py {input.peaks} {input.indid} {output}"
+
+
+rule pheno2count:
+   input:
+      phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.fc"
+   output:
+      phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.CountsOnly"
+   shell: "Rscript pheno2countonly.R -I {input} -O {output}"
+
+rule conver2numeric:
+   input:
+     phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.CountsOnly"
+   output:
+     phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.CountsOnlyNumeric"
+   shell: "python convertNumeric.py {input} {output}"
+
+rule filter5percpeak:
+   input:
+     pheno= phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.fc",
+     numeric= phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.CountsOnlyNumeric"
+   output:
+     peak5perc + "APApeak_Peaks_GeneLocAnno.{fractions}.5perc.fc"
+   shell: "Rscript filter5perc.R -P {input.pheno} -N {input.numeric} -O {output}"
+
+rule filter5percpheno:
+  input:
+    okpeak= peak5perc + "APApeak_Peaks_GeneLocAnno.{fractions}.5perc.fc",
+    fullpheno = phenotype + "APApeak_Phenotype_GeneLocAnno.{fractions}.fc"
+  output:
+    phenotype5perc + "APApeak_Phenotype_GeneLocAnno.{fractions}.5perc.fc"
+  shell: "python filter5percPheno.py {input.okpeak} {input.fullpheno} {output}"
+
+rule filterAllpeaks:
+  input:
+    total= peak5perc + "APApeak_Peaks_GeneLocAnno.Total.5perc.fc",
+    nuclear =peak5perc + "APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc",
+    allPeaks = assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF"
+  output:
+    peak5perc + "APApeak_Peaks_GeneLocAnno.5perc.bed"
+  shell: "python make5percPeakbed.py {input.total} {input.nuclear} {input.allPeaks} {output}"
+
+rule convert2PAS:
+  input:
+    peak5perc + "APApeak_Peaks_GeneLocAnno.5perc.bed"
+  output:
+    PAS + "APAPAS_GeneLocAnno.5perc.bed"
+  shell: "python peak2PAS.py {input} {output}"
