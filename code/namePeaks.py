@@ -3,15 +3,15 @@
 
 def main(inFile, outFile):
     rows=0
-    for in open(inFile, "r"):
+    for ln in open(inFile, "r"):
         rows +=1
-    rowname=list(range(1, rows+1))
+    rowname=list(range(0, rows))
     outF=open(outFile, "w")
     inF= open(inFile, "r")
     for i, ln in enumerate(inF):
         chrom, start, end, cov, strand, score = ln.split()
         chromNoch=chrom[3:]
-        name=rowname[i + 1]
+        name=rowname[i]
         outF.write("%s\t%s\t%s\t%d\t%s\t%s\t%s\n"%(chromNoch, start, end, name, cov, strand, score))
     outF.close()
 

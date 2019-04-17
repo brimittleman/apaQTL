@@ -1,10 +1,10 @@
-def main(inputFile, outputF):
+def main(inputFile, fileID, outputF):
   #PYTHON 3
 
   dic_IND = {}
   dic_BAM = {}
 
-  for ln in open(inputFile, "r"):
+  for ln in open(fileID, "r"):
       bam, IND = ln.split("\t")
       IND = IND.strip()
       dic_IND[bam] = IND
@@ -108,5 +108,6 @@ if __name__ == "__main__":
   from misc_helper import *
   import sys
   inFile =sys.argv[1]
-  outFile= sys.argv[2]
-  main(inFile, outFile)
+  fileID=sys.argv[2]
+  outFile= sys.argv[3]
+  main(inFile, fileID,outFile)

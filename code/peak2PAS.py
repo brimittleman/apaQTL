@@ -5,13 +5,13 @@ def main(inF, outF):
       if strand == "+":
           #switch to neg strand
           # pas is first base
-          startPAS=int(start -1)
+          startPAS=int(start) -1
           endPAS=int(start)
           fout.write("%s\t%s\t%s\t%s\t%s\t-\n"%(chrom, startPAS, endPAS, name, score))
       else:
           #switch 2 pos strand
           #PAS is last base
-          startPAS=int(end -1)
+          startPAS=int(end) -1
           endPAS=int(end)
           fout.write("%s\t%s\t%s\t%s\t%s\t+\n"%(chrom, startPAS, endPAS, name, score))
   fout.close()

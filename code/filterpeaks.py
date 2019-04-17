@@ -1,6 +1,6 @@
 
 def main(inFile, outFile):
-    fout = file(outFile,'w')
+    fout = open(outFile,'w')
     #cutoffs
     c = 0.9
     caveread = 2
