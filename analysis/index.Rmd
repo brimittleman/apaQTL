@@ -14,3 +14,5 @@ Welcome to my research website.
 In the preprocessing steps of the analysis I will go from the fastq files that come off the sequencer to the PAS I will use for the rest of the analysis. 
 
 * [Process fastq to cleaned bam files](fastq2bam.html)
+
+* [Process bam to PAS](bam2pas.html) 
