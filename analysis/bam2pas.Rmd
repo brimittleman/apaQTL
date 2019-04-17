@@ -1,0 +1,45 @@
+---
+title: "Bam2PAS"
+author: "Briana Mittleman"
+date: "4/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In the previous analysis I used a snakefile to process the fastq files to bam files. The goal of this analysis is to call peaks in the data and refine these to the PAS I will use for the differences between fractions and for the QTL analysis. This relies on the use of 2 snake pipelines. One will call the peaks and the second will filter the peaks to the PAS set. I use the same config file for all 3 pipelines.
+
+
+##Call peaks in data  
+I use an in house peak caller to call regions of the genome that have reads in all of the libraries merged.
+
+
+First I need to load the environment. 
+```{bash,eval=F}
+module load Anaconda3
+source activate three-prime-env
+```
+
+I will run the call peak file. 
+
+```{bash, eval=F}
+sbatch code/snakemakePAS.batch
+```
+This will call the submit-snakemakePAS.sh script to run each rule in the SnakefilePAS pipeline. 
+
+The log files go to the same log directory as the files from the fastq to bam pas code/log. 
+
+##Filter peaks to PAS
+This anaylsis filters the peaks first on individual read count per individual and the number of individuals with non zero counts in the peak. I then keep peaks that are used at an average of at least 5% in the total and nuclear fractions. Finally, I convert to PAS by flipping the strand and keeping the most 3' end of the bin as the pas. 
+
+```{bash,eval=F}
+sbatch code/snakemakefiltPAS.batch  
+```
+
+These log files are also in the code/log directory.  
+
+This will call the submit-snakemakefiltPAS.sh script to run each rule in the SnakefilefiltPAS pipeline. 
+
+
