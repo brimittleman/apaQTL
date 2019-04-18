@@ -1,0 +1,90 @@
+---
+title: "apaQTLs"
+author: "Briana Mittleman"
+date: "4/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will call apaQTls in both fractions. I will start with the phenotype files and normalized the counts using the leafcutter package in order to run the fastq QTL mapper.  
+
+
+##Prepare phenotypes for QTL- phenotype dir  
+It is best to run this analysis in the data/phenotype directory. I have copied the leafcutter prepare_phenotype_table.py to the code directroy to use here.  
+
+
+```{bash,eval=F}
+#!/bin/bash
+module load python
+
+gzip APApeak_Phenotype_GeneLocAnno.Total.fc
+gzip APApeak_Phenotype_GeneLocAnno.Nuclear.fc
+
+python ../../code/prepare_phenotype_table.py/APApeak_Phenotype_GeneLocAnno.Total.fc
+python ../../code/prepare_phenotype_table.py/APApeak_Phenotype_GeneLocAnno.Nuclear.fc
+
+```
+
+
+This will output bash scripts to run. 
+
+```{bash,eval=F}
+module load Anaconda3
+source activate three-prime-env
+
+sh APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz_prepare.sh
+sh APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz_prepare.sh
+
+```
+
+
+Subset the PCs to use the first 2 in the qtl calling:  
+
+```{bash,eval=F}
+module load Anaconda3
+source activate three-prime-env
+
+head -n 3 APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.2PCs
+head -n 3 APApeak_Phenotype_GeneLocAnno.Total.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Total.fc.gz.2PCs
+
+```
+
+##Call QTLs- code dir  
+
+Next I will need to make a sample list. From the code directory: 
+
+```{bash,eval=F}
+python makeSampleList.py
+```
+
+Prepare directroy 
+```{bash,eval=F}
+mkdir ../data/apaQTLNominal
+mkdir ../data/apaQTLPermuted
+```
+
+
+Run the code to call QTLs within 1mb of each PAS peak. I run both a nominal pass and a permuted pas. The permulted pas chosses the best snp for each peak gene pair. 
+
+
+```{bash,eval=F}
+sbatch apaQTL_Nominal.sh
+sbatch apaQTL_permuted.sh
+```
+
+
+Concatinate all of the results in the permuted set. I do this so I can account for multiple testing with the benjamini hochberg test.  
+
+**Concatinate**  
+
+
+```{bash,eval=F}
+Rscripts apaQTLCorrectPvalMakeQQ.R  
+```
+
+
+
+
