@@ -1,0 +1,30 @@
+---
+title: "PAS usage QC"
+author: "Briana Mittleman"
+date: "4/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will test the avrage peak usage difference in peak usage between individuals. We expect the average difference to as you look at peaks with more coverage. I will use this analysis to test for potential batch effects. Prior to resequencing I saw higher variance in the last batch of samples. This was highly correlated with the library concentrations of these samples being lower.I reran each of these libraries for this round.  
+
+For interpretation purposes, I look at genes with only 2 peaks. I will also need the metadata to order the plot.
+
+For simplicity I will do this seperatly for total and nuclear. The files are in /project2/gilad/briana/apaQTL/data/phenotype/ I will need to join the first column of the fc file with the countsonly numeric file. I can filter the 5% peaks by joining these files with the file in /project2/gilad/briana/apaQTL/data/phenotype_5perc. To partition this information by count I will also use the counts file and filter by the 5% usage peaks. The counts are in /project2/gilad/briana/apaQTL/data/peakCoverage/. 
+
+
+I will do this in an R script that can be run from the code directory.  
+
+The R script will take either Total and Nuclear.  
+
+```{bash,eval=F}
+module load Anaconda3
+source activate three-prime-env
+Rscript UsageDifferenceHeatmap.R -F Total
+Rscript UsageDifferenceHeatmap.R -F Nuclear
+```
+
+The resulting plots are written to output as AverageDiffHeatmap.Nuclear.png and AverageDiffHeatmap.Total.png  

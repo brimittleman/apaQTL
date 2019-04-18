@@ -16,3 +16,10 @@ In the preprocessing steps of the analysis I will go from the fastq files that c
 * [Process fastq to cleaned bam files](fastq2bam.html)
 
 * [Process bam to PAS](bam2pas.html) 
+
+
+##QC:
+
+These files create some of the QC metrics I used for the analysis.
+
+* [Look at PAS usage differences by gene coverage](PASusageQC.html)
