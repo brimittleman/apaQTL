@@ -12,14 +12,15 @@ opt <- parse_args(opt_parser)
 
 
 ##input files:  
-PeakAnno=read.table(paste("../data/phenotype/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".fc", sep=""), header = T)
-indiv=colnames(PeakAnno)[2:length(col.names(PeakAnno))]
-NumericUsage=read.table(paste("../data/phenotype/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".CountsOnlyNumeric", sep=""), col.names = indiv)
-filterPheno=read.table(paste("../data/phenotype_5perc/.", opt$fraction, ".5perc.fc", sep=""), header=T)
-counts=read.table(paste("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.", opt$fraction, ".Quant.Fixed.fc", sep=""), col.names = c("GeneID", "Chr", "Start","End", "Strand", "Length", indiv)) 
+PeakAnno=read.table(paste("../data/phenotype/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".fc", sep=""), header = T,stringsAsFactors=F)
+indiv=colnames(PeakAnno)[2:length(colnames(PeakAnno))]
+print(indiv)
+NumericUsage=read.table(paste("../data/phenotype/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".CountsOnlyNumeric", sep=""), col.names = indiv, stringsAsFactors=F)
+filterPheno=read.table(paste("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".5perc.fc", sep=""), header=T, stringsAsFactors=F)
+counts=read.table(paste("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.", opt$fraction, ".Quant.Fixed.fc", sep=""), col.names = c("Geneid", "Chr", "Start","End", "Strand", "Length", indiv), stringsAsFactors=F) 
 
 ##combine peak anno and numeric usage and filter by peaks in 5 perc 
-PeakUsage=as.data.frame(cbind(PeakAnno, NumericUsage)) %>% semi_join(filterPheno, by="chrom")
+PeakUsage=as.data.frame(cbind(chrom=PeakAnno$chrom, NumericUsage)) %>% semi_join(filterPheno, by="chrom")
 
 ##find genes with 2 peaks:  
 genes2Peaks=PeakUsage %>% separate(chrom, into=c("chromo", 'start', 'end', "peakID"), sep = ":") %>% separate(peakID, into=c("gene", "loc", "strand", "peaknum"),sep="_") %>% group_by(gene) %>% summarise(nPeaks=n()) %>% filter(nPeaks==2)
@@ -31,7 +32,7 @@ PeakUsage2peaks= PeakUsage %>% separate(chrom, into=c("chromo", 'start', 'end', 
 counts_filt= counts %>% separate(Geneid, into=c("peaknum", "chromP", "startP", "endP", "strandP","peakID"), sep=":") %>% separate(peakID, into=c("gene", "loc"),sep="_") %>% select(-loc, -Chr, -Start, -End, -Strand, -Length, -peaknum, -chromP, -startP, -endP, -strandP) %>% semi_join(genes2Peaks, by="gene")
 
 #function to give me output of final matrix  
-
+print("fileswork")
 perIndDiffUsage=function(ind, counts=counts_filt, usage=PeakUsage2peaks){
   ind=enquo(ind)
   #compute usage stats
@@ -44,6 +45,7 @@ perIndDiffUsage=function(ind, counts=counts_filt, usage=PeakUsage2peaks){
   #seperate genes by percentile for this ind
   count_ind= counts %>% select(gene, !!ind)
   colnames(count_ind)=c("gene", "count")
+  count_ind$count=as.numeric(count_ind$count)
   count_ind = count_ind %>%  group_by(gene) %>% summarize(Exp=sum(count)) %>% filter(Exp >0)  %>% mutate(Percentile = percent_rank(Exp)) 
   count_ind_perc10= count_ind %>% filter(Percentile<.1)
   count_ind_perc20= count_ind %>% filter(Percentile<.2, Percentile>.1)
@@ -79,7 +81,7 @@ for (i in indiv){
   Percentile=cbind(Percentile, x)
 }
 colnames(Percentile)=c("Percentile", indiv)
-
+Percentile_df=as.data.frame(Percentile) 
 #melt this to make a ggplot: 
 Percentile_melt=melt(Percentile_df, id.vars=c("Percentile"))
 colnames(Percentile_melt)=c("Percentile", "Individual", "AvgUsageDiff")
