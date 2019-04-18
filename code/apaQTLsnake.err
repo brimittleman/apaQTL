@@ -1,0 +1,113 @@
+slurmstepd-midway2-0002: error: task/cgroup: unable to add task[pid=54787] to memory cg '(null)'
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cluster nodes: 450
+Job counts:
+	count	jobs
+	1	all
+	2	cleanBam
+	2	index_cleanBam
+	2	sort_cleanBam
+	1	sortcleanbed
+	8
+
+[Mon Apr 15 19:58:25 2019]
+rule sortcleanbed:
+    input: /project2/gilad/briana/apaQTL/data/bed_clean/YL-SP-18498-N-combined-clean.bed
+    output: /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18498-N-combined-clean-sort.bed
+    jobid: 29
+    wildcards: samples=YL-SP-18498-N-combined
+
+bedtools sort -faidx /project2/gilad/briana/genome_anotation_data/chromOrder.num.txt -i /project2/gilad/briana/apaQTL/data/bed_clean/YL-SP-18498-N-combined-clean.bed > /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18498-N-combined-clean-sort.bed
+Submitted job 29 with external jobid 'Submitted batch job 59474275'.
+
+[Mon Apr 15 19:58:25 2019]
+rule cleanBam:
+    input: /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18486-T-combined-clean-sort.bed, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18486-T-combined-waspfilt.sort.bam
+    output: /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18486-T-combined-clean.bam
+    jobid: 31
+    wildcards: samples=YL-SP-18486-T-combined
+
+python filterBamforMP.pysam2_gen.py /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18486-T-combined-clean-sort.bed /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18486-T-combined-waspfilt.sort.bam /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18486-T-combined-clean.bam
+Submitted job 31 with external jobid 'Submitted batch job 59474276'.
+[Mon Apr 15 19:59:45 2019]
+Finished job 29.
+1 of 8 steps (12%) done
+
+[Mon Apr 15 19:59:45 2019]
+rule cleanBam:
+    input: /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18498-N-combined-clean-sort.bed, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18498-N-combined-waspfilt.sort.bam
+    output: /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18498-N-combined-clean.bam
+    jobid: 58
+    wildcards: samples=YL-SP-18498-N-combined
+
+python filterBamforMP.pysam2_gen.py /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18498-N-combined-clean-sort.bed /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18498-N-combined-waspfilt.sort.bam /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18498-N-combined-clean.bam
+Submitted job 58 with external jobid 'Submitted batch job 59474283'.
+[Mon Apr 15 20:00:55 2019]
+Finished job 31.
+2 of 8 steps (25%) done
+
+[Mon Apr 15 20:00:55 2019]
+rule sort_cleanBam:
+    input: /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18486-T-combined-clean.bam
+    output: /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam
+    jobid: 20
+    wildcards: samples=YL-SP-18486-T-combined
+
+samtools sort -o /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam -O bam /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18486-T-combined-clean.bam
+Submitted job 20 with external jobid 'Submitted batch job 59474288'.
+[Mon Apr 15 20:01:25 2019]
+Finished job 58.
+3 of 8 steps (38%) done
+
+[Mon Apr 15 20:01:25 2019]
+rule sort_cleanBam:
+    input: /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18498-N-combined-clean.bam
+    output: /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam
+    jobid: 68
+    wildcards: samples=YL-SP-18498-N-combined
+
+samtools sort -o /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam -O bam /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18498-N-combined-clean.bam
+Submitted job 68 with external jobid 'Submitted batch job 59474292'.
+[Mon Apr 15 20:02:25 2019]
+Finished job 20.
+4 of 8 steps (50%) done
+
+[Mon Apr 15 20:02:25 2019]
+rule index_cleanBam:
+    input: /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam
+    output: /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam.bai
+    jobid: 32
+    wildcards: samples=YL-SP-18486-T-combined
+
+samtools index /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam > /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam.bai
+Submitted job 32 with external jobid 'Submitted batch job 59474303'.
+[Mon Apr 15 20:03:05 2019]
+Finished job 68.
+5 of 8 steps (62%) done
+
+[Mon Apr 15 20:03:05 2019]
+rule index_cleanBam:
+    input: /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam
+    output: /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam.bai
+    jobid: 4
+    wildcards: samples=YL-SP-18498-N-combined
+
+samtools index /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam > /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam.bai
+Submitted job 4 with external jobid 'Submitted batch job 59474306'.
+[Mon Apr 15 20:03:35 2019]
+Finished job 32.
+6 of 8 steps (75%) done
+[Mon Apr 15 20:03:35 2019]
+Finished job 4.
+7 of 8 steps (88%) done
+
+[Mon Apr 15 20:03:35 2019]
+localrule all:
+    input: /project2/gilad/briana/apaQTL/output/fastqc/YL-SP-18498-T-combined_fastqc.html, /project2/gilad/briana/apaQTL/output/fastqc/YL-SP-18486-N-combined_fastqc.html, /project2/gilad/briana/apaQTL/output/fastqc/YL-SP-18498-N-combined_fastqc.html, /project2/gilad/briana/apaQTL/output/fastqc/YL-SP-18486-T-combined_fastqc.html, /project2/gilad/briana/apaQTL/data/bam/YL-SP-18498-T-combined.bam, /project2/gilad/briana/apaQTL/data/bam/YL-SP-18486-N-combined.bam, /project2/gilad/briana/apaQTL/data/bam/YL-SP-18498-N-combined.bam, /project2/gilad/briana/apaQTL/data/bam/YL-SP-18486-T-combined.bam, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18498-T-combined-sort.bam, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18486-N-combined-sort.bam, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18498-N-combined-sort.bam, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18486-T-combined-sort.bam, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18498-T-combined-sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18486-N-combined-sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18498-N-combined-sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort/YL-SP-18486-T-combined-sort.bam.bai, /project2/gilad/briana/apaQTL/data/bam_waspfilt/YL-SP-18498-T-combined-waspfilt.bam, /project2/gilad/briana/apaQTL/data/bam_waspfilt/YL-SP-18486-N-combined-waspfilt.bam, /project2/gilad/briana/apaQTL/data/bam_waspfilt/YL-SP-18498-N-combined-waspfilt.bam, /project2/gilad/briana/apaQTL/data/bam_waspfilt/YL-SP-18486-T-combined-waspfilt.bam, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18498-T-combined-waspfilt.sort.bam, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18486-N-combined-waspfilt.sort.bam, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18498-N-combined-waspfilt.sort.bam, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18486-T-combined-waspfilt.sort.bam, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18498-T-combined-waspfilt.sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18486-N-combined-waspfilt.sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18498-N-combined-waspfilt.sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort_waspfilter/YL-SP-18486-T-combined-waspfilt.sort.bam.bai, /project2/gilad/briana/apaQTL/data/bed_waspfilter/YL-SP-18498-T-combined-waspfilt.bed, /project2/gilad/briana/apaQTL/data/bed_waspfilter/YL-SP-18486-N-combined-waspfilt.bed, /project2/gilad/briana/apaQTL/data/bed_waspfilter/YL-SP-18498-N-combined-waspfilt.bed, /project2/gilad/briana/apaQTL/data/bed_waspfilter/YL-SP-18486-T-combined-waspfilt.bed, /project2/gilad/briana/apaQTL/data/bedsort_waspfilter/YL-SP-18498-T-combined-waspfilt.sort.bed, /project2/gilad/briana/apaQTL/data/bedsort_waspfilter/YL-SP-18486-N-combined-waspfilt.sort.bed, /project2/gilad/briana/apaQTL/data/bedsort_waspfilter/YL-SP-18498-N-combined-waspfilt.sort.bed, /project2/gilad/briana/apaQTL/data/bedsort_waspfilter/YL-SP-18486-T-combined-waspfilt.sort.bed, /project2/gilad/briana/apaQTL/data/bed_10up/YL-SP-18498-T-combined-10up.bed, /project2/gilad/briana/apaQTL/data/bed_10up/YL-SP-18486-N-combined-10up.bed, /project2/gilad/briana/apaQTL/data/bed_10up/YL-SP-18498-N-combined-10up.bed, /project2/gilad/briana/apaQTL/data/bed_10up/YL-SP-18486-T-combined-10up.bed, /project2/gilad/briana/apaQTL/data/nuc_10up/YL-SP-18498-T-combined-10upnuc.txt, /project2/gilad/briana/apaQTL/data/nuc_10up/YL-SP-18486-N-combined-10upnuc.txt, /project2/gilad/briana/apaQTL/data/nuc_10up/YL-SP-18498-N-combined-10upnuc.txt, /project2/gilad/briana/apaQTL/data/nuc_10up/YL-SP-18486-T-combined-10upnuc.txt, /project2/gilad/briana/apaQTL/data/nuc_10upclean/YL-SP-18498-T-combined-10upnuc.clean.txt, /project2/gilad/briana/apaQTL/data/nuc_10upclean/YL-SP-18486-N-combined-10upnuc.clean.txt, /project2/gilad/briana/apaQTL/data/nuc_10upclean/YL-SP-18498-N-combined-10upnuc.clean.txt, /project2/gilad/briana/apaQTL/data/nuc_10upclean/YL-SP-18486-T-combined-10upnuc.clean.txt, /project2/gilad/briana/apaQTL/data/bed_clean/YL-SP-18498-T-combined-clean.bed, /project2/gilad/briana/apaQTL/data/bed_clean/YL-SP-18486-N-combined-clean.bed, /project2/gilad/briana/apaQTL/data/bed_clean/YL-SP-18498-N-combined-clean.bed, /project2/gilad/briana/apaQTL/data/bed_clean/YL-SP-18486-T-combined-clean.bed, /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18498-T-combined-clean-sort.bed, /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18486-N-combined-clean-sort.bed, /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18498-N-combined-clean-sort.bed, /project2/gilad/briana/apaQTL/data/bed_clean_sort/YL-SP-18486-T-combined-clean-sort.bed, /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18498-T-combined-clean.bam, /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18486-N-combined-clean.bam, /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18498-N-combined-clean.bam, /project2/gilad/briana/apaQTL/data/bam_clean/YL-SP-18486-T-combined-clean.bam, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-T-combined-clean.sort.bam, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-N-combined-clean.sort.bam, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-T-combined-clean.sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-N-combined-clean.sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18498-N-combined-clean.sort.bam.bai, /project2/gilad/briana/apaQTL/data/sort_clean/YL-SP-18486-T-combined-clean.sort.bam.bai
+    jobid: 0
+
+[Mon Apr 15 20:03:35 2019]
+Finished job 0.
+8 of 8 steps (100%) done
+Complete log: /project2/gilad/briana/apaQTL/code/.snakemake/log/2019-04-15T195824.802504.snakemake.log
