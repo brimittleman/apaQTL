@@ -13,7 +13,7 @@ opt <- parse_args(opt_parser)
 
 ##input files:  
 PeakAnno=read.table(paste("../data/phenotype/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".fc", sep=""), header = T)
-indiv=col.names(PeakAnno)[2:length(col.names(PeakAnno))]
+indiv=colnames(PeakAnno)[2:length(col.names(PeakAnno))]
 NumericUsage=read.table(paste("../data/phenotype/APApeak_Phenotype_GeneLocAnno.", opt$fraction, ".CountsOnlyNumeric", sep=""), col.names = indiv)
 filterPheno=read.table(paste("../data/phenotype_5perc/.", opt$fraction, ".5perc.fc", sep=""), header=T)
 counts=read.table(paste("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.", opt$fraction, ".Quant.Fixed.fc", sep=""), col.names = c("GeneID", "Chr", "Start","End", "Strand", "Length", indiv)) 
