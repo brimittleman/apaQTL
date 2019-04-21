@@ -13,18 +13,18 @@ In this analysis I will call apaQTls in both fractions. I will start with the ph
 
 
 ##Prepare phenotypes for QTL- phenotype dir  
-It is best to run this analysis in the data/phenotype directory. I have copied the leafcutter prepare_phenotype_table.py to the code directroy to use here.  
+It is best to run this analysis in the data/phenotype_5perc directory. I have copied the leafcutter prepare_phenotype_table.py to the code directroy to use here.  
 
 
 ```{bash,eval=F}
 #!/bin/bash
 module load python
 
-gzip APApeak_Phenotype_GeneLocAnno.Total.fc
-gzip APApeak_Phenotype_GeneLocAnno.Nuclear.fc
+gzip APApeak_Phenotype_GeneLocAnno.Total.5perc.fc
+gzip APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc
 
-python ../../code/prepare_phenotype_table.py/APApeak_Phenotype_GeneLocAnno.Total.fc
-python ../../code/prepare_phenotype_table.py/APApeak_Phenotype_GeneLocAnno.Nuclear.fc
+python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz
+python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz
 
 ```
 
@@ -35,8 +35,8 @@ This will output bash scripts to run.
 module load Anaconda3
 source activate three-prime-env
 
-sh APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz_prepare.sh
-sh APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz_prepare.sh
+sh APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz_prepare.sh
+sh APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz_prepare.sh
 
 ```
 
@@ -47,8 +47,8 @@ Subset the PCs to use the first 2 in the qtl calling:
 module load Anaconda3
 source activate three-prime-env
 
-head -n 3 APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.2PCs
-head -n 3 APApeak_Phenotype_GeneLocAnno.Total.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Total.fc.gz.2PCs
+head -n 3 APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.2PCs
+head -n 3 APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.2PCs
 
 ```
 
@@ -60,6 +60,9 @@ Next I will need to make a sample list. From the code directory:
 python makeSampleList.py
 ```
 
+*remove 19092 and 19193*
+ 
+ 
 Prepare directroy 
 ```{bash,eval=F}
 mkdir ../data/apaQTLNominal
