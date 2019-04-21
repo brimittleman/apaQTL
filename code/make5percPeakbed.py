@@ -1,11 +1,12 @@
 def main(tot, nuc, allP, outF):
    peakDic={}
    for ln in open(nuc, "r"):
-       peaknum=int(ln.split()[6][4:])
+       peaknum=ln.split()[6][4:]
+       print(peaknum)
        if peaknum not in peakDic.keys():
            peakDic[peaknum]=""
    for ln in open(tot, "r"):
-       peaknum=int(ln.split()[6][4:])
+       peaknum=ln.split()[6][4:]
        if peaknum not in peakDic.keys():
            peakDic[peaknum]=""
    fout=open(outF, "w")
@@ -13,7 +14,7 @@ def main(tot, nuc, allP, outF):
    for i, ln in enumerate(allPeak):
        if i > 0:
            geneid, chrom, start, end, strand = ln.split()
-           peak=int(geneid.split(":")[0][4:])
+           peak=geneid.split(":")[0][4:]
            if peak in peakDic.keys():
                geneloc=geneid.split(":")[-1]
                peakc=str(peak)

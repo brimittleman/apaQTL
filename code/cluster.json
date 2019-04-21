@@ -32,6 +32,18 @@
     {
              "mem":8000
     },
+"sortbed":
+    {
+             "mem":10000
+    },
+"cleanBedfile":
+    {
+             "mem":10000
+    } ,
+"sortcleanbed":
+    {
+             "mem":10000
+    },
 "sort_cleanBam":
     {
              "mem":8000

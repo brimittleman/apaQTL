@@ -10,5 +10,9 @@
 "peaks2saf" :
     {
            "mem": 40000
+    },
+"sortCoverage" :
+    {
+           "mem":50000
     }
 }
