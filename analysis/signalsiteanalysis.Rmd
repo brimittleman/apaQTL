@@ -9,6 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(tidyverse)
+library(workflowr)
+library(reshape2)
+```
+
 In this analysis I will plot the distribution of signal sites upstream of the PAS I have found. 
 
 
@@ -18,7 +25,7 @@ First I use a python script to make a bed file with the 100 base pairs upsream o
 module load Anaconda3
 source activate three-prime-env
 mkdir ../data/SignalSiteFiles
-python Upstream10Bases_general.py ../data/PAS/APAPAS_GeneLocAnno.5perc.bed ../data/SignalSiteFiles/APAPAS_100up.bed
+python Upstream100Bases_general.py ../data/PAS/APAPAS_GeneLocAnno.5perc.bed ../data/SignalSiteFiles/APAPAS_100up.bed
 ```
 
 
@@ -27,3 +34,53 @@ Now I use bedtools nuc to get the sequence for each of these regions:
 sbatch getSeq100up.sh 
 ```
 
+I can now run the DistPAS2Sig.py which will give me the location for the signal site for each PAS.I am running this with the 12 most common PAS signal sites. 
+
+```{bash,eval=F}
+sbatch run_distPAS2Sig.sh
+```
+
+Upload all of the results:
+
+```{r}
+Loc_AATAAA= read.table("../data/SignalSiteFiles/Loc_AATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATAAA")
+Loc_AAAAAG= read.table("../data/SignalSiteFiles/Loc_AAAAAG_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AAAAAG")
+Loc_AATACA= read.table("../data/SignalSiteFiles/Loc_AATACA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATACA")
+Loc_AATAGA= read.table("../data/SignalSiteFiles/Loc_AATAGA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATAGA")
+Loc_AATATA= read.table("../data/SignalSiteFiles/Loc_AATATA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATATA")
+Loc_ACTAAA= read.table("../data/SignalSiteFiles/Loc_ACTAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="ACTAAA")
+Loc_AGTAAA= read.table("../data/SignalSiteFiles/Loc_AGTAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AGTAAA")
+Loc_ATTAAA= read.table("../data/SignalSiteFiles/Loc_ATTAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="ATTAAA")
+Loc_CATAAA= read.table("../data/SignalSiteFiles/Loc_CATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="CATAAA")
+Loc_GATAAA= read.table("../data/SignalSiteFiles/Loc_GATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="GATAAA")
+Loc_TATAAA= read.table("../data/SignalSiteFiles/Loc_TATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="TATAAA")
+Loc_AAAAAA= read.table("../data/SignalSiteFiles/Loc_AAAAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AAAAAA")
+```
+
+Join these together:  
+
+```{r}
+AllsiteDF=as.data.frame(rbind(Loc_AATAAA,Loc_AAAAAG,Loc_AATACA,Loc_AATAGA,Loc_AATATA,Loc_ACTAAA,Loc_AGTAAA,Loc_ATTAAA, Loc_GATAAA,Loc_TATAAA,Loc_CATAAA, Loc_AAAAAA))
+```
+
+
+
+```{r}
+
+AllsiteDF_sep = AllsiteDF %>% separate(PAS, int=c("GenePeak", "Location"), sep="_")
+ggplot(AllsiteDF_sep, aes(x=Distance2PAS, by=Site, col=Site)) + stat_ecdf() + facet_wrap(~Location)
+
+
+```
+
+**Next plot: look at presence of signal site compared to PAS usage**  
+
+
+
+
+Check to see if any PAS have more than one signal site detected:
+
+```{r}
+AllsiteDFmultsites=AllsiteDF %>% group_by(PAS) %>% mutate(nSites=n()) %>% filter(nSites>1)
+```
+First take the perfect match within 50 bp then use the closest. 
