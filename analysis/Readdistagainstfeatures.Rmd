@@ -1,0 +1,34 @@
+---
+title: "Read distribution Deep tools plots"
+author: "Briana Mittleman"
+date: "4/22/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will create the read distribution figures. These are created using deeptools. I have merged total and nuclear bam files from the read mapping pipeline. I will convert these to bigwigs in order to map the reads against features with deeptools. 
+
+
+##Create BW files  
+```{bash,eval=F}
+mkdir ../data/mergedBW_byfrac
+mkdir ../data/DTmatrix
+mkdir ../output/dtPlots
+
+module load Anaconda3 
+source activate three-prime-env
+
+sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Total.SamplesMerged.bw sbatch bam2bw.sh ../data/mergedbyFracBam/Nuclear.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Nuclear.SamplesMerged.bw
+```
+
+##Map along gene bodies  
+
+
+```{bash,eval=F}
+sbatch BothFracDTPlotGeneRegions.sh
+```
+
+
