@@ -28,6 +28,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Make descriptive plots for called PAS](PASdescriptiveplots.html)  
 
+* [Plot signal site dristributions](signalsiteanalysis.html)
+
 
 ##apaQTL
 * [Call apaQTLs in both fractions](mapapaQTL.html)

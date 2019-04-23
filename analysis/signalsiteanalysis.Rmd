@@ -1,0 +1,29 @@
+---
+title: "Signal Site analysis"
+author: "Briana Mittleman"
+date: "4/23/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will plot the distribution of signal sites upstream of the PAS I have found. 
+
+
+First I use a python script to make a bed file with the 100 base pairs upsream of the PAS:
+
+```{bash,eval=F}
+module load Anaconda3
+source activate three-prime-env
+mkdir ../data/SignalSiteFiles
+python Upstream10Bases_general.py ../data/PAS/APAPAS_GeneLocAnno.5perc.bed ../data/SignalSiteFiles/APAPAS_100up.bed
+```
+
+
+Now I use bedtools nuc to get the sequence for each of these regions:  
+```{bash,eval=F}
+sbatch getSeq100up.sh 
+```
+
