@@ -18,13 +18,15 @@ In the preprocessing steps of the analysis I will go from the fastq files that c
 * [Process bam to PAS](bam2pas.html) 
 
 
-##QC:
+##QC and base visualization:
 
 These files create some of the QC metrics I used for the analysis.
 
-* [Look at PAS usage differences by gene coverage](PASusageQC.html)  
+* [Look at PAS usage differences by gene coverage](PASusageQC.html) 
 
-* [Look at read distribution accross features](Readdistagainstfeatures.html)  
+* [Look at read distribution accross features](Readdistagainstfeatures.html) 
+
+* [Make descriptive plots for called PAS](PASdescriptiveplots.html)  
 
 
 ##apaQTL

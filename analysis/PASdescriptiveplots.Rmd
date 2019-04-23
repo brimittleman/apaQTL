@@ -1,0 +1,136 @@
+---
+title: "PAS descriptive plots"
+author: "Briana Mittleman"
+date: "4/23/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will create discriptive plots for the PAS identified in the 54 LCLs.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(reshape2)
+library(cowplot)
+```
+
+
+##Peaks per gene: 
+
+I want to plot how many genes have 0, 1, 2 and more than 2 PAS in the set. I need to join my PAS with the annotation to find out how many genes have 0 PAS.  
+
+```{r}
+pas=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", header = F, stringsAsFactors = F, col.names = c("Chr", "start", "end", "PeakID", "score", "strand")) %>% separate(PeakID, into=c("peaknum", "geneAnno"), sep=":") %>% separate(geneAnno, into=c("Gene", "Loc"),sep="_")
+
+pasbygene= pas %>% group_by(Gene) %>% summarise(PAS=n())
+
+annotation=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("chr", "start", "end", "anno", "score", "strand")) %>% separate(anno, into=c("Loc", "Gene"),sep=":") %>% group_by(Gene) %>% summarise(annos=n()) %>% select(Gene)
+
+PASallgene=annotation %>% full_join(pasbygene, by="Gene") %>% replace_na(list(PAS=0)) 
+
+#group with 0,1,2,more than 2
+PASallgene_grouped=PASallgene %>% mutate(Zero=ifelse(PAS==0,1, 0), One=ifelse(PAS==1,1,0), Multiple=ifelse(PAS>1,1,0))
+
+```
+
+
+Plot this:  
+```{r}
+Genes=c(sum(PASallgene_grouped$Zero),sum(PASallgene_grouped$One),sum(PASallgene_grouped$Multiple))
+PAS=c("Zero", "One", "Multiple")
+AllPAS=c(sum(PASallgene_grouped$Zero),sum(PASallgene_grouped$One),sum(PASallgene_grouped$Multiple))
+GenebyPAS=as.data.frame(cbind(PAS,AllPAS))
+GenebyPAS$AllPAS=as.numeric(as.character(GenebyPAS$AllPAS))
+
+ggplot(GenebyPAS, aes(x="",y=AllPAS, fill=PAS)) + geom_bar(stat="identity")
+```
+
+###Subset and get stats for UTR  
+
+```{r}
+pasUTR=pas %>% filter(Loc=="utr3") %>% group_by(Gene) %>% summarise(PAS=n())
+
+pasUTR_allgene=annotation %>% full_join(pasUTR, by="Gene") %>% replace_na(list(PAS=0)) 
+
+PASUTRallgene_grouped=pasUTR_allgene %>% mutate(Zero=ifelse(PAS==0,1, 0), One=ifelse(PAS==1,1,0), Multiple=ifelse(PAS>1,1,0))
+
+
+GenesUTR=c(sum(PASUTRallgene_grouped$Zero),sum(PASUTRallgene_grouped$One),sum(PASUTRallgene_grouped$Multiple))
+UTR=c(sum(PASUTRallgene_grouped$Zero),sum(PASUTRallgene_grouped$One),sum(PASUTRallgene_grouped$Multiple))
+GenebyPASUTR=as.data.frame(cbind(PAS,UTR))
+GenebyPASUTR$UTR=as.numeric(as.character(GenebyPASUTR$UTR))
+
+ggplot(GenebyPASUTR, aes(x="",y=UTR, fill=PAS)) + geom_bar(stat="identity")
+
+```
+
+
+
+###Subset and get stats for Intron
+
+
+```{r}
+pasIntron=pas %>% filter(Loc=="intron" | Loc=='utr3') %>% group_by(Gene) %>% summarise(PAS=n())
+
+pasIntron_allgene=annotation %>% full_join(pasIntron, by="Gene") %>% replace_na(list(PAS=0)) 
+
+pasIntronallgene_grouped=pasIntron_allgene %>% mutate(Zero=ifelse(PAS==0,1, 0), One=ifelse(PAS==1,1,0), Multiple=ifelse(PAS>1,1,0))
+
+
+UTRandIntron=c(sum(pasIntronallgene_grouped$Zero),sum(pasIntronallgene_grouped$One),sum(pasIntronallgene_grouped$Multiple))
+GenebyPASIntron=as.data.frame(cbind(PAS,UTRandIntron))
+GenebyPASIntron$UTRandIntron=as.numeric(as.character(GenebyPASIntron$UTRandIntron))
+
+ggplot(GenebyPASIntron, aes(x="",y=UTRandIntron, fill=PAS)) + geom_bar(stat="identity")
+
+```
+
+
+
+
+
+
+
+
+
+
+Make these side by side:  
+
+```{r}
+GenebyPASUTR_melt=melt(GenebyPASUTR, id.vars = "PAS", value.name = "Genes", variable.name = "Set")
+
+GenebyPAS_melt=melt(GenebyPAS, id.vars = "PAS", value.name = "Genes", variable.name = "Set")
+
+GenebyPASIntron_melt=melt(GenebyPASIntron, id.vars = "PAS", value.name = "Genes", variable.name = "Set")
+
+GenebyPAStoplot=rbind(GenebyPAS_melt,GenebyPASUTR_melt,GenebyPASIntron_melt)
+
+geneswithAPA=ggplot(GenebyPAStoplot, aes(x=Set,y=Genes, fill=PAS, by=Set)) + geom_bar(stat="identity")+ scale_fill_brewer(palette="YlGnBu") + labs(title="Genes with APA poential")
+
+geneswithAPA
+
+```
+
+```{r}
+ggsave(geneswithAPA, file="../output/GeneswithAPApotential.png")
+```
+
+```{r}
+GenebyPAStoplot
+```
+
+##Location of PAS
+
+```{r}
+PAS_loc=pas %>% group_by(Loc) %>% summarise(nPAS=n())
+
+PASLocPlot=ggplot(PAS_loc, aes(x=Loc, y=nPAS, fill=Loc)) + geom_bar(stat="identity")+ scale_fill_brewer(palette = "YlGnBu") + labs(x="Gene location", y="Number of identified PAS", title="Location distribution for identified PAS") + theme(legend.position = "none")
+
+
+ggsave(PASLocPlot, file="../output/PASlocation.png")
+
+```
