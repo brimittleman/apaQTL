@@ -76,11 +76,44 @@ ggplot(AllsiteDF_sep, aes(x=Distance2PAS, by=Site, col=Site)) + stat_ecdf() + fa
 **Next plot: look at presence of signal site compared to PAS usage**  
 
 
-
-
 Check to see if any PAS have more than one signal site detected:
 
 ```{r}
 AllsiteDFmultsites=AllsiteDF %>% group_by(PAS) %>% mutate(nSites=n()) %>% filter(nSites>1)
 ```
 First take the perfect match within 50 bp then use the closest. 
+
+Write out the AllSite in order to use it in the chooseSignalSite.py script:  
+
+```{r}
+write.table(AllsiteDF, file="../data/SignalSiteFiles/AllSignalSite.txt", quote=F, col.names = F, row.names = F, sep="\t")
+```
+
+```{r}
+AllsiteDF_1per=read.table(file="../data/SignalSiteFiles/AllSignalSite_1perPAS.txt", col.names = colnames(AllsiteDF)) %>% mutate(NegCount=-1*as.integer(as.character(Distance2PAS)))
+```
+
+Plot
+
+```{r}
+dist2signalsiteplot=ggplot(AllsiteDF_1per, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of annotated signal sites")
+dist2signalsiteplot
+
+ggsave(dist2signalsiteplot, file="../output/SignalSitePlot.png")
+```
+
+Seperate by location:
+
+```{r}
+AllsiteDF_1per_sep= AllsiteDF_1per %>%separate(PAS, int=c("GenePeak", "Location"), sep="_")
+```
+
+```{r}
+dist2signalsiteplot_byloc=ggplot(AllsiteDF_1per_sep, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of annotated signal sites") + facet_wrap(~Location)
+
+dist2signalsiteplot_byloc
+
+ggsave(dist2signalsiteplot_byloc, file="../output/SignalSitePlotbyLoc.png")
+```
+
+This analysis shows me that 35,323 of the 76,650 PAS have an annotated signal site. This is 46%.
