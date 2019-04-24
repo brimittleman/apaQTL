@@ -46,7 +46,10 @@ AllPAS=c(sum(PASallgene_grouped$Zero),sum(PASallgene_grouped$One),sum(PASallgene
 GenebyPAS=as.data.frame(cbind(PAS,AllPAS))
 GenebyPAS$AllPAS=as.numeric(as.character(GenebyPAS$AllPAS))
 
-ggplot(GenebyPAS, aes(x="",y=AllPAS, fill=PAS)) + geom_bar(stat="identity")
+allPASplot=ggplot(GenebyPAS, aes(x="",y=AllPAS, fill=PAS)) + geom_bar(stat="identity", width=.5) + scale_fill_brewer(palette="GnBu") + labs(title="Identified PAS per Gene", y="Genes",x="All Indentified PAS")
+allPASplot
+
+ggsave(allPASplot, file="../output/GeneswithAPApotentialAllPAS.png", width=3, height=5)
 ```
 
 ###Subset and get stats for UTR  
@@ -127,9 +130,9 @@ GenebyPAStoplot
 
 ```{r}
 PAS_loc=pas %>% group_by(Loc) %>% summarise(nPAS=n())
-
-PASLocPlot=ggplot(PAS_loc, aes(x=Loc, y=nPAS, fill=Loc)) + geom_bar(stat="identity")+ scale_fill_brewer(palette = "YlGnBu") + labs(x="Gene location", y="Number of identified PAS", title="Location distribution for identified PAS") + theme(legend.position = "none")
-
+loclabel=c("Coding", "Downstream", "Intronic", "3' UTR", "5' UTR")
+PASLocPlot=ggplot(PAS_loc, aes(x=Loc, y=nPAS, fill=Loc)) + geom_bar(stat="identity",width=.5)+ scale_fill_brewer(palette = "YlGnBu") + labs(x="Gene location", y="Number of identified PAS", title="Location distribution for identified PAS") + theme(legend.position = "none")+ scale_x_discrete(labels= loclabel)+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+PASLocPlot
 
 ggsave(PASLocPlot, file="../output/PASlocation.png")
 
