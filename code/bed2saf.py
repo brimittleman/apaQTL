@@ -5,8 +5,10 @@ def main(inFile, outFile):
     for ln in open(inFile, "r"):
          chrom, start, end, score, strand, score2 = ln.split()
          ID = "peak_%s_%s_%s"%(chrom,start, end)
-         fout.write("%s\t%s\t%s\t%s\t+\n"%(ID+"_+", chrom.replace("chr",""), start, end))
-         fout.write("%s\t%s\t%s\t%s\t-\n"%(ID+"_-", chrom.replace("chr",""), start, end))
+         if strand=="+":
+             fout.write("%s\t%s\t%s\t%s\t+\n"%(ID+"_+", chrom.replace("chr",""), start, end))
+         else:
+             fout.write("%s\t%s\t%s\t%s\t-\n"%(ID+"_-", chrom.replace("chr",""), start, end))
     fout.close()
 
 

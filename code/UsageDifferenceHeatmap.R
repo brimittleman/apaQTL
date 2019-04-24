@@ -87,7 +87,7 @@ Percentile_melt=melt(Percentile_df, id.vars=c("Percentile"))
 colnames(Percentile_melt)=c("Percentile", "Individual", "AvgUsageDiff")
 
 
-diffplot=ggplot(Percentile_melt, aes(x=Percentile, y=Individual, fill=AvgUsageDiff)) + geom_tile() + labs(title="Average peak usage difference for individaul vs. others") + scale_fill_gradientn(colours = c("white", "blue", "black"))
+diffplot=ggplot(Percentile_melt, aes(x=Percentile, y=Individual, fill=AvgUsageDiff)) + geom_tile() + labs(title="Average peak usage difference for individaul vs. others") + scale_fill_gradientn(colours = c("white", "red", "black"))
 
 ggsave(diffplot,file=paste("../output/AverageDiffHeatmap.", opt$fraction, ".png", sep=""))
 
