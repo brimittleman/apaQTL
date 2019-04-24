@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree49d9b39354c61188211dd36bc0317832383063b3targetblank49d9b39a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/49d9b39354c61188211dd36bc0317832383063b3" target="_blank">49d9b39</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree627fc45018d1876c5f86788d55810fa5a2314aa7targetblank627fc45a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/627fc45018d1876c5f86788d55810fa5a2314aa7" target="_blank">627fc45</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree49d9b39354c61188211dd36bc0317832383063b3targetblank49d9b39a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree627fc45018d1876c5f86788d55810fa5a2314aa7targetblank627fc45a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -463,6 +463,7 @@ Untracked files:
     Untracked:  code/._config2.yaml
     Untracked:  code/._configOLD.yaml
     Untracked:  code/._convertNumeric.py
+    Untracked:  code/._dag.pdf
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
     Untracked:  code/._filterpeaks.py
@@ -495,8 +496,9 @@ Untracked files:
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/bam2bw.err
     Untracked:  code/bam2bw.out
-    Untracked:  code/chooseSignalSite
-    Untracked:  code/chooseSignalSite.py
+    Untracked:  code/dag.pdf
+    Untracked:  code/dagPAS.pdf
+    Untracked:  code/dagfiltPAS.pdf
     Untracked:  code/get100upPAS.py
     Untracked:  code/getSeq100up.sh
     Untracked:  code/getseq100up.err
@@ -545,7 +547,10 @@ Untracked files:
     Untracked:  output/fastqc/
 
 Unstaged changes:
+    Modified:   analysis/signalsiteanalysis.Rmd
     Deleted:    code/Upstream10Bases_general.py
+    Modified:   code/bed2saf.py
+    Deleted:    code/test.txt
 
 </code></pre>
 <p>
@@ -584,6 +589,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/012892d10fc4ae28c25a266e1e1eae9feac6189d/docs/PASdescriptiveplots.html" target="_blank">012892d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -680,6 +702,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/012892d10fc4ae28c25a266e1e1eae9feac6189d/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-3-1.png" target="_blank">012892d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fb70868f617a09060d6e68818511172255910df/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-3-1.png" target="_blank">1fb7086</a>
 </td>
 <td>
@@ -732,6 +765,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/012892d10fc4ae28c25a266e1e1eae9feac6189d/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-4-1.png" target="_blank">012892d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fb70868f617a09060d6e68818511172255910df/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-4-1.png" target="_blank">1fb7086</a>
@@ -787,6 +831,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/012892d10fc4ae28c25a266e1e1eae9feac6189d/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-5-1.png" target="_blank">012892d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fb70868f617a09060d6e68818511172255910df/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-5-1.png" target="_blank">1fb7086</a>
 </td>
 <td>
@@ -837,6 +892,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/012892d10fc4ae28c25a266e1e1eae9feac6189d/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-6-1.png" target="_blank">012892d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fb70868f617a09060d6e68818511172255910df/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-6-1.png" target="_blank">1fb7086</a>
 </td>
 <td>
@@ -854,15 +920,15 @@ brimittleman
 <pre><code>Saving 7 x 5 in image</code></pre>
 <pre class="r"><code>GenebyPAStoplot</code></pre>
 <pre><code>       PAS          Set Genes
-1     Zero       AllPAS 11659
-2      One       AllPAS  4111
-3 Multiple       AllPAS 11345
-4     Zero          UTR 14503
-5      One          UTR  6996
-6 Multiple          UTR  5616
-7     Zero UTRandIntron 13025
-8      One UTRandIntron  4328
-9 Multiple UTRandIntron  9762</code></pre>
+1     Zero       AllPAS 19518
+2      One       AllPAS  2062
+3 Multiple       AllPAS  5535
+4     Zero          UTR 20539
+5      One          UTR  3659
+6 Multiple          UTR  2917
+7     Zero UTRandIntron 19960
+8      One UTRandIntron  2285
+9 Multiple UTRandIntron  4870</code></pre>
 </div>
 </div>
 <div id="location-of-pas" class="section level2">
@@ -872,6 +938,43 @@ loclabel=c(&quot;Coding&quot;, &quot;Downstream&quot;, &quot;Intronic&quot;, &qu
 PASLocPlot=ggplot(PAS_loc, aes(x=Loc, y=nPAS, fill=Loc)) + geom_bar(stat=&quot;identity&quot;,width=.5)+ scale_fill_brewer(palette = &quot;YlGnBu&quot;) + labs(x=&quot;Gene location&quot;, y=&quot;Number of identified PAS&quot;, title=&quot;Location distribution for identified PAS&quot;) + theme(legend.position = &quot;none&quot;)+ scale_x_discrete(labels= loclabel)+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 PASLocPlot</code></pre>
 <p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/012892d10fc4ae28c25a266e1e1eae9feac6189d/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-9-1.png" target="_blank">012892d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggsave(PASLocPlot, file=&quot;../output/PASlocation.png&quot;)</code></pre>
 <pre><code>Saving 7 x 5 in image</code></pre>
 <br>
