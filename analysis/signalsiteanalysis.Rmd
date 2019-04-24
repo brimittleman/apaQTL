@@ -117,8 +117,7 @@ dist2signalsiteplot_byloc
 
 ggsave(dist2signalsiteplot_byloc, file="../output/SignalSitePlotbyLoc.png")
 ```
-
-This analysis shows me that 35,323 of the 76,650 PAS have an annotated signal site. This is 46%.
+.
 
 ##Signal site and usage relationship  
 **Next plot: look at presence of signal site compared to PAS usage**  
