@@ -73,9 +73,6 @@ ggplot(AllsiteDF_sep, aes(x=Distance2PAS, by=Site, col=Site)) + stat_ecdf() + fa
 
 ```
 
-**Next plot: look at presence of signal site compared to PAS usage**  
-
-
 Check to see if any PAS have more than one signal site detected:
 
 ```{r}
@@ -87,6 +84,11 @@ Write out the AllSite in order to use it in the chooseSignalSite.py script:
 
 ```{r}
 write.table(AllsiteDF, file="../data/SignalSiteFiles/AllSignalSite.txt", quote=F, col.names = F, row.names = F, sep="\t")
+```
+
+
+```{bash, eval=F}
+python chooseSignalSite.py ../data/SignalSiteFiles/AllSignalSite.txt ../data/SignalSiteFiles/AllSignalSite_1perPAS.txt
 ```
 
 ```{r}
@@ -117,3 +119,8 @@ ggsave(dist2signalsiteplot_byloc, file="../output/SignalSitePlotbyLoc.png")
 ```
 
 This analysis shows me that 35,323 of the 76,650 PAS have an annotated signal site. This is 46%.
+
+##Signal site and usage relationship  
+**Next plot: look at presence of signal site compared to PAS usage**  
+
+I need to look at the mean usage and fraction it by if the peak has a signal site.  
