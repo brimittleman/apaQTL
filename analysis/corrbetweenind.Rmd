@@ -14,7 +14,18 @@ In this analysis I will look at correlations heatmaps for the counts of all of t
 library(tidyverse)
 library(workflowr)
 library(reshape2)
+library(gplots)
+library(gdata)
 ```
+
+Load metadata:  
+
+```{r}
+metadata=read.table("../data/MetaDataSequencing.txt",header = T)
+meta_T=metadata %>% filter(grepl("T", Sample_ID)) %>% mutate(samp=paste("X", Sample_ID, sep=""))
+meta_N=metadata %>% filter(grepl("N", Sample_ID)) %>%  mutate(samp=paste("X", Sample_ID, sep=""))
+```
+
 
 ##Correlation in counts:  
 ###Total  
@@ -37,7 +48,26 @@ Plot heatmap:
 ggplot(data = totCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +theme(axis.text.x = element_text(angle = 90))
 ```
+Use heatmap2.  
+
+```{r}
+
+meta_TBatch=meta_T %>% select(samp,batch)
+
+target=colnames(totCount_corr)
+meta_TBatch$samp <- reorder.factor(meta_TBatch$samp, new.order=target)
+meta_TBatch_order=meta_TBatch %>% arrange(samp)
+
+meta_TBatch_order = meta_TBatch_order %>% mutate(color=ifelse(batch=="1", "blue", ifelse(batch=="2", "green", ifelse(batch=="3", "purple", "pink"))))
+
+
+heatmap.2(as.matrix(totCount_corr),trace="none", dendrogram =c("col"), ColSideColors =meta_TBatch_order$color, key=T)
+```
+
+
+
 ###Nuclear  
+
 
 ```{r}
 nucCount=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F,header=T) %>% select(-Geneid, -Chr, -Start, -End, -Strand, -Length)
@@ -57,6 +87,19 @@ Plot heatmap:
 ggplot(data = nucCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +theme(axis.text.x = element_text(angle = 90))
 ```
+
+```{r}
+meta_NBatch=meta_N %>% select(samp,batch)
+target=colnames(nucCount_corr)
+meta_NBatch$samp <- reorder.factor(meta_NBatch$samp, new.order=target)
+meta_NBatch_order=meta_NBatch %>% arrange(samp)
+
+meta_NBatch_order = meta_NBatch_order %>% mutate(color=ifelse(batch=="1", "blue", ifelse(batch=="2", "green", ifelse(batch=="3", "purple", "pink"))))
+
+
+heatmap.2(as.matrix(nucCount_corr),trace="none", dendrogram =c("col"), ColSideColors =meta_NBatch_order$color, key=T)
+```
+
 
 ##Correlation in Usage  
 
