@@ -1,0 +1,101 @@
+---
+title: "Correlation between Individuals"
+author: "Briana Mittleman"
+date: "4/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+In this analysis I will look at correlations heatmaps for the counts of all of the inidividuals. 
+
+```{r}
+library(tidyverse)
+library(workflowr)
+library(reshape2)
+```
+
+##Correlation in counts:  
+###Total  
+
+```{r}
+totCount=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F,header=T) %>% select(-Geneid, -Chr, -Start, -End, -Strand, -Length)
+```
+
+Correlation: 
+
+```{r}
+totCount_corr= round(cor(totCount),2)
+
+totCount_corr_melt=melt(totCount_corr)
+
+```
+
+Plot heatmap:
+```{r}
+ggplot(data = totCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile() +theme(axis.text.x = element_text(angle = 90))
+```
+###Nuclear  
+```{r}
+nucCount=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F,header=T) %>% select(-Geneid, -Chr, -Start, -End, -Strand, -Length)
+```
+
+Correlation: 
+
+```{r}
+nucCount_corr= round(cor(nucCount),2)
+
+nucCount_corr_melt=melt(nucCount_corr)
+
+```
+
+Plot heatmap:
+```{r}
+ggplot(data = nucCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile() +theme(axis.text.x = element_text(angle = 90))
+```
+
+##Correlation in Usage  
+
+###Total  
+
+```{r}
+totUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.CountsNumeric", stringsAsFactors = F,header=F, col.names = colnames(totCount)) 
+```
+
+Correlation: 
+
+```{r}
+totUsage_corr= round(cor(totUsage),2)
+
+totUsage_corr_melt=melt(totUsage_corr)
+
+```
+
+Plot heatmap:
+```{r}
+ggplot(data = totUsage_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile() +theme(axis.text.x = element_text(angle = 90))
+```
+###Nuclear  
+
+```{r}
+nucUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric", stringsAsFactors = F,header=F, col.names = colnames(nucCount)) 
+```
+
+Correlation: 
+
+```{r}
+nucUsage_corr= round(cor(nucUsage),2)
+
+nucUsage_corr_melt=melt(nucUsage_corr)
+
+```
+
+Plot heatmap:
+```{r}
+ggplot(data = nucUsage_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile() +theme(axis.text.x = element_text(angle = 90))
+```

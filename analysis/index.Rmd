@@ -30,6 +30,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Plot signal site dristributions](signalsiteanalysis.html)
 
+* [Count and usage correlation](corrbetweenind.html)
+
 
 ##apaQTL
 * [Call apaQTLs in both fractions](mapapaQTL.html)
