@@ -46,3 +46,9 @@ ggplot(metadata, aes(x=batch, group=batch, y=prop_MappedwithoutMP, fill=batch)) 
 ggplot(metadata, aes(x=batch, group=batch, y=library_conc, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Library concentrations by batch")
 ```
 
+##before mp  
+
+```{r}
+ggplot(metadata, aes(x=batch, group=batch, y=mapped, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Mapped reads before MP filter by batch")
+```
+
