@@ -1,0 +1,48 @@
+---
+title: "Sequencing meta data"
+author: "Briana Mittleman"
+date: "4/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+In this analysis I want to compare the sequencing depth between batches.  
+
+```{r}
+library(tidyverse)
+```
+
+Load metadata:  
+
+```{r}
+metadata=read.table("../data/MetaDataSequencing.txt",header = T)
+meta_T=metadata %>% filter(grepl("T", Sample_ID)) %>% mutate(samp=paste("X", Sample_ID, sep=""))
+meta_N=metadata %>% filter(grepl("N", Sample_ID)) %>%  mutate(samp=paste("X", Sample_ID, sep=""))
+```
+
+##Read count
+```{r}
+metadata$batch=as.factor(metadata$batch)
+ggplot(metadata, aes(x=batch, group=batch, y=reads, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Read count by batch")
+```
+
+##Mapped reads
+```{r}
+ggplot(metadata, aes(x=batch, group=batch, y=prop_MappedwithoutMP, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Mapped reads by batch")
+```
+
+##Map prop
+
+```{r}
+ggplot(metadata, aes(x=batch, group=batch, y=prop_MappedwithoutMP, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Proportion Mapped reads by batch")
+```
+
+
+##Library concentration  
+
+```{r}
+ggplot(metadata, aes(x=batch, group=batch, y=library_conc, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Library concentrations by batch")
+```
+
