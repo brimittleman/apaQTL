@@ -58,7 +58,7 @@ target=colnames(totCount_corr)
 meta_TBatch$samp <- reorder.factor(meta_TBatch$samp, new.order=target)
 meta_TBatch_order=meta_TBatch %>% arrange(samp)
 
-meta_TBatch_order = meta_TBatch_order %>% mutate(color=ifelse(batch=="1", "blue", ifelse(batch=="2", "green", ifelse(batch=="3", "purple", "pink"))))
+meta_TBatch_order = meta_TBatch_order %>% mutate(color=ifelse(batch=="1", "green", ifelse(batch=="2", "blue", ifelse(batch=="3", "purple", "pink"))))
 
 
 heatmap.2(as.matrix(totCount_corr),trace="none", dendrogram =c("col"), ColSideColors =meta_TBatch_order$color, key=T)
@@ -94,7 +94,7 @@ target=colnames(nucCount_corr)
 meta_NBatch$samp <- reorder.factor(meta_NBatch$samp, new.order=target)
 meta_NBatch_order=meta_NBatch %>% arrange(samp)
 
-meta_NBatch_order = meta_NBatch_order %>% mutate(color=ifelse(batch=="1", "blue", ifelse(batch=="2", "green", ifelse(batch=="3", "purple", "pink"))))
+meta_NBatch_order = meta_NBatch_order %>% mutate(color=ifelse(batch=="1", "green", ifelse(batch=="2", "blue", ifelse(batch=="3", "purple", "pink"))))
 
 
 heatmap.2(as.matrix(nucCount_corr),trace="none", dendrogram =c("col"), ColSideColors =meta_NBatch_order$color, key=T)
