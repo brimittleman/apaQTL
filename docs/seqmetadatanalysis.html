@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6cb0a9909fff660701379bf3e8317ee4fea55ab2targetblank6cb0a99a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6cb0a9909fff660701379bf3e8317ee4fea55ab2" target="_blank">6cb0a99</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree48b2ec1beba36ac1bfceb53a897d7f0a2ba7c16etargetblank48b2ec1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/48b2ec1beba36ac1bfceb53a897d7f0a2ba7c16e" target="_blank">48b2ec1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6cb0a9909fff660701379bf3e8317ee4fea55ab2targetblank6cb0a99a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree48b2ec1beba36ac1bfceb53a897d7f0a2ba7c16etargetblank48b2ec1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -597,6 +597,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/48b2ec1beba36ac1bfceb53a897d7f0a2ba7c16e/analysis/seqmetadatanalysis.Rmd" target="_blank">48b2ec1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+add map befroe mp filter
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/seqmetadatanalysis.html" target="_blank">be227e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/6cb0a9909fff660701379bf3e8317ee4fea55ab2/analysis/seqmetadatanalysis.Rmd" target="_blank">6cb0a99</a>
 </td>
 <td>
@@ -635,21 +669,174 @@ meta_N=metadata %&gt;% filter(grepl(&quot;N&quot;, Sample_ID)) %&gt;%  mutate(sa
 <pre class="r"><code>metadata$batch=as.factor(metadata$batch)
 ggplot(metadata, aes(x=batch, group=batch, y=reads, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title=&quot;Read count by batch&quot;)</code></pre>
 <p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/figure/seqmetadatanalysis.Rmd/unnamed-chunk-3-1.png" target="_blank">be227e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="mapped-reads" class="section level2">
 <h2>Mapped reads</h2>
 <pre class="r"><code>ggplot(metadata, aes(x=batch, group=batch, y=prop_MappedwithoutMP, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title=&quot;Mapped reads by batch&quot;)</code></pre>
 <p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/figure/seqmetadatanalysis.Rmd/unnamed-chunk-4-1.png" target="_blank">be227e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="map-prop" class="section level2">
 <h2>Map prop</h2>
 <pre class="r"><code>ggplot(metadata, aes(x=batch, group=batch, y=prop_MappedwithoutMP, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title=&quot;Proportion Mapped reads by batch&quot;)</code></pre>
 <p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/figure/seqmetadatanalysis.Rmd/unnamed-chunk-5-1.png" target="_blank">be227e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="library-concentration" class="section level2">
 <h2>Library concentration</h2>
 <pre class="r"><code>ggplot(metadata, aes(x=batch, group=batch, y=library_conc, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title=&quot;Library concentrations by batch&quot;)</code></pre>
 <p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/figure/seqmetadatanalysis.Rmd/unnamed-chunk-6-1.png" target="_blank">be227e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="before-mp" class="section level2">
+<h2>before mp</h2>
+<pre class="r"><code>ggplot(metadata, aes(x=batch, group=batch, y=mapped, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title=&quot;Mapped reads before MP filter by batch&quot;)</code></pre>
+<p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
