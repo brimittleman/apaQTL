@@ -38,6 +38,7 @@ ggplot(data = totCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) +
   geom_tile() +theme(axis.text.x = element_text(angle = 90))
 ```
 ###Nuclear  
+
 ```{r}
 nucCount=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F,header=T) %>% select(-Geneid, -Chr, -Start, -End, -Strand, -Length)
 ```
@@ -81,6 +82,7 @@ ggplot(data = totUsage_corr_melt, aes(x=Var1, y=Var2, fill=value)) +
 ```
 ###Nuclear  
 
+
 ```{r}
 nucUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric", stringsAsFactors = F,header=F, col.names = colnames(nucCount)) 
 ```
@@ -95,6 +97,7 @@ nucUsage_corr_melt=melt(nucUsage_corr)
 ```
 
 Plot heatmap:
+
 ```{r}
 ggplot(data = nucUsage_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +theme(axis.text.x = element_text(angle = 90))
