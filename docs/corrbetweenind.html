@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeeb89a2516c1568deff0fcc8624c8e3639439d1cctargetblankeb89a25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/eb89a2516c1568deff0fcc8624c8e3639439d1cc" target="_blank">eb89a25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8139519dafb94a2b6c5b8a31e69049211cbf7782targetblank8139519a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/8139519dafb94a2b6c5b8a31e69049211cbf7782" target="_blank">8139519</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeeb89a2516c1568deff0fcc8624c8e3639439d1cctargetblankeb89a25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8139519dafb94a2b6c5b8a31e69049211cbf7782targetblank8139519a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -597,6 +597,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/8139519dafb94a2b6c5b8a31e69049211cbf7782/analysis/corrbetweenind.Rmd" target="_blank">8139519</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+fix color order
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/88373310417a2a038938215d0054f8fbfa424fc1/docs/corrbetweenind.html" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/eb89a2516c1568deff0fcc8624c8e3639439d1cc/analysis/corrbetweenind.Rmd" target="_blank">eb89a25</a>
 </td>
 <td>
@@ -751,18 +785,93 @@ totCount_corr_melt=melt(totCount_corr)</code></pre>
 <p>Plot heatmap:</p>
 <pre class="r"><code>ggplot(data = totCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +theme(axis.text.x = element_text(angle = 90))</code></pre>
-<p><img src="figure/corrbetweenind.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /> Use heatmap2.</p>
+<p><img src="figure/corrbetweenind.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/88373310417a2a038938215d0054f8fbfa424fc1/docs/figure/corrbetweenind.Rmd/unnamed-chunk-5-1.png" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Use heatmap2.</p>
 <pre class="r"><code>meta_TBatch=meta_T %&gt;% select(samp,batch)
 
 target=colnames(totCount_corr)
 meta_TBatch$samp &lt;- reorder.factor(meta_TBatch$samp, new.order=target)
 meta_TBatch_order=meta_TBatch %&gt;% arrange(samp)
 
-meta_TBatch_order = meta_TBatch_order %&gt;% mutate(color=ifelse(batch==&quot;1&quot;, &quot;blue&quot;, ifelse(batch==&quot;2&quot;, &quot;green&quot;, ifelse(batch==&quot;3&quot;, &quot;purple&quot;, &quot;pink&quot;))))
+meta_TBatch_order = meta_TBatch_order %&gt;% mutate(color=ifelse(batch==&quot;1&quot;, &quot;green&quot;, ifelse(batch==&quot;2&quot;, &quot;blue&quot;, ifelse(batch==&quot;3&quot;, &quot;purple&quot;, &quot;pink&quot;))))
 
 
 heatmap.2(as.matrix(totCount_corr),trace=&quot;none&quot;, dendrogram =c(&quot;col&quot;), ColSideColors =meta_TBatch_order$color, key=T)</code></pre>
 <p><img src="figure/corrbetweenind.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/88373310417a2a038938215d0054f8fbfa424fc1/docs/figure/corrbetweenind.Rmd/unnamed-chunk-6-1.png" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nuclear" class="section level3">
 <h3>Nuclear</h3>
@@ -775,12 +884,49 @@ nucCount_corr_melt=melt(nucCount_corr)</code></pre>
 <pre class="r"><code>ggplot(data = nucCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +theme(axis.text.x = element_text(angle = 90))</code></pre>
 <p><img src="figure/corrbetweenind.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/88373310417a2a038938215d0054f8fbfa424fc1/docs/figure/corrbetweenind.Rmd/unnamed-chunk-9-1.png" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>meta_NBatch=meta_N %&gt;% select(samp,batch)
 target=colnames(nucCount_corr)
 meta_NBatch$samp &lt;- reorder.factor(meta_NBatch$samp, new.order=target)
 meta_NBatch_order=meta_NBatch %&gt;% arrange(samp)
 
-meta_NBatch_order = meta_NBatch_order %&gt;% mutate(color=ifelse(batch==&quot;1&quot;, &quot;blue&quot;, ifelse(batch==&quot;2&quot;, &quot;green&quot;, ifelse(batch==&quot;3&quot;, &quot;purple&quot;, &quot;pink&quot;))))
+meta_NBatch_order = meta_NBatch_order %&gt;% mutate(color=ifelse(batch==&quot;1&quot;, &quot;green&quot;, ifelse(batch==&quot;2&quot;, &quot;blue&quot;, ifelse(batch==&quot;3&quot;, &quot;purple&quot;, &quot;pink&quot;))))
 
 
 heatmap.2(as.matrix(nucCount_corr),trace=&quot;none&quot;, dendrogram =c(&quot;col&quot;), ColSideColors =meta_NBatch_order$color, key=T)</code></pre>
@@ -807,6 +953,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/88373310417a2a038938215d0054f8fbfa424fc1/docs/figure/corrbetweenind.Rmd/unnamed-chunk-10-1.png" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/b2525c343bc47d98f6ff2e82c969a014866b1c95/docs/figure/corrbetweenind.Rmd/unnamed-chunk-10-1.png" target="_blank">b2525c3</a>
@@ -861,6 +1018,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/88373310417a2a038938215d0054f8fbfa424fc1/docs/figure/corrbetweenind.Rmd/unnamed-chunk-13-1.png" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/b2525c343bc47d98f6ff2e82c969a014866b1c95/docs/figure/corrbetweenind.Rmd/unnamed-chunk-13-1.png" target="_blank">b2525c3</a>
 </td>
 <td>
@@ -886,6 +1054,43 @@ nucUsage_corr_melt=melt(nucUsage_corr)</code></pre>
 <pre class="r"><code>ggplot(data = nucUsage_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
   geom_tile() +theme(axis.text.x = element_text(angle = 90))</code></pre>
 <p><img src="figure/corrbetweenind.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/88373310417a2a038938215d0054f8fbfa424fc1/docs/figure/corrbetweenind.Rmd/unnamed-chunk-16-1.png" target="_blank">8837331</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
