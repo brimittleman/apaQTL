@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(workflowr)
 library(reshape2)
+library(gplots)
+library(cowplot)
 ```
 
 In this analysis I will plot the distribution of signal sites upstream of the PAS I have found. 
@@ -103,6 +105,22 @@ dist2signalsiteplot
 
 ggsave(dist2signalsiteplot, file="../output/SignalSitePlot.png")
 ```
+Plot with proportion:  
+```{r}
+allPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, col.names = c("chr","start","end","PAS","score","strand"))
+
+AllsiteDF_1per_prop= AllsiteDF_1per %>% group_by(Site,NegCount) %>% summarise(CountperPos=n()) %>% mutate(TotCount=sum(CountperPos),prop=CountperPos/nrow(allPAS))
+```
+
+Plot with prop:
+```{r}
+dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites")
+dist2signalsiteplotprop
+```
+```{r}
+nrow(AllsiteDF_1per)/nrow(allPAS) 
+```
+
 
 Seperate by location:
 
@@ -117,7 +135,62 @@ dist2signalsiteplot_byloc
 
 ggsave(dist2signalsiteplot_byloc, file="../output/SignalSitePlotbyLoc.png")
 ```
-.
+Proportion:  
+```{r}
+allPAS_byloc=allPAS %>% separate(PAS,into=c("peakid", "loc"),sep="_") %>% group_by(loc) %>% summarise(nLoc=n())
+
+allPAS_byloc_new=as.data.frame(allPAS_byloc$nLoc %>% t())
+colnames(allPAS_byloc_new) = allPAS_byloc$loc
+
+
+
+AllsiteDF_1per_sep_INTRON=AllsiteDF_1per_sep %>% filter(Location=="intron") %>%  group_by(Site,NegCount) %>% summarise(CountperPos=n()) %>% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron))
+
+ggplot(AllsiteDF_1per_sep_INTRON, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=5, stat="identity" ) + labs(x="Distance from PAS", y="Propotion of Intron annotated Sites", title="Location of annotated signal sites") 
+```
+```{r}
+AllsiteDF_1per_sep_UTR=AllsiteDF_1per_sep %>% filter(Location=="utr3") %>%  group_by(Site,NegCount) %>% summarise(CountperPos=n()) %>% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron))
+
+ggplot(AllsiteDF_1per_sep_UTR, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack", stat="identity" ) + labs(x="Distance from PAS", y="Propotion of UTR annotated Sites", title="Location of annotated signal sites") 
+```
+
+```{r}
+Propwith=c(nrow(AllsiteDF_1per_sep %>% filter(Location=="intron"))/allPAS_byloc_new$intron,nrow(AllsiteDF_1per_sep %>% filter(Location=="utr3"))/allPAS_byloc_new$utr3,nrow(AllsiteDF_1per_sep %>% filter(Location=="utr5"))/allPAS_byloc_new$utr5,nrow(AllsiteDF_1per_sep %>% filter(Location=="cds"))/allPAS_byloc_new$cds,nrow(AllsiteDF_1per_sep %>% filter(Location=="end"))/allPAS_byloc_new$end)
+Locations=c("intron", "utr3", "utr5", "Coding", "Downstream")
+propdf=as.data.frame(cbind(Location=Locations,Proportion=Propwith))
+propdf$Proportion=as.numeric(as.character(propdf$Proportion))
+
+all=ggplot(propdf,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")
+```
+
+```{r}
+AllsiteDF_1per_sep_noncon=AllsiteDF_1per_sep %>% filter(Site != "AATAAA")
+
+Propwithnotcon=c(nrow(AllsiteDF_1per_sep_noncon %>% filter(Location=="intron"))/allPAS_byloc_new$intron,nrow(AllsiteDF_1per_sep_noncon %>% filter(Location=="utr3"))/allPAS_byloc_new$utr3,nrow(AllsiteDF_1per_sep_noncon %>% filter(Location=="utr5"))/allPAS_byloc_new$utr5,nrow(AllsiteDF_1per_sep_noncon %>% filter(Location=="cds"))/allPAS_byloc_new$cds,nrow(AllsiteDF_1per_sep_noncon %>% filter(Location=="end"))/allPAS_byloc_new$end)
+Locations=c("intron", "utr3", "utr5", "Coding", "Downstream")
+propdf_noncon=as.data.frame(cbind(Location=Locations,Proportion=Propwithnotcon))
+propdf_noncon$Proportion=as.numeric(as.character(propdf_noncon$Proportion))
+
+non=ggplot(propdf_noncon,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")
+non
+```
+```{r}
+AllsiteDF_1per_sep_con=AllsiteDF_1per_sep %>% filter(Site == "AATAAA")
+
+Propwithcon=c(nrow(AllsiteDF_1per_sep_con %>% filter(Location=="intron"))/allPAS_byloc_new$intron,nrow(AllsiteDF_1per_sep_con %>% filter(Location=="utr3"))/allPAS_byloc_new$utr3,nrow(AllsiteDF_1per_sep_con %>% filter(Location=="utr5"))/allPAS_byloc_new$utr5,nrow(AllsiteDF_1per_sep_con %>% filter(Location=="cds"))/allPAS_byloc_new$cds,nrow(AllsiteDF_1per_sep_con %>% filter(Location=="end"))/allPAS_byloc_new$end)
+Locations=c("intron", "utr3", "utr5", "Coding", "Downstream")
+propdf_con=as.data.frame(cbind(Location=Locations,Proportion=Propwithcon))
+propdf_con$Proportion=as.numeric(as.character(propdf_con$Proportion))
+
+con=ggplot(propdf_con,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")
+con
+```
+
+
+```{r}
+plot_grid(all, con, non)
+```
+
 
 ##Signal site and usage relationship  
 **Next plot: look at presence of signal site compared to PAS usage**  
