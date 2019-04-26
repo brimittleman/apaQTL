@@ -30,7 +30,7 @@ ggplot(metadata, aes(x=batch, group=batch, y=reads, fill=batch)) + geom_boxplot(
 
 ##Mapped reads
 ```{r}
-ggplot(metadata, aes(x=batch, group=batch, y=prop_MappedwithoutMP, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Mapped reads by batch")
+ggplot(metadata, aes(x=batch, group=batch, y=Mapped_noMP, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Mapped reads by batch")
 ```
 
 ##Map prop
@@ -50,5 +50,36 @@ ggplot(metadata, aes(x=batch, group=batch, y=library_conc, fill=batch)) + geom_b
 
 ```{r}
 ggplot(metadata, aes(x=batch, group=batch, y=mapped, fill=batch)) + geom_boxplot() + geom_jitter() + facet_grid(~fraction) + labs(title="Mapped reads before MP filter by batch")
+```
+
+##alive perc  
+
+```{r}
+ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=alive_avg)) + geom_point()
+```
+#Cq  
+
+```{r}
+ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=library_conc)) + geom_point() 
+```
+
+##Mapped v concentration
+
+```{r}
+ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=Conentration)) + geom_point() + facet_grid(~fraction)
+
+metadata_T=metadata %>% filter(fraction=="total")
+summary(lm(data=metadata_T, Mapped_noMP ~ Conentration))
+
+
+metadata_N=metadata %>% filter(fraction=="nuclear")
+summary(lm(data=metadata_N, Mapped_noMP~ Conentration))
+```
+
+##RNA quality  
+
+```{r}
+ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=ratio260_280)) + geom_point() + facet_grid(~fraction)
+
 ```
 
