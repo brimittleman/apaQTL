@@ -325,7 +325,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -334,7 +334,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -343,10 +343,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-25
+<strong>Last updated:</strong> 2019-04-26
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>apaQTL/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -362,12 +362,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0f7ad7235fde6290f1cf0bb7e950127408fa60cetargetblank0f7ad72a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/0f7ad7235fde6290f1cf0bb7e950127408fa60ce" target="_blank">0f7ad72</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree111979f7287c7227571265452d04a515b7913959targetblank111979fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/111979f7287c7227571265452d04a515b7913959" target="_blank">111979f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0f7ad7235fde6290f1cf0bb7e950127408fa60cetargetblank0f7ad72a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree111979f7287c7227571265452d04a515b7913959targetblank111979fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,8 +550,6 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/PASusageQC.Rmd
     Modified:   analysis/corrbetweenind.Rmd
-    Modified:   analysis/seqmetadatanalysis.Rmd
-    Modified:   analysis/signalsiteanalysis.Rmd
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/bed2saf.py
     Deleted:    code/test.txt
@@ -593,6 +591,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/111979f7287c7227571265452d04a515b7913959/analysis/seqmetadatanalysis.Rmd" target="_blank">111979f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-26
+</td>
+<td>
+add seq correlations
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/3557545af3aca46726edc82a0760737beaf40999/docs/seqmetadatanalysis.html" target="_blank">3557545</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -753,6 +785,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3557545af3aca46726edc82a0760737beaf40999/docs/figure/seqmetadatanalysis.Rmd/unnamed-chunk-4-1.png" target="_blank">3557545</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/figure/seqmetadatanalysis.Rmd/unnamed-chunk-4-1.png" target="_blank">be227e7</a>
 </td>
 <td>
@@ -892,6 +935,63 @@ brimittleman
 </table>
 </div>
 </div>
+</div>
+<div id="alive-perc" class="section level2">
+<h2>alive perc</h2>
+<pre class="r"><code>ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=alive_avg)) + geom_point()</code></pre>
+<p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /> #Cq</p>
+<pre class="r"><code>ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=library_conc)) + geom_point() </code></pre>
+<p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mapped-v-concentration" class="section level2">
+<h2>Mapped v concentration</h2>
+<pre class="r"><code>ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=Conentration)) + geom_point() + facet_grid(~fraction)</code></pre>
+<p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>metadata_T=metadata %&gt;% filter(fraction==&quot;total&quot;)
+summary(lm(data=metadata_T, Mapped_noMP ~ Conentration))</code></pre>
+<pre><code>
+Call:
+lm(formula = Mapped_noMP ~ Conentration, data = metadata_T)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-6858140 -1918197   151332  1688547  6691716 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6525031.1  1219768.8   5.349 2.01e-06 ***
+Conentration    4149.8      722.4   5.745 4.86e-07 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2805000 on 52 degrees of freedom
+Multiple R-squared:  0.3882,    Adjusted R-squared:  0.3765 
+F-statistic:    33 on 1 and 52 DF,  p-value: 4.86e-07</code></pre>
+<pre class="r"><code>metadata_N=metadata %&gt;% filter(fraction==&quot;nuclear&quot;)
+summary(lm(data=metadata_N, Mapped_noMP~ Conentration))</code></pre>
+<pre><code>
+Call:
+lm(formula = Mapped_noMP ~ Conentration, data = metadata_N)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-4831820  -875807  -215509   558782  8499292 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   6972552     446484  15.617   &lt;2e-16 ***
+Conentration     1577       1389   1.136    0.261    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1895000 on 52 degrees of freedom
+Multiple R-squared:  0.02422,   Adjusted R-squared:  0.005452 
+F-statistic: 1.291 on 1 and 52 DF,  p-value: 0.2612</code></pre>
+</div>
+<div id="rna-quality" class="section level2">
+<h2>RNA quality</h2>
+<pre class="r"><code>ggplot(metadata, aes(y=Mapped_noMP, col=batch, x=ratio260_280)) + geom_point() + facet_grid(~fraction)</code></pre>
+<p><img src="figure/seqmetadatanalysis.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
