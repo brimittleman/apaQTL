@@ -151,7 +151,7 @@ ggplot(AllsiteDF_1per_sep_INTRON, aes(group=Site, x=NegCount,y=prop, fill=Site))
 ```{r}
 AllsiteDF_1per_sep_UTR=AllsiteDF_1per_sep %>% filter(Location=="utr3") %>%  group_by(Site,NegCount) %>% summarise(CountperPos=n()) %>% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron))
 
-ggplot(AllsiteDF_1per_sep_UTR, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack", stat="identity" ) + labs(x="Distance from PAS", y="Propotion of UTR annotated Sites", title="Location of annotated signal sites") 
+ggplot(AllsiteDF_1per_sep_UTR, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack", stat="identity" ) + labs(x="Distance from PAS", y="Propotion of UTR annotated Sites", title="Location of annotated signal sites in UTR") 
 ```
 
 ```{r}
@@ -160,7 +160,7 @@ Locations=c("intron", "utr3", "utr5", "Coding", "Downstream")
 propdf=as.data.frame(cbind(Location=Locations,Proportion=Propwith))
 propdf$Proportion=as.numeric(as.character(propdf$Proportion))
 
-all=ggplot(propdf,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")
+all=ggplot(propdf,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ```{r}
@@ -171,7 +171,7 @@ Locations=c("intron", "utr3", "utr5", "Coding", "Downstream")
 propdf_noncon=as.data.frame(cbind(Location=Locations,Proportion=Propwithnotcon))
 propdf_noncon$Proportion=as.numeric(as.character(propdf_noncon$Proportion))
 
-non=ggplot(propdf_noncon,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")
+non=ggplot(propdf_noncon,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 non
 ```
 ```{r}
@@ -182,13 +182,13 @@ Locations=c("intron", "utr3", "utr5", "Coding", "Downstream")
 propdf_con=as.data.frame(cbind(Location=Locations,Proportion=Propwithcon))
 propdf_con$Proportion=as.numeric(as.character(propdf_con$Proportion))
 
-con=ggplot(propdf_con,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")
+con=ggplot(propdf_con,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat="identity")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
 con
 ```
 
 
 ```{r}
-plot_grid(all, con, non)
+plot_grid(all, con, non, labels=c("All PAS", "Cononical PAS", "Non-conical PAS"))
 ```
 
 
