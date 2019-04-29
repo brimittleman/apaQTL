@@ -173,3 +173,27 @@ nucQTLloc=ggplot(NucQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat =
 plot_grid(totQTLloc, nucQTLloc)
 ```
 
+##Distance to PAS  
+
+The distance to PAS is the location of the snp to the end of the peak for the 
+
+Strand in this file is the peak strand (opposite of gene). This means for + strand I want the start of the Peak and for the - strand i will use the end of the peak.
+```{r}
+TotQTLs_dist=TotQTLs %>% separate(sid, into=c("SnpCHR", "SNPpos"), sep=":") %>% mutate(Dist2PAS=ifelse(Strand=="+", as.integer(SNPpos)-as.integer(Start), as.integer(SNPpos)-as.integer(End)))
+
+
+summary(abs(TotQTLs_dist$Dist2PAS))
+```
+
+Plot:  
+```{r}
+ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+
+```{r}
+ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + facet_grid(~Loc)
+```
+```
+
+
