@@ -9,6 +9,14 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(tidyverse)
+library(reshape2)
+library(workflowr)
+library(cowplot)
+```
+
 In this analysis I will call apaQTls in both fractions. I will start with the phenotype files and normalized the counts using the leafcutter package in order to run the fastq QTL mapper.  
 
 
@@ -81,13 +89,87 @@ sbatch apaQTL_permuted.sh
 
 Concatinate all of the results in the permuted set. I do this so I can account for multiple testing with the benjamini hochberg test.  
 
-**Concatinate**  
+Concatinate results in permuted directory:  
+```{bash,eval=F}
+cat APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_chr* > APApeak_Phenotype_GeneLocAnno.Total_permRes.txt
+
+cat APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* > APApeak_Phenotype_GeneLocAnno.Nuclear_permRes.txt
+ 
+```
 
 
+Run correction script  
 ```{bash,eval=F}
 Rscripts apaQTLCorrectPvalMakeQQ.R  
 ```
 
 
+##Evaluation results   
 
+```{r}
+totRes=read.table("../data/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Total_permResBH.txt", stringsAsFactors = F, header = T) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Loc", "Strand","Peak"), sep="_")
+```
+
+
+Total Apa QTLs   
+```{r}
+TotQTLs= totRes %>% filter(-log10(bh)>=1)
+nrow(TotQTLs)
+```
+
+apaQTL genes:  
+
+```{r}
+TotQTLs_gene=TotQTLs %>% group_by(Gene)  %>% summarise(nQTL=n())
+
+summary(TotQTLs_gene$nQTL)
+
+hist(TotQTLs_gene$nQTL)
+```
+
+
+Location distribution for peaks:
+
+```{r}
+TotQTLs_loc= TotQTLs %>% group_by(Loc) %>% summarise(nLoc=n()) %>% mutate(PropLoc=nLoc/nrow(TotQTLs))
+
+
+totQTLloc=ggplot(TotQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat = "Identity") + labs(x="Location of Significant Peak", y="Proportion of QTLs", title="Total QTL peak distribution")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r}
+nucRes=read.table("../data/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt", stringsAsFactors = F, header = T) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Loc", "Strand","Peak"), sep="_")
+```
+
+
+Nuclear Apa QTLs   
+```{r}
+NucQTLs= nucRes %>% filter(-log10(bh)>=1)
+nrow(NucQTLs)
+```
+
+apaQTL genes:  
+
+```{r}
+NucQTLs_gene= NucQTLs %>% group_by(Gene)  %>% summarise(nQTL=n())
+
+summary(NucQTLs_gene$nQTL)
+
+hist(NucQTLs_gene$nQTL)
+```
+
+Location distribution for peaks:
+
+```{r}
+NucQTLs_loc= NucQTLs %>% group_by(Loc) %>% summarise(nLoc=n()) %>% mutate(PropLoc=nLoc/nrow(NucQTLs))
+
+
+nucQTLloc=ggplot(NucQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat = "Identity") + labs(x="Location of Significant Peak", y="Proportion of QTLs", title="Nuclear QTL peak distribution")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+
+```{r}
+plot_grid(totQTLloc, nucQTLloc)
+```
 
