@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-28
+<strong>Last updated:</strong> 2019-04-29
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree7416404d702044695f30e239122400f7bc585423targetblank7416404a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/7416404d702044695f30e239122400f7bc585423" target="_blank">7416404</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb18b96c887192a82ee966941ba2d25e3fd030c71targetblankb18b96ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b18b96c887192a82ee966941ba2d25e3fd030c71" target="_blank">b18b96c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree7416404d702044695f30e239122400f7bc585423targetblank7416404a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb18b96c887192a82ee966941ba2d25e3fd030c71targetblankb18b96ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,7 +435,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -553,6 +552,7 @@ Unstaged changes:
     Modified:   analysis/corrbetweenind.Rmd
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
+    Modified:   code/apaQTL_permuted.sh
     Modified:   code/bed2saf.py
     Deleted:    code/test.txt
 
@@ -593,6 +593,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b18b96c887192a82ee966941ba2d25e3fd030c71/analysis/mapapaQTL.Rmd" target="_blank">b18b96c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+<td>
+fix distance
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/mapapaQTL.html" target="_blank">2d33728</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -686,12 +720,12 @@ add map apa qtl pipeline
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(reshape2)</code></pre>
@@ -763,15 +797,52 @@ cat APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* &gt; APApeak_P
 <p>Total Apa QTLs</p>
 <pre class="r"><code>TotQTLs= totRes %&gt;% filter(-log10(bh)&gt;=1)
 nrow(TotQTLs)</code></pre>
-<pre><code>[1] 242</code></pre>
+<pre><code>[1] 502</code></pre>
 <p>apaQTL genes:</p>
 <pre class="r"><code>TotQTLs_gene=TotQTLs %&gt;% group_by(Gene)  %&gt;% summarise(nQTL=n())
 
 summary(TotQTLs_gene$nQTL)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   1.00    1.00    1.00    1.28    1.00    6.00 </code></pre>
+  1.000   1.000   1.000   1.307   2.000   6.000 </code></pre>
 <pre class="r"><code>hist(TotQTLs_gene$nQTL)</code></pre>
 <p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/figure/mapapaQTL.Rmd/unnamed-chunk-12-1.png" target="_blank">2d33728</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Location distribution for peaks:</p>
 <pre class="r"><code>TotQTLs_loc= TotQTLs %&gt;% group_by(Loc) %&gt;% summarise(nLoc=n()) %&gt;% mutate(PropLoc=nLoc/nrow(TotQTLs))
 
@@ -781,15 +852,52 @@ totQTLloc=ggplot(TotQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat =
 <p>Nuclear Apa QTLs</p>
 <pre class="r"><code>NucQTLs= nucRes %&gt;% filter(-log10(bh)&gt;=1)
 nrow(NucQTLs)</code></pre>
-<pre><code>[1] 521</code></pre>
+<pre><code>[1] 1070</code></pre>
 <p>apaQTL genes:</p>
 <pre class="r"><code>NucQTLs_gene= NucQTLs %&gt;% group_by(Gene)  %&gt;% summarise(nQTL=n())
 
 summary(NucQTLs_gene$nQTL)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  1.000   1.000   1.000   1.271   1.000   6.000 </code></pre>
+  1.000   1.000   1.000   1.328   2.000   7.000 </code></pre>
 <pre class="r"><code>hist(NucQTLs_gene$nQTL)</code></pre>
 <p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/figure/mapapaQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">2d33728</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Location distribution for peaks:</p>
 <pre class="r"><code>NucQTLs_loc= NucQTLs %&gt;% group_by(Loc) %&gt;% summarise(nLoc=n()) %&gt;% mutate(PropLoc=nLoc/nrow(NucQTLs))
 
@@ -797,6 +905,59 @@ summary(NucQTLs_gene$nQTL)</code></pre>
 nucQTLloc=ggplot(NucQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat = &quot;Identity&quot;) + labs(x=&quot;Location of Significant Peak&quot;, y=&quot;Proportion of QTLs&quot;, title=&quot;Nuclear QTL peak distribution&quot;)+theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
 <pre class="r"><code>plot_grid(totQTLloc, nucQTLloc)</code></pre>
 <p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/figure/mapapaQTL.Rmd/unnamed-chunk-18-1.png" target="_blank">2d33728</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="distance-to-pas" class="section level2">
+<h2>Distance to PAS</h2>
+<p>The distance to PAS is the location of the snp to the end of the peak for the</p>
+<p>Strand in this file is the peak strand (opposite of gene). This means for + strand I want the start of the Peak and for the - strand i will use the end of the peak.</p>
+<pre class="r"><code>TotQTLs_dist=TotQTLs %&gt;% separate(sid, into=c(&quot;SnpCHR&quot;, &quot;SNPpos&quot;), sep=&quot;:&quot;) %&gt;% mutate(Dist2PAS=ifelse(Strand==&quot;+&quot;, as.integer(SNPpos)-as.integer(Start), as.integer(SNPpos)-as.integer(End)))
+
+
+summary(abs(TotQTLs_dist$Dist2PAS))</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      0    1598    6160    8832   15461   25071 </code></pre>
+<p>Plot:</p>
+<pre class="r"><code>ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + facet_grid(~Loc)</code></pre>
+<p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /> ```</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
