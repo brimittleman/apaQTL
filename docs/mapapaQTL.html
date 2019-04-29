@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb18b96c887192a82ee966941ba2d25e3fd030c71targetblankb18b96ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b18b96c887192a82ee966941ba2d25e3fd030c71" target="_blank">b18b96c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3c5e041d6fa9462ce813f47eefe1902cff52c461targetblank3c5e041a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3c5e041d6fa9462ce813f47eefe1902cff52c461" target="_blank">3c5e041</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb18b96c887192a82ee966941ba2d25e3fd030c71targetblankb18b96ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3c5e041d6fa9462ce813f47eefe1902cff52c461targetblank3c5e041a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -445,6 +445,7 @@ Untracked files:
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
+    Untracked:  analysis/newQTLheatmap.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
@@ -516,6 +517,7 @@ Untracked files:
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/apaQTLNominal/
     Untracked:  data/apaQTLPermuted/
+    Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
     Untracked:  data/bam/
     Untracked:  data/bam_clean/
@@ -593,6 +595,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3c5e041d6fa9462ce813f47eefe1902cff52c461/analysis/mapapaQTL.Rmd" target="_blank">3c5e041</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+<td>
+add write out for qtls
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/9490b23c274c0684bea941f9b69b1c6202033dba/docs/mapapaQTL.html" target="_blank">9490b23</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -720,12 +756,12 @@ add map apa qtl pipeline
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(reshape2)</code></pre>
@@ -830,6 +866,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9490b23c274c0684bea941f9b69b1c6202033dba/docs/figure/mapapaQTL.Rmd/unnamed-chunk-12-1.png" target="_blank">9490b23</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/figure/mapapaQTL.Rmd/unnamed-chunk-12-1.png" target="_blank">2d33728</a>
 </td>
 <td>
@@ -885,6 +932,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9490b23c274c0684bea941f9b69b1c6202033dba/docs/figure/mapapaQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">9490b23</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/figure/mapapaQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">2d33728</a>
 </td>
 <td>
@@ -929,6 +987,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9490b23c274c0684bea941f9b69b1c6202033dba/docs/figure/mapapaQTL.Rmd/unnamed-chunk-18-1.png" target="_blank">9490b23</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/2d337286e7a8c6bcf3460f560c34668865a0b7df/docs/figure/mapapaQTL.Rmd/unnamed-chunk-18-1.png" target="_blank">2d33728</a>
 </td>
 <td>
@@ -946,7 +1015,7 @@ brimittleman
 <div id="distance-to-pas" class="section level2">
 <h2>Distance to PAS</h2>
 <p>The distance to PAS is the location of the snp to the end of the peak for the</p>
-<p>Strand in this file is the peak strand (opposite of gene). This means for + strand I want the start of the Peak and for the - strand i will use the end of the peak.</p>
+<p>Strand in this file is the peak strand (opposite of gene). This means for + strand I want the start of the Peak and for the - strand i will use the end of the peak. ###Total</p>
 <pre class="r"><code>TotQTLs_dist=TotQTLs %&gt;% separate(sid, into=c(&quot;SnpCHR&quot;, &quot;SNPpos&quot;), sep=&quot;:&quot;) %&gt;% mutate(Dist2PAS=ifelse(Strand==&quot;+&quot;, as.integer(SNPpos)-as.integer(Start), as.integer(SNPpos)-as.integer(End)))
 
 
@@ -954,10 +1023,65 @@ summary(abs(TotQTLs_dist$Dist2PAS))</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
       0    1598    6160    8832   15461   25071 </code></pre>
 <p>Plot:</p>
-<pre class="r"><code>ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
-<p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>totqtldist=ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100, fill=&quot;darkviolet&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x=&quot;Distance from QTL snp to PAS&quot;,y=&quot;Number of Total apaQTLs&quot;, title=&quot;Total apaQTL \n are close to the PAS they regulate&quot;)</code></pre>
 <pre class="r"><code>ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + facet_grid(~Loc)</code></pre>
-<p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /> ```</p>
+<p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9490b23c274c0684bea941f9b69b1c6202033dba/docs/figure/mapapaQTL.Rmd/unnamed-chunk-21-1.png" target="_blank">9490b23</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="nuclear" class="section level3">
+<h3>Nuclear</h3>
+<pre class="r"><code>NucQTLs_dist=NucQTLs %&gt;% separate(sid, into=c(&quot;SnpCHR&quot;, &quot;SNPpos&quot;), sep=&quot;:&quot;) %&gt;% mutate(Dist2PAS=ifelse(Strand==&quot;+&quot;, as.integer(SNPpos)-as.integer(Start), as.integer(SNPpos)-as.integer(End)))
+
+
+summary(abs(NucQTLs_dist$Dist2PAS))</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      0    1930    7726    9216   15463   25071 </code></pre>
+<p>Plot:</p>
+<pre class="r"><code>nucqtldist=ggplot(NucQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100,fill=&quot;deepskyblue3&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x=&quot;Distance from QTL snp to PAS&quot;,y=&quot;Number of Nuclear apaQTLs&quot;, title=&quot;Nuclear apaQTL \n are close to the PAS they regulate&quot;) </code></pre>
+<pre class="r"><code>plot_grid(totqtldist,nucqtldist)</code></pre>
+<p><img src="figure/mapapaQTL.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="write-out-qtls" class="section level2">
+<h2>Write out QTLs:</h2>
+<pre class="r"><code>write.table(TotQTLs, file=&quot;../data/apaQTLs/Total_apaQTLs_5fdr.txt&quot;, col.names = T, row.names = F, quote=F)
+
+write.table(NucQTLs, file=&quot;../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt&quot;, col.names = T, row.names = F, quote=F)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
