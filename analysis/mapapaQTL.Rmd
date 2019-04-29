@@ -178,6 +178,7 @@ plot_grid(totQTLloc, nucQTLloc)
 The distance to PAS is the location of the snp to the end of the peak for the 
 
 Strand in this file is the peak strand (opposite of gene). This means for + strand I want the start of the Peak and for the - strand i will use the end of the peak.
+###Total
 ```{r}
 TotQTLs_dist=TotQTLs %>% separate(sid, into=c("SnpCHR", "SNPpos"), sep=":") %>% mutate(Dist2PAS=ifelse(Strand=="+", as.integer(SNPpos)-as.integer(Start), as.integer(SNPpos)-as.integer(End)))
 
@@ -187,13 +188,41 @@ summary(abs(TotQTLs_dist$Dist2PAS))
 
 Plot:  
 ```{r}
-ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+totqtldist=ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100, fill="darkviolet") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x="Distance from QTL snp to PAS",y="Number of Total apaQTLs", title="Total apaQTL \n are close to the PAS they regulate")
 ```
 
 
 ```{r}
 ggplot(TotQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + facet_grid(~Loc)
 ```
+
+
+###Nuclear  
+
+```{r}
+NucQTLs_dist=NucQTLs %>% separate(sid, into=c("SnpCHR", "SNPpos"), sep=":") %>% mutate(Dist2PAS=ifelse(Strand=="+", as.integer(SNPpos)-as.integer(Start), as.integer(SNPpos)-as.integer(End)))
+
+
+summary(abs(NucQTLs_dist$Dist2PAS))
 ```
 
+Plot:  
+```{r}
+nucqtldist=ggplot(NucQTLs_dist, aes(x=Dist2PAS)) + geom_histogram(bins=100,fill="deepskyblue3") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x="Distance from QTL snp to PAS",y="Number of Nuclear apaQTLs", title="Nuclear apaQTL \n are close to the PAS they regulate") 
+
+```
+
+```{r}
+plot_grid(totqtldist,nucqtldist)
+```
+
+##Write out QTLs:  
+
+
+```{r}
+write.table(TotQTLs, file="../data/apaQTLs/Total_apaQTLs_5fdr.txt", col.names = T, row.names = F, quote=F)
+
+write.table(NucQTLs, file="../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt", col.names = T, row.names = F, quote=F)
+
+```
 
