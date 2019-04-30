@@ -32,8 +32,9 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Count and usage correlation](corrbetweenind.html)
 
-* [Sequencing meta data by batch](seqmetadatanalysis.html)
+* [Sequencing meta data by batch](seqmetadatanalysis.html)  
 
+* [Understand new PAS](NewvOldPeakQC.html)  
 
 ##apaQTL
 * [Call apaQTLs in both fractions](mapapaQTL.html)

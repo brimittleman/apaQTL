@@ -1,0 +1,75 @@
+---
+title: "Compare new and old peaks"
+author: "Briana Mittleman"
+date: "4/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+These results have 30k more PAS than the previous runs. I also see a confusing shift in mean usage for all of the PAS. I want to compare the distribution of usage for different sets of individuals to see if there is something inherently different about the 15 new individuals.  
+
+
+##New vs old peaks
+
+I want to compare the usage of the new peaks compared to the overall mean usage. To do this I need to seperate the new and old PAS. 
+
+```{r}
+newPAS5perc=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, col.names = c("chr", "start","end", "ID", "score", "strand"))
+oldPAS5perc=read.table("../../threeprimeseq/data/peaks4DT/APAPAS_5percCov_fixedStrand.bed", stringsAsFactors = F, col.names = c("chr", "start", "end", "ID", "score", "strand"))
+
+uniqnew=newPAS5perc %>% semi_join(oldPAS5perc, by=c("chr", "start", "end"))
+```
+
+Pull in the usage of the peaks:  
+
+###Total
+```{r}
+totalPeakUs=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.fc", header = T, stringsAsFactors = F) %>% separate(chrom, sep = ":", into = c("chr", "start", "end", "id")) %>% separate(id, sep="_", into=c("gene", "loc", "strand", "peak"))
+
+
+ind=colnames(totalPeakUs)[8:dim(totalPeakUs)[2]]
+totalPeakUs_CountNum=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.CountsOnlyNumeric", col.names = ind)
+
+
+#numeric with anno
+totalPeak=as.data.frame(cbind(totalPeakUs[,1:7], totalPeakUs_CountNum))
+
+totalPeakUs_CountNum_mean=rowMeans(totalPeakUs_CountNum)
+
+#append mean to anno
+TotalPeakUSMean=as.data.frame(cbind(totalPeakUs[,1:7],mean=totalPeakUs_CountNum_mean))
+
+```
+
+```{r}
+uniqnewPasnum=uniqnew  %>% separate(ID ,into=c("peaknum", "geneloc"),sep=":") %>% mutate(peak=paste("peak", peaknum, sep="")) %>% select(peak)
+```
+
+Filter these inthe mean usage: 
+
+```{r}
+TotalPeakUSMeanClass= TotalPeakUSMean %>% mutate(New=ifelse(peak %in% uniqnewPasnum$peak,"new", "original")) %>% mutate(Cutoff=ifelse(mean>=.05, "Yes", "No"))
+
+mean(TotalPeakUSMean$mean)
+```
+
+
+Plot:
+
+```{r}
+ggplot(TotalPeakUSMeanClass, aes(y=mean,x=New)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col="red") + facet_grid(~Cutoff)
+
+```
+
+This shows me the new peaks are not the peaks that barely passed the cuttoff before. These peaks cover the distribution of usage.  
+
+
