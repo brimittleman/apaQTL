@@ -72,4 +72,9 @@ ggplot(TotalPeakUSMeanClass, aes(y=mean,x=New)) + geom_violin() + geom_hline(yin
 
 This shows me the new peaks are not the peaks that barely passed the cuttoff before. These peaks cover the distribution of usage.  
 
+write out file with information about new and old peaks  
+```{r}
+Peak_newOld=TotalPeakUSMeanClass %>% select(-mean)
+write.table(Peak_newOld, file="../data/peaks_5perc/NewVOldPeaks.txt", col.names = T, row.names = F, quote=F)
+```
 
