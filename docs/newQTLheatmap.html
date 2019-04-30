@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-29
+<strong>Last updated:</strong> 2019-04-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree39a65720a87b13e232ed3ca1fb874dd9bd8e17e7targetblank39a6572a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/39a65720a87b13e232ed3ca1fb874dd9bd8e17e7" target="_blank">39a6572</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecf0998569593f3f277ac95338b7037ba5e1736d0targetblankcf09985a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/cf0998569593f3f277ac95338b7037ba5e1736d0" target="_blank">cf09985</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree39a65720a87b13e232ed3ca1fb874dd9bd8e17e7targetblank39a6572a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecf0998569593f3f277ac95338b7037ba5e1736d0targetblankcf09985a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,6 +435,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -448,6 +449,7 @@ Untracked files:
     Untracked:  apaQTL.Rproj
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
+    Untracked:  code/._aAPAqtl_nominal39ind.sh
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
     Untracked:  code/._apaQTL_permuted.sh
@@ -480,6 +482,7 @@ Untracked files:
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
     Untracked:  code/._quantassign2parsedpeak.py
+    Untracked:  code/._selectNominalPvalues.py
     Untracked:  code/._snakemakePAS.batch
     Untracked:  code/._snakemakefiltPAS.batch
     Untracked:  code/._submit-snakemakePAS.sh
@@ -487,6 +490,8 @@ Untracked files:
     Untracked:  code/.snakemake/
     Untracked:  code/APAqtl_nominal.err
     Untracked:  code/APAqtl_nominal.out
+    Untracked:  code/APAqtl_nominal_39.err
+    Untracked:  code/APAqtl_nominal_39.out
     Untracked:  code/APAqtl_permuted.err
     Untracked:  code/APAqtl_permuted.out
     Untracked:  code/BothFracDTPlotGeneRegions.err
@@ -495,6 +500,7 @@ Untracked files:
     Untracked:  code/README.md
     Untracked:  code/Rplots.pdf
     Untracked:  code/Upstream100Bases_general.py
+    Untracked:  code/aAPAqtl_nominal39ind.sh
     Untracked:  code/bam2bw.err
     Untracked:  code/bam2bw.out
     Untracked:  code/dag.pdf
@@ -510,6 +516,7 @@ Untracked files:
     Untracked:  code/run_DistPAS2Sig.err
     Untracked:  code/run_DistPAS2Sig.out
     Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/selectNominalPvalues.py
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
     Untracked:  data/DTmatrix/
@@ -517,6 +524,7 @@ Untracked files:
     Untracked:  data/QTLGenotypes/
     Untracked:  data/README.md
     Untracked:  data/SignalSiteFiles/
+    Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/apaQTLNominal/
     Untracked:  data/apaQTLPermuted/
     Untracked:  data/apaQTLs/
@@ -602,6 +610,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/cf0998569593f3f277ac95338b7037ba5e1736d0/analysis/newQTLheatmap.Rmd" target="_blank">cf09985</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-30
+</td>
+<td>
+add beta corr plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/e3bdc3ada15495b74f56c2b12038d4364c179354/docs/newQTLheatmap.html" target="_blank">e3bdc3a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/39a65720a87b13e232ed3ca1fb874dd9bd8e17e7/analysis/newQTLheatmap.Rmd" target="_blank">39a6572</a>
 </td>
 <td>
@@ -651,18 +693,24 @@ Attaching package: &#39;gplots&#39;</code></pre>
 
     lowess</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::combine() masks gdata::combine()
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::first()   masks gdata::first()
 ✖ purrr::keep()    masks gdata::keep()
 ✖ dplyr::lag()     masks stats::lag()
 ✖ dplyr::last()    masks gdata::last()</code></pre>
+<pre class="r"><code>library(cowplot)</code></pre>
+<pre><code>
+Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    ggsave</code></pre>
 <div id="compare-qtls-to-those-found-with-previous-batch-data" class="section level2">
 <h2>Compare QTLs to those found with previous batch data</h2>
 <p>I have about double the QTLs hear compared to before resequencing batch 4. I will look at the new QTL to see if there is evidence for them being false positives. I am going to see if there is structure in the genotypes for these QTLs.</p>
@@ -725,13 +773,143 @@ samplist=as.vector(samples$V1)</code></pre>
 <pre class="r"><code>totgeneCorr=round(cor(totgeno),2)
 
 heatmap.2(as.matrix(totgeneCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;), main=&quot;Genotype correlation\n for new Total QTL snps&quot;)</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /> ###Nuclear</p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e3bdc3ada15495b74f56c2b12038d4364c179354/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-15-1.png" target="_blank">e3bdc3a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="nuclear-1" class="section level3">
+<h3>Nuclear</h3>
 <pre class="r"><code>nucgeno=read.table(&quot;../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt&quot;, col.names = colnames(vcfhead)) %&gt;% select(samplist) %&gt;% t()</code></pre>
 <p>Correlation:</p>
 <pre class="r"><code>nucgeneCorr=round(cor(nucgeno),2)
 
 heatmap.2(as.matrix(nucgeneCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;),main=&quot;Genotype correlation \n for new Nuclear QTL snps&quot;)</code></pre>
 <p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e3bdc3ada15495b74f56c2b12038d4364c179354/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-17-1.png" target="_blank">e3bdc3a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="compare-beta-values-in-55-vs-39" class="section level2">
+<h2>Compare beta values in 55 vs 39</h2>
+<p>I want to make a scatter plot comaparring the new QTL associations in the 55 vs 39 individauls. If the qtls are real we expect a high correlation.</p>
+<p>To do this I can recall the qtls with a smaller sample list excluding the 15 new individuals.</p>
+<p>I need to make a list of the individuals not in the 4th batch.</p>
+<pre class="r"><code>batch1.2.3=read.table(&quot;../data/MetaDataSequencing.txt&quot;, header=T,stringsAsFactors = F)%&gt;% filter(fraction==&quot;total&quot;) %&gt;%  select(line, batch) %&gt;% filter(batch != 4)</code></pre>
+<pre class="r"><code>samplelist=read.table(&quot;../data/phenotype/SAMPLE.txt&quot;, col.names = c(&quot;line&quot;),stringsAsFactors = F)</code></pre>
+<p>Make a new directory for the 39ind qtls:</p>
+<pre class="bash"><code>mkdir ../data/ThirtyNineIndQtl_nominal</code></pre>
+<p>Filter the sample list</p>
+<pre class="r"><code>samplelist_39= samplelist %&gt;% semi_join(batch1.2.3, by=&quot;line&quot;)</code></pre>
+<pre class="r"><code>write.table(samplelist_39, file=&quot;../data/ThirtyNineIndQtl_nominal/samplelist39.txt&quot;, col.names = F, row.names = F, quote = F)</code></pre>
+<p>Run the QTL code with this sample list</p>
+<pre class="bash"><code>sbatch aAPAqtl_nominal39ind.sh
+</code></pre>
+<p>Concatinate results:</p>
+<pre class="bash"><code>cat APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_chr* &gt; APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChr.txt
+
+cat APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* &gt; APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChr.txt
+</code></pre>
+<p>I want to filter the results for the new snps in the uniquenewtot. These results are in data/apaQTLs</p>
+<p>I need to write a script that makes a dictionary with each of the new QTLs in the format above. Then I can run throguh the nominal values and keep only the values in the dictionary.</p>
+<p>I can run this on the 55 and 39 nominal files then combine the files to create the scatterplot.</p>
+<div id="total-2" class="section level3">
+<h3>total</h3>
+<pre class="bash"><code>python selectNominalPvalues.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/ThirtyNineIndQtl_nominal/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_37ing.txt
+
+python selectNominalPvalues.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_55ind.txt
+</code></pre>
+<p>Import files:</p>
+<pre class="r"><code>newin37_tot=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_37ing.txt&quot;,col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Nompval39&quot;,&quot;Beta39&quot;), stringsAsFactors = F)%&gt;% select(peakID, snp, Beta39)
+
+newin54_tot=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_55ind.txt&quot;,col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Nompval54&quot;,&quot;Beta54&quot;), stringsAsFactors = F) %&gt;% select(peakID, snp, Beta54)</code></pre>
+<p>Join these:</p>
+<pre class="r"><code>newinboth=newin54_tot %&gt;% full_join(newin37_tot, by=c(&quot;peakID&quot;, &quot;snp&quot;))</code></pre>
+<pre class="r"><code>total_qtlind=ggplot(newinboth,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title=&quot;New Total apaQTLs \nin different ind. sets&quot;, ylab=&quot;Beta 39 ind&quot;, xlab=&quot;Beta 55 ind&quot;)</code></pre>
+</div>
+<div id="nuclear-2" class="section level3">
+<h3>nuclear</h3>
+<pre class="bash"><code>python selectNominalPvalues.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/ThirtyNineIndQtl_nominal/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_37ing.txt
+
+python selectNominalPvalues.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_55ind.txt</code></pre>
+<pre class="r"><code>newin37_nuc=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_37ing.txt&quot;,col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Nompval39&quot;,&quot;Beta39&quot;), stringsAsFactors = F)%&gt;% select(peakID, snp, Beta39)
+
+newin54_nuc=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_55ind.txt&quot;,col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Nompval54&quot;,&quot;Beta54&quot;), stringsAsFactors = F) %&gt;% select(peakID, snp, Beta54)</code></pre>
+<p>Join these:</p>
+<pre class="r"><code>newinboth_nuc=newin54_nuc %&gt;% full_join(newin37_nuc, by=c(&quot;peakID&quot;, &quot;snp&quot;))</code></pre>
+<pre class="r"><code>nuclear_qtlind=ggplot(newinboth_nuc,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title=&quot;New Nuclear apaQTLs\n in different ind. sets&quot;, ylab=&quot;Beta 39 ind&quot;, xlab=&quot;Beta 55 ind&quot;)</code></pre>
+<p>plot both:</p>
+<pre class="r"><code>plot_grid(total_qtlind, nuclear_qtlind)</code></pre>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -759,29 +937,30 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
- [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.0  
- [9] tidyverse_1.2.1 gplots_3.0.1    workflowr_1.3.0 gdata_2.18.0   
+ [1] cowplot_0.9.4   forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
+ [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
+ [9] ggplot2_3.1.0   tidyverse_1.2.1 gplots_3.0.1    workflowr_1.3.0
+[13] gdata_2.18.0   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0         cellranger_1.1.0   plyr_1.8.4        
- [4] compiler_3.5.1     pillar_1.3.1       git2r_0.23.0      
- [7] bitops_1.0-6       tools_3.5.1        digest_0.6.18     
-[10] lubridate_1.7.4    jsonlite_1.6       evaluate_0.12     
-[13] nlme_3.1-137       gtable_0.2.0       lattice_0.20-38   
-[16] pkgconfig_2.0.2    rlang_0.3.1        cli_1.0.1         
-[19] rstudioapi_0.10    yaml_2.2.0         haven_1.1.2       
-[22] withr_2.1.2        xml2_1.2.0         httr_1.3.1        
-[25] knitr_1.20         hms_0.4.2          generics_0.0.2    
-[28] fs_1.2.6           gtools_3.8.1       caTools_1.17.1.1  
-[31] rprojroot_1.3-2    grid_3.5.1         tidyselect_0.2.5  
-[34] glue_1.3.0         R6_2.3.0           readxl_1.1.0      
-[37] rmarkdown_1.10     modelr_0.1.2       magrittr_1.5      
-[40] whisker_0.3-2      backports_1.1.2    scales_1.0.0      
-[43] htmltools_0.3.6    rvest_0.3.2        assertthat_0.2.0  
-[46] colorspace_1.3-2   KernSmooth_2.23-15 stringi_1.2.4     
-[49] lazyeval_0.2.1     munsell_0.5.0      broom_0.5.1       
-[52] crayon_1.3.4      </code></pre>
+ [1] gtools_3.8.1       tidyselect_0.2.5   haven_1.1.2       
+ [4] lattice_0.20-38    colorspace_1.3-2   generics_0.0.2    
+ [7] htmltools_0.3.6    yaml_2.2.0         rlang_0.3.1       
+[10] pillar_1.3.1       glue_1.3.0         withr_2.1.2       
+[13] modelr_0.1.2       readxl_1.1.0       plyr_1.8.4        
+[16] munsell_0.5.0      gtable_0.2.0       cellranger_1.1.0  
+[19] rvest_0.3.2        caTools_1.17.1.1   evaluate_0.12     
+[22] labeling_0.3       knitr_1.20         broom_0.5.1       
+[25] Rcpp_1.0.0         KernSmooth_2.23-15 scales_1.0.0      
+[28] backports_1.1.2    jsonlite_1.6       fs_1.2.6          
+[31] hms_0.4.2          digest_0.6.18      stringi_1.2.4     
+[34] grid_3.5.1         rprojroot_1.3-2    cli_1.0.1         
+[37] tools_3.5.1        bitops_1.0-6       magrittr_1.5      
+[40] lazyeval_0.2.1     crayon_1.3.4       whisker_0.3-2     
+[43] pkgconfig_2.0.2    xml2_1.2.0         lubridate_1.7.4   
+[46] assertthat_0.2.0   rmarkdown_1.10     httr_1.3.1        
+[49] rstudioapi_0.10    R6_2.3.0           nlme_3.1-137      
+[52] git2r_0.23.0       compiler_3.5.1    </code></pre>
 </div>
 </div>
 </div>
