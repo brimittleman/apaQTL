@@ -15,6 +15,7 @@ library(gdata)
 library(workflowr)
 library(gplots)
 library(tidyverse)
+library(cowplot)
 ```
 
 ##Compare QTLs to those found with previous batch data  
@@ -138,3 +139,116 @@ nucgeneCorr=round(cor(nucgeno),2)
 
 heatmap.2(as.matrix(nucgeneCorr),trace="none", dendrogram =c("none"),main="Genotype correlation \n for new Nuclear QTL snps")
 ```
+
+##Compare beta values in 55 vs 39  
+
+I want to make a scatter plot comaparring the new QTL associations in the 55 vs 39 individauls. If the qtls are real we expect a high correlation.  
+
+To do this I can recall the qtls with a smaller sample list excluding the 15 new individuals. 
+
+I need to make a list of the individuals not in the 4th batch.
+
+```{r}
+batch1.2.3=read.table("../data/MetaDataSequencing.txt", header=T,stringsAsFactors = F)%>% filter(fraction=="total") %>%  select(line, batch) %>% filter(batch != 4)
+```
+
+
+```{r}
+samplelist=read.table("../data/phenotype/SAMPLE.txt", col.names = c("line"),stringsAsFactors = F)
+```
+
+Make a new directory for the 39ind qtls:  
+
+```{bash,eval=F}
+mkdir ../data/ThirtyNineIndQtl_nominal
+```
+
+Filter the sample list 
+
+```{r}
+samplelist_39= samplelist %>% semi_join(batch1.2.3, by="line")
+```
+
+```{r}
+write.table(samplelist_39, file="../data/ThirtyNineIndQtl_nominal/samplelist39.txt", col.names = F, row.names = F, quote = F)
+```
+
+Run the QTL code with this sample list 
+```{bash,eval=F}
+sbatch aAPAqtl_nominal39ind.sh
+
+```
+
+Concatinate results:  
+
+```{bash,eval=F}
+cat APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_chr* > APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChr.txt
+
+cat APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* > APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChr.txt
+
+```
+
+
+
+I want to filter the results for the new snps in the uniquenewtot. These results are in  data/apaQTLs
+
+
+I need to write a script that makes a dictionary with each of the new QTLs in the format above. Then I can run throguh the nominal values and keep only the values in the dictionary.  
+
+I can run this on the 55 and 39 nominal files then combine the files to create the scatterplot.  
+
+
+###total
+```{bash,eval=F}
+python selectNominalPvalues.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/ThirtyNineIndQtl_nominal/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_37ing.txt
+
+python selectNominalPvalues.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_55ind.txt
+
+```
+Import files:
+
+```{r}
+newin37_tot=read.table("../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_37ing.txt",col.names=c("peakID", "snp", "dist", "Nompval39","Beta39"), stringsAsFactors = F)%>% select(peakID, snp, Beta39)
+
+newin54_tot=read.table("../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_55ind.txt",col.names=c("peakID", "snp", "dist", "Nompval54","Beta54"), stringsAsFactors = F) %>% select(peakID, snp, Beta54)
+```
+Join these:
+```{r}
+newinboth=newin54_tot %>% full_join(newin37_tot, by=c("peakID", "snp"))
+```
+
+```{r}
+total_qtlind=ggplot(newinboth,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title="New Total apaQTLs \nin different ind. sets", ylab="Beta 39 ind", xlab="Beta 55 ind")
+
+```
+
+###nuclear  
+
+```{bash,eval=F}
+python selectNominalPvalues.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/ThirtyNineIndQtl_nominal/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_37ing.txt
+
+python selectNominalPvalues.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChr.txt ../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_55ind.txt
+```
+
+```{r}
+newin37_nuc=read.table("../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_37ing.txt",col.names=c("peakID", "snp", "dist", "Nompval39","Beta39"), stringsAsFactors = F)%>% select(peakID, snp, Beta39)
+
+newin54_nuc=read.table("../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_55ind.txt",col.names=c("peakID", "snp", "dist", "Nompval54","Beta54"), stringsAsFactors = F) %>% select(peakID, snp, Beta54)
+```
+Join these:
+```{r}
+newinboth_nuc=newin54_nuc %>% full_join(newin37_nuc, by=c("peakID", "snp"))
+```
+
+```{r}
+nuclear_qtlind=ggplot(newinboth_nuc,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title="New Nuclear apaQTLs\n in different ind. sets", ylab="Beta 39 ind", xlab="Beta 55 ind")
+
+```
+
+
+plot both: 
+
+```{r}
+plot_grid(total_qtlind, nuclear_qtlind)
+```
+
