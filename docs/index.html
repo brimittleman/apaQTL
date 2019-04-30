@@ -242,7 +242,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-25
+<strong>Last updated:</strong> 2019-04-29
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6cb0a9909fff660701379bf3e8317ee4fea55ab2targetblank6cb0a99a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6cb0a9909fff660701379bf3e8317ee4fea55ab2" target="_blank">6cb0a99</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree39a65720a87b13e232ed3ca1fb874dd9bd8e17e7targetblank39a6572a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/39a65720a87b13e232ed3ca1fb874dd9bd8e17e7" target="_blank">39a6572</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6cb0a9909fff660701379bf3e8317ee4fea55ab2targetblank6cb0a99a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree39a65720a87b13e232ed3ca1fb874dd9bd8e17e7targetblank39a6572a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -315,6 +315,7 @@ Untracked files:
     Untracked:  code/._configOLD.yaml
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._dag.pdf
+    Untracked:  code/._extractGenotypes.py
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
     Untracked:  code/._filterpeaks.py
@@ -350,6 +351,7 @@ Untracked files:
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
+    Untracked:  code/extractGenotypes.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/get100upPAS.py
     Untracked:  code/getSeq100up.sh
@@ -363,10 +365,12 @@ Untracked files:
     Untracked:  code/snakefiltPASlog.out
     Untracked:  data/DTmatrix/
     Untracked:  data/PAS/
+    Untracked:  data/QTLGenotypes/
     Untracked:  data/README.md
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/apaQTLNominal/
     Untracked:  data/apaQTLPermuted/
+    Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
     Untracked:  data/bam/
     Untracked:  data/bam_clean/
@@ -401,8 +405,9 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/PASusageQC.Rmd
     Modified:   analysis/corrbetweenind.Rmd
-    Modified:   analysis/signalsiteanalysis.Rmd
     Deleted:    code/Upstream10Bases_general.py
+    Modified:   code/apaQTLCorrectPvalMakeQQ.R
+    Modified:   code/apaQTL_permuted.sh
     Modified:   code/bed2saf.py
     Deleted:    code/test.txt
 
@@ -443,6 +448,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/index.html" target="_blank">be227e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -780,7 +802,8 @@ Start workflowr project.
 <div id="apaqtl" class="section level2">
 <h2>apaQTL</h2>
 <ul>
-<li><a href="mapapaQTL.html">Call apaQTLs in both fractions</a></li>
+<li><p><a href="mapapaQTL.html">Call apaQTLs in both fractions</a></p></li>
+<li><p><a href="newQTLheatmap.html">Check for batch effects in new QTLs</a></p></li>
 </ul>
 </div>
 
