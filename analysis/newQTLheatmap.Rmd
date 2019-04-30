@@ -1,0 +1,140 @@
+---
+title: "New QTL heatmap"
+author: "Briana Mittleman"
+date: "4/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(gdata)
+library(workflowr)
+library(gplots)
+library(tidyverse)
+```
+
+##Compare QTLs to those found with previous batch data  
+
+I have about double the QTLs hear compared to before resequencing batch 4. I will look at the new QTL to see if there is evidence for them being false positives. I am going to see if there is structure in the genotypes for these QTLs.  
+
+The old QTLs are from the threeprimeseq repository.  
+
+###Total
+
+Import old QTLs
+```{r}
+oldtot=read.table("../../threeprimeseq/data/perm_APAqtl_GeneLocAnno_noMP_5percUs/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno.NoMP_sm_quant.Total.fixed.pheno_5perc_permResBH.txt", header=T,stringsAsFactors = F) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Strand","Peak"), sep="_")
+
+OldTotQTLs= oldtot %>% filter(-log10(bh)>=1)
+nrow(OldTotQTLs)
+```
+Import new QTLs:  
+
+```{r}
+newTotQTLs=read.table("../data/apaQTLs/Total_apaQTLs_5fdr.txt", stringsAsFactors = F, header = T)
+nrow(newTotQTLs)
+```
+
+Filter out those matching from the old:  
+
+```{r}
+UniqueNewTot=newTotQTLs %>% semi_join(OldTotQTLs, by="sid")
+```
+
+There are only 105 new snps This makes sense because 1 sno associates with multiple peaks. 
+
+Write these out to fetch the genotypes:  
+
+```{r}
+write.table(UniqueNewTot, file="../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt", quote = F, col.names = F, row.names = F)
+```
+
+###Nuclear
+
+```{r}
+oldnuc=read.table("../../threeprimeseq/data/perm_APAqtl_GeneLocAnno_noMP_5percUs/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno.NoMP_sm_quant.Nuclear.fixed.pheno_5perc_permResBH.txt", header=T,stringsAsFactors = F) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Strand","Peak"), sep="_")
+
+OldNucQTLs= oldnuc %>% filter(-log10(bh)>=1)
+nrow(OldNucQTLs)
+```
+Import new QTLs:  
+
+```{r}
+newNucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt", stringsAsFactors = F, header = T)
+nrow(newNucQTLs)
+```
+
+Filter out those matching from the old:  
+
+```{r}
+UniqueNewNuc=newNucQTLs %>% semi_join(OldNucQTLs, by="sid")
+```
+
+
+There are 200 new snps in this set.  
+```{r}
+write.table(UniqueNewNuc, file="../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt", quote = F, col.names = F, row.names = F)
+```
+
+
+
+##Extract genotypes: 
+
+I wrote a script to pull the doses from the vcf file. Run it with:
+
+```{bash,eval=F}
+ python extractGenotypes.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt
+ 
+  python extractGenotypes.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt
+```
+
+I also need the header from the VCF to have the individuals:  
+
+```{bash,eval=F}
+head -n14 /project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt.vcf | tail -n1  > ../data/QTLGenotypes/vcfheader.txt
+
+#manually remove # and unneaded columns, keep snp and ind. 
+```
+
+```{r}
+vcfhead=read.table("../data/QTLGenotypes/vcfheader.txt", header = T)
+```
+
+input sample list:  
+
+```{r}
+samples=read.table("../data/phenotype/SAMPLE.txt")
+samplist=as.vector(samples$V1)
+```
+
+
+###Total: 
+
+```{r}
+totgeno=read.table("../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt", col.names = colnames(vcfhead)) %>% select(samplist) %>% t()
+```
+
+Correlation:  
+
+```{r}
+totgeneCorr=round(cor(totgeno),2)
+
+heatmap.2(as.matrix(totgeneCorr),trace="none", dendrogram =c("none"), main="Genotype correlation\n for new Total QTL snps")
+```
+###Nuclear  
+
+```{r}
+nucgeno=read.table("../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt", col.names = colnames(vcfhead)) %>% select(samplist) %>% t()
+```
+
+Correlation:  
+
+```{r}
+nucgeneCorr=round(cor(nucgeno),2)
+
+heatmap.2(as.matrix(nucgeneCorr),trace="none", dendrogram =c("none"),main="Genotype correlation \n for new Nuclear QTL snps")
+```
