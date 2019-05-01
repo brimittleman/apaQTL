@@ -92,6 +92,7 @@ I wrote a script to pull the doses from the vcf file. Run it with:
  python extractGenotypes.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt
  
   python extractGenotypes.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt
+  
 ```
 
 I also need the header from the VCF to have the individuals:  
@@ -140,6 +141,40 @@ nucgeneCorr=round(cor(nucgeno),2)
 
 heatmap.2(as.matrix(nucgeneCorr),trace="none", dendrogram =c("none"),main="Genotype correlation \n for new Nuclear QTL snps")
 ```
+
+##Structure in all QTLs
+This was for the new QTLs. I want to see if there is structure more generally.  
+
+```{bash,eval=F}
+ python extractGenotypes.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt ../data/QTLGenotypes/Genotypes_NuclearapaQTLS_ALLQTLs.txt
+
+ python extractGenotypes.py ../data/apaQTLs/Total_apaQTLs_5fdr.txt ../data/QTLGenotypes/Genotypes_TotalapaQTLS_ALLQTLs.txt
+```
+
+
+```{r}
+totgenoall=read.table("../data/QTLGenotypes/Genotypes_TotalapaQTLS_ALLQTLs.txt", col.names = colnames(vcfhead)) %>% select(samplist) %>% t()
+
+totgenoallsm=totgenoall[,1:300]
+
+totgeneallCorr=round(cor(totgenoallsm),2)
+
+heatmap.2(as.matrix(totgeneallCorr),trace="none", dendrogram =c("none"),main="Genotype correlation \n for first 300 Total QTL snps")
+
+```
+
+```{r}
+nucgenoall=read.table("../data/QTLGenotypes/Genotypes_NuclearapaQTLS_ALLQTLs.txt", col.names = colnames(vcfhead)) %>% select(samplist) %>% t()
+nucgenoallsm=nucgenoall[,1:400]
+
+
+nucgeneallCorr=round(cor(nucgenoallsm),2)
+
+heatmap.2(as.matrix(nucgeneallCorr),trace="none", dendrogram =c("none"),main="Genotype correlation \n for first 400 Nuclear QTL snps")
+
+
+```
+
 
 ##Compare beta values in 55 vs 39  
 
