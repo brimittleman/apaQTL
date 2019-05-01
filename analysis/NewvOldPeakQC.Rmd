@@ -120,13 +120,6 @@ UsageHist= function(indVec,title,totUsage=totUsage){
 RUn this for different itterations of individuals:
 
 
-```{r}
-
-par(mfrow=c(1,2))
-#old ind
-UsageHist(indVec=newInd,title="Total Usage New",totUsage=totUsage)
-UsageHist(indVec=oldind,title="Total Usage Old",totUsage=totUsage)
-```
 Pick 15 random individuals from old: 
 
 
@@ -138,7 +131,9 @@ sampl3=sample(oldind, 15)
 sampl4=sample(oldind, 15)
 
 
-par(mfrow=c(2,2))
+par(mfrow=c(3,2))
+UsageHist(indVec=newInd,title="Total Usage New",totUsage=totUsage)
+UsageHist(indVec=oldind,title="Total Usage Old",totUsage=totUsage)
 UsageHist(indVec=sampl1,title="Total Usage Sample 15 Old",totUsage=totUsage)
 UsageHist(indVec=sampl2,title="Total Usage Sample 15 Old",totUsage=totUsage)
 UsageHist(indVec=sampl3,title="Total Usage Sample 15 Old",totUsage=totUsage)
@@ -170,20 +165,61 @@ UsageHist_nuc= function(indVec,title,nucUsage=nucUsage){
 ```
 
 
+
 ```{r}
 
-par(mfrow=c(1,2))
+par(mfrow=c(3,2))
 UsageHist_nuc(indVec=newInd,title="Nuclear Usage New",nucUsage=nucUsage)
 UsageHist_nuc(indVec=oldind,title="Nuclear Usage Old",nucUsage=nucUsage)
-```
-
-```{r}
-
-par(mfrow=c(2,2))
 UsageHist_nuc(indVec=sampl1,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl2,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl3,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl4,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 ```
+
+
+Old 
+
+```{r}
+
+oldtotalCount=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Total.fixed.pheno.fc",header=T,stringsAsFactors = F)
+indOld=colnames(oldtotalCount)[2:56]
+oldtotalUsage=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Total.fixed.pheno.CountsOnlyNumeric.txt",col.names = indOld,stringsAsFactors = F)
+
+
 ```
+
+
+```{r}
+par(mfrow=c(3,2))
+UsageHist(indVec=newInd,title="Old total Usage",totUsage=oldtotalUsage)
+UsageHist(indVec=oldind,title="Old total Usage (39ind)",totUsage=oldtotalUsage)
+UsageHist(indVec=sampl1,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
+UsageHist(indVec=sampl2,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
+UsageHist(indVec=sampl3,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
+UsageHist(indVec=sampl4,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
+```
+
+
+
+
+```{r}
+oldnuclearCount=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Nuclear.fixed.pheno.fc",header=T,stringsAsFactors = F)
+indOldN=colnames(oldnuclearCount)[2:56]
+oldnuclearUsage=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Nuclear.fixed.pheno.CountsOnlyNumeric.txt",col.names = indOldN,stringsAsFactors = F)
+
+```
+
+```{r}
+par(mfrow=c(3,2))
+UsageHist_nuc(indVec=newInd,title="Old nuclear Usage",nucUsage=oldnuclearUsage)
+UsageHist_nuc(indVec=oldind,title="Old nuclear Usage (39ind)",nucUsage=oldnuclearUsage)
+UsageHist_nuc(indVec=sampl1,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
+UsageHist_nuc(indVec=sampl2,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
+UsageHist_nuc(indVec=sampl3,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
+UsageHist_nuc(indVec=sampl4,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
+```
+
+
+
 
