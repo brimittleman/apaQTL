@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3153f49ecd4c0b6cd0e0eb18401c762f33700c6btargetblank3153f49a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3153f49ecd4c0b6cd0e0eb18401c762f33700c6b" target="_blank">3153f49</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef58797082799d020c419ca0d45c1dc1f5b91d71ftargetblankf587970a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f58797082799d020c419ca0d45c1dc1f5b91d71f" target="_blank">f587970</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3153f49ecd4c0b6cd0e0eb18401c762f33700c6btargetblank3153f49a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef58797082799d020c419ca0d45c1dc1f5b91d71ftargetblankf587970a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -610,6 +610,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f58797082799d020c419ca0d45c1dc1f5b91d71f/analysis/NewvOldPeakQC.Rmd" target="_blank">f587970</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+fix join
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/2ec0f07b8a52a3e281551ecd05d0c8d327545e7c/docs/NewvOldPeakQC.html" target="_blank">2ec0f07</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/3153f49ecd4c0b6cd0e0eb18401c762f33700c6b/analysis/NewvOldPeakQC.Rmd" target="_blank">3153f49</a>
 </td>
 <td>
@@ -732,12 +766,12 @@ understand usage of new pas
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -750,7 +784,7 @@ Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>newPAS5perc=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.bed&quot;, stringsAsFactors = F, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;ID&quot;, &quot;score&quot;, &quot;strand&quot;))
 oldPAS5perc=read.table(&quot;../../threeprimeseq/data/peaks4DT/APAPAS_5percCov_fixedStrand.bed&quot;, stringsAsFactors = F, col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;ID&quot;, &quot;score&quot;, &quot;strand&quot;))
 
-uniqnew=newPAS5perc %&gt;% semi_join(oldPAS5perc, by=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;))</code></pre>
+uniqnew=newPAS5perc %&gt;% anti_join(oldPAS5perc, by=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;))</code></pre>
 <p>Pull in the usage of the peaks:</p>
 <div id="total" class="section level3">
 <h3>Total</h3>
@@ -850,52 +884,17 @@ sampl2=sample(oldind, 15)
 sampl3=sample(oldind, 15)
 sampl4=sample(oldind, 15)
 
-
+png(&quot;../output/newtot.png&quot;)
 par(mfrow=c(3,2))
-UsageHist(indVec=newInd,title=&quot;Total Usage New&quot;,totUsage=totUsage)
-UsageHist(indVec=oldind,title=&quot;Total Usage Old&quot;,totUsage=totUsage)
+UsageHist(indVec=newInd,title=&quot;Total Usage New (15ind)&quot;,totUsage=totUsage)
+UsageHist(indVec=oldind,title=&quot;Total Usage Old (39 ind)&quot;,totUsage=totUsage)
 UsageHist(indVec=sampl1,title=&quot;Total Usage Sample 15 Old&quot;,totUsage=totUsage)
 UsageHist(indVec=sampl2,title=&quot;Total Usage Sample 15 Old&quot;,totUsage=totUsage)
 UsageHist(indVec=sampl3,title=&quot;Total Usage Sample 15 Old&quot;,totUsage=totUsage)
-UsageHist(indVec=sampl4,title=&quot;Total Usage Sample 15 Old&quot;,totUsage=totUsage)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
-Past versions of unnamed-chunk-10-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-10-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/15e195f787e3347dcffd6a0c82574e29700290a8/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-10-1.png" target="_blank">15e195f</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-01
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+UsageHist(indVec=sampl4,title=&quot;Total Usage Sample 15 Old&quot;,totUsage=totUsage)
+dev.off()</code></pre>
+<pre><code>png 
+  2 </code></pre>
 </div>
 <div id="nuclear" class="section level3">
 <h3>Nuclear</h3>
@@ -907,74 +906,66 @@ nucUsage=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclea
   meanVec=rowMeans(nucUsage_ind)
   hist(meanVec, main=title,xlab=&quot;Mean Usage&quot;)
 }</code></pre>
-<pre class="r"><code>par(mfrow=c(3,2))
-UsageHist_nuc(indVec=newInd,title=&quot;Nuclear Usage New&quot;,nucUsage=nucUsage)
-UsageHist_nuc(indVec=oldind,title=&quot;Nuclear Usage Old&quot;,nucUsage=nucUsage)
+<pre class="r"><code>png(&quot;../output/newnuc.png&quot;)
+par(mfrow=c(3,2))
+UsageHist_nuc(indVec=newInd,title=&quot;Nuclear Usage New (15ind)&quot;,nucUsage=nucUsage)
+UsageHist_nuc(indVec=oldind,title=&quot;Nuclear Usage Old (39ind)&quot;,nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl1,title=&quot;Nuclear Usage Sample 15 Old&quot;,nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl2,title=&quot;Nuclear Usage Sample 15 Old&quot;,nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl3,title=&quot;Nuclear Usage Sample 15 Old&quot;,nucUsage=nucUsage)
-UsageHist_nuc(indVec=sampl4,title=&quot;Nuclear Usage Sample 15 Old&quot;,nucUsage=nucUsage)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+UsageHist_nuc(indVec=sampl4,title=&quot;Nuclear Usage Sample 15 Old&quot;,nucUsage=nucUsage)
+dev.off()</code></pre>
+<pre><code>png 
+  2 </code></pre>
 <p>Old</p>
 <pre class="r"><code>oldtotalCount=read.table(&quot;../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Total.fixed.pheno.fc&quot;,header=T,stringsAsFactors = F)
 indOld=colnames(oldtotalCount)[2:56]
 oldtotalUsage=read.table(&quot;../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Total.fixed.pheno.CountsOnlyNumeric.txt&quot;,col.names = indOld,stringsAsFactors = F)</code></pre>
-<pre class="r"><code>par(mfrow=c(3,2))
-UsageHist(indVec=newInd,title=&quot;Old total Usage&quot;,totUsage=oldtotalUsage)
+<pre class="r"><code>png(&quot;../output/oldtot.png&quot;)
+par(mfrow=c(3,2))
+UsageHist(indVec=newInd,title=&quot;Old total Usage (15ind)&quot;,totUsage=oldtotalUsage)
 UsageHist(indVec=oldind,title=&quot;Old total Usage (39ind)&quot;,totUsage=oldtotalUsage)
 UsageHist(indVec=sampl1,title=&quot;Old total Usage sample 15 ind&quot;,totUsage=oldtotalUsage)
 UsageHist(indVec=sampl2,title=&quot;Old total Usage sample 15 ind&quot;,totUsage=oldtotalUsage)
 UsageHist(indVec=sampl3,title=&quot;Old total Usage sample 15 ind&quot;,totUsage=oldtotalUsage)
-UsageHist(indVec=sampl4,title=&quot;Old total Usage sample 15 ind&quot;,totUsage=oldtotalUsage)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
-Past versions of unnamed-chunk-15-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-15-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/15e195f787e3347dcffd6a0c82574e29700290a8/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-15-1.png" target="_blank">15e195f</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-01
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+UsageHist(indVec=sampl4,title=&quot;Old total Usage sample 15 ind&quot;,totUsage=oldtotalUsage)
+dev.off()</code></pre>
+<pre><code>png 
+  2 </code></pre>
 <pre class="r"><code>oldnuclearCount=read.table(&quot;../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Nuclear.fixed.pheno.fc&quot;,header=T,stringsAsFactors = F)
 indOldN=colnames(oldnuclearCount)[2:56]
 oldnuclearUsage=read.table(&quot;../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Nuclear.fixed.pheno.CountsOnlyNumeric.txt&quot;,col.names = indOldN,stringsAsFactors = F)</code></pre>
-<pre class="r"><code>par(mfrow=c(3,2))
-UsageHist_nuc(indVec=newInd,title=&quot;Old nuclear Usage&quot;,nucUsage=oldnuclearUsage)
+<pre class="r"><code>png(&quot;../output/oldnuc.png&quot;)
+par(mfrow=c(3,2))
+UsageHist_nuc(indVec=newInd,title=&quot;Old nuclear Usage (15ind)&quot;,nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=oldind,title=&quot;Old nuclear Usage (39ind)&quot;,nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl1,title=&quot;Old nuclear Usage sample 15 ind&quot;,nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl2,title=&quot;Old nuclear Usage sample 15 ind&quot;,nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl3,title=&quot;Old nuclear Usage sample 15 ind&quot;,nucUsage=oldnuclearUsage)
-UsageHist_nuc(indVec=sampl4,title=&quot;Old nuclear Usage sample 15 ind&quot;,nucUsage=oldnuclearUsage)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+UsageHist_nuc(indVec=sampl4,title=&quot;Old nuclear Usage sample 15 ind&quot;,nucUsage=oldnuclearUsage)
+dev.off()</code></pre>
+<pre><code>png 
+  2 </code></pre>
+</div>
+</div>
+<div id="usage-of-new-peaks-in-old-data" class="section level2">
+<h2>Usage of new peaks in old data</h2>
+<p>I have the old usage. I want to filter the new peaks from this:</p>
+<pre class="r"><code>oldtotusage_anno=as.data.frame(cbind(chrom=oldtotalCount$chrom,oldtotalUsage )) %&gt;% separate(chrom, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;peakID&quot;), sep=&quot;:&quot;)
+
+TotalPeakUSMeanClass_newonly=TotalPeakUSMeanClass %&gt;% filter(New==&quot;new&quot;)
+
+oldtotusage_anno_new=oldtotusage_anno %&gt;% semi_join(TotalPeakUSMeanClass_newonly, by=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;)) %&gt;% select(-chr, -start,-end,-peakID)
+
+
+oldtotusage_anno_new_mean=rowMeans(oldtotusage_anno_new)
+
+hist(oldtotusage_anno_new_mean, main=&quot;Total Usage of new peaks in old data&quot;, xlab=&quot;old usage means&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>length(oldtotusage_anno_new_mean)</code></pre>
+<pre><code>[1] 14642</code></pre>
+<p>This shows me that we called 14 thousand of the new peaks in the old set but they were all super low coverage.</p>
+<p>Where are the new peaks, genes with a lot of peaks? or genes with less peaks</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1020,7 +1011,6 @@ loaded via a namespace (and not attached):
 [41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
 [45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
 [49] broom_0.5.1      crayon_1.3.4    </code></pre>
-</div>
 </div>
 </div>
 

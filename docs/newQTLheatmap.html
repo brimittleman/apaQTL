@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreedf3b22ee769fbc931e8f06d21f4d7d8d2172e1eatargetblankdf3b22ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/df3b22ee769fbc931e8f06d21f4d7d8d2172e1ea" target="_blank">df3b22e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef58797082799d020c419ca0d45c1dc1f5b91d71ftargetblankf587970a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f58797082799d020c419ca0d45c1dc1f5b91d71f" target="_blank">f587970</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreedf3b22ee769fbc931e8f06d21f4d7d8d2172e1eatargetblankdf3b22ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef58797082799d020c419ca0d45c1dc1f5b91d71ftargetblankf587970a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -610,6 +610,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f58797082799d020c419ca0d45c1dc1f5b91d71f/analysis/newQTLheatmap.Rmd" target="_blank">f587970</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+fix join
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/newQTLheatmap.html" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/df3b22ee769fbc931e8f06d21f4d7d8d2172e1ea/analysis/newQTLheatmap.Rmd" target="_blank">df3b22e</a>
 </td>
 <td>
@@ -762,12 +796,12 @@ Attaching package: &#39;gplots&#39;</code></pre>
 
     lowess</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::combine() masks gdata::combine()
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::first()   masks gdata::first()
@@ -798,8 +832,7 @@ nrow(OldTotQTLs)</code></pre>
 nrow(newTotQTLs)</code></pre>
 <pre><code>[1] 502</code></pre>
 <p>Filter out those matching from the old:</p>
-<pre class="r"><code>UniqueNewTot=newTotQTLs %&gt;% semi_join(OldTotQTLs, by=&quot;sid&quot;)</code></pre>
-<p>There are only 105 new snps This makes sense because 1 sno associates with multiple peaks.</p>
+<pre class="r"><code>UniqueNewTot=newTotQTLs %&gt;% anti_join(OldTotQTLs, by=c(&quot;sid&quot;,&quot;Gene&quot;))</code></pre>
 <p>Write these out to fetch the genotypes:</p>
 <pre class="r"><code>write.table(UniqueNewTot, file=&quot;../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt&quot;, quote = F, col.names = F, row.names = F)</code></pre>
 </div>
@@ -815,9 +848,7 @@ nrow(OldNucQTLs)</code></pre>
 <pre class="r"><code>newNucQTLs=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt&quot;, stringsAsFactors = F, header = T)
 nrow(newNucQTLs)</code></pre>
 <pre><code>[1] 1070</code></pre>
-<p>Filter out those matching from the old:</p>
-<pre class="r"><code>UniqueNewNuc=newNucQTLs %&gt;% semi_join(OldNucQTLs, by=&quot;sid&quot;)</code></pre>
-<p>There are 200 new snps in this set.</p>
+<pre class="r"><code>UniqueNewNuc=newNucQTLs %&gt;% anti_join(OldNucQTLs, by=c(&quot;sid&quot;,&quot;Gene&quot;))</code></pre>
 <pre class="r"><code>write.table(UniqueNewNuc, file=&quot;../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt&quot;, quote = F, col.names = F, row.names = F)</code></pre>
 </div>
 </div>
@@ -840,7 +871,8 @@ samplist=as.vector(samples$V1)</code></pre>
 <h3>Total:</h3>
 <pre class="r"><code>totgeno=read.table(&quot;../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt&quot;, col.names = colnames(vcfhead)) %&gt;% select(samplist) %&gt;% t()</code></pre>
 <p>Correlation:</p>
-<pre class="r"><code>totgeneCorr=round(cor(totgeno),2)
+<pre class="r"><code>totgenosm=totgeno[,1:250]
+totgeneCorr=round(cor(totgenosm),2)
 
 heatmap.2(as.matrix(totgeneCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;), main=&quot;Genotype correlation\n for new Total QTL snps&quot;)</code></pre>
 <p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -886,8 +918,8 @@ brimittleman
 <h3>Nuclear</h3>
 <pre class="r"><code>nucgeno=read.table(&quot;../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt&quot;, col.names = colnames(vcfhead)) %&gt;% select(samplist) %&gt;% t()</code></pre>
 <p>Correlation:</p>
-<pre class="r"><code>nucgeneCorr=round(cor(nucgeno),2)
-
+<pre class="r"><code>nucgenosm=nucgeno[,1:600]
+nucgeneCorr=round(cor(nucgenosm),2)
 heatmap.2(as.matrix(nucgeneCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;),main=&quot;Genotype correlation \n for new Nuclear QTL snps&quot;)</code></pre>
 <p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -943,6 +975,43 @@ totgeneallCorr=round(cor(totgenoallsm),2)
 
 heatmap.2(as.matrix(totgeneallCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;),main=&quot;Genotype correlation \n for first 300 Total QTL snps&quot;)</code></pre>
 <p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-19-1.png" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>nucgenoall=read.table(&quot;../data/QTLGenotypes/Genotypes_NuclearapaQTLS_ALLQTLs.txt&quot;, col.names = colnames(vcfhead)) %&gt;% select(samplist) %&gt;% t()
 nucgenoallsm=nucgenoall[,1:400]
 
@@ -951,6 +1020,43 @@ nucgeneallCorr=round(cor(nucgenoallsm),2)
 
 heatmap.2(as.matrix(nucgeneallCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;),main=&quot;Genotype correlation \n for first 400 Nuclear QTL snps&quot;)</code></pre>
 <p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-20-1.png" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="compare-beta-values-in-55-vs-39" class="section level2">
 <h2>Compare beta values in 55 vs 39</h2>
@@ -986,8 +1092,10 @@ python selectNominalPvalues.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt 
 
 newin54_tot=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNom_55ind.txt&quot;,col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Nompval54&quot;,&quot;Beta54&quot;), stringsAsFactors = F) </code></pre>
 <p>Join these:</p>
-<pre class="r"><code>newinboth=newin54_tot %&gt;% full_join(newin37_tot, by=c(&quot;peakID&quot;, &quot;snp&quot;))</code></pre>
-<pre class="r"><code>total_qtlind=ggplot(newinboth,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title=&quot;New Total apaQTLs \nin different ind. sets&quot;, ylab=&quot;Beta 39 ind&quot;, xlab=&quot;Beta 55 ind&quot;)</code></pre>
+<pre class="r"><code>newinboth=newin54_tot %&gt;% inner_join(newin37_tot, by=c(&quot;peakID&quot;, &quot;snp&quot;))</code></pre>
+<pre class="r"><code>total_qtlind=ggplot(newinboth,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title=&quot;New Total apaQTLs \nin different ind. sets&quot;, ylab=&quot;Beta 39 ind&quot;, xlab=&quot;Beta 55 ind&quot;)
+total_qtlind</code></pre>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="nuclear-2" class="section level3">
 <h3>nuclear</h3>
@@ -998,7 +1106,7 @@ python selectNominalPvalues.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.tx
 
 newin54_nuc=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniqNom_55ind.txt&quot;,col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Nompval54&quot;,&quot;Beta54&quot;), stringsAsFactors = F)</code></pre>
 <p>Join these:</p>
-<pre class="r"><code>newinboth_nuc=newin54_nuc %&gt;% full_join(newin37_nuc, by=c(&quot;peakID&quot;, &quot;snp&quot;))</code></pre>
+<pre class="r"><code>newinboth_nuc=newin54_nuc %&gt;% inner_join(newin37_nuc, by=c(&quot;peakID&quot;, &quot;snp&quot;))</code></pre>
 <pre class="r"><code>nuclear_qtlind=ggplot(newinboth_nuc,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title=&quot;New Nuclear apaQTLs\n in different ind. sets&quot;, ylab=&quot;Beta 39 ind&quot;, xlab=&quot;Beta 55 ind&quot;)</code></pre>
 <p>plot both:</p>
 <pre class="r"><code>plot_grid(total_qtlind, nuclear_qtlind)</code></pre>
@@ -1027,6 +1135,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-36-1.png" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/c2abb09fdced67286550fde9dc19c2da692a0d62/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-36-1.png" target="_blank">c2abb09</a>
 </td>
 <td>
@@ -1041,10 +1160,51 @@ brimittleman
 </div>
 </div>
 <p>Plot -log10pvalue</p>
-<pre class="r"><code>pvalplot_tot=ggplot(newinboth,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title=&quot;New Total apaQTLs \nin different ind. sets&quot;, y=&quot;-log10 pval 39 ind&quot;, x=&quot;-log10 pval 55 ind&quot;)</code></pre>
+<pre class="r"><code>pvalplot_tot=ggplot(newinboth,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title=&quot;New Total apaQTLs \nin different ind. sets&quot;, y=&quot;-log10 pval 39 ind&quot;, x=&quot;-log10 pval 55 ind&quot;)
+
+pvalplot_tot</code></pre>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>pvalplot_nuc=ggplot(newinboth_nuc,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title=&quot;New Nuclear apaQTLs \nin different ind. sets&quot;, y=&quot;-log10 pval 39 ind&quot;, x=&quot;-log10 pval 55 ind&quot;)</code></pre>
 <pre class="r"><code>plot_grid(pvalplot_tot,pvalplot_nuc)</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /> Confirm these QTLs are in new phenotype peaks:</p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-39-1">
+Past versions of unnamed-chunk-39-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-39-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-39-1.png" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Confirm these QTLs are in new phenotype peaks:</p>
 <pre class="r"><code>newvold=read.table(&quot;../data/peaks_5perc/NewVOldPeaks.txt&quot;, header = T, stringsAsFactors = F) %&gt;% select(peak, New)
 
 colnames(newvold)=c(&quot;Peak&quot;, &quot;Set&quot;)</code></pre>
@@ -1055,25 +1215,27 @@ colnames(newvold)=c(&quot;Peak&quot;, &quot;Set&quot;)</code></pre>
 UniqueNewTot_set$Set=as.factor(UniqueNewTot_set$Set)
 summary(UniqueNewTot_set$Set)</code></pre>
 <pre><code>     new original 
-      87       18 </code></pre>
+     209      188 </code></pre>
 <pre class="r"><code>UniqueNewNuc_set= UniqueNewNuc %&gt;% inner_join(newvold, by=&quot;Peak&quot;)
 
 
 UniqueNewNuc_set$Set=as.factor(UniqueNewNuc_set$Set)
 summary(UniqueNewNuc_set$Set)</code></pre>
 <pre><code>     new original 
-     168       32 </code></pre>
+     521      349 </code></pre>
 </div>
 </div>
 <div id="example-boxplots" class="section level2">
 <h2>Example boxplots</h2>
 <p>I want to plot these qtls as boxplots. I will plot usage vs. genotype. I want to color the new 15 individuals differently.</p>
-<p>DCLRE1C peak14470 10:14974843</p>
-<pre class="bash"><code>#get genotype from vcf
-less chr10.dose.filt.vcf.gz  |  grep 10:14974843 &gt; ../apaQTL/data/exampleQTLs/Geno_10:14974843.txt
+<p>peak15390 CREM 10:35411246</p>
+<pre class="bash"><code>
+less /project2/gilad/briana/YRI_geno_hg19/chr10.dose.filt.vcf.gz  |  grep 10:35411246 &gt; ../data/exampleQTLs/Geno_10:35411246.txt
+
+
 
 #get pheno from pheno_5perc
-less APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak14470 &gt; ../exampleQTLs/Pheno_peak14470.txt</code></pre>
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak15390 &gt; ../data/exampleQTLs/Pheno_peak15390.txt</code></pre>
 <p>col.names = colnames(vcfhead))</p>
 <pre class="bash"><code>
 head -n14 /project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt.vcf | tail -n1  &gt; ../data/exampleQTLs/vcfheader.txt
@@ -1086,67 +1248,119 @@ head -n14 /project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt.vcf | tail -n1
 <pre class="r"><code>vcfheadfull=read.table(&quot;../data/exampleQTLs/vcfheader.txt&quot;, header = T)
 phenohead=read.table(&quot;../data/exampleQTLs/phenoHead.txt&quot;, header = T)</code></pre>
 <p>Try first</p>
-<pre class="r"><code>geno_peak14470=read.table(&quot;../data/exampleQTLs/Geno_10:14974843.txt&quot;, col.names = colnames(vcfheadfull), stringsAsFactors = F) %&gt;% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
-geno_peak14470M=melt(geno_peak14470, id.vars = &quot;ID&quot;) %&gt;% separate(value, into=c(&quot;genotype&quot;, &quot;extra&quot;, &quot;extra2&quot;), sep=&quot;:&quot;) %&gt;% mutate(dose=round(as.integer(extra), digits = 1)) %&gt;% select(-genotype, -extra, -extra2)
+<pre class="r"><code>geno_peak15390=read.table(&quot;../data/exampleQTLs/Geno_10:35411246.txt&quot;, col.names = colnames(vcfheadfull), stringsAsFactors = F) %&gt;% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
+geno_peak15390M=melt(geno_peak15390, id.vars = &quot;ID&quot;) %&gt;% separate(value, into=c(&quot;genotype&quot;, &quot;extra&quot;, &quot;extra2&quot;), sep=&quot;:&quot;) %&gt;% mutate(dose=round(as.integer(extra), digits = 1)) %&gt;% select(-genotype, -extra, -extra2)
 
-geno_peak14470M$variable=as.character(geno_peak14470M$variable)
+geno_peak15390M$variable=as.character(geno_peak15390M$variable)
 
-pheno_peak14470=read.table(&quot;../data/exampleQTLs/Pheno_peak14470.txt&quot;, col.names = colnames(phenohead), stringsAsFactors = F) 
-pheno_peak14470M=melt(pheno_peak14470,id.vars = &quot;chrom&quot;) %&gt;% separate(value, into=c(&quot;num&quot;, &quot;dom&quot;), sep=&quot;/&quot;) %&gt;% mutate(usage=as.integer(num)/as.integer(dom))
+pheno_peak15390=read.table(&quot;../data/exampleQTLs/Pheno_peak15390.txt&quot;, col.names = colnames(phenohead), stringsAsFactors = F) 
+pheno_peak15390M=melt(pheno_peak15390,id.vars = &quot;chrom&quot;) %&gt;% separate(value, into=c(&quot;num&quot;, &quot;dom&quot;), sep=&quot;/&quot;) %&gt;% mutate(usage=as.integer(num)/as.integer(dom))
 
-pheno_peak14470M$variable=as.character(pheno_peak14470M$variable)</code></pre>
+pheno_peak15390M$variable=as.character(pheno_peak15390M$variable)</code></pre>
 <p>Join these</p>
-<pre class="r"><code>genoPheno14470=pheno_peak14470M %&gt;% inner_join(geno_peak14470M, by=&quot;variable&quot;) %&gt;% mutate(set=ifelse(variable %in% samplelist_39$line, &quot;old39&quot;, &quot;new15&quot;))
+<pre class="r"><code>genoPhenopeak15390=pheno_peak15390M %&gt;% inner_join(geno_peak15390M, by=&quot;variable&quot;) %&gt;% mutate(set=ifelse(variable %in% samplelist_39$line, &quot;old39&quot;, &quot;new15&quot;))
 
-genoPheno14470$set=as.factor(genoPheno14470$set)
-genoPheno14470$dose=as.factor(genoPheno14470$dose)</code></pre>
-<pre class="r"><code>ggplot(genoPheno14470, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /> Try 1 more: peak33185 12:116544223</p>
+genoPhenopeak15390$set=as.factor(genoPhenopeak15390$set)
+genoPhenopeak15390$dose=as.factor(genoPhenopeak15390$dose)</code></pre>
+<pre class="r"><code>ggplot(genoPhenopeak15390, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-48-1">
+Past versions of unnamed-chunk-48-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-48-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-48-1.png" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Try 1 more: PAFAH1B2 peak25812 11:117048417</p>
 <pre class="bash"><code>#get genotype from vcf
-less /project2/gilad/briana/YRI_geno_hg19/chr12.dose.filt.vcf.gz  |  grep 12:116544223 &gt; ../data/exampleQTLs/Geno_12:116544223.txt
+less /project2/gilad/briana/YRI_geno_hg19/chr11.dose.filt.vcf.gz  |  grep 11:117048417 &gt; ../data/exampleQTLs/Geno_11:117048417.txt
 
 #get pheno from pheno_5perc
-less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak33185 &gt; ../data/exampleQTLs/Pheno_peak33185.txt</code></pre>
-<pre class="r"><code>geno_peak33185=read.table(&quot;../data/exampleQTLs/Geno_12:116544223.txt&quot;, col.names = colnames(vcfheadfull), stringsAsFactors = F) %&gt;% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
-geno_peak33185M=melt(geno_peak33185, id.vars = &quot;ID&quot;) %&gt;% separate(value, into=c(&quot;genotype&quot;, &quot;extra&quot;, &quot;extra2&quot;), sep=&quot;:&quot;) %&gt;% mutate(dose=round(as.integer(extra), digits = 1)) %&gt;% select(-genotype, -extra, -extra2)
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak25812 &gt; ../data/exampleQTLs/Pheno_peak25812.txt</code></pre>
+<pre class="r"><code>geno_peak25812=read.table(&quot;../data/exampleQTLs/Geno_11:117048417.txt&quot;, col.names = colnames(vcfheadfull), stringsAsFactors = F) %&gt;% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
+geno_peak25812M=melt(geno_peak25812, id.vars = &quot;ID&quot;) %&gt;% separate(value, into=c(&quot;genotype&quot;, &quot;extra&quot;, &quot;extra2&quot;), sep=&quot;:&quot;) %&gt;% mutate(dose=round(as.integer(extra), digits = 1)) %&gt;% select(-genotype, -extra, -extra2)
 
-geno_peak33185M$variable=as.character(geno_peak33185M$variable)
+geno_peak25812M$variable=as.character(geno_peak25812M$variable)
 
-pheno_peak33185=read.table(&quot;../data/exampleQTLs/Pheno_peak33185.txt&quot;, col.names = colnames(phenohead), stringsAsFactors = F) 
-pheno_peak33185M=melt(pheno_peak33185,id.vars = &quot;chrom&quot;) %&gt;% separate(value, into=c(&quot;num&quot;, &quot;dom&quot;), sep=&quot;/&quot;) %&gt;% mutate(usage=as.integer(num)/as.integer(dom))
+pheno_peak25812=read.table(&quot;../data/exampleQTLs/Pheno_peak25812.txt&quot;, col.names = colnames(phenohead), stringsAsFactors = F) 
+pheno_peak25812M=melt(pheno_peak25812,id.vars = &quot;chrom&quot;) %&gt;% separate(value, into=c(&quot;num&quot;, &quot;dom&quot;), sep=&quot;/&quot;) %&gt;% mutate(usage=as.integer(num)/as.integer(dom))
 
-geno_peak33185M$variable=as.character(geno_peak33185M$variable)</code></pre>
+geno_peak25812M$variable=as.character(geno_peak25812M$variable)</code></pre>
 <p>Join these</p>
-<pre class="r"><code>genoPhenopeak33185=pheno_peak33185M %&gt;% inner_join(geno_peak33185M, by=&quot;variable&quot;) %&gt;% mutate(set=ifelse(variable %in% samplelist_39$line, &quot;old39&quot;, &quot;new15&quot;))</code></pre>
+<pre class="r"><code>genoPhenopeak25812=pheno_peak25812M %&gt;% inner_join(geno_peak25812M, by=&quot;variable&quot;) %&gt;% mutate(set=ifelse(variable %in% samplelist_39$line, &quot;old39&quot;, &quot;new15&quot;))</code></pre>
 <pre><code>Warning: Column `variable` joining factor and character vector, coercing
 into character vector</code></pre>
-<pre class="r"><code>genoPhenopeak33185$set=as.factor(genoPhenopeak33185$set)
-genoPhenopeak33185$dose=as.factor(genoPhenopeak33185$dose)</code></pre>
-<pre class="r"><code>ggplot(genoPhenopeak33185, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
+<pre class="r"><code>genoPhenopeak25812$set=as.factor(genoPhenopeak25812$set)
+genoPhenopeak25812$dose=as.factor(genoPhenopeak25812$dose)</code></pre>
+<pre class="r"><code>ggplot(genoPhenopeak25812, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
 <p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>peak59741 17:78371306</p>
-<pre class="bash"><code>#get genotype from vcf
-less /project2/gilad/briana/YRI_geno_hg19/chr17.dose.filt.vcf.gz  |  grep 17:78371306 &gt; ../data/exampleQTLs/Geno_17:78371306.txt
-
-#get pheno from pheno_5perc
-less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak59741 &gt; ../data/exampleQTLs/Pheno_peak59741.txt</code></pre>
-<pre class="r"><code>geno_peak59741=read.table(&quot;../data/exampleQTLs/Geno_17:78371306.txt&quot;, col.names = colnames(vcfheadfull), stringsAsFactors = F) %&gt;% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
-geno_peak59741M=melt(geno_peak59741, id.vars = &quot;ID&quot;) %&gt;% separate(value, into=c(&quot;genotype&quot;, &quot;extra&quot;, &quot;extra2&quot;), sep=&quot;:&quot;) %&gt;% mutate(dose=round(as.integer(extra), digits = 1)) %&gt;% select(-genotype, -extra, -extra2)
-
-geno_peak59741M$variable=as.character(geno_peak59741M$variable)
-
-pheno_peak59741=read.table(&quot;../data/exampleQTLs/Pheno_peak59741.txt&quot;, col.names = colnames(phenohead), stringsAsFactors = F) 
-pheno_peak59741M=melt(pheno_peak59741,id.vars = &quot;chrom&quot;) %&gt;% separate(value, into=c(&quot;num&quot;, &quot;dom&quot;), sep=&quot;/&quot;) %&gt;% mutate(usage=as.integer(num)/as.integer(dom))
-
-geno_peak59741M$variable=as.character(geno_peak59741M$variable)</code></pre>
-<p>Join these</p>
-<pre class="r"><code>genoPhenopeak59741=pheno_peak59741M %&gt;% inner_join(geno_peak59741M, by=&quot;variable&quot;) %&gt;% mutate(set=ifelse(variable %in% samplelist_39$line, &quot;old39&quot;, &quot;new15&quot;))</code></pre>
-<pre><code>Warning: Column `variable` joining factor and character vector, coercing
-into character vector</code></pre>
-<pre class="r"><code>genoPhenopeak59741$set=as.factor(genoPhenopeak59741$set)
-genoPhenopeak59741$dose=as.factor(genoPhenopeak59741$dose)</code></pre>
-<pre class="r"><code>ggplot(genoPhenopeak59741, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-52-1">
+Past versions of unnamed-chunk-52-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-52-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9fba469ca41b32b3fd387781890a3e344ad7b8bc/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-52-1.png" target="_blank">9fba469</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
