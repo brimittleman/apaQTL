@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-30
+<strong>Last updated:</strong> 2019-05-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea1e3a436d19590acac4863cda63e7f42c55e77eetargetblanka1e3a43a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a1e3a436d19590acac4863cda63e7f42c55e77ee" target="_blank">a1e3a43</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreedf3b22ee769fbc931e8f06d21f4d7d8d2172e1eatargetblankdf3b22ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/df3b22ee769fbc931e8f06d21f4d7d8d2172e1ea" target="_blank">df3b22e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea1e3a436d19590acac4863cda63e7f42c55e77eetargetblanka1e3a43a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreedf3b22ee769fbc931e8f06d21f4d7d8d2172e1eatargetblankdf3b22ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,7 +435,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -611,6 +610,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/df3b22ee769fbc931e8f06d21f4d7d8d2172e1ea/analysis/newQTLheatmap.Rmd" target="_blank">df3b22e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+add heatmap all qtls
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/c2abb09fdced67286550fde9dc19c2da692a0d62/docs/newQTLheatmap.html" target="_blank">c2abb09</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/a1e3a436d19590acac4863cda63e7f42c55e77ee/analysis/newQTLheatmap.Rmd" target="_blank">a1e3a43</a>
 </td>
 <td>
@@ -729,12 +762,12 @@ Attaching package: &#39;gplots&#39;</code></pre>
 
     lowess</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::combine() masks gdata::combine()
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::first()   masks gdata::first()
@@ -793,7 +826,8 @@ nrow(newNucQTLs)</code></pre>
 <p>I wrote a script to pull the doses from the vcf file. Run it with:</p>
 <pre class="bash"><code> python extractGenotypes.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt
  
-  python extractGenotypes.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt</code></pre>
+  python extractGenotypes.py ../data/apaQTLs/Total_apaQTLs_5fdr_NewUnique.txt ../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt
+  </code></pre>
 <p>I also need the header from the VCF to have the individuals:</p>
 <pre class="bash"><code>head -n14 /project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt.vcf | tail -n1  &gt; ../data/QTLGenotypes/vcfheader.txt
 
@@ -895,6 +929,29 @@ brimittleman
 </div>
 </div>
 </div>
+<div id="structure-in-all-qtls" class="section level2">
+<h2>Structure in all QTLs</h2>
+<p>This was for the new QTLs. I want to see if there is structure more generally.</p>
+<pre class="bash"><code> python extractGenotypes.py ../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt ../data/QTLGenotypes/Genotypes_NuclearapaQTLS_ALLQTLs.txt
+
+ python extractGenotypes.py ../data/apaQTLs/Total_apaQTLs_5fdr.txt ../data/QTLGenotypes/Genotypes_TotalapaQTLS_ALLQTLs.txt</code></pre>
+<pre class="r"><code>totgenoall=read.table(&quot;../data/QTLGenotypes/Genotypes_TotalapaQTLS_ALLQTLs.txt&quot;, col.names = colnames(vcfhead)) %&gt;% select(samplist) %&gt;% t()
+
+totgenoallsm=totgenoall[,1:300]
+
+totgeneallCorr=round(cor(totgenoallsm),2)
+
+heatmap.2(as.matrix(totgeneallCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;),main=&quot;Genotype correlation \n for first 300 Total QTL snps&quot;)</code></pre>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>nucgenoall=read.table(&quot;../data/QTLGenotypes/Genotypes_NuclearapaQTLS_ALLQTLs.txt&quot;, col.names = colnames(vcfhead)) %&gt;% select(samplist) %&gt;% t()
+nucgenoallsm=nucgenoall[,1:400]
+
+
+nucgeneallCorr=round(cor(nucgenoallsm),2)
+
+heatmap.2(as.matrix(nucgeneallCorr),trace=&quot;none&quot;, dendrogram =c(&quot;none&quot;),main=&quot;Genotype correlation \n for first 400 Nuclear QTL snps&quot;)</code></pre>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 <div id="compare-beta-values-in-55-vs-39" class="section level2">
 <h2>Compare beta values in 55 vs 39</h2>
 <p>I want to make a scatter plot comaparring the new QTL associations in the 55 vs 39 individauls. If the qtls are real we expect a high correlation.</p>
@@ -945,13 +1002,13 @@ newin54_nuc=read.table(&quot;../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_Ne
 <pre class="r"><code>nuclear_qtlind=ggplot(newinboth_nuc,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title=&quot;New Nuclear apaQTLs\n in different ind. sets&quot;, ylab=&quot;Beta 39 ind&quot;, xlab=&quot;Beta 55 ind&quot;)</code></pre>
 <p>plot both:</p>
 <pre class="r"><code>plot_grid(total_qtlind, nuclear_qtlind)</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-33-1">
-Past versions of unnamed-chunk-33-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-36-1">
+Past versions of unnamed-chunk-36-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-33-1" class="collapse">
+<div id="fig-unnamed-chunk-36-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -970,7 +1027,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/26aa2e67d2a27339f4a1024552748c03cc25a03c/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-33-1.png" target="_blank">26aa2e6</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/c2abb09fdced67286550fde9dc19c2da692a0d62/docs/figure/newQTLheatmap.Rmd/unnamed-chunk-36-1.png" target="_blank">c2abb09</a>
 </td>
 <td>
 brimittleman
@@ -987,7 +1044,7 @@ brimittleman
 <pre class="r"><code>pvalplot_tot=ggplot(newinboth,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title=&quot;New Total apaQTLs \nin different ind. sets&quot;, y=&quot;-log10 pval 39 ind&quot;, x=&quot;-log10 pval 55 ind&quot;)</code></pre>
 <pre class="r"><code>pvalplot_nuc=ggplot(newinboth_nuc,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title=&quot;New Nuclear apaQTLs \nin different ind. sets&quot;, y=&quot;-log10 pval 39 ind&quot;, x=&quot;-log10 pval 55 ind&quot;)</code></pre>
 <pre class="r"><code>plot_grid(pvalplot_tot,pvalplot_nuc)</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /> Confirm these QTLs are in new phenotype peaks:</p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /> Confirm these QTLs are in new phenotype peaks:</p>
 <pre class="r"><code>newvold=read.table(&quot;../data/peaks_5perc/NewVOldPeaks.txt&quot;, header = T, stringsAsFactors = F) %&gt;% select(peak, New)
 
 colnames(newvold)=c(&quot;Peak&quot;, &quot;Set&quot;)</code></pre>
@@ -1044,7 +1101,7 @@ pheno_peak14470M$variable=as.character(pheno_peak14470M$variable)</code></pre>
 genoPheno14470$set=as.factor(genoPheno14470$set)
 genoPheno14470$dose=as.factor(genoPheno14470$dose)</code></pre>
 <pre class="r"><code>ggplot(genoPheno14470, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /> Try 1 more: peak33185 12:116544223</p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /> Try 1 more: peak33185 12:116544223</p>
 <pre class="bash"><code>#get genotype from vcf
 less /project2/gilad/briana/YRI_geno_hg19/chr12.dose.filt.vcf.gz  |  grep 12:116544223 &gt; ../data/exampleQTLs/Geno_12:116544223.txt
 
@@ -1066,7 +1123,7 @@ into character vector</code></pre>
 <pre class="r"><code>genoPhenopeak33185$set=as.factor(genoPhenopeak33185$set)
 genoPhenopeak33185$dose=as.factor(genoPhenopeak33185$dose)</code></pre>
 <pre class="r"><code>ggplot(genoPhenopeak33185, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>peak59741 17:78371306</p>
 <pre class="bash"><code>#get genotype from vcf
 less /project2/gilad/briana/YRI_geno_hg19/chr17.dose.filt.vcf.gz  |  grep 17:78371306 &gt; ../data/exampleQTLs/Geno_17:78371306.txt
@@ -1089,7 +1146,7 @@ into character vector</code></pre>
 <pre class="r"><code>genoPhenopeak59741$set=as.factor(genoPhenopeak59741$set)
 genoPhenopeak59741$dose=as.factor(genoPhenopeak59741$dose)</code></pre>
 <pre class="r"><code>ggplot(genoPhenopeak59741, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))</code></pre>
-<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/newQTLheatmap.Rmd/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
