@@ -26,7 +26,7 @@ I want to compare the usage of the new peaks compared to the overall mean usage.
 newPAS5perc=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, col.names = c("chr", "start","end", "ID", "score", "strand"))
 oldPAS5perc=read.table("../../threeprimeseq/data/peaks4DT/APAPAS_5percCov_fixedStrand.bed", stringsAsFactors = F, col.names = c("chr", "start", "end", "ID", "score", "strand"))
 
-uniqnew=newPAS5perc %>% semi_join(oldPAS5perc, by=c("chr", "start", "end"))
+uniqnew=newPAS5perc %>% anti_join(oldPAS5perc, by=c("chr", "start", "end"))
 ```
 
 Pull in the usage of the peaks:  
@@ -130,14 +130,15 @@ sampl2=sample(oldind, 15)
 sampl3=sample(oldind, 15)
 sampl4=sample(oldind, 15)
 
-
+png("../output/newtot.png")
 par(mfrow=c(3,2))
-UsageHist(indVec=newInd,title="Total Usage New",totUsage=totUsage)
-UsageHist(indVec=oldind,title="Total Usage Old",totUsage=totUsage)
+UsageHist(indVec=newInd,title="Total Usage New (15ind)",totUsage=totUsage)
+UsageHist(indVec=oldind,title="Total Usage Old (39 ind)",totUsage=totUsage)
 UsageHist(indVec=sampl1,title="Total Usage Sample 15 Old",totUsage=totUsage)
 UsageHist(indVec=sampl2,title="Total Usage Sample 15 Old",totUsage=totUsage)
 UsageHist(indVec=sampl3,title="Total Usage Sample 15 Old",totUsage=totUsage)
 UsageHist(indVec=sampl4,title="Total Usage Sample 15 Old",totUsage=totUsage)
+dev.off()
 ```
 
 
@@ -167,14 +168,15 @@ UsageHist_nuc= function(indVec,title,nucUsage=nucUsage){
 
 
 ```{r}
-
+png("../output/newnuc.png")
 par(mfrow=c(3,2))
-UsageHist_nuc(indVec=newInd,title="Nuclear Usage New",nucUsage=nucUsage)
-UsageHist_nuc(indVec=oldind,title="Nuclear Usage Old",nucUsage=nucUsage)
+UsageHist_nuc(indVec=newInd,title="Nuclear Usage New (15ind)",nucUsage=nucUsage)
+UsageHist_nuc(indVec=oldind,title="Nuclear Usage Old (39ind)",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl1,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl2,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl3,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
 UsageHist_nuc(indVec=sampl4,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
+dev.off()
 ```
 
 
@@ -191,19 +193,22 @@ oldtotalUsage=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript
 
 
 ```{r}
+png("../output/oldtot.png")
 par(mfrow=c(3,2))
-UsageHist(indVec=newInd,title="Old total Usage",totUsage=oldtotalUsage)
+UsageHist(indVec=newInd,title="Old total Usage (15ind)",totUsage=oldtotalUsage)
 UsageHist(indVec=oldind,title="Old total Usage (39ind)",totUsage=oldtotalUsage)
 UsageHist(indVec=sampl1,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
 UsageHist(indVec=sampl2,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
 UsageHist(indVec=sampl3,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
 UsageHist(indVec=sampl4,title="Old total Usage sample 15 ind",totUsage=oldtotalUsage)
+dev.off()
 ```
 
 
 
 
 ```{r}
+
 oldnuclearCount=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Nuclear.fixed.pheno.fc",header=T,stringsAsFactors = F)
 indOldN=colnames(oldnuclearCount)[2:56]
 oldnuclearUsage=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscript_noMP_GeneLocAnno/filtered_APApeaks_merged_allchrom_refseqGenes.GeneLocAnno_NoMP_sm_quant.Nuclear.fixed.pheno.CountsOnlyNumeric.txt",col.names = indOldN,stringsAsFactors = F)
@@ -211,15 +216,39 @@ oldnuclearUsage=read.table("../../threeprimeseq/data/phenotypes_filtPeakTranscri
 ```
 
 ```{r}
+png("../output/oldnuc.png")
 par(mfrow=c(3,2))
-UsageHist_nuc(indVec=newInd,title="Old nuclear Usage",nucUsage=oldnuclearUsage)
+UsageHist_nuc(indVec=newInd,title="Old nuclear Usage (15ind)",nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=oldind,title="Old nuclear Usage (39ind)",nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl1,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl2,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl3,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
 UsageHist_nuc(indVec=sampl4,title="Old nuclear Usage sample 15 ind",nucUsage=oldnuclearUsage)
+dev.off()
 ```
 
 
 
+##Usage of new peaks in old data  
+I have the old usage. I want to filter the new peaks from this:  
+```{r}
 
+oldtotusage_anno=as.data.frame(cbind(chrom=oldtotalCount$chrom,oldtotalUsage )) %>% separate(chrom, into=c("chr", "start", "end", "peakID"), sep=":")
+
+TotalPeakUSMeanClass_newonly=TotalPeakUSMeanClass %>% filter(New=="new")
+
+oldtotusage_anno_new=oldtotusage_anno %>% semi_join(TotalPeakUSMeanClass_newonly, by=c("chr", "start", "end")) %>% select(-chr, -start,-end,-peakID)
+
+
+oldtotusage_anno_new_mean=rowMeans(oldtotusage_anno_new)
+
+hist(oldtotusage_anno_new_mean, main="Total Usage of new peaks in old data", xlab="old usage means")
+
+length(oldtotusage_anno_new_mean)
+```
+
+This shows me that we called 14 thousand of the new peaks in the old set but they were all super low coverage.  
+
+
+
+Where are the new peaks, genes with a lot of peaks? or genes with less peaks  

@@ -44,10 +44,9 @@ nrow(newTotQTLs)
 Filter out those matching from the old:  
 
 ```{r}
-UniqueNewTot=newTotQTLs %>% semi_join(OldTotQTLs, by="sid")
+UniqueNewTot=newTotQTLs %>% anti_join(OldTotQTLs, by=c("sid","Gene"))
 ```
 
-There are only 105 new snps This makes sense because 1 sno associates with multiple peaks. 
 
 Write these out to fetch the genotypes:  
 
@@ -70,14 +69,11 @@ newNucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt", stringsAsFacto
 nrow(newNucQTLs)
 ```
 
-Filter out those matching from the old:  
 
 ```{r}
-UniqueNewNuc=newNucQTLs %>% semi_join(OldNucQTLs, by="sid")
+UniqueNewNuc=newNucQTLs %>% anti_join(OldNucQTLs, by=c("sid","Gene"))
 ```
-
-
-There are 200 new snps in this set.  
+  
 ```{r}
 write.table(UniqueNewNuc, file="../data/apaQTLs/Nuclear_apaQTLs_5fdr_NewUnique.txt", quote = F, col.names = F, row.names = F)
 ```
@@ -124,7 +120,8 @@ totgeno=read.table("../data/QTLGenotypes/Genotypes_TotalapaQTLS_newunique.txt", 
 Correlation:  
 
 ```{r}
-totgeneCorr=round(cor(totgeno),2)
+totgenosm=totgeno[,1:250]
+totgeneCorr=round(cor(totgenosm),2)
 
 heatmap.2(as.matrix(totgeneCorr),trace="none", dendrogram =c("none"), main="Genotype correlation\n for new Total QTL snps")
 ```
@@ -137,8 +134,9 @@ nucgeno=read.table("../data/QTLGenotypes/Genotypes_NuclearapaQTLS_newunique.txt"
 Correlation:  
 
 ```{r}
-nucgeneCorr=round(cor(nucgeno),2)
 
+nucgenosm=nucgeno[,1:600]
+nucgeneCorr=round(cor(nucgenosm),2)
 heatmap.2(as.matrix(nucgeneCorr),trace="none", dendrogram =c("none"),main="Genotype correlation \n for new Nuclear QTL snps")
 ```
 
@@ -250,12 +248,12 @@ newin54_tot=read.table("../data/ThirtyNineIndQtl_nominal/Total_apaQTLs_NewUniqNo
 ```
 Join these:
 ```{r}
-newinboth=newin54_tot %>% full_join(newin37_tot, by=c("peakID", "snp"))
+newinboth=newin54_tot %>% inner_join(newin37_tot, by=c("peakID", "snp"))
 ```
 
 ```{r}
 total_qtlind=ggplot(newinboth,aes(x=Beta54, y=Beta39)) + geom_point()  + labs(title="New Total apaQTLs \nin different ind. sets", ylab="Beta 39 ind", xlab="Beta 55 ind")
-
+total_qtlind
 ```
 
 ###nuclear  
@@ -273,7 +271,7 @@ newin54_nuc=read.table("../data/ThirtyNineIndQtl_nominal/Nuclear_apaQTLs_NewUniq
 ```
 Join these:
 ```{r}
-newinboth_nuc=newin54_nuc %>% full_join(newin37_nuc, by=c("peakID", "snp"))
+newinboth_nuc=newin54_nuc %>% inner_join(newin37_nuc, by=c("peakID", "snp"))
 ```
 
 ```{r}
@@ -292,6 +290,8 @@ Plot -log10pvalue
 
 ```{r}
 pvalplot_tot=ggplot(newinboth,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title="New Total apaQTLs \nin different ind. sets", y="-log10 pval 39 ind", x="-log10 pval 55 ind")
+
+pvalplot_tot
 ```
 ```{r}
 pvalplot_nuc=ggplot(newinboth_nuc,aes(x=-log10(Nompval54), y=-log10(Nompval39))) + geom_point()  + labs(title="New Nuclear apaQTLs \nin different ind. sets", y="-log10 pval 39 ind", x="-log10 pval 55 ind")
@@ -329,14 +329,16 @@ summary(UniqueNewNuc_set$Set)
 
 I want to plot these  qtls as boxplots. I will plot usage vs. genotype. I want to color the new 15 individuals differently.  
 
-
-DCLRE1C peak14470 10:14974843 
+ 
+peak15390 CREM 10:35411246
 ```{bash,eval=F}
-#get genotype from vcf
-less chr10.dose.filt.vcf.gz  |  grep 10:14974843 > ../apaQTL/data/exampleQTLs/Geno_10:14974843.txt
+
+less /project2/gilad/briana/YRI_geno_hg19/chr10.dose.filt.vcf.gz  |  grep 10:35411246 > ../data/exampleQTLs/Geno_10:35411246.txt
+
+
 
 #get pheno from pheno_5perc
-less APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak14470 > ../exampleQTLs/Pheno_peak14470.txt
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak15390 > ../data/exampleQTLs/Pheno_peak15390.txt
 ```
 
  col.names = colnames(vcfhead))
@@ -363,106 +365,67 @@ phenohead=read.table("../data/exampleQTLs/phenoHead.txt", header = T)
 Try first
 
 ```{r}
-geno_peak14470=read.table("../data/exampleQTLs/Geno_10:14974843.txt", col.names = colnames(vcfheadfull), stringsAsFactors = F) %>% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
-geno_peak14470M=melt(geno_peak14470, id.vars = "ID") %>% separate(value, into=c("genotype", "extra", "extra2"), sep=":") %>% mutate(dose=round(as.integer(extra), digits = 1)) %>% select(-genotype, -extra, -extra2)
+geno_peak15390=read.table("../data/exampleQTLs/Geno_10:35411246.txt", col.names = colnames(vcfheadfull), stringsAsFactors = F) %>% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
+geno_peak15390M=melt(geno_peak15390, id.vars = "ID") %>% separate(value, into=c("genotype", "extra", "extra2"), sep=":") %>% mutate(dose=round(as.integer(extra), digits = 1)) %>% select(-genotype, -extra, -extra2)
 
-geno_peak14470M$variable=as.character(geno_peak14470M$variable)
+geno_peak15390M$variable=as.character(geno_peak15390M$variable)
 
-pheno_peak14470=read.table("../data/exampleQTLs/Pheno_peak14470.txt", col.names = colnames(phenohead), stringsAsFactors = F) 
-pheno_peak14470M=melt(pheno_peak14470,id.vars = "chrom") %>% separate(value, into=c("num", "dom"), sep="/") %>% mutate(usage=as.integer(num)/as.integer(dom))
+pheno_peak15390=read.table("../data/exampleQTLs/Pheno_peak15390.txt", col.names = colnames(phenohead), stringsAsFactors = F) 
+pheno_peak15390M=melt(pheno_peak15390,id.vars = "chrom") %>% separate(value, into=c("num", "dom"), sep="/") %>% mutate(usage=as.integer(num)/as.integer(dom))
 
-pheno_peak14470M$variable=as.character(pheno_peak14470M$variable)
+pheno_peak15390M$variable=as.character(pheno_peak15390M$variable)
 ```
 
 Join these 
 
 
 ```{r}
-genoPheno14470=pheno_peak14470M %>% inner_join(geno_peak14470M, by="variable") %>% mutate(set=ifelse(variable %in% samplelist_39$line, "old39", "new15"))
+genoPhenopeak15390=pheno_peak15390M %>% inner_join(geno_peak15390M, by="variable") %>% mutate(set=ifelse(variable %in% samplelist_39$line, "old39", "new15"))
 
-genoPheno14470$set=as.factor(genoPheno14470$set)
-genoPheno14470$dose=as.factor(genoPheno14470$dose)
+genoPhenopeak15390$set=as.factor(genoPhenopeak15390$set)
+genoPhenopeak15390$dose=as.factor(genoPhenopeak15390$dose)
 ```
 
 
 ```{r}
-ggplot(genoPheno14470, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))
+ggplot(genoPhenopeak15390, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))
 ```
 Try 1 more: 
-peak33185 12:116544223
+PAFAH1B2 peak25812 11:117048417
 
 ```{bash,eval=F}
 #get genotype from vcf
-less /project2/gilad/briana/YRI_geno_hg19/chr12.dose.filt.vcf.gz  |  grep 12:116544223 > ../data/exampleQTLs/Geno_12:116544223.txt
+less /project2/gilad/briana/YRI_geno_hg19/chr11.dose.filt.vcf.gz  |  grep 11:117048417 > ../data/exampleQTLs/Geno_11:117048417.txt
 
 #get pheno from pheno_5perc
-less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak33185 > ../data/exampleQTLs/Pheno_peak33185.txt
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak25812 > ../data/exampleQTLs/Pheno_peak25812.txt
 ```
 
 
 ```{r}
-geno_peak33185=read.table("../data/exampleQTLs/Geno_12:116544223.txt", col.names = colnames(vcfheadfull), stringsAsFactors = F) %>% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
-geno_peak33185M=melt(geno_peak33185, id.vars = "ID") %>% separate(value, into=c("genotype", "extra", "extra2"), sep=":") %>% mutate(dose=round(as.integer(extra), digits = 1)) %>% select(-genotype, -extra, -extra2)
+geno_peak25812=read.table("../data/exampleQTLs/Geno_11:117048417.txt", col.names = colnames(vcfheadfull), stringsAsFactors = F) %>% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
+geno_peak25812M=melt(geno_peak25812, id.vars = "ID") %>% separate(value, into=c("genotype", "extra", "extra2"), sep=":") %>% mutate(dose=round(as.integer(extra), digits = 1)) %>% select(-genotype, -extra, -extra2)
 
-geno_peak33185M$variable=as.character(geno_peak33185M$variable)
+geno_peak25812M$variable=as.character(geno_peak25812M$variable)
 
-pheno_peak33185=read.table("../data/exampleQTLs/Pheno_peak33185.txt", col.names = colnames(phenohead), stringsAsFactors = F) 
-pheno_peak33185M=melt(pheno_peak33185,id.vars = "chrom") %>% separate(value, into=c("num", "dom"), sep="/") %>% mutate(usage=as.integer(num)/as.integer(dom))
+pheno_peak25812=read.table("../data/exampleQTLs/Pheno_peak25812.txt", col.names = colnames(phenohead), stringsAsFactors = F) 
+pheno_peak25812M=melt(pheno_peak25812,id.vars = "chrom") %>% separate(value, into=c("num", "dom"), sep="/") %>% mutate(usage=as.integer(num)/as.integer(dom))
 
-geno_peak33185M$variable=as.character(geno_peak33185M$variable)
+geno_peak25812M$variable=as.character(geno_peak25812M$variable)
 ```
 
 Join these 
 
 
 ```{r}
-genoPhenopeak33185=pheno_peak33185M %>% inner_join(geno_peak33185M, by="variable") %>% mutate(set=ifelse(variable %in% samplelist_39$line, "old39", "new15"))
+genoPhenopeak25812=pheno_peak25812M %>% inner_join(geno_peak25812M, by="variable") %>% mutate(set=ifelse(variable %in% samplelist_39$line, "old39", "new15"))
 
-genoPhenopeak33185$set=as.factor(genoPhenopeak33185$set)
-genoPhenopeak33185$dose=as.factor(genoPhenopeak33185$dose)
+genoPhenopeak25812$set=as.factor(genoPhenopeak25812$set)
+genoPhenopeak25812$dose=as.factor(genoPhenopeak25812$dose)
 ```
 
 
 ```{r}
-ggplot(genoPhenopeak33185, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))
+ggplot(genoPhenopeak25812, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))
 ```
 
-
-peak59741 17:78371306
-
-
-```{bash,eval=F}
-#get genotype from vcf
-less /project2/gilad/briana/YRI_geno_hg19/chr17.dose.filt.vcf.gz  |  grep 17:78371306 > ../data/exampleQTLs/Geno_17:78371306.txt
-
-#get pheno from pheno_5perc
-less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz | grep peak59741 > ../data/exampleQTLs/Pheno_peak59741.txt
-```
-
-
-```{r}
-geno_peak59741=read.table("../data/exampleQTLs/Geno_17:78371306.txt", col.names = colnames(vcfheadfull), stringsAsFactors = F) %>% select(-CHROM, -POS, -REF, -ALT, -QUAL, -FILTER, -INFO, -FORMAT)
-geno_peak59741M=melt(geno_peak59741, id.vars = "ID") %>% separate(value, into=c("genotype", "extra", "extra2"), sep=":") %>% mutate(dose=round(as.integer(extra), digits = 1)) %>% select(-genotype, -extra, -extra2)
-
-geno_peak59741M$variable=as.character(geno_peak59741M$variable)
-
-pheno_peak59741=read.table("../data/exampleQTLs/Pheno_peak59741.txt", col.names = colnames(phenohead), stringsAsFactors = F) 
-pheno_peak59741M=melt(pheno_peak59741,id.vars = "chrom") %>% separate(value, into=c("num", "dom"), sep="/") %>% mutate(usage=as.integer(num)/as.integer(dom))
-
-geno_peak59741M$variable=as.character(geno_peak59741M$variable)
-```
-
-Join these 
-
-
-```{r}
-genoPhenopeak59741=pheno_peak59741M %>% inner_join(geno_peak59741M, by="variable") %>% mutate(set=ifelse(variable %in% samplelist_39$line, "old39", "new15"))
-
-genoPhenopeak59741$set=as.factor(genoPhenopeak59741$set)
-genoPhenopeak59741$dose=as.factor(genoPhenopeak59741$dose)
-```
-
-
-```{r}
-ggplot(genoPhenopeak59741, aes(x=dose, y=usage)) + geom_boxplot()+ geom_jitter(aes(col=set))
-```
