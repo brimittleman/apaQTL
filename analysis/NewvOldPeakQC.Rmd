@@ -78,3 +78,112 @@ Peak_newOld=TotalPeakUSMeanClass %>% select(-mean)
 write.table(Peak_newOld, file="../data/peaks_5perc/NewVOldPeaks.txt", col.names = T, row.names = F, quote=F)
 ```
 
+
+##Distirubution in different sets of 15 ind  
+
+I want to see if the new 15 individuals are driving the change in the peak mean distribution. I want to make a function that take a vector of individuals, filters the usage dataframe and plots the histogram.  
+
+
+###Total: 
+First I will upload the usage dataframe. 
+
+```{r}
+totCounts=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.fc", stringsAsFactors = F, header = T)
+ind=colnames(totCounts)[2:55]
+totUsage=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.CountsOnlyNumeric", stringsAsFactors = F, header = F,col.names = ind)
+
+
+
+batch1.2.3=read.table("../data/MetaDataSequencing.txt", header=T,stringsAsFactors = F)%>% filter(fraction=="total") %>%  select(line, batch) %>% filter(batch != 4)
+oldind=batch1.2.3$line
+
+batch4=read.table("../data/MetaDataSequencing.txt", header=T,stringsAsFactors = F)%>% filter(fraction=="total") %>%  select(line, batch) %>% filter(batch == 4)
+
+newInd=batch4$line
+
+  
+
+```
+
+
+
+```{r}
+UsageHist= function(indVec,title,totUsage=totUsage){
+  totUsage_ind=totUsage %>% select(indVec)
+  meanVec=rowMeans(totUsage_ind)
+  hist(meanVec, main=title,xlab="Mean Usage")
+}
+
+```
+
+
+RUn this for different itterations of individuals:
+
+
+```{r}
+
+par(mfrow=c(1,2))
+#old ind
+UsageHist(indVec=newInd,title="Total Usage New",totUsage=totUsage)
+UsageHist(indVec=oldind,title="Total Usage Old",totUsage=totUsage)
+```
+Pick 15 random individuals from old: 
+
+
+```{r}
+
+sampl1=sample(oldind, 15)
+sampl2=sample(oldind, 15)
+sampl3=sample(oldind, 15)
+sampl4=sample(oldind, 15)
+
+
+par(mfrow=c(2,2))
+UsageHist(indVec=sampl1,title="Total Usage Sample 15 Old",totUsage=totUsage)
+UsageHist(indVec=sampl2,title="Total Usage Sample 15 Old",totUsage=totUsage)
+UsageHist(indVec=sampl3,title="Total Usage Sample 15 Old",totUsage=totUsage)
+UsageHist(indVec=sampl4,title="Total Usage Sample 15 Old",totUsage=totUsage)
+```
+
+
+
+
+
+###Nuclear  
+
+```{r}
+nucCounts=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc", stringsAsFactors = F, header = T)
+ind=colnames(nucCounts)[2:55]
+nucUsage=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.CountsOnlyNumeric", stringsAsFactors = F, header = F,col.names = ind)
+
+```
+
+
+
+```{r}
+UsageHist_nuc= function(indVec,title,nucUsage=nucUsage){
+  nucUsage_ind=nucUsage %>% select(indVec)
+  meanVec=rowMeans(nucUsage_ind)
+  hist(meanVec, main=title,xlab="Mean Usage")
+}
+
+```
+
+
+```{r}
+
+par(mfrow=c(1,2))
+UsageHist_nuc(indVec=newInd,title="Nuclear Usage New",nucUsage=nucUsage)
+UsageHist_nuc(indVec=oldind,title="Nuclear Usage Old",nucUsage=nucUsage)
+```
+
+```{r}
+
+par(mfrow=c(2,2))
+UsageHist_nuc(indVec=sampl1,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
+UsageHist_nuc(indVec=sampl2,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
+UsageHist_nuc(indVec=sampl3,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
+UsageHist_nuc(indVec=sampl4,title="Nuclear Usage Sample 15 Old",nucUsage=nucUsage)
+```
+```
+
