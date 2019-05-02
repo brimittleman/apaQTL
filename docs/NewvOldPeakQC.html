@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef4f5b21553b16c8948f83b538061dab32ad4d09etargetblankf4f5b21a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f4f5b21553b16c8948f83b538061dab32ad4d09e" target="_blank">f4f5b21</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee9021d256562149996342ed6ed485537c3c4cbb3targetblanke9021d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e9021d256562149996342ed6ed485537c3c4cbb3" target="_blank">e9021d2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef4f5b21553b16c8948f83b538061dab32ad4d09etargetblankf4f5b21a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee9021d256562149996342ed6ed485537c3c4cbb3targetblanke9021d2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -605,6 +605,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e9021d256562149996342ed6ed485537c3c4cbb3/analysis/NewvOldPeakQC.Rmd" target="_blank">e9021d2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+compare usage in new, by ind set
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/09090d7834800361bafe3b2d16b2b9569c44517f/docs/NewvOldPeakQC.html" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -799,13 +833,14 @@ understand usage of new pas
 </div>
 </div>
 </div>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre class="r"><code>library(reshape2)
+library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.0       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -869,6 +904,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-6-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/03ea0f7f10cb119174b2b47cfbe388beb5c34178/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-6-1.png" target="_blank">03ea0f7</a>
 </td>
 <td>
@@ -897,8 +943,82 @@ brimittleman
 
 ggplot(TotalPeakUSMeanClass_newonly, aes(y=mean, x=&quot;&quot;)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col=&quot;red&quot;) +  geom_hline(yintercept = .05, col=&quot;Blue&quot;) + labs(x=&quot;&quot;, y=&quot;Mean Usage&quot;, title=&quot;Mean Usage of New PAS&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-7-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(TotalPeakUSMeanClass_newonly, aes(x=mean)) + geom_histogram(bins=50) + geom_vline(xintercept = mean(TotalPeakUSMean$mean), col=&quot;red&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-8-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>This shows me the new peaks are the peaks that barely passed the cuttoff before.</p>
 <p>write out file with information about new and old peaks</p>
 <pre class="r"><code>Peak_newOld=TotalPeakUSMeanClass %&gt;% select(-mean)
@@ -1013,6 +1133,43 @@ oldtotusage_anno_new_mean=rowMeans(oldtotusage_anno_new)
 
 plot(oldtotusage_anno_new_mean, main=&quot;Total Usage of new peaks in old data&quot;, ylab=&quot;old usage means Percent&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-20-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>length(oldtotusage_anno_new_mean)</code></pre>
 <pre><code>[1] 14642</code></pre>
 <p>This shows me that we called 14 thousand of the new peaks in the old set but they were all super low coverage.</p>
@@ -1021,6 +1178,43 @@ plot(oldtotusage_anno_new_mean, main=&quot;Total Usage of new peaks in old data&
 
 ggplot(newPAS5perc_pergene,aes(x=nPeak)) + geom_histogram(bins=100)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-21-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>nrow(newPAS5perc_pergene)</code></pre>
 <pre><code>[1] 15456</code></pre>
 <p>Look at which genes the new peaks are in.</p>
@@ -1028,12 +1222,87 @@ ggplot(newPAS5perc_pergene,aes(x=nPeak)) + geom_histogram(bins=100)</code></pre>
 
 
 ggplot(uniqnew_genes, aes(x=npeakadded)) + geom_histogram(bins=100) + labs(title=&quot;Number of peaks added per gene\n(added peak in 10827 genes of 15456 genes)&quot;, x=&quot;Number of Peaks&quot;, y=&quot;Number of Genes&quot;)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /> Look at these genes compared to distribution for number of peaks in all peaks before filter</p>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
+Past versions of unnamed-chunk-22-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-22-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Look at these genes compared to distribution for number of peaks in all peaks before filter</p>
 <pre class="r"><code>allPAS=read.table(&quot;../data/assignedPeaks/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF&quot;, header = T, stringsAsFactors = F) %&gt;% separate(GeneID, into = c(&quot;peak&quot;, &quot;Chrom&quot;, &quot;Peakstart&quot;, &quot;PeakEnd&quot;, &quot;strand&quot;, &quot;geneid&quot;),sep=&quot;:&quot;) %&gt;% separate(geneid, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene) %&gt;% summarise(nPeakAll=n()) %&gt;% mutate(AddedPeak=ifelse(gene %in% uniqnew_genes$gene, &quot;yes&quot;, &quot;no&quot;))</code></pre>
 <pre><code>Warning: Expected 2 pieces. Additional pieces discarded in 4 rows [14735,
 14736, 14737, 14738].</code></pre>
 <pre class="r"><code>ggplot(allPAS, aes(x=nPeakAll))+ geom_histogram(bins = 100) + facet_grid(~AddedPeak)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
+Past versions of unnamed-chunk-23-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-23-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-23-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Mean number of peaks for genes where we added, this could help us understand the distribution shift:</p>
 <pre class="r"><code>allPAS_withnewpas=allPAS %&gt;% filter(AddedPeak==&quot;yes&quot;)
 
@@ -1052,7 +1321,45 @@ nrow(oldPAS5perc_pergene)</code></pre>
 
 
 ggplot(npeakpergenebot, aes(x=nPeakOld, y=nPeak)) + geom_point() + geom_smooth(method=&quot;lm&quot;) + annotate(&quot;text&quot;, label=&quot;r2=0.4447&quot;, x=12, y=2) + labs(title=&quot;Number of Peaks in old vs new data&quot;,y=&quot;Number of peaks new data&quot;, x=&quot;Number of peaks old data&quot;)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /> Correlation between number of peaks before and after:</p>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-26-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Correlation between number of peaks before and after:</p>
 <pre class="r"><code>summary(lm(npeakpergenebot$nPeak~npeakpergenebot$nPeakOld))</code></pre>
 <pre><code>
 Call:
@@ -1077,6 +1384,62 @@ F-statistic: 1.254e+04 on 1 and 15650 DF,  p-value: &lt; 2.2e-16</code></pre>
  -6.000   0.000   1.000   1.988   3.000  20.000 </code></pre>
 <pre class="r"><code>ggplot(npeakpergenebot, aes(x=NewMinOld)) + geom_histogram(bins=100)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-28-1">
+Past versions of unnamed-chunk-28-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-28-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/09090d7834800361bafe3b2d16b2b9569c44517f/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-28-1.png" target="_blank">09090d7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="usage-of-new-peaks-by-ind-set" class="section level2">
+<h2>Usage of new peaks by ind set</h2>
+<div id="total-2" class="section level3">
+<h3>Total</h3>
+<pre class="r"><code>totalPeak_inNew=totalPeak %&gt;% filter(peak %in% uniqnewPasnum$peak)
+
+totalPeak_inNew_melt=melt(totalPeak_inNew,id.vars=c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;gene&quot;,&quot;loc&quot;, &quot;peak&quot;,&quot;strand&quot;),value.name = &quot;Usage&quot; ,variable.name = &quot;Ind&quot;) %&gt;% mutate(New15=ifelse(Ind %in% batch4$line, &quot;Yes&quot;, &quot;No&quot;))
+
+
+ggplot(totalPeak_inNew_melt, aes(x=New15, y=Usage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = &quot;none&quot;) + labs(x=&quot;Individuals in New batch&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Look if means are different:</p>
+<pre class="r"><code>totalPeak_inNew_meltGroup=totalPeak_inNew_melt %&gt;% group_by(New15,peak) %&gt;% summarise(meanUsage=mean(Usage))
+
+ggplot(totalPeak_inNew_meltGroup, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = &quot;none&quot;) + labs(x=&quot;Individuals in New batch&quot;, y=&quot;Mean Usage in Group&quot;, title=&quot;Mean usage for new PAS in 39 ind v new 15&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(totalPeak_inNew_meltGroup, aes(x=meanUsage, group=New15, fill=New15))+geom_density(alpha=.3)  + labs( x=&quot;Mean Usage in Group&quot;, title=&quot;Mean usage for new PAS in 39 ind v new 15&quot;)+ scale_fill_discrete(name = &quot;Ind in new 15&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1106,10 +1469,10 @@ attached base packages:
 other attached packages:
  [1] workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
  [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.0   tidyverse_1.2.1
+ [9] ggplot2_3.1.0   tidyverse_1.2.1 reshape2_1.4.3 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
+ [1] Rcpp_1.0.0       cellranger_1.1.0 compiler_3.5.1   pillar_1.3.1    
  [5] git2r_0.23.0     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
  [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
 [13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
@@ -1117,11 +1480,12 @@ loaded via a namespace (and not attached):
 [21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
 [25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
-[33] readxl_1.1.0     rmarkdown_1.10   reshape2_1.4.3   modelr_0.1.2    
-[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
-[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
-[45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
-[49] broom_0.5.1      crayon_1.3.4    </code></pre>
+[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
+[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
+[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
+[49] crayon_1.3.4    </code></pre>
+</div>
 </div>
 </div>
 
