@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-01
+<strong>Last updated:</strong> 2019-05-02
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee9021d256562149996342ed6ed485537c3c4cbb3targetblanke9021d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e9021d256562149996342ed6ed485537c3c4cbb3" target="_blank">e9021d2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0f39c9b26884cd39b2a6647f77e5969736dc3128targetblank0f39c9ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/0f39c9b26884cd39b2a6647f77e5969736dc3128" target="_blank">0f39c9b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee9021d256562149996342ed6ed485537c3c4cbb3targetblanke9021d2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0f39c9b26884cd39b2a6647f77e5969736dc3128targetblank0f39c9ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -605,6 +605,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/0f39c9b26884cd39b2a6647f77e5969736dc3128/analysis/NewvOldPeakQC.Rmd" target="_blank">0f39c9b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-02
+</td>
+<td>
+add usage in old data
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/3d56b3b5df8f22c7d45b750196f6d9bdaba83db8/docs/NewvOldPeakQC.html" target="_blank">3d56b3b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1433,13 +1467,209 @@ totalPeak_inNew_melt=melt(totalPeak_inNew,id.vars=c(&quot;chr&quot;, &quot;start
 
 ggplot(totalPeak_inNew_melt, aes(x=New15, y=Usage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = &quot;none&quot;) + labs(x=&quot;Individuals in New batch&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-29-1">
+Past versions of unnamed-chunk-29-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-29-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3d56b3b5df8f22c7d45b750196f6d9bdaba83db8/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-29-1.png" target="_blank">3d56b3b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Look if means are different:</p>
 <pre class="r"><code>totalPeak_inNew_meltGroup=totalPeak_inNew_melt %&gt;% group_by(New15,peak) %&gt;% summarise(meanUsage=mean(Usage))
 
 ggplot(totalPeak_inNew_meltGroup, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = &quot;none&quot;) + labs(x=&quot;Individuals in New batch&quot;, y=&quot;Mean Usage in Group&quot;, title=&quot;Mean usage for new PAS in 39 ind v new 15&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-1">
+Past versions of unnamed-chunk-30-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3d56b3b5df8f22c7d45b750196f6d9bdaba83db8/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-30-1.png" target="_blank">3d56b3b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(totalPeak_inNew_meltGroup, aes(x=meanUsage, group=New15, fill=New15))+geom_density(alpha=.3)  + labs( x=&quot;Mean Usage in Group&quot;, title=&quot;Mean usage for new PAS in 39 ind v new 15&quot;)+ scale_fill_discrete(name = &quot;Ind in new 15&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-1">
+Past versions of unnamed-chunk-31-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3d56b3b5df8f22c7d45b750196f6d9bdaba83db8/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-31-1.png" target="_blank">3d56b3b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>totalPeak_inNew_meltGroup_spre=totalPeak_inNew_meltGroup %&gt;% spread(New15,meanUsage)
+
+
+ggplot(totalPeak_inNew_meltGroup_spre,aes(x=No, y=Yes)) + geom_point() + geom_density_2d() + geom_smooth(method = &quot;lm&quot;)+annotate(&quot;text&quot;, label=&quot;New=old+0.053680&quot; ,x=.8,y=0) + labs(x=&quot;Original 39 Mean&quot;, y=&quot;Original 15 Mean&quot;, title=&quot;Mean Usage in New data by Ind set&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=totalPeak_inNew_meltGroup_spre, Yes~No))</code></pre>
+<pre><code>
+Call:
+lm(formula = Yes ~ No, data = totalPeak_inNew_meltGroup_spre)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.80920 -0.08513 -0.03408  0.05478  0.86924 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.053680   0.001055   50.86   &lt;2e-16 ***
+No          1.002046   0.003416  293.35   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1584 on 42931 degrees of freedom
+Multiple R-squared:  0.6672,    Adjusted R-squared:  0.6671 
+F-statistic: 8.605e+04 on 1 and 42931 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="nuclear-1" class="section level3">
+<h3>Nuclear</h3>
+<pre class="r"><code>nuclearPeakUs=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc&quot;, header = T, stringsAsFactors = F) %&gt;% separate(chrom, sep = &quot;:&quot;, into = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;id&quot;)) %&gt;% separate(id, sep=&quot;_&quot;, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;))</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 4 rows [14735,
+14736, 14737, 14738].</code></pre>
+<pre class="r"><code>ind=colnames(nuclearPeakUs)[8:dim(nuclearPeakUs)[2]]
+nuclearPeakUs_CountNum=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.CountsOnlyNumeric&quot;, col.names = ind)
+
+
+#numeric with anno
+nuclearPeak=as.data.frame(cbind(nuclearPeakUs[,1:7], nuclearPeakUs_CountNum))
+
+
+
+nuclearPeak_inNew=nuclearPeak %&gt;% filter(peak %in% uniqnewPasnum$peak)
+
+nuclearPeak_inNew_melt=melt(nuclearPeak_inNew,id.vars=c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;gene&quot;,&quot;loc&quot;, &quot;peak&quot;,&quot;strand&quot;),value.name = &quot;Usage&quot; ,variable.name = &quot;Ind&quot;) %&gt;% mutate(New15=ifelse(Ind %in% batch4$line, &quot;Yes&quot;, &quot;No&quot;))</code></pre>
+<pre class="r"><code>nuclearPeak_inNew_meltGroup=nuclearPeak_inNew_melt %&gt;% group_by(New15,peak) %&gt;% summarise(meanUsage=mean(Usage))
+
+ggplot(nuclearPeak_inNew_meltGroup, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = &quot;none&quot;) + labs(x=&quot;Individuals in New batch&quot;, y=&quot;Mean Usage in Group&quot;, title=&quot;Nuclear Mean usage for new PAS in 39 ind v new 15&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(nuclearPeak_inNew_meltGroup, aes(x=meanUsage, group=New15, fill=New15))+geom_density(alpha=.3)  + labs( x=&quot;Mean Usage in Group&quot;, title=&quot;Nuclear Mean usage for new PAS in 39 ind v new 15&quot;)+ scale_fill_discrete(name = &quot;Ind in new 15&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="seperate-the-usage-for-old-data-by-ind-set" class="section level2">
+<h2>Seperate the usage for old data by ind set</h2>
+<pre class="r"><code>oldtotusage_annoM=melt(oldtotusage_anno, id.vars=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;peakID&quot;), value.name = &quot;Usage&quot;, variable.name = &quot;Ind&quot;) %&gt;% mutate(New15=ifelse(Ind %in% batch4$line, &quot;Yes&quot;, &quot;No&quot;))
+
+oldtotusage_annoM_new=oldtotusage_annoM %&gt;% semi_join(TotalPeakUSMeanClass_newonly, by=c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;)) %&gt;%  group_by(New15,peakID) %&gt;% summarise(meanUsage=mean(Usage))
+
+
+ggplot(oldtotusage_annoM_new, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = &quot;none&quot;) + labs(x=&quot;Individuals in New batch&quot;, y=&quot;Mean Usage in Group&quot;, title=&quot;Total mean usage for new PAS in old data&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /> This shows the peaks had super low usage in both sets of individuals.</p>
+<p>spread</p>
+<pre class="r"><code>oldtotusage_annoM_new_spread=oldtotusage_annoM_new %&gt;% spread(New15,meanUsage)
+
+
+ggplot(oldtotusage_annoM_new_spread, aes(x=No, y=Yes))+ geom_point() +geom_density_2d() + geom_smooth(method = &quot;lm&quot;) + annotate(&quot;text&quot;, label=&quot;New=.7Old+.009&quot; ,x=.25,y=.75) + labs(x=&quot;Original 39 Mean&quot;, y=&quot;Original 15 Mean&quot;, title=&quot;Mean Usage in old data by Ind set&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=oldtotusage_annoM_new_spread, Yes~No))</code></pre>
+<pre><code>
+Call:
+lm(formula = Yes ~ No, data = oldtotusage_annoM_new_spread)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.30595 -0.01113 -0.00586  0.00590  0.32477 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.009067   0.000217   41.78   &lt;2e-16 ***
+No          0.727159   0.004500  161.58   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.02478 on 14640 degrees of freedom
+Multiple R-squared:  0.6407,    Adjusted R-squared:  0.6407 
+F-statistic: 2.611e+04 on 1 and 14640 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Yes=.7(No)</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1481,11 +1711,10 @@ loaded via a namespace (and not attached):
 [25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
 [33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
-[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
-[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
-[49] crayon_1.3.4    </code></pre>
-</div>
+[37] whisker_0.3-2    MASS_7.3-51.1    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
+[49] broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 </div>
 
