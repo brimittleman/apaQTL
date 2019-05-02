@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
+library(reshape2)
 library(tidyverse)
 library(workflowr)
 ```
@@ -333,4 +334,32 @@ summary(npeakpergenebot$NewMinOld)
 ggplot(npeakpergenebot, aes(x=NewMinOld)) + geom_histogram(bins=100)
 ```
 
+
+##Usage of new peaks by ind set  
+
+###Total
+```{r}
+
+totalPeak_inNew=totalPeak %>% filter(peak %in% uniqnewPasnum$peak)
+
+totalPeak_inNew_melt=melt(totalPeak_inNew,id.vars=c("chr", "start","end", "gene","loc", "peak","strand"),value.name = "Usage" ,variable.name = "Ind") %>% mutate(New15=ifelse(Ind %in% batch4$line, "Yes", "No"))
+
+
+ggplot(totalPeak_inNew_melt, aes(x=New15, y=Usage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = "none") + labs(x="Individuals in New batch")
+```
+
+Look if means are different:
+
+
+```{r}
+totalPeak_inNew_meltGroup=totalPeak_inNew_melt %>% group_by(New15,peak) %>% summarise(meanUsage=mean(Usage))
+
+ggplot(totalPeak_inNew_meltGroup, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = "none") + labs(x="Individuals in New batch", y="Mean Usage in Group", title="Mean usage for new PAS in 39 ind v new 15")
+
+```
+
+```{r}
+ggplot(totalPeak_inNew_meltGroup, aes(x=meanUsage, group=New15, fill=New15))+geom_density(alpha=.3)  + labs( x="Mean Usage in Group", title="Mean usage for new PAS in 39 ind v new 15")+ scale_fill_discrete(name = "Ind in new 15")
+
+```
 
