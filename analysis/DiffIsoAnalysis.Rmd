@@ -1,0 +1,87 @@
+---
+title: "Total v Nuclear"
+author: "Briana Mittleman"
+date: "5/2/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I wil use leafcutter to call PAS with differential ussage between fractions.
+
+##Prepare annotation  
+
+I first filter the annotated peak SAF file for peaks passing the 5% coverage in either fraction.  
+
+```{bash,eval=F}
+python makeSAFbothfrac5perc.py
+```
+
+
+##Peak quantification
+```{bash,eval=F}
+mkdir bothFrac_FC
+```
+
+Run feature counts with these peaks with both fractions:  
+
+```{bash,eval=F}
+sbatch bothFrac_FC.sh
+```
+
+
+Fix the header:
+```{bash,eval=F}
+python fixFChead_bothfrac.py ../data/bothFrac_FC/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fc ../data/bothFrac_FC/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.fc
+```
+
+
+#Prepare leafcutter phenotype  
+
+```{bash,eval=F}
+mkdir ../data/DiffIso
+```
+
+
+```{bash,eval=F}
+python fc2leafphen.py
+```
+
+```{bash,eval=F}
+python subset_diffisopheno.py 1
+python subset_diffisopheno.py 2
+python subset_diffisopheno.py 3
+python subset_diffisopheno.py 4
+python subset_diffisopheno.py 5
+python subset_diffisopheno.py 6
+python subset_diffisopheno.py 7
+python subset_diffisopheno.py 8
+python subset_diffisopheno.py 9
+python subset_diffisopheno.py 10
+python subset_diffisopheno.py 11
+python subset_diffisopheno.py 12
+python subset_diffisopheno.py 13
+python subset_diffisopheno.py 14
+python subset_diffisopheno.py 15
+python subset_diffisopheno.py 16
+python subset_diffisopheno.py 18
+python subset_diffisopheno.py 19
+python subset_diffisopheno.py 20
+python subset_diffisopheno.py 21
+python subset_diffisopheno.py 22
+```
+
+Make the sample groups file: 
+
+```{bash,eval=F}
+python LC_samplegroups.py 
+```
+
+##Run leafcutter  
+The leafcutter environment is not in the three-prime-seq environment. Make sure leafcutter is installed and working.  
+```{bash,eval=F}
+sbatch run_leafcutterDiffIso.sh
+```
+
