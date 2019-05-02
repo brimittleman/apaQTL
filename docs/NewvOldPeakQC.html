@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef58797082799d020c419ca0d45c1dc1f5b91d71ftargetblankf587970a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f58797082799d020c419ca0d45c1dc1f5b91d71f" target="_blank">f587970</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef4f5b21553b16c8948f83b538061dab32ad4d09etargetblankf4f5b21a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f4f5b21553b16c8948f83b538061dab32ad4d09e" target="_blank">f4f5b21</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef58797082799d020c419ca0d45c1dc1f5b91d71ftargetblankf587970a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef4f5b21553b16c8948f83b538061dab32ad4d09etargetblankf4f5b21a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -605,6 +605,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f4f5b21553b16c8948f83b538061dab32ad4d09e/analysis/NewvOldPeakQC.Rmd" target="_blank">f4f5b21</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+add number of peak per gene analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/03ea0f7f10cb119174b2b47cfbe388beb5c34178/docs/NewvOldPeakQC.html" target="_blank">03ea0f7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -809,7 +843,7 @@ TotalPeakUSMean=as.data.frame(cbind(totalPeakUs[,1:7],mean=totalPeakUs_CountNum_
 mean(TotalPeakUSMean$mean)</code></pre>
 <pre><code>[1] 0.2378282</code></pre>
 <p>Plot:</p>
-<pre class="r"><code>ggplot(TotalPeakUSMeanClass, aes(y=mean,x=New)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col=&quot;red&quot;) + facet_grid(~Cutoff)</code></pre>
+<pre class="r"><code>ggplot(TotalPeakUSMeanClass, aes(y=mean,x=New)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col=&quot;red&quot;) +  geom_hline(yintercept = .05, col=&quot;Blue&quot;)</code></pre>
 <p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
@@ -835,6 +869,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/03ea0f7f10cb119174b2b47cfbe388beb5c34178/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-6-1.png" target="_blank">03ea0f7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-01
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/ac656aad301db960e1e2b218a7235b295395057d/docs/figure/NewvOldPeakQC.Rmd/unnamed-chunk-6-1.png" target="_blank">ac656aa</a>
 </td>
 <td>
@@ -848,7 +893,13 @@ brimittleman
 </table>
 </div>
 </div>
-<p>This shows me the new peaks are not the peaks that barely passed the cuttoff before. These peaks cover the distribution of usage.</p>
+<pre class="r"><code>TotalPeakUSMeanClass_newonly= TotalPeakUSMeanClass %&gt;% filter(New==&quot;new&quot;)
+
+ggplot(TotalPeakUSMeanClass_newonly, aes(y=mean, x=&quot;&quot;)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col=&quot;red&quot;) +  geom_hline(yintercept = .05, col=&quot;Blue&quot;) + labs(x=&quot;&quot;, y=&quot;Mean Usage&quot;, title=&quot;Mean Usage of New PAS&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(TotalPeakUSMeanClass_newonly, aes(x=mean)) + geom_histogram(bins=50) + geom_vline(xintercept = mean(TotalPeakUSMean$mean), col=&quot;red&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This shows me the new peaks are the peaks that barely passed the cuttoff before.</p>
 <p>write out file with information about new and old peaks</p>
 <pre class="r"><code>Peak_newOld=TotalPeakUSMeanClass %&gt;% select(-mean)
 write.table(Peak_newOld, file=&quot;../data/peaks_5perc/NewVOldPeaks.txt&quot;, col.names = T, row.names = F, quote=F)</code></pre>
@@ -960,12 +1011,72 @@ oldtotusage_anno_new=oldtotusage_anno %&gt;% semi_join(TotalPeakUSMeanClass_newo
 
 oldtotusage_anno_new_mean=rowMeans(oldtotusage_anno_new)
 
-hist(oldtotusage_anno_new_mean, main=&quot;Total Usage of new peaks in old data&quot;, xlab=&quot;old usage means&quot;)</code></pre>
-<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+plot(oldtotusage_anno_new_mean, main=&quot;Total Usage of new peaks in old data&quot;, ylab=&quot;old usage means Percent&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>length(oldtotusage_anno_new_mean)</code></pre>
 <pre><code>[1] 14642</code></pre>
 <p>This shows me that we called 14 thousand of the new peaks in the old set but they were all super low coverage.</p>
 <p>Where are the new peaks, genes with a lot of peaks? or genes with less peaks</p>
+<pre class="r"><code>newPAS5perc_pergene=newPAS5perc %&gt;% separate(ID, into=c(&quot;peaknum&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;),sep=&quot;_&quot;) %&gt;% group_by(gene) %&gt;% summarise(nPeak=n())
+
+ggplot(newPAS5perc_pergene,aes(x=nPeak)) + geom_histogram(bins=100)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>nrow(newPAS5perc_pergene)</code></pre>
+<pre><code>[1] 15456</code></pre>
+<p>Look at which genes the new peaks are in.</p>
+<pre class="r"><code>uniqnew_genes=uniqnew %&gt;% separate(ID, into=c(&quot;peaknum&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;),sep=&quot;_&quot;) %&gt;% group_by(gene) %&gt;% summarise(npeakadded=n())
+
+
+ggplot(uniqnew_genes, aes(x=npeakadded)) + geom_histogram(bins=100) + labs(title=&quot;Number of peaks added per gene\n(added peak in 10827 genes of 15456 genes)&quot;, x=&quot;Number of Peaks&quot;, y=&quot;Number of Genes&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /> Look at these genes compared to distribution for number of peaks in all peaks before filter</p>
+<pre class="r"><code>allPAS=read.table(&quot;../data/assignedPeaks/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF&quot;, header = T, stringsAsFactors = F) %&gt;% separate(GeneID, into = c(&quot;peak&quot;, &quot;Chrom&quot;, &quot;Peakstart&quot;, &quot;PeakEnd&quot;, &quot;strand&quot;, &quot;geneid&quot;),sep=&quot;:&quot;) %&gt;% separate(geneid, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene) %&gt;% summarise(nPeakAll=n()) %&gt;% mutate(AddedPeak=ifelse(gene %in% uniqnew_genes$gene, &quot;yes&quot;, &quot;no&quot;))</code></pre>
+<pre><code>Warning: Expected 2 pieces. Additional pieces discarded in 4 rows [14735,
+14736, 14737, 14738].</code></pre>
+<pre class="r"><code>ggplot(allPAS, aes(x=nPeakAll))+ geom_histogram(bins = 100) + facet_grid(~AddedPeak)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Mean number of peaks for genes where we added, this could help us understand the distribution shift:</p>
+<pre class="r"><code>allPAS_withnewpas=allPAS %&gt;% filter(AddedPeak==&quot;yes&quot;)
+
+summary(allPAS_withnewpas$nPeakAll)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.000   3.000   6.000   9.725  12.000 201.000 </code></pre>
+<p>Look at n peaks per gene in old data and npeaks per gene in new- join and subtract</p>
+<pre class="r"><code>#newPAS5perc_pergene
+
+oldPAS5perc_pergene= oldPAS5perc%&gt;% separate(ID, into=c(&quot;gene&quot;, &quot;peaknum&quot;), sep=&quot;:&quot;) %&gt;% group_by(gene) %&gt;% summarise(nPeakOld=n())
+
+nrow(oldPAS5perc_pergene)</code></pre>
+<pre><code>[1] 15219</code></pre>
+<p>Join:</p>
+<pre class="r"><code>npeakpergenebot=oldPAS5perc_pergene %&gt;% full_join(newPAS5perc_pergene, by=&quot;gene&quot;) %&gt;% replace_na(list(nPeakOld = 0, nPeak = 0)) %&gt;% mutate(NewMinOld=nPeak-nPeakOld)
+
+
+ggplot(npeakpergenebot, aes(x=nPeakOld, y=nPeak)) + geom_point() + geom_smooth(method=&quot;lm&quot;) + annotate(&quot;text&quot;, label=&quot;r2=0.4447&quot;, x=12, y=2) + labs(title=&quot;Number of Peaks in old vs new data&quot;,y=&quot;Number of peaks new data&quot;, x=&quot;Number of peaks old data&quot;)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /> Correlation between number of peaks before and after:</p>
+<pre class="r"><code>summary(lm(npeakpergenebot$nPeak~npeakpergenebot$nPeakOld))</code></pre>
+<pre><code>
+Call:
+lm(formula = npeakpergenebot$nPeak ~ npeakpergenebot$nPeakOld)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.1193  -1.6746  -1.3302   0.9475  17.3254 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               0.98570    0.04322    22.8   &lt;2e-16 ***
+npeakpergenebot$nPeakOld  1.34447    0.01201   112.0   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3.185 on 15650 degrees of freedom
+Multiple R-squared:  0.4448,    Adjusted R-squared:  0.4447 
+F-statistic: 1.254e+04 on 1 and 15650 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>summary(npeakpergenebot$NewMinOld)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -6.000   0.000   1.000   1.988   3.000  20.000 </code></pre>
+<pre class="r"><code>ggplot(npeakpergenebot, aes(x=NewMinOld)) + geom_histogram(bins=100)</code></pre>
+<p><img src="figure/NewvOldPeakQC.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
