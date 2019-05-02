@@ -356,6 +356,7 @@ totalPeak_inNew_meltGroup=totalPeak_inNew_melt %>% group_by(New15,peak) %>% summ
 
 ggplot(totalPeak_inNew_meltGroup, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = "none") + labs(x="Individuals in New batch", y="Mean Usage in Group", title="Mean usage for new PAS in 39 ind v new 15")
 
+
 ```
 
 ```{r}
@@ -363,3 +364,72 @@ ggplot(totalPeak_inNew_meltGroup, aes(x=meanUsage, group=New15, fill=New15))+geo
 
 ```
 
+```{r}
+totalPeak_inNew_meltGroup_spre=totalPeak_inNew_meltGroup %>% spread(New15,meanUsage)
+
+
+ggplot(totalPeak_inNew_meltGroup_spre,aes(x=No, y=Yes)) + geom_point() + geom_density_2d() + geom_smooth(method = "lm")+annotate("text", label="New=old+0.053680" ,x=.8,y=0) + labs(x="Original 39 Mean", y="Original 15 Mean", title="Mean Usage in New data by Ind set")
+
+summary(lm(data=totalPeak_inNew_meltGroup_spre, Yes~No))
+```
+
+
+
+###Nuclear
+```{r}
+
+nuclearPeakUs=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc", header = T, stringsAsFactors = F) %>% separate(chrom, sep = ":", into = c("chr", "start", "end", "id")) %>% separate(id, sep="_", into=c("gene", "loc", "strand", "peak"))
+
+
+ind=colnames(nuclearPeakUs)[8:dim(nuclearPeakUs)[2]]
+nuclearPeakUs_CountNum=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.CountsOnlyNumeric", col.names = ind)
+
+
+#numeric with anno
+nuclearPeak=as.data.frame(cbind(nuclearPeakUs[,1:7], nuclearPeakUs_CountNum))
+
+
+
+nuclearPeak_inNew=nuclearPeak %>% filter(peak %in% uniqnewPasnum$peak)
+
+nuclearPeak_inNew_melt=melt(nuclearPeak_inNew,id.vars=c("chr", "start","end", "gene","loc", "peak","strand"),value.name = "Usage" ,variable.name = "Ind") %>% mutate(New15=ifelse(Ind %in% batch4$line, "Yes", "No"))
+
+```
+```{r}
+nuclearPeak_inNew_meltGroup=nuclearPeak_inNew_melt %>% group_by(New15,peak) %>% summarise(meanUsage=mean(Usage))
+
+ggplot(nuclearPeak_inNew_meltGroup, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = "none") + labs(x="Individuals in New batch", y="Mean Usage in Group", title="Nuclear Mean usage for new PAS in 39 ind v new 15")
+
+```
+
+
+```{r}
+ggplot(nuclearPeak_inNew_meltGroup, aes(x=meanUsage, group=New15, fill=New15))+geom_density(alpha=.3)  + labs( x="Mean Usage in Group", title="Nuclear Mean usage for new PAS in 39 ind v new 15")+ scale_fill_discrete(name = "Ind in new 15")
+```
+ 
+##Seperate the usage for old data by ind set  
+
+```{r}
+oldtotusage_annoM=melt(oldtotusage_anno, id.vars=c("chr","start","end","peakID"), value.name = "Usage", variable.name = "Ind") %>% mutate(New15=ifelse(Ind %in% batch4$line, "Yes", "No"))
+
+oldtotusage_annoM_new=oldtotusage_annoM %>% semi_join(TotalPeakUSMeanClass_newonly, by=c("chr","start", "end")) %>%  group_by(New15,peakID) %>% summarise(meanUsage=mean(Usage))
+
+
+ggplot(oldtotusage_annoM_new, aes(x=New15, y=meanUsage, fill=New15))+geom_boxplot(width=.5) + theme(legend.position = "none") + labs(x="Individuals in New batch", y="Mean Usage in Group", title="Total mean usage for new PAS in old data")
+
+
+```
+This shows the peaks had super low usage in both sets of individuals. 
+
+spread
+
+```{r}
+oldtotusage_annoM_new_spread=oldtotusage_annoM_new %>% spread(New15,meanUsage)
+
+
+ggplot(oldtotusage_annoM_new_spread, aes(x=No, y=Yes))+ geom_point() +geom_density_2d() + geom_smooth(method = "lm") + annotate("text", label="New=.7Old+.009" ,x=.25,y=.75) + labs(x="Original 39 Mean", y="Original 15 Mean", title="Mean Usage in old data by Ind set")
+
+
+summary(lm(data=oldtotusage_annoM_new_spread, Yes~No))
+```
+Yes=.7(No)
