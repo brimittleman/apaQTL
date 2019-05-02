@@ -66,11 +66,23 @@ mean(TotalPeakUSMean$mean)
 Plot:
 
 ```{r}
-ggplot(TotalPeakUSMeanClass, aes(y=mean,x=New)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col="red") + facet_grid(~Cutoff)
+ggplot(TotalPeakUSMeanClass, aes(y=mean,x=New)) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col="red") +  geom_hline(yintercept = .05, col="Blue")
 
 ```
 
-This shows me the new peaks are not the peaks that barely passed the cuttoff before. These peaks cover the distribution of usage.  
+
+```{r}
+TotalPeakUSMeanClass_newonly= TotalPeakUSMeanClass %>% filter(New=="new")
+
+ggplot(TotalPeakUSMeanClass_newonly, aes(y=mean, x="")) + geom_violin() + geom_hline(yintercept = mean(TotalPeakUSMean$mean), col="red") +  geom_hline(yintercept = .05, col="Blue") + labs(x="", y="Mean Usage", title="Mean Usage of New PAS")
+
+
+```
+```{r}
+ggplot(TotalPeakUSMeanClass_newonly, aes(x=mean)) + geom_histogram(bins=50) + geom_vline(xintercept = mean(TotalPeakUSMean$mean), col="red")
+```
+
+This shows me the new peaks are the peaks that barely passed the cuttoff before.  
 
 write out file with information about new and old peaks  
 ```{r}
@@ -242,7 +254,7 @@ oldtotusage_anno_new=oldtotusage_anno %>% semi_join(TotalPeakUSMeanClass_newonly
 
 oldtotusage_anno_new_mean=rowMeans(oldtotusage_anno_new)
 
-hist(oldtotusage_anno_new_mean, main="Total Usage of new peaks in old data", xlab="old usage means")
+plot(oldtotusage_anno_new_mean, main="Total Usage of new peaks in old data", ylab="old usage means Percent")
 
 length(oldtotusage_anno_new_mean)
 ```
@@ -252,3 +264,73 @@ This shows me that we called 14 thousand of the new peaks in the old set but the
 
 
 Where are the new peaks, genes with a lot of peaks? or genes with less peaks  
+
+
+
+```{r}
+newPAS5perc_pergene=newPAS5perc %>% separate(ID, into=c("peaknum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>% group_by(gene) %>% summarise(nPeak=n())
+
+ggplot(newPAS5perc_pergene,aes(x=nPeak)) + geom_histogram(bins=100)
+
+
+nrow(newPAS5perc_pergene)
+```
+Look at which genes the new peaks are in.
+
+```{r}
+uniqnew_genes=uniqnew %>% separate(ID, into=c("peaknum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>% group_by(gene) %>% summarise(npeakadded=n())
+
+
+ggplot(uniqnew_genes, aes(x=npeakadded)) + geom_histogram(bins=100) + labs(title="Number of peaks added per gene\n(added peak in 10827 genes of 15456 genes)", x="Number of Peaks", y="Number of Genes")
+```
+Look at these genes compared to distribution for number of peaks in all peaks before filter
+
+```{r}
+allPAS=read.table("../data/assignedPeaks/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF", header = T, stringsAsFactors = F) %>% separate(GeneID, into = c("peak", "Chrom", "Peakstart", "PeakEnd", "strand", "geneid"),sep=":") %>% separate(geneid, into=c("gene", "loc"), sep="_") %>% group_by(gene) %>% summarise(nPeakAll=n()) %>% mutate(AddedPeak=ifelse(gene %in% uniqnew_genes$gene, "yes", "no"))
+
+
+ggplot(allPAS, aes(x=nPeakAll))+ geom_histogram(bins = 100) + facet_grid(~AddedPeak)
+```
+
+Mean number of peaks for genes where we added, this could help us understand the distribution shift:  
+
+```{r}
+allPAS_withnewpas=allPAS %>% filter(AddedPeak=="yes")
+
+summary(allPAS_withnewpas$nPeakAll)
+
+```
+
+
+
+
+Look at n peaks per gene in old data and npeaks per gene in new- join and subtract
+```{r}
+#newPAS5perc_pergene
+
+oldPAS5perc_pergene= oldPAS5perc%>% separate(ID, into=c("gene", "peaknum"), sep=":") %>% group_by(gene) %>% summarise(nPeakOld=n())
+
+nrow(oldPAS5perc_pergene)
+```
+
+Join: 
+
+```{r}
+npeakpergenebot=oldPAS5perc_pergene %>% full_join(newPAS5perc_pergene, by="gene") %>% replace_na(list(nPeakOld = 0, nPeak = 0)) %>% mutate(NewMinOld=nPeak-nPeakOld)
+
+
+ggplot(npeakpergenebot, aes(x=nPeakOld, y=nPeak)) + geom_point() + geom_smooth(method="lm") + annotate("text", label="r2=0.4447", x=12, y=2) + labs(title="Number of Peaks in old vs new data",y="Number of peaks new data", x="Number of peaks old data")
+```
+Correlation between number of peaks before and after:
+
+```{r}
+summary(lm(npeakpergenebot$nPeak~npeakpergenebot$nPeakOld))
+
+```
+```{r}
+summary(npeakpergenebot$NewMinOld)
+
+ggplot(npeakpergenebot, aes(x=NewMinOld)) + geom_histogram(bins=100)
+```
+
+
