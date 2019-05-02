@@ -1,0 +1,29 @@
+---
+title: "Recompute usage with old data"
+author: "Briana Mittleman"
+date: "5/2/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will compute the PAS usage for the new phenotypes in the old data. To make the info comparable and I will rerun feature counts with the filtered phenotypes for both the old and the new data.  
+
+Convert the filtered data to an SAF  
+
+```{bash,eval=F}
+python finalPASbed2SAF.py ../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc ../data/CompareOldandNew/APApeak_5perc_Nuclear.SAF
+
+python finalPASbed2SAF.py ../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc ../data/CompareOldandNew/APApeak_5perc_Total.SAF
+```
+
+Run feature counts:  
+
+
+```{bash,eval=F}
+sbatch FC_newPeaks_olddata.sh 
+
+```
+

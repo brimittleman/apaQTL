@@ -36,6 +36,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Understand new PAS](NewvOldPeakQC.html)  
 
+* [Compare new and old data](recomputeusageold.html)
+
 ##apaQTL
 * [Call apaQTLs in both fractions](mapapaQTL.html)
 
