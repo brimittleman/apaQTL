@@ -1,0 +1,34 @@
+---
+title: "Reads mapping to 3' UTR"
+author: "Briana Mittleman"
+date: "5/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+To help asses quality I want to look at the number and percent of reads mapping to the 3' UTR. We expect this to be where most reads fall and this should be reasonanably similar between libraries. I will do this for the new set and the old set to see the difference between the old batch 4 and new batch 4. 
+
+```{bash,eval=F}
+mkdir ../data/Reads2UTR
+
+mkdir ../data/Reads2UTR/Total
+mkdir ../data/Reads2UTR/Nuclear
+```
+
+The 3' UTR annotations are in /project2/gilad/briana/genome_anotation_data/RefSeq_annotations and were downloaded using the ucsc table browser. I will convert the 3' UTR annotation to an SAF in order to run feature counts. The summary of the feature counts information will provide me the information I need.  
+
+```{bash,eval=F}
+python utrdms2saf.py
+```
+
+
+Run feature counts: 
+
+```{bash,eval=F}
+sbatch FC_UTR.sh
+```
+
+

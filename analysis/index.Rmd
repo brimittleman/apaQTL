@@ -38,10 +38,15 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Compare new and old data](recomputeusageold.html)
 
-##apaQTL
-* [Call apaQTLs in both fractions](mapapaQTL.html)
+* [Look at coverage in 3' UTR](reads2UTR.html)  
 
-* [Check for batch effects in new QTLs](newQTLheatmap.html)
+
+##apaQTL  
+
+
+* [Call apaQTLs in both fractions](mapapaQTL.html)  
+
+* [Check for batch effects in new QTLs](newQTLheatmap.html)  
 
 
 ##Differential Isoform Analysis  
