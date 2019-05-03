@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-02
+<strong>Last updated:</strong> 2019-05-03
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2067946979430b43c67b42a864f2976619aa69f4targetblank2067946a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2067946979430b43c67b42a864f2976619aa69f4" target="_blank">2067946</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0c16f6907cb2268bcdd161858745ef8b87465851targetblank0c16f69a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/0c16f6907cb2268bcdd161858745ef8b87465851" target="_blank">0c16f69</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2067946979430b43c67b42a864f2976619aa69f4targetblank2067946a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0c16f6907cb2268bcdd161858745ef8b87465851targetblank0c16f69a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -637,6 +637,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/0c16f6907cb2268bcdd161858745ef8b87465851/analysis/recomputeusageold.Rmd" target="_blank">0c16f69</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-03
+</td>
+<td>
+add result plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/53eeea4cef34210e7926ae287aecef8c382e7a48/docs/recomputeusageold.html" target="_blank">53eeea4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/2067946979430b43c67b42a864f2976619aa69f4/analysis/recomputeusageold.Rmd" target="_blank">2067946</a>
 </td>
 <td>
@@ -656,6 +690,30 @@ add old vs new data usage analysis
 </div>
 </div>
 </div>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(reshape2)</code></pre>
+<pre><code>
+Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    smiths</code></pre>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.3.0
+Run ?workflowr for help getting started</code></pre>
+<pre class="r"><code>library(cowplot)</code></pre>
+<pre><code>
+Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    ggsave</code></pre>
 <p>In this analysis I will compute the PAS usage for the new phenotypes in the old data. To make the info comparable and I will rerun feature counts with the filtered phenotypes for both the old and the new data.</p>
 <p>Convert the filtered data to an SAF</p>
 <pre class="bash"><code>python finalPASbed2SAF.py ../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc ../data/CompareOldandNew/APApeak_5perc_Nuclear.SAF
@@ -664,6 +722,120 @@ python finalPASbed2SAF.py ../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5p
 <p>Run feature counts:</p>
 <pre class="bash"><code>sbatch FC_newPeaks_olddata.sh 
 </code></pre>
+<p>Convert to phenotypes:</p>
+<p>fix headers on FC</p>
+<pre class="bash"><code>python fixFChead.py ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fc ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.fc 
+
+python fixFChead_bothfrac.py ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fc ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.fc
+
+python fixFChead.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fc ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.fc 
+
+python fixFChead_bothfrac.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fc ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.fc
+</code></pre>
+<pre class="bash"><code>python makePheno.py ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.fc ../data/peakCoverage/file_id_mapping_Total_Transcript.txt ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.fc
+python makePheno.py ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.fc ../data/peakCoverage/file_id_mapping_Total_Transcript.txt ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.fc
+
+python makePheno.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.fc  ../data/peakCoverage/file_id_mapping_Nuclear_Transcript.txt ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.fc 
+python makePheno.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.fc ../data/peakCoverage/file_id_mapping_Nuclear_Transcript.txt ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.fc
+</code></pre>
+<p>COunts only:</p>
+<pre class="bash"><code>Rscript pheno2countonly.R -I ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.fc -O ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnly
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.fc -O ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnly
+
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.fc -O ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnly
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.fc -O ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnly
+</code></pre>
+<p>Convert to numeric</p>
+<pre class="bash"><code>python convertNumeric.py ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnlyNumeric
+
+python convertNumeric.py ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnlyNumeric
+
+
+python convertNumeric.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnlyNumeric
+
+python convertNumeric.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnlyNumeric</code></pre>
+<p>Total New data</p>
+<pre class="r"><code>totalPeakUs_new=read.table(&quot;../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.fc&quot;, header = T, stringsAsFactors = F) %&gt;% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+ind=as.data.frame(colnames(totalPeakUs_new)[2:dim(totalPeakUs_new)[2]])
+colnames(ind)=c(&quot;x&quot;)
+ind=ind %&gt;% separate(x,into=c(&quot;indiv&quot;, &quot;fraction&quot;), sep=&quot;_&quot;) %&gt;%mutate(Individual=paste(&quot;NA&quot;,substring(indiv,2, 6), sep=&quot;&quot;))
+
+
+totalPeakUs_new_CountNum=read.table(&quot;../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnlyNumeric&quot;, col.names = ind$Individual)
+
+#numeric with anno
+totalPeakNew=as.data.frame(cbind(ID=totalPeakUs_new[,1], totalPeakUs_new_CountNum))</code></pre>
+<p>Total Old data</p>
+<pre class="r"><code>totalPeakUs_old=read.table(&quot;../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.fc&quot;, header = T, stringsAsFactors = F) %&gt;% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+totalPeakUs_old_CountNum=read.table(&quot;../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnlyNumeric&quot;, col.names = ind$Individual)
+
+#numeric with anno
+totalPeakold=as.data.frame(cbind(ID=totalPeakUs_old[,1], totalPeakUs_old_CountNum))</code></pre>
+<p>Seperate by batch</p>
+<pre class="r"><code>batch4=read.table(&quot;../data/MetaDataSequencing.txt&quot;, header=T,stringsAsFactors = F)%&gt;% filter(fraction==&quot;total&quot;) %&gt;%  select(line, batch) %&gt;% filter(batch == 4)
+newInd=batch4$line</code></pre>
+<pre class="r"><code>totalPeakoldM=melt(totalPeakold, id.vars=c(&quot;ID&quot;), value.name = &quot;Usage&quot;, variable.name = &quot;Individual&quot;) %&gt;% mutate(New15=ifelse(Individual %in%newInd, &quot;Yes&quot;, &quot;No&quot;)) %&gt;%  group_by(New15,ID) %&gt;% summarise(meanUsageOld=mean(Usage)) %&gt;% spread(New15,meanUsageOld)
+
+totalPeaknewM=melt(totalPeakNew, id.vars=c(&quot;ID&quot;), value.name = &quot;Usage&quot;, variable.name = &quot;Individual&quot;) %&gt;% mutate(New15=ifelse(Individual %in%newInd, &quot;Yes&quot;, &quot;No&quot;)) %&gt;%  group_by(New15,ID) %&gt;% summarise(meanUsageNew=mean(Usage)) %&gt;% spread(New15,meanUsageNew)</code></pre>
+<pre class="r"><code>totalold=ggplot(totalPeakoldM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;Total Usage Old data&quot;)
+totalnew=ggplot(totalPeaknewM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;Total Usage New data&quot;)</code></pre>
+<pre class="r"><code>plot_grid(totalold,totalnew)</code></pre>
+<p><img src="figure/recomputeusageold.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Nuclear New data</p>
+<pre class="r"><code>nuclearPeakUs_new=read.table(&quot;../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.fc&quot;, header = T, stringsAsFactors = F) %&gt;% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+
+nuclearPeakUs_new_CountNum=read.table(&quot;../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnlyNumeric&quot;, col.names = ind$Individual)
+
+#numeric with anno
+nuclearPeakNew=as.data.frame(cbind(ID=nuclearPeakUs_new[,1],nuclearPeakUs_new_CountNum))</code></pre>
+<p>Nuclear Old data</p>
+<pre class="r"><code>nuclearPeakUs_old=read.table(&quot;../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.fc&quot;, header = T, stringsAsFactors = F) %&gt;% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+nuclearPeakUs_old_CountNum=read.table(&quot;../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnlyNumeric&quot;, col.names = ind$Individual)
+
+#numeric with anno
+nuclearPeakold=as.data.frame(cbind(ID=nuclearPeakUs_old[,1], nuclearPeakUs_old_CountNum))</code></pre>
+<p>Seperate by batch</p>
+<pre class="r"><code>nuclearPeakoldM=melt(nuclearPeakold, id.vars=c(&quot;ID&quot;), value.name = &quot;Usage&quot;, variable.name = &quot;Individual&quot;) %&gt;% mutate(New15=ifelse(Individual %in%newInd, &quot;Yes&quot;, &quot;No&quot;)) %&gt;%  group_by(New15,ID) %&gt;% summarise(meanUsageOld=mean(Usage)) %&gt;% spread(New15,meanUsageOld)
+
+nuclearPeaknewM=melt(nuclearPeakNew, id.vars=c(&quot;ID&quot;), value.name = &quot;Usage&quot;, variable.name = &quot;Individual&quot;) %&gt;% mutate(New15=ifelse(Individual %in%newInd, &quot;Yes&quot;, &quot;No&quot;)) %&gt;%  group_by(New15,ID) %&gt;% summarise(meanUsageNew=mean(Usage)) %&gt;% spread(New15,meanUsageNew)</code></pre>
+<pre class="r"><code>nuclearold=ggplot(nuclearPeakoldM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;Nuclear Usage Old data&quot;)
+nuclearnew=ggplot(nuclearPeaknewM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;Nuclear Usage New data&quot;)</code></pre>
+<pre class="r"><code>plot_grid(nuclearold,nuclearnew)</code></pre>
+<p><img src="figure/recomputeusageold.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Subset to new peaks:</p>
+<pre class="r"><code>NewPeak=read.table( file=&quot;../data/peaks_5perc/NewVOldPeaks.txt&quot;, header = T) %&gt;% filter(New==&quot;new&quot;)</code></pre>
+<p>Subset total:</p>
+<pre class="r"><code>totalPeakoldM_new=totalPeakoldM %&gt;% separate(ID, into = c(&quot;peak&quot;, &quot;chr&quot;, &quot;Start&quot;, &quot;end&quot;,&quot;strand&quot;,&quot;id&quot;),sep=&quot;:&quot;) %&gt;% filter(peak %in% NewPeak$peak)
+
+totalPeaknewM_new=totalPeaknewM %&gt;% separate(ID, into = c(&quot;peak&quot;, &quot;chr&quot;, &quot;Start&quot;, &quot;end&quot;,&quot;strand&quot;,&quot;id&quot;),sep=&quot;:&quot;) %&gt;% filter(peak %in% NewPeak$peak)</code></pre>
+<p>Plot:</p>
+<pre class="r"><code>totaloldnewpeak=ggplot(totalPeakoldM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;Total Usage Old data \n New Peaks &quot;)
+totalnewnewpeak=ggplot(totalPeaknewM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;Total Usage New data\n New Peaks &quot;)
+
+plot_grid(totaloldnewpeak,totalnewnewpeak)</code></pre>
+<p><img src="figure/recomputeusageold.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Subset total:</p>
+<pre class="r"><code>nuclearPeakoldM_new=nuclearPeakoldM %&gt;% separate(ID, into = c(&quot;peak&quot;, &quot;chr&quot;, &quot;Start&quot;, &quot;end&quot;,&quot;strand&quot;,&quot;id&quot;),sep=&quot;:&quot;) %&gt;% filter(peak %in% NewPeak$peak)
+
+nuclearPeaknewM_new=nuclearPeaknewM %&gt;% separate(ID, into = c(&quot;peak&quot;, &quot;chr&quot;, &quot;Start&quot;, &quot;end&quot;,&quot;strand&quot;,&quot;id&quot;),sep=&quot;:&quot;) %&gt;% filter(peak %in% NewPeak$peak)</code></pre>
+<p>Plot:</p>
+<pre class="r"><code>nuclearoldnewpeak=ggplot(nuclearPeakoldM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;nuclear Usage Old data \n New Peaks &quot;)
+nuclearnewnewpeak=ggplot(nuclearPeaknewM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x=&quot;39 ind&quot;, y=&quot;15 ind&quot;, title=&quot;nuclear Usage New data\n New Peaks &quot;)
+
+plot_grid(nuclearoldnewpeak,nuclearnewnewpeak)</code></pre>
+<p><img src="figure/recomputeusageold.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -690,12 +862,25 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] cowplot_0.9.4   workflowr_1.3.0 reshape2_1.4.3  forcats_0.3.0  
+ [5] stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1    
+ [9] tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.3.0 Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2
- [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.12  
- [9] stringi_1.2.4   fs_1.2.6        whisker_0.3-2   rmarkdown_1.10 
-[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
-[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+ [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
+ [5] git2r_0.23.0     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
+ [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
+[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
+[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
+[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
+[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
+[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
+[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
+[37] whisker_0.3-2    MASS_7.3-51.1    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
+[49] broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 
