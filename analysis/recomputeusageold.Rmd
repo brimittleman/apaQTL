@@ -9,6 +9,14 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(tidyverse)
+library(reshape2)
+library(workflowr)
+library(cowplot)
+```
+
 In this analysis I will compute the PAS usage for the new phenotypes in the old data. To make the info comparable and I will rerun feature counts with the filtered phenotypes for both the old and the new data.  
 
 Convert the filtered data to an SAF  
@@ -27,3 +35,204 @@ sbatch FC_newPeaks_olddata.sh
 
 ```
 
+
+Convert to phenotypes: 
+
+fix headers on FC 
+```{bash,eval=F}
+python fixFChead.py ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fc ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.fc 
+
+python fixFChead_bothfrac.py ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fc ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.fc
+
+python fixFChead.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fc ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.fc 
+
+python fixFChead_bothfrac.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fc ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.fc
+
+```
+
+
+```{bash,eval=F}
+python makePheno.py ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.fc ../data/peakCoverage/file_id_mapping_Total_Transcript.txt ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.fc
+python makePheno.py ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.fc ../data/peakCoverage/file_id_mapping_Total_Transcript.txt ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.fc
+
+python makePheno.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.fc  ../data/peakCoverage/file_id_mapping_Nuclear_Transcript.txt ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.fc 
+python makePheno.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.fc ../data/peakCoverage/file_id_mapping_Nuclear_Transcript.txt ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.fc
+
+```
+
+COunts only: 
+
+```{bash,eval=F}
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.fc -O ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnly
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.fc -O ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnly
+
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.fc -O ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnly
+Rscript pheno2countonly.R -I ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.fc -O ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnly
+
+
+```
+
+
+
+Convert to numeric 
+
+```{bash,eval=F}
+python convertNumeric.py ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnlyNumeric
+
+python convertNumeric.py ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnlyNumeric
+
+
+python convertNumeric.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnlyNumeric
+
+python convertNumeric.py ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnly ../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnlyNumeric
+```
+
+
+Total New data 
+```{r}
+
+totalPeakUs_new=read.table("../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.fc", header = T, stringsAsFactors = F) %>% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+ind=as.data.frame(colnames(totalPeakUs_new)[2:dim(totalPeakUs_new)[2]])
+colnames(ind)=c("x")
+ind=ind %>% separate(x,into=c("indiv", "fraction"), sep="_") %>%mutate(Individual=paste("NA",substring(indiv,2, 6), sep=""))
+
+
+totalPeakUs_new_CountNum=read.table("../data/CompareOldandNew/Total/New5percPeaks_Total_newdata.fixed.pheno.CountsOnlyNumeric", col.names = ind$Individual)
+
+#numeric with anno
+totalPeakNew=as.data.frame(cbind(ID=totalPeakUs_new[,1], totalPeakUs_new_CountNum))
+```
+
+
+Total Old data 
+
+```{r}
+
+totalPeakUs_old=read.table("../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.fc", header = T, stringsAsFactors = F) %>% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+totalPeakUs_old_CountNum=read.table("../data/CompareOldandNew/Total/New5percPeaks_Total_olddata.fixed.pheno.CountsOnlyNumeric", col.names = ind$Individual)
+
+#numeric with anno
+totalPeakold=as.data.frame(cbind(ID=totalPeakUs_old[,1], totalPeakUs_old_CountNum))
+```
+Seperate by batch 
+
+```{r}
+batch4=read.table("../data/MetaDataSequencing.txt", header=T,stringsAsFactors = F)%>% filter(fraction=="total") %>%  select(line, batch) %>% filter(batch == 4)
+newInd=batch4$line
+```
+
+```{r}
+totalPeakoldM=melt(totalPeakold, id.vars=c("ID"), value.name = "Usage", variable.name = "Individual") %>% mutate(New15=ifelse(Individual %in%newInd, "Yes", "No")) %>%  group_by(New15,ID) %>% summarise(meanUsageOld=mean(Usage)) %>% spread(New15,meanUsageOld)
+
+totalPeaknewM=melt(totalPeakNew, id.vars=c("ID"), value.name = "Usage", variable.name = "Individual") %>% mutate(New15=ifelse(Individual %in%newInd, "Yes", "No")) %>%  group_by(New15,ID) %>% summarise(meanUsageNew=mean(Usage)) %>% spread(New15,meanUsageNew)
+
+
+
+
+```
+
+```{r}
+totalold=ggplot(totalPeakoldM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage Old data")
+totalnew=ggplot(totalPeaknewM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage New data")
+```
+
+```{r}
+plot_grid(totalold,totalnew)
+```
+
+
+Nuclear New data 
+```{r}
+
+nuclearPeakUs_new=read.table("../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.fc", header = T, stringsAsFactors = F) %>% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+
+nuclearPeakUs_new_CountNum=read.table("../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_newdata.fixed.pheno.CountsOnlyNumeric", col.names = ind$Individual)
+
+#numeric with anno
+nuclearPeakNew=as.data.frame(cbind(ID=nuclearPeakUs_new[,1],nuclearPeakUs_new_CountNum))
+```
+
+
+Nuclear Old data 
+
+```{r}
+
+nuclearPeakUs_old=read.table("../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.fc", header = T, stringsAsFactors = F) %>% select(-Chr,-Start,-End,-Strand,-Length)
+
+
+
+nuclearPeakUs_old_CountNum=read.table("../data/CompareOldandNew/Nuclear/New5percPeaks_Nuclear_olddata.fixed.pheno.CountsOnlyNumeric", col.names = ind$Individual)
+
+#numeric with anno
+nuclearPeakold=as.data.frame(cbind(ID=nuclearPeakUs_old[,1], nuclearPeakUs_old_CountNum))
+```
+Seperate by batch 
+
+
+```{r}
+nuclearPeakoldM=melt(nuclearPeakold, id.vars=c("ID"), value.name = "Usage", variable.name = "Individual") %>% mutate(New15=ifelse(Individual %in%newInd, "Yes", "No")) %>%  group_by(New15,ID) %>% summarise(meanUsageOld=mean(Usage)) %>% spread(New15,meanUsageOld)
+
+nuclearPeaknewM=melt(nuclearPeakNew, id.vars=c("ID"), value.name = "Usage", variable.name = "Individual") %>% mutate(New15=ifelse(Individual %in%newInd, "Yes", "No")) %>%  group_by(New15,ID) %>% summarise(meanUsageNew=mean(Usage)) %>% spread(New15,meanUsageNew)
+
+
+
+
+```
+
+```{r}
+nuclearold=ggplot(nuclearPeakoldM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Nuclear Usage Old data")
+nuclearnew=ggplot(nuclearPeaknewM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Nuclear Usage New data")
+```
+
+```{r}
+plot_grid(nuclearold,nuclearnew)
+```
+
+
+Subset to new peaks:  
+
+```{r}
+NewPeak=read.table( file="../data/peaks_5perc/NewVOldPeaks.txt", header = T) %>% filter(New=="new")
+```
+Subset total:  
+
+```{r}
+totalPeakoldM_new=totalPeakoldM %>% separate(ID, into = c("peak", "chr", "Start", "end","strand","id"),sep=":") %>% filter(peak %in% NewPeak$peak)
+
+totalPeaknewM_new=totalPeaknewM %>% separate(ID, into = c("peak", "chr", "Start", "end","strand","id"),sep=":") %>% filter(peak %in% NewPeak$peak)
+```
+
+Plot:
+
+```{r}
+totaloldnewpeak=ggplot(totalPeakoldM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage Old data \n New Peaks ")
+totalnewnewpeak=ggplot(totalPeaknewM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage New data\n New Peaks ")
+
+plot_grid(totaloldnewpeak,totalnewnewpeak)
+```
+
+Subset total:  
+
+```{r}
+nuclearPeakoldM_new=nuclearPeakoldM %>% separate(ID, into = c("peak", "chr", "Start", "end","strand","id"),sep=":") %>% filter(peak %in% NewPeak$peak)
+
+nuclearPeaknewM_new=nuclearPeaknewM %>% separate(ID, into = c("peak", "chr", "Start", "end","strand","id"),sep=":") %>% filter(peak %in% NewPeak$peak)
+```
+
+Plot:
+
+```{r}
+nuclearoldnewpeak=ggplot(nuclearPeakoldM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="nuclear Usage Old data \n New Peaks ")
+nuclearnewnewpeak=ggplot(nuclearPeaknewM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="nuclear Usage New data\n New Peaks ")
+
+plot_grid(nuclearoldnewpeak,nuclearnewnewpeak)
+```
