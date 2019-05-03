@@ -138,8 +138,8 @@ totalPeaknewM=melt(totalPeakNew, id.vars=c("ID"), value.name = "Usage", variable
 ```
 
 ```{r}
-totalold=ggplot(totalPeakoldM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage Old data")
-totalnew=ggplot(totalPeaknewM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage New data")
+totalold=ggplot(totalPeakoldM,aes(x=No,y=Yes)) + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage Old data")
+totalnew=ggplot(totalPeaknewM,aes(x=No,y=Yes)) + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage New data")
 ```
 
 ```{r}
@@ -189,8 +189,8 @@ nuclearPeaknewM=melt(nuclearPeakNew, id.vars=c("ID"), value.name = "Usage", vari
 ```
 
 ```{r}
-nuclearold=ggplot(nuclearPeakoldM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Nuclear Usage Old data")
-nuclearnew=ggplot(nuclearPeaknewM,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Nuclear Usage New data")
+nuclearold=ggplot(nuclearPeakoldM,aes(x=No,y=Yes)) + geom_density2d() + labs(x="39 ind", y="15 ind", title="Nuclear Usage Old data")
+nuclearnew=ggplot(nuclearPeaknewM,aes(x=No,y=Yes)) +  geom_density2d() + labs(x="39 ind", y="15 ind", title="Nuclear Usage New data")
 ```
 
 ```{r}
@@ -214,8 +214,8 @@ totalPeaknewM_new=totalPeaknewM %>% separate(ID, into = c("peak", "chr", "Start"
 Plot:
 
 ```{r}
-totaloldnewpeak=ggplot(totalPeakoldM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage Old data \n New Peaks ")
-totalnewnewpeak=ggplot(totalPeaknewM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage New data\n New Peaks ")
+totaloldnewpeak=ggplot(totalPeakoldM_new,aes(x=No,y=Yes))  + geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage Old data \n New Peaks ")
+totalnewnewpeak=ggplot(totalPeaknewM_new,aes(x=No,y=Yes))+ geom_density2d() + labs(x="39 ind", y="15 ind", title="Total Usage New data\n New Peaks ")
 
 plot_grid(totaloldnewpeak,totalnewnewpeak)
 ```
@@ -231,8 +231,8 @@ nuclearPeaknewM_new=nuclearPeaknewM %>% separate(ID, into = c("peak", "chr", "St
 Plot:
 
 ```{r}
-nuclearoldnewpeak=ggplot(nuclearPeakoldM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="nuclear Usage Old data \n New Peaks ")
-nuclearnewnewpeak=ggplot(nuclearPeaknewM_new,aes(x=No,y=Yes)) + geom_point() + geom_density2d() + labs(x="39 ind", y="15 ind", title="nuclear Usage New data\n New Peaks ")
+nuclearoldnewpeak=ggplot(nuclearPeakoldM_new,aes(x=No,y=Yes)) +  geom_density2d() + labs(x="39 ind", y="15 ind", title="nuclear Usage Old data \n New Peaks ")
+nuclearnewnewpeak=ggplot(nuclearPeaknewM_new,aes(x=No,y=Yes)) + geom_density2d() + labs(x="39 ind", y="15 ind", title="nuclear Usage New data\n New Peaks ")
 
 plot_grid(nuclearoldnewpeak,nuclearnewnewpeak)
 ```
