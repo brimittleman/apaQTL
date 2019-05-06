@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-02
+<strong>Last updated:</strong> 2019-05-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree24c2cebc7e4b061243ebb5b04abce358a1035334targetblank24c2ceba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/24c2cebc7e4b061243ebb5b04abce358a1035334" target="_blank">24c2ceb</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1d8a0a3e88aa036b1b965a6ca54efe058c2d2a1ftargetblank1d8a0a3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1d8a0a3e88aa036b1b965a6ca54efe058c2d2a1f" target="_blank">1d8a0a3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree24c2cebc7e4b061243ebb5b04abce358a1035334targetblank24c2ceba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1d8a0a3e88aa036b1b965a6ca54efe058c2d2a1ftargetblank1d8a0a3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -445,8 +445,8 @@ Untracked files:
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
-    Untracked:  analysis/recomputeusageold.Rmd
     Untracked:  apaQTL.Rproj
+    Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._SnakefilePAS
@@ -489,6 +489,7 @@ Untracked files:
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
     Untracked:  code/._quantassign2parsedpeak.py
+    Untracked:  code/._removeloc_pheno.py
     Untracked:  code/._run_leafcutterDiffIso.sh
     Untracked:  code/._selectNominalPvalues.py
     Untracked:  code/._snakemakePAS.batch
@@ -496,6 +497,7 @@ Untracked files:
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subset_diffisopheno.py
+    Untracked:  code/._utrdms2saf.py
     Untracked:  code/.snakemake/
     Untracked:  code/APAqtl_nominal.err
     Untracked:  code/APAqtl_nominal.out
@@ -506,6 +508,9 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions.err
     Untracked:  code/BothFracDTPlotGeneRegions.out
     Untracked:  code/DistPAS2Sig.py
+    Untracked:  code/FC_UTR.err
+    Untracked:  code/FC_UTR.out
+    Untracked:  code/FC_UTR.sh
     Untracked:  code/FC_newPAS_olddata.err
     Untracked:  code/FC_newPAS_olddata.out
     Untracked:  code/FC_newPeaks_olddata.sh
@@ -527,12 +532,14 @@ Untracked files:
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fixFChead_bothfrac.py
+    Untracked:  code/fixFChead_summary.py
     Untracked:  code/get100upPAS.py
     Untracked:  code/getSeq100up.sh
     Untracked:  code/getseq100up.err
     Untracked:  code/getseq100up.out
     Untracked:  code/log/
     Untracked:  code/makeSAFbothfrac5perc.py
+    Untracked:  code/removeloc_pheno.py
     Untracked:  code/run_DistPAS2Sig.err
     Untracked:  code/run_DistPAS2Sig.out
     Untracked:  code/run_distPAS2Sig.sh
@@ -543,12 +550,14 @@ Untracked files:
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
     Untracked:  code/subset_diffisopheno.py
+    Untracked:  code/utrdms2saf.py
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/README.md
+    Untracked:  data/Reads2UTR/
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/apaQTLNominal/
@@ -594,6 +603,7 @@ Unstaged changes:
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_permuted.sh
     Modified:   code/bed2saf.py
+    Modified:   code/config.yaml
     Deleted:    code/test.txt
 
 </code></pre>
@@ -638,6 +648,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1d8a0a3e88aa036b1b965a6ca54efe058c2d2a1f/analysis/DiffIsoAnalysis.Rmd" target="_blank">1d8a0a3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-06
+</td>
+<td>
+add res
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/60093ce5e545fc47f274a3f3f76d2bc0c8c93cc1/docs/DiffIsoAnalysis.html" target="_blank">60093ce</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/24c2cebc7e4b061243ebb5b04abce358a1035334/analysis/DiffIsoAnalysis.Rmd" target="_blank">24c2ceb</a>
 </td>
 <td>
@@ -657,6 +701,18 @@ add diff iso
 </div>
 </div>
 </div>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.3.0
+Run ?workflowr for help getting started</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>In this analysis I wil use leafcutter to call PAS with differential ussage between fractions.</p>
 <div id="prepare-annotation" class="section level2">
 <h2>Prepare annotation</h2>
@@ -670,11 +726,14 @@ add diff iso
 <pre class="bash"><code>sbatch bothFrac_FC.sh</code></pre>
 <p>Fix the header:</p>
 <pre class="bash"><code>python fixFChead_bothfrac.py ../data/bothFrac_FC/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fc ../data/bothFrac_FC/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.fc</code></pre>
+<p>Remove location demoniaiton:</p>
 </div>
 <div id="prepare-leafcutter-phenotype" class="section level1">
 <h1>Prepare leafcutter phenotype</h1>
 <pre class="bash"><code>mkdir ../data/DiffIso</code></pre>
 <pre class="bash"><code>python fc2leafphen.py</code></pre>
+<p>Fix pheno to remove location:</p>
+<pre class="bash"><code>python removeloc_pheno.py ../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC.fc ../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC_noloc.fc</code></pre>
 <pre class="bash"><code>python subset_diffisopheno.py 1
 python subset_diffisopheno.py 2
 python subset_diffisopheno.py 3
@@ -702,6 +761,52 @@ python subset_diffisopheno.py 22</code></pre>
 <h2>Run leafcutter</h2>
 <p>The leafcutter environment is not in the three-prime-seq environment. Make sure leafcutter is installed and working.</p>
 <pre class="bash"><code>sbatch run_leafcutterDiffIso.sh</code></pre>
+<p>Concatinate results:</p>
+<pre class="bash"><code>awk &#39;{if(NR&gt;1)print}&#39; ../data/DiffIso/TN_diff_isoform_chr*.txt_effect_sizes.txt &gt; ../data/DiffIso/TN_diff_isoform_allChrom.txt_effect_sizes.txt
+
+
+awk &#39;{if(NR&gt;1)print}&#39; ../data/DiffIso/TN_diff_isoform_chr*.txt_cluster_significance.txt &gt; ../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt</code></pre>
+</div>
+<div id="evaluate-results" class="section level2">
+<h2>Evaluate results</h2>
+<div id="significant-clusters" class="section level3">
+<h3>Significant clusters</h3>
+<pre class="r"><code>sig=read.table(&quot;../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt&quot;,sep=&quot;\t&quot; ,col.names = c(&#39;status&#39;,&#39;loglr&#39;,&#39;df&#39;,&#39;p&#39;,&#39;cluster&#39;,&#39;p.adjust&#39;),stringsAsFactors = F) %&gt;% filter(status==&quot;Success&quot;)
+
+sig$p.adjust=as.numeric(as.character(sig$p.adjust))</code></pre>
+<pre class="r"><code>qqplot(-log10(runif(nrow(sig))), -log10(sig$p.adjust),ylab=&quot;-log10 Total Adjusted Leafcutter pvalue&quot;, xlab=&quot;-log 10 Uniform expectation&quot;, main=&quot;Leafcutter differencial isoform analysis between fractions&quot;)
+abline(0,1)</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>tested_genes=nrow(sig)
+tested_genes</code></pre>
+<pre><code>[1] 10815</code></pre>
+<pre class="r"><code>sig_genes=sig %&gt;% filter(p.adjust&lt;.05)
+number_sig_genes=nrow(sig_genes)
+number_sig_genes</code></pre>
+<pre><code>[1] 9446</code></pre>
+</div>
+<div id="effect-sizes" class="section level3">
+<h3>Effect sizes</h3>
+<pre class="r"><code>effectsize=read.table(&quot;../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt&quot;, stringsAsFactors = F, col.names=c(&#39;intron&#39;,  &#39;logef&#39; ,&#39;Nuclear&#39;, &#39;Total&#39;,&#39;deltaPAU&#39;)) %&gt;% filter(intron != &quot;intron&quot;)
+
+effectsize$deltaPAU=as.numeric(as.character(effectsize$deltaPAU))
+effectsize$logef=as.numeric(as.character(effectsize$logef))</code></pre>
+<p>Plot delta PAU:</p>
+<pre class="r"><code>plot(sort(effectsize$deltaPAU),main=&quot;Leafcutter delta PAU&quot;, ylab=&quot;Delta PAU&quot;, xlab=&quot;PAS Index&quot;)</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Filter PAU &gt; .2</p>
+<pre class="r"><code>effectsize_deltaPAU= effectsize %&gt;% filter(abs(deltaPAU) &gt; .2) 
+nrow(effectsize_deltaPAU)</code></pre>
+<pre><code>[1] 2090</code></pre>
+<p>Genes in this set:</p>
+<pre class="r"><code>effectsize_deltaPAU_Genes= effectsize_deltaPAU %&gt;% separate(intron, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;,&quot;gene&quot;),sep=&quot;:&quot;) %&gt;% group_by(gene) %&gt;% summarise(nperGene=n()) 
+
+nrow(effectsize_deltaPAU_Genes)</code></pre>
+<pre><code>[1] 1689</code></pre>
+<p>Filter &gt;.2 in Nuclear</p>
+<pre class="r"><code>effectsize_deltaPAU_nuclear= effectsize_deltaPAU %&gt;% filter(deltaPAU &lt; 0)</code></pre>
+<p>FIlter &gt;.2 in Total:</p>
+<pre class="r"><code>effectsize_deltaPAU_total= effectsize_deltaPAU %&gt;% filter(deltaPAU &gt; 0)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -728,12 +833,25 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
+ [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
+ [9] tidyverse_1.2.1 workflowr_1.3.0
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.3.0 Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2
- [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.12  
- [9] stringi_1.2.4   fs_1.2.6        whisker_0.3-2   rmarkdown_1.10 
-[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
-[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+ [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
+ [5] git2r_0.23.0     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
+ [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
+[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
+[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
+[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
+[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
+[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
+[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
+[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
+[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+</div>
 </div>
 </div>
 </div>
