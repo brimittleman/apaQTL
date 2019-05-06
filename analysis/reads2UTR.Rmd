@@ -9,6 +9,14 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(workflowr)
+library(reshape2)
+library(tidyverse)
+library(cowplot)
+```
+
+
 To help asses quality I want to look at the number and percent of reads mapping to the 3' UTR. We expect this to be where most reads fall and this should be reasonanably similar between libraries. I will do this for the new set and the old set to see the difference between the old batch 4 and new batch 4. 
 
 ```{bash,eval=F}
@@ -29,6 +37,90 @@ Run feature counts:
 
 ```{bash,eval=F}
 sbatch FC_UTR.sh
+```
+
+
+Fix the headers on all of these files:  
+
+```{bash,eval=F}
+python fixFChead_summary.py ../data/Reads2UTR/Nuclear_olddata_UTR.fc.summary ../data/Reads2UTR/Nuclear_olddata_UTR.fc.fixed.summary
+
+python fixFChead_summary.py ../data/Reads2UTR/Nuclear_newdata_UTR.fc.summary ../data/Reads2UTR/Nuclear_newdata_UTR.fc.fixed.summary
+
+python fixFChead_summary.py ../data/Reads2UTR/Total_olddata_UTR.fc.summary ../data/Reads2UTR/Total_olddata_UTR.fc.fixed.summary
+
+python fixFChead_summary.py ../data/Reads2UTR/Total_newdata_UTR.fc.summary ../data/Reads2UTR/Total_newdata_UTR.fc.fixed.summary
+```
+
+
+Process old data to keep only information about the 15 ind in batch 4. 
+
+```{r}
+batch4=read.table("../data/MetaDataSequencing.txt", header=T,stringsAsFactors = F)%>% filter(fraction=="total") %>%  select(line, batch, Mapped_noMP) %>% filter(batch == 4) 
+
+colnames(batch4)=c("Individual", "batch", "MappedReads")
+
+AllInd=read.table("../data/MetaDataSequencing.txt", header=T,stringsAsFactors = F)%>% filter(fraction=="total") %>%  select(line, batch, Mapped_noMP)
+colnames(AllInd)=c("Individual", "batch", "MappedReads")
+```
+
+###Total:  
+
+```{r}
+totalOld=read.table("../data/Reads2UTR/Total_olddata_UTR.fc.fixed.summary", header = T) %>% filter(Status=="Assigned")
+
+totalOld_melt=melt(totalOld, id.vars = "Status", variable.name = "Ind", value.name = "nReads") %>% separate(Ind,into=c("indiv", "fraction"), sep="_") %>%mutate(Individual=paste("NA",substring(indiv,2, 6),sep="")) %>% inner_join(batch4, by="Individual" )%>% mutate(Individual=paste(Individual, "Old", sep="_")) %>% mutate(PropUTR=nReads/MappedReads) %>% select(fraction, Individual, PropUTR,nReads)
+```
+
+
+```{r}
+totalNew=read.table("../data/Reads2UTR/Total_newdata_UTR.fc.fixed.summary", header = T) %>% filter(Status=="Assigned")
+
+totalNew_melt=melt(totalNew, id.vars = "Status", variable.name = "Ind", value.name = "nReads") %>% separate(Ind,into=c("Individual", "fraction"), sep="_") %>%mutate(Individual=paste("NA",substring(Individual,2, 6),sep="")) %>% inner_join(AllInd, by="Individual" ) %>% mutate(PropUTR=nReads/MappedReads) %>% select(fraction, Individual, PropUTR,nReads)
+```
+
+Join these to plot togetehr 
+
+```{r}
+totalboth=rbind(totalOld_melt,totalNew_melt) %>% mutate(batch=ifelse(grepl("Old",Individual), "Old", "New"))
+```
+
+
+```{r}
+ggplot(totalboth, aes(x=Individual, fill=batch, y=PropUTR)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Proportion of reads mapping to 3' UTR Total")
+```
+```{r}
+ggplot(totalboth, aes(x=Individual, fill=batch, y=nReads)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Number of reads mapping to 3' UTR Total")
+```
+
+
+###Nuclear  
+
+
+```{r}
+nuclearOld=read.table("../data/Reads2UTR/Nuclear_olddata_UTR.fc.fixed.summary", header = T) %>% filter(Status=="Assigned")
+
+nuclearOld_melt=melt(nuclearOld, id.vars = "Status", variable.name = "Ind", value.name = "nReads") %>% separate(Ind,into=c("indiv", "fraction"), sep="_") %>%mutate(Individual=paste("NA",substring(indiv,2, 6),sep="")) %>% inner_join(batch4, by="Individual" )%>% mutate(Individual=paste(Individual, "Old", sep="_")) %>% mutate(PropUTR=nReads/MappedReads) %>% select(fraction, Individual, PropUTR,nReads)
+```
+
+
+```{r}
+
+
+nuclearNew=read.table("../data/Reads2UTR/Nuclear_newdata_UTR.fc.fixed.summary", header = T) %>% filter(Status=="Assigned")
+
+nuclearNew_melt=melt(nuclearNew, id.vars = "Status", variable.name = "Ind", value.name = "nReads")%>% separate(Ind,into=c("Individual", "fraction"), sep="_") %>%mutate(Individual=paste("NA",substring(Individual,2, 6),sep="")) %>% inner_join(AllInd, by="Individual" ) %>% mutate(PropUTR=nReads/MappedReads) %>% select(fraction, Individual, PropUTR,nReads)
+```
+
+Join these to plot togetehr 
+
+```{r}
+nuclearboth=rbind(nuclearOld_melt,nuclearNew_melt) %>% mutate(batch=ifelse(grepl("Old",Individual), "Old", "New"))
+```
+
+
+```{r}
+ggplot(nuclearboth, aes(x=Individual, fill=batch, y=PropUTR)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Proportion of reads mapping to 3' UTR Nuclear")
 ```
 
 
