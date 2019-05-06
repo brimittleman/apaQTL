@@ -9,6 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
 In this analysis I wil use leafcutter to call PAS with differential ussage between fractions.
 
 ##Prepare annotation  
@@ -37,6 +43,8 @@ Fix the header:
 python fixFChead_bothfrac.py ../data/bothFrac_FC/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fc ../data/bothFrac_FC/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.fc
 ```
 
+Remove location demoniaiton:  
+
 
 #Prepare leafcutter phenotype  
 
@@ -48,6 +56,13 @@ mkdir ../data/DiffIso
 ```{bash,eval=F}
 python fc2leafphen.py
 ```
+
+Fix pheno to remove location:
+
+```{bash,eval=F}
+python removeloc_pheno.py ../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC.fc ../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC_noloc.fc
+```
+
 
 ```{bash,eval=F}
 python subset_diffisopheno.py 1
@@ -83,5 +98,84 @@ python LC_samplegroups.py
 The leafcutter environment is not in the three-prime-seq environment. Make sure leafcutter is installed and working.  
 ```{bash,eval=F}
 sbatch run_leafcutterDiffIso.sh
+```
+
+
+Concatinate results:
+
+```{bash,eval=F}
+awk '{if(NR>1)print}' ../data/DiffIso/TN_diff_isoform_chr*.txt_effect_sizes.txt > ../data/DiffIso/TN_diff_isoform_allChrom.txt_effect_sizes.txt
+
+
+awk '{if(NR>1)print}' ../data/DiffIso/TN_diff_isoform_chr*.txt_cluster_significance.txt > ../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt
+```
+
+
+##Evaluate results
+###Significant clusters
+
+```{r}
+sig=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt",sep="\t" ,col.names = c('status','loglr','df','p','cluster','p.adjust'),stringsAsFactors = F) %>% filter(status=="Success")
+
+sig$p.adjust=as.numeric(as.character(sig$p.adjust))
+```
+
+```{r}
+qqplot(-log10(runif(nrow(sig))), -log10(sig$p.adjust),ylab="-log10 Total Adjusted Leafcutter pvalue", xlab="-log 10 Uniform expectation", main="Leafcutter differencial isoform analysis between fractions")
+abline(0,1)
+```
+```{r}
+tested_genes=nrow(sig)
+tested_genes
+```
+
+
+
+```{r}
+sig_genes=sig %>% filter(p.adjust<.05)
+number_sig_genes=nrow(sig_genes)
+number_sig_genes
+
+
+```
+
+###Effect sizes 
+
+```{r}
+effectsize=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(intron != "intron")
+
+effectsize$deltaPAU=as.numeric(as.character(effectsize$deltaPAU))
+effectsize$logef=as.numeric(as.character(effectsize$logef))
+```
+
+Plot delta PAU:  
+```{r}
+plot(sort(effectsize$deltaPAU),main="Leafcutter delta PAU", ylab="Delta PAU", xlab="PAS Index")
+```
+
+Filter PAU > .2
+
+```{r}
+effectsize_deltaPAU= effectsize %>% filter(abs(deltaPAU) > .2) 
+nrow(effectsize_deltaPAU)
+```
+Genes in this set:  
+
+```{r}
+effectsize_deltaPAU_Genes= effectsize_deltaPAU %>% separate(intron, into=c("chrom", "start", "end","gene"),sep=":") %>% group_by(gene) %>% summarise(nperGene=n()) 
+
+nrow(effectsize_deltaPAU_Genes)
+```
+
+Filter >.2 in Nuclear 
+
+```{r}
+effectsize_deltaPAU_nuclear= effectsize_deltaPAU %>% filter(deltaPAU < 0)
+```
+
+FIlter >.2 in Total: 
+
+```{r}
+effectsize_deltaPAU_total= effectsize_deltaPAU %>% filter(deltaPAU > 0)
 ```
 
