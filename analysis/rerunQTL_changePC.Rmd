@@ -1,0 +1,29 @@
+---
+title: "Remap qtls with 6pcs"
+author: "Briana Mittleman"
+date: "5/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{bash,eval=F}
+head -n 5 APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.4PCs
+head -n 5 APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.4PCs
+
+```
+
+```{bash,eval=F}
+mkdir ../data/apaQTLNominal_4pc
+mkdir ../data/apaQTLPermuted_4pc
+```
+
+
+```{bash,eval=F}
+sbatch apaQTL_Nominal_4pc.sh
+sbatch apaQTL_permuted.4pc.sh
+```
+
+

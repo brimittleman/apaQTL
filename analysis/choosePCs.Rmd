@@ -71,10 +71,19 @@ Plot together:
 both_prop=as.data.frame(cbind(PCs=seq(1,54,1),Total=proportion_tot,Nuclear=proportion_nuc))
 
 both_prop_melt=melt(both_prop, id.var=c("PCs"), variable.name="Fraction",value.name = "VariationExplained" )
+
+
 ```
 
 
 ```{r}
 ggplot(both_prop_melt, aes(x=PCs, y=VariationExplained,group=Fraction, color=Fraction)) + geom_line() + geom_vline(xintercept = 6, col="red") + annotate("text", label="6 PCs", x=10, y=.1) + labs(title="Proportion of variance explained \nin PCA on normalized APA usage")
+```
+
+
+```{r}
+both_prop_melt_filt=both_prop_melt %>% filter(PCs<10)
+
+ggplot(both_prop_melt_filt, aes(x=PCs, y=VariationExplained,group=Fraction, color=Fraction)) + geom_line() + geom_vline(xintercept = 4, col="red") + annotate("text", label="4 PCs", x=5, y=.1) + labs(title="Proportion of variance explained \nin PCA on normalized APA usage")
 ```
 
