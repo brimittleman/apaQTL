@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1ba7d2bed37a985dfd3e436359be43912ef786b3targetblank1ba7d2ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1ba7d2bed37a985dfd3e436359be43912ef786b3" target="_blank">1ba7d2b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5e39f1c9463c9ed6b3179631c5876a9b560c08cetargetblank5e39f1ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5e39f1c9463c9ed6b3179631c5876a9b560c08ce" target="_blank">5e39f1c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1ba7d2bed37a985dfd3e436359be43912ef786b3targetblank1ba7d2ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5e39f1c9463c9ed6b3179631c5876a9b560c08cetargetblank5e39f1ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -370,6 +370,8 @@ Untracked files:
     Untracked:  code/Rplots.pdf
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/apaQTL_Nominal_4pc.sh
+    Untracked:  code/apaQTL_permuted.4pc.sh
     Untracked:  code/bam2bw.err
     Untracked:  code/bam2bw.out
     Untracked:  code/bothFrac_FC.err
@@ -412,7 +414,9 @@ Untracked files:
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/apaQTLNominal/
+    Untracked:  data/apaQTLNominal_4pc/
     Untracked:  data/apaQTLPermuted/
+    Untracked:  data/apaQTLPermuted_4pc/
     Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
     Untracked:  data/bam/
@@ -494,6 +498,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5e39f1c9463c9ed6b3179631c5876a9b560c08ce/analysis/index.Rmd" target="_blank">5e39f1c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-08
+</td>
+<td>
+choose pcs and start qtl rerun
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/f5af9c6e7f82c99ee20a28c0d63c1ba8a34275e0/docs/index.html" target="_blank">f5af9c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1022,8 +1060,9 @@ Start workflowr project.
 <h2>apaQTL</h2>
 <ul>
 <li><p><a href="mapapaQTL.html">Call apaQTLs in both fractions</a></p></li>
-<li><p><a href="choosePCs.html">Look at how many PCs I should include</a></p></li>
 <li><p><a href="newQTLheatmap.html">Check for batch effects in new QTLs</a></p></li>
+<li><p><a href="choosePCs.html">Look at how many PCs I should include</a></p></li>
+<li><p><a href="rerunQTL_changePC.html">Rerun qtl with PCs from previous analysis</a></p></li>
 </ul>
 </div>
 <div id="differential-isoform-analysis" class="section level2">
