@@ -1,0 +1,80 @@
+---
+title: "Choose PCs"
+author: "Briana Mittleman"
+date: "5/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(reshape2)
+```
+
+
+```{r}
+totalqqnorm=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom", col.names = c('Chr',	'start',	'end',	'ID',	'NA18486',	'NA18498',	'NA18499',	'NA18501',	'NA18502',	'NA18504', 'NA18505',	'NA18508',	'NA18510',	'NA18511',	'NA18516',	'NA18517',	'NA18519',	'NA18520',	'NA18522',	'NA18852', 'NA18853',	'NA18855',	'NA18856',	'NA18858',	'NA18861',	'NA18862',	'NA18870',	'NA18907',	'NA18909',	'NA18912', 'NA18913',	'NA18916',	'NA19092',	'NA19093',	'NA19101',	'NA19119',	'NA19128',	'NA19130',	'NA19131',	'NA19137','NA19138',	'NA19140',	'NA19141',	'NA19144',	'NA19152',	'NA19153',	'NA19160',	'NA19171',	'NA19193',	'NA19200','NA19207',	'NA19209',	'NA19210',	'NA19223',	'NA19225',	'NA19238',	'NA19239',	'NA19257'))
+
+totalqqnorm_matrix=as.matrix(totalqqnorm %>% select(-Chr, -start, -end, -ID))
+```
+
+
+RUn PCA:
+
+```{r}
+pca_tot_peak=prcomp(totalqqnorm_matrix, center=T,scale=T)
+pca_tot_df=as.data.frame(pca_tot_peak$rotation) %>% rownames_to_column(var="lib") %>% select(1:11)
+
+pca_tot_df_fix=bind_cols(line=pca_tot_df[,dim(pca_tot_df)[[2]]],pca_tot_df[,3:dim(pca_tot_df)[[2]]-1])
+```
+
+Variance explained:
+
+```{r}
+eigs_tot <- pca_tot_peak$sdev^2
+proportion_tot = eigs_tot/sum(eigs_tot)
+
+plot(proportion_tot)
+```
+
+```{r}
+nuclearqqnorm=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom", col.names = c('Chr',	'start',	'end',	'ID',	'NA18486',	'NA18498',	'NA18499',	'NA18501',	'NA18502',	'NA18504', 'NA18505',	'NA18508',	'NA18510',	'NA18511',	'NA18516',	'NA18517',	'NA18519',	'NA18520',	'NA18522',	'NA18852', 'NA18853',	'NA18855',	'NA18856',	'NA18858',	'NA18861',	'NA18862',	'NA18870',	'NA18907',	'NA18909',	'NA18912', 'NA18913',	'NA18916',	'NA19092',	'NA19093',	'NA19101',	'NA19119',	'NA19128',	'NA19130',	'NA19131',	'NA19137','NA19138',	'NA19140',	'NA19141',	'NA19144',	'NA19152',	'NA19153',	'NA19160',	'NA19171',	'NA19193',	'NA19200','NA19207',	'NA19209',	'NA19210',	'NA19223',	'NA19225',	'NA19238',	'NA19239',	'NA19257'))
+
+nuclearqqnorm_matrix=as.matrix(nuclearqqnorm %>% select(-Chr, -start, -end, -ID))
+```
+
+
+```{r}
+pca_nuc_peak=prcomp(nuclearqqnorm_matrix, center=T,scale=T)
+pca_nuc_df=as.data.frame(pca_nuc_peak$rotation) %>% rownames_to_column(var="lib") %>% select(1:11)
+
+pca_nuc_df_fix=bind_cols(line=pca_nuc_df[,dim(pca_nuc_df)[[2]]],pca_nuc_df[,3:dim(pca_nuc_df)[[2]]-1])
+```
+
+
+Variance explained:
+
+```{r}
+eigs_nuc <- pca_nuc_peak$sdev^2
+proportion_nuc = eigs_nuc/sum(eigs_nuc)
+
+plot(proportion_nuc)
+```
+
+
+Plot together:
+
+```{r}
+both_prop=as.data.frame(cbind(PCs=seq(1,54,1),Total=proportion_tot,Nuclear=proportion_nuc))
+
+both_prop_melt=melt(both_prop, id.var=c("PCs"), variable.name="Fraction",value.name = "VariationExplained" )
+```
+
+
+```{r}
+ggplot(both_prop_melt, aes(x=PCs, y=VariationExplained,group=Fraction, color=Fraction)) + geom_line() + geom_vline(xintercept = 6, col="red") + annotate("text", label="6 PCs", x=10, y=.1) + labs(title="Proportion of variance explained \nin PCA on normalized APA usage")
+```
+

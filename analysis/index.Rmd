@@ -46,7 +46,11 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Call apaQTLs in both fractions](mapapaQTL.html)  
 
+* [Look at how many PCs I should include](choosePCs.html)
+
 * [Check for batch effects in new QTLs](newQTLheatmap.html)  
+
+
 
 
 ##Differential Isoform Analysis  
