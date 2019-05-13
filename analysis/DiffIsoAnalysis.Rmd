@@ -170,12 +170,68 @@ nrow(effectsize_deltaPAU_Genes)
 Filter >.2 in Nuclear 
 
 ```{r}
-effectsize_deltaPAU_nuclear= effectsize_deltaPAU %>% filter(deltaPAU < 0)
+effectsize_deltaPAU_nuclear= effectsize_deltaPAU %>% filter(deltaPAU < -0.2)
 ```
 
-FIlter >.2 in Total: 
+Filter >.2 in Total: 
 
 ```{r}
-effectsize_deltaPAU_total= effectsize_deltaPAU %>% filter(deltaPAU > 0)
+effectsize_deltaPAU_total= effectsize_deltaPAU %>% filter(deltaPAU > 0.2)
+```
+
+##Location of high >PAU  
+
+###Total:
+
+Pull in location information for each PAS:  
+
+```{r}
+PAS=read.table("../data/peaks_5perc/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.SAF",stringsAsFactors = F,header = T) %>% separate(GeneID, into=c("num", "chr", "start", "end", "strand", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>%  mutate(intron=paste("chr", Chr, ":", Start, ":", End, ":", gene,sep="")) %>% select(intron, loc)
+```
+
+
+
+```{r}
+effectsize_deltaPAU_total_loc=effectsize_deltaPAU_total %>% inner_join(PAS, by="intron") 
+
+
+ggplot(effectsize_deltaPAU_total_loc,aes(x=loc)) + geom_histogram(stat="count") + labs(title="Location of Total peaks >.2 PAU") 
+```
+
+###Nuclear:
+
+
+```{r}
+effectsize_deltaPAU_nuclear_loc=effectsize_deltaPAU_nuclear %>% inner_join(PAS, by="intron") 
+
+
+ggplot(effectsize_deltaPAU_nuclear_loc,aes(x=loc)) + geom_histogram(stat="count") + labs(title="Location of Nuclear peaks >.2 PAU")
+```
+
+
+I will want to look at proportions. I need to know how many peaks are in each location: 
+
+```{r}
+PAS_loc =PAS%>% group_by(loc) %>% summarise(nloc=n())
+
+```
+
+
+```{r}
+effectsize_deltaPAU_total_locProp=effectsize_deltaPAU_total_loc %>% group_by(loc) %>% summarise(nloctotal=n()) 
+effectsize_deltaPAU_nuclear_locProp=effectsize_deltaPAU_nuclear_loc %>% group_by(loc) %>% summarise(nlocnuclear=n()) 
+
+effectsize_deltaPAUProp_tot=effectsize_deltaPAU_total_locProp %>% inner_join(PAS_loc, by="loc") %>% mutate(Proportion=nloctotal/nloc)
+
+effectsize_deltaPAUProp_nuc=effectsize_deltaPAU_nuclear_locProp %>% inner_join(PAS_loc, by="loc") %>% mutate(Proportion=nlocnuclear/nloc)
+
+```
+
+```{r}
+ggplot(effectsize_deltaPAUProp_tot, aes(x=loc, y=Proportion)) + geom_bar(stat="identity") + labs(y="Proportion of all called PAS", title="Location of high Total used PAS")
+```
+
+```{r}
+ggplot(effectsize_deltaPAUProp_nuc, aes(x=loc, y=Proportion)) + geom_bar(stat="identity") + labs(y="Proportion of all called PAS", title="Location of high nuclear used PAS")
 ```
 
