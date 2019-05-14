@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree981ac33005293ea9e74d3abcdfc28d0c0ccfeefbtargetblank981ac33a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/981ac33005293ea9e74d3abcdfc28d0c0ccfeefb" target="_blank">981ac33</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef514b6e9efaf5153fb3d938c9a275b11aa5ffbc4targetblankf514b6ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f514b6e9efaf5153fb3d938c9a275b11aa5ffbc4" target="_blank">f514b6e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree981ac33005293ea9e74d3abcdfc28d0c0ccfeefbtargetblank981ac33a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef514b6e9efaf5153fb3d938c9a275b11aa5ffbc4targetblankf514b6ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -655,6 +655,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f514b6e9efaf5153fb3d938c9a275b11aa5ffbc4/analysis/DiffIsoAnalysis.Rmd" target="_blank">f514b6e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+<td>
+add combined plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/07c912574a6c40eb69bd055525665ba0ec9a3e10/docs/DiffIsoAnalysis.html" target="_blank">07c9125</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/981ac33005293ea9e74d3abcdfc28d0c0ccfeefb/analysis/DiffIsoAnalysis.Rmd" target="_blank">981ac33</a>
 </td>
 <td>
@@ -746,14 +780,20 @@ add diff iso
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(reshape2)</code></pre>
+<pre><code>
+Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    smiths</code></pre>
 <p>In this analysis I wil use leafcutter to call PAS with differential ussage between fractions.</p>
 <div id="prepare-annotation" class="section level2">
 <h2>Prepare annotation</h2>
@@ -936,6 +976,43 @@ nrow(effectsize_deltaPAU_Genes)</code></pre>
 ggplot(effectsize_deltaPAU_total_loc,aes(x=loc)) + geom_histogram(stat=&quot;count&quot;) + labs(title=&quot;Location of Total peaks &gt;.2 PAU&quot;) </code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
+Past versions of unnamed-chunk-24-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-24-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/07c912574a6c40eb69bd055525665ba0ec9a3e10/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-24-1.png" target="_blank">07c9125</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nuclear" class="section level3">
 <h3>Nuclear:</h3>
@@ -945,18 +1022,135 @@ ggplot(effectsize_deltaPAU_total_loc,aes(x=loc)) + geom_histogram(stat=&quot;cou
 ggplot(effectsize_deltaPAU_nuclear_loc,aes(x=loc)) + geom_histogram(stat=&quot;count&quot;) + labs(title=&quot;Location of Nuclear peaks &gt;.2 PAU&quot;)</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
+Past versions of unnamed-chunk-25-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-25-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/07c912574a6c40eb69bd055525665ba0ec9a3e10/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-25-1.png" target="_blank">07c9125</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I will want to look at proportions. I need to know how many peaks are in each location:</p>
 <pre class="r"><code>PAS_loc =PAS%&gt;% group_by(loc) %&gt;% summarise(nloc=n())</code></pre>
 <pre class="r"><code>effectsize_deltaPAU_total_locProp=effectsize_deltaPAU_total_loc %&gt;% group_by(loc) %&gt;% summarise(nloctotal=n()) 
 effectsize_deltaPAU_nuclear_locProp=effectsize_deltaPAU_nuclear_loc %&gt;% group_by(loc) %&gt;% summarise(nlocnuclear=n()) 
 
-effectsize_deltaPAUProp_tot=effectsize_deltaPAU_total_locProp %&gt;% inner_join(PAS_loc, by=&quot;loc&quot;) %&gt;% mutate(Proportion=nloctotal/nloc)
+effectsize_deltaPAUProp_tot=effectsize_deltaPAU_total_locProp %&gt;% inner_join(PAS_loc, by=&quot;loc&quot;) %&gt;% mutate(Proportion_tot=nloctotal/nloc)
 
-effectsize_deltaPAUProp_nuc=effectsize_deltaPAU_nuclear_locProp %&gt;% inner_join(PAS_loc, by=&quot;loc&quot;) %&gt;% mutate(Proportion=nlocnuclear/nloc)</code></pre>
-<pre class="r"><code>ggplot(effectsize_deltaPAUProp_tot, aes(x=loc, y=Proportion)) + geom_bar(stat=&quot;identity&quot;) + labs(y=&quot;Proportion of all called PAS&quot;, title=&quot;Location of high Total used PAS&quot;)</code></pre>
+effectsize_deltaPAUProp_nuc=effectsize_deltaPAU_nuclear_locProp %&gt;% inner_join(PAS_loc, by=&quot;loc&quot;) %&gt;% mutate(Proportion_nuc=nlocnuclear/nloc)</code></pre>
+<pre class="r"><code>ggplot(effectsize_deltaPAUProp_tot, aes(x=loc, y=Proportion_tot)) + geom_bar(stat=&quot;identity&quot;) + labs(y=&quot;Proportion of all called PAS&quot;, title=&quot;Location of high Total used PAS&quot;)</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggplot(effectsize_deltaPAUProp_nuc, aes(x=loc, y=Proportion)) + geom_bar(stat=&quot;identity&quot;) + labs(y=&quot;Proportion of all called PAS&quot;, title=&quot;Location of high nuclear used PAS&quot;)</code></pre>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-28-1">
+Past versions of unnamed-chunk-28-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-28-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/07c912574a6c40eb69bd055525665ba0ec9a3e10/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-28-1.png" target="_blank">07c9125</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>ggplot(effectsize_deltaPAUProp_nuc, aes(x=loc, y=Proportion_nuc)) + geom_bar(stat=&quot;identity&quot;) + labs(y=&quot;Proportion of all called PAS&quot;, title=&quot;Location of high nuclear used PAS&quot;)</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-29-1">
+Past versions of unnamed-chunk-29-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-29-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/07c912574a6c40eb69bd055525665ba0ec9a3e10/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-29-1.png" target="_blank">07c9125</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Merge to 1 figure:</p>
+<pre class="r"><code>effectsize_deltaPAUProp_both= effectsize_deltaPAUProp_nuc %&gt;% inner_join(effectsize_deltaPAUProp_tot, by=c(&quot;loc&quot;,&quot;nloc&quot;)) %&gt;% rename(Nuclear=Proportion_nuc, Total=Proportion_tot) %&gt;% select(loc, Nuclear, Total) 
+effectsize_deltaPAUProp_both_melt= effectsize_deltaPAUProp_both %&gt;% melt(id.vars=&quot;loc&quot;, variable.name=&quot;Fraction&quot;, value.name = &quot;Proportion&quot;) </code></pre>
+<pre class="r"><code>ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differentiall used by location&quot;)</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -984,9 +1178,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
- [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
- [9] tidyverse_1.2.1 workflowr_1.3.0
+ [1] reshape2_1.4.3  forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
+ [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
+ [9] ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.3.0
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
