@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-13
+<strong>Last updated:</strong> 2019-05-14
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef514b6e9efaf5153fb3d938c9a275b11aa5ffbc4targetblankf514b6ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f514b6e9efaf5153fb3d938c9a275b11aa5ffbc4" target="_blank">f514b6e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree4c10e8f3402fa8b01e07005321ea18e0b28f6d87targetblank4c10e8fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/4c10e8f3402fa8b01e07005321ea18e0b28f6d87" target="_blank">4c10e8f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef514b6e9efaf5153fb3d938c9a275b11aa5ffbc4targetblankf514b6ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree4c10e8f3402fa8b01e07005321ea18e0b28f6d87targetblank4c10e8fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,7 +435,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -650,6 +649,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4c10e8f3402fa8b01e07005321ea18e0b28f6d87/analysis/DiffIsoAnalysis.Rmd" target="_blank">4c10e8f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-14
+</td>
+<td>
+add dist to PAS plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/d0aa6a390125f83f875919a531383e48eb6fe8d2/docs/DiffIsoAnalysis.html" target="_blank">d0aa6a3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -907,6 +940,8 @@ number_sig_genes</code></pre>
 <h3>Effect sizes</h3>
 <pre class="r"><code>effectsize=read.table(&quot;../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt&quot;, stringsAsFactors = F, col.names=c(&#39;intron&#39;,  &#39;logef&#39; ,&#39;Nuclear&#39;, &#39;Total&#39;,&#39;deltaPAU&#39;)) %&gt;% filter(intron != &quot;intron&quot;)
 
+write.table(effectsize,file=&quot;../data/DiffIso/EffectSizes.txt&quot;, quote = F, col.names = T, row.names = F)
+
 effectsize$deltaPAU=as.numeric(as.character(effectsize$deltaPAU))
 effectsize$logef=as.numeric(as.character(effectsize$logef))</code></pre>
 <p>Plot delta PAU:</p>
@@ -1150,7 +1185,85 @@ brimittleman
 effectsize_deltaPAUProp_both_melt= effectsize_deltaPAUProp_both %&gt;% melt(id.vars=&quot;loc&quot;, variable.name=&quot;Fraction&quot;, value.name = &quot;Proportion&quot;) </code></pre>
 <pre class="r"><code>ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differentiall used by location&quot;)</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-1">
+Past versions of unnamed-chunk-31-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d0aa6a390125f83f875919a531383e48eb6fe8d2/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-31-1.png" target="_blank">d0aa6a3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.</p>
+</div>
+<div id="stratify-by-different-delta-pau" class="section level3">
+<h3>Stratify by different <span class="math inline">\(\Delta\)</span> PAU</h3>
+<p>I want to create a data frame that has the location proportion distribution based on different <span class="math inline">\(\Delta\)</span> PAU. 0-.1 .1-.2 .2-.3 .3-.4 .4-.5 &gt;.5</p>
+<p>First I will seperate the total and nuclear but the sign of the <span class="math inline">\(\Delta\)</span> PAU.</p>
+<pre class="r"><code>Total_dpau= effectsize %&gt;% filter(deltaPAU &gt; 0) %&gt;% inner_join(PAS, by=&quot;intron&quot;) %&gt;% select(-logef, -Nuclear,-Total) %&gt;%  mutate(fraction=&quot;Total&quot;, PAU_Cat=ifelse(deltaPAU &lt;.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &gt;=.1 &amp; deltaPAU &lt;.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &gt;=.2 &amp; deltaPAU &lt;.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &gt;=.3 &amp; deltaPAU &lt;.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;))))) 
+
+Nuclear_dpau= effectsize %&gt;% filter(deltaPAU &lt;0) %&gt;% inner_join(PAS, by=&quot;intron&quot;) %&gt;% select(-logef,-Nuclear,-Total) %&gt;% mutate(fraction=&quot;Nuclear&quot;, PAU_Cat=ifelse(deltaPAU &gt;-.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &lt;=-.1 &amp; deltaPAU &gt; -.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &lt;=-.2 &amp; deltaPAU &gt;-.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &lt;=-.3 &amp; deltaPAU &gt;-.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;)))))</code></pre>
+<p>Merge these together to start grouping:</p>
+<pre class="r"><code>allPAU=as.data.frame(rbind(Total_dpau, Nuclear_dpau)) %&gt;% group_by(fraction, PAU_Cat, loc ) %&gt;% summarise(nperLoc=n()) %&gt;% full_join(PAS_loc, by =&quot;loc&quot;) %&gt;% mutate(Prop=nperLoc/nloc)</code></pre>
+<p>Plot it:</p>
+<pre class="r"><code>ggplot(allPAU, aes(x=loc,y=Prop, group=fraction, fill=fraction)) + geom_bar(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Proportion of PAS by location and delta PAU&quot;)</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>allPAU_remove.1= allPAU %&gt;% filter(PAU_Cat != &quot;&lt;.1&quot;)
+
+ggplot(allPAU_remove.1, aes(x=loc,y=Prop, group=fraction, fill=fraction)) + geom_bar(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Proportion of PAS by location and delta PAU&quot;)</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Proportion within group:</p>
+<pre class="r"><code>allPAU_ingroup= allPAU %&gt;% mutate(nCat=sum(nperLoc),proppercat=nperLoc/nCat)
+
+ggplot(allPAU_ingroup, aes(x=loc,y=proppercat, group=fraction, fill=fraction)) + geom_bar(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Proportion of PAS by location and delta PAU&quot;)</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="distance-to-tss" class="section level2">
+<h2>Distance to TSS:</h2>
+<p>I need to pull in the TSS information so I can look at the distance between the differentially used peaks and by distance .</p>
+<pre class="r"><code>tss=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% mutate(TSS= ifelse(strand==&quot;+&quot;, start, end)) %&gt;% select(gene, TSS, strand)</code></pre>
+<p>Seperate effect size introns:</p>
+<p>PAS base for + strand is end, PAS for neg stand in -</p>
+<pre class="r"><code>effectsize_TSS= effectsize %&gt;% separate(intron, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;),sep=&quot;:&quot;) %&gt;% mutate(fraction=ifelse(deltaPAU &lt; 0, &quot;nuclear&quot;, &quot;total&quot;)) %&gt;% inner_join(tss, by=&quot;gene&quot;) %&gt;% mutate(dist2PAS=ifelse(strand==&quot;+&quot;, as.numeric(end)-as.numeric(TSS), as.numeric(TSS)-as.numeric(start))) 
+
+effectsize_TSS_tot= effectsize_TSS %&gt;% filter(fraction==&quot;total&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &lt;.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &gt;=.1 &amp; deltaPAU &lt;.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &gt;=.2 &amp; deltaPAU &lt;.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &gt;=.3 &amp; deltaPAU &lt;.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;))))) 
+
+
+effectsize_TSS_nuc=effectsize_TSS %&gt;% filter(fraction==&quot;nuclear&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &gt;-.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &lt;=-.1 &amp; deltaPAU &gt; -.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &lt;=-.2 &amp; deltaPAU &gt;-.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &lt;=-.3 &amp; deltaPAU &gt;-.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;)))))
+
+
+effectsize_TSS_cat=as.data.frame(rbind(effectsize_TSS_tot, effectsize_TSS_nuc)) %&gt;% filter(dist2PAS &gt;0)</code></pre>
+<pre class="r"><code>ggplot(effectsize_TSS_cat, aes(x=log10(dist2PAS), by=fraction, fill=fraction))+ geom_density(alpha=.4) + facet_grid(~PAU_Cat) + labs(title=&quot;Distance to TSS for differentialy used PAS&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) </code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1196,7 +1309,6 @@ loaded via a namespace (and not attached):
 [41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
 [45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
 [49] crayon_1.3.4    </code></pre>
-</div>
 </div>
 </div>
 </div>
