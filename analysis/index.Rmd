@@ -57,4 +57,9 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  
 
+* [Results when logef > 0.5](diffiso_logef5.html)  
+
+* [Results when logef > 1](diffuse_logef1.html) 
+
+
 

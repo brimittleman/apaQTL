@@ -1,0 +1,117 @@
+---
+title: "Diff iso with effect size greater than .5"
+author: "Briana Mittleman"
+date: "5/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(reshape2)
+```
+
+```{r}
+PAS=read.table("../data/peaks_5perc/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.SAF",stringsAsFactors = F,header = T) %>% separate(GeneID, into=c("num", "chr", "start", "end", "strand", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>%  mutate(intron=paste("chr", Chr, ":", Start, ":", End, ":", gene,sep="")) %>% select(intron, loc)
+```
+```{r}
+PAS_loc =PAS%>% group_by(loc) %>% summarise(nloc=n())
+
+```
+
+```{r}
+effectsize=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(intron != "intron") %>% filter(logef>.5)
+```
+
+
+###Stratify by different $\Delta$ PAU
+
+I want to create a data frame that has the location proportion distribution based on different $\Delta$ PAU. 0-.1 .1-.2 .2-.3 .3-.4 .4-.5 >.5
+
+First I will seperate the total and nuclear but the sign of the $\Delta$ PAU.
+
+```{r}
+Total_dpau= effectsize %>% filter(deltaPAU > 0) %>% inner_join(PAS, by="intron") %>% select(-logef, -Nuclear,-Total) %>%  mutate(fraction="Total", PAU_Cat=ifelse(deltaPAU <.1, "<.1", ifelse(deltaPAU >=.1 & deltaPAU <.2, "<.2", ifelse(deltaPAU >=.2 & deltaPAU <.3, "<.3", ifelse(deltaPAU >=.3 & deltaPAU <.4, "<.4", "<.5")))))
+
+Nuclear_dpau= effectsize %>% filter(deltaPAU <0) %>% inner_join(PAS, by="intron") %>% select(-logef,-Nuclear,-Total) %>% mutate(fraction="Nuclear", PAU_Cat=ifelse(deltaPAU >-.1, "<.1", ifelse(deltaPAU <=-.1 & deltaPAU > -.2, "<.2", ifelse(deltaPAU <=-.2 & deltaPAU >-.3, "<.3", ifelse(deltaPAU <=-.3 & deltaPAU >-.4, "<.4", "<.5")))))
+```
+
+
+Merge these together to start grouping:
+
+```{r}
+allPAU=as.data.frame(rbind(Total_dpau, Nuclear_dpau)) %>% group_by(fraction, PAU_Cat, loc ) %>% summarise(nperLoc=n()) %>% full_join(PAS_loc, by ="loc") %>% mutate(Prop=nperLoc/nloc)
+```
+
+
+
+Proportion within group:
+
+
+```{r}
+allPAU_ingroup= allPAU %>% mutate(nCat=sum(nperLoc),proppercat=nperLoc/nCat)
+
+ggplot(allPAU_ingroup, aes(x=loc,y=proppercat, group=fraction, fill=fraction)) + geom_bar(stat="identity", position = "dodge") + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c("deepskyblue3","darkviolet")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Proportion of PAS by location and delta PAU  \n logef >.5")
+```
+
+
+##Distance to TSS:
+
+I need to pull in the TSS information so I can look at the distance between the differentially used peaks and by distance .
+
+```{r}
+tss=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "start", "end", "gene", "score", "strand") ,stringsAsFactors = F) %>% mutate(TSS= ifelse(strand=="+", start, end)) %>% select(gene, TSS, strand)
+```
+
+
+Seperate effect size introns:
+
+PAS base for + strand is end, PAS for neg stand in -
+```{r}
+effectsize_TSS= effectsize %>% separate(intron, into=c("chrom", "start", "end", "gene"),sep=":") %>% mutate(fraction=ifelse(deltaPAU < 0, "nuclear", "total")) %>% inner_join(tss, by="gene") %>% mutate(dist2PAS=ifelse(strand=="+", as.numeric(end)-as.numeric(TSS), as.numeric(TSS)-as.numeric(start)))
+
+effectsize_TSS_tot= effectsize_TSS %>% filter(fraction=="total") %>% mutate( PAU_Cat=ifelse(deltaPAU <.1, "<.1", ifelse(deltaPAU >=.1 & deltaPAU <.2, "<.2", ifelse(deltaPAU >=.2 & deltaPAU <.3, "<.3", ifelse(deltaPAU >=.3 & deltaPAU <.4, "<.4", "<.5")))))
+
+
+effectsize_TSS_nuc=effectsize_TSS %>% filter(fraction=="nuclear") %>% mutate( PAU_Cat=ifelse(deltaPAU >-.1, "<.1", ifelse(deltaPAU <=-.1 & deltaPAU > -.2, "<.2", ifelse(deltaPAU <=-.2 & deltaPAU >-.3, "<.3", ifelse(deltaPAU <=-.3 & deltaPAU >-.4, "<.4", "<.5")))))
+
+
+effectsize_TSS_cat=as.data.frame(rbind(effectsize_TSS_tot, effectsize_TSS_nuc)) %>% filter(dist2PAS >0)
+```
+
+
+```{r}
+ggplot(effectsize_TSS_cat, aes(x=log10(dist2PAS), by=fraction, fill=fraction))+ geom_density(alpha=.4) + facet_grid(~PAU_Cat) + labs(title="Distance to TSS for differentialy used PAS  \n logef >.5")+scale_fill_manual(values=c("deepskyblue3","darkviolet"))
+```
+
+###By length of gene
+
+
+```{r}
+length=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "start", "end", "gene", "score", "strand") ,stringsAsFactors = F) %>% mutate(length=abs(end-start)) %>%  mutate(TSS= ifelse(strand=="+", start, end)) %>% select(gene, length,TSS, strand)
+```
+
+
+```{r}
+effectsize_length= effectsize %>% separate(intron, into=c("chrom", "start", "end", "gene"),sep=":") %>% mutate(fraction=ifelse(deltaPAU < 0, "nuclear", "total")) %>% inner_join(length, by="gene") %>% mutate(PercLength=ifelse(strand=="+", ((as.numeric(end)-as.numeric(TSS))/as.numeric(length)), (1-(as.numeric(start)-as.numeric(TSS))/as.numeric(length))))
+
+effectsize_length_tot= effectsize_length %>% filter(fraction=="total") %>% mutate( PAU_Cat=ifelse(deltaPAU <.1, "<.1", ifelse(deltaPAU >=.1 & deltaPAU <.2, "<.2", ifelse(deltaPAU >=.2 & deltaPAU <.3, "<.3", ifelse(deltaPAU >=.3 & deltaPAU <.4, "<.4", "<.5")))))
+
+
+effectsize_length_nuc=effectsize_length %>% filter(fraction=="nuclear") %>% mutate( PAU_Cat=ifelse(deltaPAU >-.1, "<.1", ifelse(deltaPAU <=-.1 & deltaPAU > -.2, "<.2", ifelse(deltaPAU <=-.2 & deltaPAU >-.3, "<.3", ifelse(deltaPAU <=-.3 & deltaPAU >-.4, "<.4", "<.5")))))
+
+
+effectsize_length_cat=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) %>% filter(PercLength<=1 & PercLength >0)
+
+effectsize_length_catall=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc))
+```
+
+```{r}
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(alpha=.4,bins=10) + facet_grid(~PAU_Cat) + labs(title="Location of differentially used PAS within a gene body \n logef >.5")+scale_fill_manual(values=c("deepskyblue3","darkviolet"))
+```
+

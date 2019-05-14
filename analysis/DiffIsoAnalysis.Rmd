@@ -319,3 +319,38 @@ effectsize_TSS_cat=as.data.frame(rbind(effectsize_TSS_tot, effectsize_TSS_nuc)) 
 ggplot(effectsize_TSS_cat, aes(x=log10(dist2PAS), by=fraction, fill=fraction))+ geom_density(alpha=.4) + facet_grid(~PAU_Cat) + labs(title="Distance to TSS for differentialy used PAS")+scale_fill_manual(values=c("deepskyblue3","darkviolet")) 
 ```
 
+###By length of gene  
+
+
+```{r}
+length=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "start", "end", "gene", "score", "strand") ,stringsAsFactors = F) %>% mutate(length=abs(end-start)) %>%  mutate(TSS= ifelse(strand=="+", start, end)) %>% select(gene, length,TSS, strand)
+```
+
+
+```{r}
+effectsize_length= effectsize %>% separate(intron, into=c("chrom", "start", "end", "gene"),sep=":") %>% mutate(fraction=ifelse(deltaPAU < 0, "nuclear", "total")) %>% inner_join(length, by="gene") %>% mutate(PercLength=ifelse(strand=="+", ((as.numeric(end)-as.numeric(TSS))/as.numeric(length)), (1-(as.numeric(start)-as.numeric(TSS))/as.numeric(length)))) 
+
+effectsize_length_tot= effectsize_length %>% filter(fraction=="total") %>% mutate( PAU_Cat=ifelse(deltaPAU <.1, "<.1", ifelse(deltaPAU >=.1 & deltaPAU <.2, "<.2", ifelse(deltaPAU >=.2 & deltaPAU <.3, "<.3", ifelse(deltaPAU >=.3 & deltaPAU <.4, "<.4", "<.5"))))) 
+
+
+effectsize_length_nuc=effectsize_length %>% filter(fraction=="nuclear") %>% mutate( PAU_Cat=ifelse(deltaPAU >-.1, "<.1", ifelse(deltaPAU <=-.1 & deltaPAU > -.2, "<.2", ifelse(deltaPAU <=-.2 & deltaPAU >-.3, "<.3", ifelse(deltaPAU <=-.3 & deltaPAU >-.4, "<.4", "<.5")))))
+
+
+effectsize_length_cat=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) %>% filter(PercLength<=1 & PercLength >0)
+
+effectsize_length_catall=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) 
+```
+
+```{r}
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(alpha=.4,bins=10) + facet_grid(~PAU_Cat) + labs(title="Location of differentially used PAS within a gene body ")+scale_fill_manual(values=c("deepskyblue3","darkviolet")) 
+```
+```{r}
+summary(effectsize_length_catall$PercLength)
+```
+
+
+```{r}
+summary(effectsize$logef)
+
+```
+
