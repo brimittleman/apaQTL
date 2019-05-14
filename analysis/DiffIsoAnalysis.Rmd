@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(workflowr)
 library(tidyverse)
+library(reshape2)
 ```
 
 In this analysis I wil use leafcutter to call PAS with differential ussage between fractions.
@@ -208,7 +209,6 @@ effectsize_deltaPAU_nuclear_loc=effectsize_deltaPAU_nuclear %>% inner_join(PAS, 
 ggplot(effectsize_deltaPAU_nuclear_loc,aes(x=loc)) + geom_histogram(stat="count") + labs(title="Location of Nuclear peaks >.2 PAU")
 ```
 
-
 I will want to look at proportions. I need to know how many peaks are in each location: 
 
 ```{r}
@@ -221,17 +221,29 @@ PAS_loc =PAS%>% group_by(loc) %>% summarise(nloc=n())
 effectsize_deltaPAU_total_locProp=effectsize_deltaPAU_total_loc %>% group_by(loc) %>% summarise(nloctotal=n()) 
 effectsize_deltaPAU_nuclear_locProp=effectsize_deltaPAU_nuclear_loc %>% group_by(loc) %>% summarise(nlocnuclear=n()) 
 
-effectsize_deltaPAUProp_tot=effectsize_deltaPAU_total_locProp %>% inner_join(PAS_loc, by="loc") %>% mutate(Proportion=nloctotal/nloc)
+effectsize_deltaPAUProp_tot=effectsize_deltaPAU_total_locProp %>% inner_join(PAS_loc, by="loc") %>% mutate(Proportion_tot=nloctotal/nloc)
 
-effectsize_deltaPAUProp_nuc=effectsize_deltaPAU_nuclear_locProp %>% inner_join(PAS_loc, by="loc") %>% mutate(Proportion=nlocnuclear/nloc)
+effectsize_deltaPAUProp_nuc=effectsize_deltaPAU_nuclear_locProp %>% inner_join(PAS_loc, by="loc") %>% mutate(Proportion_nuc=nlocnuclear/nloc)
 
 ```
 
 ```{r}
-ggplot(effectsize_deltaPAUProp_tot, aes(x=loc, y=Proportion)) + geom_bar(stat="identity") + labs(y="Proportion of all called PAS", title="Location of high Total used PAS")
+ggplot(effectsize_deltaPAUProp_tot, aes(x=loc, y=Proportion_tot)) + geom_bar(stat="identity") + labs(y="Proportion of all called PAS", title="Location of high Total used PAS")
 ```
 
 ```{r}
-ggplot(effectsize_deltaPAUProp_nuc, aes(x=loc, y=Proportion)) + geom_bar(stat="identity") + labs(y="Proportion of all called PAS", title="Location of high nuclear used PAS")
+ggplot(effectsize_deltaPAUProp_nuc, aes(x=loc, y=Proportion_nuc)) + geom_bar(stat="identity") + labs(y="Proportion of all called PAS", title="Location of high nuclear used PAS")
 ```
 
+Merge to 1 figure: 
+
+```{r}
+effectsize_deltaPAUProp_both= effectsize_deltaPAUProp_nuc %>% inner_join(effectsize_deltaPAUProp_tot, by=c("loc","nloc")) %>% rename(Nuclear=Proportion_nuc, Total=Proportion_tot) %>% select(loc, Nuclear, Total) 
+effectsize_deltaPAUProp_both_melt= effectsize_deltaPAUProp_both %>% melt(id.vars="loc", variable.name="Fraction", value.name = "Proportion") 
+```
+
+```{r}
+ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Proportion of PAS differentiall used by location")
+```
+
+More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.  
