@@ -145,6 +145,8 @@ number_sig_genes
 ```{r}
 effectsize=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(intron != "intron")
 
+write.table(effectsize,file="../data/DiffIso/EffectSizes.txt", quote = F, col.names = T, row.names = F)
+
 effectsize$deltaPAU=as.numeric(as.character(effectsize$deltaPAU))
 effectsize$logef=as.numeric(as.character(effectsize$logef))
 ```
@@ -247,3 +249,73 @@ ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, 
 ```
 
 More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.  
+
+###Stratify by different $\Delta$ PAU
+
+I want to create a data frame that has the location proportion distribution based on different $\Delta$ PAU. 0-.1 .1-.2 .2-.3 .3-.4 .4-.5 >.5
+
+First I will seperate the total and nuclear but the sign of the $\Delta$ PAU.  
+
+```{r}
+Total_dpau= effectsize %>% filter(deltaPAU > 0) %>% inner_join(PAS, by="intron") %>% select(-logef, -Nuclear,-Total) %>%  mutate(fraction="Total", PAU_Cat=ifelse(deltaPAU <.1, "<.1", ifelse(deltaPAU >=.1 & deltaPAU <.2, "<.2", ifelse(deltaPAU >=.2 & deltaPAU <.3, "<.3", ifelse(deltaPAU >=.3 & deltaPAU <.4, "<.4", "<.5"))))) 
+
+Nuclear_dpau= effectsize %>% filter(deltaPAU <0) %>% inner_join(PAS, by="intron") %>% select(-logef,-Nuclear,-Total) %>% mutate(fraction="Nuclear", PAU_Cat=ifelse(deltaPAU >-.1, "<.1", ifelse(deltaPAU <=-.1 & deltaPAU > -.2, "<.2", ifelse(deltaPAU <=-.2 & deltaPAU >-.3, "<.3", ifelse(deltaPAU <=-.3 & deltaPAU >-.4, "<.4", "<.5")))))
+```
+
+
+Merge these together to start grouping: 
+
+```{r}
+allPAU=as.data.frame(rbind(Total_dpau, Nuclear_dpau)) %>% group_by(fraction, PAU_Cat, loc ) %>% summarise(nperLoc=n()) %>% full_join(PAS_loc, by ="loc") %>% mutate(Prop=nperLoc/nloc)
+```
+
+Plot it:
+
+```{r}
+ggplot(allPAU, aes(x=loc,y=Prop, group=fraction, fill=fraction)) + geom_bar(stat="identity", position = "dodge") + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c("deepskyblue3","darkviolet")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Proportion of PAS by location and delta PAU")
+```
+```{r}
+allPAU_remove.1= allPAU %>% filter(PAU_Cat != "<.1")
+
+ggplot(allPAU_remove.1, aes(x=loc,y=Prop, group=fraction, fill=fraction)) + geom_bar(stat="identity", position = "dodge") + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c("deepskyblue3","darkviolet")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Proportion of PAS by location and delta PAU")
+```
+
+Proportion within group:
+
+
+```{r}
+allPAU_ingroup= allPAU %>% mutate(nCat=sum(nperLoc),proppercat=nperLoc/nCat)
+
+ggplot(allPAU_ingroup, aes(x=loc,y=proppercat, group=fraction, fill=fraction)) + geom_bar(stat="identity", position = "dodge") + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c("deepskyblue3","darkviolet")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Proportion of PAS by location and delta PAU")
+```
+
+
+##Distance to TSS:
+
+I need to pull in the TSS information so I can look at the distance between the differentially used peaks and by distance .
+
+```{r}
+tss=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "start", "end", "gene", "score", "strand") ,stringsAsFactors = F) %>% mutate(TSS= ifelse(strand=="+", start, end)) %>% select(gene, TSS, strand)
+```
+
+
+Seperate effect size introns:
+
+PAS base for + strand is end, PAS for neg stand in -
+```{r}
+effectsize_TSS= effectsize %>% separate(intron, into=c("chrom", "start", "end", "gene"),sep=":") %>% mutate(fraction=ifelse(deltaPAU < 0, "nuclear", "total")) %>% inner_join(tss, by="gene") %>% mutate(dist2PAS=ifelse(strand=="+", as.numeric(end)-as.numeric(TSS), as.numeric(TSS)-as.numeric(start))) 
+
+effectsize_TSS_tot= effectsize_TSS %>% filter(fraction=="total") %>% mutate( PAU_Cat=ifelse(deltaPAU <.1, "<.1", ifelse(deltaPAU >=.1 & deltaPAU <.2, "<.2", ifelse(deltaPAU >=.2 & deltaPAU <.3, "<.3", ifelse(deltaPAU >=.3 & deltaPAU <.4, "<.4", "<.5"))))) 
+
+
+effectsize_TSS_nuc=effectsize_TSS %>% filter(fraction=="nuclear") %>% mutate( PAU_Cat=ifelse(deltaPAU >-.1, "<.1", ifelse(deltaPAU <=-.1 & deltaPAU > -.2, "<.2", ifelse(deltaPAU <=-.2 & deltaPAU >-.3, "<.3", ifelse(deltaPAU <=-.3 & deltaPAU >-.4, "<.4", "<.5")))))
+
+
+effectsize_TSS_cat=as.data.frame(rbind(effectsize_TSS_tot, effectsize_TSS_nuc)) %>% filter(dist2PAS >0)
+```
+
+
+```{r}
+ggplot(effectsize_TSS_cat, aes(x=log10(dist2PAS), by=fraction, fill=fraction))+ geom_density(alpha=.4) + facet_grid(~PAU_Cat) + labs(title="Distance to TSS for differentialy used PAS")+scale_fill_manual(values=c("deepskyblue3","darkviolet")) 
+```
+
