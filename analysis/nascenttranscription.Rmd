@@ -50,7 +50,9 @@ RNA_geneMean=RNAgeneNames_long %>% group_by(GeneName) %>%summarise(Mean_RNA=mean
 
 Make transcription phenotype  
 ```{r}
-Transcription=FourSU_geneMean %>% inner_join(RNA_geneMean, by="GeneName") %>% mutate(Transcription=Mean_4su/(Mean_4su + Mean_RNA)) %>% dplyr::select(GeneName, Transcription) %>% rename("gene"=GeneName)
+Transcription=FourSU_geneMean %>% inner_join(RNA_geneMean, by="GeneName") %>% mutate(Transcription=Mean_4su/(Mean_4su + Mean_RNA)) %>% dplyr::select(GeneName, Transcription) %>% dplyr::rename("gene"=GeneName)
+
+Transcription2=FourSU_geneMean %>% inner_join(RNA_geneMean, by="GeneName") %>% mutate(Transcription=Mean_4su/Mean_RNA) %>% dplyr::select(GeneName, Transcription) %>% dplyr::rename("gene"=GeneName)
 ```
 ##APA phenotype  
 5 perc apa 
@@ -61,7 +63,7 @@ peaknumlist=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.5perc.bed"
 Nuclear apa 
 
 ```{r}
-NucAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% select(-chrom , -start, -end, -strand, -loc)
+NucAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% dplyr::select(-chrom , -start, -end, -strand, -loc)
 
 NucApaMelt=melt(NucAPA, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
 
@@ -73,7 +75,7 @@ NucAPA_bygene= NucApaMelt %>% group_by(gene,Individual) %>% summarise(NuclearSum
 total apa 
 
 ```{r}
-TotAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% select(-chrom , -start, -end, -strand, -loc)
+TotAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% dplyr::select(-chrom , -start, -end, -strand, -loc)
 
 TotApaMelt=melt(TotAPA, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
 
@@ -149,4 +151,157 @@ Plot:
 ggplot(APAandTranscrption, aes(x=Transcription, y=APAVal))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="Nuclear/Nuclear+Total", title="Relationship between APA fraction and transcription") + scale_color_viridis()
 ```
 
+
+##Split Nuclear by intronic  
+
+
+###Nuclear intronic:
+I will have to change the gene names for the 3' info:  
+
+```{r}
+NucAPAIntron=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% filter(loc=="intron")%>% dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+NucApaIntronMelt=melt(NucAPAIntron, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
+
+
+NucAPAIntron_bygene= NucApaIntronMelt %>% group_by(gene,Individual) %>% summarise(NuclearIntronSum=sum(count))
+```
+
+
+###Total UTR  
+
+```{r}
+TotUTRAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>%filter(loc=="utr3") %>%  dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+TotApaUTRMelt=melt(TotUTRAPA, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
+
+
+TotAPAUTR_bygene= TotApaUTRMelt %>% group_by(gene,Individual) %>% summarise(TotalUTRSum=sum(count))
+```
+
+
+```{r}
+
+
+ApaBothFracLoc=TotAPAUTR_bygene %>% inner_join(NucAPAIntron_bygene, by=c("gene", "Individual"))
+
+ApaBothFracLoc_melt=melt(ApaBothFracLoc, id.vars=c("gene", "Individual"),value.name="APA_val" ) %>% mutate(fraction=ifelse(variable=="TotalUTRSum", "total", "nuclear"), line=paste("NA", substring(Individual, 2), sep="")) %>% dplyr::select(gene, fraction, line, APA_val)
+
+
+ApaBothFracLocStand=ApaBothFracLoc_melt %>% full_join(metadata, by=c("line", "fraction")) %>% mutate(StandApa=APA_val/Mapped_noMP)
+
+ApaBothFracLocStand_geneMean=ApaBothFracLocStand %>% group_by(fraction, gene) %>% summarise(meanAPA=mean(StandApa, na.rm=T))
+
+ApaBothFracLocStand_geneMean_spread= spread(ApaBothFracLocStand_geneMean,fraction,meanAPA ) %>% mutate(APAValLoc=nuclear/(total+nuclear)) 
+
+ApaBothFracLocStand_geneMean_spread2= spread(ApaBothFracLocStand_geneMean,fraction,meanAPA ) %>% mutate(APAValLoc=nuclear/total) 
+```
+Join this with the transcription info:
+
+```{r}
+APAlocationandTranscrption= Transcription %>% inner_join(ApaBothFracLocStand_geneMean_spread, by="gene")
+APAlocationandTranscrption$density <- get_density(APAlocationandTranscrption$APAValLoc, APAlocationandTranscrption$Transcription, n = 100)
+
+```
+
+
+```{r}
+ggplot(APAlocationandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="NuclearIntron/TotalUTR + IntronNuclear", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+```
+
+```{r}
+summary(lm(data=APAlocationandTranscrption, APAValLoc~Transcription))
+```
+Just the ratio:
+
+```{r}
+APAlocationandTranscrption2= Transcription2 %>% inner_join(ApaBothFracLocStand_geneMean_spread2, by="gene")
+APAlocationandTranscrption2$density <- get_density(APAlocationandTranscrption2$APAValLoc, APAlocationandTranscrption2$Transcription, n = 100)
+summary(lm(data=APAlocationandTranscrption2, log10(APAValLoc)~log10(Transcription)))
+
+ggplot(APAlocationandTranscrption2, aes(x=log10(Transcription), y=log10(APAValLoc)))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="log10(4su/RNA)", y="log10(NuclearIntron/TotalUTR)", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+```
+
+##Compare nuclear and total UTR  
+
+```{r}
+NucAPAUTR=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% filter(loc=="utr3")%>% dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+NucAPAUTRMelt=melt(NucAPAUTR, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
+
+
+NucAPAUTR_bygene= NucAPAUTRMelt %>% group_by(gene,Individual) %>% summarise(NuclearUTRSum=sum(count))
+```
+
+```{r}
+ApaBothFracUTR=TotAPAUTR_bygene %>% inner_join(NucAPAUTR_bygene, by=c("gene", "Individual"))
+
+ApaBothFracUTR_melt=melt(ApaBothFracUTR, id.vars=c("gene", "Individual"),value.name="APA_val" ) %>% mutate(fraction=ifelse(variable=="TotalUTRSum", "total", "nuclear"), line=paste("NA", substring(Individual, 2), sep="")) %>% dplyr::select(gene, fraction, line, APA_val)
+
+
+ApaBothFracUTRStand=ApaBothFracUTR_melt %>% full_join(metadata, by=c("line", "fraction")) %>% mutate(StandApa=APA_val/Mapped_noMP)
+
+ApaBothFracUTRStand_geneMean=ApaBothFracUTRStand %>% group_by(fraction, gene) %>% summarise(meanAPA=mean(StandApa, na.rm=T))
+
+ApaBothFracUTRStand_geneMean_spread= spread(ApaBothFracUTRStand_geneMean,fraction,meanAPA ) %>% mutate(APAValLoc=nuclear/total)
+ApaBothFracUTRStand_geneMean_spread2= spread(ApaBothFracUTRStand_geneMean,fraction,meanAPA ) %>% mutate(APAValLoc=nuclear/(total+nuclear))
+```
+
+
+THis is nuclear vs total only looking at teh UTR:  
+```{r}
+APAUTRandTranscrption= Transcription %>% inner_join(ApaBothFracUTRStand_geneMean_spread, by="gene")
+APAUTRandTranscrption$density <- get_density(APAUTRandTranscrption$APAValLoc, APAUTRandTranscrption$Transcription, n = 100)
+
+
+summary(lm(data=APAUTRandTranscrption, log10(APAValLoc)~log10(Transcription)))
+
+ggplot(APAUTRandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/RNA", y="NuclearUTR/TotalUTR", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+
+
+```
+
+```{r}
+APAUTRandTranscrption2= Transcription %>% inner_join(ApaBothFracUTRStand_geneMean_spread2, by="gene")
+APAUTRandTranscrption2$density <- get_density(APAUTRandTranscrption2$APAValLoc, APAUTRandTranscrption2$Transcription, n = 100)
+
+
+summary(lm(data=APAUTRandTranscrption2, log10(APAValLoc)~log10(Transcription)))
+
+ggplot(APAUTRandTranscrption2, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/RNA+4su", y="NuclearUTR/TotalUTR+NuclearUTR", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+
+```
+
+##Intron Nuclear over all nuclear
+
+Nuclear intron= NucAPAIntron_bygene
+
+all nuclear =NucAPA_bygene
+
+
+Create this pheno:
+
+```{r}
+ApaNuclear_byloc=NucAPAIntron_bygene %>% inner_join(NucAPA_bygene, by=c("gene", "Individual")) %>% mutate(IntronOverAll=NuclearIntronSum/NuclearSum) %>% mutate(fraction="nuclear",line=paste("NA", substring(Individual, 2), sep="")) %>% dplyr::select(gene, fraction, line, IntronOverAll) %>% group_by(gene) %>% filter(IntronOverAll!=0) %>%  summarise(MeanIntronoverAll=mean(IntronOverAll)) %>% dplyr::rename("GeneName"=gene)
+```
+
+
+Join with RNA 
+
+```{r}
+nuclearandRNA=ApaNuclear_byloc %>% inner_join(RNA_geneMean, by="GeneName")
+
+nuclearandRNA$density <- get_density(nuclearandRNA$MeanIntronoverAll, nuclearandRNA$Mean_RNA, n = 100)
+```
+
+Plot:
+
+```{r}
+ggplot(nuclearandRNA, aes(x=log10(Mean_RNA), y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="log10(RNA)", y="NuclearIntron/NuclearAll", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+```
+```{r}
+
+summary(lm(data=nuclearandRNA, MeanIntronoverAll~log10(Mean_RNA)))
+
+```
 
