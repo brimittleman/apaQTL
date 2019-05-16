@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6targetblank1df3fe1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6" target="_blank">1df3fe1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree75f456708c9fb69499addbde5ed57b5f6370be83targetblank75f4567a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/75f456708c9fb69499addbde5ed57b5f6370be83" target="_blank">75f4567</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6targetblank1df3fe1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree75f456708c9fb69499addbde5ed57b5f6370be83targetblank75f4567a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -676,6 +676,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/75f456708c9fb69499addbde5ed57b5f6370be83/analysis/nascenttranscription.Rmd" target="_blank">75f4567</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+<td>
+add total intron/all
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/460e1fb1112f135cc0704c5a91d932f16a930450/docs/nascenttranscription.html" target="_blank">460e1fb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -934,6 +968,43 @@ ApaBothFracLocStand_geneMean_spread2= spread(ApaBothFracLocStand_geneMean,fracti
 APAlocationandTranscrption$density &lt;- get_density(APAlocationandTranscrption$APAValLoc, APAlocationandTranscrption$Transcription, n = 100)</code></pre>
 <pre class="r"><code>ggplot(APAlocationandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/4su+RNA&quot;, y=&quot;NuclearIntron/TotalUTR + IntronNuclear&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/460e1fb1112f135cc0704c5a91d932f16a930450/docs/figure/nascenttranscription.Rmd/unnamed-chunk-18-1.png" target="_blank">460e1fb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(lm(data=APAlocationandTranscrption, APAValLoc~Transcription))</code></pre>
 <pre><code>
 Call:
@@ -977,6 +1048,43 @@ Multiple R-squared:  0.04766,   Adjusted R-squared:  0.04749
 F-statistic: 274.8 on 1 and 5491 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>ggplot(APAlocationandTranscrption2, aes(x=log10(Transcription), y=log10(APAValLoc)))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;log10(4su/RNA)&quot;, y=&quot;log10(NuclearIntron/TotalUTR)&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/460e1fb1112f135cc0704c5a91d932f16a930450/docs/figure/nascenttranscription.Rmd/unnamed-chunk-20-1.png" target="_blank">460e1fb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="compare-nuclear-and-total-utr" class="section level2">
@@ -1024,6 +1132,43 @@ Multiple R-squared:  0.03501,   Adjusted R-squared:  0.03488
 F-statistic: 281.3 on 1 and 7753 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>ggplot(APAUTRandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/RNA&quot;, y=&quot;NuclearUTR/TotalUTR&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
+Past versions of unnamed-chunk-23-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-23-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/460e1fb1112f135cc0704c5a91d932f16a930450/docs/figure/nascenttranscription.Rmd/unnamed-chunk-23-1.png" target="_blank">460e1fb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>APAUTRandTranscrption2= Transcription %&gt;% inner_join(ApaBothFracUTRStand_geneMean_spread2, by=&quot;gene&quot;)
 APAUTRandTranscrption2$density &lt;- get_density(APAUTRandTranscrption2$APAValLoc, APAUTRandTranscrption2$Transcription, n = 100)
 
@@ -1049,6 +1194,43 @@ Multiple R-squared:  0.04251,   Adjusted R-squared:  0.04239
 F-statistic: 344.2 on 1 and 7753 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>ggplot(APAUTRandTranscrption2, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/RNA+4su&quot;, y=&quot;NuclearUTR/TotalUTR+NuclearUTR&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
+Past versions of unnamed-chunk-24-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-24-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/460e1fb1112f135cc0704c5a91d932f16a930450/docs/figure/nascenttranscription.Rmd/unnamed-chunk-24-1.png" target="_blank">460e1fb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="intron-nuclear-over-all-nuclear" class="section level2">
 <h2>Intron Nuclear over all nuclear</h2>
@@ -1063,6 +1245,43 @@ nuclearandRNA$density &lt;- get_density(nuclearandRNA$MeanIntronoverAll, nuclear
 <p>Plot:</p>
 <pre class="r"><code>ggplot(nuclearandRNA, aes(x=log10(Mean_RNA), y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;log10(RNA)&quot;, y=&quot;NuclearIntron/NuclearAll&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-27-1">
+Past versions of unnamed-chunk-27-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-27-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/460e1fb1112f135cc0704c5a91d932f16a930450/docs/figure/nascenttranscription.Rmd/unnamed-chunk-27-1.png" target="_blank">460e1fb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(lm(data=nuclearandRNA, MeanIntronoverAll~log10(Mean_RNA)))</code></pre>
 <pre><code>
 Call:
@@ -1082,6 +1301,100 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 0.2018 on 5560 degrees of freedom
 Multiple R-squared:  0.1182,    Adjusted R-squared:  0.1181 
 F-statistic: 745.5 on 1 and 5560 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div id="same-plot-with-transcription-phenotype-on-bottom" class="section level3">
+<h3>Same plot with transcription phenotype on bottom:</h3>
+<pre class="r"><code>ApaNuclear_byloc_rename=ApaNuclear_byloc %&gt;% dplyr::rename(&quot;gene&quot;=GeneName)
+nuclearandtranscription=ApaNuclear_byloc_rename %&gt;% inner_join(Transcription, by=&quot;gene&quot;)
+
+nuclearandtranscription$density &lt;- get_density(nuclearandtranscription$MeanIntronoverAll, nuclearandtranscription$Transcription, n = 100)
+
+ggplot(nuclearandtranscription, aes(x=Transcription, y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/4su+RNA&quot;, y=&quot;NuclearIntron/NuclearAll&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=nuclearandtranscription, MeanIntronoverAll~Transcription))</code></pre>
+<pre><code>
+Call:
+lm(formula = MeanIntronoverAll ~ Transcription, data = nuclearandtranscription)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.29935 -0.17119 -0.05628  0.12082  0.79573 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    0.14461    0.01530   9.452  &lt; 2e-16 ***
+Transcription  0.20500    0.02797   7.329 2.66e-13 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.2138 on 5560 degrees of freedom
+Multiple R-squared:  0.009567,  Adjusted R-squared:  0.009389 
+F-statistic: 53.71 on 1 and 5560 DF,  p-value: 2.658e-13</code></pre>
+</div>
+</div>
+<div id="intron-total-over-all-total" class="section level2">
+<h2>Intron Total over all Total</h2>
+<p>First I need to get the total intronic:</p>
+<pre class="r"><code>TotAPAIntron=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;%filter(loc==&quot;intron&quot;) %&gt;%  dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+TotAPAIntronMelt=melt(TotAPAIntron, id.vars =c( &quot;peakid&quot;, &quot;gene&quot;), value.name=&quot;count&quot;, variable.name=&quot;Ind&quot;) %&gt;% separate(Ind, into=c(&#39;Individual&#39;, &#39;fraction&#39;) ,sep=&quot;_&quot;)%&gt;% dplyr::select(peakid, gene, Individual, count)
+
+
+TotAPAIntron_bygene= TotAPAIntronMelt %&gt;% group_by(gene,Individual) %&gt;% summarise(TotalIntronSum=sum(count))</code></pre>
+<pre class="r"><code>ApaTotal_byloc=TotAPAIntron_bygene %&gt;% inner_join(TotAPA_bygene, by=c(&quot;gene&quot;, &quot;Individual&quot;)) %&gt;% mutate(IntronOverAll=TotalIntronSum/TotalSum) %&gt;% mutate(fraction=&quot;total&quot;,line=paste(&quot;NA&quot;, substring(Individual, 2), sep=&quot;&quot;)) %&gt;% dplyr::select(gene, fraction, line, IntronOverAll) %&gt;% group_by(gene) %&gt;% filter(IntronOverAll!=0) %&gt;%  summarise(MeanIntronoverAll=mean(IntronOverAll)) %&gt;% dplyr::rename(&quot;GeneName&quot;=gene)</code></pre>
+<p>Join with RNA</p>
+<pre class="r"><code>totalandRNA=ApaTotal_byloc %&gt;% inner_join(RNA_geneMean, by=&quot;GeneName&quot;)
+
+totalandRNA$density &lt;- get_density(totalandRNA$MeanIntronoverAll, totalandRNA$Mean_RNA, n = 100)</code></pre>
+<p>Plot:</p>
+<pre class="r"><code>ggplot(totalandRNA, aes(x=log10(Mean_RNA), y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;log10(RNA)&quot;, y=&quot;TotalIntron/TotalAll&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=totalandRNA, MeanIntronoverAll~log10(Mean_RNA)))</code></pre>
+<pre><code>
+Call:
+lm(formula = MeanIntronoverAll ~ log10(Mean_RNA), data = totalandRNA)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.30265 -0.10190 -0.03972  0.05381  0.92485 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     -0.445003   0.019435  -22.90   &lt;2e-16 ***
+log10(Mean_RNA) -0.145939   0.004654  -31.36   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1605 on 5560 degrees of freedom
+Multiple R-squared:  0.1503,    Adjusted R-squared:  0.1501 
+F-statistic: 983.2 on 1 and 5560 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div id="same-plot-with-transcription-phenotype-on-bottom-1" class="section level3">
+<h3>Same plot with transcription phenotype on bottom:</h3>
+<pre class="r"><code>ApaTotal_byloc_rename=ApaTotal_byloc %&gt;% dplyr::rename(&quot;gene&quot;=GeneName)
+totalandtranscription=ApaTotal_byloc_rename %&gt;% inner_join(Transcription, by=&quot;gene&quot;)
+
+totalandtranscription$density &lt;- get_density(totalandtranscription$MeanIntronoverAll, totalandtranscription$Transcription, n = 100)
+
+ggplot(totalandtranscription, aes(x=Transcription, y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/4su+RNA&quot;, y=&quot;TotalIntron/TotalAll&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=totalandtranscription, MeanIntronoverAll~Transcription))</code></pre>
+<pre><code>
+Call:
+lm(formula = MeanIntronoverAll ~ Transcription, data = totalandtranscription)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.19578 -0.11811 -0.05860  0.05286  0.87881 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    0.07454    0.01240   6.012 1.95e-09 ***
+Transcription  0.16028    0.02267   7.070 1.74e-12 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1733 on 5560 degrees of freedom
+Multiple R-squared:  0.00891,   Adjusted R-squared:  0.008732 
+F-statistic: 49.99 on 1 and 5560 DF,  p-value: 1.739e-12</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1129,6 +1442,7 @@ loaded via a namespace (and not attached):
 [41] MASS_7.3-51.1    xml2_1.2.0       lubridate_1.7.4  assertthat_0.2.0
 [45] rmarkdown_1.10   httr_1.3.1       rstudioapi_0.10  R6_2.3.0        
 [49] nlme_3.1-137     git2r_0.23.0     compiler_3.5.1  </code></pre>
+</div>
 </div>
 </div>
 
