@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-15
+<strong>Last updated:</strong> 2019-05-16
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef484dcdb4493c72bb05e76cd64d14389de036457targetblankf484dcda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f484dcdb4493c72bb05e76cd64d14389de036457" target="_blank">f484dcd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6targetblank1df3fe1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6" target="_blank">1df3fe1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef484dcdb4493c72bb05e76cd64d14389de036457targetblankf484dcda" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6targetblank1df3fe1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -622,13 +622,16 @@ Untracked files:
     Untracked:  data/sort_waspfilter/
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
+    Untracked:  output/._meanCorrelationPhenotypes.svg
     Untracked:  output/dtPlots/
     Untracked:  output/fastqc/
+    Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
     Modified:   analysis/PASusageQC.Rmd
     Modified:   analysis/choosePCs.Rmd
     Modified:   analysis/corrbetweenind.Rmd
+    Modified:   analysis/nucintronicanalysis.Rmd
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_permuted.sh
@@ -678,6 +681,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1df3fe1053fa61acd4d2ca8f6a36287fd5ebf8f6/analysis/nascenttranscription.Rmd" target="_blank">1df3fe1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+<td>
+seperate fractions by locations
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/81a3e1646c908c34822af2ce80eac2e07ee602d6/docs/nascenttranscription.html" target="_blank">81a3e16</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/f484dcdb4493c72bb05e76cd64d14389de036457/analysis/nascenttranscription.Rmd" target="_blank">f484dcd</a>
 </td>
 <td>
@@ -702,12 +739,12 @@ library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(viridis)</code></pre>
@@ -735,21 +772,23 @@ RNAgeneNames_long=melt(RNA_geneNames,id.vars = &quot;GeneName&quot;, value.name 
 
 RNA_geneMean=RNAgeneNames_long %&gt;% group_by(GeneName) %&gt;%summarise(Mean_RNA=mean(RNA))</code></pre>
 <p>Make transcription phenotype</p>
-<pre class="r"><code>Transcription=FourSU_geneMean %&gt;% inner_join(RNA_geneMean, by=&quot;GeneName&quot;) %&gt;% mutate(Transcription=Mean_4su/(Mean_4su + Mean_RNA)) %&gt;% dplyr::select(GeneName, Transcription) %&gt;% rename(&quot;gene&quot;=GeneName)</code></pre>
+<pre class="r"><code>Transcription=FourSU_geneMean %&gt;% inner_join(RNA_geneMean, by=&quot;GeneName&quot;) %&gt;% mutate(Transcription=Mean_4su/(Mean_4su + Mean_RNA)) %&gt;% dplyr::select(GeneName, Transcription) %&gt;% dplyr::rename(&quot;gene&quot;=GeneName)
+
+Transcription2=FourSU_geneMean %&gt;% inner_join(RNA_geneMean, by=&quot;GeneName&quot;) %&gt;% mutate(Transcription=Mean_4su/Mean_RNA) %&gt;% dplyr::select(GeneName, Transcription) %&gt;% dplyr::rename(&quot;gene&quot;=GeneName)</code></pre>
 </div>
 <div id="apa-phenotype" class="section level2">
 <h2>APA phenotype</h2>
 <p>5 perc apa</p>
 <pre class="r"><code>peaknumlist=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.5perc.bed&quot;, stringsAsFactors = F, header=F, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;id&quot;, &quot;score&quot;, &quot;strand&quot;))  %&gt;% separate(id, into=c(&quot;peaknum&quot;, &quot;geneid&quot;), sep=&quot;:&quot;) %&gt;% mutate(peakid=paste(&quot;peak&quot;, peaknum,sep=&quot;&quot;))</code></pre>
 <p>Nuclear apa</p>
-<pre class="r"><code>NucAPA=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% select(-chrom , -start, -end, -strand, -loc)
+<pre class="r"><code>NucAPA=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% dplyr::select(-chrom , -start, -end, -strand, -loc)
 
 NucApaMelt=melt(NucAPA, id.vars =c( &quot;peakid&quot;, &quot;gene&quot;), value.name=&quot;count&quot;, variable.name=&quot;Ind&quot;) %&gt;% separate(Ind, into=c(&#39;Individual&#39;, &#39;fraction&#39;) ,sep=&quot;_&quot;)%&gt;% dplyr::select(peakid, gene, Individual, count)
 
 
 NucAPA_bygene= NucApaMelt %&gt;% group_by(gene,Individual) %&gt;% summarise(NuclearSum=sum(count))</code></pre>
 <p>total apa</p>
-<pre class="r"><code>TotAPA=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% select(-chrom , -start, -end, -strand, -loc)
+<pre class="r"><code>TotAPA=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% dplyr::select(-chrom , -start, -end, -strand, -loc)
 
 TotApaMelt=melt(TotAPA, id.vars =c( &quot;peakid&quot;, &quot;gene&quot;), value.name=&quot;count&quot;, variable.name=&quot;Ind&quot;) %&gt;% separate(Ind, into=c(&#39;Individual&#39;, &#39;fraction&#39;) ,sep=&quot;_&quot;)%&gt;% dplyr::select(peakid, gene, Individual, count)
 
@@ -820,6 +859,229 @@ F-statistic: 443.6 on 1 and 7885 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Plot:</p>
 <pre class="r"><code>ggplot(APAandTranscrption, aes(x=Transcription, y=APAVal))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/4su+RNA&quot;, y=&quot;Nuclear/Nuclear+Total&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/81a3e1646c908c34822af2ce80eac2e07ee602d6/docs/figure/nascenttranscription.Rmd/unnamed-chunk-13-1.png" target="_blank">81a3e16</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="split-nuclear-by-intronic" class="section level2">
+<h2>Split Nuclear by intronic</h2>
+<div id="nuclear-intronic" class="section level3">
+<h3>Nuclear intronic:</h3>
+<p>I will have to change the gene names for the 3’ info:</p>
+<pre class="r"><code>NucAPAIntron=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;intron&quot;)%&gt;% dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+NucApaIntronMelt=melt(NucAPAIntron, id.vars =c( &quot;peakid&quot;, &quot;gene&quot;), value.name=&quot;count&quot;, variable.name=&quot;Ind&quot;) %&gt;% separate(Ind, into=c(&#39;Individual&#39;, &#39;fraction&#39;) ,sep=&quot;_&quot;)%&gt;% dplyr::select(peakid, gene, Individual, count)
+
+
+NucAPAIntron_bygene= NucApaIntronMelt %&gt;% group_by(gene,Individual) %&gt;% summarise(NuclearIntronSum=sum(count))</code></pre>
+</div>
+<div id="total-utr" class="section level3">
+<h3>Total UTR</h3>
+<pre class="r"><code>TotUTRAPA=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;%filter(loc==&quot;utr3&quot;) %&gt;%  dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+TotApaUTRMelt=melt(TotUTRAPA, id.vars =c( &quot;peakid&quot;, &quot;gene&quot;), value.name=&quot;count&quot;, variable.name=&quot;Ind&quot;) %&gt;% separate(Ind, into=c(&#39;Individual&#39;, &#39;fraction&#39;) ,sep=&quot;_&quot;)%&gt;% dplyr::select(peakid, gene, Individual, count)
+
+
+TotAPAUTR_bygene= TotApaUTRMelt %&gt;% group_by(gene,Individual) %&gt;% summarise(TotalUTRSum=sum(count))</code></pre>
+<pre class="r"><code>ApaBothFracLoc=TotAPAUTR_bygene %&gt;% inner_join(NucAPAIntron_bygene, by=c(&quot;gene&quot;, &quot;Individual&quot;))
+
+ApaBothFracLoc_melt=melt(ApaBothFracLoc, id.vars=c(&quot;gene&quot;, &quot;Individual&quot;),value.name=&quot;APA_val&quot; ) %&gt;% mutate(fraction=ifelse(variable==&quot;TotalUTRSum&quot;, &quot;total&quot;, &quot;nuclear&quot;), line=paste(&quot;NA&quot;, substring(Individual, 2), sep=&quot;&quot;)) %&gt;% dplyr::select(gene, fraction, line, APA_val)
+
+
+ApaBothFracLocStand=ApaBothFracLoc_melt %&gt;% full_join(metadata, by=c(&quot;line&quot;, &quot;fraction&quot;)) %&gt;% mutate(StandApa=APA_val/Mapped_noMP)
+
+ApaBothFracLocStand_geneMean=ApaBothFracLocStand %&gt;% group_by(fraction, gene) %&gt;% summarise(meanAPA=mean(StandApa, na.rm=T))
+
+ApaBothFracLocStand_geneMean_spread= spread(ApaBothFracLocStand_geneMean,fraction,meanAPA ) %&gt;% mutate(APAValLoc=nuclear/(total+nuclear)) 
+
+ApaBothFracLocStand_geneMean_spread2= spread(ApaBothFracLocStand_geneMean,fraction,meanAPA ) %&gt;% mutate(APAValLoc=nuclear/total) </code></pre>
+<p>Join this with the transcription info:</p>
+<pre class="r"><code>APAlocationandTranscrption= Transcription %&gt;% inner_join(ApaBothFracLocStand_geneMean_spread, by=&quot;gene&quot;)
+APAlocationandTranscrption$density &lt;- get_density(APAlocationandTranscrption$APAValLoc, APAlocationandTranscrption$Transcription, n = 100)</code></pre>
+<pre class="r"><code>ggplot(APAlocationandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/4su+RNA&quot;, y=&quot;NuclearIntron/TotalUTR + IntronNuclear&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=APAlocationandTranscrption, APAValLoc~Transcription))</code></pre>
+<pre><code>
+Call:
+lm(formula = APAValLoc ~ Transcription, data = APAlocationandTranscrption)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.40940 -0.19655 -0.07216  0.15348  0.80483 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    0.02328    0.01768   1.317    0.188    
+Transcription  0.47752    0.03232  14.777   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.2455 on 5491 degrees of freedom
+Multiple R-squared:  0.03825,   Adjusted R-squared:  0.03807 
+F-statistic: 218.4 on 1 and 5491 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Just the ratio:</p>
+<pre class="r"><code>APAlocationandTranscrption2= Transcription2 %&gt;% inner_join(ApaBothFracLocStand_geneMean_spread2, by=&quot;gene&quot;)
+APAlocationandTranscrption2$density &lt;- get_density(APAlocationandTranscrption2$APAValLoc, APAlocationandTranscrption2$Transcription, n = 100)
+summary(lm(data=APAlocationandTranscrption2, log10(APAValLoc)~log10(Transcription)))</code></pre>
+<pre><code>
+Call:
+lm(formula = log10(APAValLoc) ~ log10(Transcription), data = APAlocationandTranscrption2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.2920 -0.4924  0.0373  0.5100  3.3917 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          -0.69768    0.01097  -63.59   &lt;2e-16 ***
+log10(Transcription)  0.90749    0.05474   16.58   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.7643 on 5491 degrees of freedom
+Multiple R-squared:  0.04766,   Adjusted R-squared:  0.04749 
+F-statistic: 274.8 on 1 and 5491 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>ggplot(APAlocationandTranscrption2, aes(x=log10(Transcription), y=log10(APAValLoc)))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;log10(4su/RNA)&quot;, y=&quot;log10(NuclearIntron/TotalUTR)&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="compare-nuclear-and-total-utr" class="section level2">
+<h2>Compare nuclear and total UTR</h2>
+<pre class="r"><code>NucAPAUTR=read.table(&quot;../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc&quot;, stringsAsFactors = F, header = T) %&gt;% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %&gt;% separate(Geneid, into=c(&quot;peakid&quot;,&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;strand&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% semi_join(peaknumlist, by=&quot;peakid&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;utr3&quot;)%&gt;% dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+NucAPAUTRMelt=melt(NucAPAUTR, id.vars =c( &quot;peakid&quot;, &quot;gene&quot;), value.name=&quot;count&quot;, variable.name=&quot;Ind&quot;) %&gt;% separate(Ind, into=c(&#39;Individual&#39;, &#39;fraction&#39;) ,sep=&quot;_&quot;)%&gt;% dplyr::select(peakid, gene, Individual, count)
+
+
+NucAPAUTR_bygene= NucAPAUTRMelt %&gt;% group_by(gene,Individual) %&gt;% summarise(NuclearUTRSum=sum(count))</code></pre>
+<pre class="r"><code>ApaBothFracUTR=TotAPAUTR_bygene %&gt;% inner_join(NucAPAUTR_bygene, by=c(&quot;gene&quot;, &quot;Individual&quot;))
+
+ApaBothFracUTR_melt=melt(ApaBothFracUTR, id.vars=c(&quot;gene&quot;, &quot;Individual&quot;),value.name=&quot;APA_val&quot; ) %&gt;% mutate(fraction=ifelse(variable==&quot;TotalUTRSum&quot;, &quot;total&quot;, &quot;nuclear&quot;), line=paste(&quot;NA&quot;, substring(Individual, 2), sep=&quot;&quot;)) %&gt;% dplyr::select(gene, fraction, line, APA_val)
+
+
+ApaBothFracUTRStand=ApaBothFracUTR_melt %&gt;% full_join(metadata, by=c(&quot;line&quot;, &quot;fraction&quot;)) %&gt;% mutate(StandApa=APA_val/Mapped_noMP)
+
+ApaBothFracUTRStand_geneMean=ApaBothFracUTRStand %&gt;% group_by(fraction, gene) %&gt;% summarise(meanAPA=mean(StandApa, na.rm=T))
+
+ApaBothFracUTRStand_geneMean_spread= spread(ApaBothFracUTRStand_geneMean,fraction,meanAPA ) %&gt;% mutate(APAValLoc=nuclear/total)
+ApaBothFracUTRStand_geneMean_spread2= spread(ApaBothFracUTRStand_geneMean,fraction,meanAPA ) %&gt;% mutate(APAValLoc=nuclear/(total+nuclear))</code></pre>
+<p>THis is nuclear vs total only looking at teh UTR:</p>
+<pre class="r"><code>APAUTRandTranscrption= Transcription %&gt;% inner_join(ApaBothFracUTRStand_geneMean_spread, by=&quot;gene&quot;)
+APAUTRandTranscrption$density &lt;- get_density(APAUTRandTranscrption$APAValLoc, APAUTRandTranscrption$Transcription, n = 100)
+
+
+summary(lm(data=APAUTRandTranscrption, log10(APAValLoc)~log10(Transcription)))</code></pre>
+<pre><code>
+Call:
+lm(formula = log10(APAValLoc) ~ log10(Transcription), data = APAUTRandTranscrption)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.69221 -0.18902 -0.00244  0.19660  0.90638 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          0.155656   0.008892   17.50   &lt;2e-16 ***
+log10(Transcription) 0.485080   0.028924   16.77   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.252 on 7753 degrees of freedom
+Multiple R-squared:  0.03501,   Adjusted R-squared:  0.03488 
+F-statistic: 281.3 on 1 and 7753 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>ggplot(APAUTRandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/RNA&quot;, y=&quot;NuclearUTR/TotalUTR&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>APAUTRandTranscrption2= Transcription %&gt;% inner_join(ApaBothFracUTRStand_geneMean_spread2, by=&quot;gene&quot;)
+APAUTRandTranscrption2$density &lt;- get_density(APAUTRandTranscrption2$APAValLoc, APAUTRandTranscrption2$Transcription, n = 100)
+
+
+summary(lm(data=APAUTRandTranscrption2, log10(APAValLoc)~log10(Transcription)))</code></pre>
+<pre><code>
+Call:
+lm(formula = log10(APAValLoc) ~ log10(Transcription), data = APAUTRandTranscrption2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.45055 -0.08567  0.01585  0.10118  0.37283 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          -0.23370    0.00447  -52.29   &lt;2e-16 ***
+log10(Transcription)  0.26974    0.01454   18.55   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1267 on 7753 degrees of freedom
+Multiple R-squared:  0.04251,   Adjusted R-squared:  0.04239 
+F-statistic: 344.2 on 1 and 7753 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>ggplot(APAUTRandTranscrption2, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/RNA+4su&quot;, y=&quot;NuclearUTR/TotalUTR+NuclearUTR&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="intron-nuclear-over-all-nuclear" class="section level2">
+<h2>Intron Nuclear over all nuclear</h2>
+<p>Nuclear intron= NucAPAIntron_bygene</p>
+<p>all nuclear =NucAPA_bygene</p>
+<p>Create this pheno:</p>
+<pre class="r"><code>ApaNuclear_byloc=NucAPAIntron_bygene %&gt;% inner_join(NucAPA_bygene, by=c(&quot;gene&quot;, &quot;Individual&quot;)) %&gt;% mutate(IntronOverAll=NuclearIntronSum/NuclearSum) %&gt;% mutate(fraction=&quot;nuclear&quot;,line=paste(&quot;NA&quot;, substring(Individual, 2), sep=&quot;&quot;)) %&gt;% dplyr::select(gene, fraction, line, IntronOverAll) %&gt;% group_by(gene) %&gt;% filter(IntronOverAll!=0) %&gt;%  summarise(MeanIntronoverAll=mean(IntronOverAll)) %&gt;% dplyr::rename(&quot;GeneName&quot;=gene)</code></pre>
+<p>Join with RNA</p>
+<pre class="r"><code>nuclearandRNA=ApaNuclear_byloc %&gt;% inner_join(RNA_geneMean, by=&quot;GeneName&quot;)
+
+nuclearandRNA$density &lt;- get_density(nuclearandRNA$MeanIntronoverAll, nuclearandRNA$Mean_RNA, n = 100)</code></pre>
+<p>Plot:</p>
+<pre class="r"><code>ggplot(nuclearandRNA, aes(x=log10(Mean_RNA), y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;log10(RNA)&quot;, y=&quot;NuclearIntron/NuclearAll&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=nuclearandRNA, MeanIntronoverAll~log10(Mean_RNA)))</code></pre>
+<pre><code>
+Call:
+lm(formula = MeanIntronoverAll ~ log10(Mean_RNA), data = nuclearandRNA)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.39640 -0.15292 -0.04646  0.11444  0.84926 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     -0.408362   0.024437  -16.71   &lt;2e-16 ***
+log10(Mean_RNA) -0.159782   0.005852  -27.30   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.2018 on 5560 degrees of freedom
+Multiple R-squared:  0.1182,    Adjusted R-squared:  0.1181 
+F-statistic: 745.5 on 1 and 5560 DF,  p-value: &lt; 2.2e-16</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
