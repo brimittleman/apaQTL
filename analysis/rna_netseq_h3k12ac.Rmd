@@ -23,7 +23,7 @@ library(workflowr)
 
 
 ```{r}
-h3k27ac=read.table("../data/h3k27ac/H3K27acShyam_TSS_fixed.txt", header = T,stringsAsFactors = F) %>% select(-Chr, -Start, -End,-Strand, -Length) %>% rename("ID"=Geneid)
+h3k27ac=read.table("../data/h3k27ac/H3K27acShyam_TSS_fixed.txt", header = T,stringsAsFactors = F)%>% dplyr::select(-Chr, -Start, -End,-Strand, -Length) %>% dplyr::rename("ID"= Geneid)
 ```
 
 
@@ -31,25 +31,25 @@ h3k27ac=read.table("../data/h3k27ac/H3K27acShyam_TSS_fixed.txt", header = T,stri
 
 
 ```{r}
-RNA=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  select(gene_id,contains("RNAseq_14000")) %>%  rename("ID"=gene_id)
+RNA=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  dplyr::select(gene_id,contains("RNAseq_14000")) %>%  dplyr::rename("ID"=gene_id)
 ```
 I also have the kalisto TPM that I can try:  
 
 ```{r}
-RNA_TPM=read.table('../data/RNAseq/kallisto_RNAseq.txt', stringsAsFactors = F,header = T) %>% rename("ID"=gene)
+RNA_TPM=read.table('../data/RNAseq/kallisto_RNAseq.txt', stringsAsFactors = F,header = T) %>% dplyr::rename("ID"=gene)
 ```
 
 
 ##4su  
 
 ```{r}
-fourSU=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  select(gene_id,contains("4su_30")) %>% rename("ID"=gene_id)
+fourSU=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  dplyr::select(gene_id,contains("4su_30")) %>% dplyr::rename("ID"=gene_id)
 ```
 
 tpm 4su
 
 ```{r}
-foursu_tpm=read.table("../data/fourSU/kallisto_4sU.txt", header = T, stringsAsFactors = F) %>% rename("ID"=gene)
+foursu_tpm=read.table("../data/fourSU/kallisto_4sU.txt", header = T, stringsAsFactors = F) %>% dplyr::rename("ID"=gene)
 ```
 
 
@@ -72,7 +72,7 @@ python fixFChead_bothfrac.py ../data/netseq/netseq_TSS.fc ../data/netseq/netseq_
 
 
 ```{r}
-netseq=read.table("../data/netseq/netseq_TSS.fixed.fc", stringsAsFactors = F, header = T) %>% select(-Chr, -Strand, -Start, -Length, -End) %>% rename("ID"=Geneid)
+netseq=read.table("../data/netseq/netseq_TSS.fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Strand, -Start, -Length, -End) %>% dplyr::rename("ID"=Geneid)
 ```
 
 
@@ -82,19 +82,74 @@ netseq=read.table("../data/netseq/netseq_TSS.fixed.fc", stringsAsFactors = F, he
 I will join all of these based on the genes we have data for in all. 
 
 ```{r}
-allpheno=foursu_tpm %>% inner_join(h3k27ac, by="ID") %>% inner_join(RNA, by="ID") %>% inner_join(netseq, by="ID")
+allpheno=foursu_tpm %>% dplyr::inner_join(h3k27ac, by="ID") %>% dplyr::inner_join(RNA, by="ID") %>% dplyr::inner_join(netseq, by="ID")
 ```
 
 ```{r}
-allpheno_matrix= as.matrix(allpheno %>% select(-ID))
+allpheno_matrix= as.matrix(allpheno %>% dplyr::select(-ID))
 ```
 
 ```{r}
-allphenocorr= round(cor(allpheno_matrix,method="spearman"),2)
+
+my_palette <- colorRampPalette(c("white", "yellow", "orange", "red", "black"))(n = 100)
+allphenocorr= abs(round(cor(allpheno_matrix,method="spearman"),2))
 #4su, h3k27, RNA, netseq 
 colBar=c(rep("Red",20), rep("Green", 59), rep("Blue",69), rep("Purple", 16))
-heatmap.2(as.matrix(allphenocorr),trace="none", dendrogram='none',ColSideColors=colBar)
+heatmap.2(as.matrix(allphenocorr),trace="none", dendrogram='col',ColSideColors=colBar, col=my_palette)
           
 ```
 
+##Pairwise graphs averaging accross indviduals:
+First I will take the mean for all individuals for each phenotype:  
+
+
+```{r}
+h3k27ac_mean=melt(h3k27ac,id.vars = "ID") %>% group_by(ID) %>% summarize(H3K27AC=mean(value))%>% filter(H3K27AC!=0)
+
+RNA_mean=melt(RNA,id.vars = "ID") %>% group_by(ID) %>% summarize(Rna=mean(value)) %>% filter(Rna!=0)
+
+foursu_tpm_mean= melt(foursu_tpm,id.vars = "ID") %>% group_by(ID) %>% summarize(FourSU=mean(value))%>% filter(FourSU!=0)
+
+netseq_mean= melt(netseq,id.vars = "ID") %>% group_by(ID) %>% summarize(NetSeq=mean(value)) %>% filter(NetSeq!=0)
+
+```
+
+Join all of these:
+
+```{r}
+Allpheno_mean= h3k27ac_mean %>% inner_join(RNA_mean,by="ID") %>% inner_join(foursu_tpm_mean, by="ID") %>%   inner_join(netseq_mean, by="ID")
+
+```
+
+
+```{r}
+ggplotRegression <- function (fit) {
+
+require(ggplot2)
+
+ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  labs(title = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
+                     "Intercept =",signif(fit$coef[[1]],5 ),
+                     " Slope =",signif(fit$coef[[2]], 5),
+                     " P =",signif(summary(fit)$coef[2,4], 5)))
+}
+```
+
+
+Plots:
+
+```{r}
+
+ggplotRegression(lm(log10(Allpheno_mean$NetSeq)~ log10(Allpheno_mean$Rna)))
+```
+
+```{r}
+ggplotRegression(lm(log10(Allpheno_mean$FourSU)~ log10(Allpheno_mean$Rna)))
+```
+
+```{r}
+ggplotRegression(lm(log10(Allpheno_mean$H3K27AC)~ log10(Allpheno_mean$Rna)))
+```
 
