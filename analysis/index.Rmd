@@ -65,4 +65,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Relationship between APA fraction and nascent transcription](nascenttranscription.html)  
 
+* [Location of nuclear intronic peaks along introns](nucintronicanalysis.html)  
+
 

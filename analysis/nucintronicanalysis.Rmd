@@ -1,0 +1,50 @@
+---
+title: "Location of Nuclear Intronic PAS"
+author: "Briana Mittleman"
+date: "5/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I am interested in understanding where in the introns the nuclear peaks are. Are they closer to the three prime or five prime edge of the intron. This may help us understand if NMD is contributing to the loss of transcripts between the nuclear and total fraction.  
+
+I need to create an annotation with introns that do not overlap. For this I will use line up all of the exons for a gene then take the open spaces as introns.  
+```{r}
+
+library(tidyverse)
+library(workflowr)
+```
+
+
+```{r}
+nucIntronicPeaks=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc", stringsAsFactors = F, header = F,col.names = c("chr", "start", "end", "gene", "loc", "strand", "peak", "avgUsage")) %>% filter(loc=="intron")
+```
+
+I will need to assign each of these to an intron in the new annotation.  
+
+The genome annotation file, Transcript2GeneName.dms has the information i need. I will need to parse this file. I need all exons for a gene (longest transcript) The file has the exon starts and ends for each transcript.  
+
+It may be easiest to first subset to the longest transcripts for each of the genes. 
+
+
+Rpackages?
+
+https://rdrr.io/bioc/GenomicFeatures/man/exonicParts.html
+
+```{r}
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+```
+
+Pull out introns:
+
+```{r}
+intronic_parts2 <- intronicParts(txdb, linked.to.single.gene.only=TRUE)
+
+```
+
+
+Can I just assign all of the peaks to an intron and not allow multimapping? I could do something with bedtools intersect. I would need to require opposite strandedness in this case because the peaks are still opposite.  I could do this then choose the longest intron if thereare more than one that the peak overlaps.  
