@@ -1,0 +1,100 @@
+---
+title: "Relationship between RNA, net-seq, h3k27ac"
+author: "Briana Mittleman"
+date: "5/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I want to look at the correlation between the net seq daata, rna seq, 4su, and h3k27ac to understand the relationship between nascent transcription and steady state RNA. This will be similar to the analysis in Li et al 2016 figure 1c.  
+
+```{r}
+library(tidyverse)
+library(gplots)
+library(gdata)
+library(reshape2)
+library(workflowr)
+```
+
+##H3K27ac at TSS  
+
+
+```{r}
+h3k27ac=read.table("../data/h3k27ac/H3K27acShyam_TSS_fixed.txt", header = T,stringsAsFactors = F) %>% select(-Chr, -Start, -End,-Strand, -Length) %>% rename("ID"=Geneid)
+```
+
+
+##RNA seq
+
+
+```{r}
+RNA=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  select(gene_id,contains("RNAseqGeuvadis")) %>%  rename("ID"=gene_id)
+```
+I also have the kalisto TPM that I can try:  
+
+```{r}
+RNA_TPM=read.table('../data/RNAseq/kallisto_RNAseq.txt', stringsAsFactors = F,header = T) %>% rename("ID"=gene)
+```
+
+
+##4su  
+
+```{r}
+fourSU=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  select(gene_id,contains("4su_30")) %>% rename("ID"=gene_id)
+```
+
+tpm 4su
+
+```{r}
+foursu_tpm=read.table("../data/fourSU/kallisto_4sU.txt", header = T, stringsAsFactors = F) %>% rename("ID"=gene)
+```
+
+
+##Netseq  
+
+I want to quantify reads 1kb on either side of the TSS. I will use the gencode v19 annotations to match the files above. I need to convert the gtf file into an saf file with the TSS.  
+
+```{bash,eval=F}
+python makegencondeTSSfile.py
+```
+Run feature counts with the 16 net seq libraries and this TSS file.  
+
+```{bash,eval=F}
+sbatch netseqFC.sh
+```
+Fix header 
+```{bash,eval=F}
+python fixFChead_bothfrac.py ../data/netseq/netseq_TSS.fc ../data/netseq/netseq_TSS.fixed.fc
+```
+
+
+```{r}
+netseq=read.table("../data/netseq/netseq_TSS.fixed.fc", stringsAsFactors = F, header = T) %>% select(-Chr, -Strand, -Start, -Length, -End) %>% rename("ID"=Geneid)
+```
+
+
+
+##Correlation:
+
+I will join all of these based on the genes we have data for in all. 
+
+```{r}
+allpheno=foursu_tpm %>% inner_join(h3k27ac, by="ID") %>% inner_join(RNA_TPM, by="ID") %>% inner_join(netseq, by="ID")
+```
+
+```{r}
+allpheno_matrix= as.matrix(allpheno %>% select(-ID))
+```
+
+```{r}
+allphenocorr= round(cor(allpheno_matrix,method="spearman"),2)
+#4su, h3k27, RNA, netseq 
+colBar=c(rep("Red",20), rep("Green", 59), rep("Blue",20), rep("Purple", 16))
+heatmap.2(as.matrix(allphenocorr),trace="none", dendrogram='none',ColSideColors=colBar)
+          
+```
+
+
