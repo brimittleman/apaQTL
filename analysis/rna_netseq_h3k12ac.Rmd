@@ -31,7 +31,7 @@ h3k27ac=read.table("../data/h3k27ac/H3K27acShyam_TSS_fixed.txt", header = T,stri
 
 
 ```{r}
-RNA=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  select(gene_id,contains("RNAseqGeuvadis")) %>%  rename("ID"=gene_id)
+RNA=read.table("../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F)%>%  select(gene_id,contains("RNAseq_14000")) %>%  rename("ID"=gene_id)
 ```
 I also have the kalisto TPM that I can try:  
 
@@ -82,7 +82,7 @@ netseq=read.table("../data/netseq/netseq_TSS.fixed.fc", stringsAsFactors = F, he
 I will join all of these based on the genes we have data for in all. 
 
 ```{r}
-allpheno=foursu_tpm %>% inner_join(h3k27ac, by="ID") %>% inner_join(RNA_TPM, by="ID") %>% inner_join(netseq, by="ID")
+allpheno=foursu_tpm %>% inner_join(h3k27ac, by="ID") %>% inner_join(RNA, by="ID") %>% inner_join(netseq, by="ID")
 ```
 
 ```{r}
@@ -92,7 +92,7 @@ allpheno_matrix= as.matrix(allpheno %>% select(-ID))
 ```{r}
 allphenocorr= round(cor(allpheno_matrix,method="spearman"),2)
 #4su, h3k27, RNA, netseq 
-colBar=c(rep("Red",20), rep("Green", 59), rep("Blue",20), rep("Purple", 16))
+colBar=c(rep("Red",20), rep("Green", 59), rep("Blue",69), rep("Purple", 16))
 heatmap.2(as.matrix(allphenocorr),trace="none", dendrogram='none',ColSideColors=colBar)
           
 ```
