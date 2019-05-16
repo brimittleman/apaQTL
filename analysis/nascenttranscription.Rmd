@@ -1,0 +1,152 @@
+---
+title: "Nuclear fraction and nascent transcription"
+author: "Briana Mittleman"
+date: "5/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reshape2)
+library(workflowr)
+library(tidyverse)
+library(viridis)
+```
+
+
+Gene name switch file:
+
+```{r}
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'GeneName', 'source' ),stringsAsFactors = F)
+```
+##Create transcription phenotype  
+
+4su data
+```{r}
+FourSU=read.table(file = "../data/fourSU//tr_decay_table_norm.txt", header=T, stringsAsFactors = F) %>%  dplyr::select(gene_id,contains("4su_30"))
+
+
+FourSU_geneNames=FourSU %>% inner_join(geneNames, by="gene_id") %>% dplyr::select(GeneName, contains("4su_30"))
+
+FourgeneNames_long=melt(FourSU_geneNames,id.vars = "GeneName", value.name = "FourSU", variable.name = "FourSU_ind") %>% separate(FourSU_ind, into=c("type","time", "1400", "MAf", "Individual"), sep="_") %>% dplyr::select(GeneName, Individual, FourSU) 
+
+FourSU_geneMean=FourgeneNames_long %>% group_by(GeneName) %>%summarise(Mean_4su=mean(FourSU))
+```
+rna seq 
+
+```{r}
+RNA=read.table(file = "../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F) %>%  dplyr::select(gene_id,contains("RNAseq_14000"))
+
+
+RNA_geneNames=RNA %>% inner_join(geneNames, by="gene_id") %>% dplyr::select(GeneName, contains("RNA"))
+
+RNAgeneNames_long=melt(RNA_geneNames,id.vars = "GeneName", value.name = "RNA", variable.name = "RNA_ind") %>%   separate(RNA_ind, into=c("type", "1400", "MAf", "Individual"), sep="_") %>% dplyr::select(GeneName, Individual, RNA) 
+
+RNA_geneMean=RNAgeneNames_long %>% group_by(GeneName) %>%summarise(Mean_RNA=mean(RNA))
+```
+
+Make transcription phenotype  
+```{r}
+Transcription=FourSU_geneMean %>% inner_join(RNA_geneMean, by="GeneName") %>% mutate(Transcription=Mean_4su/(Mean_4su + Mean_RNA)) %>% dplyr::select(GeneName, Transcription) %>% rename("gene"=GeneName)
+```
+##APA phenotype  
+5 perc apa 
+```{r}
+peaknumlist=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.5perc.bed", stringsAsFactors = F, header=F, col.names = c("chr", "start","end", "id", "score", "strand"))  %>% separate(id, into=c("peaknum", "geneid"), sep=":") %>% mutate(peakid=paste("peak", peaknum,sep=""))
+```
+
+Nuclear apa 
+
+```{r}
+NucAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% select(-chrom , -start, -end, -strand, -loc)
+
+NucApaMelt=melt(NucAPA, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
+
+
+NucAPA_bygene= NucApaMelt %>% group_by(gene,Individual) %>% summarise(NuclearSum=sum(count))
+```
+
+
+total apa 
+
+```{r}
+TotAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% select(-chrom , -start, -end, -strand, -loc)
+
+TotApaMelt=melt(TotAPA, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
+
+
+TotAPA_bygene= TotApaMelt %>% group_by(gene,Individual) %>% summarise(TotalSum=sum(count))
+```
+Sum together:
+
+```{r}
+
+
+ApaBothFrac=TotAPA_bygene %>% inner_join(NucAPA_bygene, by=c("gene", "Individual"))
+
+ApaBothFrac_melt=melt(ApaBothFrac, id.vars=c("gene", "Individual"),value.name="APA_val" ) %>% mutate(fraction=ifelse(variable=="TotalSum", "total", "nuclear"), line=paste("NA", substring(Individual, 2), sep="")) %>% dplyr::select(gene, fraction, line, APA_val)
+
+```
+Normalize with meta data info:
+
+```{r}
+metadata=read.table("../data/MetaDataSequencing.txt", header = T,stringsAsFactors = F) %>% dplyr::select(line, fraction, Mapped_noMP)
+
+metadata$line= as.character(metadata$line)
+
+ApaBothFracStand=ApaBothFrac_melt %>% full_join(metadata, by=c("line", "fraction")) %>% mutate(StandApa=APA_val/Mapped_noMP)
+
+ApaBothFracStand_geneMean=ApaBothFracStand %>% group_by(fraction, gene) %>% summarise(meanAPA=mean(StandApa, na.rm=T))
+
+ApaBothFracStand_geneMean_spread= spread(ApaBothFracStand_geneMean,fraction,meanAPA ) %>% mutate(APAVal=nuclear/(total+ nuclear)) 
+
+```
+
+
+##Join data and plot  
+Density function:
+
+```{r}
+get_density <- function(x, y, ...) {
+  dens <- MASS::kde2d(x, y, ...)
+  ix <- findInterval(x, dens$x)
+  iy <- findInterval(y, dens$y)
+  ii <- cbind(ix, iy)
+  return(dens$z[ii])
+}
+
+set.seed(1)
+dat <- data.frame(
+  x = c(
+    rnorm(1e4, mean = 0, sd = 0.1),
+    rnorm(1e3, mean = 0, sd = 0.1)
+  ),
+  y = c(
+    rnorm(1e4, mean = 0, sd = 0.1),
+    rnorm(1e3, mean = 0.1, sd = 0.2)
+  )
+)
+```
+
+Joing apa and transcription 
+
+```{r}
+APAandTranscrption= Transcription %>% inner_join(ApaBothFracStand_geneMean_spread, by="gene")
+APAandTranscrption$density <- get_density(APAandTranscrption$APAVal, APAandTranscrption$Transcription, n = 100)
+
+
+
+summary(lm(data=APAandTranscrption, APAVal~Transcription))
+```
+
+Plot:
+
+```{r}
+
+ggplot(APAandTranscrption, aes(x=Transcription, y=APAVal))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="Nuclear/Nuclear+Total", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+```
+
+

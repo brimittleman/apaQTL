@@ -61,6 +61,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Results when logef > 1](diffuse_logef1.html) 
 
-* [Reulatory correlation heatmap](rna_netseq_h3k12ac.html)  
+* [Regulatory correlation heatmap](rna_netseq_h3k12ac.html)  
+
+* [Relationship between APA fraction and nascent transcription](nascenttranscription.html)  
 
 
