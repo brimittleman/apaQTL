@@ -304,4 +304,69 @@ ggplot(nuclearandRNA, aes(x=log10(Mean_RNA), y=MeanIntronoverAll))+ geom_point(a
 summary(lm(data=nuclearandRNA, MeanIntronoverAll~log10(Mean_RNA)))
 
 ```
+###Same plot with transcription phenotype on bottom: 
 
+```{r}
+ApaNuclear_byloc_rename=ApaNuclear_byloc %>% dplyr::rename("gene"=GeneName)
+nuclearandtranscription=ApaNuclear_byloc_rename %>% inner_join(Transcription, by="gene")
+
+nuclearandtranscription$density <- get_density(nuclearandtranscription$MeanIntronoverAll, nuclearandtranscription$Transcription, n = 100)
+
+ggplot(nuclearandtranscription, aes(x=Transcription, y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="NuclearIntron/NuclearAll", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+
+summary(lm(data=nuclearandtranscription, MeanIntronoverAll~Transcription))
+
+```
+
+##Intron Total over all Total 
+
+First I need to get the total intronic:  
+
+```{r}
+TotAPAIntron=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>% dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>% semi_join(peaknumlist, by="peakid") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>%filter(loc=="intron") %>%  dplyr::select(-chrom , -start, -end, -strand, -loc)
+
+TotAPAIntronMelt=melt(TotAPAIntron, id.vars =c( "peakid", "gene"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, gene, Individual, count)
+
+
+TotAPAIntron_bygene= TotAPAIntronMelt %>% group_by(gene,Individual) %>% summarise(TotalIntronSum=sum(count))
+```
+
+```{r}
+ApaTotal_byloc=TotAPAIntron_bygene %>% inner_join(TotAPA_bygene, by=c("gene", "Individual")) %>% mutate(IntronOverAll=TotalIntronSum/TotalSum) %>% mutate(fraction="total",line=paste("NA", substring(Individual, 2), sep="")) %>% dplyr::select(gene, fraction, line, IntronOverAll) %>% group_by(gene) %>% filter(IntronOverAll!=0) %>%  summarise(MeanIntronoverAll=mean(IntronOverAll)) %>% dplyr::rename("GeneName"=gene)
+```
+
+
+Join with RNA 
+
+```{r}
+totalandRNA=ApaTotal_byloc %>% inner_join(RNA_geneMean, by="GeneName")
+
+totalandRNA$density <- get_density(totalandRNA$MeanIntronoverAll, totalandRNA$Mean_RNA, n = 100)
+```
+
+Plot:
+
+```{r}
+ggplot(totalandRNA, aes(x=log10(Mean_RNA), y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="log10(RNA)", y="TotalIntron/TotalAll", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+```
+
+
+```{r}
+
+summary(lm(data=totalandRNA, MeanIntronoverAll~log10(Mean_RNA)))
+
+```
+
+###Same plot with transcription phenotype on bottom: 
+
+```{r}
+ApaTotal_byloc_rename=ApaTotal_byloc %>% dplyr::rename("gene"=GeneName)
+totalandtranscription=ApaTotal_byloc_rename %>% inner_join(Transcription, by="gene")
+
+totalandtranscription$density <- get_density(totalandtranscription$MeanIntronoverAll, totalandtranscription$Transcription, n = 100)
+
+ggplot(totalandtranscription, aes(x=Transcription, y=MeanIntronoverAll))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="TotalIntron/TotalAll", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+
+summary(lm(data=totalandtranscription, MeanIntronoverAll~Transcription))
+
+```
