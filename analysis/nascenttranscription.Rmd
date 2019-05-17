@@ -370,3 +370,34 @@ ggplot(totalandtranscription, aes(x=Transcription, y=MeanIntronoverAll))+ geom_p
 summary(lm(data=totalandtranscription, MeanIntronoverAll~Transcription))
 
 ```
+
+
+##Put it all together:
+
+(Nuclear intronic/nuclear all)/(total intronic/total all) vs 4su/(4su+RNA)
+
+
+Nucintron v nuc all: 
+
+ApaNuclear_byloc_rename
+
+ApaTotal_byloc_rename
+
+Transcription
+
+```{r}
+fullapa=ApaNuclear_byloc_rename %>% dplyr::rename("NuclearIntronoverall"=MeanIntronoverAll)%>% inner_join(ApaTotal_byloc_rename, by="gene") %>% mutate(fullAPA=NuclearIntronoverall/MeanIntronoverAll) %>% dplyr::select(gene,fullAPA)
+
+
+#join with transcription 
+
+
+BothlocPhenoandtranscription=fullapa %>% inner_join(Transcription, by="gene")
+
+BothlocPhenoandtranscription$density <- get_density(BothlocPhenoandtranscription$fullAPA, BothlocPhenoandtranscription$Transcription, n = 100)
+
+ggplot(BothlocPhenoandtranscription, aes(x=Transcription, y=fullAPA))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="(NuclearIntron/Nuclearall)/(TotalIntron/TotalAll)", title="Relationship between APA fraction and transcription") + scale_color_viridis()
+
+summary(lm(data=totalandtranscription, MeanIntronoverAll~Transcription))
+```
+
