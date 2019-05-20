@@ -75,20 +75,20 @@ Join the data frames:
 Total:
 ```{r}
 TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
-summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
+summary(lm(log10(TotBoth$slope) ~ log10(TotBoth$Originalslope)))
 
 ```
 
 ```{r}
-ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")
+ggplot(TotBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")
 ```
 
 ```{r}
 NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
-summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
+summary(lm(log10(NucBoth$slope) ~ log10(NucBoth$Originalslope)))
 ```
 
 ```{r}
-ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")
+ggplot(NucBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")
 ```
 
