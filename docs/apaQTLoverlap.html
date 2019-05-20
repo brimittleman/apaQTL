@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8f883d80c16388df62dd5e0a353736abe5bcb925targetblank8f883d8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/8f883d80c16388df62dd5e0a353736abe5bcb925" target="_blank">8f883d8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree7da06f57e32fe334ab9e79f5cf0e803cd840cedctargetblank7da06f5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/7da06f57e32fe334ab9e79f5cf0e803cd840cedc" target="_blank">7da06f5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8f883d80c16388df62dd5e0a353736abe5bcb925targetblank8f883d8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree7da06f57e32fe334ab9e79f5cf0e803cd840cedctargetblank7da06f5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -445,6 +445,7 @@ Untracked files:
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
+    Untracked:  analysis/deepToolsPlots.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
@@ -659,10 +660,12 @@ Unstaged changes:
     Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/rna_netseq_h3k12ac.Rmd
+    Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_permuted.sh
     Modified:   code/bed2saf.py
+    Modified:   code/cluster.json
     Modified:   code/config.yaml
     Deleted:    code/test.txt
 
@@ -703,6 +706,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/7da06f57e32fe334ab9e79f5cf0e803cd840cedc/analysis/apaQTLoverlap.Rmd" target="_blank">7da06f5</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+<td>
+switch log effect
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/a88eedf9feeaeba2af44f429f931361c419ff930/docs/apaQTLoverlap.html" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -767,6 +804,43 @@ text(.8,300, paste(&quot;pi_1=&quot;, round((1-qval_tot$pi0), digit=3), sep=&quo
 hist(nucAPAinTot$pval, xlab=&quot;Total Pvalue&quot;, main=&quot;Significant Nuclear APA QTLs \n Total&quot;)
 text(.8,450, paste(&quot;pi_1=&quot;, round((1-qval_nuc$pi0), digit=3), sep=&quot; &quot;))</code></pre>
 <p><img src="figure/apaQTLoverlap.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a88eedf9feeaeba2af44f429f931361c419ff930/docs/figure/apaQTLoverlap.Rmd/unnamed-chunk-4-1.png" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="effect-size-sharing" class="section level2">
 <h2>Effect size sharing:</h2>
@@ -783,49 +857,167 @@ nucAPAinNuc=read.table(&quot;../data/QTLoverlap/NuclearQTLinNuclearNominal.txt&q
 <p>Join the data frames:</p>
 <p>Total:</p>
 <pre class="r"><code>TotBoth= totAPAinNuc %&gt;% inner_join(totAPAinTot,by=c(&quot;peakID&quot;, &quot;snp&quot;))
-summary(lm(TotBoth$slope ~ TotBoth$Originalslope))</code></pre>
+summary(lm(log10(TotBoth$slope) ~ log10(TotBoth$Originalslope)))</code></pre>
+<pre><code>Warning in eval(predvars, data, env): NaNs produced
+
+Warning in eval(predvars, data, env): NaNs produced</code></pre>
 <pre><code>
 Call:
-lm(formula = TotBoth$slope ~ TotBoth$Originalslope)
+lm(formula = log10(TotBoth$slope) ~ log10(TotBoth$Originalslope))
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--6.3171 -0.4603 -0.0005  0.5016  2.5768 
+     Min       1Q   Median       3Q      Max 
+-2.24324 -0.05574  0.09258  0.15932  0.35691 
 
 Coefficients:
-                      Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)            0.07316    0.02896   2.526   0.0118 *  
-TotBoth$Originalslope  0.47108    0.01482  31.790   &lt;2e-16 ***
+                             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  -0.12902    0.02021  -6.385 7.05e-10 ***
+log10(TotBoth$Originalslope)  0.91151    0.11689   7.798 1.24e-13 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.6736 on 543 degrees of freedom
-Multiple R-squared:  0.6505,    Adjusted R-squared:  0.6498 
-F-statistic:  1011 on 1 and 543 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Total apaQTL effect sizes&quot;, x=&quot;Effect size in Nuclear&quot;,y=&quot;Effect size in Total&quot;) + geom_density_2d(col=&quot;red&quot;)</code></pre>
+Residual standard error: 0.314 on 281 degrees of freedom
+  (262 observations deleted due to missingness)
+Multiple R-squared:  0.1779,    Adjusted R-squared:  0.175 
+F-statistic: 60.81 on 1 and 281 DF,  p-value: 1.237e-13</code></pre>
+<pre class="r"><code>ggplot(TotBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Total apaQTL effect sizes&quot;, x=&quot;Effect size in Nuclear&quot;,y=&quot;Effect size in Total&quot;) + geom_density_2d(col=&quot;red&quot;)</code></pre>
+<pre><code>Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced</code></pre>
+<pre><code>Warning: Removed 262 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>Warning: Removed 262 rows containing non-finite values (stat_density2d).</code></pre>
+<pre><code>Warning: Removed 262 rows containing missing values (geom_point).</code></pre>
 <p><img src="figure/apaQTLoverlap.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a88eedf9feeaeba2af44f429f931361c419ff930/docs/figure/apaQTLoverlap.Rmd/unnamed-chunk-8-1.png" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>NucBoth= nucAPAinTot %&gt;% inner_join(nucAPAinNuc,by=c(&quot;peakID&quot;, &quot;snp&quot;))
-summary(lm(NucBoth$slope ~ NucBoth$Originalslope))</code></pre>
+summary(lm(log10(NucBoth$slope) ~ log10(NucBoth$Originalslope)))</code></pre>
+<pre><code>Warning in eval(predvars, data, env): NaNs produced
+
+Warning in eval(predvars, data, env): NaNs produced</code></pre>
 <pre><code>
 Call:
-lm(formula = NucBoth$slope ~ NucBoth$Originalslope)
+lm(formula = log10(NucBoth$slope) ~ log10(NucBoth$Originalslope))
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.9473 -0.2833 -0.0066  0.2964  6.8598 
+     Min       1Q   Median       3Q      Max 
+-2.01013 -0.09546  0.09137  0.20730  0.83745 
 
 Coefficients:
-                      Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)           0.020900   0.016866   1.239    0.216    
-NucBoth$Originalslope 0.555704   0.009141  60.792   &lt;2e-16 ***
+                             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  -0.24598    0.01466  -16.77   &lt;2e-16 ***
+log10(NucBoth$Originalslope)  0.97106    0.08188   11.86   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.5291 on 995 degrees of freedom
-Multiple R-squared:  0.7879,    Adjusted R-squared:  0.7877 
-F-statistic:  3696 on 1 and 995 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Nuclear apaQTL effect sizes&quot;, x=&quot;Effect size in Total&quot;,y=&quot;Effect size in Nuclear&quot;) + geom_density_2d(col=&quot;red&quot;)</code></pre>
+Residual standard error: 0.3306 on 536 degrees of freedom
+  (459 observations deleted due to missingness)
+Multiple R-squared:  0.2079,    Adjusted R-squared:  0.2064 
+F-statistic: 140.7 on 1 and 536 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>ggplot(NucBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Nuclear apaQTL effect sizes&quot;, x=&quot;Effect size in Total&quot;,y=&quot;Effect size in Nuclear&quot;) + geom_density_2d(col=&quot;red&quot;)</code></pre>
+<pre><code>Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced
+
+Warning in FUN(X[[i]], ...): NaNs produced</code></pre>
+<pre><code>Warning: Removed 459 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>Warning: Removed 459 rows containing non-finite values (stat_density2d).</code></pre>
+<pre><code>Warning: Removed 459 rows containing missing values (geom_point).</code></pre>
 <p><img src="figure/apaQTLoverlap.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a88eedf9feeaeba2af44f429f931361c419ff930/docs/figure/apaQTLoverlap.Rmd/unnamed-chunk-10-1.png" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
