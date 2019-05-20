@@ -28,7 +28,7 @@ pas=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", header = F, stringsAs
 
 pasbygene= pas %>% group_by(Gene) %>% summarise(PAS=n())
 
-annotation=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("chr", "start", "end", "anno", "score", "strand")) %>% separate(anno, into=c("Loc", "Gene"),sep=":") %>% group_by(Gene) %>% summarise(annos=n()) %>% select(Gene)
+annotation=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("chr", "start", "end", "anno", "score", "strand")) %>% separate(anno, into=c("Loc", "Gene"),sep=":") %>% group_by(Gene) %>% summarise(annos=n()) %>% dplyr::select(Gene)
 
 PASallgene=annotation %>% full_join(pasbygene, by="Gene") %>% replace_na(list(PAS=0)) 
 
@@ -137,3 +137,93 @@ PASLocPlot
 ggsave(PASLocPlot, file="../output/PASlocation.png")
 
 ```
+##Number of genes with apa by cutoff 
+
+I want to make a script that takes a cuttoff and tells me how many gens have 0,1, >1 PAS. This way I can put these together to make stacked barplots:  
+
+I can make the plot for total then again for nuclear. 
+
+The annotaiton is annotation:  
+
+```{r}
+
+
+totapaanno=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.fc",header = T,stringsAsFactors = F) 
+indiv=colnames(totapaanno)[2:55]
+totapanum=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.CountsOnlyNumeric",header = F, col.names = indiv) 
+totapa_mean=rowMeans(totapanum)
+totapaMeananno=as.data.frame(cbind(ID=totapaanno$chrom, meanUsage=totapa_mean))
+totapaMeananno$meanUsage=as.numeric(as.character(totapaMeananno$meanUsage))
+totapaMeananno$ID=as.character(totapaMeananno$ID)
+```
+
+
+```{r}
+genesbycuttoff_tot=function(fraction){
+  totapaMeananno_filt=totapaMeananno %>% filter(meanUsage >=fraction) %>% separate(ID, into=c("chrom", "start","end", "peakID"),sep=":") %>% separate(peakID, into=c("Gene","loc", "strand", "peak"),sep="_") %>% group_by(Gene) %>% summarise(PAS=n())
+  PASallgene=annotation %>% full_join(totapaMeananno_filt, by="Gene") %>% replace_na(list(PAS=0))
+  PASallgene_cat=PASallgene %>% mutate(Category=ifelse(PAS==0,"Zero", ifelse(PAS==1, "One", "Multiple"))) %>% group_by(Category) %>% summarise(NPer=n())
+return(PASallgene_cat$NPer)
+}
+
+```
+```{r}
+#multiple, one, zero 
+categories=c("Multiple_PAS", "One_PAS", "Zero_PAS")
+FullDF=as.data.frame(cbind(categories))
+cutoffs=seq(from=0, to=.5, by=.05)
+for (val in cutoffs)
+{
+FullDF=cbind(FullDF,val=genesbycuttoff_tot(val))
+}
+colnames(FullDF)=c("Category",cutoffs)
+```
+
+Melt:
+
+```{r}
+fullDF_melt=melt(FullDF,id.vars = "Category",variable.name = "Cutoff", value.name = "NGenes") %>% mutate(propGene=NGenes/nrow(annotation))
+
+ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat="identity") + scale_fill_brewer(palette="GnBu") + labs(title="Proportion of genes with Multiple PAS by Total Usage filter",y="Proportion of 27115 genes", x="Usage Filter cutoff")
+```
+Nuclear:  
+```{r}
+
+
+nucapaanno=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc",header = T,stringsAsFactors = F) 
+
+nucapanum=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.CountsOnlyNumeric",header = F, col.names = indiv) 
+nucapa_mean=rowMeans(nucapanum)
+nucapaMeananno=as.data.frame(cbind(ID=nucapaanno$chrom, meanUsage=nucapa_mean))
+nucapaMeananno$meanUsage=as.numeric(as.character(nucapaMeananno$meanUsage))
+nucapaMeananno$ID=as.character(nucapaMeananno$ID)
+```
+
+
+```{r}
+genesbycuttoff_nuc=function(fraction){
+  nucapaMeananno_filt=nucapaMeananno %>% filter(meanUsage >=fraction) %>% separate(ID, into=c("chrom", "start","end", "peakID"),sep=":") %>% separate(peakID, into=c("Gene","loc", "strand", "peak"),sep="_") %>% group_by(Gene) %>% summarise(PAS=n())
+  PASallgene=annotation %>% full_join(nucapaMeananno_filt, by="Gene") %>% replace_na(list(PAS=0))
+  PASallgene_cat=PASallgene %>% mutate(Category=ifelse(PAS==0,"Zero", ifelse(PAS==1, "One", "Multiple"))) %>% group_by(Category) %>% summarise(NPer=n())
+return(PASallgene_cat$NPer)
+}
+```
+
+
+```{r}
+#multiple, one, zero 
+FullDFNuc=as.data.frame(cbind(categories))
+for (val in cutoffs)
+{
+FullDFNuc=cbind(FullDFNuc,val=genesbycuttoff_nuc(val))
+}
+colnames(FullDFNuc)=c("Category",cutoffs)
+```
+
+
+```{r}
+FullDFNuc_melt=melt(FullDFNuc,id.vars = "Category",variable.name = "Cutoff", value.name = "NGenes") %>% mutate(propGene=NGenes/nrow(annotation))
+
+ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat="identity") + scale_fill_brewer(palette="GnBu") + labs(title="Proportion of genes with Multiple PAS by Nuclear Usage filter",y="Proportion of 27115 genes", x="Usage Filter cutoff")
+```
+##Location of PAS by filter

@@ -398,6 +398,6 @@ BothlocPhenoandtranscription$density <- get_density(BothlocPhenoandtranscription
 
 ggplot(BothlocPhenoandtranscription, aes(x=Transcription, y=fullAPA))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="(NuclearIntron/Nuclearall)/(TotalIntron/TotalAll)", title="Relationship between APA fraction and transcription") + scale_color_viridis()
 
-summary(lm(data=totalandtranscription, MeanIntronoverAll~Transcription))
+summary(lm(data=BothlocPhenoandtranscription, fullAPA~Transcription))
 ```
 

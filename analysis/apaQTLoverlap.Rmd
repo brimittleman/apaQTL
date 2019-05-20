@@ -1,0 +1,94 @@
+---
+title: "Total and Nuclear QTL sharing"
+author: "Briana Mittleman"
+date: "5/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+This analysis will investigate the sharing between total and nuclear apaQTls first by calculating the pi1 statistic and second by looking at the correlation of effect sizes.  
+```{r}
+library(tidyverse)
+library(reshape2)
+library(workflowr)
+library(qvalue)
+```
+
+
+## Pi 1 sharing  
+
+Concatinate nominal results and run
+
+```{bash,eval=F}
+mkdir ../data/QTLoverlap/
+python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/QTLoverlap/TotalQTLinNuclearNominal.txt  
+
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/QTLoverlap/NuclearQTLinTotalNominal.txt  
+
+```
+
+
+```{r}
+totAPAinNuc=read.table("../data/QTLoverlap/TotalQTLinNuclearNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope"))
+qval_tot=pi0est(totAPAinNuc$pval, pi0.method = "bootstrap")
+
+nucAPAinTot=read.table("../data/QTLoverlap/NuclearQTLinTotalNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope"))
+qval_nuc=pi0est(nucAPAinTot$pval, pi0.method = "bootstrap")
+
+
+```
+```{r}
+par(mfrow=c(1,2))
+hist(totAPAinNuc$pval, xlab="Nuclear Pvalue", main="Significant Total APA QTLs \n Nuclear")
+text(.8,300, paste("pi_1=", round((1-qval_tot$pi0), digit=3), sep=" "))
+hist(nucAPAinTot$pval, xlab="Total Pvalue", main="Significant Nuclear APA QTLs \n Total")
+text(.8,450, paste("pi_1=", round((1-qval_nuc$pi0), digit=3), sep=" "))
+```
+
+
+##Effect size sharing:
+I need to get the nominal effect sizes. I can use the script I wrote above but put the same fraction in for the qtl and nom values.
+```{bash,eval=F}
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/QTLoverlap/TotalQTLinTotalNominal.txt  
+
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/QTLoverlap/NuclearQTLinNuclearNominal.txt  
+```
+
+
+```{r}
+totAPAinTot=read.table("../data/QTLoverlap/TotalQTLinTotalNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% dplyr::select(peakID, snp, slope) %>% dplyr::rename("Originalslope"=slope)
+
+
+nucAPAinNuc=read.table("../data/QTLoverlap/NuclearQTLinNuclearNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% dplyr::select(peakID, snp, slope)%>% dplyr::rename("Originalslope"=slope)
+
+```
+
+
+
+Join the data frames: 
+
+Total:
+```{r}
+TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
+summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
+
+```
+
+```{r}
+ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")
+```
+
+```{r}
+NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
+summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
+```
+
+```{r}
+ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")
+```
+
