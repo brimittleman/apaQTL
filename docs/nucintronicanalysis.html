@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree82fdc65cc1f44b0d2ec541d4d992c803c6067730targetblank82fdc65a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/82fdc65cc1f44b0d2ec541d4d992c803c6067730" target="_blank">82fdc65</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed859f02f7079e5fdac54304f492e7e658bf3f0b6targetblankd859f02a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d859f02f7079e5fdac54304f492e7e658bf3f0b6" target="_blank">d859f02</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree82fdc65cc1f44b0d2ec541d4d992c803c6067730targetblank82fdc65a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed859f02f7079e5fdac54304f492e7e658bf3f0b6targetblankd859f02a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,7 +435,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -719,6 +718,23 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/nucintronicanalysis.html" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -885,6 +901,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-10-1.png" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/801ca1b09492172c6076aa44cb901b40524e0164/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-10-1.png" target="_blank">801ca1b</a>
 </td>
 <td>
@@ -902,6 +929,43 @@ brimittleman
 <p>First i want to look at the distribution of intorn lengths:</p>
 <pre class="r"><code>ggplot(pas2intron_usage, aes(x=log10(intronLength))) + geom_density()</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-11-1.png" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I will look at above and below the mean intron length:</p>
 <pre class="r"><code>meanIntronlength=mean(pas2intron_usage$intronLength)
 
@@ -909,7 +973,45 @@ pas2intron_length=pas2intron %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=mea
 
 
 ggplot(pas2intron_length, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat)</code></pre>
-<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /> Look at quartiles:</p>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-12-1.png" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Look at quartiles:</p>
 <pre class="r"><code>summary(pas2intron_usage$intronLength)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     106    4451   11142   29576   30024 1878880 </code></pre>
@@ -917,6 +1019,43 @@ ggplot(pas2intron_length, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bi
                                          
 ggplot(pas2intron_length2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-13-1.png" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Look at distribution in total fraction:</p>
 <pre class="r"><code>totIntronicPeaks=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc&quot;, stringsAsFactors = F, header = F,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;, &quot;avgUsage&quot;)) %&gt;% filter(loc==&quot;intron&quot;)
 
@@ -932,6 +1071,43 @@ nrow(pas2intronTot)</code></pre>
 <pre class="r"><code>totalplot=ggplot(pas2intronTot, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title=&quot;PAS position within intron \nfor total PAS&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;)</code></pre>
 <pre class="r"><code>plot_grid(totalplot, nuclearplot)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-18-1.png" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(pas2intronTot$intronLength)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     106    4275   10682   28016   28377 1878880 </code></pre>
@@ -939,6 +1115,43 @@ nrow(pas2intronTot)</code></pre>
                                          
 ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-19-1.png" target="_blank">d859f02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
