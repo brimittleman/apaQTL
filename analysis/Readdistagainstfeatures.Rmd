@@ -32,3 +32,19 @@ sbatch BothFracDTPlotGeneRegions.sh
 ```
 
 
+
+##Redo with Normalized RPKM  
+
+I need to create normalized bw from each bam file. I then merge by fraction and convert back to bigwig from bedgraph. 
+
+I added a rule to the first snakefile that created the normalized files. Then I run the following to merge and create the bw.  
+
+```{bash,eval=F}
+sbatch mergeBW_norm.sh
+```
+Next I create the plot with deeptools.  
+
+```{bash,eval=F}
+sbatch BothFracDTPlotGeneRegions_normalized.sh
+```
+
