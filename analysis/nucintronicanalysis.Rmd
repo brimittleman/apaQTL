@@ -16,6 +16,7 @@ I need to create an annotation with introns that do not overlap. For this I will
 
 library(tidyverse)
 library(workflowr)
+library(cowplot)
 ```
 
 
@@ -88,13 +89,93 @@ pas2intron=read.table("../data/intron_analysis/IntronPeaksontoIntrons.bed",col.n
 
 
 ```{r}
-ggplot(pas2intron, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length")
+nuclearplot=ggplot(pas2intron, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron \n for Nuclear PAS", y="Proportion of Intronic PAS", x="Proportion of Intronic Length")
 ```
 Facet by usage 0-25, 25-50, 50-75, 75-1
 ```{r}
 pas2intron_usage=pas2intron %>% mutate(UsageCat=ifelse(meanUsage<=.5, "low", "high"))
 
 ggplot(pas2intron_usage, aes(x=propIntron, fill=UsageCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~UsageCat)
+
+```
+
+
+Look at different intron lengths:
+
+First i want to look at the distribution of intorn lengths:
+
+```{r}
+ggplot(pas2intron_usage, aes(x=log10(intronLength))) + geom_density()
+```
+
+I will look at above and below the mean intron length:
+
+```{r}
+meanIntronlength=mean(pas2intron_usage$intronLength)
+
+pas2intron_length=pas2intron %>% mutate(LengthCat=ifelse(intronLength<=meanIntronlength, "bottom", "top"))
+
+
+ggplot(pas2intron_length, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
+
+
+```
+Look at quartiles:  
+
+```{r}
+summary(pas2intron_usage$intronLength)
+
+pas2intron_length2=pas2intron %>% mutate(LengthCat=ifelse(intronLength<=4451, "first", ifelse(intronLength>4451 &intronLength<=11142, "second", ifelse(intronLength>11142 &intronLength<=30024, "third", "fourth"))))
+                                         
+ggplot(pas2intron_length2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
+
+
+
+```
+
+
+Look at distribution in total fraction:  
+
+
+```{r}
+totIntronicPeaks=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc", stringsAsFactors = F, header = F,col.names = c("chr", "start", "end", "gene", "loc", "strand", "peak", "avgUsage")) %>% filter(loc=="intron")
+
+totIntronicPeaksBed=totIntronicPeaks %>% mutate(ID=paste(peak,gene,loc, sep=":")) %>% dplyr::select(chr, start, end, ID, avgUsage, strand)
+
+write.table(totIntronicPeaksBed, "../data/intron_analysis/TotalIntronicPeaks.bed", col.names = F, row.names = F, quote = F,sep="\t")
+```
+
+
+map these to the intron file
+
+
+
+```{bash,eval=F}
+sbatch assignTotIntronpeak2intronlocs.sh
+```
+
+```{r}
+pas2intronTot=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand")) %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+
+nrow(pas2intronTot)
+
+```
+
+```{r}
+totalplot=ggplot(pas2intronTot, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title="PAS position within intron \nfor total PAS", y="Proportion of Intronic PAS", x="Proportion of Intronic Length")
+```
+
+
+```{r}
+plot_grid(totalplot, nuclearplot)
+```
+```{r}
+summary(pas2intronTot$intronLength)
+
+pas2intron_totlength2=pas2intronTot %>% mutate(LengthCat=ifelse(intronLength<=4451, "first", ifelse(intronLength>4275 &intronLength<=10682, "second", ifelse(intronLength>10682 &intronLength<=28377, "third", "fourth"))))
+                                         
+ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
+
 
 ```
 
