@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-15
+<strong>Last updated:</strong> 2019-05-20
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeee9296437fb85f9bc1eee9ababefeebcb346be55targetblankee92964a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/ee9296437fb85f9bc1eee9ababefeebcb346be55" target="_blank">ee92964</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea45570155fbe1b9b4bec8f57969257f733790afetargetblanka455701a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a45570155fbe1b9b4bec8f57969257f733790afe" target="_blank">a455701</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeee9296437fb85f9bc1eee9ababefeebcb346be55targetblankee92964a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea45570155fbe1b9b4bec8f57969257f733790afetargetblanka455701a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -445,6 +445,7 @@ Untracked files:
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
+    Untracked:  analysis/deepToolsPlots.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
@@ -455,6 +456,7 @@ Untracked files:
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
     Untracked:  code/._apaQTL_permuted.sh
+    Untracked:  code/._assignNucIntonpeak2intronlocs.sh
     Untracked:  code/._bed2saf.py
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
@@ -464,6 +466,7 @@ Untracked files:
     Untracked:  code/._cluster.json
     Untracked:  code/._clusterPAS.json
     Untracked:  code/._clusterfiltPAS.json
+    Untracked:  code/._codingdms2bed.py
     Untracked:  code/._config.yaml
     Untracked:  code/._config2.yaml
     Untracked:  code/._configOLD.yaml
@@ -483,7 +486,9 @@ Untracked files:
     Untracked:  code/._fixH3k12ac.py
     Untracked:  code/._fixRNAhead4corr.py
     Untracked:  code/._fixRNAkalisto.py
+    Untracked:  code/._fixgroupedtranscript.py
     Untracked:  code/._fixhead_netseqfc.py
+    Untracked:  code/._grouptranscripts.py
     Untracked:  code/._make5percPeakbed.py
     Untracked:  code/._makeFileID.py
     Untracked:  code/._makePheno.py
@@ -497,6 +502,7 @@ Untracked files:
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
+    Untracked:  code/._qtlsPvalOppFrac.py
     Untracked:  code/._quantassign2parsedpeak.py
     Untracked:  code/._removeloc_pheno.py
     Untracked:  code/._run_leafcutterDiffIso.sh
@@ -506,6 +512,7 @@ Untracked files:
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subset_diffisopheno.py
+    Untracked:  code/._subtractExons.sh
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/.snakemake/
     Untracked:  code/APAqtl_nominal.err
@@ -531,11 +538,15 @@ Untracked files:
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/assignNucIntonpeak2intronlocs.sh
+    Untracked:  code/assignPeak2Intronicregion.err
+    Untracked:  code/assignPeak2Intronicregion.out
     Untracked:  code/bam2bw.err
     Untracked:  code/bam2bw.out
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/codingdms2bed.py
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
@@ -551,17 +562,22 @@ Untracked files:
     Untracked:  code/fixH3k12ac.py
     Untracked:  code/fixRNAhead4corr.py
     Untracked:  code/fixRNAkalisto.py
+    Untracked:  code/fixgroupedtranscript.py
     Untracked:  code/fixhead_netseqfc.py
     Untracked:  code/get100upPAS.py
     Untracked:  code/getSeq100up.sh
     Untracked:  code/getseq100up.err
     Untracked:  code/getseq100up.out
+    Untracked:  code/grouptranscripts.err
+    Untracked:  code/grouptranscripts.out
+    Untracked:  code/grouptranscripts.py
     Untracked:  code/log/
     Untracked:  code/makeSAFbothfrac5perc.py
     Untracked:  code/makegencondeTSSfile.py
     Untracked:  code/netseqFC.err
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
+    Untracked:  code/qtlsPvalOppFrac.py
     Untracked:  code/removeloc_pheno.py
     Untracked:  code/run_DistPAS2Sig.err
     Untracked:  code/run_DistPAS2Sig.out
@@ -573,12 +589,17 @@ Untracked files:
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
     Untracked:  code/subset_diffisopheno.py
+    Untracked:  code/subtractExons.err
+    Untracked:  code/subtractExons.out
+    Untracked:  code/subtractExons.sh
+    Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
+    Untracked:  data/QTLoverlap/
     Untracked:  data/README.md
     Untracked:  data/RNAseq/
     Untracked:  data/Reads2UTR/
@@ -599,13 +620,16 @@ Untracked files:
     Untracked:  data/bed_waspfilter/
     Untracked:  data/bedsort_waspfilter/
     Untracked:  data/bothFrac_FC/
+    Untracked:  data/bw_norm/
     Untracked:  data/exampleQTLs/
     Untracked:  data/fastq/
     Untracked:  data/filterPeaks/
     Untracked:  data/fourSU/
     Untracked:  data/h3k27ac/
+    Untracked:  data/highdiffsiggenes.txt
     Untracked:  data/inclusivePeaks/
     Untracked:  data/inclusivePeaks_FC/
+    Untracked:  data/intron_analysis/
     Untracked:  data/mergedBG/
     Untracked:  data/mergedBW_byfrac/
     Untracked:  data/mergedBam/
@@ -617,22 +641,32 @@ Untracked files:
     Untracked:  data/peaks_5perc/
     Untracked:  data/phenotype/
     Untracked:  data/phenotype_5perc/
+    Untracked:  data/sigDiffGenes.txt
     Untracked:  data/sort/
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
+    Untracked:  output/._meanCorrelationPhenotypes.svg
     Untracked:  output/dtPlots/
     Untracked:  output/fastqc/
+    Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
+    Modified:   analysis/DiffIsoAnalysis.Rmd
     Modified:   analysis/PASusageQC.Rmd
     Modified:   analysis/choosePCs.Rmd
     Modified:   analysis/corrbetweenind.Rmd
+    Modified:   analysis/nascenttranscription.Rmd
+    Modified:   analysis/rerunQTL_changePC.Rmd
+    Modified:   analysis/rna_netseq_h3k12ac.Rmd
+    Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_permuted.sh
+    Modified:   code/apaQTLsnake.err
     Modified:   code/bed2saf.py
+    Modified:   code/cluster.json
     Modified:   code/config.yaml
     Deleted:    code/test.txt
 
@@ -678,6 +712,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a45570155fbe1b9b4bec8f57969257f733790afe/analysis/nucintronicanalysis.Rmd" target="_blank">a455701</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+<td>
+analysis plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/d89772dae76346f78daaef40d61bd313034c4966/docs/nucintronicanalysis.html" target="_blank">d89772d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/ee9296437fb85f9bc1eee9ababefeebcb346be55/analysis/nucintronicanalysis.Rmd" target="_blank">ee92964</a>
 </td>
 <td>
@@ -700,90 +768,49 @@ start ideas for inton analysis
 <p>I am interested in understanding where in the introns the nuclear peaks are. Are they closer to the three prime or five prime edge of the intron. This may help us understand if NMD is contributing to the loss of transcripts between the nuclear and total fraction.</p>
 <p>I need to create an annotation with introns that do not overlap. For this I will use line up all of the exons for a gene then take the open spaces as introns.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
-<pre class="r"><code>nucIntronicPeaks=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc&quot;, stringsAsFactors = F, header = F,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;, &quot;avgUsage&quot;)) %&gt;% filter(loc==&quot;intron&quot;)</code></pre>
+<pre class="r"><code>nucIntronicPeaks=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc&quot;, stringsAsFactors = F, header = F,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;, &quot;avgUsage&quot;)) %&gt;% filter(loc==&quot;intron&quot;)
+
+nucIntronicPeaksBed=nucIntronicPeaks %&gt;% mutate(ID=paste(peak,gene,loc, sep=&quot;:&quot;)) %&gt;% dplyr::select(chr, start, end, ID, avgUsage, strand)
+
+write.table(nucIntronicPeaksBed, &quot;../data/intron_analysis/NuclearIntronicPeaks.bed&quot;, col.names = F, row.names = F, quote = F,sep=&quot;\t&quot;)</code></pre>
 <p>I will need to assign each of these to an intron in the new annotation.</p>
 <p>The genome annotation file, Transcript2GeneName.dms has the information i need. I will need to parse this file. I need all exons for a gene (longest transcript) The file has the exon starts and ends for each transcript.</p>
-<p>It may be easiest to first subset to the longest transcripts for each of the genes.</p>
-<p>Rpackages?</p>
-<p><a href="https://rdrr.io/bioc/GenomicFeatures/man/exonicParts.html" class="uri">https://rdrr.io/bioc/GenomicFeatures/man/exonicParts.html</a></p>
-<pre class="r"><code>library(TxDb.Hsapiens.UCSC.hg19.knownGene)</code></pre>
-<pre><code>Loading required package: GenomicFeatures</code></pre>
-<pre><code>Loading required package: BiocGenerics</code></pre>
-<pre><code>Loading required package: parallel</code></pre>
-<pre><code>
-Attaching package: &#39;BiocGenerics&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:parallel&#39;:
+<p>I will remove the exon locations for full transcripts using bedtools subtract.</p>
+<p>Create transcript file.I will select all of the transcripts in the dms file and merge by gene name. Then I can subtract the exons</p>
+<pre class="bash"><code>python transcriptdm2bed.py</code></pre>
+<p>Sort the output, group by transcript and fix order of columns.</p>
+<pre class="bash"><code>sort -k1,1 -k2,2n /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/AllTranscriptsbyName.bed &gt; /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/AllTranscriptsbyName.sort.bed
 
-    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-    clusterExport, clusterMap, parApply, parCapply, parLapply,
-    parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
-<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+sbatch grouptranscripts.py
 
-    combine, intersect, setdiff, union</code></pre>
-<pre><code>The following objects are masked from &#39;package:stats&#39;:
+python fixgroupedtranscript.py</code></pre>
+<p>Exons:</p>
+<p>/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_coding.dms</p>
+<p>Exon bed <a href="file:/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/refseq.ProteinCoding.bed" class="uri">file:/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/refseq.ProteinCoding.bed</a></p>
+<pre class="bash"><code>sbatch subtractExons.sh</code></pre>
+<p>sort:</p>
+<pre class="bash"><code>sort -k1,1 -k2,2n /project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.bed &gt; /project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed</code></pre>
+<p>Next I will map the intronic peaks on these positions.</p>
+<pre class="bash"><code>sbatch assignNucIntonpeak2intronlocs.sh</code></pre>
+<p>Plot percentage of intron where PAS is.</p>
+<pre class="r"><code>pas2intron=read.table(&quot;../data/intron_analysis/IntronPeaksontoIntrons.bed&quot;,col.names = c(&quot;intronCHR&quot;, &quot;intronStart&quot;, &quot;intronEnd&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;peakCHR&quot;, &quot;peakStart&quot;, &quot;peakEnd&quot;, &quot;PeakID&quot;, &quot;meanUsage&quot;, &quot;peakStrand&quot;)) %&gt;% mutate(PASloc=ifelse(strand==&quot;+&quot;, peakEnd, peakStart)) %&gt;% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %&gt;% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand==&quot;+&quot;, PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)</code></pre>
+<pre class="r"><code>ggplot(pas2intron, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;)</code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /> Facet by usage 0-25, 25-50, 50-75, 75-1</p>
+<pre class="r"><code>pas2intron_usage=pas2intron %&gt;% mutate(UsageCat=ifelse(meanUsage&lt;=.5, &quot;low&quot;, &quot;high&quot;))
 
-    IQR, mad, sd, var, xtabs</code></pre>
-<pre><code>The following objects are masked from &#39;package:base&#39;:
-
-    anyDuplicated, append, as.data.frame, basename, cbind,
-    colMeans, colnames, colSums, dirname, do.call, duplicated,
-    eval, evalq, Filter, Find, get, grep, grepl, intersect,
-    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
-    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
-    Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
-    table, tapply, union, unique, unsplit, which, which.max,
-    which.min</code></pre>
-<pre><code>Loading required package: S4Vectors</code></pre>
-<pre><code>Loading required package: stats4</code></pre>
-<pre><code>
-Attaching package: &#39;S4Vectors&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
-
-    first, rename</code></pre>
-<pre><code>The following object is masked from &#39;package:tidyr&#39;:
-
-    expand</code></pre>
-<pre><code>The following object is masked from &#39;package:base&#39;:
-
-    expand.grid</code></pre>
-<pre><code>Loading required package: IRanges</code></pre>
-<pre><code>
-Attaching package: &#39;IRanges&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
-
-    collapse, desc, slice</code></pre>
-<pre><code>The following object is masked from &#39;package:purrr&#39;:
-
-    reduce</code></pre>
-<pre><code>Loading required package: GenomeInfoDb</code></pre>
-<pre><code>Loading required package: GenomicRanges</code></pre>
-<pre><code>Loading required package: AnnotationDbi</code></pre>
-<pre><code>Loading required package: Biobase</code></pre>
-<pre><code>Welcome to Bioconductor
-
-    Vignettes contain introductory material; view with
-    &#39;browseVignettes()&#39;. To cite Bioconductor, see
-    &#39;citation(&quot;Biobase&quot;)&#39;, and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
-<pre><code>
-Attaching package: &#39;AnnotationDbi&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:dplyr&#39;:
-
-    select</code></pre>
-<pre class="r"><code>txdb &lt;- TxDb.Hsapiens.UCSC.hg19.knownGene</code></pre>
-<p>Pull out introns:</p>
-<pre class="r"><code>intronic_parts2 &lt;- intronicParts(txdb, linked.to.single.gene.only=TRUE)</code></pre>
-<p>Can I just assign all of the peaks to an intron and not allow multimapping? I could do something with bedtools intersect. I would need to require opposite strandedness in this case because the peaks are still opposite. I could do this then choose the longest intron if thereare more than one that the peak overlaps.</p>
+ggplot(pas2intron_usage, aes(x=propIntron, fill=UsageCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~UsageCat)</code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -808,67 +835,27 @@ locale:
 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
-[1] stats4    parallel  stats     graphics  grDevices utils     datasets 
-[8] methods   base     
+[1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2
- [2] GenomicFeatures_1.34.1                 
- [3] AnnotationDbi_1.44.0                   
- [4] Biobase_2.42.0                         
- [5] GenomicRanges_1.34.0                   
- [6] GenomeInfoDb_1.18.1                    
- [7] IRanges_2.16.0                         
- [8] S4Vectors_0.20.1                       
- [9] BiocGenerics_0.28.0                    
-[10] workflowr_1.3.0                        
-[11] forcats_0.3.0                          
-[12] stringr_1.3.1                          
-[13] dplyr_0.8.0.1                          
-[14] purrr_0.3.2                            
-[15] readr_1.3.1                            
-[16] tidyr_0.8.3                            
-[17] tibble_2.1.1                           
-[18] ggplot2_3.1.1                          
-[19] tidyverse_1.2.1                        
+ [1] workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
+ [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
+ [9] ggplot2_3.1.1   tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
- [1] nlme_3.1-137                bitops_1.0-6               
- [3] matrixStats_0.54.0          fs_1.2.6                   
- [5] lubridate_1.7.4             bit64_0.9-7                
- [7] progress_1.2.0              httr_1.3.1                 
- [9] rprojroot_1.3-2             tools_3.5.1                
-[11] backports_1.1.2             R6_2.3.0                   
-[13] DBI_1.0.0                   lazyeval_0.2.1             
-[15] colorspace_1.3-2            withr_2.1.2                
-[17] tidyselect_0.2.5            prettyunits_1.0.2          
-[19] bit_1.1-14                  compiler_3.5.1             
-[21] git2r_0.23.0                cli_1.0.1                  
-[23] rvest_0.3.2                 xml2_1.2.0                 
-[25] DelayedArray_0.8.0          rtracklayer_1.42.0         
-[27] scales_1.0.0                digest_0.6.18              
-[29] Rsamtools_1.34.0            rmarkdown_1.10             
-[31] XVector_0.22.0              pkgconfig_2.0.2            
-[33] htmltools_0.3.6             rlang_0.3.1                
-[35] readxl_1.1.0                rstudioapi_0.10            
-[37] RSQLite_2.1.1               generics_0.0.2             
-[39] jsonlite_1.6                BiocParallel_1.16.0        
-[41] RCurl_1.95-4.11             magrittr_1.5               
-[43] GenomeInfoDbData_1.2.0      Matrix_1.2-15              
-[45] Rcpp_1.0.0                  munsell_0.5.0              
-[47] stringi_1.2.4               whisker_0.3-2              
-[49] yaml_2.2.0                  SummarizedExperiment_1.12.0
-[51] zlibbioc_1.28.0             plyr_1.8.4                 
-[53] grid_3.5.1                  blob_1.1.1                 
-[55] crayon_1.3.4                lattice_0.20-38            
-[57] Biostrings_2.50.1           haven_1.1.2                
-[59] hms_0.4.2                   knitr_1.20                 
-[61] pillar_1.3.1                biomaRt_2.38.0             
-[63] XML_3.98-1.16               glue_1.3.0                 
-[65] evaluate_0.12               modelr_0.1.2               
-[67] cellranger_1.1.0            gtable_0.2.0               
-[69] assertthat_0.2.0            broom_0.5.1                
-[71] GenomicAlignments_1.18.0    memoise_1.1.0              </code></pre>
+ [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
+ [5] git2r_0.23.0     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
+ [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
+[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
+[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
+[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
+[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
+[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
+[33] readxl_1.1.0     rmarkdown_1.10   reshape2_1.4.3   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
+[49] broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 
