@@ -26,8 +26,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -102,9 +103,6 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
@@ -119,6 +117,7 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
+
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -138,43 +137,6 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -196,77 +158,18 @@ $(document).ready(function () {
 });
 </script>
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
 </script>
 
 <!-- code folding -->
+
 
 
 
@@ -431,7 +334,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#report"> Report <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -440,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-04-22
+<strong>Last updated:</strong> 2019-05-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -450,11 +353,11 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.2.0). The <em>Report</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.3.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
-<div id="report" class="tab-pane fade">
+<div id="checks" class="tab-pane fade">
 <div id="workflowr-checks" class="panel-group">
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -483,12 +386,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed12345code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(12345)</code> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190411code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190411)</code> </a>
 </p>
 </div>
-<div id="strongSeedstrongcodesetseed12345code" class="panel-collapse collapse">
+<div id="strongSeedstrongcodesetseed20190411code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(12345)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20190411)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -519,32 +422,267 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree851c963223c1de49d3f362ddacf6a8877b1087cftargetblank851c963a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/851c963223c1de49d3f362ddacf6a8877b1087cf" target="_blank">851c963</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree54fb5e2530fe0b207726590a364575239b34a595targetblank54fb5e2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/54fb5e2530fe0b207726590a364575239b34a595" target="_blank">54fb5e2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree851c963223c1de49d3f362ddacf6a8877b1087cftargetblank851c963a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree54fb5e2530fe0b207726590a364575239b34a595targetblank54fb5e2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .RData
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    output/.DS_Store
 
 Untracked files:
-    Untracked:  .DS_Store
+    Untracked:  .Rprofile
+    Untracked:  ._.DS_Store
     Untracked:  .gitignore
+    Untracked:  _workflowr.yml
+    Untracked:  analysis/._PASdescriptiveplots.Rmd
+    Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  apaQTL.Rproj
-    Untracked:  code/.DS_Store
-    Untracked:  data/MetaDataSequencing.xlsx
-    Untracked:  docs/.DS_Store
-    Untracked:  docs/~$MetaDataSequencing.xlsx
+    Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._FC_UTR.sh
+    Untracked:  code/._FC_newPeaks_olddata.sh
+    Untracked:  code/._LC_samplegroups.py
+    Untracked:  code/._SnakefilePAS
+    Untracked:  code/._SnakefilefiltPAS
+    Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
+    Untracked:  code/._apaQTL_Nominal.sh
+    Untracked:  code/._apaQTL_permuted.sh
+    Untracked:  code/._assignNucIntonpeak2intronlocs.sh
+    Untracked:  code/._assignTotIntronpeak2intronlocs.sh
+    Untracked:  code/._bed2saf.py
+    Untracked:  code/._bothFrac_FC.sh
+    Untracked:  code/._callPeaksYL.py
+    Untracked:  code/._chooseAnno2SAF.py
+    Untracked:  code/._chooseSignalSite
+    Untracked:  code/._chooseSignalSite.py
+    Untracked:  code/._cluster.json
+    Untracked:  code/._clusterPAS.json
+    Untracked:  code/._clusterfiltPAS.json
+    Untracked:  code/._codingdms2bed.py
+    Untracked:  code/._config.yaml
+    Untracked:  code/._config2.yaml
+    Untracked:  code/._configOLD.yaml
+    Untracked:  code/._convertNumeric.py
+    Untracked:  code/._dag.pdf
+    Untracked:  code/._encodeRNADTplots.sh
+    Untracked:  code/._extractGenotypes.py
+    Untracked:  code/._fc2leafphen.py
+    Untracked:  code/._filter5perc.R
+    Untracked:  code/._filter5percPheno.py
+    Untracked:  code/._filterpeaks.py
+    Untracked:  code/._finalPASbed2SAF.py
+    Untracked:  code/._fix4su304corr.py
+    Untracked:  code/._fix4su604corr.py
+    Untracked:  code/._fix4sukalisto.py
+    Untracked:  code/._fixFChead.py
+    Untracked:  code/._fixFChead_bothfrac.py
+    Untracked:  code/._fixH3k12ac.py
+    Untracked:  code/._fixRNAhead4corr.py
+    Untracked:  code/._fixRNAkalisto.py
+    Untracked:  code/._fixgroupedtranscript.py
+    Untracked:  code/._fixhead_netseqfc.py
+    Untracked:  code/._grouptranscripts.py
+    Untracked:  code/._make5percPeakbed.py
+    Untracked:  code/._makeFileID.py
+    Untracked:  code/._makePheno.py
+    Untracked:  code/._makeSAFbothfrac5perc.py
+    Untracked:  code/._makegencondeTSSfile.py
+    Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeBW_norm.sh
+    Untracked:  code/._mergeByFracBam.sh
+    Untracked:  code/._mergePeaks.sh
+    Untracked:  code/._namePeaks.py
+    Untracked:  code/._netseqFC.sh
+    Untracked:  code/._peak2PAS.py
+    Untracked:  code/._peakFC.sh
+    Untracked:  code/._pheno2countonly.R
+    Untracked:  code/._qtlsPvalOppFrac.py
+    Untracked:  code/._quantassign2parsedpeak.py
+    Untracked:  code/._removeloc_pheno.py
+    Untracked:  code/._run_leafcutterDiffIso.sh
+    Untracked:  code/._selectNominalPvalues.py
+    Untracked:  code/._snakemakePAS.batch
+    Untracked:  code/._snakemakefiltPAS.batch
+    Untracked:  code/._submit-snakemakePAS.sh
+    Untracked:  code/._submit-snakemakefiltPAS.sh
+    Untracked:  code/._subset_diffisopheno.py
+    Untracked:  code/._subtractExons.sh
+    Untracked:  code/._utrdms2saf.py
+    Untracked:  code/.snakemake/
+    Untracked:  code/APAqtl_nominal.err
+    Untracked:  code/APAqtl_nominal.out
+    Untracked:  code/APAqtl_nominal_39.err
+    Untracked:  code/APAqtl_nominal_39.out
+    Untracked:  code/APAqtl_permuted.err
+    Untracked:  code/APAqtl_permuted.out
+    Untracked:  code/BothFracDTPlotGeneRegions.err
+    Untracked:  code/BothFracDTPlotGeneRegions.out
+    Untracked:  code/BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/DistPAS2Sig.py
+    Untracked:  code/FC_UTR.err
+    Untracked:  code/FC_UTR.out
+    Untracked:  code/FC_UTR.sh
+    Untracked:  code/FC_newPAS_olddata.err
+    Untracked:  code/FC_newPAS_olddata.out
+    Untracked:  code/FC_newPeaks_olddata.sh
+    Untracked:  code/LC_samplegroups.py
+    Untracked:  code/README.md
+    Untracked:  code/Rplots.pdf
+    Untracked:  code/Upstream100Bases_general.py
+    Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
+    Untracked:  code/apaQTL_Nominal_4pc.sh
+    Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/assignNucIntonpeak2intronlocs.sh
+    Untracked:  code/assignPeak2Intronicregion.err
+    Untracked:  code/assignPeak2Intronicregion.out
+    Untracked:  code/assignTotIntronpeak2intronlocs.sh
+    Untracked:  code/assigntotPeak2Intronicregion.err
+    Untracked:  code/assigntotPeak2Intronicregion.out
+    Untracked:  code/bam2bw.err
+    Untracked:  code/bam2bw.out
+    Untracked:  code/bothFrac_FC.err
+    Untracked:  code/bothFrac_FC.out
+    Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/codingdms2bed.py
+    Untracked:  code/dag.pdf
+    Untracked:  code/dagPAS.pdf
+    Untracked:  code/dagfiltPAS.pdf
+    Untracked:  code/encodeRNADTplots.sh
+    Untracked:  code/extractGenotypes.py
+    Untracked:  code/fc2leafphen.py
+    Untracked:  code/finalPASbed2SAF.py
+    Untracked:  code/findbuginpeaks.R
+    Untracked:  code/fix4su304corr.py
+    Untracked:  code/fix4su604corr.py
+    Untracked:  code/fix4sukalisto.py
+    Untracked:  code/fixFChead_bothfrac.py
+    Untracked:  code/fixFChead_summary.py
+    Untracked:  code/fixH3k12ac.py
+    Untracked:  code/fixRNAhead4corr.py
+    Untracked:  code/fixRNAkalisto.py
+    Untracked:  code/fixgroupedtranscript.py
+    Untracked:  code/fixhead_netseqfc.py
+    Untracked:  code/get100upPAS.py
+    Untracked:  code/getSeq100up.sh
+    Untracked:  code/getseq100up.err
+    Untracked:  code/getseq100up.out
+    Untracked:  code/grouptranscripts.err
+    Untracked:  code/grouptranscripts.out
+    Untracked:  code/grouptranscripts.py
+    Untracked:  code/log/
+    Untracked:  code/makeSAFbothfrac5perc.py
+    Untracked:  code/makegencondeTSSfile.py
+    Untracked:  code/mergeBW_norm.sh
+    Untracked:  code/mergeBWnorm.err
+    Untracked:  code/mergeBWnorm.out
+    Untracked:  code/netseqFC.err
+    Untracked:  code/netseqFC.out
+    Untracked:  code/netseqFC.sh
+    Untracked:  code/qtlsPvalOppFrac.py
+    Untracked:  code/removeloc_pheno.py
+    Untracked:  code/run_DistPAS2Sig.err
+    Untracked:  code/run_DistPAS2Sig.out
+    Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/run_leafcutterDiffIso.sh
+    Untracked:  code/run_leafcutter_ds.err
+    Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/selectNominalPvalues.py
+    Untracked:  code/snakePASlog.out
+    Untracked:  code/snakefiltPASlog.out
+    Untracked:  code/subset_diffisopheno.py
+    Untracked:  code/subtractExons.err
+    Untracked:  code/subtractExons.out
+    Untracked:  code/subtractExons.sh
+    Untracked:  code/transcriptdm2bed.py
+    Untracked:  code/utrdms2saf.py
+    Untracked:  data/CompareOldandNew/
+    Untracked:  data/DTmatrix/
+    Untracked:  data/DiffIso/
+    Untracked:  data/EncodeRNA/
+    Untracked:  data/PAS/
+    Untracked:  data/QTLGenotypes/
+    Untracked:  data/QTLoverlap/
+    Untracked:  data/README.md
+    Untracked:  data/RNAseq/
+    Untracked:  data/Reads2UTR/
+    Untracked:  data/SignalSiteFiles/
+    Untracked:  data/ThirtyNineIndQtl_nominal/
+    Untracked:  data/apaQTLNominal/
+    Untracked:  data/apaQTLNominal_4pc/
+    Untracked:  data/apaQTLPermuted/
+    Untracked:  data/apaQTLPermuted_4pc/
+    Untracked:  data/apaQTLs/
+    Untracked:  data/assignedPeaks/
+    Untracked:  data/bam/
+    Untracked:  data/bam_clean/
+    Untracked:  data/bam_waspfilt/
+    Untracked:  data/bed_10up/
+    Untracked:  data/bed_clean/
+    Untracked:  data/bed_clean_sort/
+    Untracked:  data/bed_waspfilter/
+    Untracked:  data/bedsort_waspfilter/
+    Untracked:  data/bothFrac_FC/
+    Untracked:  data/bw_norm/
+    Untracked:  data/exampleQTLs/
+    Untracked:  data/fastq/
+    Untracked:  data/filterPeaks/
+    Untracked:  data/fourSU/
+    Untracked:  data/h3k27ac/
+    Untracked:  data/highdiffsiggenes.txt
+    Untracked:  data/inclusivePeaks/
+    Untracked:  data/inclusivePeaks_FC/
+    Untracked:  data/intron_analysis/
+    Untracked:  data/mergedBG/
+    Untracked:  data/mergedBW_byfrac/
+    Untracked:  data/mergedBW_norm/
+    Untracked:  data/mergedBam/
+    Untracked:  data/mergedbyFracBam/
+    Untracked:  data/netseq/
+    Untracked:  data/nuc_10up/
+    Untracked:  data/nuc_10upclean/
+    Untracked:  data/peakCoverage/
+    Untracked:  data/peaks_5perc/
+    Untracked:  data/phenotype/
+    Untracked:  data/phenotype_5perc/
+    Untracked:  data/sigDiffGenes.txt
+    Untracked:  data/sort/
+    Untracked:  data/sort_clean/
+    Untracked:  data/sort_waspfilter/
+    Untracked:  nohup.out
+    Untracked:  output/._.DS_Store
+    Untracked:  output/._meanCorrelationPhenotypes.svg
+    Untracked:  output/dtPlots/
+    Untracked:  output/fastqc/
+    Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
-    Modified:   analysis/mapapaQTL.Rmd
-    Modified:   data/MetaDataSequencing.txt
+    Modified:   analysis/DiffIsoAnalysis.Rmd
+    Modified:   analysis/PASusageQC.Rmd
+    Modified:   analysis/choosePCs.Rmd
+    Modified:   analysis/corrbetweenind.Rmd
+    Modified:   analysis/nascenttranscription.Rmd
+    Modified:   analysis/nucintronicanalysis.Rmd
+    Modified:   analysis/rerunQTL_changePC.Rmd
+    Modified:   analysis/rna_netseq_h3k12ac.Rmd
+    Modified:   code/Snakefile
+    Deleted:    code/Upstream10Bases_general.py
+    Modified:   code/apaQTLCorrectPvalMakeQQ.R
+    Modified:   code/apaQTL_permuted.sh
+    Modified:   code/apaQTLsnake.err
+    Modified:   code/bed2saf.py
+    Modified:   code/cluster.json
+    Modified:   code/config.yaml
+    Deleted:    code/test.txt
 
 </code></pre>
 <p>
@@ -588,6 +726,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/54fb5e2530fe0b207726590a364575239b34a595/analysis/Readdistagainstfeatures.Rmd" target="_blank">54fb5e2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+<td>
+add normalized plot code
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/e650e08719a9e5e69ce9b3fba86c0f6218fe9d32/docs/Readdistagainstfeatures.html" target="_blank">e650e08</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/851c963223c1de49d3f362ddacf6a8877b1087cf/analysis/Readdistagainstfeatures.Rmd" target="_blank">851c963</a>
 </td>
 <td>
@@ -622,7 +794,15 @@ sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/me
 <div id="map-along-gene-bodies" class="section level2">
 <h2>Map along gene bodies</h2>
 <pre class="bash"><code>sbatch BothFracDTPlotGeneRegions.sh</code></pre>
-<br> <br>
+</div>
+<div id="redo-with-normalized-rpkm" class="section level2">
+<h2>Redo with Normalized RPKM</h2>
+<p>I need to create normalized bw from each bam file. I then merge by fraction and convert back to bigwig from bedgraph.</p>
+<p>I added a rule to the first snakefile that created the normalized files. Then I run the following to merge and create the bw.</p>
+<pre class="bash"><code>sbatch mergeBW_norm.sh</code></pre>
+<p>Next I create the plot with deeptools.</p>
+<pre class="bash"><code>sbatch BothFracDTPlotGeneRegions_normalized.sh</code></pre>
+<br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
 <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
@@ -631,25 +811,29 @@ sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/me
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 3.5.1 (2018-07-02)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.14.1
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
 
 Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] workflowr_1.2.0 Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2
- [5] backports_1.1.3 git2r_0.24.0    magrittr_1.5    evaluate_0.13  
- [9] stringi_1.3.1   fs_1.2.6        whisker_0.3-2   rmarkdown_1.11 
-[13] tools_3.5.1     stringr_1.4.0   glue_1.3.0      xfun_0.5       
-[17] yaml_2.2.0      compiler_3.5.1  htmltools_0.3.6 knitr_1.21     </code></pre>
+ [1] workflowr_1.3.0 Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2
+ [5] backports_1.1.2 git2r_0.23.0    magrittr_1.5    evaluate_0.12  
+ [9] stringi_1.2.4   fs_1.2.6        whisker_0.3-2   rmarkdown_1.10 
+[13] tools_3.5.1     stringr_1.3.1   glue_1.3.0      yaml_2.2.0     
+[17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
 </div>
 </div>
 
