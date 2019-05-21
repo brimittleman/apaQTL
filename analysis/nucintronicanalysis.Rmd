@@ -21,30 +21,81 @@ library(workflowr)
 
 ```{r}
 nucIntronicPeaks=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc", stringsAsFactors = F, header = F,col.names = c("chr", "start", "end", "gene", "loc", "strand", "peak", "avgUsage")) %>% filter(loc=="intron")
+
+nucIntronicPeaksBed=nucIntronicPeaks %>% mutate(ID=paste(peak,gene,loc, sep=":")) %>% dplyr::select(chr, start, end, ID, avgUsage, strand)
+
+write.table(nucIntronicPeaksBed, "../data/intron_analysis/NuclearIntronicPeaks.bed", col.names = F, row.names = F, quote = F,sep="\t")
 ```
 
 I will need to assign each of these to an intron in the new annotation.  
 
 The genome annotation file, Transcript2GeneName.dms has the information i need. I will need to parse this file. I need all exons for a gene (longest transcript) The file has the exon starts and ends for each transcript.  
 
-It may be easiest to first subset to the longest transcripts for each of the genes. 
+I will remove the exon locations for full transcripts using bedtools subtract. 
 
 
-Rpackages?
 
-https://rdrr.io/bioc/GenomicFeatures/man/exonicParts.html
+Create transcript file.I will select all of the transcripts in the dms file and merge by gene name. Then I can subtract the exons 
 
-```{r}
-library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+
+
+```{bash,eval=F}
+python transcriptdm2bed.py
 ```
 
-Pull out introns:
+Sort the output, group by transcript and fix order of columns. 
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/AllTranscriptsbyName.bed > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/AllTranscriptsbyName.sort.bed
+
+sbatch grouptranscripts.py
+
+python fixgroupedtranscript.py
+```
+
+
+Exons:
+
+/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_coding.dms  
+
+Exon bed file:/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/refseq.ProteinCoding.bed
+
+```{bash,eval=F}
+sbatch subtractExons.sh
+```
+sort:
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n /project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.bed > /project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed
+```
+
+
+Next I will map the intronic peaks on these positions. 
+
+```{bash,eval=F}
+sbatch assignNucIntonpeak2intronlocs.sh
+```
+
+
+Plot percentage of intron where PAS is.
 
 ```{r}
-intronic_parts2 <- intronicParts(txdb, linked.to.single.gene.only=TRUE)
+pas2intron=read.table("../data/intron_analysis/IntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand")) %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+
+
 
 ```
 
 
-Can I just assign all of the peaks to an intron and not allow multimapping? I could do something with bedtools intersect. I would need to require opposite strandedness in this case because the peaks are still opposite.  I could do this then choose the longest intron if thereare more than one that the peak overlaps.  
+```{r}
+ggplot(pas2intron, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length")
+```
+Facet by usage 0-25, 25-50, 50-75, 75-1
+```{r}
+pas2intron_usage=pas2intron %>% mutate(UsageCat=ifelse(meanUsage<=.5, "low", "high"))
+
+ggplot(pas2intron_usage, aes(x=propIntron, fill=UsageCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~UsageCat)
+
+```
+
+
