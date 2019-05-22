@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea259a17e4ca3bfe70a6fcf372a01bd63ad4ca1bdtargetblanka259a17a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a259a17e4ca3bfe70a6fcf372a01bd63ad4ca1bd" target="_blank">a259a17</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree48cbbd4a248fe28c643b7ed27b6962161ce0170etargetblank48cbbd4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/48cbbd4a248fe28c643b7ed27b6962161ce0170e" target="_blank">48cbbd4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea259a17e4ca3bfe70a6fcf372a01bd63ad4ca1bdtargetblanka259a17a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree48cbbd4a248fe28c643b7ed27b6962161ce0170etargetblank48cbbd4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -452,6 +452,7 @@ Untracked files:
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
+    Untracked:  code/._TESplots100bp.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
@@ -541,6 +542,9 @@ Untracked files:
     Untracked:  code/LC_samplegroups.py
     Untracked:  code/README.md
     Untracked:  code/Rplots.pdf
+    Untracked:  code/TESplots100bp.err
+    Untracked:  code/TESplots100bp.out
+    Untracked:  code/TESplots100bp.sh
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/aAPAqtl_nominal39ind.sh
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
@@ -613,6 +617,7 @@ Untracked files:
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
+    Untracked:  data/GeuvadisRNA/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
@@ -724,6 +729,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/nucintronicanalysis.html" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -870,12 +892,12 @@ start ideas for inton analysis
 <p>I am interested in understanding where in the introns the nuclear peaks are. Are they closer to the three prime or five prime edge of the intron. This may help us understand if NMD is contributing to the loss of transcripts between the nuclear and total fraction.</p>
 <p>I need to create an annotation with introns that do not overlap. For this I will use line up all of the exons for a gene then take the open spaces as introns.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -946,6 +968,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-12-1.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-12-1.png" target="_blank">d859f02</a>
 </td>
 <td>
@@ -987,6 +1020,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-13-1.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d859f02f7079e5fdac54304f492e7e658bf3f0b6/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-13-1.png" target="_blank">d859f02</a>
 </td>
 <td>
@@ -1008,17 +1052,168 @@ pas2intron_length=pas2intron %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=mea
 
 ggplot(pas2intron_length, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-14-1.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(pas2intron_length, aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat)</code></pre>
-<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-14-2.png" width="672" style="display: block; margin: auto;" /> Look at quartiles:</p>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-14-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-2">
+Past versions of unnamed-chunk-14-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-14-2.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Look at quartiles:</p>
 <pre class="r"><code>summary(pas2intron_usage$intronLength)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     106    3929    9220   22248   24094 1102540 </code></pre>
 <pre class="r"><code>pas2intron_length2=pas2intron %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=3929, &quot;first&quot;, ifelse(intronLength&gt;3929 &amp;intronLength&lt;=9220, &quot;second&quot;, ifelse(intronLength&gt;9220 &amp;intronLength&lt;=24094, &quot;third&quot;, &quot;fourth&quot;))))
+
+pas2intron_length2$LengthCat &lt;- factor(pas2intron_length2$LengthCat, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))
                                          
 ggplot(pas2intron_length2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title=&quot;PAS position within intron \n Nuclear intronic PAS&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat)+theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-15-1.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(pas2intron_length2, aes(x=log(distance2PAS)), by=LengthCat, col=LengthCat) + stat_ecdf(aes(col=LengthCat)) </code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-15-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-2">
+Past versions of unnamed-chunk-15-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-15-2.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Look at distribution in total fraction:</p>
 <pre class="r"><code>totIntronicPeaks=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc&quot;, stringsAsFactors = F, header = F,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;, &quot;avgUsage&quot;)) %&gt;% filter(loc==&quot;intron&quot;)
 
@@ -1034,13 +1229,90 @@ nrow(pas2intronTot)</code></pre>
 <pre class="r"><code>totalplot=ggplot(pas2intronTot, aes(x=propIntron)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title=&quot;PAS position within intron \nfor total PAS&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;)</code></pre>
 <pre class="r"><code>plot_grid(totalplot, nuclearplot)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-20-1.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(pas2intronTot$intronLength)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     106    3785    8872   21032   22928 1102540 </code></pre>
 <pre class="r"><code>pas2intron_totlength2=pas2intronTot %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=3785, &quot;first&quot;, ifelse(intronLength&gt;3785 &amp;intronLength&lt;=8872, &quot;second&quot;, ifelse(intronLength&gt;8872 &amp;intronLength&lt;=22928, &quot;third&quot;, &quot;fourth&quot;))))
+
+pas2intron_totlength2$LengthCat &lt;- factor(pas2intron_totlength2$LengthCat, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))
+
                                          
 ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title=&quot;PAS position within intron \n Total intronic PAS&quot;, y=&quot;Proportion of Intronic PAS&quot;, x=&quot;Proportion of Intronic Length&quot;) + facet_grid(~LengthCat) + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-21-1.png" target="_blank">57d8a8c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
