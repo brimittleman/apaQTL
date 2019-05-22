@@ -137,7 +137,9 @@ sig_genes=sig %>% filter(p.adjust<.05)
 number_sig_genes=nrow(sig_genes)
 number_sig_genes
 
+sig_genesonly=sig_genes %>% separate(cluster,into=c("chrom", "geneName"), sep = ":") %>% dplyr::select(geneName)
 
+write.table(sig_genesonly, file="../data/sigDiffGenes.txt", col.names = T, row.names = F, quote = F)
 ```
 
 ###Effect sizes 
@@ -161,6 +163,11 @@ Filter PAU > .2
 ```{r}
 effectsize_deltaPAU= effectsize %>% filter(abs(deltaPAU) > .2) 
 nrow(effectsize_deltaPAU)
+
+effectSize_highdiffGenes=effectsize_deltaPAU %>% separate(intron, into=c("chrom", "start", "end", "GeneName"), sep=":") %>% dplyr::select(GeneName) %>% unique()
+
+
+write.table(effectSize_highdiffGenes, file="../data/highdiffsiggenes.txt", col.names = F, row.names = F, quote = F)
 ```
 Genes in this set:  
 
@@ -352,5 +359,9 @@ summary(effectsize_length_catall$PercLength)
 ```{r}
 summary(effectsize$logef)
 
+```
+
+```{r}
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(alpha=.4,bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body ")+scale_fill_manual(values=c("deepskyblue3","darkviolet")) 
 ```
 
