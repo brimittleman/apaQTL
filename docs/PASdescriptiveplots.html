@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-20
+<strong>Last updated:</strong> 2019-05-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8f883d80c16388df62dd5e0a353736abe5bcb925targetblank8f883d8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/8f883d80c16388df62dd5e0a353736abe5bcb925" target="_blank">8f883d8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2fd13bb267054d96d3d8577887b6473a557e5eedtargetblank2fd13bba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2fd13bb267054d96d3d8577887b6473a557e5eed" target="_blank">2fd13bb</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8f883d80c16388df62dd5e0a353736abe5bcb925targetblank8f883d8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2fd13bb267054d96d3d8577887b6473a557e5eedtargetblank2fd13bba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -446,6 +446,7 @@ Untracked files:
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  apaQTL.Rproj
+    Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
     Untracked:  code/._LC_samplegroups.py
@@ -456,6 +457,7 @@ Untracked files:
     Untracked:  code/._apaQTL_Nominal.sh
     Untracked:  code/._apaQTL_permuted.sh
     Untracked:  code/._assignNucIntonpeak2intronlocs.sh
+    Untracked:  code/._assignTotIntronpeak2intronlocs.sh
     Untracked:  code/._bed2saf.py
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
@@ -471,6 +473,7 @@ Untracked files:
     Untracked:  code/._configOLD.yaml
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._dag.pdf
+    Untracked:  code/._encodeRNADTplots.sh
     Untracked:  code/._extractGenotypes.py
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._filter5perc.R
@@ -494,6 +497,7 @@ Untracked files:
     Untracked:  code/._makeSAFbothfrac5perc.py
     Untracked:  code/._makegencondeTSSfile.py
     Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeByFracBam.sh
     Untracked:  code/._mergePeaks.sh
     Untracked:  code/._namePeaks.py
@@ -522,6 +526,7 @@ Untracked files:
     Untracked:  code/APAqtl_permuted.out
     Untracked:  code/BothFracDTPlotGeneRegions.err
     Untracked:  code/BothFracDTPlotGeneRegions.out
+    Untracked:  code/BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/DistPAS2Sig.py
     Untracked:  code/FC_UTR.err
     Untracked:  code/FC_UTR.out
@@ -540,6 +545,9 @@ Untracked files:
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
     Untracked:  code/assignPeak2Intronicregion.out
+    Untracked:  code/assignTotIntronpeak2intronlocs.sh
+    Untracked:  code/assigntotPeak2Intronicregion.err
+    Untracked:  code/assigntotPeak2Intronicregion.out
     Untracked:  code/bam2bw.err
     Untracked:  code/bam2bw.out
     Untracked:  code/bothFrac_FC.err
@@ -549,6 +557,7 @@ Untracked files:
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
+    Untracked:  code/encodeRNADTplots.sh
     Untracked:  code/extractGenotypes.py
     Untracked:  code/fc2leafphen.py
     Untracked:  code/finalPASbed2SAF.py
@@ -573,6 +582,9 @@ Untracked files:
     Untracked:  code/log/
     Untracked:  code/makeSAFbothfrac5perc.py
     Untracked:  code/makegencondeTSSfile.py
+    Untracked:  code/mergeBW_norm.sh
+    Untracked:  code/mergeBWnorm.err
+    Untracked:  code/mergeBWnorm.out
     Untracked:  code/netseqFC.err
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
@@ -596,6 +608,7 @@ Untracked files:
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
+    Untracked:  data/EncodeRNA/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
@@ -619,6 +632,7 @@ Untracked files:
     Untracked:  data/bed_waspfilter/
     Untracked:  data/bedsort_waspfilter/
     Untracked:  data/bothFrac_FC/
+    Untracked:  data/bw_norm/
     Untracked:  data/exampleQTLs/
     Untracked:  data/fastq/
     Untracked:  data/filterPeaks/
@@ -630,6 +644,7 @@ Untracked files:
     Untracked:  data/intron_analysis/
     Untracked:  data/mergedBG/
     Untracked:  data/mergedBW_byfrac/
+    Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
     Untracked:  data/netseq/
@@ -643,7 +658,6 @@ Untracked files:
     Untracked:  data/sort/
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
-    Untracked:  docs/figure/apaQTLoverlap.Rmd/
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -660,10 +674,13 @@ Unstaged changes:
     Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/rna_netseq_h3k12ac.Rmd
+    Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_permuted.sh
+    Modified:   code/apaQTLsnake.err
     Modified:   code/bed2saf.py
+    Modified:   code/cluster.json
     Modified:   code/config.yaml
     Deleted:    code/test.txt
 
@@ -704,6 +721,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/2fd13bb267054d96d3d8577887b6473a557e5eed/analysis/PASdescriptiveplots.Rmd" target="_blank">2fd13bb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+<td>
+add location plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/a88eedf9feeaeba2af44f429f931361c419ff930/docs/PASdescriptiveplots.html" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -784,12 +835,12 @@ Build site.
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(reshape2)</code></pre>
@@ -1229,7 +1280,45 @@ FullDF=cbind(FullDF,val=genesbycuttoff_tot(val))
 <pre class="r"><code>fullDF_melt=melt(FullDF,id.vars = &quot;Category&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NGenes&quot;) %&gt;% mutate(propGene=NGenes/nrow(annotation))
 
 ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;Proportion of genes with Multiple PAS by Total Usage filter&quot;,y=&quot;Proportion of 27115 genes&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
-<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /> Nuclear:</p>
+<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a88eedf9feeaeba2af44f429f931361c419ff930/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nuclear:</p>
 <pre class="r"><code>nucapaanno=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc&quot;,header = T,stringsAsFactors = F) 
 
 nucapanum=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.CountsOnlyNumeric&quot;,header = F, col.names = indiv) 
@@ -1269,7 +1358,115 @@ FullDFNuc=cbind(FullDFNuc,val=genesbycuttoff_nuc(val))
 <pre class="r"><code>FullDFNuc_melt=melt(FullDFNuc,id.vars = &quot;Category&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NGenes&quot;) %&gt;% mutate(propGene=NGenes/nrow(annotation))
 
 ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;Proportion of genes with Multiple PAS by Nuclear Usage filter&quot;,y=&quot;Proportion of 27115 genes&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
-<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /> ##Location of PAS by filter</p>
+<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a88eedf9feeaeba2af44f429f931361c419ff930/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" target="_blank">a88eedf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="location-of-pas-by-filter" class="section level2">
+<h2>Location of PAS by filter</h2>
+<p>I will make these plots but the categories will be location of the PAS.</p>
+<pre class="r"><code>locbycutoff_tot=function(fraction){
+  totapaMeananno_filt=totapaMeananno %&gt;% filter(meanUsage &gt;=fraction) %&gt;% separate(ID, into=c(&quot;chrom&quot;, &quot;start&quot;,&quot;end&quot;, &quot;peakID&quot;),sep=&quot;:&quot;) %&gt;% separate(peakID, into=c(&quot;Gene&quot;,&quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;),sep=&quot;_&quot;) %&gt;% group_by(loc) %&gt;% summarise(PerLoc=n()) %&gt;%filter(loc!= &quot;008559&quot;)
+return(totapaMeananno_filt$PerLoc)
+}</code></pre>
+<pre class="r"><code>locations=c(&quot;cds&quot;, &quot;end&quot;, &quot;intron&quot;, &quot;utr3&quot;, &quot;utr5&quot;)
+FullDF_loc=as.data.frame(cbind(locations))
+cutoffs=seq(from=0, to=.5, by=.05)
+for (val in cutoffs)
+{
+FullDF_loc=cbind(FullDF_loc,val=locbycutoff_tot(val))
+}</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 4 rows [14735,
+14736, 14737, 14738].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 3 rows [9347,
+9348, 9349].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 3 rows [7284,
+7285, 7286].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 2 rows [6143,
+6144].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 2 rows [5328,
+5329].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [4704].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [4169].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [3738].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [3327].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [2987].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [2685].</code></pre>
+<pre class="r"><code>colnames(FullDF_loc)=c(&quot;Location&quot;,cutoffs)</code></pre>
+<p>Melt:</p>
+<pre class="r"><code>FullDF_loc_melt=melt(FullDF_loc,id.vars = &quot;Location&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NPas&quot;) %&gt;% group_by(Cutoff) %&gt;%  mutate(propPAS=NPas/sum(NPas))
+
+totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;PAS location: Total Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
+<p>Nuclear</p>
+<pre class="r"><code>locbycutoff_nuc=function(fraction){
+nucapaMeananno_filt=nucapaMeananno %&gt;% filter(meanUsage &gt;=fraction) %&gt;% separate(ID, into=c(&quot;chrom&quot;, &quot;start&quot;,&quot;end&quot;, &quot;peakID&quot;),sep=&quot;:&quot;) %&gt;% separate(peakID, into=c(&quot;Gene&quot;,&quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;),sep=&quot;_&quot;) %&gt;% group_by(loc) %&gt;% summarise(PerLoc=n()) %&gt;%filter(loc!= &quot;008559&quot;)
+return(nucapaMeananno_filt$PerLoc)
+}</code></pre>
+<pre class="r"><code>NucFullDF_loc=as.data.frame(cbind(locations))
+cutoffs=seq(from=0, to=.5, by=.05)
+for (val in cutoffs)
+{
+NucFullDF_loc=cbind(NucFullDF_loc,val=locbycutoff_nuc(val))
+}</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 4 rows [14735,
+14736, 14737, 14738].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 4 rows [9492,
+9493, 9494, 9495].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 3 rows [7512,
+7513, 7514].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 2 rows [6329,
+6330].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 2 rows [5636,
+5637].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [5028].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [4561].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [4146].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [3782].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [3457].</code></pre>
+<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 1 rows [3178].</code></pre>
+<pre class="r"><code>colnames(NucFullDF_loc)=c(&quot;Location&quot;,cutoffs)</code></pre>
+<p>Melt:</p>
+<pre class="r"><code>NucFullDF_locMelt=melt(NucFullDF_loc,id.vars = &quot;Location&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NPas&quot;) %&gt;% group_by(Cutoff) %&gt;%  mutate(propPAS=NPas/sum(NPas))
+
+nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;PAS location: Nuclear Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
+<p>Plot next to eachother</p>
+<pre class="r"><code>plot_grid(nucplotloc, totplotloc)</code></pre>
+<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
