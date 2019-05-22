@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree48cbbd4a248fe28c643b7ed27b6962161ce0170etargetblank48cbbd4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/48cbbd4a248fe28c643b7ed27b6962161ce0170e" target="_blank">48cbbd4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6bfa078733ba29f9d36b40aeb0806a4106dd293btargetblank6bfa078a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6bfa078733ba29f9d36b40aeb0806a4106dd293b" target="_blank">6bfa078</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree48cbbd4a248fe28c643b7ed27b6962161ce0170etargetblank48cbbd4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6bfa078733ba29f9d36b40aeb0806a4106dd293btargetblank6bfa078a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -453,12 +453,15 @@ Untracked files:
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
+    Untracked:  code/._TESplots150bp.sh
+    Untracked:  code/._TESplots200bp.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
     Untracked:  code/._apaQTL_permuted.sh
     Untracked:  code/._assignNucIntonpeak2intronlocs.sh
     Untracked:  code/._assignTotIntronpeak2intronlocs.sh
+    Untracked:  code/._bam2BW_5primemost.sh
     Untracked:  code/._bed2saf.py
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
@@ -545,6 +548,12 @@ Untracked files:
     Untracked:  code/TESplots100bp.err
     Untracked:  code/TESplots100bp.out
     Untracked:  code/TESplots100bp.sh
+    Untracked:  code/TESplots150bp.err
+    Untracked:  code/TESplots150bp.out
+    Untracked:  code/TESplots150bp.sh
+    Untracked:  code/TESplots200bp.err
+    Untracked:  code/TESplots200bp.out
+    Untracked:  code/TESplots200bp.sh
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/aAPAqtl_nominal39ind.sh
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
@@ -556,8 +565,11 @@ Untracked files:
     Untracked:  code/assignTotIntronpeak2intronlocs.sh
     Untracked:  code/assigntotPeak2Intronicregion.err
     Untracked:  code/assigntotPeak2Intronicregion.out
+    Untracked:  code/bam2BW_5primemost.sh
     Untracked:  code/bam2bw.err
     Untracked:  code/bam2bw.out
+    Untracked:  code/bam2bw_5primemost.err
+    Untracked:  code/bam2bw_5primemost.out
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
@@ -731,6 +743,40 @@ Message
 <tbody>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6bfa078733ba29f9d36b40aeb0806a4106dd293b/analysis/nucintronicanalysis.Rmd" target="_blank">6bfa078</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+by delta pau
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/ace11ccd5c571d9720e66baa89949d6e9439a69d/docs/nucintronicanalysis.html" target="_blank">ace11cc</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -892,12 +938,12 @@ start ideas for inton analysis
 <p>I am interested in understanding where in the introns the nuclear peaks are. Are they closer to the three prime or five prime edge of the intron. This may help us understand if NMD is contributing to the loss of transcripts between the nuclear and total fraction.</p>
 <p>I need to create an annotation with introns that do not overlap. For this I will use line up all of the exons for a gene then take the open spaces as introns.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -1162,6 +1208,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ace11ccd5c571d9720e66baa89949d6e9439a69d/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-15-1.png" target="_blank">ace11cc</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-15-1.png" target="_blank">57d8a8c</a>
 </td>
 <td>
@@ -1199,6 +1256,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ace11ccd5c571d9720e66baa89949d6e9439a69d/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-15-2.png" target="_blank">ace11cc</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-15-2.png" target="_blank">57d8a8c</a>
@@ -1300,6 +1368,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ace11ccd5c571d9720e66baa89949d6e9439a69d/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-21-1.png" target="_blank">ace11cc</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/57d8a8c3302213fce92c63c5cb645ab7ede038d2/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-21-1.png" target="_blank">57d8a8c</a>
 </td>
 <td>
@@ -1313,6 +1392,20 @@ brimittleman
 </table>
 </div>
 </div>
+<p>Look by differences in <span class="math inline">\(\Delta\)</span> PAU.</p>
+<pre class="r"><code>effectsize=read.table(&quot;../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt&quot;, stringsAsFactors = F, col.names=c(&#39;PAS&#39;,  &#39;logef&#39; ,&#39;Nuclear&#39;, &#39;Total&#39;,&#39;deltaPAU&#39;)) %&gt;% filter(PAS != &quot;intron&quot;) %&gt;% dplyr::select(PAS, deltaPAU)</code></pre>
+<pre class="r"><code>pas2intronNuc=read.table(&quot;../data/intron_analysis/IntronPeaksontoIntrons.bed&quot;,col.names = c(&quot;intronCHR&quot;, &quot;intronStart&quot;, &quot;intronEnd&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;peakCHR&quot;, &quot;peakStart&quot;, &quot;peakEnd&quot;, &quot;PeakID&quot;, &quot;meanUsage&quot;, &quot;peakStrand&quot;)) %&gt;% mutate(PAS=paste(peakCHR, peakStart, peakEnd, gene, sep=&quot;:&quot;)) %&gt;% inner_join(effectsize, by=&quot;PAS&quot;) %&gt;% mutate(PASloc=ifelse(strand==&quot;+&quot;, peakEnd, peakStart)) %&gt;% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage, deltaPAU) %&gt;% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand==&quot;+&quot;, PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+
+pas2intronNuc$deltaPAU= as.numeric(pas2intronNuc$deltaPAU)</code></pre>
+<p>Plot relationship between delta PAU and distance to proporiton of intron</p>
+<pre class="r"><code>ggplot(pas2intronNuc, aes(x=propIntron, y=deltaPAU)) + geom_point() + geom_density2d(col=&quot;red&quot;)</code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pas2intronNuc_cat=pas2intronNuc %&gt;% mutate(Fraction=ifelse(deltaPAU &lt;= -0.2, &quot;NuclearSpecific&quot;, &quot;NotDiff&quot;)) %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=3929, &quot;first&quot;, ifelse(intronLength&gt;3929 &amp;intronLength&lt;=9220, &quot;second&quot;, ifelse(intronLength&gt;9220 &amp;intronLength&lt;=24094, &quot;third&quot;, &quot;fourth&quot;))))
+
+pas2intronNuc_cat$LengthCat &lt;- factor(pas2intronNuc_cat$LengthCat, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))</code></pre>
+<p>Plot this:</p>
+<pre class="r"><code>ggplot(pas2intronNuc_cat, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~LengthCat)</code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1354,10 +1447,10 @@ loaded via a namespace (and not attached):
 [25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
 [33] readxl_1.1.0     rmarkdown_1.10   reshape2_1.4.3   modelr_0.1.2    
-[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
-[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
-[45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
-[49] broom_0.5.1      crayon_1.3.4    </code></pre>
+[37] magrittr_1.5     whisker_0.3-2    MASS_7.3-51.1    backports_1.1.2 
+[41] scales_1.0.0     htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
+[45] colorspace_1.3-2 labeling_0.3     stringi_1.2.4    lazyeval_0.2.1  
+[49] munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 
