@@ -141,6 +141,8 @@ Look at quartiles:
 summary(pas2intron_usage$intronLength)
 
 pas2intron_length2=pas2intron %>% mutate(LengthCat=ifelse(intronLength<=3929, "first", ifelse(intronLength>3929 &intronLength<=9220, "second", ifelse(intronLength>9220 &intronLength<=24094, "third", "fourth"))))
+
+pas2intron_length2$LengthCat <- factor(pas2intron_length2$LengthCat, levels=c("first", "second", "third", "fourth"))
                                          
 ggplot(pas2intron_length2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron \n Nuclear intronic PAS", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
@@ -191,6 +193,10 @@ plot_grid(totalplot, nuclearplot)
 summary(pas2intronTot$intronLength)
 
 pas2intron_totlength2=pas2intronTot %>% mutate(LengthCat=ifelse(intronLength<=3785, "first", ifelse(intronLength>3785 &intronLength<=8872, "second", ifelse(intronLength>8872 &intronLength<=22928, "third", "fourth"))))
+
+pas2intron_totlength2$LengthCat <- factor(pas2intron_totlength2$LengthCat, levels=c("first", "second", "third", "fourth"))
+
+
                                          
 ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title="PAS position within intron \n Total intronic PAS", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
