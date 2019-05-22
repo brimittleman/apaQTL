@@ -31,7 +31,7 @@ sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/me
 sbatch BothFracDTPlotGeneRegions.sh
 ```
 
-
+![Normalized deep tools plots.](../output/dtPlots/BothFrac_Transcript_labeled.png)
 
 ##Redo with Normalized RPKM  
 
@@ -48,3 +48,11 @@ Next I create the plot with deeptools.
 sbatch BothFracDTPlotGeneRegions_normalized.sh
 ```
 
+![Normalized deep tools plots.](../output/dtPlots/BothFrac_Transcript_normalize.png)
+
+
+##Same plots with RNA seq  
+
+![Our RNA.](../output/dtPlots/RNAseq_Transcriptlabeled.png)
+
+![encode RNA.](../output/dtPlots/EncodeRNA_Transcript.png)
