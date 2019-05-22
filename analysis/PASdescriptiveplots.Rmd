@@ -227,3 +227,80 @@ FullDFNuc_melt=melt(FullDFNuc,id.vars = "Category",variable.name = "Cutoff", val
 ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat="identity") + scale_fill_brewer(palette="GnBu") + labs(title="Proportion of genes with Multiple PAS by Nuclear Usage filter",y="Proportion of 27115 genes", x="Usage Filter cutoff")
 ```
 ##Location of PAS by filter
+I will make these plots but the categories will be location of the PAS.  
+
+```{r}
+
+locbycutoff_tot=function(fraction){
+  totapaMeananno_filt=totapaMeananno %>% filter(meanUsage >=fraction) %>% separate(ID, into=c("chrom", "start","end", "peakID"),sep=":") %>% separate(peakID, into=c("Gene","loc", "strand", "peak"),sep="_") %>% group_by(loc) %>% summarise(PerLoc=n()) %>%filter(loc!= "008559")
+return(totapaMeananno_filt$PerLoc)
+}
+
+```
+
+
+```{r}
+
+locations=c("cds", "end", "intron", "utr3", "utr5")
+FullDF_loc=as.data.frame(cbind(locations))
+cutoffs=seq(from=0, to=.5, by=.05)
+for (val in cutoffs)
+{
+FullDF_loc=cbind(FullDF_loc,val=locbycutoff_tot(val))
+}
+colnames(FullDF_loc)=c("Location",cutoffs)
+
+
+
+```
+
+
+Melt:
+
+```{r}
+FullDF_loc_melt=melt(FullDF_loc,id.vars = "Location",variable.name = "Cutoff", value.name = "NPas") %>% group_by(Cutoff) %>%  mutate(propPAS=NPas/sum(NPas))
+
+totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar( stat="identity") + scale_fill_brewer(palette="GnBu") + labs(title="PAS location: Total Fraction",y="Proportion of PAS", x="Usage Filter cutoff")
+```
+
+
+Nuclear  
+
+```{r}
+
+locbycutoff_nuc=function(fraction){
+nucapaMeananno_filt=nucapaMeananno %>% filter(meanUsage >=fraction) %>% separate(ID, into=c("chrom", "start","end", "peakID"),sep=":") %>% separate(peakID, into=c("Gene","loc", "strand", "peak"),sep="_") %>% group_by(loc) %>% summarise(PerLoc=n()) %>%filter(loc!= "008559")
+return(nucapaMeananno_filt$PerLoc)
+}
+
+```
+
+
+```{r}
+
+
+NucFullDF_loc=as.data.frame(cbind(locations))
+cutoffs=seq(from=0, to=.5, by=.05)
+for (val in cutoffs)
+{
+NucFullDF_loc=cbind(NucFullDF_loc,val=locbycutoff_nuc(val))
+}
+colnames(NucFullDF_loc)=c("Location",cutoffs)
+
+```
+
+
+Melt:
+
+```{r}
+NucFullDF_locMelt=melt(NucFullDF_loc,id.vars = "Location",variable.name = "Cutoff", value.name = "NPas") %>% group_by(Cutoff) %>%  mutate(propPAS=NPas/sum(NPas))
+
+nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar( stat="identity") + scale_fill_brewer(palette="GnBu") + labs(title="PAS location: Nuclear Fraction",y="Proportion of PAS", x="Usage Filter cutoff")
+```
+
+Plot next to eachother 
+
+```{r}
+plot_grid(nucplotloc, totplotloc)
+```
+
