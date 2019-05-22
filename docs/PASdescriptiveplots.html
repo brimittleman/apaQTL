@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-21
+<strong>Last updated:</strong> 2019-05-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2fd13bb267054d96d3d8577887b6473a557e5eedtargetblank2fd13bba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2fd13bb267054d96d3d8577887b6473a557e5eed" target="_blank">2fd13bb</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed3df9c350ef728f099d4faca56938a43dd998102targetblankd3df9c3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d3df9c350ef728f099d4faca56938a43dd998102" target="_blank">d3df9c3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2fd13bb267054d96d3d8577887b6473a557e5eedtargetblank2fd13bba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed3df9c350ef728f099d4faca56938a43dd998102targetblankd3df9c3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,6 +435,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -526,8 +527,12 @@ Untracked files:
     Untracked:  code/APAqtl_permuted.out
     Untracked:  code/BothFracDTPlotGeneRegions.err
     Untracked:  code/BothFracDTPlotGeneRegions.out
+    Untracked:  code/BothFracDTPlotGeneRegions_norm.err
+    Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/DistPAS2Sig.py
+    Untracked:  code/EncodeRNADTPlotGeneRegions.err
+    Untracked:  code/EncodeRNADTPlotGeneRegions.out
     Untracked:  code/FC_UTR.err
     Untracked:  code/FC_UTR.out
     Untracked:  code/FC_UTR.sh
@@ -668,6 +673,7 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/DiffIsoAnalysis.Rmd
     Modified:   analysis/PASusageQC.Rmd
+    Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/choosePCs.Rmd
     Modified:   analysis/corrbetweenind.Rmd
     Modified:   analysis/nascenttranscription.Rmd
@@ -721,6 +727,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d3df9c350ef728f099d4faca56938a43dd998102/analysis/PASdescriptiveplots.Rmd" target="_blank">d3df9c3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+fix plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6af55a2e450967786cd727fd0392d030998b45fd/docs/PASdescriptiveplots.html" target="_blank">6af55a2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -835,12 +875,12 @@ Build site.
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(reshape2)</code></pre>
@@ -1279,7 +1319,7 @@ FullDF=cbind(FullDF,val=genesbycuttoff_tot(val))
 <p>Melt:</p>
 <pre class="r"><code>fullDF_melt=melt(FullDF,id.vars = &quot;Category&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NGenes&quot;) %&gt;% mutate(propGene=NGenes/nrow(annotation))
 
-ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;Proportion of genes with Multiple PAS by Total Usage filter&quot;,y=&quot;Proportion of 27115 genes&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
+ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( stat=&quot;identity&quot;,width = .5) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;Proportion of genes with Multiple PAS by Total Usage filter&quot;,y=&quot;Proportion of 27115 genes&quot;, x=&quot;Usage Filter cutoff&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))</code></pre>
 <p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
@@ -1431,7 +1471,7 @@ FullDF_loc=cbind(FullDF_loc,val=locbycutoff_tot(val))
 <p>Melt:</p>
 <pre class="r"><code>FullDF_loc_melt=melt(FullDF_loc,id.vars = &quot;Location&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NPas&quot;) %&gt;% group_by(Cutoff) %&gt;%  mutate(propPAS=NPas/sum(NPas))
 
-totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;PAS location: Total Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
+totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width=.5, stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;PAS location\n Total Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))</code></pre>
 <p>Nuclear</p>
 <pre class="r"><code>locbycutoff_nuc=function(fraction){
 nucapaMeananno_filt=nucapaMeananno %&gt;% filter(meanUsage &gt;=fraction) %&gt;% separate(ID, into=c(&quot;chrom&quot;, &quot;start&quot;,&quot;end&quot;, &quot;peakID&quot;),sep=&quot;:&quot;) %&gt;% separate(peakID, into=c(&quot;Gene&quot;,&quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;),sep=&quot;_&quot;) %&gt;% group_by(loc) %&gt;% summarise(PerLoc=n()) %&gt;%filter(loc!= &quot;008559&quot;)
@@ -1463,10 +1503,49 @@ NucFullDF_loc=cbind(NucFullDF_loc,val=locbycutoff_nuc(val))
 <p>Melt:</p>
 <pre class="r"><code>NucFullDF_locMelt=melt(NucFullDF_loc,id.vars = &quot;Location&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NPas&quot;) %&gt;% group_by(Cutoff) %&gt;%  mutate(propPAS=NPas/sum(NPas))
 
-nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar( stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;PAS location: Nuclear Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
+nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width = .5, stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;GnBu&quot;) + labs(title=&quot;PAS location\n Nuclear Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))</code></pre>
 <p>Plot next to eachother</p>
 <pre class="r"><code>plot_grid(nucplotloc, totplotloc)</code></pre>
 <p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
+Past versions of unnamed-chunk-24-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-24-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6af55a2e450967786cd727fd0392d030998b45fd/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-24-1.png" target="_blank">6af55a2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>totplotloc</code></pre>
+<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
