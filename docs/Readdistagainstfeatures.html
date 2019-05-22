@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-21
+<strong>Last updated:</strong> 2019-05-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree54fb5e2530fe0b207726590a364575239b34a595targetblank54fb5e2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/54fb5e2530fe0b207726590a364575239b34a595" target="_blank">54fb5e2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree498c964865621eaa3f433f7a515b2c7e4da48838targetblank498c964a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/498c964865621eaa3f433f7a515b2c7e4da48838" target="_blank">498c964</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree54fb5e2530fe0b207726590a364575239b34a595targetblank54fb5e2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree498c964865621eaa3f433f7a515b2c7e4da48838targetblank498c964a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -526,8 +526,12 @@ Untracked files:
     Untracked:  code/APAqtl_permuted.out
     Untracked:  code/BothFracDTPlotGeneRegions.err
     Untracked:  code/BothFracDTPlotGeneRegions.out
+    Untracked:  code/BothFracDTPlotGeneRegions_norm.err
+    Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/DistPAS2Sig.py
+    Untracked:  code/EncodeRNADTPlotGeneRegions.err
+    Untracked:  code/EncodeRNADTPlotGeneRegions.out
     Untracked:  code/FC_UTR.err
     Untracked:  code/FC_UTR.out
     Untracked:  code/FC_UTR.sh
@@ -726,6 +730,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/498c964865621eaa3f433f7a515b2c7e4da48838/analysis/Readdistagainstfeatures.Rmd" target="_blank">498c964</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-22
+</td>
+<td>
+add plots as pngs
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6952d4e8e3aea5c63cf56f4e083c6b32d10c6fa1/docs/Readdistagainstfeatures.html" target="_blank">6952d4e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/54fb5e2530fe0b207726590a364575239b34a595/analysis/Readdistagainstfeatures.Rmd" target="_blank">54fb5e2</a>
 </td>
 <td>
@@ -794,6 +832,10 @@ sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/me
 <div id="map-along-gene-bodies" class="section level2">
 <h2>Map along gene bodies</h2>
 <pre class="bash"><code>sbatch BothFracDTPlotGeneRegions.sh</code></pre>
+<div class="figure">
+<img src="../output/dtPlots/BothFrac_Transcript_labeled.png" alt="Normalized deep tools plots." />
+<p class="caption">Normalized deep tools plots.</p>
+</div>
 </div>
 <div id="redo-with-normalized-rpkm" class="section level2">
 <h2>Redo with Normalized RPKM</h2>
@@ -802,6 +844,21 @@ sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/me
 <pre class="bash"><code>sbatch mergeBW_norm.sh</code></pre>
 <p>Next I create the plot with deeptools.</p>
 <pre class="bash"><code>sbatch BothFracDTPlotGeneRegions_normalized.sh</code></pre>
+<div class="figure">
+<img src="../output/dtPlots/BothFrac_Transcript_normalize.png" alt="Normalized deep tools plots." />
+<p class="caption">Normalized deep tools plots.</p>
+</div>
+</div>
+<div id="same-plots-with-rna-seq" class="section level2">
+<h2>Same plots with RNA seq</h2>
+<div class="figure">
+<img src="../output/dtPlots/RNAseq_Transcriptlabeled.png" alt="Our RNA." />
+<p class="caption">Our RNA.</p>
+</div>
+<div class="figure">
+<img src="../output/dtPlots/EncodeRNA_Transcript.png" alt="encode RNA." />
+<p class="caption">encode RNA.</p>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
