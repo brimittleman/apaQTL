@@ -55,20 +55,35 @@ python fixgroupedtranscript.py
 ```
 
 
-Exons:
+I want to subract any exon or UTR seqeunce. I have an annotation bed file I will use:
+ 
+```{r}
+exonandUTRs=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("CHR", "start", "end", "ID", "score", "strand"),stringsAsFactors = F)%>% separate(ID, into=c("loc", "gene"),sep=":") %>% filter(loc!="intron") %>% dplyr::select(-loc) %>% mutate(CHR=paste("chr", CHR, sep=""))
 
-/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_coding.dms  
 
-Exon bed file:/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/refseq.ProteinCoding.bed
+write.table(exonandUTRs, file="../data/intron_analysis/ExonandUTRloc.bed", quote=F, col.names = F, row.names = F, sep="\t")
+```
+
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/intron_analysis/ExonandUTRloc.bed > ../data/intron_analysis/ExonandUTRloc.sort.bed
+```
+
+
 
 ```{bash,eval=F}
 sbatch subtractExons.sh
 ```
+
+
 sort:
 
 ```{bash,eval=F}
 sort -k1,1 -k2,2n /project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.bed > /project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed
 ```
+
+
+
 
 
 Next I will map the intronic peaks on these positions. 
@@ -118,17 +133,20 @@ pas2intron_length=pas2intron %>% mutate(LengthCat=ifelse(intronLength<=meanIntro
 
 ggplot(pas2intron_length, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
 
-
+ggplot(pas2intron_length, aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
 ```
 Look at quartiles:  
 
 ```{r}
 summary(pas2intron_usage$intronLength)
 
-pas2intron_length2=pas2intron %>% mutate(LengthCat=ifelse(intronLength<=4451, "first", ifelse(intronLength>4451 &intronLength<=11142, "second", ifelse(intronLength>11142 &intronLength<=30024, "third", "fourth"))))
+pas2intron_length2=pas2intron %>% mutate(LengthCat=ifelse(intronLength<=3929, "first", ifelse(intronLength>3929 &intronLength<=9220, "second", ifelse(intronLength>9220 &intronLength<=24094, "third", "fourth"))))
                                          
-ggplot(pas2intron_length2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
+ggplot(pas2intron_length2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../33345)) + labs(title="PAS position within intron \n Nuclear intronic PAS", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
+
+ggplot(pas2intron_length2, aes(x=log(distance2PAS)), by=LengthCat, col=LengthCat) + stat_ecdf(aes(col=LengthCat)) 
+  
 
 
 ```
@@ -172,11 +190,13 @@ plot_grid(totalplot, nuclearplot)
 ```{r}
 summary(pas2intronTot$intronLength)
 
-pas2intron_totlength2=pas2intronTot %>% mutate(LengthCat=ifelse(intronLength<=4451, "first", ifelse(intronLength>4275 &intronLength<=10682, "second", ifelse(intronLength>10682 &intronLength<=28377, "third", "fourth"))))
+pas2intron_totlength2=pas2intronTot %>% mutate(LengthCat=ifelse(intronLength<=3785, "first", ifelse(intronLength>3785 &intronLength<=8872, "second", ifelse(intronLength>8872 &intronLength<=22928, "third", "fourth"))))
                                          
-ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title="PAS position within intron", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat)
+ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogram(bins=50, aes(y=..count../31954)) + labs(title="PAS position within intron \n Total intronic PAS", y="Proportion of Intronic PAS", x="Proportion of Intronic Length") + facet_grid(~LengthCat) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
 ```
+
+
 
 
