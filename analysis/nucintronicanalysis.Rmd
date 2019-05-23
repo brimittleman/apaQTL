@@ -223,7 +223,7 @@ Plot relationship between delta PAU and distance to proporiton of intron
 ggplot(pas2intronNuc, aes(x=propIntron, y=deltaPAU)) + geom_point() + geom_density2d(col="red")
 ```
 ```{r}
-pas2intronNuc_cat=pas2intronNuc %>% mutate(Fraction=ifelse(deltaPAU <= -0.2, "NuclearSpecific", "NotDiff")) %>% mutate(LengthCat=ifelse(intronLength<=3929, "first", ifelse(intronLength>3929 &intronLength<=9220, "second", ifelse(intronLength>9220 &intronLength<=24094, "third", "fourth"))))
+pas2intronNuc_cat=pas2intronNuc %>% mutate(Fraction=ifelse(deltaPAU <= -0.2, "NuclearSpecific", ifelse(deltaPAU>-.2 &deltaPAU < .2, "NotDiff", "TotalEnriched"))) %>% mutate(LengthCat=ifelse(intronLength<=3929, "first", ifelse(intronLength>3929 &intronLength<=9220, "second", ifelse(intronLength>9220 &intronLength<=24094, "third", "fourth"))))
 
 pas2intronNuc_cat$LengthCat <- factor(pas2intronNuc_cat$LengthCat, levels=c("first", "second", "third", "fourth"))
 ```
@@ -235,7 +235,27 @@ ggplot(pas2intronNuc_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_b
 ```
 
 ```{r}
+ggplot(pas2intronNuc_cat, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~LengthCat)  + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+
+```{r}
 ggplot(pas2intronNuc_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
 
+```{r}
+
+pas2intronTotal=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand")) %>% mutate(PAS=paste(peakCHR, peakStart, peakEnd, gene, sep=":")) %>% inner_join(effectsize, by="PAS") %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage, deltaPAU) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+
+pas2intronTotal$deltaPAU= as.numeric(pas2intronTotal$deltaPAU)
+
+
+pas2intronTotal_cat=pas2intronTotal %>% mutate(Fraction=ifelse(deltaPAU <= -0.2, "NuclearSpecific", ifelse(deltaPAU>-.2 &deltaPAU < .2, "NotDiff", "TotalEnriched"))) %>% mutate(LengthCat=ifelse(intronLength<=3785, "first", ifelse(intronLength>3785 &intronLength<=8872, "second", ifelse(intronLength>8872 &intronLength<=22928, "third", "fourth"))))
+
+
+
+pas2intronTotal_cat$LengthCat <- factor(pas2intronTotal_cat$LengthCat, levels=c("first", "second", "third", "fourth"))
+
+ggplot(pas2intronTotal_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5) + facet_grid(~LengthCat)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+```
 
