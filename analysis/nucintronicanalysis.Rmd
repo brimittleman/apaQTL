@@ -17,6 +17,7 @@ I need to create an annotation with introns that do not overlap. For this I will
 library(tidyverse)
 library(workflowr)
 library(cowplot)
+
 ```
 
 
@@ -230,6 +231,11 @@ pas2intronNuc_cat$LengthCat <- factor(pas2intronNuc_cat$LengthCat, levels=c("fir
 Plot this:
 
 ```{r}
-ggplot(pas2intronNuc_cat, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~LengthCat)
+ggplot(pas2intronNuc_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5) + facet_grid(~LengthCat)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
+
+```{r}
+ggplot(pas2intronNuc_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+```
+
 
