@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefc5727e38d6bb9317a92fa3f9ae8762090c19069targetblankfc5727ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fc5727e38d6bb9317a92fa3f9ae8762090c19069" target="_blank">fc5727e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2632f111d82c09c085ff251404e734f0bb862dbatargetblank2632f11a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2632f111d82c09c085ff251404e734f0bb862dba" target="_blank">2632f11</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefc5727e38d6bb9317a92fa3f9ae8762090c19069targetblankfc5727ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2632f111d82c09c085ff251404e734f0bb862dbatargetblank2632f11a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -742,6 +742,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/2632f111d82c09c085ff251404e734f0bb862dba/analysis/nucintronicanalysis.Rmd" target="_blank">2632f11</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-23
+</td>
+<td>
+add tot enriched
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/b454fc6e4926213fe62688447a066aa5990c4dee/docs/nucintronicanalysis.html" target="_blank">b454fc6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1472,7 +1506,7 @@ brimittleman
 </table>
 </div>
 </div>
-<pre class="r"><code>pas2intronNuc_cat=pas2intronNuc %&gt;% mutate(Fraction=ifelse(deltaPAU &lt;= -0.2, &quot;NuclearSpecific&quot;, &quot;NotDiff&quot;)) %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=3929, &quot;first&quot;, ifelse(intronLength&gt;3929 &amp;intronLength&lt;=9220, &quot;second&quot;, ifelse(intronLength&gt;9220 &amp;intronLength&lt;=24094, &quot;third&quot;, &quot;fourth&quot;))))
+<pre class="r"><code>pas2intronNuc_cat=pas2intronNuc %&gt;% mutate(Fraction=ifelse(deltaPAU &lt;= -0.2, &quot;NuclearSpecific&quot;, ifelse(deltaPAU&gt;-.2 &amp;deltaPAU &lt; .2, &quot;NotDiff&quot;, &quot;TotalEnriched&quot;))) %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=3929, &quot;first&quot;, ifelse(intronLength&gt;3929 &amp;intronLength&lt;=9220, &quot;second&quot;, ifelse(intronLength&gt;9220 &amp;intronLength&lt;=24094, &quot;third&quot;, &quot;fourth&quot;))))
 
 pas2intronNuc_cat$LengthCat &lt;- factor(pas2intronNuc_cat$LengthCat, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))</code></pre>
 <p>Plot this:</p>
@@ -1502,6 +1536,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b454fc6e4926213fe62688447a066aa5990c4dee/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-26-1.png" target="_blank">b454fc6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/ab2692689afb940c49ce91e6d28d41719d30075d/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-26-1.png" target="_blank">ab26926</a>
 </td>
 <td>
@@ -1515,8 +1560,60 @@ brimittleman
 </table>
 </div>
 </div>
-<pre class="r"><code>ggplot(pas2intronNuc_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) </code></pre>
+<pre class="r"><code>ggplot(pas2intronNuc_cat, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~LengthCat)  + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-27-1">
+Past versions of unnamed-chunk-27-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-27-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b454fc6e4926213fe62688447a066aa5990c4dee/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-27-1.png" target="_blank">b454fc6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>ggplot(pas2intronNuc_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) </code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pas2intronTotal=read.table(&quot;../data/intron_analysis/TotalIntronPeaksontoIntrons.bed&quot;,col.names = c(&quot;intronCHR&quot;, &quot;intronStart&quot;, &quot;intronEnd&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;peakCHR&quot;, &quot;peakStart&quot;, &quot;peakEnd&quot;, &quot;PeakID&quot;, &quot;meanUsage&quot;, &quot;peakStrand&quot;)) %&gt;% mutate(PAS=paste(peakCHR, peakStart, peakEnd, gene, sep=&quot;:&quot;)) %&gt;% inner_join(effectsize, by=&quot;PAS&quot;) %&gt;% mutate(PASloc=ifelse(strand==&quot;+&quot;, peakEnd, peakStart)) %&gt;% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage, deltaPAU) %&gt;% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand==&quot;+&quot;, PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+
+pas2intronTotal$deltaPAU= as.numeric(pas2intronTotal$deltaPAU)
+
+
+pas2intronTotal_cat=pas2intronTotal %&gt;% mutate(Fraction=ifelse(deltaPAU &lt;= -0.2, &quot;NuclearSpecific&quot;, ifelse(deltaPAU&gt;-.2 &amp;deltaPAU &lt; .2, &quot;NotDiff&quot;, &quot;TotalEnriched&quot;))) %&gt;% mutate(LengthCat=ifelse(intronLength&lt;=3785, &quot;first&quot;, ifelse(intronLength&gt;3785 &amp;intronLength&lt;=8872, &quot;second&quot;, ifelse(intronLength&gt;8872 &amp;intronLength&lt;=22928, &quot;third&quot;, &quot;fourth&quot;))))
+
+
+
+pas2intronTotal_cat$LengthCat &lt;- factor(pas2intronTotal_cat$LengthCat, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))
+
+ggplot(pas2intronTotal_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5) + facet_grid(~LengthCat)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) </code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
