@@ -54,6 +54,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [apaQTL in opposite fraction](apaQTLoverlap.html)
 
+* [Usage QTL analysis to look at non normal effect sizes](nonNormQTL.html)
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  

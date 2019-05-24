@@ -1,0 +1,65 @@
+---
+title: "Usage Effect Sizes"
+author: "Briana Mittleman"
+date: "5/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In order to compare effect sizes for the QTLs I have previously identified in an interpretable manner, I need to run the linear model with the non normalized usage. To do this I will separate the the usage (with annotation) files by chromosome and run fastqtl on these files.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+##Prepare files  
+
+countsnum= APApeak_Phenotype_GeneLocAnno.Total.5perc.CountsNumeric, APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric
+
+id file= APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz, APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz
+
+
+#Chr    start   end     ID
+
+
+```{r}
+totAnno= read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz", stringsAsFactors = F, header = T) %>% separate(chrom, into=c("Chrchrom", "Start", "End", "ID"),sep=":") %>% mutate(Chr=str_sub(Chrchrom, 4, str_length(Chrchrom)))
+                                                                                                                                                                                                                
+colnamesTot= colnames(totAnno)[5:58]
+totUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.CountsNumeric", stringsAsFactors = F, header = F, col.names = colnamesTot) 
+
+totUsageAnno=as.data.frame(cbind(Chr=totAnno$Chr, start=totAnno$Start, end=totAnno$End, ID=totAnno$ID, totUsage ))
+
+write.table(totUsageAnno,file="../data/nonNorm_pheno/TotalUsageAllChrom.txt", col.names = T, row.names = F, quote = F, sep="\t" )
+```
+
+
+
+```{r}
+nucAnno= read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz", stringsAsFactors = F, header = T)%>% separate(chrom, into=c("Chrchrom", "Start", "End", "ID"),sep=":") %>% mutate(Chr=str_sub(Chrchrom, 4, str_length(Chrchrom)))
+colnamesNuc= colnames(nucAnno)[5:58]
+nucUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric", stringsAsFactors = F, header = F, col.names = colnamesNuc) 
+
+
+nucUsageAnno=as.data.frame(cbind(Chr=nucAnno$Chr, start=nucAnno$Start, end=nucAnno$End, ID=nucAnno$ID, nucUsage ))
+
+write.table(nucUsageAnno,file="../data/nonNorm_pheno/NuclearUsageAllChrom.txt", col.names = T, row.names = F, quote = F, sep="\t" )
+```
+
+I will create a python script to seperate the file into each chromosome for running fastQTL.  
+
+```{bash,eval=F}
+ sbatch run_sepUsagephen.sh
+ sbatch ZipandTabPheno.sh
+ sbatch ApaQTL_nominalNonnorm.sh
+```
+
+
+
+
+
+
