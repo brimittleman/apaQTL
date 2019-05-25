@@ -250,12 +250,127 @@ pas2intronTotal=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.
 pas2intronTotal$deltaPAU= as.numeric(pas2intronTotal$deltaPAU)
 
 
-pas2intronTotal_cat=pas2intronTotal %>% mutate(Fraction=ifelse(deltaPAU <= -0.2, "NuclearSpecific", ifelse(deltaPAU>-.2 &deltaPAU < .2, "NotDiff", "TotalEnriched"))) %>% mutate(LengthCat=ifelse(intronLength<=3785, "first", ifelse(intronLength>3785 &intronLength<=8872, "second", ifelse(intronLength>8872 &intronLength<=22928, "third", "fourth"))))
+pas2intronTotal_cat=pas2intronTotal %>% mutate(Fraction=ifelse(deltaPAU <= -0.1, "NuclearEnriched", ifelse(deltaPAU>-.1 &deltaPAU < .1, "NotDiff", "TotalEnriched"))) %>% mutate(LengthCat=ifelse(intronLength<=3785, "first", ifelse(intronLength>3785 &intronLength<=8872, "second", ifelse(intronLength>8872 &intronLength<=22928, "third", "fourth"))))%>% group_by(gene) %>% mutate(Intornid=ifelse(strand=="+",  1:n(),n():1)) %>% ungroup()
 
 
 
 pas2intronTotal_cat$LengthCat <- factor(pas2intronTotal_cat$LengthCat, levels=c("first", "second", "third", "fourth"))
 
-ggplot(pas2intronTotal_cat, aes(y=propIntron, x=Fraction, fill=Fraction)) + geom_boxplot(alpha=.5) + facet_grid(~LengthCat)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+ggplot(pas2intronTotal_cat, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~Intornid)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
+
+Fascet analysis by which number intron in a gene. I need to reverse the ordering for the negative strand. 
+
+
+First group by gene:
+
+```{r}
+pas2intronNuc_exonofgene= pas2intronNuc_cat %>% group_by(gene) %>% mutate(Intornid=ifelse(strand=="+",  1:n(),n():1))
+```
+
+
+```{r}
+ggplot(pas2intronNuc_exonofgene, aes(x=propIntron)) + geom_histogram(bins=50)  + facet_grid(~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+
+I’d like to look at just the first exon and the top 50% intron length
+
+```{r}
+pas2intronTotal_cat_first=pas2intronTotal_cat %>% filter(Intornid==1) %>% mutate(LengthHalf=ifelse(intronLength<=8872, "Short", "Long"))
+
+ggplot(pas2intronTotal_cat_first, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~LengthHalf)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="First intron proportion of the intron\n by intron length and delta PAU")
+```
+
+
+Took at distance to TSS.  
+
+
+I have the merged transcript gene file and I will remove 5' UTRs.  
+I can pull in the merged transcript gene.  
+
+```{r}
+fiveprimeUTRs=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("CHR", "start", "end", "ID", "score", "strand"),stringsAsFactors = F)%>% separate(ID, into=c("loc", "gene"),sep=":") %>% filter(loc=="utr5") %>% dplyr::select(-loc) %>% mutate(CHR=paste("chr", CHR, sep=""))
+
+
+write.table(fiveprimeUTRs, file="../data/intron_analysis/fiveprimeloc.bed", quote=F, col.names = F, row.names = F, sep="\t")
+```
+
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/intron_analysis/fiveprimeloc.bed > ../data/intron_analysis/fiveprimeloc.sort.bed
+```
+
+
+
+```{bash,eval=F}
+sbatch subtractfiveprimeUTR.sh
+```
+
+
+```{r}
+tss=read.table("../data/intron_analysis/transcriptsMinus5UTR.bed",col.names = c("chr", "start", "end", "gene", "score", "strand"), stringsAsFactors = F) %>% mutate(TSS=ifelse(strand=="+", start, end)) %>% dplyr::select(TSS, gene)
+
+
+```
+
+```{r}
+pas2intronTotal_cat$gene= as.character(pas2intronTotal_cat$gene)
+pas2intronTotal_catTSS= pas2intronTotal_cat %>% inner_join(tss, by="gene") %>% mutate(dist2TSS= ifelse(strand=="+", abs(PASloc-TSS), abs(TSS-PASloc))) %>% filter(dist2TSS<10000)
+
+
+ggplot(pas2intronTotal_catTSS, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + labs(title="Distance to TSS by delta PAU first 10KB", x="Distance to TSS")+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+```
+
+```{r}
+pas2intronTotal_catTSS %>% group_by(Fraction) %>% summarise(n())
+```
+
+
+
+```{r}
+ggplot(pas2intronTotal_catTSS, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + labs(title="Distance to TSS by delta PAU", x="Distance to TSS")+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_log10() + facet_grid(~Intornid)
+
+```
+
+
+```{r}
+pas2intronTotal_catTSS_first=pas2intronTotal_catTSS %>% filter(Intornid==1, dist2TSS<10000)
+
+ggplot(pas2intronTotal_catTSS_first, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + labs(title="Distance to TSS for first exon first 10KB",x="Distance to TSS") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+```
+
+```{r}
+pas2intronTotal_catTSS_first %>% group_by(Fraction) %>% summarise(n())
+```
+
+##deep tools first intron  
+
+```{r}
+FirstIntron= read.table("../data/intron_analysis/transcriptsMinusExons.sort.bed", stringsAsFactors = F, col.names=c("chr", "start", "end", "gene", "score", "strand")) %>% group_by(gene) %>% mutate(Intornid=ifelse(strand=="+",  1:n(),n():1)) %>% mutate(Chr=str_sub(chr, 4, str_length(chr))) %>% filter(Intornid==1) %>% select(Chr, start, end ,gene ,score ,strand) 
+
+write.table(FirstIntron,file="../data/intron_analysis/FirstIntronOnly.bed", col.names = F, row.names = F, quote=F, sep="\t")
+```
+
+Sort this:
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/intron_analysis/FirstIntronOnly.bed > ../data/intron_analysis/FirstIntronOnly_Sort.bed
+```
+
+###compare to 4th  
+
+```{r}
+FourthIntron= read.table("../data/intron_analysis/transcriptsMinusExons.sort.bed", stringsAsFactors = F, col.names=c("chr", "start", "end", "gene", "score", "strand")) %>% group_by(gene) %>% mutate(Intornid=ifelse(strand=="+",  1:n(),n():1)) %>% mutate(Chr=str_sub(chr, 4, str_length(chr))) %>% filter(Intornid==4) %>% select(Chr, start, end ,gene ,score ,strand) 
+
+write.table(FourthIntron,file="../data/intron_analysis/FourthIntronOnly.bed", col.names = F, row.names = F, quote=F, sep="\t")
+```
+
+Sort this:
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/intron_analysis/FourthIntronOnly.bed > ../data/intron_analysis/FourthIntronOnly_Sort.bed
+```
+
+
 
