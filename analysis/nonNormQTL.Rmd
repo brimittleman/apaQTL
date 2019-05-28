@@ -291,4 +291,7 @@ sbatch run_qtlFacetBoxplots.sh "Nuclear" "LINC00869" "1" "1:149598905" "peak7883
 sbatch run_qtlFacetBoxplots.sh "Nuclear" "FRG1BP" "20" "20:29641550" "peak80905"
 sbatch run_qtlFacetBoxplots.sh "Nuclear" "HLA-DRB5" "6" "6:32468906" "peak113456"
 
+#test case  
+sbatch run_qtlFacetBoxplots.sh "Nuclear" "TAF3" "10" "10:7980931" "peak14035"
+
 ```
