@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef10e64d7488cdcc34f86bee5b0304f205f934e4etargetblankf10e64da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f10e64d7488cdcc34f86bee5b0304f205f934e4e" target="_blank">f10e64d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec04929f5191f070caece16c1c785ff988b725612targetblankc04929fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/c04929f5191f070caece16c1c785ff988b725612" target="_blank">c04929f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef10e64d7488cdcc34f86bee5b0304f205f934e4etargetblankf10e64da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec04929f5191f070caece16c1c785ff988b725612targetblankc04929fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -445,6 +445,7 @@ Untracked files:
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
+    Untracked:  analysis/nascentRNA.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
@@ -582,6 +583,7 @@ Untracked files:
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
     Untracked:  code/assignPeak2Intronicregion.out
@@ -642,6 +644,8 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/qtlFacetBoxplots.err
+    Untracked:  code/qtlFacetBoxplots.out
     Untracked:  code/qtlsPvalOppFrac.py
     Untracked:  code/removeloc_pheno.py
     Untracked:  code/run_DistPAS2Sig.err
@@ -650,6 +654,7 @@ Untracked files:
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
     Untracked:  code/run_sepusage.err
     Untracked:  code/run_sepusage.out
@@ -672,6 +677,7 @@ Untracked files:
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
+    Untracked:  data/ExampleQTLPlots/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
@@ -787,6 +793,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/c04929f5191f070caece16c1c785ff988b725612/analysis/nonNormQTL.Rmd" target="_blank">c04929f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-28
+</td>
+<td>
+add example code
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/f4a21063974a84ac3db3817cf9f97a5b21c5e5b0/docs/nonNormQTL.html" target="_blank">f4a2106</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -972,7 +1012,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 0.1518 on 543 degrees of freedom
 Multiple R-squared:  0.6024,    Adjusted R-squared:  0.6017 
 F-statistic: 822.8 on 1 and 543 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Total apaQTL effect sizes&quot;, x=&quot;Effect size in Nuclear&quot;,y=&quot;Effect size in Total&quot;) + geom_density_2d(col=&quot;red&quot;) + annotate(&quot;text&quot;, y=2, x=2, label=&quot;R2=.61, slope=0.4&quot;)</code></pre>
+<pre class="r"><code>totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Total apaQTL effect sizes&quot;, x=&quot;Effect size in Total&quot;,y=&quot;Effect size in Nucler&quot;) + geom_density_2d(col=&quot;red&quot;) + annotate(&quot;text&quot;, y=2, x=2, label=&quot;R2=.61, slope=0.4&quot;)</code></pre>
 </div>
 <div id="nuclear" class="section level2">
 <h2>Nuclear</h2>
@@ -996,9 +1036,215 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 0.0998 on 1010 degrees of freedom
 Multiple R-squared:  0.8127,    Adjusted R-squared:  0.8125 
 F-statistic:  4381 on 1 and 1010 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Nuclear apaQTL effect sizes&quot;, x=&quot;Effect size in Total&quot;,y=&quot;Effect size in Nuclear&quot;) + geom_density_2d(col=&quot;red&quot;) +  annotate(&quot;text&quot;, y=2, x=1, label=&quot;R2=.81, slope=0.74&quot;)</code></pre>
+<pre class="r"><code>Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Nuclear apaQTL effect sizes&quot;, x=&quot;Effect size in Nuclear&quot;,y=&quot;Effect size in Total&quot;) + geom_density_2d(col=&quot;red&quot;) +  annotate(&quot;text&quot;, y=2, x=1, label=&quot;R2=.81, slope=0.74&quot;)</code></pre>
 <pre class="r"><code>plot_grid(totbothplot,Nucbothplot)</code></pre>
 <p><img src="figure/nonNormQTL.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f4a21063974a84ac3db3817cf9f97a5b21c5e5b0/docs/figure/nonNormQTL.Rmd/unnamed-chunk-10-1.png" target="_blank">f4a2106</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="remove-effect-size-abs1" class="section level2">
+<h2>Remove Effect size &gt; abs(1)</h2>
+<pre class="r"><code>totAPAinNucFilt=read.table(&quot;../data/QTLoverlap_nonNorm/TotalQTLinNuclearNominal_nonNorm.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;)) %&gt;% filter(abs(slope)&lt;= 1)
+
+
+nucAPAinTotFilt=read.table(&quot;../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;)) %&gt;% filter(abs(slope)&lt;= 1)
+
+totAPAinTotFilt=read.table(&quot;../data/QTLoverlap_nonNorm/TotalQTLinTotalNominal_nonNorm.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;)) %&gt;% dplyr::select(peakID, snp, slope) %&gt;%   filter(abs(slope)&lt;= 1) %&gt;% dplyr::rename(&quot;Originalslope&quot;=slope)
+
+nucAPAinNucFilt=read.table(&quot;../data/QTLoverlap_nonNorm/NuclearQTLinNuclearNominal_nonNorm.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;)) %&gt;% dplyr::select(peakID, snp, slope)%&gt;%  filter(abs(slope)&lt;= 1) %&gt;%dplyr::rename(&quot;Originalslope&quot;=slope)</code></pre>
+<pre class="r"><code>TotBothFilt= totAPAinNucFilt %&gt;% inner_join(totAPAinTotFilt,by=c(&quot;peakID&quot;, &quot;snp&quot;))
+
+summary(lm(TotBothFilt$slope ~ TotBothFilt$Originalslope))</code></pre>
+<pre><code>
+Call:
+lm(formula = TotBothFilt$slope ~ TotBothFilt$Originalslope)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.43593 -0.04769 -0.00197  0.05133  0.48722 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               0.004788   0.004634   1.033    0.302    
+TotBothFilt$Originalslope 0.767422   0.018322  41.885   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1063 on 542 degrees of freedom
+Multiple R-squared:  0.764, Adjusted R-squared:  0.7635 
+F-statistic:  1754 on 1 and 542 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>totbothplotfilt=ggplot(TotBothFilt, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Total apaQTL effect sizes&quot;, y=&quot;Effect size in Nuclear&quot;,x=&quot;Effect size in Total&quot;) + geom_density_2d(col=&quot;red&quot;) + annotate(&quot;text&quot;, y=.75, x=.1, label=&quot;R2=.76, slope=0.77&quot;)+ geom_abline(slope=1,color=&quot;green&quot;)</code></pre>
+<pre class="r"><code>NucBothFilt= nucAPAinTotFilt %&gt;% inner_join(nucAPAinNucFilt,by=c(&quot;peakID&quot;, &quot;snp&quot;))
+summary(lm(NucBothFilt$slope ~ NucBothFilt$Originalslope))</code></pre>
+<pre><code>
+Call:
+lm(formula = NucBothFilt$slope ~ NucBothFilt$Originalslope)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.74819 -0.03867  0.00179  0.04084  0.37901 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               -0.0006196  0.0030789  -0.201    0.841    
+NucBothFilt$Originalslope  0.7059759  0.0133986  52.690   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.09539 on 1007 degrees of freedom
+Multiple R-squared:  0.7338,    Adjusted R-squared:  0.7336 
+F-statistic:  2776 on 1 and 1007 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>Nucbothplotfilt=ggplot(NucBothFilt, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Nuclear apaQTL effect sizes&quot;, y=&quot;Effect size in Total&quot;,x=&quot;Effect size in Nuclear&quot;) + geom_density_2d(col=&quot;red&quot;) +  annotate(&quot;text&quot;, y=.75, x=.1, label=&quot;R2=.73, slope=0.71&quot;)+ geom_abline(slope=1,color=&quot;green&quot;)</code></pre>
+<pre class="r"><code>plot_grid(totbothplotfilt,Nucbothplotfilt)</code></pre>
+<p><img src="figure/nonNormQTL.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="box-plots-to-look-at-the-outliers" class="section level3">
+<h3>Box plots to look at the outliers:</h3>
+<p>get headers:</p>
+<pre class="bash"><code>less /project2/gilad/briana/YRI_geno_hg19/chr3.dose.filt.vcf.gz | head -n14 | tail -n1 &gt; /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/genotypeHeader.txt
+less /project2/gilad/briana/apaQTL/data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz | head -n1 &gt; /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/phenotypeHeader.txt</code></pre>
+<p>remove the hashtag in these</p>
+<p>apaqtlfacetboxplots.R</p>
+<pre class="r"><code>library(tidyverse)
+library(reshape2)
+library(optparse)
+library(cowplot)
+
+
+option_list = list(
+  make_option(c(&quot;-P&quot;, &quot;--pheno&quot;), action=&quot;store&quot;, default=NA, type=&#39;character&#39;,
+              help=&quot;input pheno file&quot;),
+  make_option(c(&quot;-G&quot;, &quot;--geno&quot;), action=&quot;store&quot;, default=NA, type=&#39;character&#39;,
+              help=&quot;input genotype&quot;),
+  make_option(c(&quot;-g&quot;, &quot;--gene&quot;), action=&quot;store&quot;, default=NA, type=&#39;character&#39;,
+              help=&quot;gene&quot;),
+  make_option(c(&quot;-p&quot;, &quot;--peakID&quot;), action=&quot;store&quot;, default=NA, type=&#39;character&#39;,
+              help=&quot;peakID&quot;),
+  make_option(c(&quot;-o&quot;, &quot;--output&quot;), action=&quot;store&quot;, default=NA, type=&#39;character&#39;,
+              help=&quot;output file for plot&quot;)
+)
+
+opt_parser &lt;- OptionParser(option_list=option_list)
+opt &lt;- parse_args(opt_parser)
+
+
+opt_parser &lt;- OptionParser(option_list=option_list)
+opt &lt;- parse_args(opt_parser)
+
+
+phenohead=read.table(&quot;/project2/gilad/briana/apaQTL/data/ExampleQTLPlots/phenotypeHeader.txt&quot;, header = T,stringsAsFactors = F)
+pheno=read.table(opt$pheno, col.names =colnames(phenohead),stringsAsFactors = F)
+
+
+meltpheno=melt(pheno, id.vars = &quot;chrom&quot;, value.name = &quot;Ratio&quot;, variable.name = &quot;Individual&quot;) %&gt;% separate(Ratio, into=c(&quot;num&quot;, &quot;denom&quot;), sep=&quot;/&quot;)  %&gt;%   separate(chrom, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;peakID&quot;),sep=&quot;:&quot;) %&gt;% mutate(PeakLoc=paste(start, end, sep=&quot;:&quot;))
+
+meltpheno$Individual= as.character(meltpheno$Individual)
+meltpheno$num= as.numeric(meltpheno$num)
+meltpheno$denom=as.numeric(meltpheno$denom)
+
+
+genoHead=read.table(&quot;/project2/gilad/briana/apaQTL/data/ExampleQTLPlots/genotypeHeader.txt&quot;, header = T,stringsAsFactors = F)
+geno=read.table(opt$geno, col.names =colnames(genoHead),stringsAsFactors = F ) %&gt;% select(ID,contains(&quot;NA&quot;)) 
+
+
+lettersGeno=read.table(opt$geno, col.names =colnames(genoHead),stringsAsFactors = F,colClasses = c(&quot;character&quot;)) %&gt;% select(REF, ALT)
+
+refAllele=lettersGeno$REF
+altAllele=lettersGeno$ALT
+
+
+genoMelt=melt(geno, id.vars = &quot;ID&quot;, value.name = &quot;FullGeno&quot;, variable.name = &quot;Individual&quot; ) %&gt;% separate(FullGeno, into=c(&quot;geno&quot;,&quot;dose&quot;,&quot;extra1&quot;), sep=&quot;:&quot;) %&gt;% select(Individual, dose) %&gt;% mutate(genotype=ifelse(round(as.integer(dose))==0, paste(refAllele, refAllele, sep=&quot;&quot;), ifelse(round(as.integer(dose))==1, paste(refAllele,altAllele, sep=&quot;&quot;), paste(altAllele,altAllele,sep=&quot;&quot;))))
+genoMelt$Individual= as.character(genoMelt$Individual)
+
+
+pheno_qtlpeak=meltpheno %&gt;% inner_join(genoMelt, by=&quot;Individual&quot;) %&gt;%  mutate(PAU=num/denom) 
+
+qtlplot=ggplot(pheno_qtlpeak, aes(x=genotype, y=PAU, fill=genotype)) + geom_boxplot(width=.5)+ geom_jitter(alpha=1) + facet_grid(~PeakLoc) +scale_fill_brewer(palette = &quot;YlOrRd&quot;)
+
+ggsave(plot=qtlplot, filename=opt$output, height=10, width=10)</code></pre>
+<p>Code for boxplots:</p>
+<p>run_qtlFacetBoxplots.sh</p>
+<pre class="bash"><code>#!/bin/bash
+
+#SBATCH --job-name=qtlFacetBoxplots
+#SBATCH --account=pi-yangili1
+#SBATCH --time=24:00:00
+#SBATCH --output=qtlFacetBoxplots.out
+#SBATCH --error=qtlFacetBoxplots.err
+#SBATCH --partition=broadwl
+#SBATCH --mem=18G
+#SBATCH --mail-type=END
+
+
+module load Anaconda3
+source activate three-prime-env
+
+Fraction=$1
+gene=$2
+chrom=$3
+snp=$4
+peakID=$5
+
+
+less /project2/gilad/briana/apaQTL/data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.${Fraction}.5perc.fc.gz | grep ${gene}_ &gt; /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksPheno.txt
+
+
+less /project2/gilad/briana/YRI_geno_hg19/chr${chrom}.dose.filt.vcf.gz | grep ${snp} &gt;  /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksGenotype.txt
+
+Rscript apaqtlfacetboxplots.R -P /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksPheno.txt -G /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksGenotype.txt --gene ${gene} -p ${peakID}  -o /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}${SNP}${peakID}_boxplot.png
+</code></pre>
+<pre class="r"><code>totAPAinTot %&gt;% filter(abs(Originalslope)&gt;1)</code></pre>
+<pre><code>                        peakID         snp Originalslope
+1      NBPF9_intron_-_peak7314 1:144701300       3.14235
+2 HLA-DRB5_intron_+_peak113454  6:32486756    -207.01900
+3    HLA-DRB6_end_+_peak113461  6:32538598       9.32331</code></pre>
+<pre class="bash"><code>sbatch run_qtlFacetBoxplots.sh &quot;Total&quot; &quot;NBPF9&quot; &quot;1&quot; &quot;1:144701300&quot; &quot;peak7314&quot;
+sbatch run_qtlFacetBoxplots.sh &quot;Total&quot; &quot;HLA-DRB5&quot; &quot;6&quot; &quot;6:32486756&quot; &quot;peak113454&quot;
+sbatch run_qtlFacetBoxplots.sh &quot;Total&quot; &quot;HLA-DRB6&quot; &quot;6&quot; &quot;6:32538598&quot; &quot;peak113461&quot;
+</code></pre>
+<pre class="r"><code>nucAPAinNuc %&gt;% filter(abs(Originalslope)&gt;1)</code></pre>
+<pre><code>                        peakID         snp Originalslope
+1  LINC00869_intron_-_peak7883 1:149598905      -2.47583
+2       FRG1BP_end_-_peak80905 20:29641550      -1.54150
+3 HLA-DRB5_intron_+_peak113456  6:32468906       4.46867</code></pre>
+<pre class="bash"><code>sbatch run_qtlFacetBoxplots.sh &quot;Nuclear&quot; &quot;LINC00869&quot; &quot;1&quot; &quot;1:149598905&quot; &quot;peak7883&quot;
+sbatch run_qtlFacetBoxplots.sh &quot;Nuclear&quot; &quot;FRG1BP&quot; &quot;20&quot; &quot;20:29641550&quot; &quot;peak80905&quot;
+sbatch run_qtlFacetBoxplots.sh &quot;Nuclear&quot; &quot;HLA-DRB5&quot; &quot;6&quot; &quot;6:32468906&quot; &quot;peak113456&quot;
+</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1044,6 +1290,7 @@ loaded via a namespace (and not attached):
 [41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
 [45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
 [49] broom_0.5.1      crayon_1.3.4    </code></pre>
+</div>
 </div>
 </div>
 
