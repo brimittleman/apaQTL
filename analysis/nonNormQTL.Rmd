@@ -14,6 +14,7 @@ In order to compare effect sizes for the QTLs I have previously identified in an
 ```{r}
 library(workflowr)
 library(tidyverse)
+library(cowplot)
 ```
 
 ##Prepare files  
@@ -103,7 +104,7 @@ TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
 summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
 
 
-ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")
+totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") + annotate("text", y=2, x=2, label="R2=.61, slope=0.4")
 ```
 ##Nuclear  
 
@@ -111,6 +112,10 @@ ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method
 NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
 summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
 
-ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")
+Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red") +  annotate("text", y=2, x=1, label="R2=.81, slope=0.74")
+```
+
+```{r}
+plot_grid(totbothplot,Nucbothplot)
 ```
 
