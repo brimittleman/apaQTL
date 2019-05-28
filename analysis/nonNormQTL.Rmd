@@ -23,8 +23,6 @@ countsnum= APApeak_Phenotype_GeneLocAnno.Total.5perc.CountsNumeric, APApeak_Phen
 id file= APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz, APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz
 
 
-#Chr    start   end     ID
-
 
 ```{r}
 totAnno= read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz", stringsAsFactors = F, header = T) %>% separate(chrom, into=c("Chrchrom", "Start", "End", "ID"),sep=":") %>% mutate(Chr=str_sub(Chrchrom, 4, str_length(Chrchrom)))
@@ -50,16 +48,69 @@ nucUsageAnno=as.data.frame(cbind(Chr=nucAnno$Chr, start=nucAnno$Start, end=nucAn
 write.table(nucUsageAnno,file="../data/nonNorm_pheno/NuclearUsageAllChrom.txt", col.names = T, row.names = F, quote = F, sep="\t" )
 ```
 
+
+##Run QTL scripts
 I will create a python script to seperate the file into each chromosome for running fastQTL.  
 
 ```{bash,eval=F}
- sbatch run_sepUsagephen.sh
- sbatch ZipandTabPheno.sh
- sbatch ApaQTL_nominalNonnorm.sh
+sbatch run_sepUsagephen.sh
+sbatch ZipandTabPheno.sh
+sbatch ApaQTL_nominalNonnorm.sh
+```
+
+Concatinate files:  
+
+```{bash,eval=F}
+cat  TotalUsageChrom*.nominal.out > TotalUsageChrom_Nominal_AllChrom.txt
+cat  NuclearUsageChrom*.nominal.out > NuclearUsageChrom_Nominal_AllChrom.txt
+
+```
+
+##Pull out real total and nuc QLTs  
+
+
+```{bash,eval=F}
+python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt  
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/NuclearUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinNuclearNominal_nonNorm.txt  
+
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/TotalQTLinTotalNominal_nonNorm.txt  
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/NuclearUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/TotalQTLinNuclearNominal_nonNorm.txt  
 ```
 
 
 
+```{r}
+totAPAinNuc=read.table("../data/QTLoverlap_nonNorm/TotalQTLinNuclearNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope"))
 
 
+nucAPAinTot=read.table("../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope"))
+
+totAPAinTot=read.table("../data/QTLoverlap_nonNorm/TotalQTLinTotalNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% dplyr::select(peakID, snp, slope) %>% dplyr::rename("Originalslope"=slope)
+
+nucAPAinNuc=read.table("../data/QTLoverlap_nonNorm/NuclearQTLinNuclearNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% dplyr::select(peakID, snp, slope)%>% dplyr::rename("Originalslope"=slope)
+```
+
+
+
+##Total
+
+```{r}
+TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
+
+summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
+
+
+ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")
+```
+##Nuclear  
+
+```{r}
+NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
+summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
+
+ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")
+```
 
