@@ -104,7 +104,7 @@ TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
 summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
 
 
-totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") + annotate("text", y=2, x=2, label="R2=.61, slope=0.4")
+totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nucler") + geom_density_2d(col="red") + annotate("text", y=2, x=2, label="R2=.61, slope=0.4")
 ```
 ##Nuclear  
 
@@ -112,10 +112,183 @@ totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_s
 NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
 summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
 
-Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red") +  annotate("text", y=2, x=1, label="R2=.81, slope=0.74")
+Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") +  annotate("text", y=2, x=1, label="R2=.81, slope=0.74")
 ```
 
 ```{r}
 plot_grid(totbothplot,Nucbothplot)
 ```
 
+##Remove Effect size > abs(1)  
+
+
+```{r}
+totAPAinNucFilt=read.table("../data/QTLoverlap_nonNorm/TotalQTLinNuclearNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% filter(abs(slope)<= 1)
+
+
+nucAPAinTotFilt=read.table("../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% filter(abs(slope)<= 1)
+
+totAPAinTotFilt=read.table("../data/QTLoverlap_nonNorm/TotalQTLinTotalNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% dplyr::select(peakID, snp, slope) %>%   filter(abs(slope)<= 1) %>% dplyr::rename("Originalslope"=slope)
+
+nucAPAinNucFilt=read.table("../data/QTLoverlap_nonNorm/NuclearQTLinNuclearNominal_nonNorm.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% dplyr::select(peakID, snp, slope)%>%  filter(abs(slope)<= 1) %>%dplyr::rename("Originalslope"=slope)
+```
+
+```{r}
+TotBothFilt= totAPAinNucFilt %>% inner_join(totAPAinTotFilt,by=c("peakID", "snp"))
+
+summary(lm(TotBothFilt$slope ~ TotBothFilt$Originalslope))
+
+
+totbothplotfilt=ggplot(TotBothFilt, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", y="Effect size in Nuclear",x="Effect size in Total") + geom_density_2d(col="red") + annotate("text", y=.75, x=.1, label="R2=.76, slope=0.77")+ geom_abline(slope=1,color="green")
+```
+
+
+
+```{r}
+NucBothFilt= nucAPAinTotFilt %>% inner_join(nucAPAinNucFilt,by=c("peakID", "snp"))
+summary(lm(NucBothFilt$slope ~ NucBothFilt$Originalslope))
+
+Nucbothplotfilt=ggplot(NucBothFilt, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", y="Effect size in Total",x="Effect size in Nuclear") + geom_density_2d(col="red") +  annotate("text", y=.75, x=.1, label="R2=.73, slope=0.71")+ geom_abline(slope=1,color="green")
+```
+
+
+
+```{r}
+plot_grid(totbothplotfilt,Nucbothplotfilt)
+```
+
+
+###Box plots to look at the outliers:  
+
+
+get headers:
+
+```{bash,eval=F}
+less /project2/gilad/briana/YRI_geno_hg19/chr3.dose.filt.vcf.gz | head -n14 | tail -n1 > /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/genotypeHeader.txt
+less /project2/gilad/briana/apaQTL/data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz | head -n1 > /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/phenotypeHeader.txt
+```
+
+remove the hashtag in these
+
+apaqtlfacetboxplots.R
+```{r,eval=F}
+library(tidyverse)
+library(reshape2)
+library(optparse)
+library(cowplot)
+
+
+option_list = list(
+  make_option(c("-P", "--pheno"), action="store", default=NA, type='character',
+              help="input pheno file"),
+  make_option(c("-G", "--geno"), action="store", default=NA, type='character',
+              help="input genotype"),
+  make_option(c("-g", "--gene"), action="store", default=NA, type='character',
+              help="gene"),
+  make_option(c("-p", "--peakID"), action="store", default=NA, type='character',
+              help="peakID"),
+  make_option(c("-o", "--output"), action="store", default=NA, type='character',
+              help="output file for plot")
+)
+
+opt_parser <- OptionParser(option_list=option_list)
+opt <- parse_args(opt_parser)
+
+
+opt_parser <- OptionParser(option_list=option_list)
+opt <- parse_args(opt_parser)
+
+
+phenohead=read.table("/project2/gilad/briana/apaQTL/data/ExampleQTLPlots/phenotypeHeader.txt", header = T,stringsAsFactors = F)
+pheno=read.table(opt$pheno, col.names =colnames(phenohead),stringsAsFactors = F)
+
+
+meltpheno=melt(pheno, id.vars = "chrom", value.name = "Ratio", variable.name = "Individual") %>% separate(Ratio, into=c("num", "denom"), sep="/")  %>%   separate(chrom, into=c("chrom", "start", "end", "peakID"),sep=":") %>% mutate(PeakLoc=paste(start, end, sep=":"))
+
+meltpheno$Individual= as.character(meltpheno$Individual)
+meltpheno$num= as.numeric(meltpheno$num)
+meltpheno$denom=as.numeric(meltpheno$denom)
+
+
+genoHead=read.table("/project2/gilad/briana/apaQTL/data/ExampleQTLPlots/genotypeHeader.txt", header = T,stringsAsFactors = F)
+geno=read.table(opt$geno, col.names =colnames(genoHead),stringsAsFactors = F ) %>% select(ID,contains("NA")) 
+
+
+lettersGeno=read.table(opt$geno, col.names =colnames(genoHead),stringsAsFactors = F,colClasses = c("character")) %>% select(REF, ALT)
+
+refAllele=lettersGeno$REF
+altAllele=lettersGeno$ALT
+
+
+genoMelt=melt(geno, id.vars = "ID", value.name = "FullGeno", variable.name = "Individual" ) %>% separate(FullGeno, into=c("geno","dose","extra1"), sep=":") %>% select(Individual, dose) %>% mutate(genotype=ifelse(round(as.integer(dose))==0, paste(refAllele, refAllele, sep=""), ifelse(round(as.integer(dose))==1, paste(refAllele,altAllele, sep=""), paste(altAllele,altAllele,sep=""))))
+genoMelt$Individual= as.character(genoMelt$Individual)
+
+
+pheno_qtlpeak=meltpheno %>% inner_join(genoMelt, by="Individual") %>%  mutate(PAU=num/denom) 
+
+qtlplot=ggplot(pheno_qtlpeak, aes(x=genotype, y=PAU, fill=genotype)) + geom_boxplot(width=.5)+ geom_jitter(alpha=1) + facet_grid(~PeakLoc) +scale_fill_brewer(palette = "YlOrRd")
+
+ggsave(plot=qtlplot, filename=opt$output, height=10, width=10)
+```
+
+
+
+Code for boxplots:  
+
+run_qtlFacetBoxplots.sh
+```{bash,eval=F}
+#!/bin/bash
+
+#SBATCH --job-name=qtlFacetBoxplots
+#SBATCH --account=pi-yangili1
+#SBATCH --time=24:00:00
+#SBATCH --output=qtlFacetBoxplots.out
+#SBATCH --error=qtlFacetBoxplots.err
+#SBATCH --partition=broadwl
+#SBATCH --mem=18G
+#SBATCH --mail-type=END
+
+
+module load Anaconda3
+source activate three-prime-env
+
+Fraction=$1
+gene=$2
+chrom=$3
+snp=$4
+peakID=$5
+
+
+less /project2/gilad/briana/apaQTL/data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.${Fraction}.5perc.fc.gz | grep ${gene}_ > /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksPheno.txt
+
+
+less /project2/gilad/briana/YRI_geno_hg19/chr${chrom}.dose.filt.vcf.gz | grep ${snp} >  /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksGenotype.txt
+
+Rscript apaqtlfacetboxplots.R -P /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksPheno.txt -G /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}PeaksGenotype.txt --gene ${gene} -p ${peakID}  -o /project2/gilad/briana/apaQTL/data/ExampleQTLPlots/${gene}_${Fraction}${SNP}${peakID}_boxplot.png
+
+
+```
+
+```{r}
+totAPAinTot %>% filter(abs(Originalslope)>1)
+```
+
+```{bash,eval=F}
+sbatch run_qtlFacetBoxplots.sh "Total" "NBPF9" "1" "1:144701300" "peak7314"
+sbatch run_qtlFacetBoxplots.sh "Total" "HLA-DRB5" "6" "6:32486756" "peak113454"
+sbatch run_qtlFacetBoxplots.sh "Total" "HLA-DRB6" "6" "6:32538598" "peak113461"
+
+```
+
+
+```{r}
+nucAPAinNuc %>% filter(abs(Originalslope)>1)
+```
+
+
+```{bash,eval=F}
+sbatch run_qtlFacetBoxplots.sh "Nuclear" "LINC00869" "1" "1:149598905" "peak7883"
+sbatch run_qtlFacetBoxplots.sh "Nuclear" "FRG1BP" "20" "20:29641550" "peak80905"
+sbatch run_qtlFacetBoxplots.sh "Nuclear" "HLA-DRB5" "6" "6:32468906" "peak113456"
+
+```
