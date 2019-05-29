@@ -1,0 +1,48 @@
+---
+title: "Explore Nascent RNA seq"
+author: "Briana Mittleman"
+date: "5/28/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We recently recieved nascent RNA seq from the Staley and Li lab collaboration. I want to explore this data in relation to my PAS.  
+
+Data: /project2/yangili1/yangili/RNAseqmap/nascentRNAseq/1*.sorted.bam
+
+```{r,eval=F}
+mkdir ../data/NascentRNA
+```
+
+
+First I will merge all of the individuals. 
+
+```{bash,eval=F}
+sbatch mergeBamNascent.sh
+sbatch bam2bw.sh ../data/NascentRNA/NascentRNAMerged.sort.bam ../data/NascentRNA/NascentRNAMerged.sort.bw
+```
+
+
+First just look at the data along gene bodies:  
+
+(chromosomes have chr)
+
+```{bash,eval=F}
+sbatch NascentRNAdtPlot.sh
+```
+
+
+I want to look at these at my PAS. First I will need to add CHR to my pas in /project2/gilad/briana/apaQTL/data/PAS/
+
+```{bash,eval=F}
+sed -e 's/^/chr/' ../data/PAS/APAPAS_GeneLocAnno.5perc.bed > ../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed
+```
+
+
+```{bash,eval=F}
+sbatch NascentRNAdtPlotPAS.sh
+```
+

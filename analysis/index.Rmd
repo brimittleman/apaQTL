@@ -70,4 +70,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Location of nuclear intronic peaks along introns](nucintronicanalysis.html)  
 
+* [Start looking at the nascent seq](nascentRNA.html)
+
 
