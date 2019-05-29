@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6d632c4f0080ce223b0c704f978a12eb6364394etargetblank6d632c4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6d632c4f0080ce223b0c704f978a12eb6364394e" target="_blank">6d632c4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree974cad6dc70d4dd71a922a449d39d1f1d0fe44f4targetblank974cad6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/974cad6dc70d4dd71a922a449d39d1f1d0fe44f4" target="_blank">974cad6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6d632c4f0080ce223b0c704f978a12eb6364394etargetblank6d632c4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree974cad6dc70d4dd71a922a449d39d1f1d0fe44f4targetblank974cad6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -452,6 +452,7 @@ Untracked files:
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
     Untracked:  code/._LC_samplegroups.py
+    Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
@@ -565,6 +566,7 @@ Untracked files:
     Untracked:  code/FC_newPAS_olddata.out
     Untracked:  code/FC_newPeaks_olddata.sh
     Untracked:  code/LC_samplegroups.py
+    Untracked:  code/NascentRNAdtPlot.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
     Untracked:  code/README.md
     Untracked:  code/Rplots.pdf
@@ -803,7 +805,7 @@ Message
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/nucintronicanalysis.html" target="_blank">6d632c4</a>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/974cad6dc70d4dd71a922a449d39d1f1d0fe44f4/docs/nucintronicanalysis.html" target="_blank">974cad6</a>
 </td>
 <td>
 brimittleman
@@ -1881,17 +1883,6 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-31-1.png" target="_blank">6d632c4</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-29
-</td>
-</tr>
-<tr>
-<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-31-1.png" target="_blank">491253b</a>
 </td>
 <td>
@@ -2125,43 +2116,6 @@ RNA_TPMmeanName_cat$gene=as.character(RNA_TPMmeanName_cat$gene)
 pas2intronNuc_exonofgene_rpkm= pas2intronNuc_exonofgene %&gt;% inner_join(RNA_TPMmeanName_cat, by=&quot;gene&quot;)
 ggplot(pas2intronNuc_exonofgene_rpkm, aes(x=propIntron,fill=RPKM_quart)) + geom_histogram(bins=50)  + facet_grid(RPKM_quart~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Location of Intronic Peaks by intron and expression&quot;)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-47-1">
-Past versions of unnamed-chunk-47-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-47-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-47-1.png" target="_blank">6d632c4</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <p>Filter just to the fourth quartile and divide this into 4 categories.</p>
 <pre class="r"><code>pas2intronNuc_exonofgene_rpkm_topexp=pas2intronNuc_exonofgene_rpkm %&gt;% filter(RPKM_quart==&quot;fourth&quot;)
 summary(pas2intronNuc_exonofgene_rpkm_topexp$RPKM)</code></pre>
@@ -2173,43 +2127,6 @@ pas2intronNuc_exonofgene_rpkm_topexp$RPKM_quartTop &lt;- factor(pas2intronNuc_ex
 
 ggplot(pas2intronNuc_exonofgene_rpkm_topexp, aes(x=propIntron,fill=RPKM_quartTop)) + geom_histogram(bins=50)  + facet_grid(RPKM_quartTop~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Location of Intronic Peaks by intron and expression&quot;)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-48-1">
-Past versions of unnamed-chunk-48-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-48-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-48-1.png" target="_blank">6d632c4</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
