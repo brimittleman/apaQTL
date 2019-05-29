@@ -270,7 +270,7 @@ pas2intronNuc_exonofgene= pas2intronNuc_cat %>% group_by(gene) %>% mutate(Intorn
 
 
 ```{r}
-ggplot(pas2intronNuc_exonofgene, aes(x=propIntron)) + geom_histogram(bins=50)  + facet_grid(~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(pas2intronNuc_exonofgene, aes(x=propIntron,fill=LengthCat)) + geom_histogram(bins=50)  + facet_grid(LengthCat~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 
@@ -372,5 +372,42 @@ Sort this:
 sort -k1,1 -k2,2n ../data/intron_analysis/FourthIntronOnly.bed > ../data/intron_analysis/FourthIntronOnly_Sort.bed
 ```
 
+Seperate plots by expression:  
 
+```{r}
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'GeneName', 'source' ),stringsAsFactors = F) %>% select(-source)
+RNA_TPM=read.table('../data/RNAseq/kallisto_RNAseq.txt', stringsAsFactors = F,header = T) %>% dplyr::rename("gene_id"=gene) %>% inner_join(geneNames,by="gene_id" )
+RNA_TPMmeans=rowMeans(RNA_TPM[,2:21])
+RNA_TPMmeanName=as.data.frame(cbind(gene=RNA_TPM$GeneName, RPKM=RNA_TPMmeans)) 
+RNA_TPMmeanName$RPKM=as.numeric(as.character(RNA_TPMmeanName$RPKM))
+summary(RNA_TPMmeanName$RPKM)
+RNA_TPMmeanName_cat=RNA_TPMmeanName %>% mutate(RPKM_quart=ifelse(RPKM<=.214, "first", ifelse(RPKM > .214 & RPKM<= .523, "second", ifelse(RPKM >.523 & RPKM <=  2.379,"third", "fourth"))))
+                                                                 
+RNA_TPMmeanName_cat$RPKM_quart <- factor(RNA_TPMmeanName_cat$RPKM_quart, levels=c("first", "second", "third", "fourth"))
+
+```
+
+
+
+```{r}
+
+
+pas2intronNuc_exonofgene$gene=as.character(pas2intronNuc_exonofgene$gene)
+RNA_TPMmeanName_cat$gene=as.character(RNA_TPMmeanName_cat$gene)
+pas2intronNuc_exonofgene_rpkm= pas2intronNuc_exonofgene %>% inner_join(RNA_TPMmeanName_cat, by="gene")
+ggplot(pas2intronNuc_exonofgene_rpkm, aes(x=propIntron,fill=RPKM_quart)) + geom_histogram(bins=50)  + facet_grid(RPKM_quart~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Location of Intronic Peaks by intron and expression")
+
+```
+
+Filter just to the fourth quartile and divide this into 4 categories.
+
+```{r}
+pas2intronNuc_exonofgene_rpkm_topexp=pas2intronNuc_exonofgene_rpkm %>% filter(RPKM_quart=="fourth")
+summary(pas2intronNuc_exonofgene_rpkm_topexp$RPKM)
+pas2intronNuc_exonofgene_rpkm_topexp= pas2intronNuc_exonofgene_rpkm_topexp %>%mutate(RPKM_quartTop=ifelse(RPKM<=10.329, "first", ifelse(RPKM > 10.329 & RPKM<= 20.795, "second", ifelse(RPKM >20.795 & RPKM <=  43.011,"third", "fourth"))))
+pas2intronNuc_exonofgene_rpkm_topexp$RPKM_quartTop <- factor(pas2intronNuc_exonofgene_rpkm_topexp$RPKM_quartTop, levels=c("first", "second", "third", "fourth"))
+
+
+ggplot(pas2intronNuc_exonofgene_rpkm_topexp, aes(x=propIntron,fill=RPKM_quartTop)) + geom_histogram(bins=50)  + facet_grid(RPKM_quartTop~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title="Location of Intronic Peaks by intron and expression")
+```
 

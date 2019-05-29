@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-24
+<strong>Last updated:</strong> 2019-05-29
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef82d5a4af310a92d87494b6809e6cb61323cc178targetblankf82d5a4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f82d5a4af310a92d87494b6809e6cb61323cc178" target="_blank">f82d5a4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6d632c4f0080ce223b0c704f978a12eb6364394etargetblank6d632c4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6d632c4f0080ce223b0c704f978a12eb6364394e" target="_blank">6d632c4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef82d5a4af310a92d87494b6809e6cb61323cc178targetblankf82d5a4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6d632c4f0080ce223b0c704f978a12eb6364394etargetblank6d632c4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -445,6 +445,7 @@ Untracked files:
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
+    Untracked:  analysis/nascentRNA.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
@@ -508,6 +509,7 @@ Untracked files:
     Untracked:  code/._makegencondeTSSfile.py
     Untracked:  code/._mergeAllBam.sh
     Untracked:  code/._mergeBW_norm.sh
+    Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
     Untracked:  code/._mergePeaks.sh
     Untracked:  code/._mnase1stintron.sh
@@ -546,6 +548,8 @@ Untracked files:
     Untracked:  code/ApaQTL_nominalNonnorm.sh
     Untracked:  code/BothFracDTPlot1stintron.err
     Untracked:  code/BothFracDTPlot1stintron.out
+    Untracked:  code/BothFracDTPlot4stintron.err
+    Untracked:  code/BothFracDTPlot4stintron.out
     Untracked:  code/BothFracDTPlotGeneRegions.err
     Untracked:  code/BothFracDTPlotGeneRegions.out
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
@@ -580,6 +584,7 @@ Untracked files:
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
     Untracked:  code/assignPeak2Intronicregion.out
@@ -628,14 +633,23 @@ Untracked files:
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
+    Untracked:  code/mergeBamNacent.err
+    Untracked:  code/mergeBamNacent.out
+    Untracked:  code/mergeBamNascent.sh
     Untracked:  code/mnase1stintron.sh
     Untracked:  code/mnaseDTPlot1stintron.err
     Untracked:  code/mnaseDTPlot1stintron.out
+    Untracked:  code/mnaseDTPlot4thintron.err
+    Untracked:  code/mnaseDTPlot4thintron.out
     Untracked:  code/mnaseDT_fourthintron.sh
+    Untracked:  code/netDTPlot4thintron.out
     Untracked:  code/netseqDTplot1stIntron.sh
     Untracked:  code/netseqFC.err
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
+    Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/qtlFacetBoxplots.err
+    Untracked:  code/qtlFacetBoxplots.out
     Untracked:  code/qtlsPvalOppFrac.py
     Untracked:  code/removeloc_pheno.py
     Untracked:  code/run_DistPAS2Sig.err
@@ -644,6 +658,7 @@ Untracked files:
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
     Untracked:  code/run_sepusage.err
     Untracked:  code/run_sepusage.out
@@ -666,10 +681,13 @@ Untracked files:
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
+    Untracked:  data/ExampleQTLPlots/
     Untracked:  data/GeuvadisRNA/
+    Untracked:  data/NascentRNA/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
+    Untracked:  data/QTLoverlap_nonNorm/
     Untracked:  data/README.md
     Untracked:  data/RNAseq/
     Untracked:  data/Reads2UTR/
@@ -780,6 +798,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/nucintronicanalysis.html" target="_blank">6d632c4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-29
+</td>
+<td>
+strat by exp
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/491253b623c5af7b8081b328b447fa31c5153c0a/docs/nucintronicanalysis.html" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1776,6 +1828,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-29-1.png" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/ef247581d915a099c0adc0acce2f1d2998a24961/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-29-1.png" target="_blank">ef24758</a>
 </td>
 <td>
@@ -1792,13 +1855,98 @@ brimittleman
 <p>Fascet analysis by which number intron in a gene. I need to reverse the ordering for the negative strand.</p>
 <p>First group by gene:</p>
 <pre class="r"><code>pas2intronNuc_exonofgene= pas2intronNuc_cat %&gt;% group_by(gene) %&gt;% mutate(Intornid=ifelse(strand==&quot;+&quot;,  1:n(),n():1))</code></pre>
-<pre class="r"><code>ggplot(pas2intronNuc_exonofgene, aes(x=propIntron)) + geom_histogram(bins=50)  + facet_grid(~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<pre class="r"><code>ggplot(pas2intronNuc_exonofgene, aes(x=propIntron,fill=LengthCat)) + geom_histogram(bins=50)  + facet_grid(LengthCat~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-1">
+Past versions of unnamed-chunk-31-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-31-1.png" target="_blank">6d632c4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-29
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-31-1.png" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I’d like to look at just the first exon and the top 50% intron length</p>
 <pre class="r"><code>pas2intronTotal_cat_first=pas2intronTotal_cat %&gt;% filter(Intornid==1) %&gt;% mutate(LengthHalf=ifelse(intronLength&lt;=8872, &quot;Short&quot;, &quot;Long&quot;))
 
 ggplot(pas2intronTotal_cat_first, aes(x=propIntron, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + facet_grid(~LengthHalf)  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;First intron proportion of the intron\n by intron length and delta PAU&quot;)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
+Past versions of unnamed-chunk-32-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-32-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-32-1.png" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Took at distance to TSS.</p>
 <p>I have the merged transcript gene file and I will remove 5’ UTRs.<br />
 I can pull in the merged transcript gene.</p>
@@ -1815,6 +1963,43 @@ pas2intronTotal_catTSS= pas2intronTotal_cat %&gt;% inner_join(tss, by=&quot;gene
 
 ggplot(pas2intronTotal_catTSS, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + labs(title=&quot;Distance to TSS by delta PAU first 10KB&quot;, x=&quot;Distance to TSS&quot;)+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) </code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-37-1">
+Past versions of unnamed-chunk-37-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-37-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-37-1.png" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pas2intronTotal_catTSS %&gt;% group_by(Fraction) %&gt;% summarise(n())</code></pre>
 <pre><code># A tibble: 3 x 2
   Fraction        `n()`
@@ -1824,10 +2009,84 @@ ggplot(pas2intronTotal_catTSS, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + ge
 3 TotalEnriched     607</code></pre>
 <pre class="r"><code>ggplot(pas2intronTotal_catTSS, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + labs(title=&quot;Distance to TSS by delta PAU&quot;, x=&quot;Distance to TSS&quot;)+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_log10() + facet_grid(~Intornid)</code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-39-1">
+Past versions of unnamed-chunk-39-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-39-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-39-1.png" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pas2intronTotal_catTSS_first=pas2intronTotal_catTSS %&gt;% filter(Intornid==1, dist2TSS&lt;10000)
 
 ggplot(pas2intronTotal_catTSS_first, aes(x=dist2TSS, by=Fraction, fill=Fraction)) + geom_density(alpha=.5) + labs(title=&quot;Distance to TSS for first exon first 10KB&quot;,x=&quot;Distance to TSS&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) </code></pre>
 <p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-40-1">
+Past versions of unnamed-chunk-40-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-40-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/491253b623c5af7b8081b328b447fa31c5153c0a/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-40-1.png" target="_blank">491253b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pas2intronTotal_catTSS_first %&gt;% group_by(Fraction) %&gt;% summarise(n())</code></pre>
 <pre><code># A tibble: 3 x 2
   Fraction        `n()`
@@ -1849,6 +2108,108 @@ write.table(FirstIntron,file=&quot;../data/intron_analysis/FirstIntronOnly.bed&q
 write.table(FourthIntron,file=&quot;../data/intron_analysis/FourthIntronOnly.bed&quot;, col.names = F, row.names = F, quote=F, sep=&quot;\t&quot;)</code></pre>
 <p>Sort this:</p>
 <pre class="bash"><code>sort -k1,1 -k2,2n ../data/intron_analysis/FourthIntronOnly.bed &gt; ../data/intron_analysis/FourthIntronOnly_Sort.bed</code></pre>
+<p>Seperate plots by expression:</p>
+<pre class="r"><code>geneNames=read.table(&quot;../../genome_anotation_data/ensemble_to_genename.txt&quot;, sep=&quot;\t&quot;, col.names = c(&#39;gene_id&#39;, &#39;GeneName&#39;, &#39;source&#39; ),stringsAsFactors = F) %&gt;% select(-source)
+RNA_TPM=read.table(&#39;../data/RNAseq/kallisto_RNAseq.txt&#39;, stringsAsFactors = F,header = T) %&gt;% dplyr::rename(&quot;gene_id&quot;=gene) %&gt;% inner_join(geneNames,by=&quot;gene_id&quot; )
+RNA_TPMmeans=rowMeans(RNA_TPM[,2:21])
+RNA_TPMmeanName=as.data.frame(cbind(gene=RNA_TPM$GeneName, RPKM=RNA_TPMmeans)) 
+RNA_TPMmeanName$RPKM=as.numeric(as.character(RNA_TPMmeanName$RPKM))
+summary(RNA_TPMmeanName$RPKM)</code></pre>
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+    0.000     0.214     0.523    17.301     2.379 16253.029 </code></pre>
+<pre class="r"><code>RNA_TPMmeanName_cat=RNA_TPMmeanName %&gt;% mutate(RPKM_quart=ifelse(RPKM&lt;=.214, &quot;first&quot;, ifelse(RPKM &gt; .214 &amp; RPKM&lt;= .523, &quot;second&quot;, ifelse(RPKM &gt;.523 &amp; RPKM &lt;=  2.379,&quot;third&quot;, &quot;fourth&quot;))))
+                                                                 
+RNA_TPMmeanName_cat$RPKM_quart &lt;- factor(RNA_TPMmeanName_cat$RPKM_quart, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))</code></pre>
+<pre class="r"><code>pas2intronNuc_exonofgene$gene=as.character(pas2intronNuc_exonofgene$gene)
+RNA_TPMmeanName_cat$gene=as.character(RNA_TPMmeanName_cat$gene)
+pas2intronNuc_exonofgene_rpkm= pas2intronNuc_exonofgene %&gt;% inner_join(RNA_TPMmeanName_cat, by=&quot;gene&quot;)
+ggplot(pas2intronNuc_exonofgene_rpkm, aes(x=propIntron,fill=RPKM_quart)) + geom_histogram(bins=50)  + facet_grid(RPKM_quart~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Location of Intronic Peaks by intron and expression&quot;)</code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-47-1">
+Past versions of unnamed-chunk-47-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-47-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-47-1.png" target="_blank">6d632c4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Filter just to the fourth quartile and divide this into 4 categories.</p>
+<pre class="r"><code>pas2intronNuc_exonofgene_rpkm_topexp=pas2intronNuc_exonofgene_rpkm %&gt;% filter(RPKM_quart==&quot;fourth&quot;)
+summary(pas2intronNuc_exonofgene_rpkm_topexp$RPKM)</code></pre>
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+    2.384    10.329    20.795    50.089    43.011 11185.798 </code></pre>
+<pre class="r"><code>pas2intronNuc_exonofgene_rpkm_topexp= pas2intronNuc_exonofgene_rpkm_topexp %&gt;%mutate(RPKM_quartTop=ifelse(RPKM&lt;=10.329, &quot;first&quot;, ifelse(RPKM &gt; 10.329 &amp; RPKM&lt;= 20.795, &quot;second&quot;, ifelse(RPKM &gt;20.795 &amp; RPKM &lt;=  43.011,&quot;third&quot;, &quot;fourth&quot;))))
+pas2intronNuc_exonofgene_rpkm_topexp$RPKM_quartTop &lt;- factor(pas2intronNuc_exonofgene_rpkm_topexp$RPKM_quartTop, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))
+
+
+ggplot(pas2intronNuc_exonofgene_rpkm_topexp, aes(x=propIntron,fill=RPKM_quartTop)) + geom_histogram(bins=50)  + facet_grid(RPKM_quartTop~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Location of Intronic Peaks by intron and expression&quot;)</code></pre>
+<p><img src="figure/nucintronicanalysis.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-48-1">
+Past versions of unnamed-chunk-48-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-48-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6d632c4f0080ce223b0c704f978a12eb6364394e/docs/figure/nucintronicanalysis.Rmd/unnamed-chunk-48-1.png" target="_blank">6d632c4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
