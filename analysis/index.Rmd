@@ -56,6 +56,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Usage QTL analysis to look at non normal effect sizes](nonNormQTL.html)
 
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  
@@ -71,5 +72,9 @@ These files create some of the QC metrics I used for the analysis.
 * [Location of nuclear intronic peaks along introns](nucintronicanalysis.html)  
 
 * [Start looking at the nascent seq](nascentRNA.html)
+
+##Characterize apaQTLs and compare to eQTLs 
+
+* [Analysis to look at differences in QTL chromHMM categories](chromHHMQTL.html)  
 
 

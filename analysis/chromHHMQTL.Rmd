@@ -1,0 +1,66 @@
+---
+title: "ChromHMM enrichment for apaQTLs"
+author: "Briana Mittleman"
+date: "5/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(workflowr)
+
+```
+
+The goal of this analysis is to see if there is a difference in the QTL chrom hmm locations between the total and nuclear set. I will resample with replacement the number of times for then number of QTLs I have. Then I will count how many QTLs are in each chromHMM region. I will plot these values and include error bars.  
+
+I want one script that will do the replacement, mapping to chromHMM, and append to a final dataframe. This dataframe will have a row for each category and a column for each sample. I can do this using a dictionary with the category as the keys and a list of values representing the number of snps in each catgory.  
+
+I will use pybedtools to overlap the snps with the ChromHMM categories.  
+
+The categories are in: /project2/gilad/briana/genome_anotation_data/GM12878.chromHMM.sort.bed
+
+
+First I need to make bedfiles for each of the QTL lists.
+
+```{r}
+totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":")) %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, Strand )
+
+write.table(totQTLs, file="../data/apaQTLs/Total_apaQTLs4pc_5fdr.bed", col.names = T, row.names = F, quote = F, sep="\t")
+
+nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":")) %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, Strand )
+
+write.table(nucQTLs, file="../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed", col.names = T, row.names = F, quote = F, sep="\t")
+```
+
+
+
+```{bash,eval=F}
+mkdir ../data/HMMqtls
+sbatch runHMMpermuteAPAqtls.sh
+```
+
+Next run this for eQTLs  as well 
+
+Run for explained and unexplained eQTLs: 
+
+```{r}
+explained=read.table("../data/Li_eQTLs/explained_FDR10.SNPs.noChr.txt", col.names = c("SNPchr", "SNPend")) %>% mutate(SNPstart=as.integer(SNPend)-1, gene="NA", score=".", strand="+") %>% dplyr::select(SNPchr, SNPstart, SNPend, gene, score, strand)
+
+write.table(explained, file="../data/Li_eQTLs/explained_FDR10.SNPs.noChr.bed", col.names = T,row.names = F, quote = F, sep="\t")
+
+
+unexplained=read.table("../data/Li_eQTLs/unexplained_FDR10.SNPs.noChr.txt", col.names = c("SNPchr", "SNPend")) %>% mutate(SNPstart=as.integer(SNPend)-1, gene="NA", score=".", strand="+") %>% dplyr::select(SNPchr, SNPstart, SNPend, gene, score, strand)
+
+write.table(unexplained, file="../data/Li_eQTLs/unexplained_FDR10.SNPs.noChr.bed", col.names = T,row.names = F, quote = F, sep="\t")
+
+```
+
+```{bash,eval=F}
+sbatch runHMMpermuteeQTLS.sh
+```
+
+
