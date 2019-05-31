@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(workflowr)
+library(reshape2)
 
 ```
 
@@ -27,11 +28,11 @@ The categories are in: /project2/gilad/briana/genome_anotation_data/GM12878.chro
 First I need to make bedfiles for each of the QTL lists.
 
 ```{r}
-totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":")) %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, Strand )
+totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":"),noStrand=".") %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, noStrand )
 
 write.table(totQTLs, file="../data/apaQTLs/Total_apaQTLs4pc_5fdr.bed", col.names = T, row.names = F, quote = F, sep="\t")
 
-nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":")) %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, Strand )
+nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":"),noStrand=".") %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, noStrand )
 
 write.table(nucQTLs, file="../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed", col.names = T, row.names = F, quote = F, sep="\t")
 ```
@@ -43,7 +44,32 @@ mkdir ../data/HMMqtls
 sbatch runHMMpermuteAPAqtls.sh
 ```
 
+
+```{r}
+chromHmm=read.table("../data/HMMqtls/chromHMM_regions.txt", col.names = c("HMMcat", "HMMname"), stringsAsFactors = F)
+```
+
+
+
+```{r}
+NuclearRes=read.table("../data/HMMqtls/NuclearAPAqtls.HMM1000times.txt", stringsAsFactors = F, col.names =c("HMMcat", seq(1,1000)))
+
+NuclearResM=melt(NuclearRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  group_by(HMMname) %>% summarise(Mean=mean(value), SD=sd(value)) %>% mutate(Category="Nuclear_APA")
+
+NuclearResMProp=melt(NuclearRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %>% mutate(Category="Nuclear_APA")
+```
+
+
+```{r}
+ggplot(NuclearResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))
+
+ggplot(NuclearResMProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))
+
+```
 Next run this for eQTLs  as well 
+
+
+
 
 Run for explained and unexplained eQTLs: 
 
@@ -63,4 +89,47 @@ write.table(unexplained, file="../data/Li_eQTLs/unexplained_FDR10.SNPs.noChr.bed
 sbatch runHMMpermuteeQTLS.sh
 ```
 
+Explained Res
+```{r}
+explainedRes=read.table("../data/HMMqtls/explainedQTLs.HMM1000times.txt", stringsAsFactors = F, col.names =c("HMMcat", seq(1,1000)))
+
+
+explainedResM=melt(explainedRes, id.vars="HMMcat") %>% inner_join(chromHmm, by="HMMcat") %>%  group_by(HMMname) %>% summarise(Mean=mean(value), SD=sd(value))  %>% mutate(Category="Explained_eQTL")
+
+explainedResMProp=melt(explainedRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(explained), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %>% mutate(Category="Explained_eQTL")
+```
+
+```{r}
+ggplot(explainedResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+
+Unexplained Res
+
+```{r}
+unexplainedRes=read.table("../data/HMMqtls/unexplainedeQTLs.HMM1000times.txt", stringsAsFactors = F, col.names =c("HMMcat", seq(1,1000)))
+
+unexplainedResM=melt(unexplainedRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  group_by(HMMname) %>% summarise(Mean=mean(value), SD=sd(value)) %>% mutate(Category="Unexplained_eQTL")
+
+unexplainedResMProp=melt(unexplainedRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(unexplained), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %>% mutate(Category="Unexplained_eQTL")
+```
+
+```{r}
+ggplot(unexplainedResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))
+```
+
+
+```{r}
+AllQTLs=as.data.frame(rbind(NuclearResM,explainedResM,unexplainedResM)) 
+
+AllQTLsProp=as.data.frame(rbind(NuclearResMProp,explainedResMProp,unexplainedResMProp)) 
+```
+
+```{r}
+ggplot(AllQTLs, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Number of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs")
+```
+
+```{r}
+ggplot(AllQTLsProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs")
+```
 
