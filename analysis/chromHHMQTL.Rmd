@@ -49,7 +49,21 @@ sbatch runHMMpermuteAPAqtls.sh
 chromHmm=read.table("../data/HMMqtls/chromHMM_regions.txt", col.names = c("HMMcat", "HMMname"), stringsAsFactors = F)
 ```
 
+```{r}
+TotalRes=read.table("../data/HMMqtls/TotalAPAqtls.HMM1000times.txt", stringsAsFactors = F, col.names =c("HMMcat", seq(1,1000)))
 
+TotalResM=melt(TotalRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  group_by(HMMname) %>% summarise(Mean=mean(value), SD=sd(value)) %>% mutate(Category="Total_APA")
+
+TotalResMProp=melt(TotalRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %>% mutate(Category="Total_APA")
+```
+
+
+```{r}
+ggplot(TotalResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))
+
+ggplot(TotalResMProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))
+
+```
 
 ```{r}
 NuclearRes=read.table("../data/HMMqtls/NuclearAPAqtls.HMM1000times.txt", stringsAsFactors = F, col.names =c("HMMcat", seq(1,1000)))
@@ -120,9 +134,9 @@ ggplot(unexplainedResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="
 
 
 ```{r}
-AllQTLs=as.data.frame(rbind(NuclearResM,explainedResM,unexplainedResM)) 
+AllQTLs=as.data.frame(rbind(NuclearResM,TotalResM,explainedResM,unexplainedResM)) 
 
-AllQTLsProp=as.data.frame(rbind(NuclearResMProp,explainedResMProp,unexplainedResMProp)) 
+AllQTLsProp=as.data.frame(rbind(NuclearResMProp,TotalResMProp,explainedResMProp,unexplainedResMProp)) 
 ```
 
 ```{r}
@@ -131,5 +145,42 @@ ggplot(AllQTLs, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity
 
 ```{r}
 ggplot(AllQTLsProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs")
+```
+Plot the 95% confidence interval:  
+
+
+```{r}
+unexplainedResMPropQuant=melt(unexplainedRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(unexplained), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %>% unnest() %>% spread(name, value)%>% mutate(category="UnexplainedeQTL")
+colnames(unexplainedResMPropQuant)=c("HMMname", "twentyfive", "fifty", "seventyfive", "category")
+
+explainedResMPropQuant=melt(explainedRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(explained), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %>% unnest() %>% spread(name, value)%>% mutate(category="ExplainedeQTL")
+colnames(explainedResMPropQuant)=c("HMMname", "twentyfive", "fifty", "seventyfive", "category")
+
+
+NuclearResMPropQuant=melt(NuclearRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %>% unnest() %>% spread(name, value)%>% mutate(category="NuclearApa")
+colnames(NuclearResMPropQuant)=c("HMMname", "twentyfive", "fifty", "seventyfive", "category")
+
+
+TotalResMPropQuant=melt(TotalRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(totQTLs), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %>% unnest() %>% spread(name, value) %>% mutate(category="TotalApa")
+colnames(TotalResMPropQuant)=c("HMMname", "twentyfive", "fifty", "seventyfive", "category")
+    
+                                                                               
+```
+
+```{r}
+
+AllQTLsProp95=as.data.frame(rbind(NuclearResMPropQuant,TotalResMPropQuant,unexplainedResMPropQuant,explainedResMPropQuant)) 
+```
+
+
+```{r}
+ggplot(AllQTLsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs")
+```
+Plot only the total and nuclear:  
+
+```{r}
+APAqtlsProp95=as.data.frame(rbind(NuclearResMPropQuant,TotalResMPropQuant)) 
+
+ggplot(APAqtlsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for apaQTLs") +scale_fill_manual(values=c("deepskyblue3","darkviolet"))
 ```
 

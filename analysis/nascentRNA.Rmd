@@ -9,6 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(reshape2)
+```
+
 We recently recieved nascent RNA seq from the Staley and Li lab collaboration. I want to explore this data in relation to my PAS.  
 
 Data: /project2/yangili1/yangili/RNAseqmap/nascentRNAseq/1*.sorted.bam
@@ -43,6 +50,59 @@ sed -e 's/^/chr/' ../data/PAS/APAPAS_GeneLocAnno.5perc.bed > ../data/PAS/APAPAS_
 
 
 ```{bash,eval=F}
-sbatch NascentRNAdtPlotPAS.sh
+sbatch NascnetRNAdtPlotPAS.sh
+```
+
+Look at the PAS used more in total and nuclear:  
+
+```{bash,eval=F}
+sbatch NascentRNAdtPlotTotPAS.sh
+sbatch NascentRNAdtPlotNucPAS.sh
+```
+
+
+Intronic PAS 
+
+```{r}
+pasIntron=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed",col.names = c("Chr", "start", "end", "PeakID", "score", "strand")) %>% separate(PeakID, into=c("peaknum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% filter(loc=="intron") %>%  mutate(peakIDuse=paste(peaknum,gene, sep=":")) %>% select(Chr, start,end, peaknum, score, strand)
+
+write.table(pasIntron, "../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR_Intronic.bed", col.names = F, row.names = F, quote = F, sep="\t")
+
+pasUTR=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed",col.names = c("Chr", "start", "end", "PeakID", "score", "strand")) %>% separate(PeakID, into=c("peaknum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% filter(loc=="utr3")  %>%  mutate(peakIDuse=paste(peaknum,gene, sep=":"))%>% select(Chr, start,end, peakIDuse, score, strand)
+
+write.table(pasUTR, "../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR_3UTR.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+
+
+```{bash,eval=F}
+sbatch NascentRNAdtPlot3UTRPAS.sh
+sbatch NascentRNAdtPlotintronicPAS.sh
+```
+
+
+For the intronic PAS I want to seperate by those in the first intron and not.  
+
+```{r}
+allPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", col.names = c("chr", "start", "end", "peak", "score", "strand")) %>% separate(peak, into=c("peakNumber", "geneloc"), sep=":") %>% mutate(PeakNum=paste("peak", peakNumber, sep=""))
+peakIntron=read.table(file="../data/intron_analysis/PeakIdwithIntronID.txt", header = T) %>% separate(PeakID, into=c("PeakNum", "gene", "loc"),sep=":") %>% select(PeakNum, Intornid)
+```
+
+Join these to write seperate bed files:
+
+```{r}
+allPASwIntron=allPAS %>% inner_join(peakIntron, by="PeakNum")
+
+FirstIntron= allPASwIntron %>% filter(Intornid==1 ) %>% select(-PeakNum,-Intornid)
+write.table(FirstIntron, "../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR_FirstIntron.bed",col.names = F, row.names = F, quote = F, sep="\t")
+
+NotfirstIntron= allPASwIntron %>% filter(Intornid!=1 ) %>% select(-PeakNum,-Intornid)
+write.table(NotfirstIntron, "../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR_ExcludeFirstIntron.bed",col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+```{bash,eval=F}
+sbatch NascentRNAdtPlotFirstintronicPAS.sh
+sbatch NascentRNAdtPlotExcludeFirstintronicPAS.sh
+
 ```
 
