@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-05-31
+<strong>Last updated:</strong> 2019-06-04
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee790bfae14f070d9b878a79b2a97c637dfbb1fcftargetblanke790bfaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e790bfae14f070d9b878a79b2a97c637dfbb1fcf" target="_blank">e790bfa</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreedd9ab8e4f032357061cb95a7262542f168f4f0f3targetblankdd9ab8ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/dd9ab8e4f032357061cb95a7262542f168f4f0f3" target="_blank">dd9ab8e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee790bfae14f070d9b878a79b2a97c637dfbb1fcftargetblanke790bfaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreedd9ab8e4f032357061cb95a7262542f168f4f0f3targetblankdd9ab8ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -446,15 +446,20 @@ Untracked files:
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  apaQTL.Rproj
+    Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
+    Untracked:  code/._HMMpermuteTotal.py
     Untracked:  code/._HmmPermute.py
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._NascentRNAdtPlot.sh
+    Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
+    Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
     Untracked:  code/._NascentRNAdtPlotNucPAS.sh
     Untracked:  code/._NascentRNAdtPlotTotPAS.sh
+    Untracked:  code/._NascentRNAdtPlotintronicPAS.sh
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._SnakefilePAS
@@ -571,12 +576,31 @@ Untracked files:
     Untracked:  code/FC_newPAS_olddata.err
     Untracked:  code/FC_newPAS_olddata.out
     Untracked:  code/FC_newPeaks_olddata.sh
+    Untracked:  code/HMMpermuteTotal.py
     Untracked:  code/HmmPermute.p
     Untracked:  code/HmmPermute.py
     Untracked:  code/LC_samplegroups.py
+    Untracked:  code/NascentDTPlotGeneRegions.err
+    Untracked:  code/NascentDTPlotGeneRegions.out
+    Untracked:  code/NascentDTPlotPAS.err
+    Untracked:  code/NascentDTPlotPAS.out
+    Untracked:  code/NascentDTPlotPAS_3utr.err
+    Untracked:  code/NascentDTPlotPAS_3utr.out
+    Untracked:  code/NascentDTPlotPAS_firstintron.err
+    Untracked:  code/NascentDTPlotPAS_firstintron.out
+    Untracked:  code/NascentDTPlotPAS_intron.err
+    Untracked:  code/NascentDTPlotPAS_intron.out
+    Untracked:  code/NascentDTPlotPAS_nuc.err
+    Untracked:  code/NascentDTPlotPAS_nuc.out
+    Untracked:  code/NascentDTPlotPAS_tot.err
+    Untracked:  code/NascentDTPlotPAS_tot.out
     Untracked:  code/NascentRNAdtPlot.sh
+    Untracked:  code/NascentRNAdtPlot3UTRPAS.sh
+    Untracked:  code/NascentRNAdtPlotExcludeFirstintronicPAS.sh
+    Untracked:  code/NascentRNAdtPlotFirstintronicPAS.sh
     Untracked:  code/NascentRNAdtPlotNucPAS.sh
     Untracked:  code/NascentRNAdtPlotTotPAS.sh
+    Untracked:  code/NascentRNAdtPlotintronicPAS.sh
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
     Untracked:  code/README.md
@@ -770,8 +794,8 @@ Unstaged changes:
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/choosePCs.Rmd
     Modified:   analysis/corrbetweenind.Rmd
-    Modified:   analysis/nascentRNA.Rmd
     Modified:   analysis/nascenttranscription.Rmd
+    Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/rna_netseq_h3k12ac.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
@@ -823,6 +847,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/946ab105b50994373f75a4ea3da00ab8fd5a3197/docs/chromHHMQTL.html" target="_blank">946ab10</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-31
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -882,12 +923,12 @@ add chromhmm analysis
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -914,15 +955,98 @@ write.table(nucQTLs, file=&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed&quot
 <pre class="bash"><code>mkdir ../data/HMMqtls
 sbatch runHMMpermuteAPAqtls.sh</code></pre>
 <pre class="r"><code>chromHmm=read.table(&quot;../data/HMMqtls/chromHMM_regions.txt&quot;, col.names = c(&quot;HMMcat&quot;, &quot;HMMname&quot;), stringsAsFactors = F)</code></pre>
+<pre class="r"><code>TotalRes=read.table(&quot;../data/HMMqtls/TotalAPAqtls.HMM1000times.txt&quot;, stringsAsFactors = F, col.names =c(&quot;HMMcat&quot;, seq(1,1000)))
+
+TotalResM=melt(TotalRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  group_by(HMMname) %&gt;% summarise(Mean=mean(value), SD=sd(value)) %&gt;% mutate(Category=&quot;Total_APA&quot;)
+
+TotalResMProp=melt(TotalRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %&gt;% mutate(Category=&quot;Total_APA&quot;)</code></pre>
+<pre class="r"><code>ggplot(TotalResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/946ab105b50994373f75a4ea3da00ab8fd5a3197/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-6-1.png" target="_blank">946ab10</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>ggplot(TotalResMProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/946ab105b50994373f75a4ea3da00ab8fd5a3197/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-6-2.png" target="_blank">946ab10</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>NuclearRes=read.table(&quot;../data/HMMqtls/NuclearAPAqtls.HMM1000times.txt&quot;, stringsAsFactors = F, col.names =c(&quot;HMMcat&quot;, seq(1,1000)))
 
 NuclearResM=melt(NuclearRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  group_by(HMMname) %&gt;% summarise(Mean=mean(value), SD=sd(value)) %&gt;% mutate(Category=&quot;Nuclear_APA&quot;)
 
 NuclearResMProp=melt(NuclearRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %&gt;% mutate(Category=&quot;Nuclear_APA&quot;)</code></pre>
 <pre class="r"><code>ggplot(NuclearResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
-<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(NuclearResMProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
-<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /> Next run this for eQTLs as well</p>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /> Next run this for eQTLs as well</p>
 <p>Run for explained and unexplained eQTLs:</p>
 <pre class="r"><code>explained=read.table(&quot;../data/Li_eQTLs/explained_FDR10.SNPs.noChr.txt&quot;, col.names = c(&quot;SNPchr&quot;, &quot;SNPend&quot;)) %&gt;% mutate(SNPstart=as.integer(SNPend)-1, gene=&quot;NA&quot;, score=&quot;.&quot;, strand=&quot;+&quot;) %&gt;% dplyr::select(SNPchr, SNPstart, SNPend, gene, score, strand)
 
@@ -941,7 +1065,44 @@ explainedResM=melt(explainedRes, id.vars=&quot;HMMcat&quot;) %&gt;% inner_join(c
 
 explainedResMProp=melt(explainedRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(explained), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %&gt;% mutate(Category=&quot;Explained_eQTL&quot;)</code></pre>
 <pre class="r"><code>ggplot(explainedResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
-<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/946ab105b50994373f75a4ea3da00ab8fd5a3197/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-12-1.png" target="_blank">946ab10</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Unexplained Res</p>
 <pre class="r"><code>unexplainedRes=read.table(&quot;../data/HMMqtls/unexplainedeQTLs.HMM1000times.txt&quot;, stringsAsFactors = F, col.names =c(&quot;HMMcat&quot;, seq(1,1000)))
 
@@ -949,14 +1110,71 @@ unexplainedResM=melt(unexplainedRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_joi
 
 unexplainedResMProp=melt(unexplainedRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(unexplained), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %&gt;% mutate(Category=&quot;Unexplained_eQTL&quot;)</code></pre>
 <pre class="r"><code>ggplot(unexplainedResM, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5) + theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
-<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>AllQTLs=as.data.frame(rbind(NuclearResM,explainedResM,unexplainedResM)) 
-
-AllQTLsProp=as.data.frame(rbind(NuclearResMProp,explainedResMProp,unexplainedResMProp)) </code></pre>
-<pre class="r"><code>ggplot(AllQTLs, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y=&quot;Number of QTLs&quot;, x=&quot;ChromHMM Category&quot;, title=&quot;ChromHMM locations for all QTLs&quot;)</code></pre>
 <p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/946ab105b50994373f75a4ea3da00ab8fd5a3197/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-14-1.png" target="_blank">946ab10</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>AllQTLs=as.data.frame(rbind(NuclearResM,TotalResM,explainedResM,unexplainedResM)) 
+
+AllQTLsProp=as.data.frame(rbind(NuclearResMProp,TotalResMProp,explainedResMProp,unexplainedResMProp)) </code></pre>
+<pre class="r"><code>ggplot(AllQTLs, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y=&quot;Number of QTLs&quot;, x=&quot;ChromHMM Category&quot;, title=&quot;ChromHMM locations for all QTLs&quot;)</code></pre>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(AllQTLsProp, aes(x=HMMname, y=Mean, fill=Category)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+ geom_errorbar(aes(ymin=Mean-SD, ymax=Mean+SD),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y=&quot;Proportion of QTLs&quot;, x=&quot;ChromHMM Category&quot;, title=&quot;ChromHMM locations for all QTLs&quot;)</code></pre>
-<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /> Plot the 95% confidence interval:</p>
+<pre class="r"><code>unexplainedResMPropQuant=melt(unexplainedRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(unexplained), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %&gt;% unnest() %&gt;% spread(name, value)%&gt;% mutate(category=&quot;UnexplainedeQTL&quot;)
+colnames(unexplainedResMPropQuant)=c(&quot;HMMname&quot;, &quot;twentyfive&quot;, &quot;fifty&quot;, &quot;seventyfive&quot;, &quot;category&quot;)
+
+explainedResMPropQuant=melt(explainedRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(explained), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %&gt;% unnest() %&gt;% spread(name, value)%&gt;% mutate(category=&quot;ExplainedeQTL&quot;)
+colnames(explainedResMPropQuant)=c(&quot;HMMname&quot;, &quot;twentyfive&quot;, &quot;fifty&quot;, &quot;seventyfive&quot;, &quot;category&quot;)
+
+
+NuclearResMPropQuant=melt(NuclearRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %&gt;% unnest() %&gt;% spread(name, value)%&gt;% mutate(category=&quot;NuclearApa&quot;)
+colnames(NuclearResMPropQuant)=c(&quot;HMMname&quot;, &quot;twentyfive&quot;, &quot;fifty&quot;, &quot;seventyfive&quot;, &quot;category&quot;)
+
+
+TotalResMPropQuant=melt(TotalRes, id.vars=&quot;HMMcat&quot;) %&gt;%inner_join(chromHmm, by=&quot;HMMcat&quot;) %&gt;%  mutate(nQTL= nrow(totQTLs), propQTL=value/nQTL)%&gt;%  group_by(HMMname) %&gt;% summarise(list(enframe(quantile(propQTL, probs=c(0.25,0.5,0.75))))) %&gt;% unnest() %&gt;% spread(name, value) %&gt;% mutate(category=&quot;TotalApa&quot;)
+colnames(TotalResMPropQuant)=c(&quot;HMMname&quot;, &quot;twentyfive&quot;, &quot;fifty&quot;, &quot;seventyfive&quot;, &quot;category&quot;)</code></pre>
+<pre class="r"><code>AllQTLsProp95=as.data.frame(rbind(NuclearResMPropQuant,TotalResMPropQuant,unexplainedResMPropQuant,explainedResMPropQuant)) </code></pre>
+<pre class="r"><code>ggplot(AllQTLsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y=&quot;Proportion of QTLs&quot;, x=&quot;ChromHMM Category&quot;, title=&quot;ChromHMM locations for all QTLs&quot;)</code></pre>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /> Plot only the total and nuclear:</p>
+<pre class="r"><code>APAqtlsProp95=as.data.frame(rbind(NuclearResMPropQuant,TotalResMPropQuant)) 
+
+ggplot(APAqtlsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y=&quot;Proportion of QTLs&quot;, x=&quot;ChromHMM Category&quot;, title=&quot;ChromHMM locations for apaQTLs&quot;) +scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;))</code></pre>
+<p><img src="figure/chromHHMQTL.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
