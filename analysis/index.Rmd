@@ -77,4 +77,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Analysis to look at differences in QTL chromHMM categories](chromHHMQTL.html)  
 
+* [Proportion explained](overlapapaqtlsandeqtls.html)
+
+
 

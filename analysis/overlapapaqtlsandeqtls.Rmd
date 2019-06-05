@@ -1,0 +1,169 @@
+---
+title: "Overlap apaQTLs and eQTLs"
+author: "Briana Mittleman"
+date: "6/4/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(workflowr)
+library(reshape2)
+```
+
+Files with eQTLs created in https://brimittleman.github.io/threeprimeseq/EmpDistforOverlaps.html
+
+/project2/gilad/briana/threeprimeseq/data/eQTL_myanalysis/fastqtl_qqnorm_RNAseq_phase2.fixed.perm_GeneNames.out 
+/project2/gilad/briana/threeprimeseq/data/eQTL_myanalysis/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal_GeneNames.out
+/project2/gilad/briana/threeprimeseq/data/eQTL_myanalysis/permRes_significanteQTLs_GeneNames.txt
+
+/project2/gilad/briana/threeprimeseq/data/eQTL_myanalysis/permRes_NOTeQTLs_eneNames.txt
+
+
+Subset the eQTL genes to those tested in apa. 
+
+```{bash,eval=F}
+mkdir ../data/overlapeQTLs/
+python eQTLgenestestedapa.py
+```
+Not eGenes:
+
+total
+Number of genes not tested in apa = 5233
+nuclear
+Number of genes not tested in apa = 5151
+total
+Number of genes not tested in apa = 165
+nuclear
+Number of genes not tested in apa = 163
+
+I need to make a file with the number of peaks per gene:  
+
+```{r}
+TotPeaks=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Total_permResBH.txt", header = T, stringsAsFactors = F) %>% select(pid) %>% separate(pid, into=c("chr", "start", "end", "peak"), sep=":") %>%  separate(peak, into=c("gene", "loc",'strand', 'peaknum'), sep="_")%>% group_by(gene) %>% summarise(NPeaks=n())
+
+write.table(TotPeaks, file="../data/overlapeQTLs/TotalQTL_nPeaks.txt", quote=F, sep="\t", col.names = F, row.names = F)
+
+NucPeaks=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt", header = T, stringsAsFactors = F) %>% select(pid) %>% separate(pid, into=c("chr", "start", "end", "peak"), sep=":") %>%  separate(peak, into=c("gene", "loc",'strand', 'peaknum'), sep="_")%>% group_by(gene) %>% summarise(NPeaks=n())
+
+write.table(NucPeaks, file="../data/overlapeQTLs/NuclearQTL_nPeaks.txt", quote=F, sep="\t", col.names = F, row.names = F)
+
+
+```
+
+Make empirical distribution: 
+
+```{bash,eval=F}
+sbatch run_getApaPval4eqtl.sh
+
+sbatch runMakeeQTLempirical.sh
+
+
+```
+
+
+Subset to the unexplained eQTLs  
+```{bash,eval=F}
+python subsetUnexplainedeQTLs.py
+
+sbatch run_getapapval4eqtl_unexp.sh
+```
+
+
+```{r}
+#actual
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+eQTLinTotal=read.table("../data/overlapeQTLs/eQTLinTotalApa.txt", stringsAsFactors = F, col.names = nomnames)
+eQTLinNuclear=read.table("../data/overlapeQTLs/eQTLinNuclearApa.txt", stringsAsFactors = F, col.names = nomnames)
+#empirical
+empTotal=read.table("../data/overlapeQTLs/eQTL_Total_EmpiricalDist.txt", col.names = nomnames,stringsAsFactors = F)
+empNuclear=read.table("../data/overlapeQTLs/eQTL_Nuclear_EmpiricalDist.txt", col.names = nomnames, stringsAsFactors = F)
+```
+
+
+```{r}
+toaddTotal=runif(nrow(eQTLinTotal)-nrow(empTotal))
+toaddNuclear=runif(nrow(eQTLinNuclear)-nrow(empNuclear))
+empNuclearUse= c(as.vector(empNuclear$pval),toaddNuclear)
+
+empTotalUse= c(as.vector(empTotal$pval),toaddTotal)
+```
+
+Unexpplained:
+
+```{r}
+#real
+UneQTLinTotal=read.table("../data/overlapeQTLs/UnexplainedeQTLinTotalApa.txt", stringsAsFactors = F, col.names = nomnames)
+UNeQTLinNuclear=read.table("../data/overlapeQTLs/UnexplainedeQTLinNuclearApa.txt", stringsAsFactors = F, col.names = nomnames)
+#empirical
+empTotalUn=read.table("../data/overlapeQTLs/eQTLUnexp_Total_EmpiricalDist.txt", col.names = nomnames,stringsAsFactors = F)
+empNuclearUn=read.table("../data/overlapeQTLs/eQTLUnexp_Nuclear_EmpiricalDist.txt", col.names = nomnames, stringsAsFactors = F)
+```
+
+```{r}
+toaddTotalUn=runif(nrow(UneQTLinTotal)-nrow(empTotalUn))
+toaddNuclearUn=runif(nrow(UNeQTLinNuclear)-nrow(empNuclearUn))
+empNuclearUseUN= c(as.vector(empNuclearUn$pval),toaddNuclearUn)
+
+empTotalUseUN= c(as.vector(empTotalUn$pval),toaddTotalUn)
+```
+
+
+```{r}
+#png("../output/plots/eqtlsinTotAPAQQPlot.png")
+qqplot(-log10(empTotalUse), -log10(eQTLinTotal$pval),ylab="-log10 Total APA pval", xlab="Empirical expectation", main="eQTLs in totalAPA analysis")
+points(sort(-log10(empTotalUseUN)), sort(-log10(UneQTLinTotal$pval)),col= alpha("Red"))
+legend("topleft", legend=c("All eQTLs", "Unexplained eQTLs"),col=c("black", "red"), pch=16,bty = 'n')
+abline(0,1)
+#dev.off()
+```
+
+
+```{r}
+#png("../output/plots/eqtlsinNucAPAQQPlot.png")
+qqplot(-log10(empNuclearUse), -log10(eQTLinNuclear$pval),ylab="-log10 Nuclear APA pval", xlab="Empirical expectation", main="eQTLs in nuclearAPA analysis")
+points(sort(-log10(empNuclearUseUN)), sort(-log10(UNeQTLinNuclear$pval)),col= alpha("Red"))
+legend("topleft", legend=c("All eQTLs", "Unexplained eQTLs"),col=c("black", "red"), pch=16,bty = 'n')
+abline(0,1)
+#dev.off()
+```
+
+
+Goals:
+
+Proportion of unexplained we can explain now. 
+
+Number of unexplained we test:  
+
+```{r}
+UneQTLinTotal_sig= UneQTLinTotal  %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% filter(pval<.05) %>% group_by(gene) %>% summarise(nGenes=n()) %>% nrow()
+UneQTLinTotal_sig
+UneQTLinNuclear_sig= UNeQTLinNuclear %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% filter(pval<.05) %>% group_by(gene) %>% summarise(nGenes=n()) %>% nrow()
+UneQTLinNuclear_sig
+```
+```{r}
+TestedunexpNuc=read.table("../data/overlapeQTLs/permRes_Unexplained_eQTLs_GeneNames_inNuc.txt") %>% nrow()
+TestedunexpTot=read.table("../data/overlapeQTLs/permRes_Unexplained_eQTLs_GeneNames_inTot.txt") %>% nrow()
+```
+
+
+Proportion explained:  
+
+```{r}
+#total: 
+UneQTLinTotal_sig/TestedunexpTot
+#nuclear:
+UneQTLinNuclear_sig/TestedunexpNuc
+
+```
+
+
+```{r}
+prop.test(x=c(UneQTLinTotal_sig,UneQTLinNuclear_sig), n=c(TestedunexpTot,TestedunexpNuc))
+```
+
+Only looking at about 443 eGenes. Should I be using permuted for this? 
