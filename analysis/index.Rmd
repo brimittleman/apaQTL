@@ -79,5 +79,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Proportion explained](overlapapaqtlsandeqtls.html)
 
+* [New analysis for comparing explained and unexplained eGenes](exvunexpeQTL.html)  
 
 

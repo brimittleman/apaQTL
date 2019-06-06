@@ -1,0 +1,108 @@
+---
+title: "Explained and unexplained eQTLs at gene level"
+author: "Briana Mittleman"
+date: "6/6/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+I want to ask if the unexplained and explaiend eQTLs are in the same or different genes.  
+
+```{r}
+explainedGenes=read.table("../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt", stringsAsFactors = F, col.names = c("chr", "snp", "gene") )%>% select(gene) %>% unique() 
+
+write.table(explainedGenes, file="../data/Li_eQTLs/explainedEgenes.txt", col.names = F, row.names = F, quote = F, sep="\t")
+
+UNexplainedGenes=read.table("../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt", stringsAsFactors = F, col.names = c("chr", "snp", "gene") )%>% select(gene) %>% unique()
+write.table(UNexplainedGenes, file="../data/Li_eQTLs/UnexplainedEgenes.txt",col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+
+Make these vectors:
+
+```{r}
+explainedGenesVec=explainedGenes$gene
+UNexplainedGenesVec=UNexplainedGenes$gene
+
+
+
+```
+
+
+Overlap:
+
+```{r}
+
+both <- UNexplainedGenesVec[UNexplainedGenesVec %in% explainedGenesVec]
+both
+```
+
+
+Plot the permuted pvalues for apa in 3 seperate lines. not eGenes, unexplained egenes, explained egenes 
+
+
+I want to make a script that takes these genes and a fraction and will give only the permuted apa values for that set. I will also make a script that will return the values for genes in neither set.  
+
+
+```{bash,eval=F}
+mkdir ../data/ApaByEgene
+python subsetpermAPAwithGenelist.py ../data/Li_eQTLs/explainedEgenes.txt Total ../data/ApaByEgene/TotalApaexplainedeGenes.txt
+
+python subsetpermAPAwithGenelist.py ../data/Li_eQTLs/UnexplainedEgenes.txt Total ../data/ApaByEgene/TotalApaUnexplainedeGenes.txt
+
+python subsetpermAPAwithGenelist.py ../data/Li_eQTLs/explainedEgenes.txt Nuclear ../data/ApaByEgene/NuclearApaexplainedeGenes.txt
+
+python subsetpermAPAwithGenelist.py ../data/Li_eQTLs/UnexplainedEgenes.txt Nuclear ../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt
+
+
+python subsetApanoteGene.py Total ../data/ApaByEgene/TotalApaNOTeGene.txt
+python subsetApanoteGene.py Nuclear ../data/ApaByEgene/NuclearApaNOTeGene.txt
+
+```
+
+
+
+Make QQplots with these:  
+
+###Total
+```{r}
+tot.notE=read.table("../data/ApaByEgene/TotalApaNOTeGene.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+tot.ex=read.table("../data/ApaByEgene/TotalApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+tot.un=read.table("../data/ApaByEgene/TotalApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(tot.notE))), -log10(tot.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Total Apa")
+points(sort(-log10(runif(nrow(tot.ex)))), sort(-log10(tot.ex$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(tot.un)))), sort(-log10(tot.un$bpval)),col= alpha("Blue"))
+abline(0,1)
+
+legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
+
+```
+###Nuclear  
+
+```{r}
+nuc.notE=read.table("../data/ApaByEgene/NuclearApaNOTeGene.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+nuc.ex=read.table("../data/ApaByEgene/NuclearApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+nuc.un=read.table("../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(nuc.notE))), -log10(nuc.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.ex)))), sort(-log10(nuc.ex$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(nuc.un)))), sort(-log10(nuc.un$bpval)),col= alpha("Blue"))
+abline(0,1)
+
+legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
+
+```
