@@ -1,0 +1,51 @@
+---
+title: "Ratio of Intronic reads up and downstream of PAS"
+author: "Briana Mittleman"
+date: "6/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I am interested in finding examples of intronic PAS that show RNAseq signatures upstream of the PAS but not downstream. To do this I will create a ratio of reads upstream/reads downstream standardized by the length of the region (up/downstream). 
+
+To do this I can use the work I did [previously](nucintronicanalysis.html). Here I assigned each intronic PAS to an intron. I will do this analysis with the total fraction because I will be looking at steady state RNA seq. 
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+
+```{bash,eval=F}
+mkdir ../data/intronRNAratio
+```
+
+
+
+```{r}
+
+totIntronicPeaks=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc", stringsAsFactors = F, header = F,col.names = c("chr", "start", "end", "gene", "loc", "strand", "peak", "avgUsage")) %>% filter(loc=="intron") 
+
+pas2intronTot=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"))  %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronCHR,intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage)
+
+write.table(pas2intronTot, "../data/intronRNAratio/TotalIntronicPAS2Intron.txt", quote = F, row.names = F, col.names = F, sep="\t")
+```
+
+Make upstream and downstream PAS saf files using python. 
+
+```{bash,eval=F}
+ python getIntronUpstreamPAS.py
+ python getIntronDownstreamPAS.py
+```
+
+
+These make Bed and SAF files. I will use the SAF files for feature counts with all of the RNA seq.  These files are in /project2/yangili1/LCL/RNAseqGeuvadisBams/*.final.bam
+
+```{bash,eval=F}
+sbatch FC_intornUpandDownsteamPAS.sh
+```
+
