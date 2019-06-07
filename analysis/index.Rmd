@@ -40,6 +40,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Look at coverage in 3' UTR](reads2UTR.html)  
 
+* [Intron RNA seq ratios](intonRNAratio.html)
+
 
 ##apaQTL  
 
