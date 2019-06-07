@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3e5cc8ed183116ef8b2c4edb38e999d716b65cd8targetblank3e5cc8ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3e5cc8ed183116ef8b2c4edb38e999d716b65cd8" target="_blank">3e5cc8e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef640ca3a64b4823964a291bc42e8eb25f69f8fb7targetblankf640ca3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f640ca3a64b4823964a291bc42e8eb25f69f8fb7" target="_blank">f640ca3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3e5cc8ed183116ef8b2c4edb38e999d716b65cd8targetblank3e5cc8ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef640ca3a64b4823964a291bc42e8eb25f69f8fb7targetblankf640ca3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -856,7 +856,6 @@ Unstaged changes:
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/rna_netseq_h3k12ac.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
@@ -913,6 +912,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f640ca3a64b4823964a291bc42e8eb25f69f8fb7/analysis/intonRNAratio.Rmd" target="_blank">f640ca3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-07
+</td>
+<td>
+add results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/4fa86e599d8f39588bb316c0ea64c3cd90c60ae6/docs/intonRNAratio.html" target="_blank">4fa86e5</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/3e5cc8ed183116ef8b2c4edb38e999d716b65cd8/analysis/intonRNAratio.Rmd" target="_blank">3e5cc8e</a>
 </td>
 <td>
@@ -957,6 +990,46 @@ write.table(pas2intronTot, &quot;../data/intronRNAratio/TotalIntronicPAS2Intron.
  python getIntronDownstreamPAS.py</code></pre>
 <p>These make Bed and SAF files. I will use the SAF files for feature counts with all of the RNA seq. These files are in /project2/yangili1/LCL/RNAseqGeuvadisBams/*.final.bam</p>
 <pre class="bash"><code>sbatch FC_intornUpandDownsteamPAS.sh</code></pre>
+<p>Downstream Results:</p>
+<pre class="r"><code>downstream=read.table(&quot;../data/intronRNAratio/DownstreamIntron.fc&quot;, header = T,stringsAsFactors = F)
+downstreamMean=rowSums(downstream[,7:ncol(downstream)])
+
+downstreanMeanDF=as.data.frame(cbind(downstream[,1:6], downstreamMean)) %&gt;% mutate(DownstreamMean_st=downstreamMean/Length) %&gt;% select(Geneid,DownstreamMean_st )</code></pre>
+<p>Upstream Results:</p>
+<pre class="r"><code>upstream=read.table(&quot;../data/intronRNAratio/UpstreamIntron.fc&quot;, header = T,stringsAsFactors = F)
+upstreamMean=rowSums(upstream[,7:ncol(upstream)])
+upstreamMeanDF=as.data.frame(cbind(upstream[,1:6], upstreamMean)) %&gt;% mutate(UpstreamMean_st=upstreamMean/Length) %&gt;% select(Geneid,UpstreamMean_st )</code></pre>
+<p>Join Results:</p>
+<p>I will use upstream - downstream instead of a ratio to deal with 0s</p>
+<pre class="r"><code>UpandDown=upstreamMeanDF %&gt;% inner_join(downstreanMeanDF, by=&quot;Geneid&quot;) %&gt;% mutate(ratio=UpstreamMean_st-DownstreamMean_st) %&gt;% arrange(desc(ratio)) %&gt;% separate(Geneid, sep=&quot;:&quot;, into=c(&quot;PAS&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;PASloc&quot;, &quot;Usage&quot;))
+
+summary(UpandDown$ratio)</code></pre>
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+-26617.062     -0.103      0.000     -2.511      0.236   5380.027 </code></pre>
+<p>I want to know how many are positive:</p>
+<pre class="r"><code>MoreUp=UpandDown %&gt;% filter(ratio&gt;0) 
+summary(MoreUp$ratio)</code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+   0.000    0.064    0.346    7.631    2.044 5380.027 </code></pre>
+<pre class="r"><code>nrow(MoreUp)</code></pre>
+<pre><code>[1] 13903</code></pre>
+<p>13903 examples where there are more reads upstream in the intron than downstream.</p>
+<p>To look for examples:</p>
+<pre class="r"><code>head(MoreUp)</code></pre>
+<pre><code>         PAS   gene    loc    PASloc             Usage UpstreamMean_st
+1 peak113671  RPS18 intron  33240934 0.110925925925926        5404.273
+2  peak56811  RPL27 intron  41152263 0.796296296296296        3739.972
+3  peak78512 RPL37A intron 217365085 0.407407407407407        3284.307
+4  peak70756 RPS27A intron  55460229 0.537037037037037        3233.041
+5 peak113669  RPS18 intron  33240357 0.537222222222222        2942.865
+6  peak20394  RPLP2 intron    810791 0.648148148148148        1683.759
+  DownstreamMean_st    ratio
+1         24.246212 5380.027
+2          7.555006 3732.417
+3         15.007150 3269.300
+4         15.651852 3217.389
+5        369.229167 2573.636
+6         25.031017 1658.728</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
