@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree32091eec9a3afdd11c7b0c8e8c9acbee27aed7d5targetblank32091eea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/32091eec9a3afdd11c7b0c8e8c9acbee27aed7d5" target="_blank">32091ee</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb39620dd0bf4401ec127ca003a2ca510429500d2targetblankb39620da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b39620dd0bf4401ec127ca003a2ca510429500d2" target="_blank">b39620d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree32091eec9a3afdd11c7b0c8e8c9acbee27aed7d5targetblank32091eea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb39620dd0bf4401ec127ca003a2ca510429500d2targetblankb39620da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,6 +435,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -446,7 +447,6 @@ Untracked files:
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
-    Untracked:  analysis/intonRNAratio.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
@@ -913,6 +913,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b39620dd0bf4401ec127ca003a2ca510429500d2/analysis/propeQTLs_explained.Rmd" target="_blank">b39620d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-07
+</td>
+<td>
+add bonfor results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/458e4942294e3b27ad25b0c9d82569afdcf9c5e2/docs/propeQTLs_explained.html" target="_blank">458e494</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/32091eec9a3afdd11c7b0c8e8c9acbee27aed7d5/analysis/propeQTLs_explained.Rmd" target="_blank">32091ee</a>
 </td>
 <td>
@@ -944,6 +978,12 @@ more prop explained to new analysis
 <pre class="r"><code>library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
+<pre class="r"><code>library(reshape2)</code></pre>
+<pre><code>
+Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    smiths</code></pre>
 <p>I need to fix the explained_FDR10.sort.txt and unexplained_FDR10.sort.txt files because right now this file has multiple genes per snp.</p>
 <pre class="bash"><code>python fixExandUnexeQTL.py ../data/Li_eQTLs/explained_FDR10.sort.txt ../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt
 python fixExandUnexeQTL.py ../data/Li_eQTLs/unexplained_FDR10.sort.txt ../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt</code></pre>
@@ -960,22 +1000,26 @@ python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocA
 <div id="total" class="section level3">
 <h3>total</h3>
 <p>I can group the unexplained by gene and snp then I can ask if there is at least 1 significat peak for each of these.</p>
+<p>I will use the bonforoni correction here and multiply the pvalue by the number of peaks in the gene:snp association.</p>
 <pre class="r"><code>nomnames=c(&quot;peakID&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;)
-totalapaUnexplained=read.table(&quot;../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp) %&gt;% slice(which.min(pval))
+totalapaUnexplained=read.table(&quot;../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;% mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;%  slice(which.min(adjPval))
 
-totalapaUnexplained_sig= totalapaUnexplained %&gt;% filter(pval&lt;.05)</code></pre>
+totalapaUnexplained_sig= totalapaUnexplained %&gt;% filter(adjPval&lt;.05)</code></pre>
+<p>Look at distribution of these pvals:</p>
+<pre class="r"><code>ggplot(totalapaUnexplained, aes(x=adjPval)) + geom_histogram(bins=50)</code></pre>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Proportion explained:</p>
 <pre class="r"><code>nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)</code></pre>
-<pre><code>[1] 0.3532819</code></pre>
-<p>I tested 518 unexplained eQTLs in the total fraction and 183 have a nominally significant peak.</p>
+<pre><code>[1] 0.1235521</code></pre>
+<p>I tested 518 unexplained eQTLs in the total fraction and 64 have a bonforoni corrected significant peak.</p>
 <p>Compare to explained eQTLS:</p>
-<pre class="r"><code>totalapaexplained=read.table(&quot;../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp) %&gt;% slice(which.min(pval))
+<pre class="r"><code>totalapaexplained=read.table(&quot;../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp) %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;%  slice(which.min(adjPval))
 
-totalapaexplained_sig= totalapaexplained %&gt;% filter(pval&lt;.05)
+totalapaexplained_sig= totalapaexplained %&gt;% filter(adjPval&lt;.05)
 
 nrow(totalapaexplained_sig)/nrow(totalapaexplained)</code></pre>
-<pre><code>[1] 0.3045326</code></pre>
-<p>I am testing 706 explained eQTLs and of those 215 have a nominally significant apaQTL.</p>
+<pre><code>[1] 0.1062323</code></pre>
+<p>I am testing 706 explained eQTLs and of those 75 have a bonforoni corrected significant peak.</p>
 <p>difference of proportions:</p>
 <pre class="r"><code>prop.test(x=c(nrow(totalapaUnexplained_sig),nrow(totalapaexplained_sig)), n=c(nrow(totalapaUnexplained),nrow(totalapaexplained)))</code></pre>
 <pre><code>
@@ -983,13 +1027,130 @@ nrow(totalapaexplained_sig)/nrow(totalapaexplained)</code></pre>
     correction
 
 data:  c(nrow(totalapaUnexplained_sig), nrow(totalapaexplained_sig)) out of c(nrow(totalapaUnexplained), nrow(totalapaexplained))
-X-squared = 3.0175, df = 1, p-value = 0.08237
+X-squared = 0.7266, df = 1, p-value = 0.394
 alternative hypothesis: two.sided
 95 percent confidence interval:
- -0.006279092  0.103777643
+ -0.02068093  0.05532059
 sample estimates:
    prop 1    prop 2 
-0.3532819 0.3045326 </code></pre>
+0.1235521 0.1062323 </code></pre>
+<pre class="r"><code>ggplot(totalapaUnexplained_sig,aes(x=loc)) + geom_histogram(stat=&quot;count&quot;,aes(y=..count../sum(..count..))) + labs(y=&quot;Proportion&quot;, title = &quot;Total apaQTLs explaining eQTLs&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>totalapaUnexplained_sig_loc= totalapaUnexplained_sig %&gt;% group_by(loc) %&gt;% summarise(nLocTotalUn=n()) %&gt;% mutate(propTotalUn=nLocTotalUn/nrow(totalapaUnexplained_sig))
+totalapaexplained_sig_loc= totalapaexplained_sig %&gt;% group_by(loc) %&gt;% summarise(nLocTotalEx=n()) %&gt;% mutate(propTotalEx=nLocTotalEx/nrow(totalapaexplained_sig))
+
+BothTotalLoc=totalapaUnexplained_sig_loc %&gt;% full_join(totalapaexplained_sig_loc,by=&quot;loc&quot;) %&gt;%  replace_na(list(propTotalUn = 0, nLocTotalUn = 0,propTotalEx=0,nLocTotalEx=0  ))
+
+BothTotalLoc</code></pre>
+<pre><code># A tibble: 5 x 5
+  loc    nLocTotalUn propTotalUn nLocTotalEx propTotalEx
+  &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1 end              5      0.0781           6      0.08  
+2 intron          23      0.359           29      0.387 
+3 utr3            35      0.547           37      0.493 
+4 utr5             1      0.0156           1      0.0133
+5 cds              0      0                2      0.0267</code></pre>
+</div>
+<div id="nuclear" class="section level3">
+<h3>nuclear</h3>
+<pre class="r"><code>nuclearapaUnexplained=read.table(&quot;../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;%  slice(which.min(adjPval))
+
+nuclearapaUnexplained_sig= nuclearapaUnexplained %&gt;% filter(adjPval&lt;.05)
+
+nrow(nuclearapaUnexplained_sig)/nrow(nuclearapaUnexplained)</code></pre>
+<pre><code>[1] 0.1444867</code></pre>
+<p>I tested 526 unexplained eQTLs in the nuclear fraction and 76 have a bonforoni corrected significant peak.</p>
+<pre class="r"><code>nuclearapaexplained=read.table(&quot;../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp) %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;%  slice(which.min(adjPval))
+
+nuclearapaexplained_sig= nuclearapaexplained %&gt;% filter(adjPval&lt;.05)
+
+nrow(nuclearapaexplained_sig)/nrow(nuclearapaexplained)</code></pre>
+<pre><code>[1] 0.1218487</code></pre>
+<p>I tested 714 explained eQTLs in the nuclear fraction and 87 have a nominally significant peak. difference of proportions:</p>
+<pre class="r"><code>prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(nuclearapaexplained)))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(nrow(nuclearapaUnexplained_sig), nrow(nuclearapaexplained_sig)) out of c(nrow(nuclearapaUnexplained), nrow(nuclearapaexplained))
+X-squared = 1.1684, df = 1, p-value = 0.2797
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.01746331  0.06273922
+sample estimates:
+   prop 1    prop 2 
+0.1444867 0.1218487 </code></pre>
+<pre class="r"><code>ggplot(nuclearapaUnexplained_sig,aes(x=loc))  + geom_histogram(stat=&quot;count&quot;,aes(y=..count../sum(..count..))) + labs(title = &quot;Nuclear apaQTLs explaining eQTLs&quot;, y=&quot;Proportion&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>nuclearapaUnexplained_sig_loc= nuclearapaUnexplained_sig %&gt;% group_by(loc) %&gt;% summarise(nLocnuclearUn=n()) %&gt;% mutate(propnuclearUn=nLocnuclearUn/nrow(nuclearapaUnexplained_sig))
+nuclearapaexplained_sig_loc= nuclearapaexplained_sig %&gt;% group_by(loc) %&gt;% summarise(nLocnuclearEx=n()) %&gt;% mutate(propnuclearEx=nLocnuclearEx/nrow(nuclearapaexplained_sig))
+
+BothnuclearLoc=nuclearapaUnexplained_sig_loc %&gt;% full_join(nuclearapaexplained_sig_loc,by=&quot;loc&quot;) %&gt;%  replace_na(list(propnuclearUn = 0, nLocnuclearUn = 0,propnuclearEx=0,nLocnuclearEx=0  ))
+
+BothnuclearLoc</code></pre>
+<pre><code># A tibble: 5 x 5
+  loc    nLocnuclearUn propnuclearUn nLocnuclearEx propnuclearEx
+  &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+1 cds                1        0.0132             4        0.0460
+2 end                3        0.0395             5        0.0575
+3 intron            32        0.421             45        0.517 
+4 utr3              40        0.526             31        0.356 
+5 utr5               0        0                  2        0.0230</code></pre>
+<pre class="r"><code>prop.test(x=c(32,45), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(32, 45) out of c(nrow(nuclearapaUnexplained_sig), nrow(nuclearapaexplained_sig))
+X-squared = 1.1446, df = 1, p-value = 0.2847
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.26131172  0.06893423
+sample estimates:
+   prop 1    prop 2 
+0.4210526 0.5172414 </code></pre>
+<pre class="r"><code>prop.test(x=c(40,31), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(40, 31) out of c(nrow(nuclearapaUnexplained_sig), nrow(nuclearapaexplained_sig))
+X-squared = 4.1017, df = 1, p-value = 0.04284
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.006907985 0.333079916
+sample estimates:
+   prop 1    prop 2 
+0.5263158 0.3563218 </code></pre>
+<p>Unexplained are more likely to be in the 3’ UTR.</p>
+</div>
+<div id="total-v-nuclear" class="section level3">
+<h3>total v nuclear</h3>
+<pre class="r"><code>prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(totalapaUnexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(totalapaUnexplained)))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(nrow(nuclearapaUnexplained_sig), nrow(totalapaUnexplained_sig)) out of c(nrow(nuclearapaUnexplained), nrow(totalapaUnexplained))
+X-squared = 0.81299, df = 1, p-value = 0.3672
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.02228253  0.06415166
+sample estimates:
+   prop 1    prop 2 
+0.1444867 0.1235521 </code></pre>
+<p>Differences in proportion by location</p>
+<pre class="r"><code>allLocProp=BothnuclearLoc %&gt;% full_join(BothTotalLoc, by=&quot;loc&quot;) %&gt;% select(loc,propnuclearUn,propnuclearEx,propTotalUn,propTotalEx )
+
+allLocPropmelt= melt(allLocProp, id.vars = &quot;loc&quot;) %&gt;% mutate(Fraction=ifelse(grepl(&quot;Total&quot;, variable), &quot;Total&quot;, &quot;Nuclear&quot;),eQTL=ifelse(grepl(&quot;Un&quot;, variable), &quot;Unexplained&quot;, &quot;Explained&quot;))
+
+
+ggplot(allLocPropmelt,aes(x=loc, fill=eQTL, y=value)) + geom_histogram(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_grid(~Fraction)+ labs(y=&quot;Proportion of PAS&quot;, title=&quot;apaQTLs overlaping eQTLs by PAS location&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This is a very stringent test. A less stringent way to get an upper bound would be to make an informed decision about which peak to use. This will make it so I am only testing one PAS per gene.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1017,9 +1178,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
- [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.1   tidyverse_1.2.1
+ [1] reshape2_1.4.3  workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1  
+ [5] dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1     tidyr_0.8.3    
+ [9] tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
@@ -1030,10 +1191,11 @@ loaded via a namespace (and not attached):
 [21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
 [25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
-[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
-[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+[33] fansi_0.4.0      readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] labeling_0.3     utf8_1.1.4       stringi_1.2.4    lazyeval_0.2.1  
+[49] munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 </div>
 
