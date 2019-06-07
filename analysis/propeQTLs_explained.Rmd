@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(workflowr)
+library(reshape2)
 ```
 
 I need to fix the explained_FDR10.sort.txt and unexplained_FDR10.sort.txt files because right now this file has multiple genes per snp.  
@@ -37,16 +38,24 @@ python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocA
 
 ```
 
+
 ###total  
 I can group the unexplained by gene and snp then I can ask if there is at least 1 significat peak for each of these.
 
+I will use the bonforoni correction here and multiply the pvalue by the number of peaks in the gene:snp association. 
+
 ```{r}
 nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
-totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>% slice(which.min(pval))
+totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>% mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
 
-totalapaUnexplained_sig= totalapaUnexplained %>% filter(pval<.05)
+totalapaUnexplained_sig= totalapaUnexplained %>% filter(adjPval<.05)
 ```
 
+Look at distribution of these pvals:
+
+```{r}
+ggplot(totalapaUnexplained, aes(x=adjPval)) + geom_histogram(bins=50)
+```
 
 Proportion explained:
 
@@ -55,21 +64,104 @@ nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)
 ```
 
 
-I tested 518 unexplained eQTLs in the total fraction and 183 have a nominally significant peak. 
+I tested 518 unexplained eQTLs in the total fraction and 64 have a bonforoni corrected significant peak. 
 
 Compare to explained eQTLS:  
 
 ```{r}
-totalapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>% slice(which.min(pval))
+totalapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
 
-totalapaexplained_sig= totalapaexplained %>% filter(pval<.05)
+totalapaexplained_sig= totalapaexplained %>% filter(adjPval<.05)
 
 nrow(totalapaexplained_sig)/nrow(totalapaexplained)
 ```
-I am testing 706 explained eQTLs and of those 215 have a nominally significant apaQTL.
-
+I am testing 706 explained eQTLs and of those 75 have a bonforoni corrected significant peak. 
+ 
 difference of proportions:
 
 ```{r}
 prop.test(x=c(nrow(totalapaUnexplained_sig),nrow(totalapaexplained_sig)), n=c(nrow(totalapaUnexplained),nrow(totalapaexplained)))
 ```
+```{r}
+ggplot(totalapaUnexplained_sig,aes(x=loc)) + geom_histogram(stat="count",aes(y=..count../sum(..count..))) + labs(y="Proportion", title = "Total apaQTLs explaining eQTLs")
+
+
+
+```
+
+
+```{r}
+totalapaUnexplained_sig_loc= totalapaUnexplained_sig %>% group_by(loc) %>% summarise(nLocTotalUn=n()) %>% mutate(propTotalUn=nLocTotalUn/nrow(totalapaUnexplained_sig))
+totalapaexplained_sig_loc= totalapaexplained_sig %>% group_by(loc) %>% summarise(nLocTotalEx=n()) %>% mutate(propTotalEx=nLocTotalEx/nrow(totalapaexplained_sig))
+
+BothTotalLoc=totalapaUnexplained_sig_loc %>% full_join(totalapaexplained_sig_loc,by="loc") %>%  replace_na(list(propTotalUn = 0, nLocTotalUn = 0,propTotalEx=0,nLocTotalEx=0  ))
+
+BothTotalLoc
+```
+
+
+###nuclear  
+
+```{r}
+nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
+
+nuclearapaUnexplained_sig= nuclearapaUnexplained %>% filter(adjPval<.05)
+
+nrow(nuclearapaUnexplained_sig)/nrow(nuclearapaUnexplained)
+```
+
+I tested 526 unexplained eQTLs in the nuclear fraction and 76 have a bonforoni corrected significant peak. 
+
+```{r}
+nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
+
+nuclearapaexplained_sig= nuclearapaexplained %>% filter(adjPval<.05)
+
+nrow(nuclearapaexplained_sig)/nrow(nuclearapaexplained)
+```
+I tested 714 explained eQTLs in the nuclear fraction and 87 have a nominally significant peak. 
+difference of proportions:
+
+```{r}
+prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(nuclearapaexplained)))
+```
+```{r}
+ggplot(nuclearapaUnexplained_sig,aes(x=loc))  + geom_histogram(stat="count",aes(y=..count../sum(..count..))) + labs(title = "Nuclear apaQTLs explaining eQTLs", y="Proportion")
+
+```
+```{r}
+nuclearapaUnexplained_sig_loc= nuclearapaUnexplained_sig %>% group_by(loc) %>% summarise(nLocnuclearUn=n()) %>% mutate(propnuclearUn=nLocnuclearUn/nrow(nuclearapaUnexplained_sig))
+nuclearapaexplained_sig_loc= nuclearapaexplained_sig %>% group_by(loc) %>% summarise(nLocnuclearEx=n()) %>% mutate(propnuclearEx=nLocnuclearEx/nrow(nuclearapaexplained_sig))
+
+BothnuclearLoc=nuclearapaUnexplained_sig_loc %>% full_join(nuclearapaexplained_sig_loc,by="loc") %>%  replace_na(list(propnuclearUn = 0, nLocnuclearUn = 0,propnuclearEx=0,nLocnuclearEx=0  ))
+
+BothnuclearLoc
+```
+```{r}
+prop.test(x=c(32,45), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
+
+prop.test(x=c(40,31), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
+```
+
+Unexplained are more likely to be in the 3' UTR.  
+
+
+###total v nuclear  
+
+```{r}
+prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(totalapaUnexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(totalapaUnexplained)))
+```
+
+Differences in proportion by location
+```{r}
+allLocProp=BothnuclearLoc %>% full_join(BothTotalLoc, by="loc") %>% select(loc,propnuclearUn,propnuclearEx,propTotalUn,propTotalEx )
+
+allLocPropmelt= melt(allLocProp, id.vars = "loc") %>% mutate(Fraction=ifelse(grepl("Total", variable), "Total", "Nuclear"),eQTL=ifelse(grepl("Un", variable), "Unexplained", "Explained"))
+
+
+ggplot(allLocPropmelt,aes(x=loc, fill=eQTL, y=value)) + geom_histogram(stat="identity", position = "dodge") + facet_grid(~Fraction)+ labs(y="Proportion of PAS", title="apaQTLs overlaping eQTLs by PAS location")
+```
+
+This is a very stringent test. A less stringent way to get an upper bound would be to make an informed decision about which peak to use. This will make it so I am only testing one PAS per gene.  
+
+
