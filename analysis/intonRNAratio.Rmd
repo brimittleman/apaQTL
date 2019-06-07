@@ -49,3 +49,47 @@ These make Bed and SAF files. I will use the SAF files for feature counts with a
 sbatch FC_intornUpandDownsteamPAS.sh
 ```
 
+Downstream Results:
+
+```{r}
+downstream=read.table("../data/intronRNAratio/DownstreamIntron.fc", header = T,stringsAsFactors = F)
+downstreamMean=rowSums(downstream[,7:ncol(downstream)])
+
+downstreanMeanDF=as.data.frame(cbind(downstream[,1:6], downstreamMean)) %>% mutate(DownstreamMean_st=downstreamMean/Length) %>% select(Geneid,DownstreamMean_st )
+```
+
+Upstream Results: 
+
+```{r}
+upstream=read.table("../data/intronRNAratio/UpstreamIntron.fc", header = T,stringsAsFactors = F)
+upstreamMean=rowSums(upstream[,7:ncol(upstream)])
+upstreamMeanDF=as.data.frame(cbind(upstream[,1:6], upstreamMean)) %>% mutate(UpstreamMean_st=upstreamMean/Length) %>% select(Geneid,UpstreamMean_st )
+```
+
+
+Join Results:
+
+I will use upstream - downstream instead of a ratio to deal with 0s
+```{r}
+UpandDown=upstreamMeanDF %>% inner_join(downstreanMeanDF, by="Geneid") %>% mutate(ratio=UpstreamMean_st-DownstreamMean_st) %>% arrange(desc(ratio)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
+
+summary(UpandDown$ratio)
+```
+
+
+I want to know how many are positive:
+
+```{r}
+MoreUp=UpandDown %>% filter(ratio>0) 
+summary(MoreUp$ratio)
+nrow(MoreUp)
+```
+13903 examples where there are more reads upstream in the intron than downstream.  
+
+To look for examples:
+
+```{r}
+head(MoreUp)
+```
+
+
