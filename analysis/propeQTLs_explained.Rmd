@@ -1,0 +1,75 @@
+---
+title: "Proportion eQTLs explained"
+author: "Briana Mittleman"
+date: "6/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+I need to fix the explained_FDR10.sort.txt and unexplained_FDR10.sort.txt files because right now this file has multiple genes per snp.  
+
+```{bash,eval=F}
+python fixExandUnexeQTL.py ../data/Li_eQTLs/explained_FDR10.sort.txt ../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt
+python fixExandUnexeQTL.py ../data/Li_eQTLs/unexplained_FDR10.sort.txt ../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt
+```
+
+
+There are 1195 explained and 814 unexplained eQTLs. I will next look at each of these in my apadata.   
+
+```{bash,eval=F}
+mkdir ../data/overlapeQTL_try2
+python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt
+
+python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt
+
+python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt
+
+python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt
+
+```
+
+###total  
+I can group the unexplained by gene and snp then I can ask if there is at least 1 significat peak for each of these.
+
+```{r}
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>% slice(which.min(pval))
+
+totalapaUnexplained_sig= totalapaUnexplained %>% filter(pval<.05)
+```
+
+
+Proportion explained:
+
+```{r}
+nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)
+```
+
+
+I tested 518 unexplained eQTLs in the total fraction and 183 have a nominally significant peak. 
+
+Compare to explained eQTLS:  
+
+```{r}
+totalapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>% slice(which.min(pval))
+
+totalapaexplained_sig= totalapaexplained %>% filter(pval<.05)
+
+nrow(totalapaexplained_sig)/nrow(totalapaexplained)
+```
+I am testing 706 explained eQTLs and of those 215 have a nominally significant apaQTL.
+
+difference of proportions:
+
+```{r}
+prop.test(x=c(nrow(totalapaUnexplained_sig),nrow(totalapaexplained_sig)), n=c(nrow(totalapaUnexplained),nrow(totalapaexplained)))
+```
