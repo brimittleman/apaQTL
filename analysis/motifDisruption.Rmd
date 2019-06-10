@@ -1,0 +1,49 @@
+---
+title: "Motif Distruption"
+author: "Briana Mittleman"
+date: "6/10/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will identify apaQTL that modify signal sites for the associated PAS. To do this I will look at the sequences 5bp up and downtream of each QTL snp and look for evidence of AATAAA disruption. 
+
+```{r}
+library(tidyverse)
+library(workflowr)
+library(reshape2)
+```
+
+```{r}
+TotQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header  = T, stringsAsFactors = F) %>% separate(sid, into = c("snpChr", "snpLoc"),sep=":")
+
+NucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header  = T, stringsAsFactors = F) %>%  separate(sid, into = c("snpChr", "snpLoc"),sep=":")
+```
+
+Make bedfile with 5 bases upstream and downstream of snp. Names is gene:peak and the score is the slope.
+
+```{r}
+totQTLbed=TotQTLs %>% select(Gene, Peak, Strand, snpChr, snpLoc,slope) %>% mutate(name=paste(Gene, Peak, sep=":"), start=as.integer(snpLoc)-5, end=as.integer(snpLoc)+5 ) %>% select(snpChr, start, end, name, slope, Strand)
+
+nucQTLbed=NucQTLs %>% select(Gene, Peak, Strand, snpChr, snpLoc,slope) %>% mutate(name=paste(Gene, Peak, sep=":"), start=as.integer(snpLoc)-5, end=as.integer(snpLoc)+5 ) %>% select(snpChr, start, end, name, slope, Strand)
+```
+
+Write these files so I can run bedtools nuc on them.  
+
+```{bash,eval=F}
+mkdir ../data/motifdistrupt
+```
+
+```{r}
+write.table(totQTLbed, file="../data/motifdistrupt/TotQTLregion.bed", col.names = T, row.names = F, quote = F, sep="\t")
+write.table(nucQTLbed, file="../data/motifdistrupt/NucQTLregion.bed", col.names = T, row.names = F, quote = F, sep="\t")
+
+```
+
+```{bash,eval=F}
+sbatch qtlRegionseq.sh
+```
+

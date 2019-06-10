@@ -58,6 +58,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Usage QTL analysis to look at non normal effect sizes](nonNormQTL.html)
 
+* [Motif distruption as apaQTL mechanism](motifDisruption.html)
+
 
 ##Differential Isoform Analysis  
 
