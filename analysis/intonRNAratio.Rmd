@@ -19,7 +19,7 @@ library(workflowr)
 library(tidyverse)
 ```
 
-
+##Total 
 ```{bash,eval=F}
 mkdir ../data/intronRNAratio
 ```
@@ -92,4 +92,57 @@ To look for examples:
 head(MoreUp)
 ```
 
+##Nuclear  
+
+We also have nacent RNA seq. I will do this with nuclear intronic PAS. 
+
+
+```{r}
+nucIntronicPeaks=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc", stringsAsFactors = F, header = F,col.names = c("chr", "start", "end", "gene", "loc", "strand", "peak", "avgUsage")) %>% filter(loc=="intron")
+
+
+pas2intronNuc=read.table("../data/intron_analysis/IntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"))  %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronCHR,intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage)
+
+write.table(pas2intronTot, "../data/intronRNAratio/NuclearIntronicPAS2Intron.txt", quote = F, row.names = F, col.names = F, sep="\t")
+```
+
+
+Make upstream and downstream PAS saf files using python. 
+
+```{bash,eval=F}
+python getUpstreamIntronNuclear.py
+python getDownstreamIntronNuclear.py
+```
+
+These make Bed and SAF files. I will use the SAF files for feature counts with all of the nacent RNA seq. 
+
+```{bash,eval=F}
+sbatch FC_NucintornUpandDown.sh
+```
+
+
+
+Downstream Results:
+
+```{r}
+downstreamNuc=read.table("../data/intronRNAratio/NuclearDownstreamIntron.fc", col.names = c("Geneid","Chr","Start", "End", "Strand", "Length", "Downstream"), header = T,stringsAsFactors = F)%>% mutate(Downstream_st=Downstream/Length) %>% select(Geneid,Downstream_st )
+
+upstreamNuc=read.table("../data/intronRNAratio/NuclearUpstreamIntron.fc", col.names = c("Geneid","Chr","Start", "End", "Strand", "Length", "Upstream"), header = T,stringsAsFactors = F)%>% mutate(Upstream_st=Upstream/Length) %>% select(Geneid,Upstream_st )
+
+
+UpandDown_nuc=upstreamNuc %>% inner_join(downstreamNuc, by="Geneid") %>% mutate(ratio=Upstream_st-Downstream_st) %>% arrange(desc(ratio)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
+
+summary(UpandDown_nuc$ratio)
+```
+
+
+```{r}
+MoreUpNuc=UpandDown_nuc %>% filter(ratio>0) 
+summary(MoreUpNuc$ratio)
+nrow(MoreUpNuc)
+```
+
+```{r}
+head(MoreUpNuc)
+```
 
