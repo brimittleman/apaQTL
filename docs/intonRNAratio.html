@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-07
+<strong>Last updated:</strong> 2019-06-10
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef640ca3a64b4823964a291bc42e8eb25f69f8fb7targetblankf640ca3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f640ca3a64b4823964a291bc42e8eb25f69f8fb7" target="_blank">f640ca3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec753b2439a2bf18e2c21f2462ca2496c23bb152atargetblankc753b24a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/c753b2439a2bf18e2c21f2462ca2496c23bb152a" target="_blank">c753b24</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef640ca3a64b4823964a291bc42e8eb25f69f8fb7targetblankf640ca3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec753b2439a2bf18e2c21f2462ca2496c23bb152atargetblankc753b24a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -450,6 +450,7 @@ Untracked files:
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._FC_NucintornUpandDown.sh
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_intornUpandDownsteamPAS.sh
     Untracked:  code/._FC_newPeaks_olddata.sh
@@ -519,9 +520,13 @@ Untracked files:
     Untracked:  code/._getAPAfromanyeQTL.py
     Untracked:  code/._getApapval4eqtl.py
     Untracked:  code/._getApapval4eqtl_unexp.py
+    Untracked:  code/._getDownstreamIntronNuclear.py
     Untracked:  code/._getIntronDownstreamPAS.py
     Untracked:  code/._getIntronUpstreamPAS.py
+    Untracked:  code/._getQTLalleles.py
+    Untracked:  code/._getUpstreamIntronNuclear.py
     Untracked:  code/._grouptranscripts.py
+    Untracked:  code/._keepSNP_vcf.sh
     Untracked:  code/._make5percPeakbed.py
     Untracked:  code/._makeFileID.py
     Untracked:  code/._makePheno.py
@@ -542,6 +547,7 @@ Untracked files:
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
+    Untracked:  code/._qtlRegionseq.sh
     Untracked:  code/._qtlsPvalOppFrac.py
     Untracked:  code/._quantassign2parsedpeak.py
     Untracked:  code/._removeXfromHmm.py
@@ -568,6 +574,7 @@ Untracked files:
     Untracked:  code/._subtrachfiveprimeUTR.sh
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
+    Untracked:  code/._tabixSNPS.sh
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/.snakemake/
     Untracked:  code/APAqtl_nominal.err
@@ -591,6 +598,9 @@ Untracked files:
     Untracked:  code/DistPAS2Sig.py
     Untracked:  code/EncodeRNADTPlotGeneRegions.err
     Untracked:  code/EncodeRNADTPlotGeneRegions.out
+    Untracked:  code/FC_NucintornUpandDown.sh
+    Untracked:  code/FC_NucintronPASupandDown.err
+    Untracked:  code/FC_NucintronPASupandDown.out
     Untracked:  code/FC_UTR.err
     Untracked:  code/FC_UTR.out
     Untracked:  code/FC_UTR.sh
@@ -689,14 +699,18 @@ Untracked files:
     Untracked:  code/getAPAfromanyeQTL.py
     Untracked:  code/getApapval4eqtl.py
     Untracked:  code/getApapval4eqtl_unexp.py
+    Untracked:  code/getDownstreamIntronNuclear.py
     Untracked:  code/getIntronDownstreamPAS.py
     Untracked:  code/getIntronUpstreamPAS.py
+    Untracked:  code/getQTLalleles.py
     Untracked:  code/getSeq100up.sh
+    Untracked:  code/getUpstreamIntronNuclear.py
     Untracked:  code/getseq100up.err
     Untracked:  code/getseq100up.out
     Untracked:  code/grouptranscripts.err
     Untracked:  code/grouptranscripts.out
     Untracked:  code/grouptranscripts.py
+    Untracked:  code/keepSNP_vcf.sh
     Untracked:  code/log/
     Untracked:  code/makeSAFbothfrac5perc.py
     Untracked:  code/makeeQTLempirical_unexp.py
@@ -722,6 +736,7 @@ Untracked files:
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/qtlFacetBoxplots.err
     Untracked:  code/qtlFacetBoxplots.out
+    Untracked:  code/qtlRegionseq.sh
     Untracked:  code/qtlsPvalOppFrac.py
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
@@ -758,6 +773,8 @@ Untracked files:
     Untracked:  code/run_sepusage.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
+    Untracked:  code/seqQTLregion.err
+    Untracked:  code/seqQTLregion.out
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
     Untracked:  code/subsetApanoteGene.py
@@ -770,8 +787,13 @@ Untracked files:
     Untracked:  code/subtractExons.out
     Untracked:  code/subtractExons.sh
     Untracked:  code/subtractfiveprimeUTR.sh
+    Untracked:  code/tabixSNPS.sh
+    Untracked:  code/tabixSNPs.err
+    Untracked:  code/tabixSNPs.out
     Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
+    Untracked:  code/vcf_keepsnps.err
+    Untracked:  code/vcf_keepsnps.out
     Untracked:  code/zipandtabPhen.err
     Untracked:  code/zipandtabPhen.out
     Untracked:  data/ApaByEgene/
@@ -825,6 +847,7 @@ Untracked files:
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
+    Untracked:  data/motifdistrupt/
     Untracked:  data/netseq/
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
@@ -853,6 +876,7 @@ Unstaged changes:
     Modified:   analysis/choosePCs.Rmd
     Modified:   analysis/corrbetweenind.Rmd
     Modified:   analysis/exvunexpeQTL.Rmd
+    Modified:   analysis/motifDisruption.Rmd
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
@@ -907,6 +931,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/c753b2439a2bf18e2c21f2462ca2496c23bb152a/analysis/intonRNAratio.Rmd" target="_blank">c753b24</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-10
+</td>
+<td>
+add nuc res
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/09323e756a71242d3f9153a722860ca6958c9fcf/docs/intonRNAratio.html" target="_blank">09323e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -979,6 +1037,8 @@ Run ?workflowr for help getting started</code></pre>
 <pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div id="total" class="section level2">
+<h2>Total</h2>
 <pre class="bash"><code>mkdir ../data/intronRNAratio</code></pre>
 <pre class="r"><code>totIntronicPeaks=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc&quot;, stringsAsFactors = F, header = F,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;, &quot;avgUsage&quot;)) %&gt;% filter(loc==&quot;intron&quot;) 
 
@@ -1030,6 +1090,53 @@ summary(MoreUp$ratio)</code></pre>
 4         15.651852 3217.389
 5        369.229167 2573.636
 6         25.031017 1658.728</code></pre>
+</div>
+<div id="nuclear" class="section level2">
+<h2>Nuclear</h2>
+<p>We also have nacent RNA seq. I will do this with nuclear intronic PAS.</p>
+<pre class="r"><code>nucIntronicPeaks=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc&quot;, stringsAsFactors = F, header = F,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;, &quot;avgUsage&quot;)) %&gt;% filter(loc==&quot;intron&quot;)
+
+
+pas2intronNuc=read.table(&quot;../data/intron_analysis/IntronPeaksontoIntrons.bed&quot;,col.names = c(&quot;intronCHR&quot;, &quot;intronStart&quot;, &quot;intronEnd&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;peakCHR&quot;, &quot;peakStart&quot;, &quot;peakEnd&quot;, &quot;PeakID&quot;, &quot;meanUsage&quot;, &quot;peakStrand&quot;))  %&gt;% mutate(PASloc=ifelse(strand==&quot;+&quot;, peakEnd, peakStart)) %&gt;% dplyr::select(intronCHR,intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage)
+
+write.table(pas2intronTot, &quot;../data/intronRNAratio/NuclearIntronicPAS2Intron.txt&quot;, quote = F, row.names = F, col.names = F, sep=&quot;\t&quot;)</code></pre>
+<p>Make upstream and downstream PAS saf files using python.</p>
+<pre class="bash"><code>python getUpstreamIntronNuclear.py
+python getDownstreamIntronNuclear.py</code></pre>
+<p>These make Bed and SAF files. I will use the SAF files for feature counts with all of the nacent RNA seq.</p>
+<pre class="bash"><code>sbatch FC_NucintornUpandDown.sh</code></pre>
+<p>Downstream Results:</p>
+<pre class="r"><code>downstreamNuc=read.table(&quot;../data/intronRNAratio/NuclearDownstreamIntron.fc&quot;, col.names = c(&quot;Geneid&quot;,&quot;Chr&quot;,&quot;Start&quot;, &quot;End&quot;, &quot;Strand&quot;, &quot;Length&quot;, &quot;Downstream&quot;), header = T,stringsAsFactors = F)%&gt;% mutate(Downstream_st=Downstream/Length) %&gt;% select(Geneid,Downstream_st )
+
+upstreamNuc=read.table(&quot;../data/intronRNAratio/NuclearUpstreamIntron.fc&quot;, col.names = c(&quot;Geneid&quot;,&quot;Chr&quot;,&quot;Start&quot;, &quot;End&quot;, &quot;Strand&quot;, &quot;Length&quot;, &quot;Upstream&quot;), header = T,stringsAsFactors = F)%&gt;% mutate(Upstream_st=Upstream/Length) %&gt;% select(Geneid,Upstream_st )
+
+
+UpandDown_nuc=upstreamNuc %&gt;% inner_join(downstreamNuc, by=&quot;Geneid&quot;) %&gt;% mutate(ratio=Upstream_st-Downstream_st) %&gt;% arrange(desc(ratio)) %&gt;% separate(Geneid, sep=&quot;:&quot;, into=c(&quot;PAS&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;PASloc&quot;, &quot;Usage&quot;))
+
+summary(UpandDown_nuc$ratio)</code></pre>
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+-1120.4860    -0.1540     0.0000    -0.1154     0.3679    57.5287 </code></pre>
+<pre class="r"><code>MoreUpNuc=UpandDown_nuc %&gt;% filter(ratio&gt;0) 
+summary(MoreUpNuc$ratio)</code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+ 0.00001  0.13175  0.39811  0.86737  0.96318 57.52867 </code></pre>
+<pre class="r"><code>nrow(MoreUpNuc)</code></pre>
+<pre><code>[1] 14913</code></pre>
+<pre class="r"><code>head(MoreUpNuc)</code></pre>
+<pre><code>         PAS    gene    loc    PASloc             Usage Upstream_st
+1  peak18198   BTAF1 intron  93719017 0.836666666666667    68.64486
+2 peak113043   HLA-A intron  29911562 0.296296296296296    56.75309
+3  peak32403 HSP90B1 intron 104335869 0.302037037037037    40.16410
+4  peak86087   DDX17 intron  38887949 0.781851851851852    89.22321
+5  peak69710 RASGRP3 intron  33741824  0.32462962962963    38.86842
+6  peak92554  PARP14 intron 122414653 0.087037037037037    32.15172
+  Downstream_st    ratio
+1     11.116190 57.52867
+2     23.910979 32.84211
+3      8.178899 31.98520
+4     57.814883 31.40833
+5      7.689828 31.17859
+6      3.907366 28.24436</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1074,6 +1181,7 @@ loaded via a namespace (and not attached):
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
 [41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
 [45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+</div>
 </div>
 
 
