@@ -44,3 +44,9 @@ bgzip and index each file:
 sbatch tabixSNPS.sh
 ```
 
+Make a file mapping varriants to rs IDs.  
+
+```{bash,eval=F}
+python makeSNP2rsidfile.py
+```
+
