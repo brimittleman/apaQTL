@@ -42,6 +42,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Intron RNA seq ratios](intonRNAratio.html)
 
+* [Prepare genotypes for downstream analysis](geno_proc.html)
 
 ##apaQTL  
 

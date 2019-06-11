@@ -1,0 +1,46 @@
+---
+title: "Genotype processing"
+author: "Briana Mittleman"
+date: "6/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Genotyes used for Li et al 2016, available at http://eqtl.uchicago.edu/jointLCL/genotypesYRI.gen.txt.gz
+
+I need to add NA in front on the individual names and remove the chr in front of the chromosome. After I have completed this I can separate the files by chromosome.  
+
+The files are in /project2/gilad/briana/li_genotypes/
+
+```{bash,eval=F}
+python processYRIgen.py
+```
+
+Keep only my individuals (53 of the 54 (19092 not in file))
+```{bash,eval=F}
+module load vcftools
+vcftools --vcf /project2/gilad/briana/li_genotypes/genotypesYRI.gen.proc.vcf --keep /project2/gilad/briana/li_genotypes/SAMPLE.txt  --recode --out genotypesYRI.gen.proc.keep.vcf
+```
+
+I will write a python script to remove snps that dont make it to MAF 5%. To do this I will write a script that adds up all of the dosages and checks if it exceeds .05. 
+
+```{bash,eval=F}
+python keep5perMAF.py
+```
+
+Next I will separate by chromosome:
+
+```{bash,eval=F}
+sbatch run_sepgenobychrom.sh
+```
+
+bgzip and index each file:  
+
+```{bash,eval=F}
+sbatch tabixSNPS.sh
+```
+
