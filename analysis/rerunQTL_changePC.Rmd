@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
-library(cowplot)
+library(cowplot) 
 ```
 
 ##Run QTL script
@@ -26,24 +26,24 @@ head -n 5 APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.PCs > APApeak_Phenotyp
 add batch to these: 
 
 ```{r}
-metadata=read.table("../data/MetaDataSequencing.txt",stringsAsFactors = F,header = T)  %>% filter(fraction=="total") %>% select(line,batch)
+metadata=read.table("../data/MetaDataSequencing.txt",stringsAsFactors = F,header = T)  %>% filter(fraction=="total") %>% dplyr::select(line,batch)
 
-pc_tot=as.data.frame(read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.4PCs",header=T) %>% select(-id) %>% t() )%>% rownames_to_column(var="line")
+pc_tot=as.data.frame(read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.4PCs",header=T) %>%  dplyr::select(-id) %>% t() )%>% rownames_to_column(var="line")
 
 pc_tot_batch=as.data.frame(pc_tot %>% full_join(metadata,by="line") %>% t()) %>% mutate()
 colnames(pc_tot_batch)=unname(unlist(pc_tot_batch[1,])) 
-pc_tot_batch= pc_tot_batch[2:nrow(pc_tot_batch),] %>% mutate(id=c("1", "2", "3", "4", "batch")) %>% select(id, contains("NA"))
+pc_tot_batch= pc_tot_batch[2:nrow(pc_tot_batch),] %>% mutate(id=c("1", "2", "3", "4", "batch")) %>%  dplyr::select(id, contains("NA"))
 
 
 write.table(pc_tot_batch,file="../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.4PCswithBatch", col.names = T, row.names = F, quote=F,sep="\t")
 ```
 
 ```{r}
-pc_nuc=as.data.frame(read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.4PCs",header=T) %>% select(-id) %>% t() )%>% rownames_to_column(var="line")
+pc_nuc=as.data.frame(read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.4PCs",header=T) %>%  dplyr::select(-id) %>% t() )%>% rownames_to_column(var="line")
 
 pc_nuc_batch=as.data.frame(pc_nuc %>% full_join(metadata,by="line") %>% t()) %>% mutate()
 colnames(pc_nuc_batch)=unname(unlist(pc_nuc_batch[1,])) 
-pc_nuc_batch= pc_nuc_batch[2:nrow(pc_nuc_batch),] %>% mutate(id=c("1", "2", "3", "4", "batch")) %>% select(id, contains("NA"))
+pc_nuc_batch= pc_nuc_batch[2:nrow(pc_nuc_batch),] %>% mutate(id=c("1", "2", "3", "4", "batch")) %>%  dplyr::select(id, contains("NA"))
 
 
 write.table(pc_nuc_batch,file="../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.4PCswithBatch", col.names = T, row.names = F, quote=F,sep = "\t")
@@ -64,9 +64,9 @@ sbatch apaQTL_permuted.4pc.sh
 
 Concatinate results in permuted directory:  
 ```{bash,eval=F}
-cat APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_chr* > APApeak_Phenotype_GeneLocAnno.Total_permRes.txt
+cat ../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_chr* > ../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Total_permRes.txt
 
-cat APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* > APApeak_Phenotype_GeneLocAnno.Nuclear_permRes.txt
+cat ../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* > ../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permRes.txt
  
 ```
 
@@ -80,7 +80,7 @@ Rscript apaQTLCorrectPvalMakeQQ_4pc.R
 
 ###Total
 ```{r}
-totRes=read.table("../data/apaQTLPermuted_4pc//APApeak_Phenotype_GeneLocAnno.Total_permResBH.txt", stringsAsFactors = F, header = T) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Loc", "Strand","Peak"), sep="_")
+totRes=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Total_permResBH.txt", stringsAsFactors = F, header = T) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Loc", "Strand","Peak"), sep="_")
 ```
 
 
@@ -144,5 +144,12 @@ nucQTLloc=ggplot(NucQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat =
 
 ```{r}
 plot_grid(totQTLloc, nucQTLloc)
+```
+
+
+```{r}
+write.table(TotQTLs, file="../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", col.names = T, row.names = F, quote=F)
+
+write.table(NucQTLs, file="../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", col.names = T, row.names = F, quote=F)
 ```
 
