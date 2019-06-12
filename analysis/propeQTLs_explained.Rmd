@@ -26,15 +26,16 @@ python fixExandUnexeQTL.py ../data/Li_eQTLs/unexplained_FDR10.sort.txt ../data/L
 
 There are 1195 explained and 814 unexplained eQTLs. I will next look at each of these in my apadata.   
 
+Convert nominal results to have snps rather than rsids:  
+```{bash,eval=F}
+python convertNominal2SNPLOC.py Total
+python convertNominal2SNPLOC.py Nuclear
+```
+
 ```{bash,eval=F}
 mkdir ../data/overlapeQTL_try2
-python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt
+sbatch run_getapafromeQTL.sh
 
-python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt
-
-python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/explained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt
-
-python getAPAfromanyeQTL.py ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt  ../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt
 
 ```
 
@@ -64,7 +65,7 @@ nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)
 ```
 
 
-I tested 518 unexplained eQTLs in the total fraction and 64 have a bonforoni corrected significant peak. 
+I tested 528 unexplained eQTLs in the total fraction and 68 have a bonforoni corrected significant peak. 
 
 Compare to explained eQTLS:  
 
@@ -75,7 +76,7 @@ totalapaexplained_sig= totalapaexplained %>% filter(adjPval<.05)
 
 nrow(totalapaexplained_sig)/nrow(totalapaexplained)
 ```
-I am testing 706 explained eQTLs and of those 75 have a bonforoni corrected significant peak. 
+I am testing 717 explained eQTLs and of those 83 have a bonforoni corrected significant peak. 
  
 difference of proportions:
 
@@ -110,7 +111,7 @@ nuclearapaUnexplained_sig= nuclearapaUnexplained %>% filter(adjPval<.05)
 nrow(nuclearapaUnexplained_sig)/nrow(nuclearapaUnexplained)
 ```
 
-I tested 526 unexplained eQTLs in the nuclear fraction and 76 have a bonforoni corrected significant peak. 
+I tested 536 unexplained eQTLs in the nuclear fraction and 89 have a bonforoni corrected significant peak. 
 
 ```{r}
 nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
@@ -119,12 +120,15 @@ nuclearapaexplained_sig= nuclearapaexplained %>% filter(adjPval<.05)
 
 nrow(nuclearapaexplained_sig)/nrow(nuclearapaexplained)
 ```
-I tested 714 explained eQTLs in the nuclear fraction and 87 have a nominally significant peak. 
+I tested 725 explained eQTLs in the nuclear fraction and 90 have a nominally significant peak. 
 difference of proportions:
 
 ```{r}
 prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(nuclearapaexplained)))
 ```
+Nuclear are more likely to explain unexplained than expalined.  
+
+
 ```{r}
 ggplot(nuclearapaUnexplained_sig,aes(x=loc))  + geom_histogram(stat="count",aes(y=..count../sum(..count..))) + labs(title = "Nuclear apaQTLs explaining eQTLs", y="Proportion")
 
@@ -138,9 +142,9 @@ BothnuclearLoc=nuclearapaUnexplained_sig_loc %>% full_join(nuclearapaexplained_s
 BothnuclearLoc
 ```
 ```{r}
-prop.test(x=c(32,45), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
+prop.test(x=c(39,48), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
 
-prop.test(x=c(40,31), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
+prop.test(x=c(45,31), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
 ```
 
 Unexplained are more likely to be in the 3' UTR.  
