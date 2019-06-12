@@ -13,22 +13,26 @@ In this analysis I will identify apaQTL that modify signal sites for the associa
 
 ```{r}
 library(tidyverse)
+library(BSgenome)
 library(workflowr)
 library(reshape2)
+
 ```
 
-```{r}
-TotQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header  = T, stringsAsFactors = F) %>% separate(sid, into = c("snpChr", "snpLoc"),sep=":")
 
-NucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header  = T, stringsAsFactors = F) %>%  separate(sid, into = c("snpChr", "snpLoc"),sep=":")
+Get bedfiles for qtls with the strand: 
+
+```{bash,eval=F}
+python QTL2bed_withstrand.py Total 
+python QTL2bed_withstrand.py Nuclear
 ```
 
-Make bedfile with 5 bases upstream and downstream of snp. Names is gene:peak and the score is the slope.
+Make bedfile with 5 bases upstream and downstream of snp. Names is gene:peak:loc and the score is the distance between PAS and the snp
 
 ```{r}
-totQTLbed=TotQTLs %>% select(Gene, Peak, Strand, snpChr, snpLoc,slope) %>% mutate(name=paste(Gene, Peak, sep=":"), start=as.integer(snpLoc)-5, end=as.integer(snpLoc)+5 ) %>% select(snpChr, start, end, name, slope, Strand)
+totQTLbed=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.bed", header = T, stringsAsFactors = F) %>%  mutate(start=as.integer(SNPstart)-4, end=as.integer(SNPend)+6,snpChrint=as.integer(SNPchr) ) %>% select(SNPchr, start, end, name, score, strand)
 
-nucQTLbed=NucQTLs %>% select(Gene, Peak, Strand, snpChr, snpLoc,slope) %>% mutate(name=paste(Gene, Peak, sep=":"), start=as.integer(snpLoc)-5, end=as.integer(snpLoc)+5 ) %>% select(snpChr, start, end, name, slope, Strand)
+nucQTLbed=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed", header = T, stringsAsFactors = F) %>%  mutate(start=as.integer(SNPstart)-4, end=as.integer(SNPend)+6,snpChrint=as.integer(SNPchr) ) %>% select(SNPchr, start, end, name, score, strand)
 ```
 
 Write these files so I can run bedtools nuc on them.  
@@ -38,8 +42,9 @@ mkdir ../data/motifdistrupt
 ```
 
 ```{r}
-write.table(totQTLbed, file="../data/motifdistrupt/TotQTLregion.bed", col.names = T, row.names = F, quote = F, sep="\t")
-write.table(nucQTLbed, file="../data/motifdistrupt/NucQTLregion.bed", col.names = T, row.names = F, quote = F, sep="\t")
+write.table(totQTLbed, file="../data/motifdistrupt/TotQTLregion.bed", col.names = F, row.names = F, quote = F, sep="\t")
+write.table(nucQTLbed, file="../data/motifdistrupt/NucQTLregion.bed", col.names = F, row.names = F, quote = F, sep="\t")
+ 
 
 ```
 
@@ -47,3 +52,100 @@ write.table(nucQTLbed, file="../data/motifdistrupt/NucQTLregion.bed", col.names 
 sbatch qtlRegionseq.sh
 ```
 
+
+
+Evaluate results:
+```{r}
+totSeq=read.table("../data/motifdistrupt/TotQTLregionSequences.bed", header = F, stringsAsFactors = F, col.names =c("chr","start", "end", "name", "Dist", "strand", "pctAT", "pctGC", "numA", "numC", "numG", "numT", "numN", "numoth", "length", "seq") )
+```
+
+
+First plot the distance: 
+
+```{r}
+ggplot(totSeq,aes(x=Dist)) + geom_histogram(bins=100)
+```
+
+```{r}
+nucSeq=read.table("../data/motifdistrupt/NucQTLregionSequences.bed", header = F, stringsAsFactors = F, col.names =c("chr","start", "end", "name", "Dist", "strand", "pctAT", "pctGC", "numA", "numC", "numG", "numT", "numN", "numoth", "length", "seq") )
+```
+
+
+First plot the distance: 
+
+```{r}
+ggplot(nucSeq,aes(x=Dist)) + geom_histogram(bins=100)
+```
+Try with getting the sequences with bedtools getfasta (This reverse compliments the negative strand)
+
+```{bash eval=F}
+sbatch getQTLfastq.sh
+```
+
+extract the sequences from these to match with the nuc file above. This is important because this uses the reverse compliment.  The snp is the 6th letter.  
+(fraction is Tot /Nuc)
+
+```{bash,eval=F}
+python extractseqfromqtlfastq.py Tot
+python extractseqfromqtlfastq.py Nuc
+```
+
+
+
+```{r}
+Totsequp=read.table("../data/motifdistrupt/TotQTLregionSequenceOnly.txt", header = F, stringsAsFactors = F, col.names = "CorrectSeq")
+TotSeqComp=as.data.frame(cbind(totSeq,Totsequp)) %>% mutate(sig=ifelse(grepl("AATAAA",CorrectSeq),1, 0))
+TotSeqCompSig=TotSeqComp %>% filter(sig==1)
+TotSeqCompSig
+```
+
+```{r}
+Nucsequp=read.table("../data/motifdistrupt/NucQTLregionSequenceOnly.txt", header = F, stringsAsFactors = F, col.names = "CorrectSeq")
+NucSeqComp=as.data.frame(cbind(nucSeq,Nucsequp)) %>% mutate(sig=ifelse(grepl("AATAAA",CorrectSeq),1, 0))
+NucSeqCompSig=NucSeqComp %>% filter(sig==1)
+NucSeqCompSig
+```
+
+These are pretty far from the peak and probably not the mechanism for these.  
+
+I can look at this another way by subsetting to those close to the peak.
+
+```{r}
+TotSeqComp_Close=TotSeqComp %>% filter(abs(Dist)<200) %>% select(name,Dist,CorrectSeq,sig)
+NucSeqComp_Close=NucSeqComp %>% filter(abs(Dist)<200) %>% select(name,Dist,CorrectSeq,sig)
+```
+
+
+Look at examples:
+
+**Nuclear: **
+
+Disrupt:
+- ZNF418 rs75991626	T	C (break signal site for peak68038), also associated with increased usage of the downstream UTR pas.  
+
+- SORL1:peak26194:utr3 rs75085036 A-T disrupt signal site for UTR pas  
+
+- LRRK1:peak47802:utr3 rs15342 T-C disrupt signal site for peak47802
+
+- KLF2:peak64650:utr3 rs11086029  T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR  
+
+- ANKRD44:peak77452:intron rs715185 T-C disrupt signal site for ANKRD44  
+ 
+Creating site:
+- LOC102725022- peak43230 rs4566122 G->A creates a signal site for PAS  
+ 
+**Total: **
+
+Disrupt:
+- ZNF418 rs75991626	T	C (break signal site for peak68038), also associated with increased usage of the downstream UTR pas.  
+
+- ANKRD44:peak77452:intron rs715185 T-C disrupt signal site for ANKRD44  
+
+- KLF2:peak64650:utr3 rs11086029  T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR  
+
+
+-  DLD:peak124968:end rs144143960 A-G disrupt site for peak124968
+
+
+
+This is not the best way to look at this. It may be a snp in LD. Also this is the distance to the peak not the PAS. 
