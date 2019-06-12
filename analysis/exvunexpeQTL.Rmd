@@ -76,6 +76,7 @@ Make QQplots with these:
 tot.notE=read.table("../data/ApaByEgene/TotalApaNOTeGene.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 tot.ex=read.table("../data/ApaByEgene/TotalApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 tot.un=read.table("../data/ApaByEgene/TotalApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+tot.un=na.omit(tot.un)
 ```
 
 
@@ -94,6 +95,7 @@ legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes
 nuc.notE=read.table("../data/ApaByEgene/NuclearApaNOTeGene.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.ex=read.table("../data/ApaByEgene/NuclearApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.un=read.table("../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+nuc.un=na.omit(nuc.un)
 ```
 
 
@@ -102,7 +104,6 @@ qqplot(-log10(runif(nrow(nuc.notE))), -log10(nuc.notE$bpval), xlab="-log10(Unifo
 points(sort(-log10(runif(nrow(nuc.ex)))), sort(-log10(nuc.ex$bpval)),col= alpha("Red"))
 points(sort(-log10(runif(nrow(nuc.un)))), sort(-log10(nuc.un$bpval)),col= alpha("Blue"))
 abline(0,1)
-
 legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
 
 ```
