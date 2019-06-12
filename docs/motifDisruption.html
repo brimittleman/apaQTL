@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-10
+<strong>Last updated:</strong> 2019-06-12
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec5fe1c231671fddcc4b2855331dd8b33aecd7f4atargetblankc5fe1c2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/c5fe1c231671fddcc4b2855331dd8b33aecd7f4a" target="_blank">c5fe1c2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1f203f7fbce00140046a8b314f1104df59df2835targetblank1f203f7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1f203f7fbce00140046a8b314f1104df59df2835" target="_blank">1f203f7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec5fe1c231671fddcc4b2855331dd8b33aecd7f4atargetblankc5fe1c2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1f203f7fbce00140046a8b314f1104df59df2835targetblank1f203f7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -446,6 +446,7 @@ Untracked files:
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
@@ -465,6 +466,8 @@ Untracked files:
     Untracked:  code/._NascentRNAdtPlotintronicPAS.sh
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
+    Untracked:  code/._QTL2bed.py
+    Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -494,12 +497,14 @@ Untracked files:
     Untracked:  code/._config.yaml
     Untracked:  code/._config2.yaml
     Untracked:  code/._configOLD.yaml
+    Untracked:  code/._convertNominal2SNPLOC.py
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._correctNomeqtl.R
     Untracked:  code/._dag.pdf
     Untracked:  code/._eQTLgenestestedapa.py
     Untracked:  code/._encodeRNADTplots.sh
     Untracked:  code/._extractGenotypes.py
+    Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
@@ -523,12 +528,17 @@ Untracked files:
     Untracked:  code/._getDownstreamIntronNuclear.py
     Untracked:  code/._getIntronDownstreamPAS.py
     Untracked:  code/._getIntronUpstreamPAS.py
+    Untracked:  code/._getQTLalleles.py
+    Untracked:  code/._getQTLfastq.sh
     Untracked:  code/._getUpstreamIntronNuclear.py
     Untracked:  code/._grouptranscripts.py
+    Untracked:  code/._keep5perMAF.py
+    Untracked:  code/._keepSNP_vcf.sh
     Untracked:  code/._make5percPeakbed.py
     Untracked:  code/._makeFileID.py
     Untracked:  code/._makePheno.py
     Untracked:  code/._makeSAFbothfrac5perc.py
+    Untracked:  code/._makeSNP2rsidfile.py
     Untracked:  code/._makeeQTLempirical_unexp.py
     Untracked:  code/._makeeQTLempiricaldist.py
     Untracked:  code/._makegencondeTSSfile.py
@@ -545,6 +555,7 @@ Untracked files:
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
+    Untracked:  code/._processYRIgen.py
     Untracked:  code/._qtlRegionseq.sh
     Untracked:  code/._qtlsPvalOppFrac.py
     Untracked:  code/._quantassign2parsedpeak.py
@@ -556,11 +567,15 @@ Untracked files:
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
     Untracked:  code/._runMakeeQTLempirical.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
+    Untracked:  code/._run_getapafromeQTL.py
+    Untracked:  code/._run_getapafromeQTL.sh
     Untracked:  code/._run_getapapval4eqtl_unexp.sh
     Untracked:  code/._run_leafcutterDiffIso.sh
     Untracked:  code/._run_sepUsagephen.sh
+    Untracked:  code/._run_sepgenobychrom.sh
     Untracked:  code/._selectNominalPvalues.py
     Untracked:  code/._sepUsagePhen.py
+    Untracked:  code/._sepgenobychrom.py
     Untracked:  code/._snakemakePAS.batch
     Untracked:  code/._snakemakefiltPAS.batch
     Untracked:  code/._submit-snakemakePAS.sh
@@ -572,6 +587,7 @@ Untracked files:
     Untracked:  code/._subtrachfiveprimeUTR.sh
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
+    Untracked:  code/._tabixSNPS.sh
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/.snakemake/
     Untracked:  code/APAqtl_nominal.err
@@ -634,6 +650,8 @@ Untracked files:
     Untracked:  code/NascentRNAdtPlotintronicPAS.sh
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
+    Untracked:  code/QTL2bed.py
+    Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
     Untracked:  code/Rplots.pdf
     Untracked:  code/TESplots100bp.err
@@ -670,6 +688,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
     Untracked:  code/codingdms2bed.py
+    Untracked:  code/convertNominal2SNPLOC.py
     Untracked:  code/correctNomeqtl.R
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
@@ -677,6 +696,7 @@ Untracked files:
     Untracked:  code/eQTLgenestestedapa.py
     Untracked:  code/encodeRNADTplots.sh
     Untracked:  code/extractGenotypes.py
+    Untracked:  code/extractseqfromqtlfastq.py
     Untracked:  code/fc2leafphen.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
@@ -692,6 +712,8 @@ Untracked files:
     Untracked:  code/fixRNAkalisto.py
     Untracked:  code/fixgroupedtranscript.py
     Untracked:  code/fixhead_netseqfc.py
+    Untracked:  code/genotypesYRI.gen.proc.keep.vcf.log
+    Untracked:  code/genotypesYRI.gen.proc.keep.vcf.recode.vcf
     Untracked:  code/get100upPAS.py
     Untracked:  code/getAPAfromanyeQTL.py
     Untracked:  code/getApapval4eqtl.py
@@ -699,6 +721,8 @@ Untracked files:
     Untracked:  code/getDownstreamIntronNuclear.py
     Untracked:  code/getIntronDownstreamPAS.py
     Untracked:  code/getIntronUpstreamPAS.py
+    Untracked:  code/getQTLalleles.py
+    Untracked:  code/getQTLfastq.sh
     Untracked:  code/getSeq100up.sh
     Untracked:  code/getUpstreamIntronNuclear.py
     Untracked:  code/getseq100up.err
@@ -706,8 +730,11 @@ Untracked files:
     Untracked:  code/grouptranscripts.err
     Untracked:  code/grouptranscripts.out
     Untracked:  code/grouptranscripts.py
+    Untracked:  code/keep5perMAF.py
+    Untracked:  code/keepSNP_vcf.sh
     Untracked:  code/log/
     Untracked:  code/makeSAFbothfrac5perc.py
+    Untracked:  code/makeSNP2rsidfile.py
     Untracked:  code/makeeQTLempirical_unexp.py
     Untracked:  code/makeeQTLempiricaldist.py
     Untracked:  code/makegencondeTSSfile.py
@@ -729,6 +756,7 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/processYRIgen.py
     Untracked:  code/qtlFacetBoxplots.err
     Untracked:  code/qtlFacetBoxplots.out
     Untracked:  code/qtlRegionseq.sh
@@ -753,21 +781,32 @@ Untracked files:
     Untracked:  code/run_DistPAS2Sig.err
     Untracked:  code/run_DistPAS2Sig.out
     Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/run_getAPAfromanyeQTL.err
+    Untracked:  code/run_getAPAfromanyeQTL.out
     Untracked:  code/run_getApaPval4eQTLs.err
     Untracked:  code/run_getApaPval4eQTLs.out
     Untracked:  code/run_getApaPval4eQTLsunexplained.err
     Untracked:  code/run_getApaPval4eQTLsunexplained.out
     Untracked:  code/run_getApaPval4eqtl.sh
+    Untracked:  code/run_getapafromeQTL.sh
     Untracked:  code/run_getapapval4eqtl_unexp.sh
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
     Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
+    Untracked:  code/run_sepgenobychrom.err
+    Untracked:  code/run_sepgenobychrom.out
+    Untracked:  code/run_sepgenobychrom.sh
     Untracked:  code/run_sepusage.err
     Untracked:  code/run_sepusage.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
+    Untracked:  code/sepgenobychrom.py
+    Untracked:  code/seqQTLfastq.err
+    Untracked:  code/seqQTLfastq.out
+    Untracked:  code/seqQTLregion.err
+    Untracked:  code/seqQTLregion.out
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
     Untracked:  code/subsetApanoteGene.py
@@ -780,8 +819,13 @@ Untracked files:
     Untracked:  code/subtractExons.out
     Untracked:  code/subtractExons.sh
     Untracked:  code/subtractfiveprimeUTR.sh
+    Untracked:  code/tabixSNPS.sh
+    Untracked:  code/tabixSNPs.err
+    Untracked:  code/tabixSNPs.out
     Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
+    Untracked:  code/vcf_keepsnps.err
+    Untracked:  code/vcf_keepsnps.out
     Untracked:  code/zipandtabPhen.err
     Untracked:  code/zipandtabPhen.out
     Untracked:  data/ApaByEgene/
@@ -863,12 +907,10 @@ Unstaged changes:
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/choosePCs.Rmd
     Modified:   analysis/corrbetweenind.Rmd
-    Modified:   analysis/exvunexpeQTL.Rmd
-    Modified:   analysis/intonRNAratio.Rmd
+    Modified:   analysis/mapapaQTL.Rmd
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/rna_netseq_h3k12ac.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
@@ -880,6 +922,7 @@ Unstaged changes:
     Modified:   code/bed2saf.py
     Modified:   code/cluster.json
     Modified:   code/config.yaml
+    Modified:   code/environment.yaml
     Deleted:    code/test.txt
 
 </code></pre>
@@ -924,6 +967,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1f203f7fbce00140046a8b314f1104df59df2835/analysis/motifDisruption.Rmd" target="_blank">1f203f7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+<td>
+add examples
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/5d71c2e297696ec0a1fd3b33e3407a9b82a9b88d/docs/motifDisruption.html" target="_blank">5d71c2e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/c5fe1c231671fddcc4b2855331dd8b33aecd7f4a/analysis/motifDisruption.Rmd" target="_blank">c5fe1c2</a>
 </td>
 <td>
@@ -945,14 +1022,77 @@ add motif disruption
 </div>
 <p>In this analysis I will identify apaQTL that modify signal sites for the associated PAS. To do this I will look at the sequences 5bp up and downtream of each QTL snp and look for evidence of AATAAA disruption.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(BSgenome)</code></pre>
+<pre><code>Loading required package: BiocGenerics</code></pre>
+<pre><code>Loading required package: parallel</code></pre>
+<pre><code>
+Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:parallel&#39;:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    combine, intersect, setdiff, union</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    anyDuplicated, append, as.data.frame, basename, cbind,
+    colMeans, colnames, colSums, dirname, do.call, duplicated,
+    eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which, which.max,
+    which.min</code></pre>
+<pre><code>Loading required package: S4Vectors</code></pre>
+<pre><code>Loading required package: stats4</code></pre>
+<pre><code>
+Attaching package: &#39;S4Vectors&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    first, rename</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    expand</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    expand.grid</code></pre>
+<pre><code>Loading required package: IRanges</code></pre>
+<pre><code>
+Attaching package: &#39;IRanges&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:dplyr&#39;:
+
+    collapse, desc, slice</code></pre>
+<pre><code>The following object is masked from &#39;package:purrr&#39;:
+
+    reduce</code></pre>
+<pre><code>Loading required package: GenomeInfoDb</code></pre>
+<pre><code>Loading required package: GenomicRanges</code></pre>
+<pre><code>Loading required package: Biostrings</code></pre>
+<pre><code>Loading required package: XVector</code></pre>
+<pre><code>
+Attaching package: &#39;XVector&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:purrr&#39;:
+
+    compact</code></pre>
+<pre><code>
+Attaching package: &#39;Biostrings&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    strsplit</code></pre>
+<pre><code>Loading required package: rtracklayer</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
@@ -962,18 +1102,116 @@ Attaching package: &#39;reshape2&#39;</code></pre>
 <pre><code>The following object is masked from &#39;package:tidyr&#39;:
 
     smiths</code></pre>
-<pre class="r"><code>TotQTLs=read.table(&quot;../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt&quot;, header  = T, stringsAsFactors = F) %&gt;% separate(sid, into = c(&quot;snpChr&quot;, &quot;snpLoc&quot;),sep=&quot;:&quot;)
+<p>Get bedfiles for qtls with the strand:</p>
+<pre class="bash"><code>python QTL2bed_withstrand.py Total 
+python QTL2bed_withstrand.py Nuclear</code></pre>
+<p>Make bedfile with 5 bases upstream and downstream of snp. Names is gene:peak:loc and the score is the distance between PAS and the snp</p>
+<pre class="r"><code>totQTLbed=read.table(&quot;../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.bed&quot;, header = T, stringsAsFactors = F) %&gt;%  mutate(start=as.integer(SNPstart)-4, end=as.integer(SNPend)+6,snpChrint=as.integer(SNPchr) ) %&gt;% select(SNPchr, start, end, name, score, strand)
 
-NucQTLs=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt&quot;, header  = T, stringsAsFactors = F) %&gt;%  separate(sid, into = c(&quot;snpChr&quot;, &quot;snpLoc&quot;),sep=&quot;:&quot;)</code></pre>
-<p>Make bedfile with 5 bases upstream and downstream of snp. Names is gene:peak and the score is the slope.</p>
-<pre class="r"><code>totQTLbed=TotQTLs %&gt;% select(Gene, Peak, Strand, snpChr, snpLoc,slope) %&gt;% mutate(name=paste(Gene, Peak, sep=&quot;:&quot;), start=as.integer(snpLoc)-5, end=as.integer(snpLoc)+5 ) %&gt;% select(snpChr, start, end, name, slope, Strand)
-
-nucQTLbed=NucQTLs %&gt;% select(Gene, Peak, Strand, snpChr, snpLoc,slope) %&gt;% mutate(name=paste(Gene, Peak, sep=&quot;:&quot;), start=as.integer(snpLoc)-5, end=as.integer(snpLoc)+5 ) %&gt;% select(snpChr, start, end, name, slope, Strand)</code></pre>
+nucQTLbed=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed&quot;, header = T, stringsAsFactors = F) %&gt;%  mutate(start=as.integer(SNPstart)-4, end=as.integer(SNPend)+6,snpChrint=as.integer(SNPchr) ) %&gt;% select(SNPchr, start, end, name, score, strand)</code></pre>
 <p>Write these files so I can run bedtools nuc on them.</p>
 <pre class="bash"><code>mkdir ../data/motifdistrupt</code></pre>
-<pre class="r"><code>write.table(totQTLbed, file=&quot;../data/motifdistrupt/TotQTLregion.bed&quot;, col.names = T, row.names = F, quote = F, sep=&quot;\t&quot;)
-write.table(nucQTLbed, file=&quot;../data/motifdistrupt/NucQTLregion.bed&quot;, col.names = T, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<pre class="r"><code>write.table(totQTLbed, file=&quot;../data/motifdistrupt/TotQTLregion.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)
+write.table(nucQTLbed, file=&quot;../data/motifdistrupt/NucQTLregion.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
 <pre class="bash"><code>sbatch qtlRegionseq.sh</code></pre>
+<p>Evaluate results:</p>
+<pre class="r"><code>totSeq=read.table(&quot;../data/motifdistrupt/TotQTLregionSequences.bed&quot;, header = F, stringsAsFactors = F, col.names =c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;, &quot;name&quot;, &quot;Dist&quot;, &quot;strand&quot;, &quot;pctAT&quot;, &quot;pctGC&quot;, &quot;numA&quot;, &quot;numC&quot;, &quot;numG&quot;, &quot;numT&quot;, &quot;numN&quot;, &quot;numoth&quot;, &quot;length&quot;, &quot;seq&quot;) )</code></pre>
+<p>First plot the distance:</p>
+<pre class="r"><code>ggplot(totSeq,aes(x=Dist)) + geom_histogram(bins=100)</code></pre>
+<p><img src="figure/motifDisruption.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>nucSeq=read.table(&quot;../data/motifdistrupt/NucQTLregionSequences.bed&quot;, header = F, stringsAsFactors = F, col.names =c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;, &quot;name&quot;, &quot;Dist&quot;, &quot;strand&quot;, &quot;pctAT&quot;, &quot;pctGC&quot;, &quot;numA&quot;, &quot;numC&quot;, &quot;numG&quot;, &quot;numT&quot;, &quot;numN&quot;, &quot;numoth&quot;, &quot;length&quot;, &quot;seq&quot;) )</code></pre>
+<p>First plot the distance:</p>
+<pre class="r"><code>ggplot(nucSeq,aes(x=Dist)) + geom_histogram(bins=100)</code></pre>
+<p><img src="figure/motifDisruption.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> Try with getting the sequences with bedtools getfasta (This reverse compliments the negative strand)</p>
+<pre class="bash"><code>sbatch getQTLfastq.sh</code></pre>
+<p>extract the sequences from these to match with the nuc file above. This is important because this uses the reverse compliment. The snp is the 6th letter.<br />
+(fraction is Tot /Nuc)</p>
+<pre class="bash"><code>python extractseqfromqtlfastq.py Tot
+python extractseqfromqtlfastq.py Nuc</code></pre>
+<pre class="r"><code>Totsequp=read.table(&quot;../data/motifdistrupt/TotQTLregionSequenceOnly.txt&quot;, header = F, stringsAsFactors = F, col.names = &quot;CorrectSeq&quot;)
+TotSeqComp=as.data.frame(cbind(totSeq,Totsequp)) %&gt;% mutate(sig=ifelse(grepl(&quot;AATAAA&quot;,CorrectSeq),1, 0))
+TotSeqCompSig=TotSeqComp %&gt;% filter(sig==1)
+TotSeqCompSig</code></pre>
+<pre><code>  chr     start       end                     name Dist strand    pctAT
+1  19  16438656  16438667      KLF2:peak64649:utr3  454      + 0.909091
+2  19  16438656  16438667      KLF2:peak64650:utr3   63      + 0.909091
+3  19  58433644  58433655    ZNF418:peak68038:utr3   18      - 0.818182
+4   2 197855147 197855158 ANKRD44:peak77452:intron   20      - 1.000000
+5   7 107562562 107562573       DLD:peak124968:end   61      + 0.727273
+     pctGC numA numC numG numT numN numoth length         seq  CorrectSeq
+1 0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+2 0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+3 0.181818    3    2    0    6    0      0     11 cttttattaac GTTAATAAAAG
+4 0.000000    5    0    0    6    0      0     11 TTTATTTAAAA TTTTAAATAAA
+5 0.272727    6    3    0    2    0      0     11 ctcaataaaca CTCAATAAACA
+  sig
+1   1
+2   1
+3   1
+4   1
+5   1</code></pre>
+<pre class="r"><code>Nucsequp=read.table(&quot;../data/motifdistrupt/NucQTLregionSequenceOnly.txt&quot;, header = F, stringsAsFactors = F, col.names = &quot;CorrectSeq&quot;)
+NucSeqComp=as.data.frame(cbind(nucSeq,Nucsequp)) %&gt;% mutate(sig=ifelse(grepl(&quot;AATAAA&quot;,CorrectSeq),1, 0))
+NucSeqCompSig=NucSeqComp %&gt;% filter(sig==1)
+NucSeqCompSig</code></pre>
+<pre><code>   chr     start       end                     name   Dist strand    pctAT
+1   11 121500616 121500627     SORL1:peak26194:utr3     64      + 0.818182
+2   12  54712768  54712779   COPZ1:peak30032:intron  -7514      + 0.909091
+3   15 101610289 101610300     LRRK1:peak47802:utr3     67      + 0.818182
+4   15 101610289 101610300     LRRK1:peak47806:utr3  -2713      + 0.818182
+5   19  16438656  16438667      KLF2:peak64649:utr3    454      + 0.909091
+6   19  16438656  16438667      KLF2:peak64650:utr3     63      + 0.909091
+7   19  58433644  58433655    ZNF418:peak68038:utr3     18      - 0.818182
+8    2 197855147 197855158 ANKRD44:peak77452:intron     20      - 1.000000
+9    4  84367754  84367765   MRPS18C:peak99426:utr3 -14538      + 0.727273
+10   4  84367754  84367765   MRPS18C:peak99427:utr3 -14730      + 0.727273
+11   6 167409236 167409247   MIR3939:peak119106:end   1476      - 1.000000
+      pctGC numA numC numG numT numN numoth length         seq  CorrectSeq
+1  0.181818    7    2    0    2    0      0     11 TAATAAAAACC TAATAAAAACC
+2  0.090909    6    1    0    4    0      0     11 catttaataaa CATTTAATAAA
+3  0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
+4  0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
+5  0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+6  0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+7  0.181818    3    2    0    6    0      0     11 cttttattaac GTTAATAAAAG
+8  0.000000    5    0    0    6    0      0     11 TTTATTTAAAA TTTTAAATAAA
+9  0.272727    7    2    1    1    0      0     11 agccAATAAAA AGCCAATAAAA
+10 0.272727    7    2    1    1    0      0     11 agccAATAAAA AGCCAATAAAA
+11 0.000000    2    0    0    9    0      0     11 tattttttatt AATAAAAAATA
+   sig
+1    1
+2    1
+3    1
+4    1
+5    1
+6    1
+7    1
+8    1
+9    1
+10   1
+11   1</code></pre>
+<p>These are pretty far from the peak and probably not the mechanism for these.</p>
+<p>I can look at this another way by subsetting to those close to the peak.</p>
+<pre class="r"><code>TotSeqComp_Close=TotSeqComp %&gt;% filter(abs(Dist)&lt;200) %&gt;% select(name,Dist,CorrectSeq,sig)
+NucSeqComp_Close=NucSeqComp %&gt;% filter(abs(Dist)&lt;200) %&gt;% select(name,Dist,CorrectSeq,sig)</code></pre>
+<p>Look at examples:</p>
+<p><strong>Nuclear: </strong></p>
+<p>Disrupt: - ZNF418 rs75991626 T C (break signal site for peak68038), also associated with increased usage of the downstream UTR pas.</p>
+<ul>
+<li><p>SORL1:peak26194:utr3 rs75085036 A-T disrupt signal site for UTR pas</p></li>
+<li><p>LRRK1:peak47802:utr3 rs15342 T-C disrupt signal site for peak47802</p></li>
+<li><p>KLF2:peak64650:utr3 rs11086029 T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR</p></li>
+<li><p>ANKRD44:peak77452:intron rs715185 T-C disrupt signal site for ANKRD44</p></li>
+</ul>
+<p>Creating site: - LOC102725022- peak43230 rs4566122 G-&gt;A creates a signal site for PAS</p>
+<p><strong>Total: </strong></p>
+<p>Disrupt: - ZNF418 rs75991626 T C (break signal site for peak68038), also associated with increased usage of the downstream UTR pas.</p>
+<ul>
+<li><p>ANKRD44:peak77452:intron rs715185 T-C disrupt signal site for ANKRD44</p></li>
+<li><p>KLF2:peak64650:utr3 rs11086029 T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR</p></li>
+<li><p>DLD:peak124968:end rs144143960 A-G disrupt site for peak124968</p></li>
+</ul>
+<p>This is not the best way to look at this. It may be a snp in LD. Also this is the distance to the peak not the PAS.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -998,26 +1236,50 @@ locale:
 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats4    parallel  stats     graphics  grDevices utils     datasets 
+[8] methods   base     
 
 other attached packages:
- [1] reshape2_1.4.3  workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1  
- [5] dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1     tidyr_0.8.3    
- [9] tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1
+ [1] reshape2_1.4.3       workflowr_1.3.0      BSgenome_1.50.0     
+ [4] rtracklayer_1.42.0   Biostrings_2.50.1    XVector_0.22.0      
+ [7] GenomicRanges_1.34.0 GenomeInfoDb_1.18.1  IRanges_2.16.0      
+[10] S4Vectors_0.20.1     BiocGenerics_0.28.0  forcats_0.3.0       
+[13] stringr_1.3.1        dplyr_0.8.0.1        purrr_0.3.2         
+[16] readr_1.3.1          tidyr_0.8.3          tibble_2.1.1        
+[19] ggplot2_3.1.1        tidyverse_1.2.1     
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
- [5] git2r_0.25.2     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
- [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
-[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
-[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
-[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
-[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
-[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
-[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
-[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+ [1] Biobase_2.42.0              httr_1.3.1                 
+ [3] jsonlite_1.6                modelr_0.1.2               
+ [5] assertthat_0.2.0            GenomeInfoDbData_1.2.0     
+ [7] cellranger_1.1.0            Rsamtools_1.34.0           
+ [9] yaml_2.2.0                  pillar_1.3.1               
+[11] backports_1.1.2             lattice_0.20-38            
+[13] glue_1.3.0                  digest_0.6.18              
+[15] rvest_0.3.2                 colorspace_1.3-2           
+[17] htmltools_0.3.6             Matrix_1.2-15              
+[19] plyr_1.8.4                  XML_3.98-1.16              
+[21] pkgconfig_2.0.2             broom_0.5.1                
+[23] haven_1.1.2                 zlibbioc_1.28.0            
+[25] scales_1.0.0                whisker_0.3-2              
+[27] BiocParallel_1.16.0         git2r_0.25.2               
+[29] generics_0.0.2              withr_2.1.2                
+[31] SummarizedExperiment_1.12.0 lazyeval_0.2.1             
+[33] cli_1.0.1                   magrittr_1.5               
+[35] crayon_1.3.4                readxl_1.1.0               
+[37] evaluate_0.12               fs_1.2.6                   
+[39] nlme_3.1-137                xml2_1.2.0                 
+[41] tools_3.5.1                 hms_0.4.2                  
+[43] matrixStats_0.54.0          munsell_0.5.0              
+[45] DelayedArray_0.8.0          compiler_3.5.1             
+[47] rlang_0.3.1                 grid_3.5.1                 
+[49] RCurl_1.95-4.11             rstudioapi_0.10            
+[51] labeling_0.3                bitops_1.0-6               
+[53] rmarkdown_1.10              gtable_0.2.0               
+[55] R6_2.3.0                    GenomicAlignments_1.18.0   
+[57] lubridate_1.7.4             knitr_1.20                 
+[59] rprojroot_1.3-2             stringi_1.2.4              
+[61] Rcpp_1.0.0                  tidyselect_0.2.5           </code></pre>
 </div>
 
 
