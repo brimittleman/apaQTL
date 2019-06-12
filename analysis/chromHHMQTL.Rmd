@@ -27,14 +27,13 @@ The categories are in: /project2/gilad/briana/genome_anotation_data/GM12878.chro
 
 First I need to make bedfiles for each of the QTL lists.
 
-```{r}
-totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":"),noStrand=".") %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, noStrand )
 
-write.table(totQTLs, file="../data/apaQTLs/Total_apaQTLs4pc_5fdr.bed", col.names = T, row.names = F, quote = F, sep="\t")
+```{bash,eval=F}
+python QTL2bed.py Total
 
-nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% separate(sid, into=c("SNPchr","SNPloc"), sep=":") %>% mutate(SNPstart=as.integer(SNPloc)-1, SNPend=as.integer(SNPloc), peakID=paste(Gene, Peak, sep=":"),noStrand=".") %>% dplyr::select(SNPchr, SNPstart, SNPend, peakID, slope, noStrand )
+python QTL2bed.py Nuclear 
 
-write.table(nucQTLs, file="../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed", col.names = T, row.names = F, quote = F, sep="\t")
+
 ```
 
 
@@ -47,6 +46,8 @@ sbatch runHMMpermuteAPAqtls.sh
 
 ```{r}
 chromHmm=read.table("../data/HMMqtls/chromHMM_regions.txt", col.names = c("HMMcat", "HMMname"), stringsAsFactors = F)
+nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed", header = T)
+totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.bed", header = T)
 ```
 
 ```{r}
@@ -54,7 +55,7 @@ TotalRes=read.table("../data/HMMqtls/TotalAPAqtls.HMM1000times.txt", stringsAsFa
 
 TotalResM=melt(TotalRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  group_by(HMMname) %>% summarise(Mean=mean(value), SD=sd(value)) %>% mutate(Category="Total_APA")
 
-TotalResMProp=melt(TotalRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(nucQTLs), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %>% mutate(Category="Total_APA")
+TotalResMProp=melt(TotalRes, id.vars="HMMcat") %>%inner_join(chromHmm, by="HMMcat") %>%  mutate(nQTL= nrow(totQTLs), propQTL=value/nQTL)%>%  group_by(HMMname) %>% summarise(Mean=mean(propQTL), SD=sd(propQTL)) %>% mutate(Category="Total_APA")
 ```
 
 
