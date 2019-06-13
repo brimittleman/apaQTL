@@ -25,7 +25,7 @@ PAS_loc =PAS%>% group_by(loc) %>% summarise(nloc=n())
 ```
 
 ```{r}
-effectsize=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(intron != "intron") %>% filter(logef>.5)
+effectsize=read.table("../data/DiffIso/TN_diff_isoform_allChrom.txt_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(intron != "intron") %>% filter(logef>.5)
 ```
 
 
