@@ -47,7 +47,8 @@ I will use the bonforoni correction here and multiply the pvalue by the number o
 
 ```{r}
 nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
-totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>% mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
+totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames)
+totalapaUnexplained=totalapaUnexplained %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>% mutate(nPeaks=n(), adjPval=pval* nPeaks)%>%  dplyr::slice(which.min(adjPval))
 
 totalapaUnexplained_sig= totalapaUnexplained %>% filter(adjPval<.05)
 ```
@@ -65,18 +66,18 @@ nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)
 ```
 
 
-I tested 528 unexplained eQTLs in the total fraction and 68 have a bonforoni corrected significant peak. 
+I tested 588 unexplained eQTLs in the total fraction and 96 have a bonforoni corrected significant peak. 
 
 Compare to explained eQTLS:  
 
 ```{r}
-totalapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
+totalapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))
 
 totalapaexplained_sig= totalapaexplained %>% filter(adjPval<.05)
 
 nrow(totalapaexplained_sig)/nrow(totalapaexplained)
 ```
-I am testing 717 explained eQTLs and of those 83 have a bonforoni corrected significant peak. 
+I am testing 820 explained eQTLs and of those 107 have a bonforoni corrected significant peak. 
  
 difference of proportions:
 
@@ -104,29 +105,28 @@ BothTotalLoc
 ###nuclear  
 
 ```{r}
-nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
+nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
 
 nuclearapaUnexplained_sig= nuclearapaUnexplained %>% filter(adjPval<.05)
 
 nrow(nuclearapaUnexplained_sig)/nrow(nuclearapaUnexplained)
 ```
 
-I tested 536 unexplained eQTLs in the nuclear fraction and 89 have a bonforoni corrected significant peak. 
+I tested 594 unexplained eQTLs in the nuclear fraction and 98 have a bonforoni corrected significant peak. 
 
 ```{r}
-nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  slice(which.min(adjPval))
+nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))
 
 nuclearapaexplained_sig= nuclearapaexplained %>% filter(adjPval<.05)
 
 nrow(nuclearapaexplained_sig)/nrow(nuclearapaexplained)
 ```
-I tested 725 explained eQTLs in the nuclear fraction and 90 have a nominally significant peak. 
+I tested 829 explained eQTLs in the nuclear fraction and 110 have a nominally significant peak. 
 difference of proportions:
 
 ```{r}
 prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(nuclearapaexplained)))
 ```
-Nuclear are more likely to explain unexplained than expalined.  
 
 
 ```{r}
@@ -142,12 +142,10 @@ BothnuclearLoc=nuclearapaUnexplained_sig_loc %>% full_join(nuclearapaexplained_s
 BothnuclearLoc
 ```
 ```{r}
-prop.test(x=c(39,48), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
+prop.test(x=c(18,33), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
 
-prop.test(x=c(45,31), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
+prop.test(x=c(66,63), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
 ```
-
-Unexplained are more likely to be in the 3' UTR.  
 
 
 ###total v nuclear  
