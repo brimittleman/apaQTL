@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-12
+<strong>Last updated:</strong> 2019-06-13
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1f203f7fbce00140046a8b314f1104df59df2835targetblank1f203f7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1f203f7fbce00140046a8b314f1104df59df2835" target="_blank">1f203f7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree02db3a7cc3219be6a76e6f917ccc69c394b984b5targetblank02db3a7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/02db3a7cc3219be6a76e6f917ccc69c394b984b5" target="_blank">02db3a7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1f203f7fbce00140046a8b314f1104df59df2835targetblank1f203f7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree02db3a7cc3219be6a76e6f917ccc69c394b984b5targetblank02db3a7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,6 +435,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    data/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -444,6 +445,7 @@ Untracked files:
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
@@ -670,6 +672,7 @@ Untracked files:
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/apafacetboxplots.R
     Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
@@ -828,6 +831,7 @@ Untracked files:
     Untracked:  code/vcf_keepsnps.out
     Untracked:  code/zipandtabPhen.err
     Untracked:  code/zipandtabPhen.out
+    Untracked:  data/._.DS_Store
     Untracked:  data/ApaByEgene/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
@@ -902,12 +906,8 @@ Untracked files:
     Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
-    Modified:   analysis/DiffIsoAnalysis.Rmd
-    Modified:   analysis/PASusageQC.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
-    Modified:   analysis/choosePCs.Rmd
-    Modified:   analysis/corrbetweenind.Rmd
-    Modified:   analysis/mapapaQTL.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucintronicanalysis.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
@@ -916,13 +916,16 @@ Unstaged changes:
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
+    Modified:   code/apaQTL_Nominal.sh
     Modified:   code/apaQTL_permuted.sh
     Modified:   code/apaQTLsnake.err
     Modified:   code/bam2bw.sh
     Modified:   code/bed2saf.py
     Modified:   code/cluster.json
+    Modified:   code/clusterfiltPAS.json
     Modified:   code/config.yaml
     Modified:   code/environment.yaml
+    Modified:   code/makePheno.py
     Deleted:    code/test.txt
 
 </code></pre>
@@ -962,6 +965,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/02db3a7cc3219be6a76e6f917ccc69c394b984b5/analysis/motifDisruption.Rmd" target="_blank">02db3a7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+<td>
+fixbug
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/e783f5c94de855600d239dd0b427e1721d36890e/docs/motifDisruption.html" target="_blank">e783f5c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1022,12 +1059,12 @@ add motif disruption
 </div>
 <p>In this analysis I will identify apaQTL that modify signal sites for the associated PAS. To do this I will look at the sequences 5bp up and downtream of each QTL snp and look for evidence of AATAAA disruption.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(BSgenome)</code></pre>
@@ -1119,10 +1156,85 @@ write.table(nucQTLbed, file=&quot;../data/motifdistrupt/NucQTLregion.bed&quot;, 
 <p>First plot the distance:</p>
 <pre class="r"><code>ggplot(totSeq,aes(x=Dist)) + geom_histogram(bins=100)</code></pre>
 <p><img src="figure/motifDisruption.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e783f5c94de855600d239dd0b427e1721d36890e/docs/figure/motifDisruption.Rmd/unnamed-chunk-8-1.png" target="_blank">e783f5c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>nucSeq=read.table(&quot;../data/motifdistrupt/NucQTLregionSequences.bed&quot;, header = F, stringsAsFactors = F, col.names =c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;, &quot;name&quot;, &quot;Dist&quot;, &quot;strand&quot;, &quot;pctAT&quot;, &quot;pctGC&quot;, &quot;numA&quot;, &quot;numC&quot;, &quot;numG&quot;, &quot;numT&quot;, &quot;numN&quot;, &quot;numoth&quot;, &quot;length&quot;, &quot;seq&quot;) )</code></pre>
 <p>First plot the distance:</p>
 <pre class="r"><code>ggplot(nucSeq,aes(x=Dist)) + geom_histogram(bins=100)</code></pre>
-<p><img src="figure/motifDisruption.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> Try with getting the sequences with bedtools getfasta (This reverse compliments the negative strand)</p>
+<p><img src="figure/motifDisruption.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e783f5c94de855600d239dd0b427e1721d36890e/docs/figure/motifDisruption.Rmd/unnamed-chunk-10-1.png" target="_blank">e783f5c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Try with getting the sequences with bedtools getfasta (This reverse compliments the negative strand)</p>
 <pre class="bash"><code>sbatch getQTLfastq.sh</code></pre>
 <p>extract the sequences from these to match with the nuc file above. This is important because this uses the reverse compliment. The snp is the 6th letter.<br />
 (fraction is Tot /Nuc)</p>
@@ -1133,51 +1245,52 @@ TotSeqComp=as.data.frame(cbind(totSeq,Totsequp)) %&gt;% mutate(sig=ifelse(grepl(
 TotSeqCompSig=TotSeqComp %&gt;% filter(sig==1)
 TotSeqCompSig</code></pre>
 <pre><code>  chr     start       end                     name Dist strand    pctAT
-1  19  16438656  16438667      KLF2:peak64649:utr3  454      + 0.909091
-2  19  16438656  16438667      KLF2:peak64650:utr3   63      + 0.909091
-3  19  58433644  58433655    ZNF418:peak68038:utr3   18      - 0.818182
-4   2 197855147 197855158 ANKRD44:peak77452:intron   20      - 1.000000
-5   7 107562562 107562573       DLD:peak124968:end   61      + 0.727273
+1  15 101610289 101610300     LRRK1:peak47802:utr3   67      + 0.818182
+2  19  16438656  16438667      KLF2:peak64649:utr3  454      + 0.909091
+3  19  16438656  16438667      KLF2:peak64650:utr3   63      + 0.909091
+4  19  43978507  43978518    PHLDB3:peak66481:utr3 -746      - 1.000000
+5   2 131132114 131132125    PTPN18:peak74525:utr3 -776      + 0.818182
+6   2 197855147 197855158 ANKRD44:peak77452:intron   20      - 1.000000
      pctGC numA numC numG numT numN numoth length         seq  CorrectSeq
-1 0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+1 0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
 2 0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
-3 0.181818    3    2    0    6    0      0     11 cttttattaac GTTAATAAAAG
-4 0.000000    5    0    0    6    0      0     11 TTTATTTAAAA TTTTAAATAAA
-5 0.272727    6    3    0    2    0      0     11 ctcaataaaca CTCAATAAACA
+3 0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+4 0.000000    1    0    0   10    0      0     11 ttttatttttt AAAAAATAAAA
+5 0.181818    8    0    2    1    0      0     11 AGAAATAAAAG AGAAATAAAAG
+6 0.000000    5    0    0    6    0      0     11 TTTATTTAAAA TTTTAAATAAA
   sig
 1   1
 2   1
 3   1
 4   1
-5   1</code></pre>
+5   1
+6   1</code></pre>
 <pre class="r"><code>Nucsequp=read.table(&quot;../data/motifdistrupt/NucQTLregionSequenceOnly.txt&quot;, header = F, stringsAsFactors = F, col.names = &quot;CorrectSeq&quot;)
 NucSeqComp=as.data.frame(cbind(nucSeq,Nucsequp)) %&gt;% mutate(sig=ifelse(grepl(&quot;AATAAA&quot;,CorrectSeq),1, 0))
 NucSeqCompSig=NucSeqComp %&gt;% filter(sig==1)
 NucSeqCompSig</code></pre>
-<pre><code>   chr     start       end                     name   Dist strand    pctAT
-1   11 121500616 121500627     SORL1:peak26194:utr3     64      + 0.818182
-2   12  54712768  54712779   COPZ1:peak30032:intron  -7514      + 0.909091
-3   15 101610289 101610300     LRRK1:peak47802:utr3     67      + 0.818182
-4   15 101610289 101610300     LRRK1:peak47806:utr3  -2713      + 0.818182
-5   19  16438656  16438667      KLF2:peak64649:utr3    454      + 0.909091
-6   19  16438656  16438667      KLF2:peak64650:utr3     63      + 0.909091
-7   19  58433644  58433655    ZNF418:peak68038:utr3     18      - 0.818182
-8    2 197855147 197855158 ANKRD44:peak77452:intron     20      - 1.000000
-9    4  84367754  84367765   MRPS18C:peak99426:utr3 -14538      + 0.727273
-10   4  84367754  84367765   MRPS18C:peak99427:utr3 -14730      + 0.727273
-11   6 167409236 167409247   MIR3939:peak119106:end   1476      - 1.000000
+<pre><code>   chr     start       end                   name   Dist strand    pctAT
+1   15 101610289 101610300   LRRK1:peak47802:utr3     67      + 0.818182
+2   15 101610289 101610300   LRRK1:peak47806:utr3  -2713      + 0.818182
+3   19  16438656  16438667    KLF2:peak64649:utr3    454      + 0.909091
+4   19  16438656  16438667    KLF2:peak64650:utr3     63      + 0.909091
+5   19  43978507  43978518  PHLDB3:peak66481:utr3   -746      - 1.000000
+6   19  58433644  58433655  ZNF418:peak68038:utr3     18      - 0.818182
+7    2  33775278  33775289 RASGRP3:peak69728:utr3 -12759      + 1.000000
+8    4  84367754  84367765 MRPS18C:peak99427:utr3 -14730      + 0.727273
+9    6 167409236 167409247 MIR3939:peak119106:end   1476      - 1.000000
+10   6 167409236 167409247 MIR3939:peak119107:end  -1662      - 1.000000
       pctGC numA numC numG numT numN numoth length         seq  CorrectSeq
-1  0.181818    7    2    0    2    0      0     11 TAATAAAAACC TAATAAAAACC
-2  0.090909    6    1    0    4    0      0     11 catttaataaa CATTTAATAAA
-3  0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
-4  0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
-5  0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
-6  0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
-7  0.181818    3    2    0    6    0      0     11 cttttattaac GTTAATAAAAG
-8  0.000000    5    0    0    6    0      0     11 TTTATTTAAAA TTTTAAATAAA
-9  0.272727    7    2    1    1    0      0     11 agccAATAAAA AGCCAATAAAA
-10 0.272727    7    2    1    1    0      0     11 agccAATAAAA AGCCAATAAAA
-11 0.000000    2    0    0    9    0      0     11 tattttttatt AATAAAAAATA
+1  0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
+2  0.181818    8    1    1    1    0      0     11 AAAATAAACAG AAAATAAACAG
+3  0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+4  0.090909    8    1    0    2    0      0     11 AAAATAAAACT AAAATAAAACT
+5  0.000000    1    0    0   10    0      0     11 ttttatttttt AAAAAATAAAA
+6  0.181818    3    2    0    6    0      0     11 cttttattaac GTTAATAAAAG
+7  0.000000    8    0    0    3    0      0     11 ataataaataa ATAATAAATAA
+8  0.272727    7    2    1    1    0      0     11 agccAATAAAA AGCCAATAAAA
+9  0.000000    2    0    0    9    0      0     11 tattttttatt AATAAAAAATA
+10 0.000000    2    0    0    9    0      0     11 tattttttatt AATAAAAAATA
    sig
 1    1
 2    1
@@ -1188,8 +1301,7 @@ NucSeqCompSig</code></pre>
 7    1
 8    1
 9    1
-10   1
-11   1</code></pre>
+10   1</code></pre>
 <p>These are pretty far from the peak and probably not the mechanism for these.</p>
 <p>I can look at this another way by subsetting to those close to the peak.</p>
 <pre class="r"><code>TotSeqComp_Close=TotSeqComp %&gt;% filter(abs(Dist)&lt;200) %&gt;% select(name,Dist,CorrectSeq,sig)
@@ -1198,7 +1310,6 @@ NucSeqComp_Close=NucSeqComp %&gt;% filter(abs(Dist)&lt;200) %&gt;% select(name,D
 <p><strong>Nuclear: </strong></p>
 <p>Disrupt: - ZNF418 rs75991626 T C (break signal site for peak68038), also associated with increased usage of the downstream UTR pas.</p>
 <ul>
-<li><p>SORL1:peak26194:utr3 rs75085036 A-T disrupt signal site for UTR pas</p></li>
 <li><p>LRRK1:peak47802:utr3 rs15342 T-C disrupt signal site for peak47802</p></li>
 <li><p>KLF2:peak64650:utr3 rs11086029 T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR</p></li>
 <li><p>ANKRD44:peak77452:intron rs715185 T-C disrupt signal site for ANKRD44</p></li>
@@ -1209,8 +1320,12 @@ NucSeqComp_Close=NucSeqComp %&gt;% filter(abs(Dist)&lt;200) %&gt;% select(name,D
 <ul>
 <li><p>ANKRD44:peak77452:intron rs715185 T-C disrupt signal site for ANKRD44</p></li>
 <li><p>KLF2:peak64650:utr3 rs11086029 T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR</p></li>
-<li><p>DLD:peak124968:end rs144143960 A-G disrupt site for peak124968</p></li>
 </ul>
+<p>Make boxplots for these:</p>
+<p>I wrote the code for these in the <a href="%22QTLexampleplots.html%22">example plots analysis</a></p>
+<p>Fraction=$1 gene=$2 chrom=$3 snp=$4 peakID=$5</p>
+<pre class="bash"><code>sbatch run_qtlFacetBoxplots.sh Nuclear ZNF418 19 rs75991626 peak68038
+</code></pre>
 <p>This is not the best way to look at this. It may be a snp in LD. Also this is the distance to the peak not the PAS.</p>
 <br>
 <p>
