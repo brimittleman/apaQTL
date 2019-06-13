@@ -62,8 +62,8 @@ sbatch ApaQTL_nominalNonnorm.sh
 Concatinate files:  
 
 ```{bash,eval=F}
-cat  TotalUsageChrom*.nominal.out > TotalUsageChrom_Nominal_AllChrom.txt
-cat  NuclearUsageChrom*.nominal.out > NuclearUsageChrom_Nominal_AllChrom.txt
+cat  ../data/nonNorm_pheno/TotalUsageChrom*.nominal.out > ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt
+cat ../data/nonNorm_pheno/NuclearUsageChrom*.nominal.out > ../data/nonNorm_pheno/NuclearUsageChrom_Nominal_AllChrom.txt
 
 ```
 
@@ -104,7 +104,7 @@ TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
 summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
 
 
-totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nucler") + geom_density_2d(col="red") + annotate("text", y=1, x=0, label="R2=.70, slope=0.69")
+totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nucler") + geom_density_2d(col="red") + annotate("text", y=1, x=0, label="R2=.64, slope=0.65")
 ```
 ##Nuclear  
 
@@ -112,7 +112,7 @@ totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_s
 NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
 summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
 
-Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") +  annotate("text", y=1, x=0, label="R2=.74, slope=0.69")
+Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") +  annotate("text", y=1, x=0, label="R2=.76, slope=0.71")
 ```
 
 ```{r}
