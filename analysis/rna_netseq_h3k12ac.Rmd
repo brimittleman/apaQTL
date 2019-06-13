@@ -76,6 +76,12 @@ netseq=read.table("../data/netseq/netseq_TSS.fixed.fc", stringsAsFactors = F, he
 ```
 
 ###Total:
+
+Genes to include: 
+```{r}
+sig_genes=read.table(file="../data/highdiffsiggenes.txt",col.names = "GeneName")
+```
+
 I will have to change the gene names for the 3' info:  
 ```{r}
 geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('geneid', 'GeneName', 'source' ),stringsAsFactors = F) %>% dplyr::select(-source)
@@ -84,7 +90,7 @@ geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep
 ```{r}
 peaknumlist=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.5perc.bed", stringsAsFactors = F, header=F, col.names = c("chr", "start","end", "id", "score", "strand"))  %>% separate(id, into=c("peaknum", "geneid"), sep=":") %>% mutate(peakid=paste("peak", peaknum,sep=""))
 
-TotAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>%  dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>%  dplyr::semi_join(peaknumlist, by="peakid") %>%  separate(geneID, into=c("GeneName", "loc"), sep="_") %>%  dplyr::select(-chrom , -start, -end, -strand, -loc)
+TotAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>%  dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":")  %>% separate(geneID,into=c("GeneName", "loc"),sep="_") %>% inner_join(sig_genes, by="GeneName")%>%  dplyr::semi_join(peaknumlist, by="peakid") %>%  dplyr::select(-chrom , -start, -end, -strand, -loc)
 
 TotApaMelt=melt(TotAPA, id.vars =c( "peakid", "GeneName"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, GeneName, Individual, count) %>% inner_join(geneNames,by="GeneName") %>% group_by(Individual,geneid) %>% summarize(TotApa=sum(count)) %>% ungroup() %>% dplyr::rename("ID"=geneid)  %>% mutate(Individual=paste("TotAPA_", Individual, sep=""))
 
@@ -96,8 +102,8 @@ totApaSpread= spread(TotApaMelt, Individual,TotApa)
 ###Nuclear  
 ```{r}
 
+NucAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>%  dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":")  %>% separate(geneID,into=c("GeneName", "loc"),sep="_") %>% inner_join(sig_genes, by="GeneName")%>%  dplyr::semi_join(peaknumlist, by="peakid") %>%  dplyr::select(-chrom , -start, -end, -strand, -loc)
 
-NucAPA=read.table("../data/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.Fixed.fc", stringsAsFactors = F, header = T) %>%  dplyr::select(-Chr, -Start, -End, -Strand, -Length) %>% separate(Geneid, into=c("peakid","chrom", "start", "end", "strand", "geneID"),sep=":") %>%  dplyr::semi_join(peaknumlist, by="peakid") %>%  separate(geneID, into=c("GeneName", "loc"), sep="_") %>%  dplyr::select(-chrom , -start, -end, -strand, -loc)
 
 NucApaMelt=melt(NucAPA, id.vars =c( "peakid", "GeneName"), value.name="count", variable.name="Ind") %>% separate(Ind, into=c('Individual', 'fraction') ,sep="_")%>% dplyr::select(peakid, GeneName, Individual, count) %>% inner_join(geneNames,by="GeneName") %>% group_by(Individual,geneid) %>% summarize(NucApa=sum(count)) %>% ungroup() %>% dplyr::rename("ID"=geneid)  %>% mutate(Individual=paste("NucAPA_", Individual, sep=""))
 
@@ -112,7 +118,7 @@ I will join all of these based on the genes we have data for in all.
 
 ```{r}
 #4su, h3k27, RNA, netseq, nuc, total
-allpheno=foursu_tpm %>% dplyr::inner_join(h3k27ac, by="ID") %>% dplyr::inner_join(RNA, by="ID") %>% dplyr::inner_join(netseq, by="ID") %>%  dplyr::inner_join(nucApaSpread, by="ID") %>%  dplyr::inner_join(totApaSpread, by="ID") 
+allpheno=fourSU %>% dplyr::inner_join(h3k27ac, by="ID") %>% dplyr::inner_join(RNA, by="ID") %>% dplyr::inner_join(netseq, by="ID") %>%  dplyr::inner_join(nucApaSpread, by="ID") %>%  dplyr::inner_join(totApaSpread, by="ID") 
 ```
 
 ```{r}
@@ -124,7 +130,7 @@ allpheno_matrix= as.matrix(allpheno %>% dplyr::select(-ID))
 my_palette <- colorRampPalette(c("white", "yellow", "orange", "red", "black"))(n = 100)
 allphenocorr= abs(round(cor(allpheno_matrix,method="spearman"),2))
 ##4su-red, h3k27-green, RNA-blue, netseq-purple, nuc-orange, total-yellow
-colBar=c(rep("Red",20), rep("Green", 59), rep("Blue",69), rep("Purple", 16),rep("Orange", 54),rep("Yellow", 54))
+colBar=c(rep("Red",65), rep("Green", 59), rep("Blue",69), rep("Purple", 16),rep("Orange", 54),rep("Yellow", 54))
 heatmap.2(as.matrix(allphenocorr),trace="none", dendrogram='col',ColSideColors=colBar, col=my_palette)
           
 ```
@@ -138,7 +144,8 @@ h3k27ac_mean=melt(h3k27ac,id.vars = "ID") %>% group_by(variable) %>% mutate(sumI
 
 RNA_mean=melt(RNA,id.vars = "ID") %>% group_by(ID) %>% summarize(Rna=mean(value)) %>% filter(Rna!=0)
 
-foursu_tpm_mean= melt(foursu_tpm,id.vars = "ID") %>% group_by(ID) %>% summarize(FourSU=mean(value))%>% filter(FourSU!=0)
+foursu_mean= melt(fourSU,id.vars = "ID") %>%  group_by(variable) %>% mutate(sumInd=sum(value)) %>% ungroup() %>% mutate(normVal=value/sumInd) %>% group_by(ID) %>% summarize(FourSU=mean(normVal))%>% filter(FourSU!=0)
+  
 
 netseq_mean= melt(netseq,id.vars = "ID") %>% group_by(variable) %>% mutate(sumInd=sum(value)) %>% ungroup() %>% mutate(normVal=value/sumInd) %>% group_by(ID) %>% summarize(NetSeq=mean(normVal))%>% filter(NetSeq!=0)
 
@@ -152,7 +159,7 @@ nucapa_mean= melt(nucApaSpread,id.vars = "ID") %>% group_by(variable) %>% mutate
 Join all of these:
 
 ```{r}
-Allpheno_mean= h3k27ac_mean %>% inner_join(RNA_mean,by="ID") %>% inner_join(foursu_tpm_mean, by="ID") %>%   inner_join(netseq_mean, by="ID") %>% inner_join(totapa_mean, by="ID")  %>%inner_join(nucapa_mean, by="ID")
+Allpheno_mean= h3k27ac_mean %>% inner_join(RNA_mean,by="ID") %>% inner_join(foursu_mean, by="ID") %>%   inner_join(netseq_mean, by="ID") %>% inner_join(totapa_mean, by="ID")  %>%inner_join(nucapa_mean, by="ID")
 
 ```
 
