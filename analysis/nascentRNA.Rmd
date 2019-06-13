@@ -57,7 +57,7 @@ Look at the PAS used more in total and nuclear:
 
 ```{bash,eval=F}
 sbatch NascentRNAdtPlotTotPAS.sh
-sbatch NascentRNAdtPlotNucPAS.sh
+sbatch NascentRNAdtPlotTotPAS.sh
 ```
 
 
