@@ -16,6 +16,27 @@ For interpretation purposes, I look at genes with only 2 peaks. I will also need
 For simplicity I will do this seperatly for total and nuclear. The files are in /project2/gilad/briana/apaQTL/data/phenotype/ I will need to join the first column of the fc file with the countsonly numeric file. I can filter the 5% peaks by joining these files with the file in /project2/gilad/briana/apaQTL/data/phenotype_5perc. To partition this information by count I will also use the counts file and filter by the 5% usage peaks. The counts are in /project2/gilad/briana/apaQTL/data/peakCoverage/. 
 
 
+* Cut annotation off:  
+
+```{bash,eval=F}
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz |sed  '1d'| cut -f 2- -d " "> ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.Counts
+
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz | cut -f 2- -d " " |sed  '1d'> ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.Counts
+```
+
+Cnnvert to numeric: 
+
+```{bash,eval=F}
+python convertNumeric.py ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.Counts  ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric
+
+python convertNumeric.py ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.Counts  ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.CountsNumeric
+```
+
+```{bash,eval=F}
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz |sed  '1d'| cut -f1 -d " " > ../data/phenotype_5perc/NuclearPeaks5PercId.txt
+less ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz |sed  '1d'| cut -f1 -d " " > ../data/phenotype_5perc/TotalPeaks5PercId.txt
+
+```
 I will do this in an R script that can be run from the code directory.  
 
 The R script will take either Total and Nuclear.  
