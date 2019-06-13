@@ -43,11 +43,6 @@ totCount_corr_melt=melt(totCount_corr)
 
 ```
 
-Plot heatmap:
-```{r}
-ggplot(data = totCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
-  geom_tile() +theme(axis.text.x = element_text(angle = 90))
-```
 Use heatmap2.  
 
 ```{r}
@@ -80,12 +75,6 @@ nucCount_corr= round(cor(nucCount),2)
 
 nucCount_corr_melt=melt(nucCount_corr)
 
-```
-
-Plot heatmap:
-```{r}
-ggplot(data = nucCount_corr_melt, aes(x=Var1, y=Var2, fill=value)) + 
-  geom_tile() +theme(axis.text.x = element_text(angle = 90))
 ```
 
 ```{r}
