@@ -207,7 +207,7 @@ ggplot(pas2intron_totlength2, aes(x=propIntron, fill=LengthCat)) + geom_histogra
 Look by differences in $\Delta$ PAU.  
 
 ```{r}
-effectsize=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_effect_sizes.txt", stringsAsFactors = F, col.names=c('PAS',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(PAS != "intron") %>% dplyr::select(PAS, deltaPAU)
+effectsize=read.table("../data/DiffIso/TN_diff_isoform_allChrom.txt_effect_sizes.txt", stringsAsFactors = F, col.names=c('PAS',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(PAS != "intron") %>% dplyr::select(PAS, deltaPAU)
 ```
 
 
@@ -272,6 +272,15 @@ pas2intronNuc_exonofgene= pas2intronNuc_cat %>% group_by(gene) %>% mutate(Intorn
 ```{r}
 ggplot(pas2intronNuc_exonofgene, aes(x=propIntron,fill=LengthCat)) + geom_histogram(bins=50)  + facet_grid(LengthCat~Intornid) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
+Write out peaks with which intron they are in. 
+
+```{r}
+peakandIntronid=pas2intronNuc_exonofgene %>% ungroup()%>% select(PeakID, Intornid)
+
+write.table(peakandIntronid,file="../data/intron_analysis/PeakIdwithIntronID.txt", col.names = T, row.names = F, quote = F, sep="\t")
+```
+
+
 
 
 I’d like to look at just the first exon and the top 50% intron length
