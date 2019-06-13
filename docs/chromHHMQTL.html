@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-12
+<strong>Last updated:</strong> 2019-06-13
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree16b1696e0e9bfb1b207748cd63b15e79777f8a94targetblank16b1696a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/16b1696e0e9bfb1b207748cd63b15e79777f8a94" target="_blank">16b1696</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0c7c682ba0d6851aeba4f606b585231a42c81df9targetblank0c7c682a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/0c7c682ba0d6851aeba4f606b585231a42c81df9" target="_blank">0c7c682</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree16b1696e0e9bfb1b207748cd63b15e79777f8a94targetblank16b1696a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0c7c682ba0d6851aeba4f606b585231a42c81df9targetblank0c7c682a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -435,6 +435,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    data/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -444,6 +445,7 @@ Untracked files:
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
@@ -467,6 +469,7 @@ Untracked files:
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._QTL2bed.py
+    Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -496,12 +499,14 @@ Untracked files:
     Untracked:  code/._config.yaml
     Untracked:  code/._config2.yaml
     Untracked:  code/._configOLD.yaml
+    Untracked:  code/._convertNominal2SNPLOC.py
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._correctNomeqtl.R
     Untracked:  code/._dag.pdf
     Untracked:  code/._eQTLgenestestedapa.py
     Untracked:  code/._encodeRNADTplots.sh
     Untracked:  code/._extractGenotypes.py
+    Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
@@ -526,6 +531,7 @@ Untracked files:
     Untracked:  code/._getIntronDownstreamPAS.py
     Untracked:  code/._getIntronUpstreamPAS.py
     Untracked:  code/._getQTLalleles.py
+    Untracked:  code/._getQTLfastq.sh
     Untracked:  code/._getUpstreamIntronNuclear.py
     Untracked:  code/._grouptranscripts.py
     Untracked:  code/._keep5perMAF.py
@@ -563,6 +569,8 @@ Untracked files:
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
     Untracked:  code/._runMakeeQTLempirical.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
+    Untracked:  code/._run_getapafromeQTL.py
+    Untracked:  code/._run_getapafromeQTL.sh
     Untracked:  code/._run_getapapval4eqtl_unexp.sh
     Untracked:  code/._run_leafcutterDiffIso.sh
     Untracked:  code/._run_sepUsagephen.sh
@@ -645,6 +653,7 @@ Untracked files:
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
     Untracked:  code/QTL2bed.py
+    Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
     Untracked:  code/Rplots.pdf
     Untracked:  code/TESplots100bp.err
@@ -663,6 +672,7 @@ Untracked files:
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/apafacetboxplots.R
     Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
@@ -681,6 +691,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
     Untracked:  code/codingdms2bed.py
+    Untracked:  code/convertNominal2SNPLOC.py
     Untracked:  code/correctNomeqtl.R
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
@@ -688,6 +699,7 @@ Untracked files:
     Untracked:  code/eQTLgenestestedapa.py
     Untracked:  code/encodeRNADTplots.sh
     Untracked:  code/extractGenotypes.py
+    Untracked:  code/extractseqfromqtlfastq.py
     Untracked:  code/fc2leafphen.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
@@ -713,6 +725,7 @@ Untracked files:
     Untracked:  code/getIntronDownstreamPAS.py
     Untracked:  code/getIntronUpstreamPAS.py
     Untracked:  code/getQTLalleles.py
+    Untracked:  code/getQTLfastq.sh
     Untracked:  code/getSeq100up.sh
     Untracked:  code/getUpstreamIntronNuclear.py
     Untracked:  code/getseq100up.err
@@ -771,11 +784,14 @@ Untracked files:
     Untracked:  code/run_DistPAS2Sig.err
     Untracked:  code/run_DistPAS2Sig.out
     Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/run_getAPAfromanyeQTL.err
+    Untracked:  code/run_getAPAfromanyeQTL.out
     Untracked:  code/run_getApaPval4eQTLs.err
     Untracked:  code/run_getApaPval4eQTLs.out
     Untracked:  code/run_getApaPval4eQTLsunexplained.err
     Untracked:  code/run_getApaPval4eQTLsunexplained.out
     Untracked:  code/run_getApaPval4eqtl.sh
+    Untracked:  code/run_getapafromeQTL.sh
     Untracked:  code/run_getapapval4eqtl_unexp.sh
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
@@ -790,6 +806,8 @@ Untracked files:
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
+    Untracked:  code/seqQTLfastq.err
+    Untracked:  code/seqQTLfastq.out
     Untracked:  code/seqQTLregion.err
     Untracked:  code/seqQTLregion.out
     Untracked:  code/snakePASlog.out
@@ -813,6 +831,7 @@ Untracked files:
     Untracked:  code/vcf_keepsnps.out
     Untracked:  code/zipandtabPhen.err
     Untracked:  code/zipandtabPhen.out
+    Untracked:  data/._.DS_Store
     Untracked:  data/ApaByEgene/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
@@ -887,13 +906,8 @@ Untracked files:
     Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
-    Modified:   analysis/DiffIsoAnalysis.Rmd
-    Modified:   analysis/PASusageQC.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
-    Modified:   analysis/choosePCs.Rmd
-    Modified:   analysis/corrbetweenind.Rmd
-    Modified:   analysis/exvunexpeQTL.Rmd
-    Modified:   analysis/mapapaQTL.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   analysis/motifDisruption.Rmd
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucintronicanalysis.Rmd
@@ -903,12 +917,16 @@ Unstaged changes:
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
+    Modified:   code/apaQTL_Nominal.sh
     Modified:   code/apaQTL_permuted.sh
     Modified:   code/apaQTLsnake.err
     Modified:   code/bam2bw.sh
     Modified:   code/bed2saf.py
     Modified:   code/cluster.json
+    Modified:   code/clusterfiltPAS.json
     Modified:   code/config.yaml
+    Modified:   code/environment.yaml
+    Modified:   code/makePheno.py
     Deleted:    code/test.txt
 
 </code></pre>
@@ -948,6 +966,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6aa908e3c518fad3de4a87656562634652b117b6/docs/chromHHMQTL.html" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1058,12 +1093,12 @@ add chromhmm analysis
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -1120,6 +1155,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-6-1.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-6-1.png" target="_blank">38a75ec</a>
 </td>
 <td>
@@ -1168,6 +1214,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-6-2.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-6-2.png" target="_blank">38a75ec</a>
@@ -1225,6 +1282,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-8-1.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-8-1.png" target="_blank">38a75ec</a>
 </td>
 <td>
@@ -1262,6 +1330,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-8-2.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-8-2.png" target="_blank">38a75ec</a>
@@ -1430,6 +1509,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">38a75ec</a>
 </td>
 <td>
@@ -1467,6 +1557,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-17-1.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-17-1.png" target="_blank">38a75ec</a>
@@ -1523,6 +1624,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-20-1.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-20-1.png" target="_blank">38a75ec</a>
 </td>
 <td>
@@ -1563,6 +1675,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6aa908e3c518fad3de4a87656562634652b117b6/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-21-1.png" target="_blank">6aa908e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/38a75ec467e0b30318e0c55d71bf2f7c7372d4ef/docs/figure/chromHHMQTL.Rmd/unnamed-chunk-21-1.png" target="_blank">38a75ec</a>
