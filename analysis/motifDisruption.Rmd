@@ -123,7 +123,6 @@ Look at examples:
 Disrupt:
 - ZNF418 rs75991626	T	C (break signal site for peak68038), also associated with increased usage of the downstream UTR pas.  
 
-- SORL1:peak26194:utr3 rs75085036 A-T disrupt signal site for UTR pas  
 
 - LRRK1:peak47802:utr3 rs15342 T-C disrupt signal site for peak47802
 
@@ -144,8 +143,21 @@ Disrupt:
 - KLF2:peak64650:utr3 rs11086029  T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR  
 
 
--  DLD:peak124968:end rs144143960 A-G disrupt site for peak124968
 
+
+Make boxplots for these:
+
+I wrote the code for these in the [example plots analysis]("QTLexampleplots.html")
+
+Fraction=$1
+gene=$2
+chrom=$3
+snp=$4
+peakID=$5
+```{bash,eval=F}
+sbatch run_qtlFacetBoxplots.sh Nuclear ZNF418 19 rs75991626 peak68038
+
+```
 
 
 This is not the best way to look at this. It may be a snp in LD. Also this is the distance to the peak not the PAS. 
