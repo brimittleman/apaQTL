@@ -172,11 +172,11 @@ return(PASallgene_cat$NPer)
 categories=c("Multiple_PAS", "One_PAS", "Zero_PAS")
 FullDF=as.data.frame(cbind(categories))
 cutoffs=seq(from=0, to=.5, by=.05)
-for (val in cutoffs)
+for (val in cutoffs[1:10])
 {
 FullDF=cbind(FullDF,val=genesbycuttoff_tot(val))
 }
-colnames(FullDF)=c("Category",cutoffs)
+colnames(FullDF)=c("Category",cutoffs[1:10])
 ```
 
 Melt:
@@ -213,11 +213,11 @@ return(PASallgene_cat$NPer)
 ```{r}
 #multiple, one, zero 
 FullDFNuc=as.data.frame(cbind(categories))
-for (val in cutoffs)
+for (val in cutoffs[1:10])
 {
 FullDFNuc=cbind(FullDFNuc,val=genesbycuttoff_nuc(val))
 }
-colnames(FullDFNuc)=c("Category",cutoffs)
+colnames(FullDFNuc)=c("Category",cutoffs[1:10])
 ```
 
 
@@ -244,11 +244,11 @@ return(totapaMeananno_filt$PerLoc)
 locations=c("cds", "end", "intron", "utr3", "utr5")
 FullDF_loc=as.data.frame(cbind(locations))
 cutoffs=seq(from=0, to=.5, by=.05)
-for (val in cutoffs)
+for (val in cutoffs[1:10])
 {
 FullDF_loc=cbind(FullDF_loc,val=locbycutoff_tot(val))
 }
-colnames(FullDF_loc)=c("Location",cutoffs)
+colnames(FullDF_loc)=c("Location",cutoffs[1:10])
 
 
 
