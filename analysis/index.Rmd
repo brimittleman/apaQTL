@@ -53,7 +53,11 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Look at how many PCs I should include](choosePCs.html)
 
+* [Code to make example plots](QTLexampleplots.html)
+
 * [Rerun qtl with PCs from previous analysis](rerunQTL_changePC.html)
+
+* [Location of QTLs with respect to PAS and gene body](QTLlocation.hml)
 
 * [apaQTL in opposite fraction](apaQTLoverlap.html)
 
@@ -81,7 +85,6 @@ These files create some of the QC metrics I used for the analysis.
 ##Characterize apaQTLs and compare to eQTLs 
 
 * [Analysis to look at differences in QTL chromHMM categories](chromHHMQTL.html)  
-
 
 * [Comparing explained and unexplained eGenes](exvunexpeQTL.html)  
 

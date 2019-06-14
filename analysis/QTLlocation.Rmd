@@ -1,0 +1,113 @@
+---
+title: "Location of apaQTLs"
+author: "Briana Mittleman"
+date: "6/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I want to look at the location of the apaQTLs first looking at distance to PAS. Until now I have been using the distance to the peak and have not flipped the strand. This showed me QTLs are close to the PAS but was not the most correct way to do this.  
+```{r}
+library(workflowr)
+library(tidyverse)
+library(cowplot)
+
+```
+
+```{r}
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed",col.names = c("chr", "start", "PASloc", "name", "score", "strand"), stringsAsFactors = F )%>% separate(name, into=c("peakNum", "geneloc"), sep=":") %>% mutate(peak=paste("peak", peakNum, sep="")) %>% select(PASloc, peak)
+```
+##Distance to PAS  
+
+Total:  
+```{r}
+totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.bed",stringsAsFactors = F, header=T)%>%
+  separate(name, into=c("gene", "peak", "loc"), sep=":") %>% 
+  inner_join(PAS, by="peak") %>% 
+  mutate(distance=SNPend-PASloc, dist2PAS=ifelse(strand=="-", -1 *distance, distance))
+
+```
+
+
+```{r}
+ggplot(totQTLs, aes(x=dist2PAS, by=loc, fill=loc)) + geom_histogram(bins=100)
+``` 
+Plot by proportion: 
+
+```{r}
+ggplot(totQTLs, aes(x=dist2PAS, fill=loc)) + geom_histogram( bins=100) + facet_grid(~loc)
+```
+Nuclear
+
+```{r}
+nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed",stringsAsFactors = F, header=T)%>%
+  separate(name, into=c("gene", "peak", "loc"), sep=":") %>% 
+  inner_join(PAS, by="peak") %>% 
+  mutate(distance=SNPend-PASloc, dist2PAS=ifelse(strand=="-", -1 *distance, distance))
+
+```
+
+```{r}
+ggplot(nucQTLs, aes(x=dist2PAS, by=loc, fill=loc)) + geom_histogram(bins=100)
+
+```
+```{r}
+ggplot(nucQTLs, aes(x=dist2PAS, fill=loc)) + geom_histogram( bins=100) + facet_grid(~loc)
+
+```
+
+##Metagene plot  
+
+I want to plot by normalized position in the gene.  
+
+```{r}
+genes=tss=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "Genestart", "Geneend", "gene", "score", "strand") ,stringsAsFactors = F) %>% select(Genestart, Geneend, gene)
+```
+
+Total: 
+
+```{r}
+totQTLs_gene= totQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand=="-", -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength)  %>% filter(propGene>-5 & propGene<5)
+
+```
+
+```{r}
+ggplot(totQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Total apaQTLs") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")
+```
+There are about 48 QTLs outside. 
+
+I can look at only those in the gene body:
+
+```{r}
+totQTLs_gene_body= totQTLs_gene %>% filter(propGene>=0, propGene<=1)
+
+ggplot(totQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Total apaQTLs in gene body") 
+
+```
+
+There are 181 in the gene body
+
+Nuclear:
+```{r}
+nucQTLs_gene= nucQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand=="-", -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength) %>% filter(propGene>-5 & propGene<5)
+
+```
+
+
+```{r}
+ggplot(nucQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Nuclear apaQTLs") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")
+
+```
+there are 77 outside of 500% of gene body 
+
+
+```{r}
+nucQTLs_gene_body= nucQTLs_gene %>% filter(propGene>=0, propGene<=1)
+
+ggplot(nucQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Nuclear apaQTLs in gene body") 
+
+```
+334 are in the gene body.  
