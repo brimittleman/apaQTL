@@ -1,0 +1,90 @@
+---
+title: "Nuclear specific apaQTLs"
+author: "Briana Mittleman"
+date: "6/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to look at nuclear specific apaQTLs. I expect these to be eQTls.
+
+To look at nuclear specific apaQTLs I will test if nuclear QTLs are nominally significant in the total fraction. I created this file in [this analysis](apaQTLoverlap.html) where I tested qtl overlap.  
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+
+I test 589 of the apaQTls in the total fraction.
+```{r}
+nucAPAinTot=read.table("../data/QTLoverlap/NuclearQTLinTotalNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% separate(peakID,into=c("chr", "start", "end", "geneID"),sep=":" ) %>% separate(geneID, into=c("gene", "loc", "strand", "peakNum"), sep="_")
+nucAPAinTot_NOTSIG=nucAPAinTot %>% filter(pval>.05)
+nucAPAinTot_SIG=nucAPAinTot %>% filter(pval<.05)
+```
+
+
+I can test if these are more likely to be eGenes. I can get the eGenes by comparing the 
+
+```{r}
+explained=read.table("../data/Li_eQTLs/explainedEgenes.txt", header = F, stringsAsFactors = F, col.names = c("gene"))
+unexplained=read.table("../data/Li_eQTLs/UnexplainedEgenes.txt", header = F, stringsAsFactors = F, col.names = c("gene"))
+
+allEgenes=as.data.frame(rbind(explained,unexplained))
+```
+
+
+```{r}
+nucAPAinTot_NOTSIG_egene=nucAPAinTot_NOTSIG %>% semi_join(allEgenes, by="gene")
+nucAPAinTot_SIG_egene=nucAPAinTot_NOTSIG %>% semi_join(allEgenes, by="gene")
+```
+
+
+
+Proportion nucspec egene
+
+```{r}
+nrow(nucAPAinTot_NOTSIG_egene)/nrow(nucAPAinTot_NOTSIG)
+nrow(nucAPAinTot_SIG_egene)/nrow(nucAPAinTot_SIG)
+
+```
+
+
+Difference of proportion test: 
+
+```{r}
+prop.test(x=c(nrow(nucAPAinTot_NOTSIG_egene),nrow(nucAPAinTot_SIG_egene)),n=c(nrow(nucAPAinTot_NOTSIG),nrow(nucAPAinTot_SIG)))
+```
+
+Run this the opposite direction:
+
+Total specific:  
+```{r}
+totAPAinNuc=read.table("../data/QTLoverlap/TotalQTLinNuclearNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% separate(peakID,into=c("chr", "start", "end", "geneID"),sep=":" ) %>% separate(geneID, into=c("gene", "loc", "strand", "peakNum"), sep="_")
+totAPAinNuc_NOTSIG=totAPAinNuc %>% filter(pval>.05)
+totAPAinNuc_SIG=totAPAinNuc %>% filter(pval<.05)
+
+```
+
+```{r}
+totAPAinNuc_NOTSIG_egene=totAPAinNuc_NOTSIG %>% semi_join(allEgenes, by="gene")
+totAPAinNuc_SIG_egene=totAPAinNuc_SIG %>% semi_join(allEgenes, by="gene")
+```
+
+
+
+Proportion nucspec egene
+
+```{r}
+nrow(totAPAinNuc_NOTSIG_egene)/nrow(totAPAinNuc_NOTSIG)
+nrow(totAPAinNuc_SIG_egene)/nrow(totAPAinNuc_SIG)
+
+```
+
+```{r}
+prop.test(x=c(nrow(totAPAinNuc_NOTSIG_egene),nrow(totAPAinNuc_SIG_egene)),n=c(nrow(totAPAinNuc_NOTSIG),nrow(totAPAinNuc_SIG)))
+```
