@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Briana Mittleman" />
 
 
-<title>Home</title>
+<title>Location of apaQTLs</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -169,6 +173,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -217,7 +316,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Location of apaQTLs</h1>
+<h4 class="author"><em>Briana Mittleman</em></h4>
+<h4 class="date"><em>6/14/2019</em></h4>
 
 </div>
 
@@ -245,7 +346,7 @@ div.section {
 <strong>Last updated:</strong> 2019-06-14
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>apaQTL/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -267,6 +368,54 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190411code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190411)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20190411code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20190411)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
 </div>
 </div>
 </div>
@@ -819,7 +968,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/bf91cb3d5abf46b7a92fd9201837557a27907cfb/analysis/index.Rmd" target="_blank">bf91cb3</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/bf91cb3d5abf46b7a92fd9201837557a27907cfb/analysis/QTLlocation.Rmd" target="_blank">bf91cb3</a>
 </td>
 <td>
 brimittleman
@@ -831,992 +980,6 @@ brimittleman
 add location plot
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/2c39fd1e839dc65e370efbdd5f23615314c2895c/docs/index.html" target="_blank">2c39fd1</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/9820e7ecbdf8a9ee5bb43821a264239dc9cb5884/docs/index.html" target="_blank">9820e7e</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/abd1ae9a51aab1c5db7dc67ca5e346a76157dbb1/analysis/index.Rmd" target="_blank">abd1ae9</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-11
-</td>
-<td>
-add geno proc info
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/5d71c2e297696ec0a1fd3b33e3407a9b82a9b88d/docs/index.html" target="_blank">5d71c2e</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/c5fe1c231671fddcc4b2855331dd8b33aecd7f4a/analysis/index.Rmd" target="_blank">c5fe1c2</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-10
-</td>
-<td>
-add motif disruption
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/f81a440313fb5dcea5f9e217d50f06ae74d8293e/docs/index.html" target="_blank">f81a440</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/02d97db5936a63f4a465ce7626100689160711a2/analysis/index.Rmd" target="_blank">02d97db</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-07
-</td>
-<td>
-add intron ratio file
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/458e4942294e3b27ad25b0c9d82569afdcf9c5e2/docs/index.html" target="_blank">458e494</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/4c50025c7df6cd909fba5a32d18b7f373f2d7c9f/docs/index.html" target="_blank">4c50025</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/8710e5c8f3701eec64c89bee178bd2840575745c/analysis/index.Rmd" target="_blank">8710e5c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-06
-</td>
-<td>
-add new analysis for unex v ex
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/0e20f3a630bccbe8a34b1ea813786205bc7bb241/docs/index.html" target="_blank">0e20f3a</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-05
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/c7435023b595bbf5d04b24dd229e7ff9fb859653/analysis/index.Rmd" target="_blank">c743502</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-05
-</td>
-<td>
-first pass overlap
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/d30d453e6194b60f5807c553f5ffadb262975022/docs/index.html" target="_blank">d30d453</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/132198920249420deff82fcf50d04d9f3773703c/analysis/index.Rmd" target="_blank">1321989</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-30
-</td>
-<td>
-add chromhmm analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/a71262e12c60d0e4e694df9893e8706035462cff/docs/index.html" target="_blank">a71262e</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/6432c1bbdbcba1645a26f9c236c5bd6aae0b795a/analysis/index.Rmd" target="_blank">6432c1b</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-29
-</td>
-<td>
-inititate nascent analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/28c8ca30c68cc29beccc34cd50d64c0d9d49923e/docs/index.html" target="_blank">28c8ca3</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/a88eedf9feeaeba2af44f429f931361c419ff930/docs/index.html" target="_blank">a88eedf</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/8f883d80c16388df62dd5e0a353736abe5bcb925/analysis/index.Rmd" target="_blank">8f883d8</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-20
-</td>
-<td>
-add overlap analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/d89772dae76346f78daaef40d61bd313034c4966/docs/index.html" target="_blank">d89772d</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/81a3e1646c908c34822af2ce80eac2e07ee602d6/docs/index.html" target="_blank">81a3e16</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f484dcdb4493c72bb05e76cd64d14389de036457/analysis/index.Rmd" target="_blank">f484dcd</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-15
-</td>
-<td>
-add nascent transcription plot
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/35b1f6e7a8632c29546f5c5b768a1a3977bb2b74/docs/index.html" target="_blank">35b1f6e</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/90e0c4d3381dc8c977bb44eccfb1766f9811ac63/analysis/index.Rmd" target="_blank">90e0c4d</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-15
-</td>
-<td>
-add reg heatmap
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/bf3a1e0ba9cbfc39facbabc357f4e690c7a05dda/docs/index.html" target="_blank">bf3a1e0</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/77ca26ac20a8a70f3ad011f8dbe1436c3568110b/analysis/index.Rmd" target="_blank">77ca26a</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-14
-</td>
-<td>
-results by logef
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/144c00b0db094769f86c5e6dbb0de49101c87b57/docs/index.html" target="_blank">144c00b</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-08
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/5e39f1c9463c9ed6b3179631c5876a9b560c08ce/analysis/index.Rmd" target="_blank">5e39f1c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-08
-</td>
-<td>
-choose pcs and start qtl rerun
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/f5af9c6e7f82c99ee20a28c0d63c1ba8a34275e0/docs/index.html" target="_blank">f5af9c6</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-08
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/1ba7d2bed37a985dfd3e436359be43912ef786b3/analysis/index.Rmd" target="_blank">1ba7d2b</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-08
-</td>
-<td>
-add pca
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/9062ebd3af9ca41b40449bb7c915aa3157a1bd27/docs/index.html" target="_blank">9062ebd</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-03
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/0e5af5545ff2b1536fe8a3c02bbbe42c33a15a83/analysis/index.Rmd" target="_blank">0e5af55</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-03
-</td>
-<td>
-add utr coverage
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/53eeea4cef34210e7926ae287aecef8c382e7a48/docs/index.html" target="_blank">53eeea4</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/2067946979430b43c67b42a864f2976619aa69f4/analysis/index.Rmd" target="_blank">2067946</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-02
-</td>
-<td>
-add old vs new data usage analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/60093ce5e545fc47f274a3f3f76d2bc0c8c93cc1/docs/index.html" target="_blank">60093ce</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/24c2cebc7e4b061243ebb5b04abce358a1035334/analysis/index.Rmd" target="_blank">24c2ceb</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-02
-</td>
-<td>
-add diff iso
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/ac656aad301db960e1e2b218a7235b295395057d/docs/index.html" target="_blank">ac656aa</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f9b8195e7d9465dff3beb1cb72b790d740f2e1d0/analysis/index.Rmd" target="_blank">f9b8195</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-30
-</td>
-<td>
-understand usage of new pas
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/e3bdc3ada15495b74f56c2b12038d4364c179354/docs/index.html" target="_blank">e3bdc3a</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/be227e79285c0c84178c9136fac1d287a5f40eb7/docs/index.html" target="_blank">be227e7</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/b2525c343bc47d98f6ff2e82c969a014866b1c95/docs/index.html" target="_blank">b2525c3</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/9bbe437468e7c6b585b8e832f6cec7ec20a09c93/analysis/index.Rmd" target="_blank">9bbe437</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-24
-</td>
-<td>
-add corr analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/214c05cf4812c042a6351f83b9e41c5c82a62102/docs/index.html" target="_blank">214c05c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/27b11e33aff06ac75bf10cfbc99b02be56ced69d/analysis/index.Rmd" target="_blank">27b11e3</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-23
-</td>
-<td>
-start signal site analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/1fb70868f617a09060d6e68818511172255910df/docs/index.html" target="_blank">1fb7086</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/e650e08719a9e5e69ce9b3fba86c0f6218fe9d32/docs/index.html" target="_blank">e650e08</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/851c963223c1de49d3f362ddacf6a8877b1087cf/analysis/index.Rmd" target="_blank">851c963</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-22
-</td>
-<td>
-add reads against feature
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/28bd04625d949dd9ab041b7731182dbfaf0d4b4f/docs/index.html" target="_blank">28bd046</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/017f5c0697a9aaddf6f3ae014d8c5e51c9888906/analysis/index.Rmd" target="_blank">017f5c0</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-18
-</td>
-<td>
-add map apa qtl pipeline
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/874081de6302ee3b10d011d4172466258ef2f2a4/docs/index.html" target="_blank">874081d</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/22bfb669998c6ed8e7580d6ca0bab6444d96489a/analysis/index.Rmd" target="_blank">22bfb66</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-18
-</td>
-<td>
-add pas usage qc analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/aab1fcabfe9fa9cdc95d55ac98047034ca5e260d/docs/index.html" target="_blank">aab1fca</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-17
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/057dc1a7d10d728fbf408543b730413b962c805b/analysis/index.Rmd" target="_blank">057dc1a</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-17
-</td>
-<td>
-add bam 2 pas analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/fd1f8cb6247fb795ffe19f71517f8ab22708323e/docs/index.html" target="_blank">fd1f8cb</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-13
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f5e23f3477a0ad01175f1189b7638e2b3e9698b1/analysis/index.Rmd" target="_blank">f5e23f3</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-11
-</td>
-<td>
-add fastq 2 bam
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/444f1c71d3fb84f5ba09c2860175bb340ee06174/docs/index.html" target="_blank">444f1c7</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/1c955c56c5d95a52e5a91856631d9c34f8c574c5/docs/index.html" target="_blank">1c955c5</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/0f343f83e954f49102656d49fc3196bc577c4a64/analysis/index.Rmd" target="_blank">0f343f8</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-04-11
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1824,65 +987,114 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Welcome to my research website.</p>
-<div id="preprocessing" class="section level2">
-<h2>Preprocessing:</h2>
-<p>In the preprocessing steps of the analysis I will go from the fastq files that come off the sequencer to the PAS I will use for the rest of the analysis.</p>
-<ul>
-<li><p><a href="fastq2bam.html">Process fastq to cleaned bam files</a></p></li>
-<li><p><a href="bam2pas.html">Process bam to PAS</a></p></li>
-</ul>
+<p>In this analysis I want to look at the location of the apaQTLs first looking at distance to PAS. Until now I have been using the distance to the peak and have not flipped the strand. This showed me QTLs are close to the PAS but was not the most correct way to do this.</p>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.3.0
+Run ?workflowr for help getting started</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(cowplot)</code></pre>
+<pre><code>
+Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    ggsave</code></pre>
+<pre class="r"><code>PAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.bed&quot;,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;PASloc&quot;, &quot;name&quot;, &quot;score&quot;, &quot;strand&quot;), stringsAsFactors = F )%&gt;% separate(name, into=c(&quot;peakNum&quot;, &quot;geneloc&quot;), sep=&quot;:&quot;) %&gt;% mutate(peak=paste(&quot;peak&quot;, peakNum, sep=&quot;&quot;)) %&gt;% select(PASloc, peak)</code></pre>
+<div id="distance-to-pas" class="section level2">
+<h2>Distance to PAS</h2>
+<p>Total:</p>
+<pre class="r"><code>totQTLs=read.table(&quot;../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.bed&quot;,stringsAsFactors = F, header=T)%&gt;%
+  separate(name, into=c(&quot;gene&quot;, &quot;peak&quot;, &quot;loc&quot;), sep=&quot;:&quot;) %&gt;% 
+  inner_join(PAS, by=&quot;peak&quot;) %&gt;% 
+  mutate(distance=SNPend-PASloc, dist2PAS=ifelse(strand==&quot;-&quot;, -1 *distance, distance))</code></pre>
+<pre class="r"><code>ggplot(totQTLs, aes(x=dist2PAS, by=loc, fill=loc)) + geom_histogram(bins=100)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /> Plot by proportion:</p>
+<pre class="r"><code>ggplot(totQTLs, aes(x=dist2PAS, fill=loc)) + geom_histogram( bins=100) + facet_grid(~loc)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /> Nuclear</p>
+<pre class="r"><code>nucQTLs=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed&quot;,stringsAsFactors = F, header=T)%&gt;%
+  separate(name, into=c(&quot;gene&quot;, &quot;peak&quot;, &quot;loc&quot;), sep=&quot;:&quot;) %&gt;% 
+  inner_join(PAS, by=&quot;peak&quot;) %&gt;% 
+  mutate(distance=SNPend-PASloc, dist2PAS=ifelse(strand==&quot;-&quot;, -1 *distance, distance))</code></pre>
+<pre class="r"><code>ggplot(nucQTLs, aes(x=dist2PAS, by=loc, fill=loc)) + geom_histogram(bins=100)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(nucQTLs, aes(x=dist2PAS, fill=loc)) + geom_histogram( bins=100) + facet_grid(~loc)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="qc-and-base-visualization" class="section level2">
-<h2>QC and base visualization:</h2>
-<p>These files create some of the QC metrics I used for the analysis.</p>
-<ul>
-<li><p><a href="PASusageQC.html">Look at PAS usage differences by gene coverage</a></p></li>
-<li><p><a href="Readdistagainstfeatures.html">Look at read distribution accross features</a></p></li>
-<li><p><a href="PASdescriptiveplots.html">Make descriptive plots for called PAS</a></p></li>
-<li><p><a href="signalsiteanalysis.html">Plot signal site dristributions</a></p></li>
-<li><p><a href="corrbetweenind.html">Count and usage correlation</a></p></li>
-<li><p><a href="seqmetadatanalysis.html">Sequencing meta data by batch</a></p></li>
-<li><p><a href="NewvOldPeakQC.html">Understand new PAS</a></p></li>
-<li><p><a href="recomputeusageold.html">Compare new and old data</a></p></li>
-<li><p><a href="reads2UTR.html">Look at coverage in 3’ UTR</a></p></li>
-<li><p><a href="intonRNAratio.html">Intron RNA seq ratios</a></p></li>
-<li><p><a href="geno_proc.html">Prepare genotypes for downstream analysis</a></p></li>
-</ul>
+<div id="metagene-plot" class="section level2">
+<h2>Metagene plot</h2>
+<p>I want to plot by normalized position in the gene.</p>
+<pre class="r"><code>genes=tss=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;Genestart&quot;, &quot;Geneend&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% select(Genestart, Geneend, gene)</code></pre>
+<p>Total:</p>
+<pre class="r"><code>totQTLs_gene= totQTLs %&gt;% inner_join(genes, by=&quot;gene&quot;)%&gt;% mutate(geneLength=Geneend-Genestart) %&gt;% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand==&quot;-&quot;, -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength)  %&gt;% filter(propGene&gt;-5 &amp; propGene&lt;5)</code></pre>
+<pre class="r"><code>ggplot(totQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Total apaQTLs&quot;) + geom_vline(xintercept =0,color= &quot;black&quot;) + geom_vline(xintercept =1,color= &quot;black&quot;)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /> There are about 48 QTLs outside.</p>
+<p>I can look at only those in the gene body:</p>
+<pre class="r"><code>totQTLs_gene_body= totQTLs_gene %&gt;% filter(propGene&gt;=0, propGene&lt;=1)
+
+ggplot(totQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Total apaQTLs in gene body&quot;) </code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>There are 181 in the gene body</p>
+<p>Nuclear:</p>
+<pre class="r"><code>nucQTLs_gene= nucQTLs %&gt;% inner_join(genes, by=&quot;gene&quot;)%&gt;% mutate(geneLength=Geneend-Genestart) %&gt;% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand==&quot;-&quot;, -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength) %&gt;% filter(propGene&gt;-5 &amp; propGene&lt;5)</code></pre>
+<pre class="r"><code>ggplot(nucQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Nuclear apaQTLs&quot;) + geom_vline(xintercept =0,color= &quot;black&quot;) + geom_vline(xintercept =1,color= &quot;black&quot;)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /> there are 77 outside of 500% of gene body</p>
+<pre class="r"><code>nucQTLs_gene_body= nucQTLs_gene %&gt;% filter(propGene&gt;=0, propGene&lt;=1)
+
+ggplot(nucQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Nuclear apaQTLs in gene body&quot;) </code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /> 334 are in the gene body.</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
+
+Matrix products: default
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] cowplot_0.9.4   forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
+ [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
+ [9] ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.3.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
+ [5] git2r_0.25.2     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
+ [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
+[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
+[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
+[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
+[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
+[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
+[33] readxl_1.1.0     rmarkdown_1.10   reshape2_1.4.3   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
+[49] broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
-<div id="apaqtl" class="section level2">
-<h2>apaQTL</h2>
-<ul>
-<li><p><a href="mapapaQTL.html">Call apaQTLs in both fractions</a></p></li>
-<li><p><a href="newQTLheatmap.html">Check for batch effects in new QTLs</a></p></li>
-<li><p><a href="choosePCs.html">Look at how many PCs I should include</a></p></li>
-<li><p><a href="QTLexampleplots.html">Code to make example plots</a></p></li>
-<li><p><a href="rerunQTL_changePC.html">Rerun qtl with PCs from previous analysis</a></p></li>
-<li><p><a href="QTLlocation.hml">Location of QTLs with respect to PAS and gene body</a></p></li>
-<li><p><a href="apaQTLoverlap.html">apaQTL in opposite fraction</a></p></li>
-<li><p><a href="nonNormQTL.html">Usage QTL analysis to look at non normal effect sizes</a></p></li>
-<li><p><a href="motifDisruption.html">Motif distruption as apaQTL mechanism</a></p></li>
-</ul>
-</div>
-<div id="differential-isoform-analysis" class="section level2">
-<h2>Differential Isoform Analysis</h2>
-<ul>
-<li><p><a href="DiffIsoAnalysis.html">Run leafcutter to compare fractions</a></p></li>
-<li><p><a href="diffiso_logef5.html">Results when logef &gt; 0.5</a></p></li>
-<li><p><a href="diffuse_logef1.html">Results when logef &gt; 1</a></p></li>
-<li><p><a href="rna_netseq_h3k12ac.html">Regulatory correlation heatmap</a></p></li>
-<li><p><a href="nascenttranscription.html">Relationship between APA fraction and nascent transcription</a></p></li>
-<li><p><a href="nucintronicanalysis.html">Location of nuclear intronic peaks along introns</a></p></li>
-<li><p><a href="nascentRNA.html">Start looking at the nascent seq</a></p></li>
-</ul>
-</div>
-<div id="characterize-apaqtls-and-compare-to-eqtls" class="section level2">
-<h2>Characterize apaQTLs and compare to eQTLs</h2>
-<ul>
-<li><p><a href="chromHHMQTL.html">Analysis to look at differences in QTL chromHMM categories</a></p></li>
-<li><p><a href="exvunexpeQTL.html">Comparing explained and unexplained eGenes</a></p></li>
-<li><p><a href="propeQTLs_explained.html">Proportion explained</a></p></li>
-</ul>
 </div>
 
 
@@ -1899,6 +1111,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
