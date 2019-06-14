@@ -90,3 +90,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Proportion explained](propeQTLs_explained.html)
 
+* [Comparing protein specific genes with apaQTL](pQTLandeQTLoverlap.Rmd)
+
+

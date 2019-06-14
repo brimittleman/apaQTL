@@ -1,0 +1,96 @@
+---
+title: "Protein and Expression specific QTL overlaps"
+author: "Briana Mittleman"
+date: "6/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+This analysis will be similar to the explained and unexplained eQTL analysis available [here](exvunexpeQTL.html). I downloaded the protein and expression specific QTLs from Battle et al. 2015. This information is in supplimentary table s2. 
+
+First I need to convert the ENSG ids.  
+
+```{r}
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'GeneName', 'source' ),stringsAsFactors = F, header = T)
+
+psQTL=read.table("../data/Battle_pQTL/psQTLGenes.txt", header = T, stringsAsFactors = F, col.names="gene_id") %>% inner_join(geneNames, by="gene_id") %>% select(GeneName)
+
+write.table(psQTL, file="../data/Battle_pQTL/psQTLGeneNames.txt", row.names = F, col.names = F, quote = F, sep="\t")
+
+esQTL=read.table("../data/Battle_pQTL/esQTLGenes.txt", header = T, stringsAsFactors = F, col.names="gene_id") %>% inner_join(geneNames, by="gene_id") %>% select(GeneName)
+write.table(esQTL, file="../data/Battle_pQTL/esQTLGeneNames.txt", row.names = F, col.names = F, quote = F, sep="\t")
+```
+
+
+Now I cat use the subsetpermAPAwithGenelist.py code to subset my results:  
+
+```{bash, eval=F}
+mkdir ../data/ApaByPgene
+python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/psQTLGeneNames.txt Total ../data/ApaByPgene/TotalApaPSGenes.txt
+
+python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/esQTLGenes.txt Total ../data/ApaByPgene/TotalApaESGenes.txt
+
+python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/psQTLGeneNames.txt Nuclear ../data/ApaByPgene/NuclearApaPSGenes.txt
+
+python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/esQTLGenes.txt Nuclear ../data/ApaByPgene/NuclearApaESGenes.txt
+
+```
+I also need those not in eQTL or pQTL: 
+
+```{bash,eval=F}
+python subsetAPAnotEorPgene.py Total ../data/ApaByPgene/TotalApaNOTPorEGenes.txt
+python subsetAPAnotEorPgene.py Nuclear ../data/ApaByPgene/NuclearApaNOTPorEGenes.txt
+
+```
+
+
+Total:
+
+```{r}
+tot.notEorP=read.table("../data/ApaByPgene/TotalApaNOTPorEGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+tot.PS=read.table("../data/ApaByPgene/TotalApaPSGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+tot.ES=read.table("../data/ApaByPgene/TotalApaESGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+tot.PS=na.omit(tot.PS)
+tot.notEorP=na.omit(tot.notEorP)
+tot.ES=na.omit(tot.ES)
+```
+
+
+
+```{r}
+qqplot(-log10(runif(nrow(tot.notEorP))), -log10(tot.notEorP$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Total Apa")
+points(sort(-log10(runif(nrow(tot.PS)))), sort(-log10(tot.PS$bpval)),col= alpha("Red"))
+abline(0,1)
+
+legend("topleft", legend=c("Not EGenes or PGenes", "ProteinGenes"),col=c("black", "red"), pch=16,bty = 'n')
+```
+
+Nuclear:
+
+```{r}
+nuc.notEorP=read.table("../data/ApaByPgene/NuclearApaNOTPorEGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+nuc.PS=read.table("../data/ApaByPgene/NuclearApaPSGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+nuc.ES=read.table("../data/ApaByPgene/NuclearApaESGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+nuc.PS=na.omit(nuc.PS)
+nuc.notEorP=na.omit(nuc.notEorP)
+nuc.ES=na.omit(nuc.ES)
+```
+
+
+
+```{r}
+qqplot(-log10(runif(nrow(nuc.notEorP))), -log10(nuc.notEorP$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.PS)))), sort(-log10(nuc.PS$bpval)),col= alpha("Red"))
+abline(0,1)
+
+legend("topleft", legend=c("Not EGenes or PGenes", "ProteinGenes"),col=c("black", "red"), pch=16,bty = 'n')
+```
