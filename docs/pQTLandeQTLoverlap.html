@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb38964e1734f523e65ec48706cd046efad0babc5targetblankb38964ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b38964e1734f523e65ec48706cd046efad0babc5" target="_blank">b38964e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5010185d2022c9b1989ea3475bd734b34fd2fdc5targetblank5010185a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5010185d2022c9b1989ea3475bd734b34fd2fdc5" target="_blank">5010185</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb38964e1734f523e65ec48706cd046efad0babc5targetblankb38964ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5010185d2022c9b1989ea3475bd734b34fd2fdc5targetblank5010185a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -972,6 +972,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5010185d2022c9b1989ea3475bd734b34fd2fdc5/analysis/pQTLandeQTLoverlap.Rmd" target="_blank">5010185</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-14
+</td>
+<td>
+wflow_publish(c(“analysis/index.Rmd”, “analysis/pQTLandeQTLoverlap.Rmd”))
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/15962c894bfeb221c45d3f1260561c58a29c0941/docs/pQTLandeQTLoverlap.html" target="_blank">15962c8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/b38964e1734f523e65ec48706cd046efad0babc5/analysis/pQTLandeQTLoverlap.Rmd" target="_blank">b38964e</a>
 </td>
 <td>
@@ -1031,28 +1065,114 @@ python subsetAPAnotEorPgene.py Nuclear ../data/ApaByPgene/NuclearApaNOTPorEGenes
 <pre class="r"><code>tot.notEorP=read.table(&quot;../data/ApaByPgene/TotalApaNOTPorEGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 tot.PS=read.table(&quot;../data/ApaByPgene/TotalApaPSGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 tot.ES=read.table(&quot;../data/ApaByPgene/TotalApaESGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
+tot.ex=read.table(&quot;../data/ApaByEgene/TotalApaexplainedeGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+tot.un=read.table(&quot;../data/ApaByEgene/TotalApaUnexplainedeGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
+
+tot_allE=as.data.frame(rbind(tot.ex,tot.un))
 tot.PS=na.omit(tot.PS)
 tot.notEorP=na.omit(tot.notEorP)
-tot.ES=na.omit(tot.ES)</code></pre>
+tot.ES=na.omit(tot.ES)
+tot.un=na.omit(tot.un)</code></pre>
 <pre class="r"><code>qqplot(-log10(runif(nrow(tot.notEorP))), -log10(tot.notEorP$bpval), xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(beta pval)&quot;, main=&quot;Total Apa&quot;)
 points(sort(-log10(runif(nrow(tot.PS)))), sort(-log10(tot.PS$bpval)),col= alpha(&quot;Red&quot;))
+points(sort(-log10(runif(nrow(tot_allE)))), sort(-log10(tot_allE$bpval)),col= alpha(&quot;blue&quot;))
 abline(0,1)
 
-legend(&quot;topleft&quot;, legend=c(&quot;Not EGenes or PGenes&quot;, &quot;ProteinGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+legend(&quot;topleft&quot;, legend=c(&quot;either eGenes or pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
 <p><img src="figure/pQTLandeQTLoverlap.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/15962c894bfeb221c45d3f1260561c58a29c0941/docs/figure/pQTLandeQTLoverlap.Rmd/unnamed-chunk-6-1.png" target="_blank">15962c8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Nuclear:</p>
 <pre class="r"><code>nuc.notEorP=read.table(&quot;../data/ApaByPgene/NuclearApaNOTPorEGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 nuc.PS=read.table(&quot;../data/ApaByPgene/NuclearApaPSGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 nuc.ES=read.table(&quot;../data/ApaByPgene/NuclearApaESGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
+nuc.ex=read.table(&quot;../data/ApaByEgene/NuclearApaexplainedeGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+nuc.un=read.table(&quot;../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
+nuc.un=na.omit(nuc.un)
 nuc.PS=na.omit(nuc.PS)
 nuc.notEorP=na.omit(nuc.notEorP)
-nuc.ES=na.omit(nuc.ES)</code></pre>
+nuc.ES=na.omit(nuc.ES)
+
+nuc_allE=as.data.frame(rbind(nuc.ex,nuc.un))</code></pre>
 <pre class="r"><code>qqplot(-log10(runif(nrow(nuc.notEorP))), -log10(nuc.notEorP$bpval), xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(beta pval)&quot;, main=&quot;Nuclear Apa&quot;)
 points(sort(-log10(runif(nrow(nuc.PS)))), sort(-log10(nuc.PS$bpval)),col= alpha(&quot;Red&quot;))
+points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha(&quot;blue&quot;))
 abline(0,1)
 
-legend(&quot;topleft&quot;, legend=c(&quot;Not EGenes or PGenes&quot;, &quot;ProteinGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+legend(&quot;topleft&quot;, legend=c(&quot;either eGenes or pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;,&quot;green&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
 <p><img src="figure/pQTLandeQTLoverlap.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/15962c894bfeb221c45d3f1260561c58a29c0941/docs/figure/pQTLandeQTLoverlap.Rmd/unnamed-chunk-8-1.png" target="_blank">15962c8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
