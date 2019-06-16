@@ -148,7 +148,7 @@ write.table(sig_genesonly, file="../data/sigDiffGenes.txt", col.names = T, row.n
 
 ```{r}
 
-effectsize=read.table("../data/DiffIso/TN_diff_isoform_allChrom.txt_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'', 'Total','deltaPAU')) %>% filter(intron != "intron")
+effectsize=read.table("../data/DiffIso/TN_diff_isoform_allChrom.txt_effect_sizes.txt", stringsAsFactors = F, col.names=c('intron',  'logef' ,'Nuclear', 'Total','deltaPAU')) %>% filter(intron != "intron")
 
 write.table(effectsize,file="../data/DiffIso/EffectSizes.txt", quote = F, col.names = T, row.names = F)
 
