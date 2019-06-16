@@ -1,0 +1,56 @@
+---
+title: "Usage for nuclear specific apaQTLs"
+author: "Briana Mittleman"
+date: "6/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I am interested in which PAS are associated with the nuclear specific apaQTLs I found in the [Nuclear Specific apaQTL analysis](NuclearSpecAPAqtl.Rmd). In this analysis I found these QTL are more likely to overlap with eQTLs. I am interested in knowing if these PAS are used more in nuclear than total.  
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+```{r}
+nucAPAinTot=read.table("../data/QTLoverlap/NuclearQTLinTotalNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% separate(peakID,into=c("chr", "start", "end", "geneID"),sep=":" ) %>% separate(geneID, into=c("gene", "loc", "strand", "peakNum"), sep="_")
+nucAPAinTot_NOTSIG=nucAPAinTot %>% filter(pval>.05)
+nucAPAinTot_SIG=nucAPAinTot %>% filter(pval<.05)
+DiffIsoEffect=read.table("../data/DiffIso/EffectSizes.txt", stringsAsFactors = F, header = T) %>% separate(intron ,into=c("chr", "start", "end", "gene"), sep=":")
+```
+
+
+Join these:
+
+```{r}
+nucAPAinTot_effect=nucAPAinTot %>% inner_join(DiffIsoEffect,by=c("start", "end", "gene")) %>% mutate(sig=ifelse(pval>.05, "No", "Yes"))
+```
+
+Plot these 
+
+```{r}
+ggplot(nucAPAinTot_effect,aes(x=sig, y=deltaPAU))+ geom_violin()
+
+```
+
+```{r}
+ggplot(nucAPAinTot_effect,aes(group=sig, fill=sig,x=deltaPAU))+ geom_density(alpha=.5)
+
+```
+
+
+```{r}
+nucAPAinTot_effect_sig=nucAPAinTot_effect %>% filter(sig=="Yes")
+nucAPAinTot_effect_notsig=nucAPAinTot_effect %>% filter(sig=="No")
+
+
+summary(nucAPAinTot_effect_sig$deltaPAU)
+summary(nucAPAinTot_effect_notsig$deltaPAU)
+
+```
+
+Does not look like there is a big difference in diff iso effect size for nuclear specific vs overlapping apaQTLs.  
+

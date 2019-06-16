@@ -90,7 +90,9 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Proportion explained](propeQTLs_explained.html)
 
-* [Nuclear specific apaQTLs are more likely to be eQTLs](NuclearSpecAPAqtl.html)
+* [Nuclear specific apaQTLs](NuclearSpecAPAqtl.html)
+
+* [Nuclear specific apaQTLs and differential usage](usageNucspecapaQTLs.html)
 
 * [Comparing protein specific genes with apaQTL](pQTLandeQTLoverlap.Rmd)
 
