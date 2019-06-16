@@ -27,6 +27,10 @@ nucAPAinTot_NOTSIG=nucAPAinTot %>% filter(pval>.05)
 nucAPAinTot_SIG=nucAPAinTot %>% filter(pval<.05)
 ```
 
+```{r}
+hist(nucAPAinTot$pval, breaks=100)
+ggplot(nucAPAinTot, aes(x=pval)) + geom_density() + geom_vline(xintercept = .05)
+```
 
 I can test if these are more likely to be eGenes. I can get the eGenes by comparing the 
 
@@ -40,7 +44,7 @@ allEgenes=as.data.frame(rbind(explained,unexplained))
 
 ```{r}
 nucAPAinTot_NOTSIG_egene=nucAPAinTot_NOTSIG %>% semi_join(allEgenes, by="gene")
-nucAPAinTot_SIG_egene=nucAPAinTot_NOTSIG %>% semi_join(allEgenes, by="gene")
+nucAPAinTot_SIG_egene=nucAPAinTot_SIG %>% semi_join(allEgenes, by="gene")
 ```
 
 
@@ -59,6 +63,12 @@ Difference of proportion test:
 ```{r}
 prop.test(x=c(nrow(nucAPAinTot_NOTSIG_egene),nrow(nucAPAinTot_SIG_egene)),n=c(nrow(nucAPAinTot_NOTSIG),nrow(nucAPAinTot_SIG)))
 ```
+
+Write out nuc specific QTLs
+```{r}
+write.table(nucAPAinTot_NOTSIG,file="../data/QTLoverlap/NucSpecApaQTL.txt", quote=F, col.names = T, row.names = F )
+```
+
 
 Run this the opposite direction:
 
