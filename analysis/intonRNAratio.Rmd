@@ -69,19 +69,19 @@ upstreamMeanDF=as.data.frame(cbind(upstream[,1:6], upstreamMean)) %>% mutate(Ups
 
 Join Results:
 
-I will use upstream - downstream instead of a ratio to deal with 0s
+I will use upstream - downstream
 ```{r}
-UpandDown=upstreamMeanDF %>% inner_join(downstreanMeanDF, by="Geneid") %>% mutate(ratio=UpstreamMean_st-DownstreamMean_st) %>% arrange(desc(ratio)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
+UpandDown=upstreamMeanDF %>% inner_join(downstreanMeanDF, by="Geneid") %>% mutate(UpMinusDown=UpstreamMean_st-DownstreamMean_st) %>% arrange(desc(UpMinusDown)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
 
-summary(UpandDown$ratio)
+summary(UpandDown$UpMinusDown)
 ```
 
 
 I want to know how many are positive:
 
 ```{r}
-MoreUp=UpandDown %>% filter(ratio>0) 
-summary(MoreUp$ratio)
+MoreUp=UpandDown %>% filter(UpMinusDown>0) 
+summary(MoreUp$UpMinusDown)
 nrow(MoreUp)
 ```
 13903 examples where there are more reads upstream in the intron than downstream.  
@@ -90,6 +90,9 @@ To look for examples:
 
 ```{r}
 head(MoreUp)
+```
+```{r}
+write.table(MoreUp, file="../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt", col.names = T, row.names = F, quote = F, sep="/t" )
 ```
 
 ##Nuclear  
@@ -103,7 +106,7 @@ nucIntronicPeaks=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nucle
 
 pas2intronNuc=read.table("../data/intron_analysis/IntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"))  %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronCHR,intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage)
 
-write.table(pas2intronTot, "../data/intronRNAratio/NuclearIntronicPAS2Intron.txt", quote = F, row.names = F, col.names = F, sep="\t")
+write.table(pas2intronNuc, "../data/intronRNAratio/NuclearIntronicPAS2Intron.txt", quote = F, row.names = F, col.names = F, sep="\t")
 ```
 
 
@@ -130,19 +133,24 @@ downstreamNuc=read.table("../data/intronRNAratio/NuclearDownstreamIntron.fc", co
 upstreamNuc=read.table("../data/intronRNAratio/NuclearUpstreamIntron.fc", col.names = c("Geneid","Chr","Start", "End", "Strand", "Length", "Upstream"), header = T,stringsAsFactors = F)%>% mutate(Upstream_st=Upstream/Length) %>% select(Geneid,Upstream_st )
 
 
-UpandDown_nuc=upstreamNuc %>% inner_join(downstreamNuc, by="Geneid") %>% mutate(ratio=Upstream_st-Downstream_st) %>% arrange(desc(ratio)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
+UpandDown_nuc=upstreamNuc %>% inner_join(downstreamNuc, by="Geneid") %>% mutate(UpMinusDown=Upstream_st-Downstream_st) %>% arrange(desc(UpMinusDown)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
 
-summary(UpandDown_nuc$ratio)
+summary(UpandDown_nuc$UpMinusDown)
 ```
 
 
 ```{r}
-MoreUpNuc=UpandDown_nuc %>% filter(ratio>0) 
-summary(MoreUpNuc$ratio)
+MoreUpNuc=UpandDown_nuc %>% filter(UpMinusDown>0) 
+summary(MoreUpNuc$UpMinusDown)
 nrow(MoreUpNuc)
 ```
 
 ```{r}
 head(MoreUpNuc)
+```
+
+
+```{r}
+write.table(MoreUpNuc, file="../data/intronRNAratio/NuclearPAS_MoreUpstreamNascentreads.txt", col.names = T, row.names = F, quote = F, sep="/t" )
 ```
 
