@@ -96,5 +96,9 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Comparing protein specific genes with apaQTL](pQTLandeQTLoverlap.Rmd)
 
+* [Rerun eQTLs and pQTLs for use in overlap analysis](molQTL.Rmd)
+
+
+
 
 

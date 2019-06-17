@@ -1,0 +1,35 @@
+---
+title: "Run molecular QTLs"
+author: "Briana Mittleman"
+date: "6/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I will rerun the eQTLs and pQTLs to overlap effect sizes with my data. These were downloaded from Li et al 2016 and processed in https://brimittleman.github.io/threeprimeseq/. 
+
+
+I will move the sample, pca, and phenotpye files to the apaQTL dir.  
+
+```{bash,eval=F}
+mkdir ../data/molPhenos/
+mkdir ../data/molQTLs/
+sbatch EandPqtls.sh
+```
+
+
+Concatinate the results: 
+
+```{bash,eval=F}
+cat ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.chunk* > ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.txt
+
+
+cat ../data/molQTLs/fastqtl_qqnorm_prot.fixed.nominal.chunk* > ../data/molQTLs/fastqtl_qqnorm_prot.fixed.nominal.AllNomRes.txt
+```
+
+
+
+I can use these results for analysis down the road.  
