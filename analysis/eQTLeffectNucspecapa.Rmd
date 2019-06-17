@@ -1,0 +1,113 @@
+---
+title: "eQTL effect size for Nuclear specific APAqtls"
+author: "Briana Mittleman"
+date: "6/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+I am interested in seeing if the nuclear specific apaQTL snps have higher eQTL effect sizes than the shared apaQTLs. This comes from my expectation that the nuclear specific apaQTLs are more likely to be eQTLs. 
+
+The eQTL results are in ../data/molQTLs/. The nuclear specific apaQTLs are in ../data/QTLoverlap/NucSpecApaQTL.txt these are the nuclear qtls that do not have nominally significant pvalues in the total fraction. (this is excluding PAS we can only test in nuclear)  
+
+First I need to extract the nuclear specific apaQTLs from the eQTL data.  
+
+```{r}
+nucspecapa=read.table("../data/QTLoverlap/NucSpecApaQTL.txt", header = T, stringsAsFactors = F) 
+
+sharedapa=read.table("../data/QTLoverlap/SharedApaQTL.txt", header = T, stringsAsFactors = F)
+
+```
+ I can write out the list of snps/gene associations and then I can make a script that will take any file of the same structure and write out the protien or expression stuff.
+ 
+The script will take as arguments the file with 2 columns (gene, snp), RNA/PROTEIN, and an outfile .
+
+```{bash,eval=F}
+mkdir ../data/NucSpeceQTLeffect
+```
+
+
+```{r}
+nucspecapa_genesnp= nucspecapa %>% select(gene, snp)
+write.table(nucspecapa_genesnp,file="../data/NucSpeceQTLeffect/NuclearSpecficApaQTL.txt", col.names = F, row.names = F, sep="\t", quote = F )
+sharedapa_geneapa=sharedapa %>% select(gene,snp)
+write.table(sharedapa_geneapa,file="../data/NucSpeceQTLeffect/SharedApaQTL.txt", col.names = F, row.names = F, sep="\t", quote = F )
+```
+
+
+```{bash,eval=F}
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL.txt RNA ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_eQTLRes.txt
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL.txt RNA ../data/NucSpeceQTLeffect/SharedApaQTL_eQTLRes.txt
+
+```
+
+
+Evaluate results:
+```{r}
+eqtl4nucqtl=read.table("../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_eQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F) %>% mutate(set="Nuclear")
+
+eqtl4sharedqtl=read.table("../data/NucSpeceQTLeffect/SharedApaQTL_eQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F)%>% mutate(set="Shared")
+
+
+eQTLsboth=eqtl4nucqtl %>% bind_rows(eqtl4sharedqtl)
+```
+
+
+
+Plot:
+
+```{r}
+ggplot(eQTLsboth,aes(x=set, y=abs(effect)))+ geom_boxplot()
+ggplot(eQTLsboth,aes(x=set, y=pval))+ geom_boxplot()+ geom_jitter() 
+```
+No effect. What if we jsut look at nominally sig snps.  
+
+```{r}
+eQTLsbothSig=eQTLsboth %>% filter(pval<.05)
+
+ggplot(eQTLsbothSig,aes(x=set, y=abs(effect),fill=set))+ geom_boxplot() + geom_jitter() 
+```
+
+```{r}
+
+t.test(abs(effect) ~ set, data = eQTLsbothSig, alternative="greater")
+```
+
+
+
+```{bash,eval=F}
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL.txt Protein ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_protQTLRes.txt
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL.txt Protein ../data/NucSpeceQTLeffect/SharedApaQTL_protQTLRes.txt
+```
+
+
+```{r}
+pqtl4nucqtl=read.table("../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_protQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F) %>% mutate(set="Nuclear")
+
+pqtl4sharedqtl=read.table("../data/NucSpeceQTLeffect/SharedApaQTL_protQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F)%>% mutate(set="Shared")
+
+
+pQTLsboth=pqtl4nucqtl %>% bind_rows(pqtl4sharedqtl)
+```
+
+
+```{r}
+ggplot(pQTLsboth,aes(x=set, y=abs(effect)))+ geom_boxplot()
+ggplot(pQTLsboth,aes(x=set, y=pval))+ geom_boxplot()+ geom_jitter() 
+```
+
+```{r}
+pQTLsbothSig=pQTLsboth %>% filter(pval<.05)
+
+ggplot(pQTLsbothSig,aes(x=set, y=abs(effect),fill=set))+ geom_boxplot() + geom_jitter() 
+```
+
+None of this is significant. 

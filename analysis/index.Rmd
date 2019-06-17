@@ -94,9 +94,11 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Nuclear specific apaQTLs and differential usage](usageNucspecapaQTLs.html)
 
-* [Comparing protein specific genes with apaQTL](pQTLandeQTLoverlap.Rmd)
+* [Comparing protein specific genes with apaQTL](pQTLandeQTLoverlap.html)
 
-* [Rerun eQTLs and pQTLs for use in overlap analysis](molQTL.Rmd)
+* [Rerun eQTLs and pQTLs for use in overlap analysis](molQTL.html)
+
+* [eQTL and pQTL effect sizes for apaQTLs](eQTLeffectNucspecapa.html)
 
 
 
