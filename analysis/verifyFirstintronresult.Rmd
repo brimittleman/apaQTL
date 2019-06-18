@@ -101,8 +101,9 @@ nuclear_cdf=ggplot(pas2intron_intron_usagecat_introncat,aes(x=Intronid, fill=Int
 ###First intron   
 
 ```{r}
-pas2intronTot=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"),stringsAsFactors = F) %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+pas2intronTot=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"),stringsAsFactors = F) %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength) %>%  mutate(LengthCat=ifelse(intronLength<=3785, "first", ifelse(intronLength>3785 &intronLength<=8872, "second", ifelse(intronLength>8872 &intronLength<=22928, "third", "fourth"))))
 
+pas2intronTot$LengthCat <- factor(pas2intronTot$LengthCat, levels=c("first", "second", "third", "fourth"))
 pas2intronTot_intron=pas2intronTot %>% inner_join(introns, by=c("intronStart","intronEnd","gene", "strand" ))
 ```
 
@@ -152,5 +153,24 @@ bothIntronicUsage=bind_rows(TotalIntronicUsage,NuclearIntronicUsage)
 
 ```{r}
 ggplot(bothIntronicUsage, aes(x=meanUsage))  +  stat_ecdf(aes(col=fraction)) 
+```
+
+Final plot:  
+first intron (conditioned on the intron being > 2KB) shows no signal (plotting the first 2kb only)
+
+```{r}
+firstintron_nuclear=pas2intron_intron_usagecat_introncat %>% filter(Intronid==1,intronLength>2000) 
+
+firstintron_total=pas2intronTot_intron_usagecat_introncat %>% filter(Intronid==1,intronLength>2000) 
+
+```
+
+```{r}
+ggplot(firstintron_nuclear,aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=50) +xlim(0,2000) + facet_grid(~LengthCat)+ labs(title="Nuclear intronic PAS in first intron (3025)")
+
+```
+
+```{r}
+ggplot(firstintron_total,aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=50) +xlim(0,2000) + facet_grid(~LengthCat) + labs(title="Total intronic PAS in first intron (1804)")
 ```
 
