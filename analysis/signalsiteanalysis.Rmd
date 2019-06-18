@@ -192,7 +192,21 @@ plot_grid(all, con, non, labels=c("All PAS", "Cononical PAS", "Non-conical PAS")
 ```
 
 
-##Signal site and usage relationship  
-**Next plot: look at presence of signal site compared to PAS usage**  
+##Strong evidence PAS  
 
-I need to look at the mean usage and fraction it by if the peak has a signal site.  
+For future analysis I want to have a set of PAS with evidence for a signal site.  I want those with 1 of the top 2 used signal sites upstream 10-50 basepairs. The top two use are AATAAA, ATTAAA.  
+
+```{r}
+AllsiteDF_1per_use= AllsiteDF_1per %>% dplyr::filter(Site== "AATAAA" | Site== "ATTAAA") %>% filter(Distance2PAS>10, Distance2PAS<50) %>% separate(PAS,into=c("peakid", "loc"),sep="_") %>% separate(peakid,into=c("Peaknum", "gene"),sep=":") %>% mutate(Peak=paste("Peak", Peaknum, sep="")) %>% dplyr::rename("UpstreamDist"=NegCount) %>%  select(Peak, gene, loc, Site, UpstreamDist)
+``` 
+
+
+```{r}
+ggplot(AllsiteDF_1per_use, aes(x=loc)) + geom_histogram(stat="count")
+```
+
+Write these out for 
+```{r}
+write.table(AllsiteDF_1per_use, file="../data/PAS/PASwSignalSite.txt", col.names = T, row.names = F, quote = F, sep="\t")
+```
+
