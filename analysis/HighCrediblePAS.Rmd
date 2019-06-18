@@ -1,0 +1,60 @@
+---
+title: "Most credible set PAS"
+author: "Briana Mittleman"
+date: "6/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+I want to get the most credible intronic PAS set I can. To do this I can use analysis I have previously done. These are those that have a signal site and have more RNA seq reads upstream. This mean I am looking at those in the total fraction.  
+
+1. [Signal site analyis](signalsiteanalysis.html)  
+
+2. [RNA evidence upstream](intonRNAratio.html)  
+
+
+
+```{r}
+signalPAS=read.table("../data/PAS/PASwSignalSite.txt", header  =T, stringsAsFactors = F) %>% filter(loc=="intron")
+
+```
+
+
+```{r}
+RNAupstream=read.table(file="../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt", header = T, stringsAsFactors = F) 
+```
+
+
+Join these together on the PAS gene and loc
+
+```{r}
+PAS_signalandRNA=RNAupstream %>% inner_join(signalPAS, by=c("PAS", "gene", "loc"))
+
+
+```
+
+
+I can look at these in IGV.  
+
+
+Are any of these total QTLs?
+
+```{r}
+totQTL=read.table("../data/apaQTLs/Total_apaQTLs_5fdr.txt", header = T, stringsAsFactors = F) %>% dplyr::rename("PAS"=Peak)
+```
+
+
+Filter join the PAS set with the QTLs 
+
+```{r}
+highcredwQTL=PAS_signalandRNA %>%  semi_join(totQTL, by= "PAS")
+```
+

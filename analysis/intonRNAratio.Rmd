@@ -92,7 +92,7 @@ To look for examples:
 head(MoreUp)
 ```
 ```{r}
-write.table(MoreUp, file="../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt", col.names = T, row.names = F, quote = F, sep="/t" )
+write.table(MoreUp, file="../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt", col.names = T, row.names = F, quote = F, sep="\t" )
 ```
 
 ##Nuclear  
