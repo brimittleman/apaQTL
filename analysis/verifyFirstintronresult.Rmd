@@ -1,0 +1,156 @@
+---
+title: "Verify first intron result"
+author: "Briana Mittleman"
+date: "6/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In the [previous analysis](nucintronicanalysis.html) I saw that most of my intronic pas are in the first intron and skew toward the beginning of long introns. I will further explore this result here. 
+```{r}
+library(tidyverse)
+library(cowplot)
+library(workflowr)
+```
+
+
+##Nuclear
+These are the nuclear intronic PAS 
+```{r}
+pas2intron=read.table("../data/intron_analysis/IntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"),stringsAsFactors = F) %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength) %>% mutate(LengthCat=ifelse(intronLength<=3929, "first", ifelse(intronLength>3929 &intronLength<=9220, "second", ifelse(intronLength>9220 &intronLength<=24094, "third", "fourth"))))
+
+pas2intron$LengthCat <- factor(pas2intron$LengthCat, levels=c("first", "second", "third", "fourth"))
+```
+
+
+###Beginning of introns
+I want to plot the absolute distance rather than the standardized distance to the 5' ss. 
+
+
+```{r}
+ggplot(pas2intron,aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=100)  + facet_grid(~LengthCat) + xlim(0,5000)
+
+
+ggplot(pas2intron,aes(x=distance2PAS, fill=LengthCat))  + facet_grid(~LengthCat) + xlim(0,5000) +  stat_ecdf(aes(col=LengthCat)) 
+```
+
+
+
+
+
+
+###First intron 
+This is not the correct analysis. I need to actually look at which intron from all of them. 
+
+this is the file I created to get the introns. I need to remove genes with only 1 introm. 
+
+```{r}
+introns=read.table("/project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed",stringsAsFactors = F, col.names = c("chrom", "intronStart", "intronEnd", "gene", "score", "strand")) %>% group_by(gene)  %>% filter(!grepl("hap",chrom)) %>% mutate(Intronid=ifelse(strand=="+",  1:n(),n():1), nintron=n()) %>% filter(nintron>2)
+```
+
+Join with PAS:
+
+```{r}
+pas2intron_intron=pas2intron %>% inner_join(introns, by=c("intronStart","intronEnd","gene", "strand" ))
+pas2intron_intron$Intronid=as.factor(pas2intron_intron$Intronid)
+```
+
+
+```{r}
+ggplot(pas2intron_intron,aes(x=Intronid)) +  geom_bar(stat="count") + labs(title="intron ID for nuclear intronic pas", x="intron ID")
+```
+```{r}
+summary(pas2intron_intron$Intronid)
+```
+I want to see if the usage is the same over this:
+
+```{r}
+
+pas2intron_intron_usagecat= pas2intron_intron %>% mutate(UsageCat=ifelse(meanUsage<=.1, "<.1", ifelse(meanUsage>.1 &meanUsage<=.2, "<.2", ifelse(meanUsage>.2 &meanUsage<=.3, "<.3", ">.3"))))
+pas2intron_intron_usagecat$Intronid=as.numeric(as.character(pas2intron_intron_usagecat$Intronid))
+```
+
+```{r}
+ggplot(pas2intron_intron_usagecat,aes(x=Intronid, fill=UsageCat)) +  geom_bar(stat="count") + labs(title="intron ID for nuclear intronic pas", x="intron ID") + facet_grid(~UsageCat)+ xlim(0,10)
+```
+Maybe by the number of introns?
+
+```{r}
+summary(pas2intron_intron_usagecat$nintron)
+```
+
+```{r}
+pas2intron_intron_usagecat_introncat= pas2intron_intron_usagecat %>% mutate(IntronCat=ifelse(nintron<=6, "first (<6)", ifelse(nintron>6 &nintron<=11, "second (6-11)", ifelse(nintron>11 &nintron<=18, "third (11-18)", "fourth (>18)"))))
+
+pas2intron_intron_usagecat_introncat$IntronCat <- factor(pas2intron_intron_usagecat_introncat$IntronCat, levels=c("first (<6)", "second (6-11)", "third (11-18)", "fourth (>18)"))
+```
+
+
+```{r}
+ggplot(pas2intron_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) +  geom_bar(stat="count") + labs(title="intron ID for nuclear intronic pas", x="intron ID") + facet_grid(~IntronCat) + xlim(0,10)
+
+nuclear_cdf=ggplot(pas2intron_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) +  stat_ecdf(aes(col=IntronCat)) + labs(title="intron ID for Nuclear intronic pas", x="intron ID") + xlim(0,10)+ geom_vline(xintercept = 2) 
+
+```
+
+##Total  
+
+###First intron   
+
+```{r}
+pas2intronTot=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand"),stringsAsFactors = F) %>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+
+pas2intronTot_intron=pas2intronTot %>% inner_join(introns, by=c("intronStart","intronEnd","gene", "strand" ))
+```
+
+
+```{r}
+summary(pas2intronTot_intron$nintron)
+
+pas2intronTot_intron_usagecat_introncat= pas2intronTot_intron %>% mutate(IntronCat=ifelse(nintron<=6, "first (<6)", ifelse(nintron>6 &nintron<=11, "second (6-11)", ifelse(nintron>11 &nintron<=18, "third (11-18)", "fourth (>18)"))))
+
+ggplot(pas2intronTot_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) +  geom_bar(stat="count") + labs(title="intron ID for Total intronic pas", x="intron ID") + facet_grid(~IntronCat) + xlim(0,10)
+
+
+
+totalcdf=ggplot(pas2intronTot_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) +  stat_ecdf(aes(col=IntronCat)) + labs(title="intron ID for Total intronic pas", x="intron ID") + xlim(0,10) + geom_vline(xintercept = 2) 
+```
+##Both fracitons  
+
+Plot both:
+
+```{r}
+pas2intronTot_intron_usagecat_introncat_frac=pas2intronTot_intron_usagecat_introncat %>% mutate(fraction="Total") %>% select(Intronid,IntronCat,fraction)
+
+pas2intron_intron_usagecat_introncat_frac=pas2intron_intron_usagecat_introncat%>% mutate(fraction="Nuclear") %>% select(Intronid,IntronCat,fraction)
+
+intronidboth=bind_rows(pas2intronTot_intron_usagecat_introncat_frac,pas2intron_intron_usagecat_introncat_frac)
+```
+
+
+
+```{r}
+ggplot(intronidboth,aes(x=Intronid)) +  stat_ecdf(aes(col=fraction)) + labs(title="intron ID for intronic pas", x="intron ID") + xlim(0,10) + facet_grid(~IntronCat)
+```
+
+```{r}
+plot_grid(nuclear_cdf,totalcdf)
+```
+
+Usage in both fractions. 
+
+```{r}
+TotalIntronicUsage=pas2intronTot_intron_usagecat_introncat %>% mutate(fraction="Total") %>% select(meanUsage,fraction)
+
+NuclearIntronicUsage=pas2intron_intron_usagecat_introncat%>% mutate(fraction="Nuclear") %>% select(meanUsage,fraction)
+
+bothIntronicUsage=bind_rows(TotalIntronicUsage,NuclearIntronicUsage)
+```
+
+```{r}
+ggplot(bothIntronicUsage, aes(x=meanUsage))  +  stat_ecdf(aes(col=fraction)) 
+```
+

@@ -80,6 +80,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Location of nuclear intronic peaks along introns](nucintronicanalysis.html)  
 
+* [Explore first intron PAS further](verifyFirstintronresult.html)
+
 * [Start looking at the nascent seq](nascentRNA.html)
 
 ##Characterize apaQTLs and compare to eQTLs 
