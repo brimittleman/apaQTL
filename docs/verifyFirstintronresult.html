@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree01bc8aa8f4b26a38e94ed2db923aa0778295d3e8targetblank01bc8aaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/01bc8aa8f4b26a38e94ed2db923aa0778295d3e8" target="_blank">01bc8aa</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree078b340cfc28b3ff298af5eb792ca736b5cd8518targetblank078b340a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/078b340cfc28b3ff298af5eb792ca736b5cd8518" target="_blank">078b340</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree01bc8aa8f4b26a38e94ed2db923aa0778295d3e8targetblank01bc8aaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree078b340cfc28b3ff298af5eb792ca736b5cd8518targetblank078b340a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -991,6 +991,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/078b340cfc28b3ff298af5eb792ca736b5cd8518/analysis/verifyFirstintronresult.Rmd" target="_blank">078b340</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+<td>
+add first intron length
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/verifyFirstintronresult.html" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/01bc8aa8f4b26a38e94ed2db923aa0778295d3e8/analysis/verifyFirstintronresult.Rmd" target="_blank">01bc8aa</a>
 </td>
 <td>
@@ -1042,9 +1076,83 @@ pas2intron$LengthCat &lt;- factor(pas2intron$LengthCat, levels=c(&quot;first&quo
 <pre><code>Warning: Removed 6143 rows containing non-finite values (stat_bin).</code></pre>
 <pre><code>Warning: Removed 8 rows containing missing values (geom_bar).</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-3-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(pas2intron,aes(x=distance2PAS, fill=LengthCat))  + facet_grid(~LengthCat) + xlim(0,5000) +  stat_ecdf(aes(col=LengthCat)) </code></pre>
 <pre><code>Warning: Removed 6143 rows containing non-finite values (stat_ecdf).</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-2">
+Past versions of unnamed-chunk-3-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-3-2.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="first-intron" class="section level3">
 <h3>First intron</h3>
@@ -1056,6 +1164,43 @@ pas2intron$LengthCat &lt;- factor(pas2intron$LengthCat, levels=c(&quot;first&quo
 pas2intron_intron$Intronid=as.factor(pas2intron_intron$Intronid)</code></pre>
 <pre class="r"><code>ggplot(pas2intron_intron,aes(x=Intronid)) +  geom_bar(stat=&quot;count&quot;) + labs(title=&quot;intron ID for nuclear intronic pas&quot;, x=&quot;intron ID&quot;)</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-6-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(pas2intron_intron$Intronid)</code></pre>
 <pre><code>   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
 3147 2111 1585 1278  896  725  633  503  432  384  287  238  188  178  145 
@@ -1075,7 +1220,45 @@ pas2intron_intron_usagecat$Intronid=as.numeric(as.character(pas2intron_intron_us
 <pre class="r"><code>ggplot(pas2intron_intron_usagecat,aes(x=Intronid, fill=UsageCat)) +  geom_bar(stat=&quot;count&quot;) + labs(title=&quot;intron ID for nuclear intronic pas&quot;, x=&quot;intron ID&quot;) + facet_grid(~UsageCat)+ xlim(0,10)</code></pre>
 <pre><code>Warning: Removed 2108 rows containing non-finite values (stat_count).</code></pre>
 <pre><code>Warning: Removed 4 rows containing missing values (geom_bar).</code></pre>
-<p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /> Maybe by the number of introns?</p>
+<p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-9-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Maybe by the number of introns?</p>
 <pre class="r"><code>summary(pas2intron_intron_usagecat$nintron)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    3.00    6.00   11.00   14.41   18.00  171.00 </code></pre>
@@ -1086,6 +1269,43 @@ pas2intron_intron_usagecat_introncat$IntronCat &lt;- factor(pas2intron_intron_us
 <pre><code>Warning: Removed 2108 rows containing non-finite values (stat_count).</code></pre>
 <pre><code>Warning: Removed 3 rows containing missing values (geom_bar).</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-12-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>nuclear_cdf=ggplot(pas2intron_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) +  stat_ecdf(aes(col=IntronCat)) + labs(title=&quot;intron ID for Nuclear intronic pas&quot;, x=&quot;intron ID&quot;) + xlim(0,10)+ geom_vline(xintercept = 2) </code></pre>
 </div>
 </div>
@@ -1093,8 +1313,9 @@ pas2intron_intron_usagecat_introncat$IntronCat &lt;- factor(pas2intron_intron_us
 <h2>Total</h2>
 <div id="first-intron-1" class="section level3">
 <h3>First intron</h3>
-<pre class="r"><code>pas2intronTot=read.table(&quot;../data/intron_analysis/TotalIntronPeaksontoIntrons.bed&quot;,col.names = c(&quot;intronCHR&quot;, &quot;intronStart&quot;, &quot;intronEnd&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;peakCHR&quot;, &quot;peakStart&quot;, &quot;peakEnd&quot;, &quot;PeakID&quot;, &quot;meanUsage&quot;, &quot;peakStrand&quot;),stringsAsFactors = F) %&gt;% mutate(PASloc=ifelse(strand==&quot;+&quot;, peakEnd, peakStart)) %&gt;% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %&gt;% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand==&quot;+&quot;, PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+<pre class="r"><code>pas2intronTot=read.table(&quot;../data/intron_analysis/TotalIntronPeaksontoIntrons.bed&quot;,col.names = c(&quot;intronCHR&quot;, &quot;intronStart&quot;, &quot;intronEnd&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;peakCHR&quot;, &quot;peakStart&quot;, &quot;peakEnd&quot;, &quot;PeakID&quot;, &quot;meanUsage&quot;, &quot;peakStrand&quot;),stringsAsFactors = F) %&gt;% mutate(PASloc=ifelse(strand==&quot;+&quot;, peakEnd, peakStart)) %&gt;% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %&gt;% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand==&quot;+&quot;, PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength) %&gt;%  mutate(LengthCat=ifelse(intronLength&lt;=3785, &quot;first&quot;, ifelse(intronLength&gt;3785 &amp;intronLength&lt;=8872, &quot;second&quot;, ifelse(intronLength&gt;8872 &amp;intronLength&lt;=22928, &quot;third&quot;, &quot;fourth&quot;))))
 
+pas2intronTot$LengthCat &lt;- factor(pas2intronTot$LengthCat, levels=c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;, &quot;fourth&quot;))
 pas2intronTot_intron=pas2intronTot %&gt;% inner_join(introns, by=c(&quot;intronStart&quot;,&quot;intronEnd&quot;,&quot;gene&quot;, &quot;strand&quot; ))</code></pre>
 <pre class="r"><code>summary(pas2intronTot_intron$nintron)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -1105,6 +1326,43 @@ ggplot(pas2intronTot_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) 
 <pre><code>Warning: Removed 1327 rows containing non-finite values (stat_count).</code></pre>
 <pre><code>Warning: Removed 3 rows containing missing values (geom_bar).</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-14-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>totalcdf=ggplot(pas2intronTot_intron_usagecat_introncat,aes(x=Intronid, fill=IntronCat)) +  stat_ecdf(aes(col=IntronCat)) + labs(title=&quot;intron ID for Total intronic pas&quot;, x=&quot;intron ID&quot;) + xlim(0,10) + geom_vline(xintercept = 2) </code></pre>
 </div>
 </div>
@@ -1121,10 +1379,84 @@ coercing into character vector</code></pre>
 <pre class="r"><code>ggplot(intronidboth,aes(x=Intronid)) +  stat_ecdf(aes(col=fraction)) + labs(title=&quot;intron ID for intronic pas&quot;, x=&quot;intron ID&quot;) + xlim(0,10) + facet_grid(~IntronCat)</code></pre>
 <pre><code>Warning: Removed 3435 rows containing non-finite values (stat_ecdf).</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-16-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(nuclear_cdf,totalcdf)</code></pre>
 <pre><code>Warning: Removed 2108 rows containing non-finite values (stat_ecdf).</code></pre>
 <pre><code>Warning: Removed 1327 rows containing non-finite values (stat_ecdf).</code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-17-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Usage in both fractions.</p>
 <pre class="r"><code>TotalIntronicUsage=pas2intronTot_intron_usagecat_introncat %&gt;% mutate(fraction=&quot;Total&quot;) %&gt;% select(meanUsage,fraction)
 
@@ -1133,6 +1465,56 @@ NuclearIntronicUsage=pas2intron_intron_usagecat_introncat%&gt;% mutate(fraction=
 bothIntronicUsage=bind_rows(TotalIntronicUsage,NuclearIntronicUsage)</code></pre>
 <pre class="r"><code>ggplot(bothIntronicUsage, aes(x=meanUsage))  +  stat_ecdf(aes(col=fraction)) </code></pre>
 <p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b3328b699912f8f0e3a7f1946927afd535d049ed/docs/figure/verifyFirstintronresult.Rmd/unnamed-chunk-19-1.png" target="_blank">b3328b6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Final plot:<br />
+first intron (conditioned on the intron being &gt; 2KB) shows no signal (plotting the first 2kb only)</p>
+<pre class="r"><code>firstintron_nuclear=pas2intron_intron_usagecat_introncat %&gt;% filter(Intronid==1,intronLength&gt;2000) 
+
+firstintron_total=pas2intronTot_intron_usagecat_introncat %&gt;% filter(Intronid==1,intronLength&gt;2000) </code></pre>
+<pre class="r"><code>ggplot(firstintron_nuclear,aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=50) +xlim(0,2000) + facet_grid(~LengthCat)+ labs(title=&quot;Nuclear intronic PAS in first intron (3025)&quot;)</code></pre>
+<pre><code>Warning: Removed 2280 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>Warning: Removed 8 rows containing missing values (geom_bar).</code></pre>
+<p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(firstintron_total,aes(x=distance2PAS, fill=LengthCat)) + geom_histogram(bins=50) +xlim(0,2000) + facet_grid(~LengthCat) + labs(title=&quot;Total intronic PAS in first intron (1804)&quot;)</code></pre>
+<pre><code>Warning: Removed 1277 rows containing non-finite values (stat_bin).</code></pre>
+<pre><code>Warning: Removed 8 rows containing missing values (geom_bar).</code></pre>
+<p><img src="figure/verifyFirstintronresult.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
