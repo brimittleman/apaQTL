@@ -12,9 +12,79 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(workflowr)
+library(cowplot)
 ```
 
-I want to get the most credible intronic PAS set I can. To do this I can use analysis I have previously done. These are those that have a signal site and have more RNA seq reads upstream. This mean I am looking at those in the total fraction.  
+
+
+##Full credible  
+I want to get the most credible PAS set I can. To do this I can use analysis I have previously done. These are those that have a signal site.  
+
+1. [Signal site analyis](signalsiteanalysis.html)  
+
+
+First I can look at the differences between the sites with a signal site and those without. 
+```{r}
+signalPAS=read.table("../data/PAS/PASwSignalSite.txt", header  =T, stringsAsFactors = F) 
+allPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", header = F, stringsAsFactors = F,col.names = c("chr","start", "end", "peakID", "score", "strand")) %>% separate(peakID, into=c("peak", "loc"), sep="_") %>% separate(peak, into=c("peaknum", "gene"), sep=":") %>% mutate(PAS=paste("peak", peaknum, sep=""))
+```
+
+Peaks with signal site in a vector:
+
+```{r}
+credsites=as.vector(signalPAS$PAS)
+
+allPAS= allPAS %>% mutate(SS=ifelse(PAS %in% credsites, "Yes", "No"))
+allPAS$SS= as.factor(allPAS$SS)
+```
+
+Plot these by location:
+
+```{r}
+ggplot(allPAS, aes(x=loc, by=SS, fill=SS)) + geom_bar(stat="count")
+```
+
+
+Proportion of each: 
+
+```{r}
+allPAS_loc= allPAS %>% group_by(loc,SS) %>% summarise(nSS=n()) %>% ungroup() %>% group_by(loc) %>% mutate(nLoc=sum(nSS)) %>% ungroup() %>% mutate(prop=nSS/nLoc)
+
+ggplot(allPAS_loc, aes(x=loc, y=prop, fill=SS)) + geom_bar(stat="identity") + labs(title="Proportion of PAS with signal site", x="Location", y="Propotion")
+```
+
+Look at usage of those with a signal site to those without. In each fraction
+
+###Total:
+
+```{r}
+TotalPASUsage=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc",stringsAsFactors = F,col.names = c("chr","start","end", "gene", "loc", "Strand", "PAS", "TotalUsage")) %>% select(PAS, TotalUsage)
+
+allPAS_totUsage=allPAS %>% inner_join(TotalPASUsage, by="PAS")
+```
+
+```{r}
+ggplot(allPAS_totUsage, aes(x=loc, y=TotalUsage, fill=SS)) + geom_boxplot() + labs(title="Mean Usage in total fraction\n by presence of signal site")
+```
+
+###Nuclear  
+
+```{r}
+NuclearPASUsage=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc",stringsAsFactors = F,col.names = c("chr","start","end", "gene", "loc", "Strand", "PAS", "NuclearUsage")) %>% select(PAS, NuclearUsage)
+
+allPAS_nucUsage=allPAS %>% inner_join(NuclearPASUsage, by="PAS")
+```
+
+
+
+```{r}
+ggplot(allPAS_nucUsage, aes(x=loc, y=NuclearUsage, fill=SS)) + geom_boxplot()
+```
+
+
+##Intronic credible set
+
+For these I will add the criteria that there are more RNA seq reads upstream. For these I am looking at those in the total fraction.  
 
 1. [Signal site analyis](signalsiteanalysis.html)  
 
@@ -23,27 +93,51 @@ I want to get the most credible intronic PAS set I can. To do this I can use ana
 
 
 ```{r}
-signalPAS=read.table("../data/PAS/PASwSignalSite.txt", header  =T, stringsAsFactors = F) %>% filter(loc=="intron")
-
-```
-
-
-```{r}
+signalPASIntronic=read.table("../data/PAS/PASwSignalSite.txt", header  =T, stringsAsFactors = F) %>% filter(loc=="intron")
 RNAupstream=read.table(file="../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt", header = T, stringsAsFactors = F) 
+allPAS_intron=allPAS %>% filter(loc=="intron")
 ```
 
-
-Join these together on the PAS gene and loc
+Make vectors to add the information 
 
 ```{r}
-PAS_signalandRNA=RNAupstream %>% inner_join(signalPAS, by=c("PAS", "gene", "loc"))
+RNAupstreamvec=as.vector(RNAupstream$PAS)
+signalPASIntronicVec=as.vector(signalPASIntronic$PAS)
+
+PAS_signalandRNA=allPAS_intron %>% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, "Yes", "No"), RNA= ifelse(PAS %in% RNAupstreamvec, "Yes" , "No"), BothEv=ifelse(SS=="Yes"& RNA=="Yes", "Yes", "No"))
 
 
 ```
 
 
-I can look at these in IGV.  
+Where are these with respect to the gene body: 
 
+```{r}
+length=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "start", "end", "gene", "score", "strand") ,stringsAsFactors = F) %>% mutate(length=abs(end-start)) %>%  mutate(TSS= ifelse(strand=="+", start, end)) %>% select(gene, length,TSS, strand) %>% select(-strand)
+
+
+#filter those outside genes (problem do to multiple transcripts)
+PAS_signalandRNA_Len=PAS_signalandRNA %>% inner_join(length, by="gene") %>% mutate(distance=ifelse(strand=="+", end- TSS, TSS-end), perlength=distance/length) %>% filter(perlength<1, perlength>0)
+```
+
+Plot these:
+
+```{r}
+ssintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=SS, x=perlength)) + geom_density(alpha=.5) + labs(title="Distribution of intronic PAS along genes\n by presence of signal site", x="Percent gene length")
+
+rnaintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=RNA, x=perlength)) + geom_density(alpha=.5)+labs(title="Distribution of intronic PAS along genes\n by presence of more RNA upstream", x="Percent gene length")
+
+bothintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=BothEv, x=perlength)) + geom_density(alpha=.5)+ labs(title="Distribution of intronic PAS along genes\n by Both lines of evidence", x="Percent gene length")
+
+
+```
+
+
+```{r}
+plot_grid(ssintronlength,rnaintronlength,bothintronlength)
+```
+
+###QTL  
 
 Are any of these total QTLs?
 
@@ -51,10 +145,11 @@ Are any of these total QTLs?
 totQTL=read.table("../data/apaQTLs/Total_apaQTLs_5fdr.txt", header = T, stringsAsFactors = F) %>% dplyr::rename("PAS"=Peak)
 ```
 
-
 Filter join the PAS set with the QTLs 
 
 ```{r}
 highcredwQTL=PAS_signalandRNA %>%  semi_join(totQTL, by= "PAS")
 ```
+
+
 
