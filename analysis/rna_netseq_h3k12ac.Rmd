@@ -221,13 +221,39 @@ ggplotRegression(lm(log10(Allpheno_mean$H3K27AC)~ log10(Allpheno_mean$TotApa)))
 ggplotRegression(lm(log10(Allpheno_mean$H3K27AC)~ log10(Allpheno_mean$NucApa)))
 ```
 
+
+```{r}
+ggplotRegression(lm(Allpheno_mean$NucApa~ Allpheno_mean$Rna))
+ggplotRegression(lm(Allpheno_mean$NucApa~ Allpheno_mean$FourSU))
+```
+```{r}
+ggplotRegression(lm(Allpheno_mean$TotApa~ Allpheno_mean$Rna))
+ggplotRegression(lm(Allpheno_mean$TotApa~ Allpheno_mean$FourSU))
+```
 heatmap correlation for these:
 
 ```{r}
 Allpheno_mean_mat= as.matrix(Allpheno_mean %>% dplyr::select(-ID))
 Allpheno_mean_matcorr= abs(round(cor(Allpheno_mean_mat,method="spearman"),2))
 
-heatmap.2(as.matrix(Allpheno_mean_matcorr),trace="none", dendrogram='col', col=my_palette)
+
+Allpheno_mean_matcorrOrder=as.data.frame(Allpheno_mean_matcorr) %>% select(NetSeq, H3K27AC,NucApa,TotApa,FourSU,Rna)
+
+
+heatmap.2(as.matrix(Allpheno_mean_matcorrOrder),trace="none",dendrogram = "none", col=my_palette,Colv = F)
 ```
 
+```{r}
+Allpheno_mean_matcorrOrder
+```
+
+
+remove net and k27ac 
+
+```{r}
+Allpheno_mean_small=as.matrix(Allpheno_mean %>% dplyr::select(-ID,-H3K27AC,-NetSeq))
+Allpheno_meanSM_matcorr= abs(round(cor(Allpheno_mean_small,method="spearman"),2))
+
+heatmap.2(as.matrix(Allpheno_meanSM_matcorr),trace="none", col=my_palette, ,dendrogram = "none")
+```
 
