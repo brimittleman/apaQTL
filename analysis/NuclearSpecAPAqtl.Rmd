@@ -67,6 +67,7 @@ prop.test(x=c(nrow(nucAPAinTot_NOTSIG_egene),nrow(nucAPAinTot_SIG_egene)),n=c(nr
 Write out nuc specific QTLs
 ```{r}
 write.table(nucAPAinTot_NOTSIG,file="../data/QTLoverlap/NucSpecApaQTL.txt", quote=F, col.names = T, row.names = F )
+write.table(nucAPAinTot_SIG,file="../data/QTLoverlap/SharedApaQTL.txt", quote=F, col.names = T, row.names = F )
 ```
 
 
@@ -98,3 +99,28 @@ nrow(totAPAinNuc_SIG_egene)/nrow(totAPAinNuc_SIG)
 ```{r}
 prop.test(x=c(nrow(totAPAinNuc_NOTSIG_egene),nrow(totAPAinNuc_SIG_egene)),n=c(nrow(totAPAinNuc_NOTSIG),nrow(totAPAinNuc_SIG)))
 ```
+
+
+Location of nuclear specific qtl pas:  
+
+
+```{r}
+nucAPAinTot_withsig=nucAPAinTot %>% mutate(NucSpec=ifelse(pval<.05, "No", "Yes"))
+
+```
+
+distribution: 
+
+```{r}
+ggplot(nucAPAinTot_withsig, aes(x=loc, fill=NucSpec)) + geom_bar()
+```
+
+Proportion within category: 
+
+```{r}
+nucAPAinTot_withsig_group= nucAPAinTot_withsig %>% group_by(loc, NucSpec) %>% summarise(nNucSpec=n()) %>% ungroup() %>% group_by(loc) %>% mutate(nLoc=sum(nNucSpec)) %>% ungroup() %>% mutate(prop=nNucSpec/nLoc)
+
+
+ggplot(nucAPAinTot_withsig_group, aes(x=loc, y=prop, fill=NucSpec)) + geom_bar(stat="identity") + labs(title="Proportion of apaQTL by \nlocation that are nuclear specific")
+```
+
