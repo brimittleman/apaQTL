@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-18
+<strong>Last updated:</strong> 2019-06-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree63e21eae9839b5b6f34748834411684550e92613targetblank63e21eaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/63e21eae9839b5b6f34748834411684550e92613" target="_blank">63e21ea</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree090a2c244e01956148b7113736ce190806c7f18ctargetblank090a2c2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/090a2c244e01956148b7113736ce190806c7f18c" target="_blank">090a2c2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree63e21eae9839b5b6f34748834411684550e92613targetblank63e21eaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree090a2c244e01956148b7113736ce190806c7f18ctargetblank090a2c2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,6 +448,7 @@ Untracked files:
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
@@ -471,6 +472,7 @@ Untracked files:
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
+    Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -546,6 +548,7 @@ Untracked files:
     Untracked:  code/._makeeQTLempirical_unexp.py
     Untracked:  code/._makeeQTLempiricaldist.py
     Untracked:  code/._makegencondeTSSfile.py
+    Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
@@ -583,6 +586,7 @@ Untracked files:
     Untracked:  code/._sepgenobychrom.py
     Untracked:  code/._snakemakePAS.batch
     Untracked:  code/._snakemakefiltPAS.batch
+    Untracked:  code/._sortindexRNAbam.sh
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subsetAPAnotEorPgene.py
@@ -664,6 +668,7 @@ Untracked files:
     Untracked:  code/QTL2bed.py
     Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
+    Untracked:  code/RNAbam2bw.sh
     Untracked:  code/Rplots.pdf
     Untracked:  code/Script4NuclearQTLexamples.sh
     Untracked:  code/Script4TotalQTLexamples.sh
@@ -755,12 +760,15 @@ Untracked files:
     Untracked:  code/makeeQTLempirical_unexp.py
     Untracked:  code/makeeQTLempiricaldist.py
     Untracked:  code/makegencondeTSSfile.py
+    Untracked:  code/mergRNABam.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
     Untracked:  code/mergeBamNacent.err
     Untracked:  code/mergeBamNacent.out
     Untracked:  code/mergeBamNascent.sh
+    Untracked:  code/mergeRNAbam.err
+    Untracked:  code/mergeRNAbam.out
     Untracked:  code/mnase1stintron.sh
     Untracked:  code/mnaseDTPlot1stintron.err
     Untracked:  code/mnaseDTPlot1stintron.out
@@ -827,6 +835,9 @@ Untracked files:
     Untracked:  code/seqQTLregion.out
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
+    Untracked:  code/sortindexRNABam.err
+    Untracked:  code/sortindexRNABam.out
+    Untracked:  code/sortindexRNAbam.sh
     Untracked:  code/subsetAPAnotEorPgene.py
     Untracked:  code/subsetApanoteGene.py
     Untracked:  code/subsetUnexplainedeQTLs.py
@@ -992,6 +1003,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/090a2c244e01956148b7113736ce190806c7f18c/analysis/HighCrediblePAS.Rmd" target="_blank">090a2c2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-19
+</td>
+<td>
+compare with ss to those without
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/529a38a7ddc53d974f2dc20122d031d582118ee0/docs/HighCrediblePAS.html" target="_blank">529a38a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/63e21eae9839b5b6f34748834411684550e92613/analysis/HighCrediblePAS.Rmd" target="_blank">63e21ea</a>
 </td>
 <td>
@@ -1012,27 +1057,94 @@ add credible set analysis
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
-<p>I want to get the most credible intronic PAS set I can. To do this I can use analysis I have previously done. These are those that have a signal site and have more RNA seq reads upstream. This mean I am looking at those in the total fraction.</p>
+<pre class="r"><code>library(cowplot)</code></pre>
+<pre><code>
+Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
+
+    ggsave</code></pre>
+<div id="full-credible" class="section level2">
+<h2>Full credible</h2>
+<p>I want to get the most credible PAS set I can. To do this I can use analysis I have previously done. These are those that have a signal site.</p>
+<ol style="list-style-type: decimal">
+<li><a href="signalsiteanalysis.html">Signal site analyis</a></li>
+</ol>
+<p>First I can look at the differences between the sites with a signal site and those without.</p>
+<pre class="r"><code>signalPAS=read.table(&quot;../data/PAS/PASwSignalSite.txt&quot;, header  =T, stringsAsFactors = F) 
+allPAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.bed&quot;, header = F, stringsAsFactors = F,col.names = c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;, &quot;peakID&quot;, &quot;score&quot;, &quot;strand&quot;)) %&gt;% separate(peakID, into=c(&quot;peak&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% separate(peak, into=c(&quot;peaknum&quot;, &quot;gene&quot;), sep=&quot;:&quot;) %&gt;% mutate(PAS=paste(&quot;peak&quot;, peaknum, sep=&quot;&quot;))</code></pre>
+<p>Peaks with signal site in a vector:</p>
+<pre class="r"><code>credsites=as.vector(signalPAS$PAS)
+
+allPAS= allPAS %&gt;% mutate(SS=ifelse(PAS %in% credsites, &quot;Yes&quot;, &quot;No&quot;))
+allPAS$SS= as.factor(allPAS$SS)</code></pre>
+<p>Plot these by location:</p>
+<pre class="r"><code>ggplot(allPAS, aes(x=loc, by=SS, fill=SS)) + geom_bar(stat=&quot;count&quot;)</code></pre>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Proportion of each:</p>
+<pre class="r"><code>allPAS_loc= allPAS %&gt;% group_by(loc,SS) %&gt;% summarise(nSS=n()) %&gt;% ungroup() %&gt;% group_by(loc) %&gt;% mutate(nLoc=sum(nSS)) %&gt;% ungroup() %&gt;% mutate(prop=nSS/nLoc)
+
+ggplot(allPAS_loc, aes(x=loc, y=prop, fill=SS)) + geom_bar(stat=&quot;identity&quot;) + labs(title=&quot;Proportion of PAS with signal site&quot;, x=&quot;Location&quot;, y=&quot;Propotion&quot;)</code></pre>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Look at usage of those with a signal site to those without. In each fraction</p>
+<div id="total" class="section level3">
+<h3>Total:</h3>
+<pre class="r"><code>TotalPASUsage=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc&quot;,stringsAsFactors = F,col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;Strand&quot;, &quot;PAS&quot;, &quot;TotalUsage&quot;)) %&gt;% select(PAS, TotalUsage)
+
+allPAS_totUsage=allPAS %&gt;% inner_join(TotalPASUsage, by=&quot;PAS&quot;)</code></pre>
+<pre class="r"><code>ggplot(allPAS_totUsage, aes(x=loc, y=TotalUsage, fill=SS)) + geom_boxplot() + labs(title=&quot;Mean Usage in total fraction\n by presence of signal site&quot;)</code></pre>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nuclear" class="section level3">
+<h3>Nuclear</h3>
+<pre class="r"><code>NuclearPASUsage=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc&quot;,stringsAsFactors = F,col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;Strand&quot;, &quot;PAS&quot;, &quot;NuclearUsage&quot;)) %&gt;% select(PAS, NuclearUsage)
+
+allPAS_nucUsage=allPAS %&gt;% inner_join(NuclearPASUsage, by=&quot;PAS&quot;)</code></pre>
+<pre class="r"><code>ggplot(allPAS_nucUsage, aes(x=loc, y=NuclearUsage, fill=SS)) + geom_boxplot()</code></pre>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="intronic-credible-set" class="section level2">
+<h2>Intronic credible set</h2>
+<p>For these I will add the criteria that there are more RNA seq reads upstream. For these I am looking at those in the total fraction.</p>
 <ol style="list-style-type: decimal">
 <li><p><a href="signalsiteanalysis.html">Signal site analyis</a></p></li>
 <li><p><a href="intonRNAratio.html">RNA evidence upstream</a></p></li>
 </ol>
-<pre class="r"><code>signalPAS=read.table(&quot;../data/PAS/PASwSignalSite.txt&quot;, header  =T, stringsAsFactors = F) %&gt;% filter(loc==&quot;intron&quot;)</code></pre>
-<pre class="r"><code>RNAupstream=read.table(file=&quot;../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt&quot;, header = T, stringsAsFactors = F) </code></pre>
-<p>Join these together on the PAS gene and loc</p>
-<pre class="r"><code>PAS_signalandRNA=RNAupstream %&gt;% inner_join(signalPAS, by=c(&quot;PAS&quot;, &quot;gene&quot;, &quot;loc&quot;))</code></pre>
-<p>I can look at these in IGV.</p>
+<pre class="r"><code>signalPASIntronic=read.table(&quot;../data/PAS/PASwSignalSite.txt&quot;, header  =T, stringsAsFactors = F) %&gt;% filter(loc==&quot;intron&quot;)
+RNAupstream=read.table(file=&quot;../data/intronRNAratio/TotalPAS_MoreUpstreamRNAreads.txt&quot;, header = T, stringsAsFactors = F) 
+allPAS_intron=allPAS %&gt;% filter(loc==&quot;intron&quot;)</code></pre>
+<p>Make vectors to add the information</p>
+<pre class="r"><code>RNAupstreamvec=as.vector(RNAupstream$PAS)
+signalPASIntronicVec=as.vector(signalPASIntronic$PAS)
+
+PAS_signalandRNA=allPAS_intron %&gt;% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, &quot;Yes&quot;, &quot;No&quot;), RNA= ifelse(PAS %in% RNAupstreamvec, &quot;Yes&quot; , &quot;No&quot;), BothEv=ifelse(SS==&quot;Yes&quot;&amp; RNA==&quot;Yes&quot;, &quot;Yes&quot;, &quot;No&quot;))</code></pre>
+<p>Where are these with respect to the gene body:</p>
+<pre class="r"><code>length=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% mutate(length=abs(end-start)) %&gt;%  mutate(TSS= ifelse(strand==&quot;+&quot;, start, end)) %&gt;% select(gene, length,TSS, strand) %&gt;% select(-strand)
+
+
+#filter those outside genes (problem do to multiple transcripts)
+PAS_signalandRNA_Len=PAS_signalandRNA %&gt;% inner_join(length, by=&quot;gene&quot;) %&gt;% mutate(distance=ifelse(strand==&quot;+&quot;, end- TSS, TSS-end), perlength=distance/length) %&gt;% filter(perlength&lt;1, perlength&gt;0)</code></pre>
+<p>Plot these:</p>
+<pre class="r"><code>ssintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=SS, x=perlength)) + geom_density(alpha=.5) + labs(title=&quot;Distribution of intronic PAS along genes\n by presence of signal site&quot;, x=&quot;Percent gene length&quot;)
+
+rnaintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=RNA, x=perlength)) + geom_density(alpha=.5)+labs(title=&quot;Distribution of intronic PAS along genes\n by presence of more RNA upstream&quot;, x=&quot;Percent gene length&quot;)
+
+bothintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=BothEv, x=perlength)) + geom_density(alpha=.5)+ labs(title=&quot;Distribution of intronic PAS along genes\n by Both lines of evidence&quot;, x=&quot;Percent gene length&quot;)</code></pre>
+<pre class="r"><code>plot_grid(ssintronlength,rnaintronlength,bothintronlength)</code></pre>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="qtl" class="section level3">
+<h3>QTL</h3>
 <p>Are any of these total QTLs?</p>
 <pre class="r"><code>totQTL=read.table(&quot;../data/apaQTLs/Total_apaQTLs_5fdr.txt&quot;, header = T, stringsAsFactors = F) %&gt;% dplyr::rename(&quot;PAS&quot;=Peak)</code></pre>
 <p>Filter join the PAS set with the QTLs</p>
@@ -1064,9 +1176,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
- [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.1   tidyverse_1.2.1
+ [1] cowplot_0.9.4   workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1  
+ [5] dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1     tidyr_0.8.3    
+ [9] tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
@@ -1079,8 +1191,11 @@ loaded via a namespace (and not attached):
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
 [33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
+[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
+[49] crayon_1.3.4    </code></pre>
+</div>
+</div>
 </div>
 
 
