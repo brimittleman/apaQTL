@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-13
+<strong>Last updated:</strong> 2019-06-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecc3b639dfc6cf1ff65b1eb12cb86538e1b2ff29ctargetblankcc3b639a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/cc3b639dfc6cf1ff65b1eb12cb86538e1b2ff29c" target="_blank">cc3b639</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee0acd4457fa35a317126356d81db8c2dee0af2f6targetblanke0acd44a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e0acd4457fa35a317126356d81db8c2dee0af2f6" target="_blank">e0acd44</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecc3b639dfc6cf1ff65b1eb12cb86538e1b2ff29ctargetblankcc3b639a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee0acd4457fa35a317126356d81db8c2dee0af2f6targetblanke0acd44a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,11 +448,13 @@ Untracked files:
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._EandPqtls.sh
     Untracked:  code/._FC_NucintornUpandDown.sh
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_intornUpandDownsteamPAS.sh
@@ -470,6 +472,7 @@ Untracked files:
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
+    Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -489,6 +492,7 @@ Untracked files:
     Untracked:  code/._bothFracDTplot4thintron.sh
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
+    Untracked:  code/._changenomQTLres2geneName.py
     Untracked:  code/._chooseAnno2SAF.py
     Untracked:  code/._chooseSignalSite
     Untracked:  code/._chooseSignalSite.py
@@ -544,6 +548,7 @@ Untracked files:
     Untracked:  code/._makeeQTLempirical_unexp.py
     Untracked:  code/._makeeQTLempiricaldist.py
     Untracked:  code/._makegencondeTSSfile.py
+    Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
@@ -557,6 +562,7 @@ Untracked files:
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
+    Untracked:  code/._phenoQTLfromlist.py
     Untracked:  code/._processYRIgen.py
     Untracked:  code/._qtlRegionseq.sh
     Untracked:  code/._qtlsPvalOppFrac.py
@@ -580,8 +586,10 @@ Untracked files:
     Untracked:  code/._sepgenobychrom.py
     Untracked:  code/._snakemakePAS.batch
     Untracked:  code/._snakemakefiltPAS.batch
+    Untracked:  code/._sortindexRNAbam.sh
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
+    Untracked:  code/._subsetAPAnotEorPgene.py
     Untracked:  code/._subsetApanoteGene.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
     Untracked:  code/._subset_diffisopheno.py
@@ -611,6 +619,9 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/DistPAS2Sig.py
+    Untracked:  code/EandPqtl.err
+    Untracked:  code/EandPqtl.out
+    Untracked:  code/EandPqtls.sh
     Untracked:  code/EncodeRNADTPlotGeneRegions.err
     Untracked:  code/EncodeRNADTPlotGeneRegions.out
     Untracked:  code/FC_NucintornUpandDown.sh
@@ -652,10 +663,15 @@ Untracked files:
     Untracked:  code/NascentRNAdtPlotintronicPAS.sh
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
+    Untracked:  code/Nuclear_example.err
+    Untracked:  code/Nuclear_example.out
     Untracked:  code/QTL2bed.py
     Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
+    Untracked:  code/RNAbam2bw.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/Script4NuclearQTLexamples.sh
+    Untracked:  code/Script4TotalQTLexamples.sh
     Untracked:  code/TESplots100bp.err
     Untracked:  code/TESplots100bp.out
     Untracked:  code/TESplots100bp.sh
@@ -665,6 +681,8 @@ Untracked files:
     Untracked:  code/TESplots200bp.err
     Untracked:  code/TESplots200bp.out
     Untracked:  code/TESplots200bp.sh
+    Untracked:  code/Total_example.err
+    Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/ZipandTabPheno.sh
@@ -690,6 +708,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
     Untracked:  code/correctNomeqtl.R
@@ -741,12 +760,15 @@ Untracked files:
     Untracked:  code/makeeQTLempirical_unexp.py
     Untracked:  code/makeeQTLempiricaldist.py
     Untracked:  code/makegencondeTSSfile.py
+    Untracked:  code/mergRNABam.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
     Untracked:  code/mergeBamNacent.err
     Untracked:  code/mergeBamNacent.out
     Untracked:  code/mergeBamNascent.sh
+    Untracked:  code/mergeRNAbam.err
+    Untracked:  code/mergeRNAbam.out
     Untracked:  code/mnase1stintron.sh
     Untracked:  code/mnaseDTPlot1stintron.err
     Untracked:  code/mnaseDTPlot1stintron.out
@@ -759,6 +781,7 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/processYRIgen.py
     Untracked:  code/qtlFacetBoxplots.err
     Untracked:  code/qtlFacetBoxplots.out
@@ -812,6 +835,10 @@ Untracked files:
     Untracked:  code/seqQTLregion.out
     Untracked:  code/snakePASlog.out
     Untracked:  code/snakefiltPASlog.out
+    Untracked:  code/sortindexRNABam.err
+    Untracked:  code/sortindexRNABam.out
+    Untracked:  code/sortindexRNAbam.sh
+    Untracked:  code/subsetAPAnotEorPgene.py
     Untracked:  code/subsetApanoteGene.py
     Untracked:  code/subsetUnexplainedeQTLs.py
     Untracked:  code/subset_diffisopheno.py
@@ -829,10 +856,13 @@ Untracked files:
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
+    Untracked:  code/writeExampleQTLcode.py
     Untracked:  code/zipandtabPhen.err
     Untracked:  code/zipandtabPhen.out
     Untracked:  data/._.DS_Store
     Untracked:  data/ApaByEgene/
+    Untracked:  data/ApaByPgene/
+    Untracked:  data/Battle_pQTL/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
@@ -842,6 +872,7 @@ Untracked files:
     Untracked:  data/HMMqtls/
     Untracked:  data/Li_eQTLs/
     Untracked:  data/NascentRNA/
+    Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
@@ -883,6 +914,8 @@ Untracked files:
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
+    Untracked:  data/molPhenos/
+    Untracked:  data/molQTLs/
     Untracked:  data/motifdistrupt/
     Untracked:  data/netseq/
     Untracked:  data/nonNorm_pheno/
@@ -907,10 +940,10 @@ Untracked files:
 
 Unstaged changes:
     Modified:   analysis/Readdistagainstfeatures.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   analysis/nascenttranscription.Rmd
-    Modified:   analysis/nucintronicanalysis.Rmd
+    Modified:   analysis/molQTL.Rmd
+    Modified:   analysis/nascentRNA.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
+    Modified:   analysis/signalsiteanalysis.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -964,6 +997,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e0acd4457fa35a317126356d81db8c2dee0af2f6/analysis/rna_netseq_h3k12ac.Rmd" target="_blank">e0acd44</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-19
+</td>
+<td>
+fix order
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/rna_netseq_h3k12ac.html" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1126,12 +1193,12 @@ add reg heatmap
 </div>
 <p>In this analysis I want to look at the correlation between the net seq daata, rna seq, 4su, and h3k27ac to understand the relationship between nascent transcription and steady state RNA. This will be similar to the analysis in Li et al 2016 figure 1c.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(gplots)</code></pre>
@@ -1269,6 +1336,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-17-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/5557709cb0accd855779b8330eb594bae63ad2ee/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-17-1.png" target="_blank">5557709</a>
 </td>
 <td>
@@ -1340,6 +1418,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-21-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-21-1.png" target="_blank">9958fb1</a>
 </td>
 <td>
@@ -1377,6 +1466,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-22-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-22-1.png" target="_blank">9958fb1</a>
@@ -1418,6 +1518,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-23-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-23-1.png" target="_blank">9958fb1</a>
 </td>
 <td>
@@ -1455,6 +1566,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-24-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-24-1.png" target="_blank">9958fb1</a>
@@ -1496,6 +1618,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-25-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-25-1.png" target="_blank">9958fb1</a>
 </td>
 <td>
@@ -1533,6 +1666,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-26-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-26-1.png" target="_blank">9958fb1</a>
@@ -1574,6 +1718,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-27-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-27-1.png" target="_blank">9958fb1</a>
 </td>
 <td>
@@ -1611,6 +1766,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-28-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-28-1.png" target="_blank">9958fb1</a>
@@ -1652,6 +1818,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-29-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-29-1.png" target="_blank">9958fb1</a>
 </td>
 <td>
@@ -1691,6 +1868,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-30-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9958fb1e579961dcfe7ca64c5c3a31e3ea22cd62/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-30-1.png" target="_blank">9958fb1</a>
 </td>
 <td>
@@ -1704,12 +1892,74 @@ brimittleman
 </table>
 </div>
 </div>
-<p>heatmap correlation for these:</p>
+<pre class="r"><code>ggplotRegression(lm(Allpheno_mean$NucApa~ Allpheno_mean$Rna))</code></pre>
+<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-1">
+Past versions of unnamed-chunk-31-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/34dcae7b5ca46453bb9ce673f40380e8cd8b4877/docs/figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-31-1.png" target="_blank">34dcae7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>ggplotRegression(lm(Allpheno_mean$NucApa~ Allpheno_mean$FourSU))</code></pre>
+<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-31-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplotRegression(lm(Allpheno_mean$TotApa~ Allpheno_mean$Rna))</code></pre>
+<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplotRegression(lm(Allpheno_mean$TotApa~ Allpheno_mean$FourSU))</code></pre>
+<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-32-2.png" width="672" style="display: block; margin: auto;" /> heatmap correlation for these:</p>
 <pre class="r"><code>Allpheno_mean_mat= as.matrix(Allpheno_mean %&gt;% dplyr::select(-ID))
 Allpheno_mean_matcorr= abs(round(cor(Allpheno_mean_mat,method=&quot;spearman&quot;),2))
 
-heatmap.2(as.matrix(Allpheno_mean_matcorr),trace=&quot;none&quot;, dendrogram=&#39;col&#39;, col=my_palette)</code></pre>
-<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+
+Allpheno_mean_matcorrOrder=as.data.frame(Allpheno_mean_matcorr) %&gt;% select(NetSeq, H3K27AC,NucApa,TotApa,FourSU,Rna)
+
+
+heatmap.2(as.matrix(Allpheno_mean_matcorrOrder),trace=&quot;none&quot;,dendrogram = &quot;none&quot;, col=my_palette,Colv = F)</code></pre>
+<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Allpheno_mean_matcorrOrder</code></pre>
+<pre><code>        NetSeq H3K27AC NucApa TotApa FourSU  Rna
+H3K27AC   0.07    1.00   0.14   0.12   0.20 0.15
+Rna       0.18    0.15   0.58   0.63   0.88 1.00
+FourSU    0.21    0.20   0.62   0.62   1.00 0.88
+NetSeq    1.00    0.07   0.17   0.18   0.21 0.18
+TotApa    0.18    0.12   0.88   1.00   0.62 0.63
+NucApa    0.17    0.14   1.00   0.88   0.62 0.58</code></pre>
+<p>remove net and k27ac</p>
+<pre class="r"><code>Allpheno_mean_small=as.matrix(Allpheno_mean %&gt;% dplyr::select(-ID,-H3K27AC,-NetSeq))
+Allpheno_meanSM_matcorr= abs(round(cor(Allpheno_mean_small,method=&quot;spearman&quot;),2))
+
+heatmap.2(as.matrix(Allpheno_meanSM_matcorr),trace=&quot;none&quot;, col=my_palette, ,dendrogram = &quot;none&quot;)</code></pre>
+<p><img src="figure/rna_netseq_h3k12ac.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
