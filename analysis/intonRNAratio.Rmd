@@ -71,7 +71,11 @@ Join Results:
 
 I will use upstream - downstream
 ```{r}
-UpandDown=upstreamMeanDF %>% inner_join(downstreanMeanDF, by="Geneid") %>% mutate(UpMinusDown=UpstreamMean_st-DownstreamMean_st) %>% arrange(desc(UpMinusDown)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
+pas2intronTot_peaks=pas2intronTot %>% separate(PeakID, into=c("PAS", "gene", "loc"), sep=":") %>% select(PAS)
+
+
+UpandDown=upstreamMeanDF %>% inner_join(downstreanMeanDF, by="Geneid") %>% mutate(UpMinusDown=UpstreamMean_st-DownstreamMean_st) %>% arrange(desc(UpMinusDown)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))  %>% semi_join(pas2intronTot_peaks, by="PAS")
+
 
 summary(UpandDown$UpMinusDown)
 ```
@@ -82,9 +86,10 @@ I want to know how many are positive:
 ```{r}
 MoreUp=UpandDown %>% filter(UpMinusDown>0) 
 summary(MoreUp$UpMinusDown)
+
 nrow(MoreUp)
 ```
-13903 examples where there are more reads upstream in the intron than downstream.  
+4131 examples where there are more reads upstream in the intron than downstream.  
 
 To look for examples:
 
@@ -133,7 +138,13 @@ downstreamNuc=read.table("../data/intronRNAratio/NuclearDownstreamIntron.fc", co
 upstreamNuc=read.table("../data/intronRNAratio/NuclearUpstreamIntron.fc", col.names = c("Geneid","Chr","Start", "End", "Strand", "Length", "Upstream"), header = T,stringsAsFactors = F)%>% mutate(Upstream_st=Upstream/Length) %>% select(Geneid,Upstream_st )
 
 
-UpandDown_nuc=upstreamNuc %>% inner_join(downstreamNuc, by="Geneid") %>% mutate(UpMinusDown=Upstream_st-Downstream_st) %>% arrange(desc(UpMinusDown)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage"))
+pas2intronNucPAS=pas2intronNuc %>% separate(PeakID, into=c("PAS", "gene", "loc"), sep=":") %>% select(PAS)
+
+
+UpandDown_nuc=upstreamNuc %>% inner_join(downstreamNuc, by="Geneid") %>% mutate(UpMinusDown=Upstream_st-Downstream_st) %>% arrange(desc(UpMinusDown)) %>% separate(Geneid, sep=":", into=c("PAS", "gene", "loc", "PASloc", "Usage")) %>% semi_join(pas2intronNucPAS, by="PAS")
+
+
+
 
 summary(UpandDown_nuc$UpMinusDown)
 ```
