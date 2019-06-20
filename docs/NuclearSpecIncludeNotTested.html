@@ -12,7 +12,7 @@
 <meta name="author" content="Briana Mittleman" />
 
 
-<title>eQTL effect size for Nuclear specific APAqtls</title>
+<title>Nuclear specific APA including those not tested in total</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -316,9 +316,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">eQTL effect size for Nuclear specific APAqtls</h1>
+<h1 class="title toc-ignore">Nuclear specific APA including those not tested in total</h1>
 <h4 class="author"><em>Briana Mittleman</em></h4>
-<h4 class="date"><em>6/17/2019</em></h4>
+<h4 class="date"><em>6/20/2019</em></h4>
 
 </div>
 
@@ -1008,7 +1008,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/6df08b6071d3f3b93b3ed3c759b424fc0967d976/analysis/eQTLeffectNucspecapa.Rmd" target="_blank">6df08b6</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/6df08b6071d3f3b93b3ed3c759b424fc0967d976/analysis/NuclearSpecIncludeNotTested.Rmd" target="_blank">6df08b6</a>
 </td>
 <td>
 brimittleman
@@ -1020,40 +1020,6 @@ brimittleman
 change analysis to include not tested in total as nuc spec
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/743c9c6e421a227c55632ab6db2c67e658b6225c/docs/eQTLeffectNucspecapa.html" target="_blank">743c9c6</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-17
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/bc3ddae8692988ab00f61f8089953b7f540b55dc/analysis/eQTLeffectNucspecapa.Rmd" target="_blank">bc3ddae</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-17
-</td>
-<td>
-add effect size nuc spec
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1061,6 +1027,10 @@ add effect size nuc spec
 </div>
 </div>
 </div>
+<p>In my previous analysis found <a href="NuclearSpecAPAqtl.html">here</a> I took nuclear specific apa QTLs as those tested in total that are not nominally significant in total. In this analysis I will include the nuclear apaQTLs in PAS not tested in total as nuclear specific. These may be important for explaining eQTLs or pQTLs.</p>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.3.0
+Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>── Attaching packages ────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
@@ -1070,58 +1040,88 @@ add effect size nuc spec
 <pre><code>── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(workflowr)</code></pre>
-<pre><code>This is workflowr version 1.3.0
-Run ?workflowr for help getting started</code></pre>
-<p>I am interested in seeing if the nuclear specific apaQTL snps have higher eQTL effect sizes than the shared apaQTLs. This comes from my expectation that the nuclear specific apaQTLs are more likely to be eQTLs.</p>
-<p>I am using the nuclear specific apa QTLs including those that are not tested in total from <a href="NuclearSpecIncludeNotTested.Rmd">this analysis</a>.</p>
-<pre class="bash"><code>python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt RNA ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_eQTLRes.txt
-python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt RNA ../data/NucSpeceQTLeffect/SharedApaQTL_eQTLRes.txt
-</code></pre>
-<p>Evaluate results:</p>
-<pre class="r"><code>eqtl4nucqtl=read.table(&quot;../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_eQTLRes.txt&quot;, col.names = c(&quot;gene&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;effect&quot;),stringsAsFactors = F) %&gt;% mutate(set=&quot;Nuclear&quot;)
-
-eqtl4sharedqtl=read.table(&quot;../data/NucSpeceQTLeffect/SharedApaQTL_eQTLRes.txt&quot;, col.names = c(&quot;gene&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;effect&quot;),stringsAsFactors = F)%&gt;% mutate(set=&quot;Shared&quot;)
-
-
-eQTLsboth=eqtl4nucqtl %&gt;% bind_rows(eqtl4sharedqtl)</code></pre>
-<p>Plot:</p>
-<pre class="r"><code>ggplot(eQTLsboth,aes(x=set, y=abs(effect)))+ geom_boxplot()</code></pre>
-<p><img src="figure/eQTLeffectNucspecapa.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggplot(eQTLsboth,aes(x=set, y=pval))+ geom_boxplot()+ geom_jitter() </code></pre>
-<p><img src="figure/eQTLeffectNucspecapa.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /> No effect. What if we jsut look at nominally sig snps.</p>
-<pre class="r"><code>eQTLsbothSig=eQTLsboth %&gt;% filter(pval&lt;.05)
-
-ggplot(eQTLsbothSig,aes(x=set, y=abs(effect),fill=set))+ geom_boxplot() + geom_jitter() </code></pre>
-<p><img src="figure/eQTLeffectNucspecapa.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>t.test(abs(effect) ~ set, data = eQTLsbothSig, alternative=&quot;greater&quot;)</code></pre>
+<pre class="r"><code>library(cowplot)</code></pre>
 <pre><code>
-    Welch Two Sample t-test
+Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
 
-data:  abs(effect) by set
-t = 0.13824, df = 37.804, p-value = 0.4454
-alternative hypothesis: true difference in means is greater than 0
+    ggsave</code></pre>
+<p>I will give all of the QTLs an id.</p>
+<pre class="r"><code>nucQTls=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt&quot;,header = T, stringsAsFactors = F) %&gt;% mutate(ID=paste(Gene,Peak, sid, sep=&quot;:&quot;))
+sharedQTLs=read.table(&quot;../data/apaQTLs/SharedAPAQTLs.txt&quot;, header = T, stringsAsFactors = F) %&gt;% mutate(ID=paste(gene,peakNum, snp, sep=&quot;:&quot;))
+
+sharedQTL_ID=as.vector(sharedQTLs$ID)</code></pre>
+<p>Nuclear Specific:</p>
+<pre class="r"><code>NuclearSpecQTL= nucQTls %&gt;% mutate(Shared=ifelse(ID %in% sharedQTL_ID, &quot;Yes&quot;, &quot;No&quot;))
+NuclearSpecQTL$Shared=as.factor(NuclearSpecQTL$Shared)</code></pre>
+<p>I need to input the explained eGenes, unexplained eGenes, and pGenes. For this I will make sure none of the pgenes are eGenes.</p>
+<pre class="r"><code>explained=read.table(&quot;../data/Li_eQTLs/explainedEgenes.txt&quot;, header = F, stringsAsFactors = F, col.names = c(&quot;gene&quot;))
+unexplained=read.table(&quot;../data/Li_eQTLs/UnexplainedEgenes.txt&quot;, header = F, stringsAsFactors = F, col.names = c(&quot;gene&quot;))
+protein=read.table(&quot;../data/Battle_pQTL/psQTLGeneNames.txt&quot;,header = F, stringsAsFactors = F,col.names = c(&quot;gene&quot;))</code></pre>
+<pre class="r"><code>&#39;%!in%&#39; &lt;- function(x,y)!(&#39;%in%&#39;(x,y))
+
+
+protein_only=protein %&gt;% filter(gene %!in% explained$gene &amp; gene %!in% unexplained$gene)
+
+write.table(protein_only, &quot;../data/Battle_pQTL/pQTLGeneNamesONLYP.txt&quot;, col.names = F, row.names = F,quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>Are nuc specific less likely to be in p genes?</p>
+<pre class="r"><code>NuclearSpecQTL_gene=NuclearSpecQTL %&gt;% mutate(pGene=ifelse(Gene %in% protein_only$gene, &quot;Yes&quot;, &quot;No&quot;), uneplained=ifelse(Gene %in% unexplained$gene, &quot;Yes&quot;, &quot;No&quot;), explained=ifelse(Gene %in% explained$gene, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
+<pre class="r"><code>nPandShare=nrow(NuclearSpecQTL_gene %&gt;% filter(Shared==&quot;Yes&quot;, pGene==&quot;Yes&quot;))/nrow(NuclearSpecQTL_gene)
+nPandShare</code></pre>
+<pre><code>[1] 0.01037613</code></pre>
+<pre class="r"><code>nPandNotShare=nrow(NuclearSpecQTL_gene %&gt;% filter(Shared==&quot;No&quot;, pGene==&quot;Yes&quot;))/nrow(NuclearSpecQTL_gene)
+nPandNotShare</code></pre>
+<pre><code>[1] 0.002594034</code></pre>
+<p>Only looking at 8 and 2. This isnt very good. Cant make claim.</p>
+<pre class="r"><code>nEandShare=nrow(NuclearSpecQTL_gene %&gt;% filter(Shared==&quot;Yes&quot;, uneplained==&quot;Yes&quot; |explained==&quot;Yes&quot; ))
+
+nEandShare</code></pre>
+<pre><code>[1] 113</code></pre>
+<pre class="r"><code>nEandNotShare=nrow(NuclearSpecQTL_gene %&gt;% filter(Shared==&quot;No&quot;, uneplained==&quot;Yes&quot; |explained==&quot;Yes&quot;))
+nEandNotShare</code></pre>
+<pre><code>[1] 59</code></pre>
+<pre class="r"><code>prop.test(x=c(nEandShare,nEandNotShare),n=c(nrow(NuclearSpecQTL_gene),nrow(NuclearSpecQTL_gene)))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(nEandShare, nEandNotShare) out of c(nrow(NuclearSpecQTL_gene), nrow(NuclearSpecQTL_gene))
+X-squared = 18.382, df = 1, p-value = 1.808e-05
+alternative hypothesis: two.sided
 95 percent confidence interval:
- -0.1922492        Inf
+ 0.03751188 0.10256594
 sample estimates:
-mean in group Nuclear  mean in group Shared 
-            0.5879320             0.5707627 </code></pre>
-<pre class="bash"><code>python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt Protein ../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc_pQTLRes.txt
-python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt Protein ../data/NucSpeceQTLeffect/SharedApaQTLnottestedinc_pQTLRes.txt</code></pre>
-<pre class="r"><code>pqtl4nucqtl=read.table(&quot;../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc_pQTLRes.txt&quot;, col.names = c(&quot;gene&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;effect&quot;),stringsAsFactors = F) %&gt;% mutate(set=&quot;Nuclear&quot;)
+    prop 1     prop 2 
+0.14656291 0.07652399 </code></pre>
+<p>I want to not count genes with multiple qtl</p>
+<pre class="r"><code>nGenes=NuclearSpecQTL_gene %&gt;% group_by(Gene) %&gt;% summarise(n=n()) %&gt;% nrow()
+nGenes</code></pre>
+<pre><code>[1] 609</code></pre>
+<pre class="r"><code>Egeneandshared=NuclearSpecQTL_gene %&gt;% filter(Shared==&quot;Yes&quot;, uneplained==&quot;Yes&quot; |explained==&quot;Yes&quot; ) %&gt;% group_by(Gene) %&gt;% summarise(n=n()) %&gt;% nrow()
+Egeneandshared</code></pre>
+<pre><code>[1] 89</code></pre>
+<pre class="r"><code>EgeneandNotshared=NuclearSpecQTL_gene %&gt;% filter(Shared==&quot;No&quot;, uneplained==&quot;Yes&quot; |explained==&quot;Yes&quot; ) %&gt;% group_by(Gene) %&gt;% summarise(n=n()) %&gt;% nrow()
+EgeneandNotshared</code></pre>
+<pre><code>[1] 53</code></pre>
+<pre class="r"><code>prop.test(x=c(Egeneandshared,EgeneandNotshared),n=c(nGenes,nGenes))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
 
-pqtl4sharedqtl=read.table(&quot;../data/NucSpeceQTLeffect/SharedApaQTLnottestedinc_pQTLRes.txt&quot;, col.names = c(&quot;gene&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;effect&quot;),stringsAsFactors = F)%&gt;% mutate(set=&quot;Shared&quot;)
-
-
-pQTLsboth=pqtl4nucqtl %&gt;% bind_rows(pqtl4sharedqtl)</code></pre>
-<pre class="r"><code>ggplot(pQTLsboth,aes(x=set, y=abs(effect)))+ geom_boxplot()</code></pre>
-<p><img src="figure/eQTLeffectNucspecapa.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggplot(pQTLsboth,aes(x=set, y=pval))+ geom_boxplot()+ geom_jitter() </code></pre>
-<p><img src="figure/eQTLeffectNucspecapa.Rmd/unnamed-chunk-9-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>pQTLsbothSig=pQTLsboth %&gt;% filter(pval&lt;.05)
-
-ggplot(pQTLsbothSig,aes(x=set, y=abs(effect),fill=set))+ geom_boxplot() + geom_jitter() </code></pre>
-<p><img src="figure/eQTLeffectNucspecapa.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> Not significant.</p>
+data:  c(Egeneandshared, EgeneandNotshared) out of c(nGenes, nGenes)
+X-squared = 9.7652, df = 1, p-value = 0.001778
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.02157843 0.09664817
+sample estimates:
+    prop 1     prop 2 
+0.14614122 0.08702791 </code></pre>
+<p>This is significant. This means the extra PAS are most likely driving the egene overlap.</p>
+<p>Write these out for other anaylsis.</p>
+<pre class="r"><code>NuclearSpecQTL_shared= NuclearSpecQTL %&gt;% filter(Shared==&quot;Yes&quot;) %&gt;% select(Gene, sid)
+write.table(NuclearSpecQTL_shared,file=&quot;../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt&quot;, col.names = F, row.names = F, sep=&quot;\t&quot;, quote = F )
+NuclearSpecQTL_specific=NuclearSpecQTL %&gt;% filter(Shared==&quot;No&quot;)%&gt;% select(Gene, sid)
+write.table(NuclearSpecQTL_specific,file=&quot;../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt&quot;, col.names = F, row.names = F, sep=&quot;\t&quot;, quote = F )</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1149,9 +1149,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] workflowr_1.3.0 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
+ [1] cowplot_0.9.4   forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
  [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.1   tidyverse_1.2.1
+ [9] ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.3.0
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
@@ -1164,9 +1164,8 @@ loaded via a namespace (and not attached):
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
 [33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
-[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
-[49] crayon_1.3.4    </code></pre>
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
+[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 
