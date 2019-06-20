@@ -57,7 +57,7 @@ Look at the PAS used more in total and nuclear:
 
 ```{bash,eval=F}
 sbatch NascentRNAdtPlotTotPAS.sh
-sbatch NascentRNAdtPlotTotPAS.sh
+sbatch NascentRNAdtPlotNucPAS.sh
 ```
 
 
@@ -105,4 +105,20 @@ sbatch NascentRNAdtPlotFirstintronicPAS.sh
 sbatch NascentRNAdtPlotExcludeFirstintronicPAS.sh
 
 ```
+
+
+I also want to quantify nascent seq at each gene for comparing to other data types. I will use feature counts.  
+
+I need to add the chr to /project2/gilad/briana/genome_anotation_data/refseq.ProteinCoding.noCHR.SAF
+
+```{r}
+genes=read.table("/project2/gilad/briana/genome_anotation_data/refseq.ProteinCoding.noCHR.SAF", header = T, stringsAsFactors = F) %>% mutate(Chr=paste("chr", Chr, sep=""))
+write.table(genes,"/project2/gilad/briana/genome_anotation_data/refseq.ProteinCoding.SAF", col.names = T, row.names = F, quote = F, sep="\t")
+
+```
+
+```{bash,eval=F}
+sbatch FC_nascentseq.sh
+```
+
 
