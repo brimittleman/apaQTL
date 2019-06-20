@@ -137,6 +137,21 @@ bothintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=BothEv, x=perlength)) + g
 plot_grid(ssintronlength,rnaintronlength,bothintronlength)
 ```
 
+Which intron are these in.  
+
+```{r}
+nucIntronIDPAS=read.table("../data/intron_analysis/NuclearIntronPASwithWhichintron.txt",header = T, stringsAsFactors = F) %>% separate(PeakID, into=c("PAS", "gene2","loc"), sep=":") %>% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, "yes","no")) %>% mutate(IntronCat=ifelse(nintron<=6, "first (<6)", ifelse(nintron>6 &nintron<=11, "second (6-11)", ifelse(nintron>11 &nintron<=18, "third (11-18)", "fourth (>18)"))))
+
+ggplot(nucIntronIDPAS, aes(x=Intronid, fill=SS)) + geom_bar(alpha=.5,position = "dodge") + xlim(0,10) + facet_grid(~IntronCat)
+```
+
+```{r}
+totIntronIDPAS=read.table("../data/intron_analysis/TotalIntronPASwithWhichintron.txt",header = T, stringsAsFactors = F) %>% separate(PeakID, into=c("PAS", "gene2","loc"), sep=":") %>% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, "yes","no")) %>% mutate(IntronCat=ifelse(nintron<=6, "first (<6)", ifelse(nintron>6 &nintron<=11, "second (6-11)", ifelse(nintron>11 &nintron<=18, "third (11-18)", "fourth (>18)"))))
+
+ggplot(totIntronIDPAS, aes(x=Intronid, fill=SS)) + geom_bar(alpha=.5,position = "dodge") + xlim(0,10) + facet_grid(~IntronCat)
+```
+
+No signal 
 ###QTL  
 
 Are any of these total QTLs?

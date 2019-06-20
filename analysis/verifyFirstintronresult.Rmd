@@ -56,6 +56,9 @@ Join with PAS:
 ```{r}
 pas2intron_intron=pas2intron %>% inner_join(introns, by=c("intronStart","intronEnd","gene", "strand" ))
 pas2intron_intron$Intronid=as.factor(pas2intron_intron$Intronid)
+
+
+write.table(pas2intron_intron, "../data/intron_analysis/NuclearIntronPASwithWhichintron.txt", col.names = T, row.names = F, quote = F, sep="\t")
 ```
 
 
@@ -105,6 +108,8 @@ pas2intronTot=read.table("../data/intron_analysis/TotalIntronPeaksontoIntrons.be
 
 pas2intronTot$LengthCat <- factor(pas2intronTot$LengthCat, levels=c("first", "second", "third", "fourth"))
 pas2intronTot_intron=pas2intronTot %>% inner_join(introns, by=c("intronStart","intronEnd","gene", "strand" ))
+
+write.table(pas2intronTot_intron, "../data/intron_analysis/TotalIntronPASwithWhichintron.txt", col.names = T, row.names = F, quote = F, sep="\t")
 ```
 
 
