@@ -1,0 +1,104 @@
+---
+title: "Nuclear specific APA including those not tested in total"
+author: "Briana Mittleman"
+date: "6/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In my previous analysis found [here](NuclearSpecAPAqtl.html) I took nuclear specific apa QTLs as those tested in total that are not nominally significant in total. In this analysis I will include the nuclear apaQTLs in PAS not tested in total as nuclear specific. These may be important for explaining eQTLs or pQTLs.
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(cowplot)
+```
+
+I will give all of the QTLs an id. 
+```{r}
+nucQTls=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt",header = T, stringsAsFactors = F) %>% mutate(ID=paste(Gene,Peak, sid, sep=":"))
+sharedQTLs=read.table("../data/apaQTLs/SharedAPAQTLs.txt", header = T, stringsAsFactors = F) %>% mutate(ID=paste(gene,peakNum, snp, sep=":"))
+
+sharedQTL_ID=as.vector(sharedQTLs$ID)
+```
+
+Nuclear Specific:
+
+```{r}
+NuclearSpecQTL= nucQTls %>% mutate(Shared=ifelse(ID %in% sharedQTL_ID, "Yes", "No"))
+NuclearSpecQTL$Shared=as.factor(NuclearSpecQTL$Shared)
+```
+
+I need to input the explained eGenes, unexplained eGenes, and pGenes. For this I will make sure none of the pgenes are eGenes.
+
+```{r}
+explained=read.table("../data/Li_eQTLs/explainedEgenes.txt", header = F, stringsAsFactors = F, col.names = c("gene"))
+unexplained=read.table("../data/Li_eQTLs/UnexplainedEgenes.txt", header = F, stringsAsFactors = F, col.names = c("gene"))
+protein=read.table("../data/Battle_pQTL/psQTLGeneNames.txt",header = F, stringsAsFactors = F,col.names = c("gene"))
+```
+
+
+```{r}
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+
+protein_only=protein %>% filter(gene %!in% explained$gene & gene %!in% unexplained$gene)
+
+write.table(protein_only, "../data/Battle_pQTL/pQTLGeneNamesONLYP.txt", col.names = F, row.names = F,quote = F, sep="\t")
+```
+
+
+Are nuc specific less likely to be in p genes?
+
+```{r}
+NuclearSpecQTL_gene=NuclearSpecQTL %>% mutate(pGene=ifelse(Gene %in% protein_only$gene, "Yes", "No"), uneplained=ifelse(Gene %in% unexplained$gene, "Yes", "No"), explained=ifelse(Gene %in% explained$gene, "Yes","No"))
+```
+
+```{r}
+nPandShare=nrow(NuclearSpecQTL_gene %>% filter(Shared=="Yes", pGene=="Yes"))/nrow(NuclearSpecQTL_gene)
+nPandShare
+nPandNotShare=nrow(NuclearSpecQTL_gene %>% filter(Shared=="No", pGene=="Yes"))/nrow(NuclearSpecQTL_gene)
+nPandNotShare
+
+```
+Only looking at 8 and 2. This isnt very good.  Cant make claim.  
+
+```{r}
+nEandShare=nrow(NuclearSpecQTL_gene %>% filter(Shared=="Yes", uneplained=="Yes" |explained=="Yes" ))
+
+nEandShare
+nEandNotShare=nrow(NuclearSpecQTL_gene %>% filter(Shared=="No", uneplained=="Yes" |explained=="Yes"))
+nEandNotShare
+
+
+prop.test(x=c(nEandShare,nEandNotShare),n=c(nrow(NuclearSpecQTL_gene),nrow(NuclearSpecQTL_gene)))
+```
+
+I want to not count genes with multiple qtl  
+
+```{r}
+nGenes=NuclearSpecQTL_gene %>% group_by(Gene) %>% summarise(n=n()) %>% nrow()
+nGenes
+Egeneandshared=NuclearSpecQTL_gene %>% filter(Shared=="Yes", uneplained=="Yes" |explained=="Yes" ) %>% group_by(Gene) %>% summarise(n=n()) %>% nrow()
+Egeneandshared
+EgeneandNotshared=NuclearSpecQTL_gene %>% filter(Shared=="No", uneplained=="Yes" |explained=="Yes" ) %>% group_by(Gene) %>% summarise(n=n()) %>% nrow()
+EgeneandNotshared
+
+
+prop.test(x=c(Egeneandshared,EgeneandNotshared),n=c(nGenes,nGenes))
+```
+This is significant. This means the extra PAS are most likely driving the egene overlap.  
+
+Write these out for other anaylsis.  
+
+```{r}
+NuclearSpecQTL_shared= NuclearSpecQTL %>% filter(Shared=="Yes") %>% select(Gene, sid)
+write.table(NuclearSpecQTL_shared,file="../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt", col.names = F, row.names = F, sep="\t", quote = F )
+NuclearSpecQTL_specific=NuclearSpecQTL %>% filter(Shared=="No")%>% select(Gene, sid)
+write.table(NuclearSpecQTL_specific,file="../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt", col.names = F, row.names = F, sep="\t", quote = F )
+```
+

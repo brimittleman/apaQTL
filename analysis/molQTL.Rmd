@@ -31,5 +31,9 @@ cat ../data/molQTLs/fastqtl_qqnorm_prot.fixed.nominal.chunk* > ../data/molQTLs/f
 ```
 
 
+Fix gene names in the results:
 
-I can use these results for analysis down the road.  
+```{bash,eval=F}
+python changenomQTLres2geneName.py
+```
+

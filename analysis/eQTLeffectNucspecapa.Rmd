@@ -16,36 +16,11 @@ library(workflowr)
 
 I am interested in seeing if the nuclear specific apaQTL snps have higher eQTL effect sizes than the shared apaQTLs. This comes from my expectation that the nuclear specific apaQTLs are more likely to be eQTLs. 
 
-The eQTL results are in ../data/molQTLs/. The nuclear specific apaQTLs are in ../data/QTLoverlap/NucSpecApaQTL.txt these are the nuclear qtls that do not have nominally significant pvalues in the total fraction. (this is excluding PAS we can only test in nuclear)  
-
-First I need to extract the nuclear specific apaQTLs from the eQTL data.  
-
-```{r}
-nucspecapa=read.table("../data/QTLoverlap/NucSpecApaQTL.txt", header = T, stringsAsFactors = F) 
-
-sharedapa=read.table("../data/QTLoverlap/SharedApaQTL.txt", header = T, stringsAsFactors = F)
-
-```
- I can write out the list of snps/gene associations and then I can make a script that will take any file of the same structure and write out the protien or expression stuff.
- 
-The script will take as arguments the file with 2 columns (gene, snp), RNA/PROTEIN, and an outfile .
+I am using the nuclear specific apa QTLs including those that are not tested in total from [this analysis](NuclearSpecIncludeNotTested.Rmd).
 
 ```{bash,eval=F}
-mkdir ../data/NucSpeceQTLeffect
-```
-
-
-```{r}
-nucspecapa_genesnp= nucspecapa %>% select(gene, snp)
-write.table(nucspecapa_genesnp,file="../data/NucSpeceQTLeffect/NuclearSpecficApaQTL.txt", col.names = F, row.names = F, sep="\t", quote = F )
-sharedapa_geneapa=sharedapa %>% select(gene,snp)
-write.table(sharedapa_geneapa,file="../data/NucSpeceQTLeffect/SharedApaQTL.txt", col.names = F, row.names = F, sep="\t", quote = F )
-```
-
-
-```{bash,eval=F}
-python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL.txt RNA ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_eQTLRes.txt
-python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL.txt RNA ../data/NucSpeceQTLeffect/SharedApaQTL_eQTLRes.txt
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt RNA ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_eQTLRes.txt
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt RNA ../data/NucSpeceQTLeffect/SharedApaQTL_eQTLRes.txt
 
 ```
 
@@ -84,15 +59,14 @@ t.test(abs(effect) ~ set, data = eQTLsbothSig, alternative="greater")
 
 
 ```{bash,eval=F}
-python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL.txt Protein ../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_protQTLRes.txt
-python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL.txt Protein ../data/NucSpeceQTLeffect/SharedApaQTL_protQTLRes.txt
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt Protein ../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc_pQTLRes.txt
+python phenoQTLfromlist.py ../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt Protein ../data/NucSpeceQTLeffect/SharedApaQTLnottestedinc_pQTLRes.txt
 ```
 
-
 ```{r}
-pqtl4nucqtl=read.table("../data/NucSpeceQTLeffect/NuclearSpecficApaQTL_protQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F) %>% mutate(set="Nuclear")
+pqtl4nucqtl=read.table("../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc_pQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F) %>% mutate(set="Nuclear")
 
-pqtl4sharedqtl=read.table("../data/NucSpeceQTLeffect/SharedApaQTL_protQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F)%>% mutate(set="Shared")
+pqtl4sharedqtl=read.table("../data/NucSpeceQTLeffect/SharedApaQTLnottestedinc_pQTLRes.txt", col.names = c("gene", "snp", "dist", "pval", "effect"),stringsAsFactors = F)%>% mutate(set="Shared")
 
 
 pQTLsboth=pqtl4nucqtl %>% bind_rows(pqtl4sharedqtl)
@@ -109,5 +83,4 @@ pQTLsbothSig=pQTLsboth %>% filter(pval<.05)
 
 ggplot(pQTLsbothSig,aes(x=set, y=abs(effect),fill=set))+ geom_boxplot() + geom_jitter() 
 ```
-
-None of this is significant. 
+Not significant.  
