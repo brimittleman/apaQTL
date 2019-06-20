@@ -166,4 +166,83 @@ ggplot(allLocPropmelt,aes(x=loc, fill=eQTL, y=value)) + geom_histogram(stat="ide
 
 This is a very stringent test. A less stringent way to get an upper bound would be to make an informed decision about which peak to use. This will make it so I am only testing one PAS per gene.  
 
+##Vary the pvalue cuttoff  
+
+To test if .05 is a good cuttoff for this analysis I will create a function that computes the overlap at different cutoffs. I will go from .01 to .5 by .05  
+
+
+totalapaUnexplained
+totalapaexplained
+
+
+nuclearapaUnexplained
+nuclearapaexplained
+
+```{r}
+prop_overlap=function(status, fraction, cutoff){
+  if (fraction=="Total"){
+    if (status=="Explained"){
+      file=totalapaexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=nrow(sig)/nrow(file)
+    }else {
+      file=totalapaUnexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=nrow(sig)/nrow(file)
+    }
+  } else{
+    if (status=="Explained"){
+      file=nuclearapaexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=nrow(sig)/nrow(file)
+     }else {
+      file=nuclearapaUnexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=nrow(sig)/nrow(file)
+     }
+  }
+  return(proportion)
+}
+
+```
+
+```{r}
+cutoffs=c(0.001,0.01,0.02,0.03,0.04,0.05,0.1,0.2,0.3,0.4,0.5)
+
+TotalExplained_Proportions=c()
+for(i in cutoffs){
+  TotalExplained_Proportions=c( TotalExplained_Proportions, prop_overlap("Explained", "Total", i))
+}
+TotalExplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=TotalExplained_Proportions, Status=rep("Explained", 11), Fraction=rep("Total", 11)))
+
+TotalUnexplained_Proportions=c()
+for(i in cutoffs){
+  TotalUnexplained_Proportions=c(TotalUnexplained_Proportions, prop_overlap("Unexplained", "Total", i))
+}
+TotalUnexplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=TotalUnexplained_Proportions, Status=rep("Unexplained", 11), Fraction=rep("Total", 11)))
+
+NuclearExplained_Proportions=c()
+for(i in cutoffs){
+  NuclearExplained_Proportions=c( NuclearExplained_Proportions, prop_overlap("Explained", "Nuclear", i))
+}
+NuclearExplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=NuclearExplained_Proportions, Status=rep("Explained", 11), Fraction=rep("Nuclear", 11)))
+
+
+NuclearUnexplained_Proportions=c()
+for(i in cutoffs){
+  NuclearUnexplained_Proportions=c( NuclearUnexplained_Proportions, prop_overlap("Unexplained", "Nuclear", i))
+}
+NuclearUnexplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=NuclearUnexplained_Proportions, Status=rep("Unexplained", 11), Fraction=rep("Nuclear", 11)))
+
+
+
+AllPropDF=bind_rows(TotalExplained_ProportionsDF,TotalUnexplained_ProportionsDF,NuclearExplained_ProportionsDF,NuclearUnexplained_ProportionsDF)
+
+AllPropDF$Prop=as.numeric(AllPropDF$Prop)
+```
+Plot this:
+
+```{r}
+ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction)
+```
 
