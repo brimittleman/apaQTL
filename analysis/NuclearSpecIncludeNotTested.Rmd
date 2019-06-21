@@ -16,6 +16,7 @@ In my previous analysis found [here](NuclearSpecAPAqtl.html) I took nuclear spec
 library(workflowr)
 library(tidyverse)
 library(cowplot)
+library(ggpubr)
 ```
 
 I will give all of the QTLs an id. 
@@ -100,5 +101,58 @@ NuclearSpecQTL_shared= NuclearSpecQTL %>% filter(Shared=="Yes") %>% select(Gene,
 write.table(NuclearSpecQTL_shared,file="../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt", col.names = F, row.names = F, sep="\t", quote = F )
 NuclearSpecQTL_specific=NuclearSpecQTL %>% filter(Shared=="No")%>% select(Gene, sid)
 write.table(NuclearSpecQTL_specific,file="../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt", col.names = F, row.names = F, sep="\t", quote = F )
+```
+
+
+
+```{r}
+ggplot(NuclearSpecQTL,aes(x=Loc, fill=Shared)) + geom_bar()
+```
+```{r}
+NuclearSpecQTL__group= NuclearSpecQTL %>% group_by(Loc, Shared) %>% summarise(nShared=n()) %>% ungroup() %>% group_by(Loc) %>% mutate(nLoc=sum(nShared)) %>% ungroup() %>% mutate(prop=nShared/nLoc)
+
+
+ggplot(NuclearSpecQTL__group, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat="identity") + labs(title="Proportion of apaQTL by \nlocation that are nuclear specific")
+```
+
+
+```{r}
+NuclearSpecQTL__group_small=NuclearSpecQTL__group %>% filter( Loc=="intron" |Loc=="utr3")
+
+ggplot(NuclearSpecQTL__group_small, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat="identity") + labs(title="Proportion of apaQTL by \nlocation that are nuclear specific") 
+
+```
+```{r}
+NuclearSpecQTL__group_small
+```
+
+```{r}
+prop.test(x=c(183,87),n=c(297,355))
+```
+
+I want to know if the shared or specific are more likely to decrease/increase 
+```{r}
+
+NuclearSpecQTL=NuclearSpecQTL %>% mutate(Dir=ifelse(slope>1, "Increase", "Decrease"))
+
+NuclearSpecQTL_shareInc=NuclearSpecQTL %>% filter(Loc=="intron",Dir=="Increase", Shared=="Yes") %>% nrow()
+AllShared=NuclearSpecQTL %>%  filter(Loc=="intron", Shared=="Yes") %>% nrow()
+AllInc=NuclearSpecQTL %>%  filter(Loc=="intron", Dir=="Increase") %>% nrow()
+AllDec=NuclearSpecQTL %>%  filter(Loc=="intron", Dir=="Decrease") %>% nrow()
+AllSpec=NuclearSpecQTL %>%  filter(Loc=="intron", Shared=="No") %>% nrow()
+NuclearSpecQTL_SpecInc=NuclearSpecQTL %>% filter(Loc=="intron",Dir=="Increase", Shared=="No") %>% nrow()
+NuclearSpecQTL_shareDec=NuclearSpecQTL %>% filter(Loc=="intron",Dir=="Decrease", Shared=="Yes") %>% nrow()
+NuclearSpecQTL_SpecDec=NuclearSpecQTL %>% filter(Loc=="intron",Dir=="Decrease", Shared=="No") %>% nrow()
+
+#in increased
+NuclearSpecQTL_SpecInc/AllInc
+#in dec
+NuclearSpecQTL_SpecDec/AllDec
+
+
+prop.test(x=c(NuclearSpecQTL_SpecInc,NuclearSpecQTL_SpecDec), n=c(AllInc,AllDec))
+```
+```{r}
+ggplot(NuclearSpecQTL, aes(x=Dir, fill=Shared))+ geom_bar(stat="count") + facet_grid(~Loc) +  theme(axis.text.x=element_text(angle=90, hjust=1))
 ```
 
