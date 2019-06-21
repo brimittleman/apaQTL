@@ -274,7 +274,7 @@ effectsize_deltaPAUProp_both_melt$Fraction=as.character(effectsize_deltaPAUProp_
 ```
 
 ```{r}
-ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Proportion of PAS differentiall used by location",x="") +scale_x_discrete(labels = c('Coding','5kb downstream','Intronic',"3' UTR", "5' UTR")) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.01,.9), legend.direction = "horizontal")
+ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Proportion of PAS differentiall used by location",x="") +scale_x_discrete(labels = c('Coding','5kb downstream','Intronic',"3' UTR", "5' UTR")) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.01,.9), legend.direction = "horizontal") +  theme(panel.background = element_blank())
 ```
 
 More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.  
@@ -385,6 +385,6 @@ summary(effectsize$logef)
 ```
 
 ```{r}
-ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.01,.9), legend.direction = "horizontal")
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.01,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
 ```
 
