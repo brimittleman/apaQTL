@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6679c9507ae4f542b9d32e7f499d6a5e4f6da7f6targetblank6679c95a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6679c9507ae4f542b9d32e7f499d6a5e4f6da7f6" target="_blank">6679c95</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef0e8ce11cd6aa1ef5c359caaeb78eb8b585d5a12targetblankf0e8ce1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f0e8ce11cd6aa1ef5c359caaeb78eb8b585d5a12" target="_blank">f0e8ce1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6679c9507ae4f542b9d32e7f499d6a5e4f6da7f6targetblank6679c95a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef0e8ce11cd6aa1ef5c359caaeb78eb8b585d5a12targetblankf0e8ce1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -947,8 +947,8 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/pQTLandeQTLoverlap.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1002,6 +1002,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f0e8ce11cd6aa1ef5c359caaeb78eb8b585d5a12/analysis/QTLlocation.Rmd" target="_blank">f0e8ce1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+<td>
+merge fracs
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/c0a090f2dc80f6f792001d4e3a7d7a5549c79914/docs/QTLlocation.html" target="_blank">c0a090f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1232,6 +1266,13 @@ brimittleman
 </table>
 </div>
 </div>
+<p>Plot total and nuclear together:</p>
+<pre class="r"><code>totalQTLdist=totQTLs %&gt;% select(dist2PAS) %&gt;% mutate(Fraction=&quot;Total&quot;)
+nuclearQTLdist=nucQTLs %&gt;% select(dist2PAS) %&gt;% mutate(Fraction=&quot;Nuclear&quot;)
+bothFractDist=bind_rows(totalQTLdist, nuclearQTLdist)
+
+ggplot(bothFractDist, aes(x=dist2PAS, fill=Fraction )) + geom_histogram(bins=100) +labs(y=&quot;Number of apaQTLs&quot;, x=&quot;Distance QTL SNP to PAS&quot;, title=&quot;Distance from QTL SNP to PAS by Fraction&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) </code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="metagene-plot" class="section level2">
 <h2>Metagene plot</h2>
@@ -1240,49 +1281,6 @@ brimittleman
 <p>Total:</p>
 <pre class="r"><code>totQTLs_gene= totQTLs %&gt;% inner_join(genes, by=&quot;gene&quot;)%&gt;% mutate(geneLength=Geneend-Genestart) %&gt;% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand==&quot;-&quot;, -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength)  %&gt;% filter(propGene&gt;-5 &amp; propGene&lt;5)</code></pre>
 <pre class="r"><code>ggplot(totQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Total apaQTLs&quot;) + geom_vline(xintercept =0,color= &quot;black&quot;) + geom_vline(xintercept =1,color= &quot;black&quot;)</code></pre>
-<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/4912eaafa457d31e530e63d4ec4b38e26caca4ed/docs/figure/QTLlocation.Rmd/unnamed-chunk-11-1.png" target="_blank">4912eaa</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>There are about 48 QTLs outside.</p>
-<p>I can look at only those in the gene body:</p>
-<pre class="r"><code>totQTLs_gene_body= totQTLs_gene %&gt;% filter(propGene&gt;=0, propGene&lt;=1)
-
-ggplot(totQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Total apaQTLs in gene body&quot;) </code></pre>
 <p><img src="figure/QTLlocation.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
@@ -1321,52 +1319,16 @@ brimittleman
 </table>
 </div>
 </div>
+<p>There are about 48 QTLs outside.</p>
+<p>I can look at only those in the gene body:</p>
+<pre class="r"><code>totQTLs_gene_body= totQTLs_gene %&gt;% filter(propGene&gt;=0, propGene&lt;=1)
+
+ggplot(totQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Total apaQTLs in gene body&quot;) </code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>There are 181 in the gene body</p>
 <p>Nuclear:</p>
 <pre class="r"><code>nucQTLs_gene= nucQTLs %&gt;% inner_join(genes, by=&quot;gene&quot;)%&gt;% mutate(geneLength=Geneend-Genestart) %&gt;% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand==&quot;-&quot;, -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength) %&gt;% filter(propGene&gt;-5 &amp; propGene&lt;5)</code></pre>
 <pre class="r"><code>ggplot(nucQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Nuclear apaQTLs&quot;) + geom_vline(xintercept =0,color= &quot;black&quot;) + geom_vline(xintercept =1,color= &quot;black&quot;)</code></pre>
-<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
-Past versions of unnamed-chunk-14-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-14-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/4912eaafa457d31e530e63d4ec4b38e26caca4ed/docs/figure/QTLlocation.Rmd/unnamed-chunk-14-1.png" target="_blank">4912eaa</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>there are 77 outside of 500% of gene body</p>
-<pre class="r"><code>nucQTLs_gene_body= nucQTLs_gene %&gt;% filter(propGene&gt;=0, propGene&lt;=1)
-
-ggplot(nucQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Nuclear apaQTLs in gene body&quot;) </code></pre>
 <p><img src="figure/QTLlocation.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
@@ -1405,7 +1367,21 @@ brimittleman
 </table>
 </div>
 </div>
-<p>334 are in the gene body.</p>
+<p>there are 77 outside of 500% of gene body</p>
+<pre class="r"><code>nucQTLs_gene_body= nucQTLs_gene %&gt;% filter(propGene&gt;=0, propGene&lt;=1)
+
+ggplot(nucQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;number QTLs&quot;, title=&quot;Nuclear apaQTLs in gene body&quot;) </code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /> 334 are in the gene body.</p>
+<p>Plot both togther:</p>
+<pre class="r"><code>nucQTLs_geneprop= nucQTLs_gene %&gt;% select(propGene) %&gt;% mutate(Fraction=&quot;Nuclear&quot;)
+totQTLs_geneprop= totQTLs_gene %&gt;% select(propGene) %&gt;% mutate(Fraction=&quot;Total&quot;)
+genepropboth=bind_rows(totQTLs_geneprop,nucQTLs_geneprop)
+
+ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_histogram(bins=100) + geom_vline(xintercept =0,color= &quot;black&quot;) + geom_vline(xintercept =1,color= &quot;black&quot;)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;))  + labs(x=&quot;Proportion of gene body&quot;, y=&quot;Number of apaQTLs&quot;, title=&quot;Metagene plot for apaQTL SNP location&quot;)</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /> Density plot</p>
+<pre class="r"><code>ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_density(bins=100) + geom_vline(xintercept =0,color= &quot;black&quot;) + geom_vline(xintercept =1,color= &quot;black&quot;)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;))  + labs(x=&quot;Proportion of gene body&quot;, title=&quot;Metagene plot for apaQTL SNP location&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: bins</code></pre>
+<p><img src="figure/QTLlocation.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
