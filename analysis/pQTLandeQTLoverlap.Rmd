@@ -43,6 +43,7 @@ python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/psQTLGeneNames.txt Nucle
 
 python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/esQTLGenes.txt Nuclear ../data/ApaByPgene/NuclearApaESGenes.txt
 
+
 ```
 I also need those not in eQTL or pQTL: 
 
@@ -67,6 +68,7 @@ tot.PS=na.omit(tot.PS)
 tot.notEorP=na.omit(tot.notEorP)
 tot.ES=na.omit(tot.ES)
 tot.un=na.omit(tot.un)
+
 ```
 
 
@@ -77,7 +79,7 @@ points(sort(-log10(runif(nrow(tot.PS)))), sort(-log10(tot.PS$bpval)),col= alpha(
 points(sort(-log10(runif(nrow(tot_allE)))), sort(-log10(tot_allE$bpval)),col= alpha("blue"))
 abline(0,1)
 
-legend("topleft", legend=c("either eGenes or pGenes", "pGenes", "eGenes"),col=c("black", "red","blue"), pch=16,bty = 'n')
+legend("topleft", legend=c("Neither eGenes nor pGenes", "pGenes", "eGenes"),col=c("black", "red","blue"), pch=16,bty = 'n')
 ```
 
 Nuclear:
@@ -88,11 +90,11 @@ nuc.PS=read.table("../data/ApaByPgene/NuclearApaPSGenes.txt",stringsAsFactors = 
 nuc.ES=read.table("../data/ApaByPgene/NuclearApaESGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
 nuc.ex=read.table("../data/ApaByEgene/NuclearApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.un=read.table("../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+
 nuc.un=na.omit(nuc.un)
 nuc.PS=na.omit(nuc.PS)
 nuc.notEorP=na.omit(nuc.notEorP)
 nuc.ES=na.omit(nuc.ES)
-
 nuc_allE=as.data.frame(rbind(nuc.ex,nuc.un))
 ```
 
@@ -104,5 +106,5 @@ points(sort(-log10(runif(nrow(nuc.PS)))), sort(-log10(nuc.PS$bpval)),col= alpha(
 points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha("blue"))
 abline(0,1)
 
-legend("topleft", legend=c("either eGenes or pGenes", "pGenes", "eGenes"),col=c("black", "red","blue","green"), pch=16,bty = 'n')
+legend("topleft", legend=c("Neither eGenes nor pGenes", "pGenes", "eGenes"),col=c("black", "red","blue","green"), pch=16,bty = 'n')
 ```
