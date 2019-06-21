@@ -114,7 +114,7 @@ AllsiteDF_1per_prop= AllsiteDF_1per %>% group_by(Site,NegCount) %>% summarise(Co
 
 Plot with prop:
 ```{r}
-dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites")
+dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites",fill="Site Sequence") 
 dist2signalsiteplotprop
 ```
 ```{r}
@@ -194,10 +194,10 @@ plot_grid(all, con, non, labels=c("All PAS", "Cononical PAS", "Non-conical PAS")
 
 ##Strong evidence PAS  
 
-For future analysis I want to have a set of PAS with evidence for a signal site.  I want those with 1 of the top 2 used signal sites upstream 10-50 basepairs. The top two use are AATAAA, ATTAAA.  
+For future analysis I want to have a set of PAS with evidence for a signal site.  I want those signal sites upstream 10-50 basepairs.
 
 ```{r}
-AllsiteDF_1per_use= AllsiteDF_1per %>% dplyr::filter(Site== "AATAAA" | Site== "ATTAAA") %>% filter(Distance2PAS>10, Distance2PAS<50) %>% separate(PAS,into=c("peakid", "loc"),sep="_") %>% separate(peakid,into=c("Peaknum", "gene"),sep=":") %>% mutate(Peak=paste("Peak", Peaknum, sep="")) %>% dplyr::rename("UpstreamDist"=NegCount) %>%  select(Peak, gene, loc, Site, UpstreamDist)
+AllsiteDF_1per_use= AllsiteDF_1per %>% filter(Distance2PAS>10, Distance2PAS<50) %>% separate(PAS,into=c("peakid", "loc"),sep="_") %>% separate(peakid,into=c("Peaknum", "gene"),sep=":") %>% mutate(PAS=paste("peak", Peaknum, sep="")) %>% dplyr::rename("UpstreamDist"=NegCount) %>%  select(PAS, gene, loc, Site, UpstreamDist)
 ``` 
 
 
