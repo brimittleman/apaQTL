@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0d606c1c66742bf9bd29941523cd5e4b7cbc2d06targetblank0d606c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/0d606c1c66742bf9bd29941523cd5e4b7cbc2d06" target="_blank">0d606c1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeabd1a7371da754280383b89ff56f54244375c8cbtargetblankabd1a73a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/abd1a7371da754280383b89ff56f54244375c8cb" target="_blank">abd1a73</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0d606c1c66742bf9bd29941523cd5e4b7cbc2d06targetblank0d606c1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeabd1a7371da754280383b89ff56f54244375c8cbtargetblankabd1a73a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1002,6 +1002,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/abd1a7371da754280383b89ff56f54244375c8cb/analysis/DiffIsoAnalysis.Rmd" target="_blank">abd1a73</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+<td>
+fix figures
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/ae5c5a1a01a0f17c7e3e933df8ca97fb766903b5/docs/DiffIsoAnalysis.html" target="_blank">ae5c5a1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1773,7 +1807,7 @@ brimittleman
 <pre class="r"><code>effectsize_deltaPAUProp_both= effectsize_deltaPAUProp_nuc %&gt;% inner_join(effectsize_deltaPAUProp_tot, by=c(&quot;loc&quot;,&quot;nloc&quot;)) %&gt;% dplyr::rename(Nuclear=Proportion_nuc, Total=Proportion_tot) %&gt;% select(loc, Nuclear, Total) 
 effectsize_deltaPAUProp_both_melt= effectsize_deltaPAUProp_both %&gt;% melt(id.vars=&quot;loc&quot;, variable.name=&quot;Fraction&quot;, value.name = &quot;Proportion&quot;) 
 effectsize_deltaPAUProp_both_melt$Fraction=as.character(effectsize_deltaPAUProp_both_melt$Fraction)</code></pre>
-<pre class="r"><code>ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differentiall used by location&quot;,x=&quot;&quot;) +scale_x_discrete(labels = c(&#39;Coding&#39;,&#39;5kb downstream&#39;,&#39;Intronic&#39;,&quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;)) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.01,.9), legend.direction = &quot;horizontal&quot;)</code></pre>
+<pre class="r"><code>ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differentiall used by location&quot;,x=&quot;&quot;) +scale_x_discrete(labels = c(&#39;Coding&#39;,&#39;5kb downstream&#39;,&#39;Intronic&#39;,&quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;)) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.01,.9), legend.direction = &quot;horizontal&quot;) +  theme(panel.background = element_blank())</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
@@ -1797,6 +1831,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae5c5a1a01a0f17c7e3e933df8ca97fb766903b5/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-32-1.png" target="_blank">ae5c5a1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9d0950ce5cbb2af3808c2fb5ee49911543466ca1/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-32-1.png" target="_blank">9d0950c</a>
@@ -2084,7 +2129,7 @@ brimittleman
 <pre class="r"><code>summary(effectsize$logef)</code></pre>
 <pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 -2.44401 -0.33487 -0.01384  0.00000  0.34328  2.47805 </code></pre>
-<pre class="r"><code>ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title=&quot;Location of differentially used PAS \nwithin a gene body&quot;, fill=&quot;Fraction&quot;, y=&quot;Number of PAS&quot;, x=&quot;Percent of Gene Length&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;),labels = c(&quot;Nuclear&quot;, &quot;Total&quot;))+ theme(legend.position = c(0.01,.9), legend.direction = &quot;horizontal&quot;)</code></pre>
+<pre class="r"><code>ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title=&quot;Location of differentially used PAS \nwithin a gene body&quot;, fill=&quot;Fraction&quot;, y=&quot;Number of PAS&quot;, x=&quot;Percent of Gene Length&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;),labels = c(&quot;Nuclear&quot;, &quot;Total&quot;))+ theme(legend.position = c(0.01,.9), legend.direction = &quot;horizontal&quot;)+  theme(panel.background = element_blank())</code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-46-1">
@@ -2108,6 +2153,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae5c5a1a01a0f17c7e3e933df8ca97fb766903b5/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-46-1.png" target="_blank">ae5c5a1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9d0950ce5cbb2af3808c2fb5ee49911543466ca1/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-46-1.png" target="_blank">9d0950c</a>
