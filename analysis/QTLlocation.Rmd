@@ -59,6 +59,17 @@ ggplot(nucQTLs, aes(x=dist2PAS, fill=loc)) + geom_histogram( bins=100) + facet_g
 
 ```
 
+
+Plot total and nuclear together: 
+
+```{r}
+totalQTLdist=totQTLs %>% select(dist2PAS) %>% mutate(Fraction="Total")
+nuclearQTLdist=nucQTLs %>% select(dist2PAS) %>% mutate(Fraction="Nuclear")
+bothFractDist=bind_rows(totalQTLdist, nuclearQTLdist)
+
+ggplot(bothFractDist, aes(x=dist2PAS, fill=Fraction )) + geom_histogram(bins=100) +labs(y="Number of apaQTLs", x="Distance QTL SNP to PAS", title="Distance from QTL SNP to PAS by Fraction") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) 
+```
+
 ##Metagene plot  
 
 I want to plot by normalized position in the gene.  
@@ -111,3 +122,20 @@ ggplot(nucQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  
 
 ```
 334 are in the gene body.  
+
+Plot both togther:
+
+
+```{r}
+nucQTLs_geneprop= nucQTLs_gene %>% select(propGene) %>% mutate(Fraction="Nuclear")
+totQTLs_geneprop= totQTLs_gene %>% select(propGene) %>% mutate(Fraction="Total")
+genepropboth=bind_rows(totQTLs_geneprop,nucQTLs_geneprop)
+
+ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_histogram(bins=100) + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")+ scale_fill_manual(values=c("deepskyblue3","darkviolet"))  + labs(x="Proportion of gene body", y="Number of apaQTLs", title="Metagene plot for apaQTL SNP location")
+```
+Density plot
+
+```{r}
+ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_density(bins=100) + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")+ scale_fill_manual(values=c("deepskyblue3","darkviolet"))  + labs(x="Proportion of gene body", title="Metagene plot for apaQTL SNP location")
+```
+
