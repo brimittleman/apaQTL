@@ -57,7 +57,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Rerun qtl with PCs from previous analysis](rerunQTL_changePC.html)
 
-* [Location of QTLs with respect to PAS and gene body](QTLlocation.hml)
+* [Location of QTLs with respect to PAS and gene body](QTLlocation.html)
 
 * [apaQTL in opposite fraction](apaQTLoverlap.html)
 
