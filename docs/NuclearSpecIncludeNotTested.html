@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6df08b6071d3f3b93b3ed3c759b424fc0967d976targetblank6df08b6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6df08b6071d3f3b93b3ed3c759b424fc0967d976" target="_blank">6df08b6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb7c93815b16668b4e1ddc0709bfa34af623e16f2targetblankb7c9381a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b7c93815b16668b4e1ddc0709bfa34af623e16f2" target="_blank">b7c9381</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6df08b6071d3f3b93b3ed3c759b424fc0967d976targetblank6df08b6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb7c93815b16668b4e1ddc0709bfa34af623e16f2targetblankb7c9381a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1008,6 +1008,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b7c93815b16668b4e1ddc0709bfa34af623e16f2/analysis/NuclearSpecIncludeNotTested.Rmd" target="_blank">b7c9381</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-20
+</td>
+<td>
+test inc/dec
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/cd60f500464e8501b43d1fed4293158c01ce4a83/docs/NuclearSpecIncludeNotTested.html" target="_blank">cd60f50</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/6df08b6071d3f3b93b3ed3c759b424fc0967d976/analysis/NuclearSpecIncludeNotTested.Rmd" target="_blank">6df08b6</a>
 </td>
 <td>
@@ -1032,12 +1066,12 @@ change analysis to include not tested in total as nuc spec
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(cowplot)</code></pre>
@@ -1046,6 +1080,21 @@ Attaching package: &#39;cowplot&#39;</code></pre>
 <pre><code>The following object is masked from &#39;package:ggplot2&#39;:
 
     ggsave</code></pre>
+<pre class="r"><code>library(ggpubr)</code></pre>
+<pre><code>Loading required package: magrittr</code></pre>
+<pre><code>
+Attaching package: &#39;magrittr&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:purrr&#39;:
+
+    set_names</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    extract</code></pre>
+<pre><code>
+Attaching package: &#39;ggpubr&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:cowplot&#39;:
+
+    get_legend</code></pre>
 <p>I will give all of the QTLs an id.</p>
 <pre class="r"><code>nucQTls=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt&quot;,header = T, stringsAsFactors = F) %&gt;% mutate(ID=paste(Gene,Peak, sid, sep=&quot;:&quot;))
 sharedQTLs=read.table(&quot;../data/apaQTLs/SharedAPAQTLs.txt&quot;, header = T, stringsAsFactors = F) %&gt;% mutate(ID=paste(gene,peakNum, snp, sep=&quot;:&quot;))
@@ -1122,6 +1171,71 @@ sample estimates:
 write.table(NuclearSpecQTL_shared,file=&quot;../data/NucSpeceQTLeffect/SharedApaQTL_nottestinc.txt&quot;, col.names = F, row.names = F, sep=&quot;\t&quot;, quote = F )
 NuclearSpecQTL_specific=NuclearSpecQTL %&gt;% filter(Shared==&quot;No&quot;)%&gt;% select(Gene, sid)
 write.table(NuclearSpecQTL_specific,file=&quot;../data/NucSpeceQTLeffect/NucSpecApaQTL_nottestinc.txt&quot;, col.names = F, row.names = F, sep=&quot;\t&quot;, quote = F )</code></pre>
+<pre class="r"><code>ggplot(NuclearSpecQTL,aes(x=Loc, fill=Shared)) + geom_bar()</code></pre>
+<p><img src="figure/NuclearSpecIncludeNotTested.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>NuclearSpecQTL__group= NuclearSpecQTL %&gt;% group_by(Loc, Shared) %&gt;% summarise(nShared=n()) %&gt;% ungroup() %&gt;% group_by(Loc) %&gt;% mutate(nLoc=sum(nShared)) %&gt;% ungroup() %&gt;% mutate(prop=nShared/nLoc)
+
+
+ggplot(NuclearSpecQTL__group, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat=&quot;identity&quot;) + labs(title=&quot;Proportion of apaQTL by \nlocation that are nuclear specific&quot;)</code></pre>
+<p><img src="figure/NuclearSpecIncludeNotTested.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>NuclearSpecQTL__group_small=NuclearSpecQTL__group %&gt;% filter( Loc==&quot;intron&quot; |Loc==&quot;utr3&quot;)
+
+ggplot(NuclearSpecQTL__group_small, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat=&quot;identity&quot;) + labs(title=&quot;Proportion of apaQTL by \nlocation that are nuclear specific&quot;) </code></pre>
+<p><img src="figure/NuclearSpecIncludeNotTested.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>NuclearSpecQTL__group_small</code></pre>
+<pre><code># A tibble: 4 x 5
+  Loc    Shared nShared  nLoc  prop
+  &lt;chr&gt;  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+1 intron No         183   297 0.616
+2 intron Yes        114   297 0.384
+3 utr3   No          87   355 0.245
+4 utr3   Yes        268   355 0.755</code></pre>
+<pre class="r"><code>prop.test(x=c(183,87),n=c(297,355))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(183, 87) out of c(297, 355)
+X-squared = 90.261, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.2968583 0.4453241
+sample estimates:
+   prop 1    prop 2 
+0.6161616 0.2450704 </code></pre>
+<p>I want to know if the shared or specific are more likely to decrease/increase</p>
+<pre class="r"><code>NuclearSpecQTL=NuclearSpecQTL %&gt;% mutate(Dir=ifelse(slope&gt;1, &quot;Increase&quot;, &quot;Decrease&quot;))
+
+NuclearSpecQTL_shareInc=NuclearSpecQTL %&gt;% filter(Loc==&quot;intron&quot;,Dir==&quot;Increase&quot;, Shared==&quot;Yes&quot;) %&gt;% nrow()
+AllShared=NuclearSpecQTL %&gt;%  filter(Loc==&quot;intron&quot;, Shared==&quot;Yes&quot;) %&gt;% nrow()
+AllInc=NuclearSpecQTL %&gt;%  filter(Loc==&quot;intron&quot;, Dir==&quot;Increase&quot;) %&gt;% nrow()
+AllDec=NuclearSpecQTL %&gt;%  filter(Loc==&quot;intron&quot;, Dir==&quot;Decrease&quot;) %&gt;% nrow()
+AllSpec=NuclearSpecQTL %&gt;%  filter(Loc==&quot;intron&quot;, Shared==&quot;No&quot;) %&gt;% nrow()
+NuclearSpecQTL_SpecInc=NuclearSpecQTL %&gt;% filter(Loc==&quot;intron&quot;,Dir==&quot;Increase&quot;, Shared==&quot;No&quot;) %&gt;% nrow()
+NuclearSpecQTL_shareDec=NuclearSpecQTL %&gt;% filter(Loc==&quot;intron&quot;,Dir==&quot;Decrease&quot;, Shared==&quot;Yes&quot;) %&gt;% nrow()
+NuclearSpecQTL_SpecDec=NuclearSpecQTL %&gt;% filter(Loc==&quot;intron&quot;,Dir==&quot;Decrease&quot;, Shared==&quot;No&quot;) %&gt;% nrow()
+
+#in increased
+NuclearSpecQTL_SpecInc/AllInc</code></pre>
+<pre><code>[1] 0.5701754</code></pre>
+<pre class="r"><code>#in dec
+NuclearSpecQTL_SpecDec/AllDec</code></pre>
+<pre><code>[1] 0.6448087</code></pre>
+<pre class="r"><code>prop.test(x=c(NuclearSpecQTL_SpecInc,NuclearSpecQTL_SpecDec), n=c(AllInc,AllDec))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(NuclearSpecQTL_SpecInc, NuclearSpecQTL_SpecDec) out of c(AllInc, AllDec)
+X-squared = 1.3538, df = 1, p-value = 0.2446
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.19605819  0.04679158
+sample estimates:
+   prop 1    prop 2 
+0.5701754 0.6448087 </code></pre>
+<pre class="r"><code>ggplot(NuclearSpecQTL, aes(x=Dir, fill=Shared))+ geom_bar(stat=&quot;count&quot;) + facet_grid(~Loc) +  theme(axis.text.x=element_text(angle=90, hjust=1))</code></pre>
+<p><img src="figure/NuclearSpecIncludeNotTested.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1149,23 +1263,25 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] cowplot_0.9.4   forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
- [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.3.0
+ [1] ggpubr_0.2      magrittr_1.5    cowplot_0.9.4   forcats_0.3.0  
+ [5] stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1    
+ [9] tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1
+[13] workflowr_1.3.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
- [5] git2r_0.25.2     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
- [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
-[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
-[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
-[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
-[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
-[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
-[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
-[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+ [1] tidyselect_0.2.5 reshape2_1.4.3   haven_1.1.2      lattice_0.20-38 
+ [5] colorspace_1.3-2 generics_0.0.2   htmltools_0.3.6  yaml_2.2.0      
+ [9] utf8_1.1.4       rlang_0.3.1      pillar_1.3.1     glue_1.3.0      
+[13] withr_2.1.2      modelr_0.1.2     readxl_1.1.0     plyr_1.8.4      
+[17] munsell_0.5.0    gtable_0.2.0     cellranger_1.1.0 rvest_0.3.2     
+[21] evaluate_0.12    labeling_0.3     knitr_1.20       fansi_0.4.0     
+[25] broom_0.5.1      Rcpp_1.0.0       scales_1.0.0     backports_1.1.2 
+[29] jsonlite_1.6     fs_1.2.6         hms_0.4.2        digest_0.6.18   
+[33] stringi_1.2.4    grid_3.5.1       rprojroot_1.3-2  cli_1.0.1       
+[37] tools_3.5.1      lazyeval_0.2.1   crayon_1.3.4     whisker_0.3-2   
+[41] pkgconfig_2.0.2  xml2_1.2.0       lubridate_1.7.4  assertthat_0.2.0
+[45] rmarkdown_1.10   httr_1.3.1       rstudioapi_0.10  R6_2.3.0        
+[49] nlme_3.1-137     git2r_0.25.2     compiler_3.5.1  </code></pre>
 </div>
 
 
