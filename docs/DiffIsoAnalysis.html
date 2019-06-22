@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-21
+<strong>Last updated:</strong> 2019-06-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree842be2582d36923230482d53ba372dfb9a46f08atargetblank842be25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/842be2582d36923230482d53ba372dfb9a46f08a" target="_blank">842be25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree97e2ea836e419626a444e3d9d8fd65c0cafc93c3targetblank97e2ea8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/97e2ea836e419626a444e3d9d8fd65c0cafc93c3" target="_blank">97e2ea8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree842be2582d36923230482d53ba372dfb9a46f08atargetblank842be25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree97e2ea836e419626a444e3d9d8fd65c0cafc93c3targetblank97e2ea8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -948,7 +948,7 @@ Unstaged changes:
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/pQTLandeQTLoverlap.Rmd
+    Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1002,6 +1002,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/97e2ea836e419626a444e3d9d8fd65c0cafc93c3/analysis/DiffIsoAnalysis.Rmd" target="_blank">97e2ea8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-22
+</td>
+<td>
+add pie chart
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6679c9507ae4f542b9d32e7f499d6a5e4f6da7f6/docs/DiffIsoAnalysis.html" target="_blank">6679c95</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1404,12 +1438,12 @@ add diff iso
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(reshape2)</code></pre>
@@ -1477,7 +1511,7 @@ awk &#39;{if(NR&gt;1)print}&#39; ../data/DiffIso/TN_diff_isoform_chr*.txt_cluste
 <h2>Evaluate results</h2>
 <div id="significant-clusters" class="section level3">
 <h3>Significant clusters</h3>
-<pre class="r"><code>sig=read.table(&quot;../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt&quot;,sep=&quot;\t&quot; ,col.names = c(&#39;status&#39;,&#39;loglr&#39;,&#39;df&#39;,&#39;p&#39;,&#39;cluster&#39;,&#39;p.adjust&#39;),stringsAsFactors = F) %&gt;% filter(status==&quot;Success&quot;)
+<pre class="r"><code>sig=read.table(&quot;../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt&quot;,sep=&quot;\t&quot; ,col.names = c(&#39;status&#39;,&#39;loglr&#39;,&#39;df&#39;,&#39;p&#39;,&#39;cluster&#39;,&#39;p.adjust&#39;),stringsAsFactors = F) %&gt;% filter(status==&quot;Success&quot;) 
 
 sig$p.adjust=as.numeric(as.character(sig$p.adjust))</code></pre>
 <pre class="r"><code>qqplot(-log10(runif(nrow(sig))), -log10(sig$p.adjust),ylab=&quot;-log10 Total Adjusted Leafcutter pvalue&quot;, xlab=&quot;-log 10 Uniform expectation&quot;, main=&quot;Leafcutter differencial isoform analysis between fractions&quot;)
@@ -1867,6 +1901,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6679c9507ae4f542b9d32e7f499d6a5e4f6da7f6/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-32-1.png" target="_blank">6679c95</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/4f2326e310ffaf47c6a9a6afc54e0985dacf93aa/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-32-1.png" target="_blank">4f2326e</a>
 </td>
 <td>
@@ -2200,6 +2245,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6679c9507ae4f542b9d32e7f499d6a5e4f6da7f6/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-46-1.png" target="_blank">6679c95</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-21
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/4f2326e310ffaf47c6a9a6afc54e0985dacf93aa/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-46-1.png" target="_blank">4f2326e</a>
 </td>
 <td>
@@ -2235,6 +2291,30 @@ brimittleman
 </table>
 </div>
 </div>
+<p>Diff iso gene proportion:</p>
+<pre class="r"><code>genes_sig=sig %&gt;% separate(cluster,into=c(&quot;chr&quot;, &quot;gene&quot;), sep=&quot;:&quot;) %&gt;% group_by(gene) %&gt;% summarise(n=n()) %&gt;% nrow
+genes_detlapau= effectSize_highdiffGenes %&gt;% nrow()
+testedgenes=read.table(&quot;../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC.fc&quot;,header = T, stringsAsFactors = F) %&gt;% rownames_to_column(&quot;ID&quot;) %&gt;% select(ID)%&gt;% separate(ID, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;),sep=&quot;_&quot;)  %&gt;% group_by(gene) %&gt;% summarise(n=n()) %&gt;% nrow()
+notsig=testedgenes-genes_sig
+sighothighpau=genes_sig-genes_detlapau
+
+cat=c(&quot;NotSig&quot;, &quot;SigNotHighPAU&quot;, &quot;SigandHighPAU&quot;)
+values=c(unlist(notsig),unlist(sighothighpau),unlist(genes_detlapau))
+
+difiso_df=as.data.frame(cbind(cat, values)) 
+difiso_df$values=as.numeric(as.character(difiso_df$values))
+difiso_df=difiso_df%&gt;% mutate(proportion=values/testedgenes)
+
+
+ggplot(difiso_df, aes(x=&quot;&quot;,y=proportion, fill=cat)) + geom_bar(stat=&quot;identity&quot;)+geom_text(aes(label=values))</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>slices &lt;- c(notsig, sighothighpau,genes_detlapau)
+lbls &lt;- c(&quot;No Sig PAS&quot;, &quot;At least 1 \nSig PAS&quot;, &quot;At least 1 Sig PAS\n High Delta PAU&quot;)
+pct &lt;- round(slices/sum(slices)*100)
+lbls &lt;- paste(lbls, pct, sep=&quot;\n   &quot;) # add percents to labels 
+lbls &lt;- paste(lbls,&quot;%&quot;,sep=&quot;&quot;) # ad % to labels 
+pie(slices, labels = lbls,col=c(&quot;Azure2&quot;, &quot;Aquamarine1&quot;,&quot;Darkslateblue&quot;))</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
