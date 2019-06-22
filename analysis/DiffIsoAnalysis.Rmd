@@ -118,9 +118,10 @@ awk '{if(NR>1)print}' ../data/DiffIso/TN_diff_isoform_chr*.txt_cluster_significa
 ###Significant clusters
 
 ```{r}
-sig=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt",sep="\t" ,col.names = c('status','loglr','df','p','cluster','p.adjust'),stringsAsFactors = F) %>% filter(status=="Success")
+sig=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt",sep="\t" ,col.names = c('status','loglr','df','p','cluster','p.adjust'),stringsAsFactors = F) %>% filter(status=="Success") 
 
 sig$p.adjust=as.numeric(as.character(sig$p.adjust))
+
 ```
 
 ```{r}
@@ -386,5 +387,35 @@ summary(effectsize$logef)
 
 ```{r}
 ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.1,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
+```
+
+Diff iso gene proportion:
+
+```{r}
+genes_sig=sig %>% separate(cluster,into=c("chr", "gene"), sep=":") %>% group_by(gene) %>% summarise(n=n()) %>% nrow
+genes_detlapau= effectSize_highdiffGenes %>% nrow()
+testedgenes=read.table("../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC.fc",header = T, stringsAsFactors = F) %>% rownames_to_column("ID") %>% select(ID)%>% separate(ID, into=c("chr", "start", "end", "geneID"),sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_")  %>% group_by(gene) %>% summarise(n=n()) %>% nrow()
+notsig=testedgenes-genes_sig
+sighothighpau=genes_sig-genes_detlapau
+
+cat=c("NotSig", "SigNotHighPAU", "SigandHighPAU")
+values=c(unlist(notsig),unlist(sighothighpau),unlist(genes_detlapau))
+
+difiso_df=as.data.frame(cbind(cat, values)) 
+difiso_df$values=as.numeric(as.character(difiso_df$values))
+difiso_df=difiso_df%>% mutate(proportion=values/testedgenes)
+
+
+ggplot(difiso_df, aes(x="",y=proportion, fill=cat)) + geom_bar(stat="identity")+geom_text(aes(label=values))
+```
+
+
+```{r}
+slices <- c(notsig, sighothighpau,genes_detlapau)
+lbls <- c("No Sig PAS", "At least 1 \nSig PAS", "At least 1 Sig PAS\n High Delta PAU")
+pct <- round(slices/sum(slices)*100)
+lbls <- paste(lbls, pct, sep="\n   ") # add percents to labels 
+lbls <- paste(lbls,"%",sep="") # ad % to labels 
+pie(slices, labels = lbls,col=c("Azure2", "Aquamarine1","Darkslateblue"))
 ```
 
