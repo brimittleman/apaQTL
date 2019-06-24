@@ -1,0 +1,58 @@
+---
+title: "SNPs in signal sites"
+author: "Briana Mittleman"
+date: "6/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I want to ask if snps in a signal site are more likely to be apaQTLs than other snps close to the PAS. In order to do this i need to subset to the pas that have signal site (identified [here](signalsiteanalysis.html)) I will then identyify the region 50 bp upstream of the PAS and ask if there are snps in this region using the vcf files for the snps i tested.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+```{bash,eval=F}
+mkdir ../data/SNPinSS
+```
+
+
+I want a bed file with 50bp upstream of these PAS. 
+```{r}
+PASwSS=read.table("../data/PAS/PASwSignalSite.txt", header = T,stringsAsFactors = F)
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""))
+
+PASwSSregion=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50)) %>% select(chr, newStart,newEnd, geneiD, score, strand)
+
+write.table(PASwSSregion,"../data/SNPinSS/FiftyupstreamPASwSS.bed", col.names = F, row.names = F, quote = F, sep="\t")
+
+```
+
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/SNPinSS/FiftyupstreamPASwSS.bed  > ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed > ../data/SNPinSS/FiftyupstreamPASwSS.nochr.sort.bed
+sbatch subsetVCF_upstreamPAS.sh
+```
+
+
+I want to further subset to those in a signal site.  
+
+
+```{r}
+SSregions=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(absdist=abs(UpstreamDist),newEnd= ifelse(strand=="+", end-absdist, end+absdist), newStart=ifelse(strand=="+", end- (absdist+6), end + (absdist-6)), length=newEnd-newStart) %>% select(chr, newStart,newEnd, geneiD, score, strand)
+
+
+write.table(SSregions,"../data/SNPinSS/SignalSiteRegions.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/SNPinSS/SignalSiteRegions.bed  > ../data/SNPinSS/SignalSiteRegions.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/SignalSiteRegions.nochr.bed > ../data/SNPinSS/SignalSiteRegions.nochr.sort.bed
+sbatch subsetVCF_SS.sh
+```
+

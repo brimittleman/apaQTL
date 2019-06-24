@@ -65,6 +65,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Motif distruption as apaQTL mechanism](motifDisruption.html)
 
+* [Are snps in Signal sites likely to be QTLs?](snpinSS.html)
 
 ##Differential Isoform Analysis  
 
