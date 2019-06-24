@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-22
+<strong>Last updated:</strong> 2019-06-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree97e2ea836e419626a444e3d9d8fd65c0cafc93c3targetblank97e2ea8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/97e2ea836e419626a444e3d9d8fd65c0cafc93c3" target="_blank">97e2ea8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree494ab8a3e91b36a1a24f9a88541314ac0aabcdc4targetblank494ab8aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/494ab8a3e91b36a1a24f9a88541314ac0aabcdc4" target="_blank">494ab8a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree97e2ea836e419626a444e3d9d8fd65c0cafc93c3targetblank97e2ea8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree494ab8a3e91b36a1a24f9a88541314ac0aabcdc4targetblank494ab8aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -450,6 +450,7 @@ Untracked files:
     Untracked:  analysis/eQTLoverlap.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
+    Untracked:  analysis/snpinSS.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
@@ -593,6 +594,7 @@ Untracked files:
     Untracked:  code/._subsetAPAnotEorPgene.py
     Untracked:  code/._subsetApanoteGene.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
+    Untracked:  code/._subsetVCF_upstreamPAS.sh
     Untracked:  code/._subset_diffisopheno.py
     Untracked:  code/._subsetpermAPAwithGenelist.py
     Untracked:  code/._subtrachfiveprimeUTR.sh
@@ -847,8 +849,11 @@ Untracked files:
     Untracked:  code/subsetAPAnotEorPgene.py
     Untracked:  code/subsetApanoteGene.py
     Untracked:  code/subsetUnexplainedeQTLs.py
+    Untracked:  code/subsetVCF_upstreamPAS.sh
     Untracked:  code/subset_diffisopheno.py
     Untracked:  code/subsetpermAPAwithGenelist.py
+    Untracked:  code/subsetvcf_pas.err
+    Untracked:  code/subsetvcf_pas.out
     Untracked:  code/subtract5UTR.err
     Untracked:  code/subtract5UTR.out
     Untracked:  code/subtractExons.err
@@ -886,6 +891,7 @@ Untracked files:
     Untracked:  data/README.md
     Untracked:  data/RNAseq/
     Untracked:  data/Reads2UTR/
+    Untracked:  data/SNPinSS/
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/apaQTLNominal/
@@ -1002,6 +1008,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/494ab8a3e91b36a1a24f9a88541314ac0aabcdc4/analysis/DiffIsoAnalysis.Rmd" target="_blank">494ab8a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-24
+</td>
+<td>
+add diff prop test
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/499e504c5c6b608cf71e42d8396e29c35768c58e/docs/DiffIsoAnalysis.html" target="_blank">499e504</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1438,12 +1478,12 @@ add diff iso
 <pre><code>This is workflowr version 1.3.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(reshape2)</code></pre>
@@ -1875,7 +1915,7 @@ brimittleman
 <pre class="r"><code>effectsize_deltaPAUProp_both= effectsize_deltaPAUProp_nuc %&gt;% inner_join(effectsize_deltaPAUProp_tot, by=c(&quot;loc&quot;,&quot;nloc&quot;)) %&gt;% dplyr::rename(Nuclear=Proportion_nuc, Total=Proportion_tot) %&gt;% select(loc, Nuclear, Total) 
 effectsize_deltaPAUProp_both_melt= effectsize_deltaPAUProp_both %&gt;% melt(id.vars=&quot;loc&quot;, variable.name=&quot;Fraction&quot;, value.name = &quot;Proportion&quot;) 
 effectsize_deltaPAUProp_both_melt$Fraction=as.character(effectsize_deltaPAUProp_both_melt$Fraction)</code></pre>
-<pre class="r"><code>ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differential used by location&quot;,x=&quot;&quot;) +scale_x_discrete(labels = c(&#39;Coding&#39;,&#39;5kb downstream&#39;,&#39;Intronic&#39;,&quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;)) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.1,.9), legend.direction = &quot;horizontal&quot;) +  theme(panel.background = element_blank())</code></pre>
+<pre class="r"><code>ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differential used by location&quot;,x=&quot;&quot;) +scale_x_discrete(labels = c(&#39;Coding&#39;,&#39;5kb downstream&#39;,&#39;Intronic&#39;,&quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;)) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.1,.9), legend.direction = &quot;horizontal&quot;) +  theme(panel.background = element_blank()) </code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
@@ -1947,6 +1987,98 @@ brimittleman
 </table>
 </div>
 </div>
+<pre class="r"><code>effectsize_deltaPAU_total_locProp</code></pre>
+<pre><code># A tibble: 5 x 2
+  loc    nloctotal
+  &lt;chr&gt;      &lt;int&gt;
+1 cds           34
+2 end           77
+3 intron       160
+4 utr3        1085
+5 utr5          40</code></pre>
+<pre class="r"><code>sum(effectsize_deltaPAU_total_locProp$nloctotal)</code></pre>
+<pre><code>[1] 1396</code></pre>
+<pre class="r"><code>effectsize_deltaPAU_nuclear_locProp</code></pre>
+<pre><code># A tibble: 5 x 2
+  loc    nlocnuclear
+  &lt;chr&gt;        &lt;int&gt;
+1 cds             10
+2 end            100
+3 intron         473
+4 utr3           104
+5 utr5            13</code></pre>
+<pre class="r"><code>sum(effectsize_deltaPAU_nuclear_locProp$nlocnuclear)</code></pre>
+<pre><code>[1] 700</code></pre>
+<pre class="r"><code>effectsize_deltaPAUProp_both_melt_sm=effectsize_deltaPAUProp_both_melt %&gt;% filter(loc==&quot;intron&quot; | loc==&quot;utr3&quot;)
+
+
+ggplot(effectsize_deltaPAUProp_both_melt_sm, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;) + scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + labs(title=&quot;Proportion of PAS differential used by location&quot;,x=&quot;&quot;) +scale_x_discrete(labels = c(&#39;Intronic&#39;,&quot;3&#39; UTR&quot;)) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.1,.9), legend.direction = &quot;horizontal&quot;) +  theme(panel.background = element_blank()) </code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-34-1">
+Past versions of unnamed-chunk-34-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-34-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/760b297cc72009dd3a7bac9e7d15aed91a79f06c/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-34-1.png" target="_blank">760b297</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>#intronic
+prop.test(x=c(473,160), n=c(700,1396),alternative = &quot;greater&quot;)</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(473, 160) out of c(700, 1396)
+X-squared = 693.66, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.5277239 1.0000000
+sample estimates:
+   prop 1    prop 2 
+0.6757143 0.1146132 </code></pre>
+<pre class="r"><code>#3&#39; utr
+prop.test(x=c(104,1085), n=c(700,1396),alternative = &quot;less&quot;)</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(104, 1085) out of c(700, 1396)
+X-squared = 748.03, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: less
+95 percent confidence interval:
+ -1.0000000 -0.5988627
+sample estimates:
+   prop 1    prop 2 
+0.1485714 0.7772206 </code></pre>
 <p>More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.</p>
 </div>
 <div id="stratify-by-different-delta-pau" class="section level3">
@@ -1961,65 +2093,17 @@ Nuclear_dpau= effectsize %&gt;% filter(deltaPAU &lt;0) %&gt;% inner_join(PAS, by
 <pre class="r"><code>allPAU=as.data.frame(rbind(Total_dpau, Nuclear_dpau)) %&gt;% group_by(fraction, PAU_Cat, loc ) %&gt;% summarise(nperLoc=n()) %&gt;% full_join(PAS_loc, by =&quot;loc&quot;) %&gt;% mutate(Prop=nperLoc/nloc)</code></pre>
 <p>Plot it:</p>
 <pre class="r"><code>ggplot(allPAU, aes(x=loc,y=Prop, group=fraction, fill=fraction)) + geom_bar(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Proportion of PAS by location and delta PAU&quot;)</code></pre>
-<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-35-1">
-Past versions of unnamed-chunk-35-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-35-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/9d0950ce5cbb2af3808c2fb5ee49911543466ca1/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-35-1.png" target="_blank">9d0950c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-13
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/760b297cc72009dd3a7bac9e7d15aed91a79f06c/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-35-1.png" target="_blank">760b297</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>allPAU_remove.1= allPAU %&gt;% filter(PAU_Cat != &quot;&lt;.1&quot;)
 
 ggplot(allPAU_remove.1, aes(x=loc,y=Prop, group=fraction, fill=fraction)) + geom_bar(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Proportion of PAS by location and delta PAU&quot;)</code></pre>
-<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-36-1">
-Past versions of unnamed-chunk-36-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-39-1">
+Past versions of unnamed-chunk-39-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-36-1" class="collapse">
+<div id="fig-unnamed-chunk-39-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2038,18 +2122,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/9d0950ce5cbb2af3808c2fb5ee49911543466ca1/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-36-1.png" target="_blank">9d0950c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-13
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/760b297cc72009dd3a7bac9e7d15aed91a79f06c/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-36-1.png" target="_blank">760b297</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/760b297cc72009dd3a7bac9e7d15aed91a79f06c/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-39-1.png" target="_blank">760b297</a>
 </td>
 <td>
 brimittleman
@@ -2066,62 +2139,6 @@ brimittleman
 <pre class="r"><code>allPAU_ingroup= allPAU %&gt;% mutate(nCat=sum(nperLoc),proppercat=nperLoc/nCat)
 
 ggplot(allPAU_ingroup, aes(x=loc,y=proppercat, group=fraction, fill=fraction)) + geom_bar(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_wrap(~PAU_Cat)+ scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(title=&quot;Proportion of PAS by location and delta PAU&quot;)</code></pre>
-<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-37-1">
-Past versions of unnamed-chunk-37-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-37-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/9d0950ce5cbb2af3808c2fb5ee49911543466ca1/docs/figure/DiffIsoAnalysis.Rmd/unnamed-chunk-37-1.png" target="_blank">9d0950c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-13
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div id="distance-to-tss" class="section level2">
-<h2>Distance to TSS:</h2>
-<p>I need to pull in the TSS information so I can look at the distance between the differentially used peaks and by distance .</p>
-<pre class="r"><code>tss=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% mutate(TSS= ifelse(strand==&quot;+&quot;, start, end)) %&gt;% select(gene, TSS, strand)</code></pre>
-<p>Seperate effect size introns:</p>
-<p>PAS base for + strand is end, PAS for neg stand in -</p>
-<pre class="r"><code>effectsize_TSS= effectsize %&gt;% separate(intron, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;),sep=&quot;:&quot;) %&gt;% mutate(fraction=ifelse(deltaPAU &lt; 0, &quot;nuclear&quot;, &quot;total&quot;)) %&gt;% inner_join(tss, by=&quot;gene&quot;) %&gt;% mutate(dist2PAS=ifelse(strand==&quot;+&quot;, as.numeric(end)-as.numeric(TSS), as.numeric(TSS)-as.numeric(start))) 
-
-effectsize_TSS_tot= effectsize_TSS %&gt;% filter(fraction==&quot;total&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &lt;.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &gt;=.1 &amp; deltaPAU &lt;.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &gt;=.2 &amp; deltaPAU &lt;.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &gt;=.3 &amp; deltaPAU &lt;.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;))))) 
-
-
-effectsize_TSS_nuc=effectsize_TSS %&gt;% filter(fraction==&quot;nuclear&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &gt;-.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &lt;=-.1 &amp; deltaPAU &gt; -.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &lt;=-.2 &amp; deltaPAU &gt;-.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &lt;=-.3 &amp; deltaPAU &gt;-.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;)))))
-
-
-effectsize_TSS_cat=as.data.frame(rbind(effectsize_TSS_tot, effectsize_TSS_nuc)) %&gt;% filter(dist2PAS &gt;0)</code></pre>
-<pre class="r"><code>ggplot(effectsize_TSS_cat, aes(x=log10(dist2PAS), by=fraction, fill=fraction))+ geom_density(alpha=.4) + facet_grid(~PAU_Cat) + labs(title=&quot;Distance to TSS for differentialy used PAS&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) </code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-40-1">
@@ -2160,21 +2177,24 @@ brimittleman
 </table>
 </div>
 </div>
-<div id="by-length-of-gene" class="section level3">
-<h3>By length of gene</h3>
-<pre class="r"><code>length=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% mutate(length=abs(end-start)) %&gt;%  mutate(TSS= ifelse(strand==&quot;+&quot;, start, end)) %&gt;% select(gene, length,TSS, strand)</code></pre>
-<pre class="r"><code>effectsize_length= effectsize %&gt;% separate(intron, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;),sep=&quot;:&quot;) %&gt;% mutate(fraction=ifelse(deltaPAU &lt; 0, &quot;nuclear&quot;, &quot;total&quot;)) %&gt;% inner_join(length, by=&quot;gene&quot;) %&gt;% mutate(PercLength=ifelse(strand==&quot;+&quot;, ((as.numeric(end)-as.numeric(TSS))/as.numeric(length)), (1-(as.numeric(start)-as.numeric(TSS))/as.numeric(length)))) 
+</div>
+</div>
+<div id="distance-to-tss" class="section level2">
+<h2>Distance to TSS:</h2>
+<p>I need to pull in the TSS information so I can look at the distance between the differentially used peaks and by distance .</p>
+<pre class="r"><code>tss=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% mutate(TSS= ifelse(strand==&quot;+&quot;, start, end)) %&gt;% select(gene, TSS, strand)</code></pre>
+<p>Seperate effect size introns:</p>
+<p>PAS base for + strand is end, PAS for neg stand in -</p>
+<pre class="r"><code>effectsize_TSS= effectsize %&gt;% separate(intron, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;),sep=&quot;:&quot;) %&gt;% mutate(fraction=ifelse(deltaPAU &lt; 0, &quot;nuclear&quot;, &quot;total&quot;)) %&gt;% inner_join(tss, by=&quot;gene&quot;) %&gt;% mutate(dist2PAS=ifelse(strand==&quot;+&quot;, as.numeric(end)-as.numeric(TSS), as.numeric(TSS)-as.numeric(start))) 
 
-effectsize_length_tot= effectsize_length %&gt;% filter(fraction==&quot;total&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &lt;.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &gt;=.1 &amp; deltaPAU &lt;.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &gt;=.2 &amp; deltaPAU &lt;.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &gt;=.3 &amp; deltaPAU &lt;.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;))))) 
+effectsize_TSS_tot= effectsize_TSS %&gt;% filter(fraction==&quot;total&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &lt;.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &gt;=.1 &amp; deltaPAU &lt;.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &gt;=.2 &amp; deltaPAU &lt;.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &gt;=.3 &amp; deltaPAU &lt;.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;))))) 
 
 
-effectsize_length_nuc=effectsize_length %&gt;% filter(fraction==&quot;nuclear&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &gt;-.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &lt;=-.1 &amp; deltaPAU &gt; -.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &lt;=-.2 &amp; deltaPAU &gt;-.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &lt;=-.3 &amp; deltaPAU &gt;-.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;)))))
+effectsize_TSS_nuc=effectsize_TSS %&gt;% filter(fraction==&quot;nuclear&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &gt;-.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &lt;=-.1 &amp; deltaPAU &gt; -.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &lt;=-.2 &amp; deltaPAU &gt;-.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &lt;=-.3 &amp; deltaPAU &gt;-.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;)))))
 
 
-effectsize_length_cat=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) %&gt;% filter(PercLength&lt;=1 &amp; PercLength &gt;0)
-
-effectsize_length_catall=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) </code></pre>
-<pre class="r"><code>ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(alpha=.4,bins=10) + facet_grid(~PAU_Cat) + labs(title=&quot;Location of differentially used PAS within a gene body &quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) </code></pre>
+effectsize_TSS_cat=as.data.frame(rbind(effectsize_TSS_tot, effectsize_TSS_nuc)) %&gt;% filter(dist2PAS &gt;0)</code></pre>
+<pre class="r"><code>ggplot(effectsize_TSS_cat, aes(x=log10(dist2PAS), by=fraction, fill=fraction))+ geom_density(alpha=.4) + facet_grid(~PAU_Cat) + labs(title=&quot;Distance to TSS for differentialy used PAS&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) </code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-43-1">
@@ -2213,13 +2233,21 @@ brimittleman
 </table>
 </div>
 </div>
-<pre class="r"><code>summary(effectsize_length_catall$PercLength)</code></pre>
-<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--16763.99      0.87      1.03     28.84      1.89  86510.07 </code></pre>
-<pre class="r"><code>summary(effectsize$logef)</code></pre>
-<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--2.44401 -0.33487 -0.01384  0.00000  0.34328  2.47805 </code></pre>
-<pre class="r"><code>ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title=&quot;Location of differentially used PAS \nwithin a gene body&quot;, fill=&quot;Fraction&quot;, y=&quot;Number of PAS&quot;, x=&quot;Percent of Gene Length&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;),labels = c(&quot;Nuclear&quot;, &quot;Total&quot;))+ theme(legend.position = c(0.1,.9), legend.direction = &quot;horizontal&quot;)+  theme(panel.background = element_blank())</code></pre>
+<div id="by-length-of-gene" class="section level3">
+<h3>By length of gene</h3>
+<pre class="r"><code>length=read.table(&quot;../../genome_anotation_data/refseq.ProteinCoding.bed&quot;,col.names = c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;, &quot;score&quot;, &quot;strand&quot;) ,stringsAsFactors = F) %&gt;% mutate(length=abs(end-start)) %&gt;%  mutate(TSS= ifelse(strand==&quot;+&quot;, start, end)) %&gt;% select(gene, length,TSS, strand)</code></pre>
+<pre class="r"><code>effectsize_length= effectsize %&gt;% separate(intron, into=c(&quot;chrom&quot;, &quot;start&quot;, &quot;end&quot;, &quot;gene&quot;),sep=&quot;:&quot;) %&gt;% mutate(fraction=ifelse(deltaPAU &lt; 0, &quot;nuclear&quot;, &quot;total&quot;)) %&gt;% inner_join(length, by=&quot;gene&quot;) %&gt;% mutate(PercLength=ifelse(strand==&quot;+&quot;, ((as.numeric(end)-as.numeric(TSS))/as.numeric(length)), (1-(as.numeric(start)-as.numeric(TSS))/as.numeric(length)))) 
+
+effectsize_length_tot= effectsize_length %&gt;% filter(fraction==&quot;total&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &lt;.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &gt;=.1 &amp; deltaPAU &lt;.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &gt;=.2 &amp; deltaPAU &lt;.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &gt;=.3 &amp; deltaPAU &lt;.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;))))) 
+
+
+effectsize_length_nuc=effectsize_length %&gt;% filter(fraction==&quot;nuclear&quot;) %&gt;% mutate( PAU_Cat=ifelse(deltaPAU &gt;-.1, &quot;&lt;.1&quot;, ifelse(deltaPAU &lt;=-.1 &amp; deltaPAU &gt; -.2, &quot;&lt;.2&quot;, ifelse(deltaPAU &lt;=-.2 &amp; deltaPAU &gt;-.3, &quot;&lt;.3&quot;, ifelse(deltaPAU &lt;=-.3 &amp; deltaPAU &gt;-.4, &quot;&lt;.4&quot;, &quot;&lt;.5&quot;)))))
+
+
+effectsize_length_cat=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) %&gt;% filter(PercLength&lt;=1 &amp; PercLength &gt;0)
+
+effectsize_length_catall=as.data.frame(rbind(effectsize_length_tot, effectsize_length_nuc)) </code></pre>
+<pre class="r"><code>ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(alpha=.4,bins=10) + facet_grid(~PAU_Cat) + labs(title=&quot;Location of differentially used PAS within a gene body &quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;)) </code></pre>
 <p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-46-1">
@@ -2291,6 +2319,14 @@ brimittleman
 </table>
 </div>
 </div>
+<pre class="r"><code>summary(effectsize_length_catall$PercLength)</code></pre>
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-16763.99      0.87      1.03     28.84      1.89  86510.07 </code></pre>
+<pre class="r"><code>summary(effectsize$logef)</code></pre>
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-2.44401 -0.33487 -0.01384  0.00000  0.34328  2.47805 </code></pre>
+<pre class="r"><code>ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title=&quot;Location of differentially used PAS \nwithin a gene body&quot;, fill=&quot;Fraction&quot;, y=&quot;Number of PAS&quot;, x=&quot;Percent of Gene Length&quot;)+scale_fill_manual(values=c(&quot;deepskyblue3&quot;,&quot;darkviolet&quot;),labels = c(&quot;Nuclear&quot;, &quot;Total&quot;))+ theme(legend.position = c(0.1,.9), legend.direction = &quot;horizontal&quot;)+  theme(panel.background = element_blank())</code></pre>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Diff iso gene proportion:</p>
 <pre class="r"><code>genes_sig=sig %&gt;% separate(cluster,into=c(&quot;chr&quot;, &quot;gene&quot;), sep=&quot;:&quot;) %&gt;% group_by(gene) %&gt;% summarise(n=n()) %&gt;% nrow
 genes_detlapau= effectSize_highdiffGenes %&gt;% nrow()
@@ -2307,14 +2343,14 @@ difiso_df=difiso_df%&gt;% mutate(proportion=values/testedgenes)
 
 
 ggplot(difiso_df, aes(x=&quot;&quot;,y=proportion, fill=cat)) + geom_bar(stat=&quot;identity&quot;)+geom_text(aes(label=values))</code></pre>
-<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>slices &lt;- c(notsig, sighothighpau,genes_detlapau)
 lbls &lt;- c(&quot;No Sig PAS&quot;, &quot;At least 1 \nSig PAS&quot;, &quot;At least 1 Sig PAS\n High Delta PAU&quot;)
 pct &lt;- round(slices/sum(slices)*100)
 lbls &lt;- paste(lbls, pct, sep=&quot;\n   &quot;) # add percents to labels 
 lbls &lt;- paste(lbls,&quot;%&quot;,sep=&quot;&quot;) # ad % to labels 
 pie(slices, labels = lbls,col=c(&quot;Azure2&quot;, &quot;Aquamarine1&quot;,&quot;Darkslateblue&quot;))</code></pre>
-<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/DiffIsoAnalysis.Rmd/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2355,11 +2391,11 @@ loaded via a namespace (and not attached):
 [21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
 [25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
-[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
-[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
-[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
-[49] crayon_1.3.4    </code></pre>
+[33] fansi_0.4.0      readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] labeling_0.3     utf8_1.1.4       stringi_1.2.4    lazyeval_0.2.1  
+[49] munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 </div>
 </div>
