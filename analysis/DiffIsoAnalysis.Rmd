@@ -275,8 +275,34 @@ effectsize_deltaPAUProp_both_melt$Fraction=as.character(effectsize_deltaPAUProp_
 ```
 
 ```{r}
-ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Proportion of PAS differential used by location",x="") +scale_x_discrete(labels = c('Coding','5kb downstream','Intronic',"3' UTR", "5' UTR")) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.1,.9), legend.direction = "horizontal") +  theme(panel.background = element_blank())
+ggplot(effectsize_deltaPAUProp_both_melt, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Proportion of PAS differential used by location",x="") +scale_x_discrete(labels = c('Coding','5kb downstream','Intronic',"3' UTR", "5' UTR")) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.1,.9), legend.direction = "horizontal") +  theme(panel.background = element_blank()) 
 ```
+
+```{r}
+effectsize_deltaPAU_total_locProp
+
+sum(effectsize_deltaPAU_total_locProp$nloctotal)
+
+effectsize_deltaPAU_nuclear_locProp
+sum(effectsize_deltaPAU_nuclear_locProp$nlocnuclear)
+```
+
+```{r}
+effectsize_deltaPAUProp_both_melt_sm=effectsize_deltaPAUProp_both_melt %>% filter(loc=="intron" | loc=="utr3")
+
+
+ggplot(effectsize_deltaPAUProp_both_melt_sm, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Proportion of PAS differential used by location",x="") +scale_x_discrete(labels = c('Intronic',"3' UTR")) +theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  theme(legend.position = c(0.1,.9), legend.direction = "horizontal") +  theme(panel.background = element_blank()) 
+```
+
+
+```{r}
+#intronic
+prop.test(x=c(473,160), n=c(700,1396),alternative = "greater")
+
+#3' utr
+prop.test(x=c(104,1085), n=c(700,1396),alternative = "less")
+```
+
 
 More differentiall used in total. this makes sense because there are more used peaks in the nuclear which evens out the distribution of the ratios.  
 
