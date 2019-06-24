@@ -26,7 +26,7 @@ geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep
 
 4su data
 ```{r}
-FourSU=read.table(file = "../data/fourSU//tr_decay_table_norm.txt", header=T, stringsAsFactors = F) %>%  dplyr::select(gene_id,contains("4su_30"))
+FourSU=read.table(file = "../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F) %>%  dplyr::select(gene_id,contains("4su_30"))
 
 
 FourSU_geneNames=FourSU %>% inner_join(geneNames, by="gene_id") %>% dplyr::select(GeneName, contains("4su_30"))
@@ -408,4 +408,56 @@ ggplot(BothlocPhenoandtranscription, aes(x=Transcription, y=fullAPA))+ geom_poin
 
 summary(lm(data=BothlocPhenoandtranscription, log10(fullAPA)~Transcription))
 ```
+
+##Does number of PAS correlate with nascent transcription  
+
+
+I want to look at number of PAS in the nuclear fraction against 4su/4su+RNA. This is the transcription phenotype in this analysis
+```{r}
+nPASnuc=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc", header = F, stringsAsFactors = F, col.names = c("chr", "start", "end","gene", "loc","strand", "peakNum", "meanusage")) %>% group_by(gene) %>% summarise(nPASN=n())
+
+transcriptionPAS=Transcription %>%inner_join(nPASnuc, by="gene")
+
+
+transcriptionPAS$density <- get_density(transcriptionPAS$nPASN, transcriptionPAS$Transcription, n = 100)
+
+
+
+ggplot(transcriptionPAS, aes(x=Transcription, y=nPASN)) + geom_point(aes(color=density)) + scale_color_viridis() + geom_smooth(method = "lm") + labs(y="Number of PAS", title="Number of Nuclear PAS increases as nascent transcription increases") 
+summary(lm(data=transcriptionPAS, nPASN~Transcription))
+
+```
+
+Try for total fraction:
+
+```{r}
+nPAStot=read.table("../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc", header = F, stringsAsFactors = F, col.names = c("chr", "start", "end","gene", "loc","strand", "peakNum", "meanusage")) %>% group_by(gene) %>% summarise(nPAST=n())
+
+transcriptionTOTPAS=Transcription %>%inner_join(nPAStot, by="gene")
+
+
+transcriptionTOTPAS$density <- get_density(transcriptionTOTPAS$nPAST, transcriptionTOTPAS$Transcription, n = 100)
+
+
+
+ggplot(transcriptionTOTPAS, aes(x=Transcription, y=nPAST)) + geom_point(aes(color=density)) + scale_color_viridis() + geom_smooth(method = "lm") + labs(y="Number of PAS", title="Number of Total PAS increases as nascent transcription increases") 
+summary(lm(data=transcriptionTOTPAS, nPAST~Transcription))
+
+```
+Look at the difference in PAS number:
+
+```{r}
+nPASall= nPAStot %>% inner_join(nPASnuc, by="gene") %>% mutate(Difference= nPASN-nPAST) 
+
+transcriptionallPAS=Transcription %>%inner_join(nPASall, by="gene")
+
+transcriptionallPAS$density <- get_density(transcriptionallPAS$Difference, transcriptionallPAS$Transcription, n = 100)
+
+ggplot(transcriptionallPAS, aes(x=Transcription, y=Difference)) + geom_point(aes(color=density)) + scale_color_viridis() + geom_smooth(method = "lm") + labs(y="Diffference in number of PAS", title="Number of Total PAS increases as nascent transcription increases") 
+
+
+summary(lm(data=transcriptionallPAS, Difference~Transcription))
+```
+
+This has a small positive correlation.  
 
