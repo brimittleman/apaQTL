@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-24
+<strong>Last updated:</strong> 2019-06-25
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -422,10 +422,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree78dd5da969049a7c26369936aa70b58e53743881targetblank78dd5daa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/78dd5da969049a7c26369936aa70b58e53743881" target="_blank">78dd5da</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree45839ab9fa71b2d6979b1cab2f349d6ce1b57619targetblank45839aba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/45839ab9fa71b2d6979b1cab2f349d6ce1b57619" target="_blank">45839ab</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree78dd5da969049a7c26369936aa70b58e53743881targetblank78dd5daa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree45839ab9fa71b2d6979b1cab2f349d6ce1b57619targetblank45839aba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -576,6 +576,7 @@ Untracked files:
     Untracked:  code/._runHMMpermuteeQTLS.sh
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
     Untracked:  code/._runMakeeQTLempirical.sh
+    Untracked:  code/._run_bam2bw_all3prime.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
     Untracked:  code/._run_getapafromeQTL.py
     Untracked:  code/._run_getapafromeQTL.sh
@@ -598,6 +599,8 @@ Untracked files:
     Untracked:  code/._subsetVCF_upstreamPAS.sh
     Untracked:  code/._subset_diffisopheno.py
     Untracked:  code/._subsetpermAPAwithGenelist.py
+    Untracked:  code/._subsetvcf_otherreg.sh
+    Untracked:  code/._subsetvcf_permSS.sh
     Untracked:  code/._subtrachfiveprimeUTR.sh
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
@@ -818,6 +821,9 @@ Untracked files:
     Untracked:  code/runMakeeQTLempirical.sh
     Untracked:  code/run_DistPAS2Sig.err
     Untracked:  code/run_DistPAS2Sig.out
+    Untracked:  code/run_bam2bw.err
+    Untracked:  code/run_bam2bw.out
+    Untracked:  code/run_bam2bw_all3prime.sh
     Untracked:  code/run_distPAS2Sig.sh
     Untracked:  code/run_getAPAfromanyeQTL.err
     Untracked:  code/run_getAPAfromanyeQTL.out
@@ -859,8 +865,14 @@ Untracked files:
     Untracked:  code/subsetpermAPAwithGenelist.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
+    Untracked:  code/subsetvcf_otherreg.sh
     Untracked:  code/subsetvcf_pas.err
     Untracked:  code/subsetvcf_pas.out
+    Untracked:  code/subsetvcf_perm.err
+    Untracked:  code/subsetvcf_perm.out
+    Untracked:  code/subsetvcf_permSS.sh
+    Untracked:  code/subsetvcf_rand.err
+    Untracked:  code/subsetvcf_rand.out
     Untracked:  code/subtract5UTR.err
     Untracked:  code/subtract5UTR.out
     Untracked:  code/subtractExons.err
@@ -916,6 +928,7 @@ Untracked files:
     Untracked:  data/bed_waspfilter/
     Untracked:  data/bedsort_waspfilter/
     Untracked:  data/bothFrac_FC/
+    Untracked:  data/bw/
     Untracked:  data/bw_norm/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
@@ -1020,6 +1033,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/45839ab9fa71b2d6979b1cab2f349d6ce1b57619/analysis/snpinSS.Rmd" target="_blank">45839ab</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+<td>
+results from snp in each loc
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/433092b3ac3b77d6d551564291163697bc18d68b/docs/snpinSS.html" target="_blank">433092b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/78dd5da969049a7c26369936aa70b58e53743881/analysis/snpinSS.Rmd" target="_blank">78dd5da</a>
 </td>
 <td>
@@ -1062,7 +1109,9 @@ PASwSSregion=PASwSS %&gt;% inner_join(PAS, by=&quot;PAS&quot;) %&gt;% mutate(new
 write.table(PASwSSregion,&quot;../data/SNPinSS/FiftyupstreamPASwSS.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
 <pre class="bash"><code>sed &#39;s/^chr//&#39; ../data/SNPinSS/FiftyupstreamPASwSS.bed  &gt; ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed
 sort -k1,1 -k2,2n ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed &gt; ../data/SNPinSS/FiftyupstreamPASwSS.nochr.sort.bed
-sbatch subsetVCF_upstreamPAS.sh</code></pre>
+sbatch subsetVCF_upstreamPAS.sh
+
+cat  ../data/SNPinSS/SNPSinFiftyupstreamPAS_chr* &gt;../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf</code></pre>
 <p>I want to further subset to those in a signal site.</p>
 <pre class="r"><code>SSregions=PASwSS %&gt;% inner_join(PAS, by=&quot;PAS&quot;) %&gt;% mutate(absdist=abs(UpstreamDist),newEnd= ifelse(strand==&quot;+&quot;, end-absdist, end+absdist), newStart=ifelse(strand==&quot;+&quot;, end- (absdist+6), end + (absdist-6)), length=newEnd-newStart) %&gt;% select(chr, newStart,newEnd, geneiD, score, strand)
 
@@ -1070,7 +1119,43 @@ sbatch subsetVCF_upstreamPAS.sh</code></pre>
 write.table(SSregions,&quot;../data/SNPinSS/SignalSiteRegions.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
 <pre class="bash"><code>sed &#39;s/^chr//&#39; ../data/SNPinSS/SignalSiteRegions.bed  &gt; ../data/SNPinSS/SignalSiteRegions.nochr.bed
 sort -k1,1 -k2,2n ../data/SNPinSS/SignalSiteRegions.nochr.bed &gt; ../data/SNPinSS/SignalSiteRegions.nochr.sort.bed
-sbatch subsetVCF_SS.sh</code></pre>
+sbatch subsetVCF_SS.sh
+
+cat  ../data/SNPinSS/SSregions_chr* &gt; ../data/SNPinSS/SSregions_Allchr.recode.vcf</code></pre>
+<p>I will also need a different region to comare to. I can just shift these regions upstream by 7</p>
+<pre class="r"><code>SS_diffregion=SSregions %&gt;% mutate(randStart=ifelse(strand==&quot;+&quot;, newStart-7, newEnd), randend=ifelse(strand==&quot;+&quot;, newStart, newEnd+7), length=randend-randStart) %&gt;% select(chr, randStart,randend, geneiD, score, strand) 
+
+write.table(SS_diffregion,&quot;../data/SNPinSS/OtherSSRegions.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<pre class="bash"><code>sed &#39;s/^chr//&#39; ../data/SNPinSS/OtherSSRegions.bed  &gt; ../data/SNPinSS/OtherSSRegions.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/OtherSSRegions.nochr.bed &gt; ../data/SNPinSS/OtherSSRegions.nochr.sort.bed
+sbatch subsetvcf_otherreg.sh 
+
+cat  ../data/SNPinSS/Otherregions_chr* &gt; ../data/SNPinSS/Otherregions_Allchr.recode.vcf</code></pre>
+<p>Alternative option, permute the distances:</p>
+<pre class="r"><code>permdist=sample(PASwSS$UpstreamDist, length(PASwSS$UpstreamDist), replace = F)
+
+SSregions_perm=as.data.frame(cbind(PASwSS,  permdist))%&gt;% inner_join(PAS, by=&quot;PAS&quot;)  %&gt;% mutate(absdist=abs(permdist),newEnd= ifelse(strand==&quot;+&quot;, end-absdist, end+absdist), newStart=ifelse(strand==&quot;+&quot;, end- (absdist+6), end + (absdist-6)), length=newEnd-newStart)%&gt;% select(chr, newStart,newEnd, geneiD, score, strand)
+
+write.table(SSregions_perm,&quot;../data/SNPinSS/SSRegions_permuted.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<pre class="bash"><code>sed &#39;s/^chr//&#39; ../data/SNPinSS/SSRegions_permuted.bed  &gt; ../data/SNPinSS/SSRegions_permuted.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/SSRegions_permuted.nochr.bed &gt; ../data/SNPinSS/SSRegions_permuted.nochr.sort.bed
+sbatch subsetvcf_permSS.sh 
+
+cat  ../data/SNPinSS/SSRegionsPerm_chr* &gt; ../data/SNPinSS/SSRegionsPerm_Allchr.recode.vcf
+#remove # in first line</code></pre>
+<p>Pull in QTL snps:</p>
+<pre class="r"><code>totQTLs=read.table(&quot;../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt&quot;,header = T, stringsAsFactors = F) %&gt;% select(sid) %&gt;% unique()
+nucQTLs=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt&quot;,header = T, stringsAsFactors = F) %&gt;% select(sid) %&gt;% unique()</code></pre>
+<p>Signal site results:</p>
+<pre class="r"><code>SS_snps=read.table(&quot;../data/SNPinSS/SSregions_Allchr.recode.vcf&quot;,header = T, stringsAsFactors = F) %&gt;% select(ID) %&gt;% mutate(totQTL=ifelse(ID %in% totQTLs$sid, &quot;Yes&quot;, &quot;No&quot;), nucQTL=ifelse(ID %in% nucQTLs$sid, &quot;Yes&quot;, &quot;No&quot;))
+
+
+permutedSS_snps=read.table(&quot;../data/SNPinSS/SSRegionsPerm_Allchr.recode.vcf&quot;,header = T, stringsAsFactors = F) %&gt;% select(ID) %&gt;% mutate(totQTL=ifelse(ID %in% totQTLs$sid, &quot;Yes&quot;, &quot;No&quot;), nucQTL=ifelse(ID %in% nucQTLs$sid, &quot;Yes&quot;, &quot;No&quot;))
+
+otherReg_snp=read.table(&quot;../data/SNPinSS/Otherregions_Allchr.recode.vcf&quot;,header = T, stringsAsFactors = F) %&gt;% select(ID) %&gt;% mutate(totQTL=ifelse(ID %in% totQTLs$sid, &quot;Yes&quot;, &quot;No&quot;), nucQTL=ifelse(ID %in% nucQTLs$sid, &quot;Yes&quot;, &quot;No&quot;))
+
+fiftybp_snp=read.table(&quot;../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf&quot;,header = T, stringsAsFactors = F) %&gt;% select(ID) %&gt;% mutate(totQTL=ifelse(ID %in% totQTLs$sid, &quot;Yes&quot;, &quot;No&quot;), nucQTL=ifelse(ID %in% nucQTLs$sid, &quot;Yes&quot;, &quot;No&quot;))</code></pre>
+<p>There are only 2 qtl snps in these signal sites. This is not enough to draw anything from this.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
