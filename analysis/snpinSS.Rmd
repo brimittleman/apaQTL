@@ -37,7 +37,12 @@ write.table(PASwSSregion,"../data/SNPinSS/FiftyupstreamPASwSS.bed", col.names = 
 sed 's/^chr//' ../data/SNPinSS/FiftyupstreamPASwSS.bed  > ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed
 sort -k1,1 -k2,2n ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed > ../data/SNPinSS/FiftyupstreamPASwSS.nochr.sort.bed
 sbatch subsetVCF_upstreamPAS.sh
+
+cat  ../data/SNPinSS/SNPSinFiftyupstreamPAS_chr* >../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf
 ```
+
+
+
 
 
 I want to further subset to those in a signal site.  
@@ -54,5 +59,69 @@ write.table(SSregions,"../data/SNPinSS/SignalSiteRegions.bed", col.names = F, ro
 sed 's/^chr//' ../data/SNPinSS/SignalSiteRegions.bed  > ../data/SNPinSS/SignalSiteRegions.nochr.bed
 sort -k1,1 -k2,2n ../data/SNPinSS/SignalSiteRegions.nochr.bed > ../data/SNPinSS/SignalSiteRegions.nochr.sort.bed
 sbatch subsetVCF_SS.sh
+
+cat  ../data/SNPinSS/SSregions_chr* > ../data/SNPinSS/SSregions_Allchr.recode.vcf
 ```
 
+
+I will also need a different region to comare to. I can just shift these regions upstream by 7
+
+```{r}
+SS_diffregion=SSregions %>% mutate(randStart=ifelse(strand=="+", newStart-7, newEnd), randend=ifelse(strand=="+", newStart, newEnd+7), length=randend-randStart) %>% select(chr, randStart,randend, geneiD, score, strand) 
+
+write.table(SS_diffregion,"../data/SNPinSS/OtherSSRegions.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/SNPinSS/OtherSSRegions.bed  > ../data/SNPinSS/OtherSSRegions.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/OtherSSRegions.nochr.bed > ../data/SNPinSS/OtherSSRegions.nochr.sort.bed
+sbatch subsetvcf_otherreg.sh 
+
+cat  ../data/SNPinSS/Otherregions_chr* > ../data/SNPinSS/Otherregions_Allchr.recode.vcf
+```
+
+
+Alternative option, permute the distances: 
+
+```{r}
+permdist=sample(PASwSS$UpstreamDist, length(PASwSS$UpstreamDist), replace = F)
+
+SSregions_perm=as.data.frame(cbind(PASwSS,  permdist))%>% inner_join(PAS, by="PAS")  %>% mutate(absdist=abs(permdist),newEnd= ifelse(strand=="+", end-absdist, end+absdist), newStart=ifelse(strand=="+", end- (absdist+6), end + (absdist-6)), length=newEnd-newStart)%>% select(chr, newStart,newEnd, geneiD, score, strand)
+
+write.table(SSregions_perm,"../data/SNPinSS/SSRegions_permuted.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/SNPinSS/SSRegions_permuted.bed  > ../data/SNPinSS/SSRegions_permuted.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/SSRegions_permuted.nochr.bed > ../data/SNPinSS/SSRegions_permuted.nochr.sort.bed
+sbatch subsetvcf_permSS.sh 
+
+cat  ../data/SNPinSS/SSRegionsPerm_chr* > ../data/SNPinSS/SSRegionsPerm_Allchr.recode.vcf
+#remove # in first line
+```
+
+
+Pull in QTL snps:
+
+```{r}
+totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt",header = T, stringsAsFactors = F) %>% select(sid) %>% unique()
+nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt",header = T, stringsAsFactors = F) %>% select(sid) %>% unique()
+```
+
+
+Signal site results:
+
+```{r}
+SS_snps=read.table("../data/SNPinSS/SSregions_Allchr.recode.vcf",header = T, stringsAsFactors = F) %>% select(ID) %>% mutate(totQTL=ifelse(ID %in% totQTLs$sid, "Yes", "No"), nucQTL=ifelse(ID %in% nucQTLs$sid, "Yes", "No"))
+
+
+permutedSS_snps=read.table("../data/SNPinSS/SSRegionsPerm_Allchr.recode.vcf",header = T, stringsAsFactors = F) %>% select(ID) %>% mutate(totQTL=ifelse(ID %in% totQTLs$sid, "Yes", "No"), nucQTL=ifelse(ID %in% nucQTLs$sid, "Yes", "No"))
+
+otherReg_snp=read.table("../data/SNPinSS/Otherregions_Allchr.recode.vcf",header = T, stringsAsFactors = F) %>% select(ID) %>% mutate(totQTL=ifelse(ID %in% totQTLs$sid, "Yes", "No"), nucQTL=ifelse(ID %in% nucQTLs$sid, "Yes", "No"))
+
+fiftybp_snp=read.table("../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf",header = T, stringsAsFactors = F) %>% select(ID) %>% mutate(totQTL=ifelse(ID %in% totQTLs$sid, "Yes", "No"), nucQTL=ifelse(ID %in% nucQTLs$sid, "Yes", "No"))
+```
+
+There are only 2 qtl snps in these signal sites. This is not enough to draw anything from this. 
