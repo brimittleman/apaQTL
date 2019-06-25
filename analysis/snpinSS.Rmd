@@ -14,6 +14,7 @@ In this analysis I want to ask if snps in a signal site are more likely to be ap
 ```{r}
 library(workflowr)
 library(tidyverse)
+library(ggpubr)
 ```
 
 ```{bash,eval=F}
@@ -24,9 +25,9 @@ mkdir ../data/SNPinSS
 I want a bed file with 50bp upstream of these PAS. 
 ```{r}
 PASwSS=read.table("../data/PAS/PASwSignalSite.txt", header = T,stringsAsFactors = F)
-PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""))
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""),PASname=paste(PAS, geneiD, sep="_")) 
 
-PASwSSregion=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50)) %>% select(chr, newStart,newEnd, geneiD, score, strand)
+PASwSSregion=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50)) %>% select(chr, newStart,newEnd, PASname, score, strand)
 
 write.table(PASwSSregion,"../data/SNPinSS/FiftyupstreamPASwSS.bed", col.names = F, row.names = F, quote = F, sep="\t")
 
@@ -49,7 +50,7 @@ I want to further subset to those in a signal site.
 
 
 ```{r}
-SSregions=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(absdist=abs(UpstreamDist),newEnd= ifelse(strand=="+", end-absdist, end+absdist), newStart=ifelse(strand=="+", end- (absdist+6), end + (absdist-6)), length=newEnd-newStart) %>% select(chr, newStart,newEnd, geneiD, score, strand)
+SSregions=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(absdist=abs(UpstreamDist),newEnd= ifelse(strand=="+", end-absdist, end+absdist), newStart=ifelse(strand=="+", end- (absdist+6), end + (absdist-6)), length=newEnd-newStart) %>% select(chr, newStart,newEnd, PASname, score, strand) 
 
 
 write.table(SSregions,"../data/SNPinSS/SignalSiteRegions.bed", col.names = F, row.names = F, quote = F, sep="\t")
@@ -67,7 +68,7 @@ cat  ../data/SNPinSS/SSregions_chr* > ../data/SNPinSS/SSregions_Allchr.recode.vc
 I will also need a different region to comare to. I can just shift these regions upstream by 7
 
 ```{r}
-SS_diffregion=SSregions %>% mutate(randStart=ifelse(strand=="+", newStart-7, newEnd), randend=ifelse(strand=="+", newStart, newEnd+7), length=randend-randStart) %>% select(chr, randStart,randend, geneiD, score, strand) 
+SS_diffregion=SSregions %>% mutate(randStart=ifelse(strand=="+", newStart-7, newEnd), randend=ifelse(strand=="+", newStart, newEnd+7), length=randend-randStart) %>% select(chr, randStart,randend, PASname, score, strand) 
 
 write.table(SS_diffregion,"../data/SNPinSS/OtherSSRegions.bed", col.names = F, row.names = F, quote = F, sep="\t")
 ```
@@ -87,7 +88,7 @@ Alternative option, permute the distances:
 ```{r}
 permdist=sample(PASwSS$UpstreamDist, length(PASwSS$UpstreamDist), replace = F)
 
-SSregions_perm=as.data.frame(cbind(PASwSS,  permdist))%>% inner_join(PAS, by="PAS")  %>% mutate(absdist=abs(permdist),newEnd= ifelse(strand=="+", end-absdist, end+absdist), newStart=ifelse(strand=="+", end- (absdist+6), end + (absdist-6)), length=newEnd-newStart)%>% select(chr, newStart,newEnd, geneiD, score, strand)
+SSregions_perm=as.data.frame(cbind(PASwSS,  permdist))%>% inner_join(PAS, by="PAS")  %>% mutate(absdist=abs(permdist),newEnd= ifelse(strand=="+", end-absdist, end+absdist), newStart=ifelse(strand=="+", end- (absdist+6), end + (absdist-6)), length=newEnd-newStart)%>% select(chr, newStart,newEnd, PASname, score, strand)
 
 write.table(SSregions_perm,"../data/SNPinSS/SSRegions_permuted.bed", col.names = F, row.names = F, quote = F, sep="\t")
 ```
@@ -128,3 +129,127 @@ fiftybp_snp=read.table("../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf
 ```
 
 There are only 2 qtl snps in these signal sites. This is not enough to draw anything from this. 
+
+
+Try with pvalues. Are the snps in pvals more likely to be significant than those not. 
+
+I need to figure out which peak is associated with each snp.
+
+I can make a bedfile from the SS snps in python and overlap this with the Signal site regions.  
+
+```{bash,eval=F}
+python vcf2bed.py ../data/SNPinSS/SSregions_Allchr.recode.vcf  ../data/SNPinSS/SSregions_Allchr.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/SSregions_Allchr.bed > ../data/SNPinSS/SSregions_Allchr.sort.bed
+
+
+python vcf2bed.py ../data/SNPinSS/SSRegionsPerm_Allchr.recode.vcf  ../data/SNPinSS/SSRegionsPerm_Allchr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/SSRegionsPerm_Allchr.bed> ../data/SNPinSS/SSRegionsPerm_Allchr.sort.bed
+
+
+
+python vcf2bed.py ../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf  ../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.bed > ../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.sort.bed
+
+
+python vcf2bed.py ../data/SNPinSS/Otherregions_Allchr.recode.vcf  ../data/SNPinSS/Otherregions_Allchr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/Otherregions_Allchr.bed > ../data/SNPinSS/Otherregions_Allchr.sort.bed
+
+
+sort -k1,1 -k2,2n ../data/SNPinSS/SignalSiteRegions.bed > ../data/SNPinSS/SignalSiteRegions.sort.bed
+
+
+sort -k1,1 -k2,2n ../data/SNPinSS/SSRegions_permuted.bed >../data/SNPinSS/SSRegions_permuted.sort.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/FiftyupstreamPASwSS.bed > ../data/SNPinSS/FiftyupstreamPASwSS.sort.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/OtherSSRegions.bed > ../data/SNPinSS/OtherSSRegions.sort.bed
+
+
+```
+
+intersect with bedtools to map the snps to the regions. Then I will be able to select the snp PAS associations.  
+```{bash,eval=F}
+sbatch mapSSsnps2PAS.sh
+```
+
+Results to get the associations:
+
+```{r}
+SSsnpswithPAS=read.table("../data/SNPinSS/SNPinSS2PAS.txt",col.names = c("chr","start", "end", "PASname", "score", "strand", "SNP")) %>% filter(SNP!=".") %>% separate(PASname, into=c("PAS", "gene", "loc"),sep="_") %>% select(PAS, SNP)
+write.table(SSsnpswithPAS, "../data/SNPinSS/SS_PASandSNPs.txt", row.names = F, col.names = F, quote = F, sep="\t")
+
+
+SSsnpswithPERMPAS=read.table("../data/SNPinSS/SNPinPermSS2PAS.txt",col.names = c("chr","start", "end", "PASname", "score", "strand", "SNP")) %>% filter(SNP!=".") %>% separate(PASname, into=c("PAS", "gene", "loc"),sep="_") %>% select(PAS, SNP)
+write.table(SSsnpswithPERMPAS, "../data/SNPinSS/PermSS_PASandSNPs.txt", row.names = F, col.names = F, quote = F, sep="\t")
+
+SNPregion=read.table("../data/SNPinSS/SNPSinFiftyupstream2PAS.txt",col.names = c("chr","start", "end", "PASname", "score", "strand", "SNP")) %>% filter(SNP!=".") %>% separate(PASname, into=c("PAS", "gene", "loc"),sep="_") %>% select(PAS, SNP)
+write.table(SNPregion, "../data/SNPinSS/PASregion_PASandSNPs.txt", row.names = F, col.names = F, quote = F, sep="\t")
+
+
+Otherregion=read.table("../data/SNPinSS/Otherregions2PAS.txt",col.names = c("chr","start", "end", "PASname", "score", "strand", "SNP")) %>% filter(SNP!=".") %>% separate(PASname, into=c("PAS", "gene", "loc"),sep="_") %>% select(PAS, SNP)
+write.table(Otherregion, "../data/SNPinSS/Otherregions_PASandSNPs.txt", row.names = F, col.names = F, quote = F, sep="\t")
+```
+
+Process the snp region with python
+
+```{bash,eval=F}
+python fixPASregionSNPs.py
+
+```
+
+Run this with total and nuclear 
+```{bash,eval=F}
+python NomResfromPASSNP.py ../data/SNPinSS/SS_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/SS_Nuclear_nomRes.txt 
+
+python NomResfromPASSNP.py ../data/SNPinSS/SS_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/SS_Total_nomRes.txt 
+
+
+python NomResfromPASSNP.py ../data/SNPinSS/PermSS_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/PermSS_Nuclear_nomRes.txt 
+
+python NomResfromPASSNP.py ../data/SNPinSS/PermSS_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/PermSS_Total_nomRes.txt 
+
+
+python NomResfromPASSNP.py ../data/SNPinSS/PASregion_PASandSNPs.FIXED.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/RegionSS_Nuclear_nomRes.txt 
+
+python NomResfromPASSNP.py ../data/SNPinSS/PASregion_PASandSNPs.FIXED.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/RegionSS_Total_nomRes.txt  
+
+python NomResfromPASSNP.py ../data/SNPinSS/Otherregions_PASandSNPs.FIXED.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/OtherSS_Nuclear_nomRes.txt 
+
+python NomResfromPASSNP.py ../data/SNPinSS/Otherregions_PASandSNPs.FIXED.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/OtherSS_Total_nomRes.txt  
+
+
+
+```
+
+
+
+```{r}
+Nuclear_SS=read.table('../data/apaQTLNominal_4pc/SS_Nuclear_nomRes.txt', header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Nuclear", set="SS")
+Nuclear_Perm=read.table('../data/apaQTLNominal_4pc/PermSS_Nuclear_nomRes.txt',header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Nuclear", set="Permuted")
+
+Total_SS=read.table('../data/apaQTLNominal_4pc/SS_Total_nomRes.txt', header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Total", set="SS")
+Total_Perm=read.table('../data/apaQTLNominal_4pc/PermSS_Total_nomRes.txt',header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Total", set="Permuted")
+
+
+Nuclear_Region=read.table('../data/apaQTLNominal_4pc/RegionSS_Nuclear_nomRes.txt',header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Nuclear", set="Region")
+
+Total_Region=read.table('../data/apaQTLNominal_4pc/RegionSS_Total_nomRes.txt',header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Total", set="Region")
+
+Nuclear_other=read.table('../data/apaQTLNominal_4pc/OtherSS_Nuclear_nomRes.txt',header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Nuclear", set="Upstream")
+
+Total_other=read.table('../data/apaQTLNominal_4pc/OtherSS_Total_nomRes.txt',header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F) %>% select(pval,slope) %>% mutate(fraction="Total", set="Upstream")
+
+
+all_SS_pval=bind_rows(Nuclear_SS,Nuclear_Perm,Total_SS,Total_Perm,Nuclear_Region,Total_Region,Nuclear_other,Total_other)
+```
+
+```{r}
+ggplot(all_SS_pval, aes(x=fraction, fill=set, y=pval)) + geom_boxplot()
+```
+```{r}
+ggplot(all_SS_pval, aes(x=fraction, fill=set, y=abs(slope))) + geom_boxplot() + labs(y="absolute value effect size")
+```
+
+Does not look like there is an effect here.  
+
