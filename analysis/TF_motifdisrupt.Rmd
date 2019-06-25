@@ -1,0 +1,48 @@
+---
+title: "TF motif disruption"
+author: "Briana Mittleman"
+date: "6/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+I want to understand what mechanisms could be driving the apaQTLs. T odo this I am going to look for TF motifs that are enriched for disruption in the apaQTLs. I am using https://ccg.epfl.ch/snp2tfbs/pwmviewer.php and am giving it the list of uniq rsids for the apaQTLs.  
+
+##Total:
+
+```{r}
+total_tf=read.table("../data/TF_motifdisruption/TotalTFenrich_output_27069.txt", stringsAsFactors = F, col.names = c("name", "genomeMatches","setMatches", "fractionHits", "enrichment","pval"))
+total_tf_sig=total_tf %>% filter(pval<.05)
+total_matches=read.table("../data/TF_motifdisruption/TotalTFmatchesAnn_output_27069.txt", stringsAsFactors = F,col.names = c("chr", "pos", "ref", "alt", "loc","gene", "score1", "score2", "snp", "TF"))
+total_matches_sig=total_matches %>% filter(TF %in% total_tf_sig$name)
+```
+
+
+```{r}
+ggplot(total_matches_sig, aes(x=TF,fill=loc)) + geom_bar()+ labs(y="Number of SNP", title="Location of Enriched TF motifs \n Total apaQTLs")
+```
+
+##Nuclear 
+```{r}
+nuclear_tf=read.table("../data/TF_motifdisruption/NuclearTFenrich_output_25094.txt", stringsAsFactors = F, col.names = c("name", "genomeMatches","setMatches", "fractionHits", "enrichment","pval"))
+nuclear_tf_sig=nuclear_tf %>% filter(pval<.05)
+nuclear_matches=read.table("../data/TF_motifdisruption/NuclearTFmatchesAnn_output_25094.txt", stringsAsFactors = F,col.names = c("chr", "pos", "ref", "alt", "loc","gene", "score1", "score2", "snp", "TF"))
+nuclear_matches_sig=nuclear_matches %>% filter(TF %in% nuclear_tf_sig$name)
+```
+
+
+```{r}
+
+ggplot(nuclear_matches_sig, aes(x=TF,fill=loc)) + geom_bar()+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +labs(y="Number of SNP", title="Location of Enriched TF motifs \n Nuclear apaQTLs")
+```
+
+

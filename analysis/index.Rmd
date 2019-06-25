@@ -67,6 +67,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Are snps in Signal sites likely to be QTLs?](snpinSS.html)
 
+* [Transcription factor motif disruption for QTLs](TF_motifdisrupt.html)
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  
