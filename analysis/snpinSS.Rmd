@@ -107,7 +107,10 @@ Pull in QTL snps:
 
 ```{r}
 totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt",header = T, stringsAsFactors = F) %>% select(sid) %>% unique()
+write.table(totQTLs,"../data/apaQTLs/TotalQTLSNPsRSID.txt", col.names = F, row.names = F, quote = F)
+
 nucQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt",header = T, stringsAsFactors = F) %>% select(sid) %>% unique()
+write.table(nucQTLs,"../data/apaQTLs/NuclearQTLSNPsRSID.txt", col.names = F, row.names = F, quote = F)
 ```
 
 
