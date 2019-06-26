@@ -246,7 +246,47 @@ Plot this:
 ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + geom_text(aes(label=Prop))
 ```
 
-###Examples for overlap:  
+##Concordance of directions for intronic pas usage and eQTL  
+
+I want to look at the intronic pas and the eQTLs. To do this I want to look at a correaltion of effect sizes for the eQTLs and and intronic PAS. 
+
+The eQTL information is in ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.GeneName.txt. I need to converte the RSID into snp loc.  
+
+```{bash,eval=F}
+python eQTL_switch2snploc.py
+```
+
+
+prepare eQTL:
+
+```{r}
+eQTLeffect=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.GeneName_snploc.txt", stringsAsFactors = F, col.names = c("gene","snp","dist", "pval", "eQTL_es")) %>% select(gene, snp, eQTL_es)
+```
+
+total: 
+```{r}
+alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
+
+
+ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm")
+
+summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))
+```
+
+Nuclear:
+
+```{r}
+alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
+
+
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm")
+
+
+summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))
+```
+
+
+##Examples for overlap:  
 
 ```{r}
 unexplained_snps=read.table("../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt", col.names = c("chr", "loc", "gene"),stringsAsFactors = F)
@@ -322,3 +362,6 @@ RNA_KDELR2_LZ=read.table("../data/locusZoom/RNA.KDELR2.txt", stringsAsFactors = 
 write.table(RNA_KDELR2_LZ,"../data/locusZoom/RNAKDELR2_LZ.txt", col.names = T, row.names = F, quote = F)
 ```
 Use locuszoom.org  
+
+
+
