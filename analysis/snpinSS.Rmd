@@ -242,13 +242,15 @@ Total_other=read.table('../data/apaQTLNominal_4pc/OtherSS_Total_nomRes.txt',head
 
 
 all_SS_pval=bind_rows(Nuclear_SS,Nuclear_Perm,Total_SS,Total_Perm,Nuclear_Region,Total_Region,Nuclear_other,Total_other)
+
+all_SS_pval$set <- factor(all_SS_pval$set, levels=c("SS", "Upstream", "Permuted", "Region"))
 ```
 
 ```{r}
-ggplot(all_SS_pval, aes(x=fraction, fill=set, y=pval)) + geom_boxplot()
+ggplot(all_SS_pval, aes(x=fraction, fill=set, y=pval)) + geom_boxplot() + labs(x="Fraction", title="p-values for SNPs in Signal Sites",y="nominal P-value" ) + scale_fill_discrete(name = 'Set', labels = c('Signal Sites', 'Region upstream of Signal Site', 'Permuted Distance to Signal Site',"50 bp upstream of PAS"))
 ```
 ```{r}
-ggplot(all_SS_pval, aes(x=fraction, fill=set, y=abs(slope))) + geom_boxplot() + labs(y="absolute value effect size")
+ggplot(all_SS_pval, aes(x=fraction, fill=set, y=abs(slope))) + geom_boxplot()  + labs(x="Fraction", title="p-values for SNPs in Signal Sites",y="absolute value effect size" ) + scale_fill_discrete(name = 'Set', labels = c('Signal Sites', 'Region upstream of Signal Site', 'Permuted Distance to Signal Site',"50 bp upstream of PAS"))
 ```
 
 Does not look like there is an effect here.  
