@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefffb14b954cbd430220b154d5bf3c204e59ee259targetblankfffb14ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fffb14b954cbd430220b154d5bf3c204e59ee259" target="_blank">fffb14b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1aa270e5dfc51988a6e775196f2af2feff470f20targetblank1aa270ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1aa270e5dfc51988a6e775196f2af2feff470f20" target="_blank">1aa270e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefffb14b954cbd430220b154d5bf3c204e59ee259targetblankfffb14ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1aa270e5dfc51988a6e775196f2af2feff470f20targetblank1aa270ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1058,6 +1058,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1aa270e5dfc51988a6e775196f2af2feff470f20/analysis/snpinSS.Rmd" target="_blank">1aa270e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+<td>
+change order and names
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/11a306934a3cc41e2c37a600c8e9032850426c4c/docs/snpinSS.html" target="_blank">11a3069</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/fffb14b954cbd430220b154d5bf3c204e59ee259/analysis/snpinSS.Rmd" target="_blank">fffb14b</a>
 </td>
 <td>
@@ -1184,12 +1218,12 @@ add snp in ss analysis
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggpubr)</code></pre>
@@ -1346,11 +1380,87 @@ Nuclear_other=read.table(&#39;../data/apaQTLNominal_4pc/OtherSS_Nuclear_nomRes.t
 Total_other=read.table(&#39;../data/apaQTLNominal_4pc/OtherSS_Total_nomRes.txt&#39;,header = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;), stringsAsFactors = F) %&gt;% select(pval,slope) %&gt;% mutate(fraction=&quot;Total&quot;, set=&quot;Upstream&quot;)
 
 
-all_SS_pval=bind_rows(Nuclear_SS,Nuclear_Perm,Total_SS,Total_Perm,Nuclear_Region,Total_Region,Nuclear_other,Total_other)</code></pre>
-<pre class="r"><code>ggplot(all_SS_pval, aes(x=fraction, fill=set, y=pval)) + geom_boxplot()</code></pre>
+all_SS_pval=bind_rows(Nuclear_SS,Nuclear_Perm,Total_SS,Total_Perm,Nuclear_Region,Total_Region,Nuclear_other,Total_other)
+
+all_SS_pval$set &lt;- factor(all_SS_pval$set, levels=c(&quot;SS&quot;, &quot;Upstream&quot;, &quot;Permuted&quot;, &quot;Region&quot;))</code></pre>
+<pre class="r"><code>ggplot(all_SS_pval, aes(x=fraction, fill=set, y=pval)) + geom_boxplot() + labs(x=&quot;Fraction&quot;, title=&quot;p-values for SNPs in Signal Sites&quot;,y=&quot;nominal P-value&quot; ) + scale_fill_discrete(name = &#39;Set&#39;, labels = c(&#39;Signal Sites&#39;, &#39;Region upstream of Signal Site&#39;, &#39;Permuted Distance to Signal Site&#39;,&quot;50 bp upstream of PAS&quot;))</code></pre>
 <p><img src="figure/snpinSS.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggplot(all_SS_pval, aes(x=fraction, fill=set, y=abs(slope))) + geom_boxplot() + labs(y=&quot;absolute value effect size&quot;)</code></pre>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/11a306934a3cc41e2c37a600c8e9032850426c4c/docs/figure/snpinSS.Rmd/unnamed-chunk-19-1.png" target="_blank">11a3069</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>ggplot(all_SS_pval, aes(x=fraction, fill=set, y=abs(slope))) + geom_boxplot()  + labs(x=&quot;Fraction&quot;, title=&quot;p-values for SNPs in Signal Sites&quot;,y=&quot;absolute value effect size&quot; ) + scale_fill_discrete(name = &#39;Set&#39;, labels = c(&#39;Signal Sites&#39;, &#39;Region upstream of Signal Site&#39;, &#39;Permuted Distance to Signal Site&#39;,&quot;50 bp upstream of PAS&quot;))</code></pre>
 <p><img src="figure/snpinSS.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/11a306934a3cc41e2c37a600c8e9032850426c4c/docs/figure/snpinSS.Rmd/unnamed-chunk-20-1.png" target="_blank">11a3069</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Does not look like there is an effect here.</p>
 <br>
 <p>
