@@ -184,21 +184,21 @@ prop_overlap=function(status, fraction, cutoff){
     if (status=="Explained"){
       file=totalapaexplained
       sig=file %>% filter(adjPval<=cutoff)
-      proportion=nrow(sig)/nrow(file)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
     }else {
       file=totalapaUnexplained
       sig=file %>% filter(adjPval<=cutoff)
-      proportion=nrow(sig)/nrow(file)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
     }
   } else{
     if (status=="Explained"){
       file=nuclearapaexplained
       sig=file %>% filter(adjPval<=cutoff)
-      proportion=nrow(sig)/nrow(file)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
      }else {
       file=nuclearapaUnexplained
       sig=file %>% filter(adjPval<=cutoff)
-      proportion=nrow(sig)/nrow(file)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
      }
   }
   return(proportion)
@@ -243,6 +243,82 @@ AllPropDF$Prop=as.numeric(AllPropDF$Prop)
 Plot this:
 
 ```{r}
-ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction)
+ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + geom_text(aes(label=Prop))
 ```
 
+###Examples for overlap:  
+
+```{r}
+unexplained_snps=read.table("../data/Li_eQTLs/unexplained_FDR10.sort_FIXED.txt", col.names = c("chr", "loc", "gene"),stringsAsFactors = F)
+totQTL=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.bed", header = T, stringsAsFactors = F, col.names = c("chr", "bedstart","loc","ID", "score", "strand"))
+nucQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed", stringsAsFactors = F, header = T, col.names = c("chr", "bedstart","loc","ID", "score", "strand"))
+```
+
+Overlap:
+
+```{r}
+totQTL_unex=totQTL %>% inner_join(unexplained_snps, by=c("chr", "loc"))
+nucQTL_unex=nucQTL %>% inner_join(unexplained_snps, by=c("chr", "loc"))
+```
+
+
+```{r}
+totQTL_unex
+```
+```{r}
+nucQTL_unex
+```
+
+
+Make a plot for KDELR2 7:6497501  
+
+
+```{r}
+genohead=as.data.frame(read.table("../data/ExampleQTLPlots/genotypeHeader.txt", stringsAsFactors = F, header = F)[,10:128] %>% t())
+colnames(genohead)=c("header")
+genotype=as.data.frame(read.table("../data/ExampleQTLPlots/KDELR2_TotalPeaksGenotype.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
+
+full_geno=bind_cols(Ind=genohead$header, dose=genotype$V1) %>% mutate(numdose=round(dose), genotype=ifelse(numdose==0, "TT", ifelse(numdose==1, "TG", "GG")))
+
+RNAhead=as.data.frame(read.table("../data/molPhenos/RNAhead.txt", stringsAsFactors = F, header = F)[,5:73] %>% t())
+
+RNApheno=as.data.frame(read.table("../data/molPhenos/RNA_KDELr2.txt", stringsAsFactors = F, header = F) [,5:73] %>% t())
+
+full_pheno=bind_cols(Ind=RNAhead$V1, Expression=RNApheno$V1)
+
+allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
+
+allRNA$genotype=as.factor(allRNA$genotype)
+```
+
+Ref,T	Alt= G
+```{r}
+ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "YlOrRd") + labs(title="Unexplained eQTL: KDELR2 - rs6962012")
+```
+
+Make locus zoom 
+
+```{bash,eval=F}
+mkdir ../data/locusZoom
+```
+
+peak119699  KDELR2 ENSG00000136240.5
+```{bash,eval=F}
+
+grep peak119699  ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt > ../data/locusZoom/TotalAPA.peak119699.KDELR2.nomNuc.txt
+
+grep ENSG00000136240.5 ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.txt > ../data/locusZoom/RNA.KDELR2.txt
+
+```
+
+
+```{r}
+APATotal_KDELR2_LZ=read.table("../data/locusZoom/TotalAPA.peak119699.KDELR2.nomNuc.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(APATotal_KDELR2_LZ,"../data/locusZoom/apaTotalKDELR2_LZ.txt", col.names = T, row.names = F, quote = F)
+
+RNA_KDELR2_LZ=read.table("../data/locusZoom/RNA.KDELR2.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(RNA_KDELR2_LZ,"../data/locusZoom/RNAKDELR2_LZ.txt", col.names = T, row.names = F, quote = F)
+```
+Use locuszoom.org  
