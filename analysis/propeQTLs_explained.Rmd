@@ -93,6 +93,10 @@ ggplot(totalapaUnexplained_sig,aes(x=loc)) + geom_histogram(stat="count",aes(y=.
 
 
 ```{r}
+
+
+
+
 totalapaUnexplained_sig_loc= totalapaUnexplained_sig %>% group_by(loc) %>% summarise(nLocTotalUn=n()) %>% mutate(propTotalUn=nLocTotalUn/nrow(totalapaUnexplained_sig))
 totalapaexplained_sig_loc= totalapaexplained_sig %>% group_by(loc) %>% summarise(nLocTotalEx=n()) %>% mutate(propTotalEx=nLocTotalEx/nrow(totalapaexplained_sig))
 
@@ -268,7 +272,7 @@ total:
 alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
 
 
-ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm")
+ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=-1, x=-1.5, label="slope: -0.21 p-value: .01, r2=0.06") + labs(title="Total apa effect sizes vs eQTL eqtl effect sizes", y="Total apaQTL effect size",x="eQTL effect size")
 
 summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))
 ```
@@ -279,7 +283,7 @@ Nuclear:
 alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
 
 
-ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm")
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=-1, x=-1.5, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="Nuclear apa effect sizes vs eQTL eqtl effect sizes", y="Nuclear apaQTL effect size",x="eQTL effect size")
 
 
 summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))
