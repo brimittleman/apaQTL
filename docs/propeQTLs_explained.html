@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeec9c1d668ea814e169b0feb42ec34cfcf5bbf007targetblankec9c1d6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/ec9c1d668ea814e169b0feb42ec34cfcf5bbf007" target="_blank">ec9c1d6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec53925ade53af946321efbf3cfad55b8dc0c8acctargetblankc53925aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/c53925ade53af946321efbf3cfad55b8dc0c8acc" target="_blank">c53925a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeec9c1d668ea814e169b0feb42ec34cfcf5bbf007targetblankec9c1d6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreec53925ade53af946321efbf3cfad55b8dc0c8acctargetblankc53925aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1055,6 +1055,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/c53925ade53af946321efbf3cfad55b8dc0c8acc/analysis/propeQTLs_explained.Rmd" target="_blank">c53925a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+<td>
+add graph labels
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/propeQTLs_explained.html" target="_blank">06de9df</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1814,8 +1848,45 @@ brimittleman
 <pre class="r"><code>alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %&gt;% filter(loc==&quot;intron&quot;) %&gt;% inner_join(eQTLeffect, by=c(&quot;gene&quot;,&quot;snp&quot;))
 
 
-ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;)</code></pre>
+ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) +geom_text(y=-1, x=-1.5, label=&quot;slope: -0.21 p-value: .01, r2=0.06&quot;) + labs(title=&quot;Total apa effect sizes vs eQTL eqtl effect sizes&quot;, y=&quot;Total apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
 <p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
+Past versions of unnamed-chunk-25-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-25-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-25-1.png" target="_blank">06de9df</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))</code></pre>
 <pre><code>
 Call:
@@ -1839,8 +1910,45 @@ F-statistic: 6.746 on 1 and 87 DF,  p-value: 0.01103</code></pre>
 <pre class="r"><code>alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %&gt;% filter(loc==&quot;intron&quot;) %&gt;% inner_join(eQTLeffect, by=c(&quot;gene&quot;,&quot;snp&quot;))
 
 
-ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;)</code></pre>
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) +geom_text(y=-1, x=-1.5, label=&quot;slope: -0.18 p-value: .005, r2=0.05&quot;) + labs(title=&quot;Nuclear apa effect sizes vs eQTL eqtl effect sizes&quot;, y=&quot;Nuclear apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
 <p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">06de9df</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))</code></pre>
 <pre><code>
 Call:
@@ -1915,6 +2023,43 @@ character vector</code></pre>
 <p>Ref,T Alt= G</p>
 <pre class="r"><code>ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = &quot;YlOrRd&quot;) + labs(title=&quot;Unexplained eQTL: KDELR2 - rs6962012&quot;)</code></pre>
 <p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
+Past versions of unnamed-chunk-32-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-32-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-32-1.png" target="_blank">06de9df</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Make locus zoom</p>
 <pre class="bash"><code>mkdir ../data/locusZoom</code></pre>
 <p>peak119699 KDELR2 ENSG00000136240.5</p>
