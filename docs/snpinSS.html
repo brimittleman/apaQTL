@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-25
+<strong>Last updated:</strong> 2019-06-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1aa270e5dfc51988a6e775196f2af2feff470f20targetblank1aa270ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1aa270e5dfc51988a6e775196f2af2feff470f20" target="_blank">1aa270e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb8e60356fb4a57182e79ef281cecac6916dce26btargetblankb8e6035a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b8e60356fb4a57182e79ef281cecac6916dce26b" target="_blank">b8e6035</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1aa270e5dfc51988a6e775196f2af2feff470f20targetblank1aa270ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb8e60356fb4a57182e79ef281cecac6916dce26btargetblankb8e6035a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -521,6 +521,7 @@ Untracked files:
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._correctNomeqtl.R
     Untracked:  code/._dag.pdf
+    Untracked:  code/._eQTL_switch2snploc.py
     Untracked:  code/._eQTLgenestestedapa.py
     Untracked:  code/._encodeRNADTplots.sh
     Untracked:  code/._extractGenotypes.py
@@ -592,6 +593,7 @@ Untracked files:
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
     Untracked:  code/._runMakeeQTLempirical.sh
     Untracked:  code/._run_bam2bw_all3prime.sh
+    Untracked:  code/._run_bam2bw_extra3.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
     Untracked:  code/._run_getapafromeQTL.py
     Untracked:  code/._run_getapafromeQTL.sh
@@ -611,6 +613,7 @@ Untracked files:
     Untracked:  code/._subsetApanoteGene.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
     Untracked:  code/._subsetVCF_SS.sh
+    Untracked:  code/._subsetVCF_noSSregions.sh
     Untracked:  code/._subsetVCF_upstreamPAS.sh
     Untracked:  code/._subset_diffisopheno.py
     Untracked:  code/._subsetpermAPAwithGenelist.py
@@ -744,6 +747,7 @@ Untracked files:
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
+    Untracked:  code/eQTL_switch2snploc.py
     Untracked:  code/eQTLgenestestedapa.py
     Untracked:  code/encodeRNADTplots.sh
     Untracked:  code/extractGenotypes.py
@@ -845,6 +849,9 @@ Untracked files:
     Untracked:  code/run_bam2bw.err
     Untracked:  code/run_bam2bw.out
     Untracked:  code/run_bam2bw_all3prime.sh
+    Untracked:  code/run_bam2bw_extra3.sh
+    Untracked:  code/run_bam2bwexta.err
+    Untracked:  code/run_bam2bwexta.out
     Untracked:  code/run_distPAS2Sig.sh
     Untracked:  code/run_getAPAfromanyeQTL.err
     Untracked:  code/run_getAPAfromanyeQTL.out
@@ -881,11 +888,14 @@ Untracked files:
     Untracked:  code/subsetApanoteGene.py
     Untracked:  code/subsetUnexplainedeQTLs.py
     Untracked:  code/subsetVCF_SS.sh
+    Untracked:  code/subsetVCF_noSSregions.sh
     Untracked:  code/subsetVCF_upstreamPAS.sh
     Untracked:  code/subset_diffisopheno.py
     Untracked:  code/subsetpermAPAwithGenelist.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
+    Untracked:  code/subsetvcf_noSS.err
+    Untracked:  code/subsetvcf_noSS.out
     Untracked:  code/subsetvcf_otherreg.sh
     Untracked:  code/subsetvcf_pas.err
     Untracked:  code/subsetvcf_pas.out
@@ -965,6 +975,7 @@ Untracked files:
     Untracked:  data/inclusivePeaks_FC/
     Untracked:  data/intronRNAratio/
     Untracked:  data/intron_analysis/
+    Untracked:  data/locusZoom/
     Untracked:  data/mergedBG/
     Untracked:  data/mergedBW_byfrac/
     Untracked:  data/mergedBW_norm/
@@ -1053,6 +1064,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b8e60356fb4a57182e79ef281cecac6916dce26b/analysis/snpinSS.Rmd" target="_blank">b8e6035</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-27
+</td>
+<td>
+add sig
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/77700ac3bdd7fa88d2ff21c8db6397391a90f1f5/docs/snpinSS.html" target="_blank">77700ac</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1218,12 +1263,12 @@ add snp in ss analysis
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggpubr)</code></pre>
@@ -1409,6 +1454,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/77700ac3bdd7fa88d2ff21c8db6397391a90f1f5/docs/figure/snpinSS.Rmd/unnamed-chunk-19-1.png" target="_blank">77700ac</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/11a306934a3cc41e2c37a600c8e9032850426c4c/docs/figure/snpinSS.Rmd/unnamed-chunk-19-1.png" target="_blank">11a3069</a>
 </td>
 <td>
@@ -1448,6 +1504,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/77700ac3bdd7fa88d2ff21c8db6397391a90f1f5/docs/figure/snpinSS.Rmd/unnamed-chunk-20-1.png" target="_blank">77700ac</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/11a306934a3cc41e2c37a600c8e9032850426c4c/docs/figure/snpinSS.Rmd/unnamed-chunk-20-1.png" target="_blank">11a3069</a>
 </td>
 <td>
@@ -1461,7 +1528,77 @@ brimittleman
 </table>
 </div>
 </div>
-<p>Does not look like there is an effect here.</p>
+<p>I am plotting this the wrong way. I need to make qqplots with the snps.</p>
+<pre class="r"><code>#plot qqplot
+qqplot(-log10(runif(nrow(Nuclear_SS))), -log10(Nuclear_SS$pval))
+points(sort(-log10(runif(nrow(Total_SS)))), sort(-log10(Total_SS$pval)),col= alpha(&quot;Red&quot;))
+points(sort(-log10(runif(nrow(Nuclear_Region)))), sort(-log10(Nuclear_Region$pval)),col= alpha(&quot;Orange&quot;))
+points(sort(-log10(runif(nrow(Total_Region)))), sort(-log10(Total_Region$pval)),col= alpha(&quot;Green&quot;))
+
+abline(0,1)</code></pre>
+<p><img src="figure/snpinSS.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This is close but i need to make this a better comparison.I want just the UTR variants.</p>
+<pre class="r"><code>Nuclear_SS_all=read.table(&#39;../data/apaQTLNominal_4pc/SS_Nuclear_nomRes.txt&#39;, header = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;), stringsAsFactors = F)  %&gt;% separate(peakID, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;PASid&quot;), sep=&quot;:&quot;)%&gt;% separate(PASid, into=c(&quot;gene&quot;, &quot;loc&quot;,&quot;strand&quot;, &quot;PAS&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;utr3&quot;)
+
+Total_SS_all=read.table(&#39;../data/apaQTLNominal_4pc/SS_Total_nomRes.txt&#39;, header = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;), stringsAsFactors = F)%&gt;% separate(peakID, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;PASid&quot;), sep=&quot;:&quot;)%&gt;% separate(PASid, into=c(&quot;gene&quot;, &quot;loc&quot;,&quot;strand&quot;, &quot;PAS&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;utr3&quot;)</code></pre>
+<p>The benchmark set is the UTRs without signal sites</p>
+<pre class="r"><code>PASwSS=read.table(&quot;../data/PAS/PASwSignalSite.txt&quot;, header = T,stringsAsFactors = F)
+PAS_noSS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed&quot;, stringsAsFactors = F, header = F, col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;PASid&quot;,&quot;score&quot;, &quot;strand&quot;)) %&gt;% separate(PASid, into=c(&quot;pasNum&quot;, &quot;geneiD&quot;), sep=&quot;:&quot;) %&gt;% mutate(PAS=paste(&quot;peak&quot;, pasNum, sep=&quot;&quot;),PASname=paste(PAS, geneiD, sep=&quot;_&quot;)) %&gt;% anti_join(PASwSS, by=&quot;PAS&quot;) %&gt;% separate(geneiD,into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;utr3&quot;) %&gt;% mutate(newEnd=ifelse(strand==&quot;+&quot;, end+50, end),newStart=ifelse(strand==&quot;+&quot;, start, start-50))%&gt;% select(chr, newStart,newEnd, PASname, score, strand)
+
+write.table(PAS_noSS,&quot;../data/SNPinSS/UTRregionsPASnoSS.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<pre class="bash"><code>sed &#39;s/^chr//&#39; ../data/SNPinSS/UTRregionsPASnoSS.bed  &gt; ../data/SNPinSS/UTRregionsPASnoSS.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRregionsPASnoSS.nochr.bed &gt; ../data/SNPinSS/UTRregionsPASnoSS.nochr.sort.bed
+
+
+sbatch subsetVCF_noSSregions.sh
+
+cat  ../data/SNPinSS/UTRnoSS_chr* &gt;../data/SNPinSS/UTRnoSS_Allchr.recode.vcf
+
+
+python vcf2bed.py ../data/SNPinSS/UTRnoSS_Allchr.recode.vcf  ../data/SNPinSS/UTRnoSS_SNPsAllchr.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRregionsPASnoSS.bed &gt; ../data/SNPinSS/UTRregionsPASnoSS.sort.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRnoSS_SNPsAllchr.bed &gt; ../data/SNPinSS/UTRnoSS_SNPsAllchr.sort.bed
+
+sbatch mapSSsnps2PAS.sh</code></pre>
+<pre class="r"><code>NOSSsnpswithPAS=read.table(&quot;../data/SNPinSS/UTRnoSS_SNPsAllchr2PAS.txt&quot;,col.names = c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;, &quot;PASname&quot;, &quot;score&quot;, &quot;strand&quot;, &quot;SNP&quot;)) %&gt;% filter(SNP!=&quot;.&quot;) %&gt;% separate(PASname, into=c(&quot;PAS&quot;, &quot;gene&quot;, &quot;loc&quot;),sep=&quot;_&quot;) %&gt;% select(PAS, SNP)
+write.table(NOSSsnpswithPAS, &quot;../data/SNPinSS/NoSSUTR_PASandSNPs.txt&quot;, row.names = F, col.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>Get the pval:</p>
+<pre class="bash"><code>python NomResfromPASSNP.py ../data/SNPinSS/NoSSUTR_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/NoSSUTR_Nuclear_nomRes.txt 
+
+python NomResfromPASSNP.py ../data/SNPinSS/NoSSUTR_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/NoSSUTR_Total_nomRes.txt 
+</code></pre>
+<pre class="r"><code>Nuclear_NOSS=read.table(&#39;../data/apaQTLNominal_4pc/NoSSUTR_Nuclear_nomRes.txt&#39;, header = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;), stringsAsFactors = F)  %&gt;% separate(peakID, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;PASid&quot;), sep=&quot;:&quot;)%&gt;% separate(PASid, into=c(&quot;gene&quot;, &quot;loc&quot;,&quot;strand&quot;, &quot;PAS&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;utr3&quot;)
+
+Total_NOSS=read.table(&#39;../data/apaQTLNominal_4pc/NoSSUTR_Total_nomRes.txt&#39;, header = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;), stringsAsFactors = F)%&gt;% separate(peakID, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;PASid&quot;), sep=&quot;:&quot;)%&gt;% separate(PASid, into=c(&quot;gene&quot;, &quot;loc&quot;,&quot;strand&quot;, &quot;PAS&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;utr3&quot;)</code></pre>
+<p>Total</p>
+<pre class="r"><code>#plot qqplot
+qqplot(-log10(runif(nrow(Total_NOSS))), -log10(Total_NOSS$pval), xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(pval)&quot;, main=&quot;Total Apa&quot;)
+points(sort(-log10(runif(nrow(Total_SS)))), sort(-log10(Total_SS$pval)),col= alpha(&quot;Red&quot;))
+abline(0,1)
+legend(&quot;topleft&quot;, legend=c(&quot;SNPs in UTR PAS Signal Sites&quot;, &quot;SNPS not in Signal Sites&quot;),col=c(&quot;red&quot;, &quot;black&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+<p><img src="figure/snpinSS.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /> Nuclear:</p>
+<pre class="r"><code>qqplot(-log10(runif(nrow(Nuclear_NOSS))), -log10(Nuclear_NOSS$pval),xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(pval)&quot;, main=&quot;Nuclear Apa&quot;)
+points(sort(-log10(runif(nrow(Nuclear_SS)))), sort(-log10(Nuclear_SS$pval)),col= alpha(&quot;Red&quot;))
+abline(0,1)
+
+legend(&quot;topleft&quot;, legend=c(&quot;SNPs in UTR PAS Signal Sites&quot;, &quot;SNPS not in Signal Sites&quot;),col=c(&quot;red&quot;, &quot;black&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+<p><img src="figure/snpinSS.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Assess significance:</p>
+<pre class="r"><code>wilcox.test(Nuclear_SS$pval,Nuclear_NOSS$pval,alternative = &#39;less&#39;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Nuclear_SS$pval and Nuclear_NOSS$pval
+W = 14599, p-value = 0.3301
+alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>wilcox.test(Total_SS$pval,Total_NOSS$pval, alternative = &quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Total_SS$pval and Total_NOSS$pval
+W = 15982, p-value = 0.4881
+alternative hypothesis: true location shift is less than 0</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
