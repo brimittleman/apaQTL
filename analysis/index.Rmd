@@ -109,7 +109,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [eQTL and pQTL effect sizes for apaQTLs](eQTLeffectNucspecapa.html)
 
-
+* [pQTL example](pQTLexampleplot.html)
 
 
 

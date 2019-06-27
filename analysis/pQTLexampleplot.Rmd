@@ -1,0 +1,66 @@
+---
+title: "pQTL not eQTL example"
+author: "Briana Mittleman"
+date: "6/27/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+Protien specific qtl example  
+
+
+```{r}
+totQTL=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) 
+nucQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", stringsAsFactors = F, header = T)
+```
+
+rs9820529
+
+peak93951
+
+
+```{r}
+genohead=as.data.frame(read.table("../data/ExampleQTLPlots/genotypeHeader.txt", stringsAsFactors = F, header = F)[,10:128] %>% t())
+colnames(genohead)=c("header")
+genotype=as.data.frame(read.table("../data/ExampleQTLPlots/EIF2A_TotalPeaksGenotype.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
+
+full_geno=bind_cols(Ind=genohead$header, dose=genotype$V1) %>% mutate(numdose=round(dose), genotype=ifelse(numdose==0, "TT", ifelse(numdose==1, "TA", "AA")))
+
+RNAhead=as.data.frame(read.table("../data/molPhenos/RNAhead.txt", stringsAsFactors = F, header = F)[,5:73] %>% t())
+
+RNApheno=as.data.frame(read.table("../data/molPhenos/RNA_EIF2a.txt", stringsAsFactors = F, header = F) [,5:73] %>% t())
+
+full_pheno=bind_cols(Ind=RNAhead$V1, Expression=RNApheno$V1)
+
+allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
+
+allRNA$genotype=as.factor(allRNA$genotype)
+
+ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "YlOrRd") + labs(title="eQTL: EIF2A - rs9820529")
+```
+
+```{r}
+
+
+prothead=as.data.frame(read.table("../data/molPhenos/ProtHead.txt", stringsAsFactors = F, header = F)[,5:66] %>% t())
+
+protpheno=as.data.frame(read.table("../data/molPhenos/prot_EIF2A.txt", stringsAsFactors = F, header = F) [,5:66] %>% t())
+
+full_phenoprot=bind_cols(Ind=prothead$V1, Expression=protpheno$V1)
+
+allprot=full_geno %>% inner_join(full_phenoprot, by="Ind")
+
+allprot$genotype=as.factor(allprot$genotype)
+
+ggplot(allprot, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "YlOrRd") + labs(title="pQTL: EIF2A - rs9820529", y="Protein Level")
+```
+
+
