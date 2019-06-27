@@ -253,5 +253,107 @@ ggplot(all_SS_pval, aes(x=fraction, fill=set, y=pval)) + geom_boxplot() + labs(x
 ggplot(all_SS_pval, aes(x=fraction, fill=set, y=abs(slope))) + geom_boxplot()  + labs(x="Fraction", title="p-values for SNPs in Signal Sites",y="absolute value effect size" ) + scale_fill_discrete(name = 'Set', labels = c('Signal Sites', 'Region upstream of Signal Site', 'Permuted Distance to Signal Site',"50 bp upstream of PAS"))
 ```
 
-Does not look like there is an effect here.  
+I am plotting this the wrong way. I need to make qqplots with the snps.  
+
+```{r}
+#plot qqplot
+qqplot(-log10(runif(nrow(Nuclear_SS))), -log10(Nuclear_SS$pval))
+points(sort(-log10(runif(nrow(Total_SS)))), sort(-log10(Total_SS$pval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(Nuclear_Region)))), sort(-log10(Nuclear_Region$pval)),col= alpha("Orange"))
+points(sort(-log10(runif(nrow(Total_Region)))), sort(-log10(Total_Region$pval)),col= alpha("Green"))
+
+abline(0,1)
+
+```
+
+This is close but i need to make this a better comparison.I want just the UTR variants.  
+
+
+```{r}
+Nuclear_SS_all=read.table('../data/apaQTLNominal_4pc/SS_Nuclear_nomRes.txt', header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F)  %>% separate(peakID, into=c("chr", "start", "end", "PASid"), sep=":")%>% separate(PASid, into=c("gene", "loc","strand", "PAS"), sep="_") %>% filter(loc=="utr3")
+
+Total_SS_all=read.table('../data/apaQTLNominal_4pc/SS_Total_nomRes.txt', header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F)%>% separate(peakID, into=c("chr", "start", "end", "PASid"), sep=":")%>% separate(PASid, into=c("gene", "loc","strand", "PAS"), sep="_") %>% filter(loc=="utr3")
+```
+
+The benchmark set is the UTRs without signal sites  
+
+```{r}
+PASwSS=read.table("../data/PAS/PASwSignalSite.txt", header = T,stringsAsFactors = F)
+PAS_noSS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""),PASname=paste(PAS, geneiD, sep="_")) %>% anti_join(PASwSS, by="PAS") %>% separate(geneiD,into=c("gene", "loc"), sep="_") %>% filter(loc=="utr3") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50))%>% select(chr, newStart,newEnd, PASname, score, strand)
+
+write.table(PAS_noSS,"../data/SNPinSS/UTRregionsPASnoSS.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/SNPinSS/UTRregionsPASnoSS.bed  > ../data/SNPinSS/UTRregionsPASnoSS.nochr.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRregionsPASnoSS.nochr.bed > ../data/SNPinSS/UTRregionsPASnoSS.nochr.sort.bed
+
+
+sbatch subsetVCF_noSSregions.sh
+
+cat  ../data/SNPinSS/UTRnoSS_chr* >../data/SNPinSS/UTRnoSS_Allchr.recode.vcf
+
+
+python vcf2bed.py ../data/SNPinSS/UTRnoSS_Allchr.recode.vcf  ../data/SNPinSS/UTRnoSS_SNPsAllchr.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRregionsPASnoSS.bed > ../data/SNPinSS/UTRregionsPASnoSS.sort.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRnoSS_SNPsAllchr.bed > ../data/SNPinSS/UTRnoSS_SNPsAllchr.sort.bed
+
+sbatch mapSSsnps2PAS.sh
+```
+```{r}
+NOSSsnpswithPAS=read.table("../data/SNPinSS/UTRnoSS_SNPsAllchr2PAS.txt",col.names = c("chr","start", "end", "PASname", "score", "strand", "SNP")) %>% filter(SNP!=".") %>% separate(PASname, into=c("PAS", "gene", "loc"),sep="_") %>% select(PAS, SNP)
+write.table(NOSSsnpswithPAS, "../data/SNPinSS/NoSSUTR_PASandSNPs.txt", row.names = F, col.names = F, quote = F, sep="\t")
+
+
+
+```
+
+
+
+Get the pval: 
+
+```{bash,eval=F}
+python NomResfromPASSNP.py ../data/SNPinSS/NoSSUTR_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/NoSSUTR_Nuclear_nomRes.txt 
+
+python NomResfromPASSNP.py ../data/SNPinSS/NoSSUTR_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/NoSSUTR_Total_nomRes.txt 
+
+```
+
+
+```{r}
+Nuclear_NOSS=read.table('../data/apaQTLNominal_4pc/NoSSUTR_Nuclear_nomRes.txt', header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F)  %>% separate(peakID, into=c("chr", "start", "end", "PASid"), sep=":")%>% separate(PASid, into=c("gene", "loc","strand", "PAS"), sep="_") %>% filter(loc=="utr3")
+
+Total_NOSS=read.table('../data/apaQTLNominal_4pc/NoSSUTR_Total_nomRes.txt', header = F, col.names=c("peakID", "snp", "dist", "pval", "slope"), stringsAsFactors = F)%>% separate(peakID, into=c("chr", "start", "end", "PASid"), sep=":")%>% separate(PASid, into=c("gene", "loc","strand", "PAS"), sep="_") %>% filter(loc=="utr3")
+```
+
+Total
+```{r}
+#plot qqplot
+qqplot(-log10(runif(nrow(Total_NOSS))), -log10(Total_NOSS$pval), xlab="-log10(Uniform)", ylab="-log10(pval)", main="Total Apa")
+points(sort(-log10(runif(nrow(Total_SS)))), sort(-log10(Total_SS$pval)),col= alpha("Red"))
+abline(0,1)
+legend("topleft", legend=c("SNPs in UTR PAS Signal Sites", "SNPS not in Signal Sites"),col=c("red", "black"), pch=16,bty = 'n')
+
+```
+Nuclear:
+
+```{r}
+qqplot(-log10(runif(nrow(Nuclear_NOSS))), -log10(Nuclear_NOSS$pval),xlab="-log10(Uniform)", ylab="-log10(pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(Nuclear_SS)))), sort(-log10(Nuclear_SS$pval)),col= alpha("Red"))
+abline(0,1)
+
+legend("topleft", legend=c("SNPs in UTR PAS Signal Sites", "SNPS not in Signal Sites"),col=c("red", "black"), pch=16,bty = 'n')
+
+```
+
+
+Assess significance:
+
+```{r}
+wilcox.test(Nuclear_SS$pval,Nuclear_NOSS$pval,alternative = 'less')
+wilcox.test(Total_SS$pval,Total_NOSS$pval, alternative = "less")
+
+```
 

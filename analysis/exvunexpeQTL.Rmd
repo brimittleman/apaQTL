@@ -89,6 +89,14 @@ abline(0,1)
 legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
 
 ```
+```{r}
+wilcox.test(tot.notE$bpval,tot.ex$bpval,alternative = "greater")
+wilcox.test(tot.notE$bpval,tot.un$bpval, alternative = "greater")
+wilcox.test(tot.un$bpval,tot.ex$bpval, alternative = "less")
+```
+
+
+
 ###Nuclear  
 
 ```{r}
@@ -107,3 +115,11 @@ abline(0,1)
 legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
 
 ```
+
+```{r}
+wilcox.test(nuc.notE$bpval,nuc.ex$bpval,alternative="greater")
+wilcox.test(nuc.notE$bpval,nuc.un$bpval,alternative="greater")
+wilcox.test(nuc.un$bpval,nuc.ex$bpval,alternative="less")
+```
+
+
