@@ -69,6 +69,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Transcription factor motif disruption for QTLs](TF_motifdisrupt.html)
 
+* [Gene Ontology](GO_apaQTLS.html)
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  

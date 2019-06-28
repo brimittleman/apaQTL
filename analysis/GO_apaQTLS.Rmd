@@ -1,0 +1,49 @@
+---
+title: "Gene set enrichment for QTLs."
+author: "Briana Mittleman"
+date: "6/28/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+I want to do a quick gene set enrichemnt for the apaQTLs using http://cbl-gorilla.cs.technion.ac.il. I need to get the genes we test for apaQTLs in each fraction as a background set and those we find as significant as the test set.  
+
+
+```{r}
+totQTL=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% select(Gene) %>% unique()
+write.table(totQTL, file="../data/apaQTLs/TotalapaQTLGenes.txt", col.names = F, row.names = F, quote = F)
+nucQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", stringsAsFactors = F, header = T) %>% select(Gene) %>% unique()
+write.table(nucQTL, file="../data/apaQTLs/NuclearapaQTLGenes.txt", col.names = F, row.names = F, quote = F)
+```
+
+
+Genes we tested:
+
+```{r}
+tottested=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Total_permResBH.txt", header = T, stringsAsFactors = F) %>% separate(pid, into=c("chr", "start", "end", "peakID"),sep=":") %>% separate(peakID, into=c("gene", "loc", "strand", "PAS"), sep="_") %>% select(gene) %>% unique()
+write.table(tottested, file="../data/apaQTLs/TestedTotalapaQTLGenes.txt", col.names = F, row.names = F, quote = F)
+
+nuctested=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt", header = T, stringsAsFactors = F) %>% separate(pid, into=c("chr", "start", "end", "peakID"),sep=":") %>% separate(peakID, into=c("gene", "loc", "strand", "PAS"), sep="_") %>% select(gene) %>% unique()
+
+write.table(nuctested, file="../data/apaQTLs/TestedNuclearapaQTLGenes.txt", col.names = F, row.names = F, quote = F)
+```
+
+Total res:
+
+Processes - cellular detoxification of aldehyde,	developmental growth,growth,	nucleotide transmembrane transport,cellular amide metabolic process
+function- 	aminopeptidase activity,	nucleotide transmembrane transporter activity, metalloaminopeptidase activity,	SNAP receptor activity
+component- 	SPOTS complex, endoplasmic reticulum palmitoyltransferase complex, 	protein-cysteine S-palmitoyltransferase complex, 	serine C-palmitoyltransferase complex
+
+
+Nuclear res:
+
+no results
