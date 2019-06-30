@@ -1,0 +1,177 @@
+---
+title: "Two Regulatory mechanisms for apaQTLs"
+author: "Briana Mittleman"
+date: "6/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+In looking at the example plots for the apaQTLs I noticed two types of QTLs. Either a switch QTL or a buffering QTL. I want to see if this is a global classifier. In a switch QTL I expect high variance after i remove the highest effect size PAS and in a buffering QTL I expect low varriance in the effect sizesa after removing the top variant. I will use the normalized nominal effect sizes for this analysis. I will select each PAS for each of the apaQTLs. This means I make a list of the PAS, SNP, gene and select the every line matching one of the snp gene pairs. After this I can group by gene. 
+
+```{bash,eval=F}
+mkdir ../data/twoMech
+```
+
+
+```{r}
+totQTL=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% select(Peak, Gene, sid)
+colnames(totQTL)=c("pas", "gene", "snp")
+write.table(totQTL, file="../data/twoMech/TotalapaQTL_PASgeneSNP.txt", col.names = F, row.names = F, quote = F)
+nucQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", stringsAsFactors = F, header = T) %>% select(Peak, Gene, sid)
+colnames(nucQTL)=c("pas", "gene", "snp")
+write.table(nucQTL, file="../data/twoMech/NuclearapaQTL_PASgeneSNP.txt", col.names = F, row.names = F, quote = F)
+```
+
+
+I will use a python script to pull out the lines I want from the nominal files. It will take a fraction, the input file i created above and an output file.  
+
+```{bash,eval=F}
+python pullTwoMechData.py Total ../data/twoMech/TotalapaQTL_PASgeneSNP.txt ../data/twoMech/TotalapaQTL_AllPAS4QTLs.txt
+
+
+python pullTwoMechData.py Nuclear ../data/twoMech/NuclearapaQTL_PASgeneSNP.txt ../data/twoMech/NuclearapaQTL_AllPAS4QTLs.txt
+```
+
+
+When I get the results I can remove the lines for the QTLs pas then get the variance. I also need to remove genes with only 2 PAS.  
+
+```{r}
+totRes=read.table("../data/twoMech/TotalapaQTL_AllPAS4QTLs.txt", header = T, stringsAsFactors = F)
+
+totGenesInclude=totRes %>% group_by(gene,snp) %>% summarise(nPAS=n()) %>% filter(nPAS>=3)
+
+totRes_filt=totRes %>% filter(gene %in% totGenesInclude$gene) %>% anti_join(totQTL, by=c("snp", "gene", "pas")) %>% group_by(gene, snp) %>% summarize(EffectVar=var(EffectSize)) %>% mutate(fraction="Total")
+
+totRes_filt=na.omit(totRes_filt)
+```
+
+
+Plot the distribution:
+
+```{r}
+ggplot(totRes_filt,aes(x=EffectVar))+ geom_histogram(bins=50)
+```
+
+
+```{r}
+
+totRes_filt %>% filter(EffectVar>=1) %>% nrow()
+
+
+summary(totRes_filt$EffectVar)
+
+```
+
+```{r}
+nucRes=read.table("../data/twoMech/NuclearapaQTL_AllPAS4QTLs.txt", header = T, stringsAsFactors = F)
+
+nucGenesInclude=nucRes %>% group_by(gene,snp) %>% summarise(nPAS=n()) %>% filter(nPAS>=3)
+
+nucRes_filt=nucRes %>% filter(gene %in% nucGenesInclude$gene) %>% anti_join(totQTL, by=c("snp", "gene", "pas")) %>% group_by(gene, snp) %>%  summarize(EffectVar=var(EffectSize))  %>% mutate(fraction="Nuclear")
+
+nucRes_filt=na.omit(nucRes_filt)
+```
+
+
+Plot the distribution:
+
+```{r}
+ggplot(nucRes_filt,aes(x=EffectVar))+ geom_histogram(bins=50)
+```
+
+```{r}
+nucRes_filt %>% filter(EffectVar>=1) %>% nrow()
+
+summary(nucRes_filt$EffectVar)
+```
+
+
+
+Look at examples: 
+```{r}
+nucRes_filt %>% arrange(EffectVar) %>% head()
+```
+
+
+
+Difference between fractions?
+
+```{r}
+allEffect=bind_rows(nucRes_filt, totRes_filt)
+
+wilcox.test(nucRes_filt$EffectVar, totRes_filt$EffectVar)
+
+
+```
+
+```{r}
+ggplot(allEffect, aes(x=fraction, y=EffectVar,fill=fraction)) + geom_boxplot() +  scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Effect Size Variance in PAS outside of QTL PAS", y="variance(Effect Size)" ) + geom_text(x=1.5, y=5,label="P-value < 2.2*10^-16\n ***")
+```
+
+
+
+
+Does this suggest a reduction of variation. More buffering in the total fraction. 
+
+
+
+I wonder how many overlap? 
+
+```{r}
+overlap = inner_join(nucRes_filt, totRes_filt, by=c("gene", "snp"))
+colnames(overlap)=c("gene", "snp", "Nuclear_Effect", "Nuclear", "Total_Effect", "Total")
+
+ggplot(overlap, aes(x=log10(Total_Effect), y=log10(Nuclear_Effect))) + geom_point()
+
+summary(lm(data=overlap,Nuclear_Effect~Total_Effect))
+```
+nuclear= .85(total)+.02
+
+This means as nuclear goes up 1 total only goes up .85. Suggest reduction in variation. 
+
+
+
+I want to add these variance in effect size measurements to the original qtls.  
+
+```{r}
+totQTL_vareff=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, , col.names = c('Chr', 'Start', 'End', 'gene', 'Loc', 'Strand', 'peak', 'nvar', 'shape1', 'shape2', 'dummy', 'snp', 'dist', 'npval', 'slope', 'ppval', 'bpval', 'bh'),stringsAsFactors = F) %>% inner_join(totRes_filt, by=c("gene", "snp")) %>% filter(Loc %in% c("utr3", "intron"))
+
+totQTL_vareff_int= totQTL_vareff %>% filter(Loc=="intron")
+
+totQTL_vareff_utr= totQTL_vareff %>% filter(Loc=="utr3")
+
+t.test(totQTL_vareff_int$EffectVar, totQTL_vareff_utr$EffectVar , alternative = "less")
+```
+
+
+
+```{r}
+ggplot(totQTL_vareff,aes(x=Loc, y=log10(EffectVar), fill=Loc) )+ geom_boxplot() + scale_fill_manual(values=c("blue","orange")) + labs(title="No difference in QTL type between total PAS location", x="PAS Location") + geom_text(x=1.5,y=0.5, label="P-value=  0.25") 
+
+```
+
+
+```{r}
+nucQTL_vareff=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header = T, , col.names = c('Chr', 'Start', 'End', 'gene', 'Loc', 'Strand', 'peak', 'nvar', 'shape1', 'shape2', 'dummy', 'snp', 'dist', 'npval', 'slope', 'ppval', 'bpval', 'bh'),stringsAsFactors = F) %>% inner_join(totRes_filt, by=c("gene", "snp")) %>% filter(Loc %in% c("utr3", "intron"))
+
+
+nucQTL_vareff_int= nucQTL_vareff %>% filter(Loc=="intron")
+
+nucQTL_vareff_utr= nucQTL_vareff %>% filter(Loc=="utr3")
+
+t.test(nucQTL_vareff_int$EffectVar, nucQTL_vareff_utr$EffectVar , alternative = "less")
+
+```
+
+```{r}
+ggplot(nucQTL_vareff,aes(x=Loc, y=log10(EffectVar), fill=Loc) )+ geom_boxplot() + scale_fill_manual(values=c("blue","orange")) + labs(title="Nuclear Intronic QTL more likely to lead to buffering", x="PAS Location") + geom_text(x=1.5,y=0.5, label="P-value= 0.00067\n***") 
+```
+

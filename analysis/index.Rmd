@@ -71,6 +71,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Gene Ontology](GO_apaQTLS.html)
 
+* [2 Regulatory mechanisms for apaQTLs](twoRegMech.html)
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  
