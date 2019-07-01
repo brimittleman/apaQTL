@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree75b84f45a4efb77b94fc72d3251be99bb4600dc0targetblank75b84f4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/75b84f45a4efb77b94fc72d3251be99bb4600dc0" target="_blank">75b84f4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6db6003d8c5277a726705d085aea4a09f6fde81dtargetblank6db6003a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6db6003d8c5277a726705d085aea4a09f6fde81d" target="_blank">6db6003</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree75b84f45a4efb77b94fc72d3251be99bb4600dc0targetblank75b84f4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6db6003d8c5277a726705d085aea4a09f6fde81dtargetblank6db6003a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,6 +448,7 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    data/PrematureQTLPermuted/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -484,6 +485,8 @@ Untracked files:
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._NomResfromPASSNP.py
+    Untracked:  code/._PrematureQTLNominal.sh
+    Untracked:  code/._PrematureQTLPermuted.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
@@ -695,6 +698,10 @@ Untracked files:
     Untracked:  code/NomResfromPASSNP.py
     Untracked:  code/Nuclear_example.err
     Untracked:  code/Nuclear_example.out
+    Untracked:  code/PrematureQTLNominal.sh
+    Untracked:  code/PrematureQTLPermuted.sh
+    Untracked:  code/Prematureqtl_nominal.err
+    Untracked:  code/Prematureqtl_nominal.out
     Untracked:  code/QTL2bed.py
     Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
@@ -939,6 +946,7 @@ Untracked files:
     Untracked:  data/PAS/
     Untracked:  data/PolyA_DB/
     Untracked:  data/PreTerm_pheno/
+    Untracked:  data/PrematureQTLNominal/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
     Untracked:  data/QTLoverlap_nonNorm/
@@ -1073,6 +1081,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6db6003d8c5277a726705d085aea4a09f6fde81d/analysis/PrematureTermQTL.Rmd" target="_blank">6db6003</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-01
+</td>
+<td>
+add qtl code
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/a4a34bfa230453d858564379b37585646571d62b/docs/PrematureTermQTL.html" target="_blank">a4a34bf</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/75b84f45a4efb77b94fc72d3251be99bb4600dc0/analysis/PrematureTermQTL.Rmd" target="_blank">75b84f4</a>
 </td>
 <td>
@@ -1105,7 +1147,7 @@ Run ?workflowr for help getting started</code></pre>
 <pre><code>── Conflicts ──────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<p>Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs with just the intronic ratio as a measure of premature termination.</p>
+<p>Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs these ratios.</p>
 <pre class="bash"><code>mkdir ../data/PreTerm_pheno</code></pre>
 <div id="prepare-phenotype" class="section level2">
 <h2>Prepare phenotype</h2>
@@ -1122,10 +1164,17 @@ totalPASPheno=totalPAS %&gt;% melt(id.vars=&quot;chrom&quot;, variable.name=&quo
 totalPASPheno_melt= totalPASPheno %&gt;% melt(id.vars=c(&quot;Ind&quot;, &quot;gene&quot;), variable.name=&quot;Type&quot;, value.name = &quot;Value&quot;) %&gt;% mutate(chrom=paste(gene, Type, sep=&quot;_&quot;)) %&gt;% spread(Ind, Value) %&gt;% select(-gene, -Type)
 
 
-write.table(totalPASPheno_melt,&quot;../data/PreTerm_pheno/Total_preterminationPheno.txt&quot;,quote=F, row.names=F,col.names=T, sep=&quot;\t&quot;)</code></pre>
-<pre class="bash"><code>
+#write.table(totalPASPheno_melt,&quot;../data/PreTerm_pheno/Total_preterminationPheno.txt&quot;,quote=F, row.names=F,col.names=T, sep=&quot; &quot;)</code></pre>
+<pre class="bash"><code>#python2
 gzip ../data/PreTerm_pheno/Total_preterminationPheno.txt
-#python prepare_phenotype_table.py ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz</code></pre>
+python prepare_phenotype_table.py ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz
+
+#activate env  
+
+sh ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz_prepare.sh
+
+#top 2 pcs
+head -n 3  ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz.PCs &gt; ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz.2PCs </code></pre>
 </div>
 <div id="nuclear" class="section level3">
 <h3>Nuclear</h3>
@@ -1138,9 +1187,25 @@ nuclearPASPheno=nuclearPAS %&gt;% melt(id.vars=&quot;chrom&quot;, variable.name=
 nuclearPASPheno_melt= nuclearPASPheno %&gt;% melt(id.vars=c(&quot;Ind&quot;, &quot;gene&quot;), variable.name=&quot;Type&quot;, value.name = &quot;Value&quot;) %&gt;% mutate(chrom=paste(gene, Type, sep=&quot;_&quot;)) %&gt;% spread(Ind, Value) %&gt;% select(-gene, -Type)
 
 
-write.table(nuclearPASPheno_melt,&quot;../data/PreTerm_pheno/Nuclear_preterminationPheno.txt&quot;,quote=F, row.names=F,col.names=T, sep=&quot;\t&quot;)</code></pre>
-<pre class="bash"><code>gzip ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt
-#python prepare_phenotype_table.py ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz</code></pre>
+#write.table(nuclearPASPheno_melt,&quot;../data/PreTerm_pheno/Nuclear_preterminationPheno.txt&quot;,quote=F, row.names=F,col.names=T, sep=&quot; &quot;)</code></pre>
+<pre class="bash"><code>#python2
+gzip ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt
+python prepare_phenotype_table.py ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz
+#env
+sh ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz_prepare.sh
+
+#top 2 pcs
+head -n 3  ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz.PCs &gt; ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz.2PCs </code></pre>
+</div>
+</div>
+<div id="call-qtls" class="section level2">
+<h2>Call QTLs</h2>
+<p>Sample list from previous work</p>
+<pre class="bash"><code>mkdir ../data/PrematureQTLNominal
+mkdir ../data/PrematureQTLPermuted</code></pre>
+<pre class="bash"><code>sbatch PrematureQTLNominal.sh
+sbatch PrematureQTLPermuted.sh</code></pre>
+<p>May want to only test one number per gene but do this for now because I want to take advantage of the leafcutter normalization software.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1185,7 +1250,6 @@ loaded via a namespace (and not attached):
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
 [41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
 [45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
-</div>
 </div>
 </div>
 
