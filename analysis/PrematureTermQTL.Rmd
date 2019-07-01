@@ -14,7 +14,7 @@ library(workflowr)
 library(tidyverse)
 ```
 
-Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs with just the intronic ratio as a measure of premature termination.  
+Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs these ratios.  
 
 ```{bash,eval=F}
 mkdir ../data/PreTerm_pheno
@@ -39,16 +39,23 @@ totalPASPheno=totalPAS %>% melt(id.vars="chrom", variable.name="Ind", value.name
 totalPASPheno_melt= totalPASPheno %>% melt(id.vars=c("Ind", "gene"), variable.name="Type", value.name = "Value") %>% mutate(chrom=paste(gene, Type, sep="_")) %>% spread(Ind, Value) %>% select(-gene, -Type)
 
 
-write.table(totalPASPheno_melt,"../data/PreTerm_pheno/Total_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep="\t")
+#write.table(totalPASPheno_melt,"../data/PreTerm_pheno/Total_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep=" ")
 
 ```
 
 
 
 ```{bash,eval=F}
-
+#python2
 gzip ../data/PreTerm_pheno/Total_preterminationPheno.txt
-#python prepare_phenotype_table.py ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz
+python prepare_phenotype_table.py ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz
+
+#activate env  
+
+sh ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz_prepare.sh
+
+#top 2 pcs
+head -n 3  ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz.PCs > ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz.2PCs 
 ```
 
 ###Nuclear  
@@ -64,13 +71,35 @@ nuclearPASPheno=nuclearPAS %>% melt(id.vars="chrom", variable.name="Ind", value.
 nuclearPASPheno_melt= nuclearPASPheno %>% melt(id.vars=c("Ind", "gene"), variable.name="Type", value.name = "Value") %>% mutate(chrom=paste(gene, Type, sep="_")) %>% spread(Ind, Value) %>% select(-gene, -Type)
 
 
-write.table(nuclearPASPheno_melt,"../data/PreTerm_pheno/Nuclear_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep="\t")
+#write.table(nuclearPASPheno_melt,"../data/PreTerm_pheno/Nuclear_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep=" ")
 
 ```
 
 
 ```{bash,eval=F}
+#python2
 gzip ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt
-#python prepare_phenotype_table.py ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz
+python prepare_phenotype_table.py ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz
+#env
+sh ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz_prepare.sh
+
+#top 2 pcs
+head -n 3  ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz.PCs > ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz.2PCs 
 ```
 
+##Call QTLs
+
+Sample list from previous work
+
+```{bash,eval=F}
+mkdir ../data/PrematureQTLNominal
+mkdir ../data/PrematureQTLPermuted
+```
+
+
+```{bash,eval=F}
+sbatch PrematureQTLNominal.sh
+sbatch PrematureQTLPermuted.sh
+```
+
+May want to only test one number per gene but do this for now because I want to take advantage of the leafcutter normalization software.  
