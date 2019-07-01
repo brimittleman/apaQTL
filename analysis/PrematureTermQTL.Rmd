@@ -1,0 +1,76 @@
+---
+title: "Premature Termination QTL"
+author: "Briana Mittleman"
+date: "7/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(reshape2)
+library(workflowr)
+library(tidyverse)
+```
+
+Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs with just the intronic ratio as a measure of premature termination.  
+
+```{bash,eval=F}
+mkdir ../data/PreTerm_pheno
+```
+
+##Prepare phenotype
+###Total
+
+gene start and end 
+
+```{r}
+genes=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/FullTranscriptByName.bed", col.names = c("chr", "Gene_start", "Gene_end", "gene", "score", "strand"),stringsAsFactors = F) %>% select(chr,Gene_start, Gene_end, gene)
+```
+
+```{r}
+totalPAS=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz",stringsAsFactors = F,header = T) 
+
+
+totalPASPheno=totalPAS %>% melt(id.vars="chrom", variable.name="Ind", value.name = "ratio") %>% separate(ratio, into=c("count", "geneCount"), sep="/") %>% separate(chrom, into=c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc","strand", "PAS"), sep="_") %>% filter(loc=="utr3" | loc=="intron") %>% inner_join(genes,by=c("chr", "gene"))%>% mutate(gene=paste(chr,Gene_start, Gene_end, gene,sep=":")) %>% group_by(Ind,gene,loc) %>% summarise(SumCount=sum(as.integer(count))) %>% ungroup() %>% group_by(Ind,gene) %>% mutate(nType=n()) %>% filter(nType==2) %>% spread(loc, SumCount) %>% mutate(total=intron+utr3,PreTermInt=paste(intron,total, sep="/"),PreTermUTR=paste(utr3,total, sep="/")) %>% select(-nType, -intron,-utr3,-total)
+
+
+totalPASPheno_melt= totalPASPheno %>% melt(id.vars=c("Ind", "gene"), variable.name="Type", value.name = "Value") %>% mutate(chrom=paste(gene, Type, sep="_")) %>% spread(Ind, Value) %>% select(-gene, -Type)
+
+
+write.table(totalPASPheno_melt,"../data/PreTerm_pheno/Total_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep="\t")
+
+```
+
+
+
+```{bash,eval=F}
+
+gzip ../data/PreTerm_pheno/Total_preterminationPheno.txt
+#python prepare_phenotype_table.py ../data/PreTerm_pheno/Total_preterminationPheno.txt.gz
+```
+
+###Nuclear  
+
+
+```{r}
+nuclearPAS=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz",stringsAsFactors = F,header = T) 
+
+
+nuclearPASPheno=nuclearPAS %>% melt(id.vars="chrom", variable.name="Ind", value.name = "ratio") %>% separate(ratio, into=c("count", "geneCount"), sep="/") %>% separate(chrom, into=c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc","strand", "PAS"), sep="_") %>% filter(loc=="utr3" | loc=="intron") %>% inner_join(genes,by=c("chr", "gene"))%>% mutate(gene=paste(chr,Gene_start, Gene_end, gene,sep=":")) %>% group_by(Ind,gene,loc) %>% summarise(SumCount=sum(as.integer(count))) %>% ungroup() %>% group_by(Ind,gene) %>% mutate(nType=n()) %>% filter(nType==2) %>% spread(loc, SumCount) %>% mutate(total=intron+utr3,PreTermInt=paste(intron,total, sep="/"),PreTermUTR=paste(utr3,total, sep="/")) %>% select(-nType, -intron,-utr3,-total)
+
+
+nuclearPASPheno_melt= nuclearPASPheno %>% melt(id.vars=c("Ind", "gene"), variable.name="Type", value.name = "Value") %>% mutate(chrom=paste(gene, Type, sep="_")) %>% spread(Ind, Value) %>% select(-gene, -Type)
+
+
+write.table(nuclearPASPheno_melt,"../data/PreTerm_pheno/Nuclear_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep="\t")
+
+```
+
+
+```{bash,eval=F}
+gzip ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt
+#python prepare_phenotype_table.py ../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz
+```
+

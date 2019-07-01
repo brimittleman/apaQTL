@@ -73,6 +73,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [2 Regulatory mechanisms for apaQTLs](twoRegMech.html)
 
+* [Pre-termination QTLs](PrematureTermQTL.html)
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  
