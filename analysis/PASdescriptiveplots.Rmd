@@ -25,12 +25,11 @@ I want to plot how many genes have 0, 1, 2 and more than 2 PAS in the set. I nee
 
 ```{r}
 pas=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", header = F, stringsAsFactors = F, col.names = c("Chr", "start", "end", "PeakID", "score", "strand")) %>% separate(PeakID, into=c("peaknum", "geneAnno"), sep=":") %>% separate(geneAnno, into=c("Gene", "Loc"),sep="_")
-
 pasbygene= pas %>% group_by(Gene) %>% summarise(PAS=n())
 
-annotation=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("chr", "start", "end", "anno", "score", "strand")) %>% separate(anno, into=c("Loc", "Gene"),sep=":") %>% group_by(Gene) %>% summarise(annos=n()) %>% dplyr::select(Gene)
+annotation=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed", col.names = c("chr", "start", "end", "Gene", "score", "strand")) %>% dplyr::select(Gene) %>% unique()
 
-PASallgene=annotation %>% full_join(pasbygene, by="Gene") %>% replace_na(list(PAS=0)) 
+PASallgene=annotation %>% left_join(pasbygene, by="Gene") %>% replace_na(list(PAS=0)) 
 
 #group with 0,1,2,more than 2
 PASallgene_grouped=PASallgene %>% mutate(Zero=ifelse(PAS==0,1, 0), One=ifelse(PAS==1,1,0), Multiple=ifelse(PAS>1,1,0))
@@ -184,7 +183,7 @@ Melt:
 ```{r}
 fullDF_melt=melt(FullDF,id.vars = "Category",variable.name = "Cutoff", value.name = "NGenes") %>% mutate(propGene=NGenes/nrow(annotation))
 
-ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar(width=.5, stat="identity") + scale_fill_brewer(palette="Purples") + labs(title="Proportion of genes with Multiple PAS by Total Usage filter",y="Proportion of 27115 genes", x="Usage Filter cutoff") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))
+ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar(width=.5, stat="identity") + scale_fill_brewer(palette="Purples") + labs(title="Proportion of genes with Multiple PAS by Total Usage filter",y="Proportion of 19,243 genes", x="Usage Filter cutoff") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))
 ```
 Nuclear:  
 ```{r}
@@ -224,7 +223,7 @@ colnames(FullDFNuc)=c("Category",cutoffs[1:10])
 ```{r}
 FullDFNuc_melt=melt(FullDFNuc,id.vars = "Category",variable.name = "Cutoff", value.name = "NGenes") %>% mutate(propGene=NGenes/nrow(annotation))
 
-ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( width=.5,stat="identity") + scale_fill_brewer(palette="Blues") + labs(title="Proportion of genes with Multiple PAS by Nuclear Usage filter",y="Proportion of 27115 genes", x="Usage Filter cutoff")
+ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( width=.5,stat="identity") + scale_fill_brewer(palette="Blues") + labs(title="Proportion of genes with Multiple PAS by Nuclear Usage filter",y="Proportion of 19,243 genes", x="Usage Filter cutoff")
 ```
 ##Location of PAS by filter
 I will make these plots but the categories will be location of the PAS.  
