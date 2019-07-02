@@ -103,3 +103,63 @@ sbatch PrematureQTLPermuted.sh
 ```
 
 May want to only test one number per gene but do this for now because I want to take advantage of the leafcutter normalization software.  
+
+
+```{bash,eval=F}
+cat ../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_chr* > ../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChr.txt
+
+cat ../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_chr* > ../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChr.txt
+```
+####Tot
+
+```{r}
+totRes=read.table("../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChr.txt", stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+
+totRes$bh=p.adjust(totRes$bpval, method="fdr")
+
+totRes_sig=totRes %>% filter(-log10(bh)>1) 
+
+
+totRes_sig_genes=totRes_sig %>% separate(pid, into=c("chr","start","end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+
+write.table(totRes, file = "../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", col.names = T, row.names = F, quote = F)
+```
+
+```{r}
+nrow(totRes_sig_genes)
+```
+
+qqplot: 
+
+```{r}
+qqplot(-log10(runif(nrow(totRes))), -log10(totRes$bpval),ylab="-log10 Total permuted pvalue", xlab="Uniform expectation", main="Total premature termination")
+abline(0,1)
+```
+
+####Nuclear:
+
+```{r}
+nucRes=read.table("../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChr.txt", stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+
+nucRes$bh=p.adjust(nucRes$bpval, method="fdr")
+
+nucRes_sig=nucRes %>% filter(-log10(bh)>1)
+
+
+nucRes_sig_genes=nucRes_sig %>% separate(pid, into=c("chr","start","end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+
+
+write.table(nucRes, file = "../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", col.names = T, row.names = F, quote = F)
+```
+
+```{r}
+nrow(nucRes_sig_genes)
+```
+
+qqplot: 
+
+```{r}
+qqplot(-log10(runif(nrow(nucRes))), -log10(nucRes$bpval),ylab="-log10 Nuclear permuted pvalue", xlab="Uniform expectation", main="Nuclear premature termination")
+abline(0,1)
+```
+
