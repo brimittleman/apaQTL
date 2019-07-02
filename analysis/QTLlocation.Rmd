@@ -33,7 +33,7 @@ totQTLs=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.bed",string
 
 
 ```{r}
-ggplot(totQTLs, aes(x=dist2PAS, by=loc, fill=loc)) + geom_histogram(bins=100)
+ggplot(totQTLs, aes(x=dist2PAS, by=loc, fill=loc)) + geom_histogram(bins=100) 
 ``` 
 Plot by proportion: 
 
@@ -75,26 +75,33 @@ ggplot(bothFractDist, aes(x=dist2PAS, fill=Fraction )) + geom_histogram(bins=100
 I want to plot by normalized position in the gene.  
 
 ```{r}
-genes=tss=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "Genestart", "Geneend", "gene", "score", "strand") ,stringsAsFactors = F) %>% select(Genestart, Geneend, gene)
+genes=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.names = c("chrom", "Genestart", "Geneend", "gene", "score", "strand") ,stringsAsFactors = F) %>% select(Genestart, Geneend, gene)
 ```
 
 Total: 
 
 ```{r}
-totQTLs_gene= totQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand=="-", -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength)  %>% filter(propGene>-5 & propGene<5)
+totQTLs_gene= totQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTL=ifelse(strand=="+",as.numeric(SNPend)-as.numeric(Genestart), as.numeric(Geneend)-as.numeric(SNPend)), propGene=dist2QTL/geneLength)  %>% filter(propGene>-5 & propGene<5)
 
 ```
 
 ```{r}
 ggplot(totQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Total apaQTLs") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")
 ```
+```{r}
+totQTLs_gene_intron_utr= totQTLs_gene %>% filter(loc=="intron"| loc =="utr3")
+ggplot(totQTLs_gene_intron_utr, aes(x=propGene, fill=loc)) + geom_density()  + labs(x="Proportion of gene body", title="Total apaQTLs") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")
+
+```
+
+
 There are about 48 QTLs outside. 
 
 I can look at only those in the gene body:
 
 ```{r}
 totQTLs_gene_body= totQTLs_gene %>% filter(propGene>=0, propGene<=1)
-
+  
 ggplot(totQTLs_gene_body, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Total apaQTLs in gene body") 
 
 ```
@@ -103,7 +110,7 @@ There are 181 in the gene body
 
 Nuclear:
 ```{r}
-nucQTLs_gene= nucQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTLnostrand= as.numeric(SNPend)-as.numeric(Genestart), dist2QTL=ifelse(strand=="-", -1 *dist2QTLnostrand, dist2QTLnostrand), propGene=dist2QTL/geneLength) %>% filter(propGene>-5 & propGene<5)
+nucQTLs_gene= nucQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart)%>% mutate(dist2QTL=ifelse(strand=="+",as.numeric(SNPend)-as.numeric(Genestart), as.numeric(Geneend)-as.numeric(SNPend)), propGene=dist2QTL/geneLength)  %>% filter(propGene>-5 & propGene<5)
 
 ```
 
@@ -112,6 +119,14 @@ nucQTLs_gene= nucQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Gene
 ggplot(nucQTLs_gene, aes(x=propGene, fill=loc)) + geom_histogram(bins=50)  + labs(x="Proportion of gene body", y="number QTLs", title="Nuclear apaQTLs") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")
 
 ```
+
+```{r}
+
+nucQTLs_gene_intron_utr= nucQTLs_gene %>% filter(loc=="intron"| loc =="utr3")
+ggplot(nucQTLs_gene_intron_utr, aes(x=propGene, fill=loc)) + geom_density()  + labs(x="Proportion of gene body", title="Nuclear apaQTLs") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")
+
+```
+
 there are 77 outside of 500% of gene body 
 
 

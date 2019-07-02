@@ -414,6 +414,9 @@ summary(effectsize$logef)
 ```{r}
 ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.1,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
 ```
+```{r}
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_density(alpha=.5)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.1,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
+```
 
 Diff iso gene proportion:
 
