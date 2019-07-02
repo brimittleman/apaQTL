@@ -182,4 +182,62 @@ More likely in nuclear:
 
 prop.test(x=c(nrow(nucRes_sig_genes),nrow(totRes_sig_genes)), n=c(nrow(nuctested_genes),nrow(tottested_genes)),alternative = "greater")
 ```
+###overlap with eGenes  
+I next want to look at the proportion of eGenes. 
 
+
+```{r}
+explainedEgenes=read.table("../data/Li_eQTLs/explainedEgenes.txt", col.names = c("gene"), stringsAsFactors = F)
+unexplainedEgenes=read.table("../data/Li_eQTLs/UnexplainedEgenes.txt", col.names = c("gene"), stringsAsFactors = F)
+
+
+allEgenes=bind_rows(explainedEgenes, unexplainedEgenes)
+
+```
+
+I want to test the proportion of overlap.
+
+```{r}
+TotPre_uneGene=totRes_sig_genes %>% inner_join(unexplainedEgenes,by="gene")
+NucPre_uneGene=nucRes_sig_genes %>% inner_join(unexplainedEgenes,by="gene")
+
+TotPre_exeGene=totRes_sig_genes %>% inner_join(explainedEgenes,by="gene")
+NucPre_exeGene=nucRes_sig_genes %>% inner_join(explainedEgenes,by="gene")
+
+TotPre_alleGene=totRes_sig_genes %>% inner_join(allEgenes,by="gene")
+NucPre_alleGene=nucRes_sig_genes %>% inner_join(allEgenes,by="gene")
+```
+
+
+Proportion of eGenes explaiend by this:
+
+```{r}
+#total
+
+nrow(TotPre_uneGene)/nrow(unexplainedEgenes)
+nrow(TotPre_exeGene)/nrow(explainedEgenes)
+nrow(TotPre_alleGene)/nrow(allEgenes)
+```
+```{r}
+#nuclear
+
+nrow(NucPre_uneGene)/nrow(unexplainedEgenes)
+nrow(NucPre_exeGene)/nrow(explainedEgenes)
+nrow(NucPre_alleGene)/nrow(allEgenes)
+```
+
+
+```{r}
+prop.test(x=c(nrow(NucPre_uneGene),nrow(TotPre_uneGene)), n=c(nrow(unexplainedEgenes),nrow(unexplainedEgenes)))
+
+
+prop.test(x=c(nrow(NucPre_exeGene),nrow(TotPre_exeGene)), n=c(nrow(explainedEgenes),nrow(explainedEgenes)))
+```
+Conclusion: 
+
+Total- 13 overlaps with all eGenes, 7 ex, 6 unexplained
+Nuclear- 24 overlaps with all eGenes, 13 ex, 11 unexpained 
+
+All eGenes=1824
+Unexplained=760
+Explained=1064
