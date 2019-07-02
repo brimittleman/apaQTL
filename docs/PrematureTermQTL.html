@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-01
+<strong>Last updated:</strong> 2019-07-02
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8d36f9bbf672ec3967462c7485ea7f347b325e94targetblank8d36f9ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/8d36f9bbf672ec3967462c7485ea7f347b325e94" target="_blank">8d36f9b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefe41a93df3a6244ae849e43cb08aae5f0ee4b6e7targetblankfe41a93a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fe41a93df3a6244ae849e43cb08aae5f0ee4b6e7" target="_blank">fe41a93</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8d36f9bbf672ec3967462c7485ea7f347b325e94targetblank8d36f9ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefe41a93df3a6244ae849e43cb08aae5f0ee4b6e7targetblankfe41a93a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1083,6 +1083,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/fe41a93df3a6244ae849e43cb08aae5f0ee4b6e7/analysis/PrematureTermQTL.Rmd" target="_blank">fe41a93</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+<td>
+add prop of tested genes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/2a63cde74ce6181b3b16aeeea1a53c9a0ed3a7fb/docs/PrematureTermQTL.html" target="_blank">2a63cde</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/8d36f9bbf672ec3967462c7485ea7f347b325e94/analysis/PrematureTermQTL.Rmd" target="_blank">8d36f9b</a>
 </td>
 <td>
@@ -1259,10 +1293,14 @@ totRes_sig_genes=totRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;st
 write.table(totRes, file = &quot;../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
 <pre class="r"><code>nrow(totRes_sig_genes)</code></pre>
 <pre><code>[1] 40</code></pre>
+<p>Proportion of genes tested:</p>
+<pre class="r"><code>tottested_genes=totRes %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
+nrow(totRes_sig_genes)/nrow(tottested_genes)</code></pre>
+<pre><code>[1] 0.01162453</code></pre>
 <p>qqplot:</p>
 <pre class="r"><code>qqplot(-log10(runif(nrow(totRes))), -log10(totRes$bpval),ylab=&quot;-log10 Total permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Total premature termination&quot;)
 abline(0,1)</code></pre>
-<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="nuclear-1" class="section level4">
 <h4>Nuclear:</h4>
@@ -1279,10 +1317,27 @@ nucRes_sig_genes=nucRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;st
 write.table(nucRes, file = &quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
 <pre class="r"><code>nrow(nucRes_sig_genes)</code></pre>
 <pre><code>[1] 106</code></pre>
+<p>Proportion of genes tested:</p>
+<pre class="r"><code>nuctested_genes=nucRes %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
+nrow(nucRes_sig_genes)/nrow(nuctested_genes)</code></pre>
+<pre><code>[1] 0.02061856</code></pre>
 <p>qqplot:</p>
 <pre class="r"><code>qqplot(-log10(runif(nrow(nucRes))), -log10(nucRes$bpval),ylab=&quot;-log10 Nuclear permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Nuclear premature termination&quot;)
 abline(0,1)</code></pre>
-<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /> More likely in nuclear:</p>
+<pre class="r"><code>prop.test(x=c(nrow(nucRes_sig_genes),nrow(totRes_sig_genes)), n=c(nrow(nuctested_genes),nrow(tottested_genes)),alternative = &quot;greater&quot;)</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(nrow(nucRes_sig_genes), nrow(totRes_sig_genes)) out of c(nrow(nuctested_genes), nrow(tottested_genes))
+X-squared = 9.4405, df = 1, p-value = 0.001061
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.004317405 1.000000000
+sample estimates:
+    prop 1     prop 2 
+0.02061856 0.01162453 </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
