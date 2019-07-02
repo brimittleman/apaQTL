@@ -129,6 +129,13 @@ write.table(totRes, file = "../data/PrematureQTLPermuted/Total_preterminationPhe
 nrow(totRes_sig_genes)
 ```
 
+
+Proportion of genes tested:
+
+```{r}
+tottested_genes=totRes %>% separate(pid, into=c("chr","start","end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+nrow(totRes_sig_genes)/nrow(tottested_genes)
+```
 qqplot: 
 
 ```{r}
@@ -155,11 +162,24 @@ write.table(nucRes, file = "../data/PrematureQTLPermuted/Nuclear_preterminationP
 ```{r}
 nrow(nucRes_sig_genes)
 ```
+Proportion of genes tested:
+
+```{r}
+nuctested_genes=nucRes %>% separate(pid, into=c("chr","start","end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+nrow(nucRes_sig_genes)/nrow(nuctested_genes)
+```
+
 
 qqplot: 
 
 ```{r}
 qqplot(-log10(runif(nrow(nucRes))), -log10(nucRes$bpval),ylab="-log10 Nuclear permuted pvalue", xlab="Uniform expectation", main="Nuclear premature termination")
 abline(0,1)
+```
+More likely in nuclear:
+
+```{r}
+
+prop.test(x=c(nrow(nucRes_sig_genes),nrow(totRes_sig_genes)), n=c(nrow(nuctested_genes),nrow(tottested_genes)),alternative = "greater")
 ```
 
