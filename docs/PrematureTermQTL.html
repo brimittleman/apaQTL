@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6db6003d8c5277a726705d085aea4a09f6fde81dtargetblank6db6003a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6db6003d8c5277a726705d085aea4a09f6fde81d" target="_blank">6db6003</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8d36f9bbf672ec3967462c7485ea7f347b325e94targetblank8d36f9ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/8d36f9bbf672ec3967462c7485ea7f347b325e94" target="_blank">8d36f9b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6db6003d8c5277a726705d085aea4a09f6fde81dtargetblank6db6003a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8d36f9bbf672ec3967462c7485ea7f347b325e94targetblank8d36f9ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,7 +448,6 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
-    Ignored:    data/PrematureQTLPermuted/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -702,6 +701,8 @@ Untracked files:
     Untracked:  code/PrematureQTLPermuted.sh
     Untracked:  code/Prematureqtl_nominal.err
     Untracked:  code/Prematureqtl_nominal.out
+    Untracked:  code/Prematureqtl_permuted.err
+    Untracked:  code/Prematureqtl_permuted.out
     Untracked:  code/QTL2bed.py
     Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
@@ -947,6 +948,7 @@ Untracked files:
     Untracked:  data/PolyA_DB/
     Untracked:  data/PreTerm_pheno/
     Untracked:  data/PrematureQTLNominal/
+    Untracked:  data/PrematureQTLPermuted/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
     Untracked:  data/QTLoverlap_nonNorm/
@@ -1081,6 +1083,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/8d36f9bbf672ec3967462c7485ea7f347b325e94/analysis/PrematureTermQTL.Rmd" target="_blank">8d36f9b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-01
+</td>
+<td>
+add res
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/5ba28ecbdcfb190db7681c3416ae5dffeb8361af/docs/PrematureTermQTL.html" target="_blank">5ba28ec</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/6db6003d8c5277a726705d085aea4a09f6fde81d/analysis/PrematureTermQTL.Rmd" target="_blank">6db6003</a>
 </td>
 <td>
@@ -1139,12 +1175,12 @@ library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs these ratios.</p>
@@ -1206,6 +1242,47 @@ mkdir ../data/PrematureQTLPermuted</code></pre>
 <pre class="bash"><code>sbatch PrematureQTLNominal.sh
 sbatch PrematureQTLPermuted.sh</code></pre>
 <p>May want to only test one number per gene but do this for now because I want to take advantage of the leafcutter normalization software.</p>
+<pre class="bash"><code>cat ../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_chr* &gt; ../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChr.txt
+
+cat ../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_chr* &gt; ../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChr.txt</code></pre>
+<div id="tot" class="section level4">
+<h4>Tot</h4>
+<pre class="r"><code>totRes=read.table(&quot;../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChr.txt&quot;, stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+
+totRes$bh=p.adjust(totRes$bpval, method=&quot;fdr&quot;)
+
+totRes_sig=totRes %&gt;% filter(-log10(bh)&gt;1) 
+
+
+totRes_sig_genes=totRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
+
+write.table(totRes, file = &quot;../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
+<pre class="r"><code>nrow(totRes_sig_genes)</code></pre>
+<pre><code>[1] 40</code></pre>
+<p>qqplot:</p>
+<pre class="r"><code>qqplot(-log10(runif(nrow(totRes))), -log10(totRes$bpval),ylab=&quot;-log10 Total permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Total premature termination&quot;)
+abline(0,1)</code></pre>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nuclear-1" class="section level4">
+<h4>Nuclear:</h4>
+<pre class="r"><code>nucRes=read.table(&quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChr.txt&quot;, stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+
+nucRes$bh=p.adjust(nucRes$bpval, method=&quot;fdr&quot;)
+
+nucRes_sig=nucRes %&gt;% filter(-log10(bh)&gt;1)
+
+
+nucRes_sig_genes=nucRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
+
+
+write.table(nucRes, file = &quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
+<pre class="r"><code>nrow(nucRes_sig_genes)</code></pre>
+<pre><code>[1] 106</code></pre>
+<p>qqplot:</p>
+<pre class="r"><code>qqplot(-log10(runif(nrow(nucRes))), -log10(nucRes$bpval),ylab=&quot;-log10 Nuclear permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Nuclear premature termination&quot;)
+abline(0,1)</code></pre>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1250,6 +1327,7 @@ loaded via a namespace (and not attached):
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
 [41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
 [45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+</div>
 </div>
 </div>
 
