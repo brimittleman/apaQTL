@@ -102,7 +102,7 @@ hist(TotQTLs_gene$nQTL)
 Location distribution for peaks:
 
 ```{r}
-TotQTLs_loc= TotQTLs %>% group_by(Loc) %>% summarise(nLoc=n()) %>% mutate(PropLoc=nLoc/nrow(TotQTLs))
+TotQTLs_loc= TotQTLs %>% group_by(Loc) %>% summarise(nLoc=n()) %>% mutate(PropLoc=nLoc/nrow(TotQTLs)) %>% mutate(fraction="Total")
 
 
 totQTLloc=ggplot(TotQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat = "Identity") + labs(x="Location of Significant Peak", y="Proportion of QTLs", title="Total QTL peak distribution")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
@@ -134,7 +134,7 @@ hist(NucQTLs_gene$nQTL)
 Location distribution for peaks:
 
 ```{r}
-NucQTLs_loc= NucQTLs %>% group_by(Loc) %>% summarise(nLoc=n()) %>% mutate(PropLoc=nLoc/nrow(NucQTLs))
+NucQTLs_loc= NucQTLs %>% group_by(Loc) %>% summarise(nLoc=n()) %>% mutate(PropLoc=nLoc/nrow(NucQTLs)) %>% mutate(fraction="Nuclear")
 
 
 nucQTLloc=ggplot(NucQTLs_loc, aes(x=Loc, y=PropLoc, fill=Loc)) + geom_bar(stat = "Identity") + labs(x="Location of Significant Peak", y="Proportion of QTLs", title="Nuclear QTL peak distribution")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
@@ -152,4 +152,30 @@ write.table(TotQTLs, file="../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", col.names
 
 write.table(NucQTLs, file="../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", col.names = T, row.names = F, quote=F)
 ```
+
+
+
+Replot these as proportion of tested. 
+
+```{r}
+TotTested=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Total_permResBH.txt", header = T,stringsAsFactors = F) %>% separate(pid, into=c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID,into=c("gene", "Loc", "strand", "PAS"), sep="_") %>% group_by(Loc) %>% summarise(nTested=n()) %>% mutate(fraction="Total")
+
+NucTested=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt", header = T,stringsAsFactors = F) %>% separate(pid, into=c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID,into=c("gene", "Loc", "strand", "PAS"), sep="_") %>% group_by(Loc) %>% summarise(nTested=n()) %>% mutate(fraction="Nuclear")
+
+
+
+TotalBoth=bind_rows(TotQTLs_loc) %>% full_join(TotTested, by=c("Loc","fraction"))
+NuclearBoth=bind_rows(NucQTLs_loc) %>% full_join(NucTested, by=c("Loc","fraction"))
+
+
+allboth=bind_rows(NuclearBoth,TotalBoth) %>% mutate(PropQTLofTested=nLoc/nTested)
+```
+
+
+```{r}
+ggplot(allboth,aes(x=Loc, y=PropQTLofTested, fill=Loc)) + geom_bar(stat="identity") +facet_grid(~fraction) + scale_fill_brewer(palette = "Dark2") + labs(title="Proportion of Tested PAS with a QTL", y="Proportion PAS tested") + geom_text(aes(label=nLoc),nudge_y = .001)
+```
+
+
+
 
