@@ -71,7 +71,7 @@ cat ../data/nonNorm_pheno/NuclearUsageChrom*.nominal.out > ../data/nonNorm_pheno
 
 
 ```{bash,eval=F}
-python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt  
+python qtlsPvalOppFrac.py  ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt  
 
 python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/NuclearUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinNuclearNominal_nonNorm.txt  
 
@@ -117,5 +117,44 @@ Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_s
 
 ```{r}
 plot_grid(totbothplot,Nucbothplot)
+```
+
+For the nuclear plot I want to include the PAS we cannot test in the total fraction. To do this I will write code that only writes out the lines for the PAS not in the total fraction. I need the nominal effect sizes for the nuclear qtls in PAS we could not test in total. First I will get all of the PAS tested in total and figure out the nuclear QTLs not in this set. I will then pull those associations out of the nominal nuclear set. 
+
+```{bash,eval=F}
+python nucSpeceffectsize.py
+```
+
+```{r}
+nucSpec=read.table("../data/QTLoverlap_nonNorm/NuclearSpecQTLinNuclearNominal_nonNorm.txt",header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "Originalslope")) %>% mutate(slope=0,set="Specific") %>% select(peakID, snp, dist, pval, Originalslope, slope,set)
+NucBoth_set= NucBoth %>% mutate(set="Both")
+NucBothwSpec=bind_rows(NucBoth_set, nucSpec)
+```
+
+```{r}
+summary(lm(NucBothwSpec$slope ~ NucBothwSpec$Originalslope))
+
+nucspecplot=ggplot(NucBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")+  annotate("text", y=1, x=0, label="R2=.66, slope=0.62") + scale_color_brewer(palette = "Dark2")
+```
+Do this in the other fraction to see what is looks like.
+
+```{bash,eval=F}
+python totSeceffectsize.py
+```
+
+
+```{r}
+totSpec=read.table("../data/QTLoverlap_nonNorm/TotalSpecQTLinTotalNominal_nonNorm.txt",header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "Originalslope")) %>% mutate(slope=0,set="Specific") %>% select(peakID, snp, dist, pval, Originalslope, slope,set)
+TotBoth_set= TotBoth %>% mutate(set="Both")
+TotBothwSpec=bind_rows(TotBoth_set, totSpec)
+```
+
+```{r}
+summary(lm(TotBothwSpec$slope ~ TotBothwSpec$Originalslope))
+
+totspecplot=ggplot(TotBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")+  annotate("text", y=1, x=0, label="R2=.62, slope=0.64") + scale_color_brewer(palette = "Dark2")
+```
+```{r}
+plot_grid(nucspecplot,totspecplot)
 ```
 
