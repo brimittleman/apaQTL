@@ -1,0 +1,81 @@
+---
+title: "pttQTL genes in eQTLs"
+author: "Briana Mittleman"
+date: "7/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This analysis will be similar to the nuclear specific in egenes analysis. I want to ask if a gene is more likely to be associated with expression if it has a pttQTL in total or nuclear. 
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+```{r}
+permeqtl=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.AllNomRes.GeneName.txt", col.names = c("gene", "nvar","shape1", "shape2", "dummy", "RSID", "dist","nomPval","slope","ppval", "bpval"),stringsAsFactors = F)
+```
+
+
+
+```{r}
+totptt=read.table("../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1) %>% separate(pid,into = c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+nucptt=read.table("../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1) %>% separate(pid,into = c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+```
+
+
+
+```{r}
+permeqtl_tot= permeqtl  %>% filter(gene %in%totptt$gene )
+
+permeqtl_nottot= permeqtl  %>% anti_join(permeqtl_tot,by = c("gene", "nvar", "shape1", "shape2", "dummy", "RSID", "dist", "nomPval", "slope", "ppval", "bpval"))
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(permeqtl_nottot))), -log10(permeqtl_nottot$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="eQTL")
+points(sort(-log10(runif(nrow(permeqtl_tot)))), sort(-log10(permeqtl_tot$bpval)),col= alpha("Red"))
+
+abline(0,1)
+legend("topleft", legend=c("Total ptt gene", "All other genes"),col=c("red", "black"), pch=16,bty = 'n')
+```
+
+
+```{r}
+permeqtl_nuc= permeqtl  %>% filter(gene %in%nucptt$gene )
+
+permeqtl_nottnuc= permeqtl  %>% anti_join(permeqtl_nuc,by = c("gene", "nvar", "shape1", "shape2", "dummy", "RSID", "dist", "nomPval", "slope", "ppval", "bpval"))
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(permeqtl_nottnuc))), -log10(permeqtl_nottnuc$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="eQTL")
+points(sort(-log10(runif(nrow(permeqtl_nuc)))), sort(-log10(permeqtl_nuc$bpval)),col= alpha("Red"))
+
+abline(0,1)
+legend("topleft", legend=c("Nuclear ptt gene", "All other genes"),col=c("red", "black"), pch=16,bty = 'n')
+```
+
+In either:  
+
+```{r}
+permeqtl_either= permeqtl  %>% filter(gene %in%totptt$gene |gene %in%nucptt$gene )
+
+permeqtl_noteither= permeqtl  %>% anti_join(permeqtl_either,by = c("gene", "nvar", "shape1", "shape2", "dummy", "RSID", "dist", "nomPval", "slope", "ppval", "bpval"))
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(permeqtl_noteither))), -log10(permeqtl_noteither$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="eQTL")
+points(sort(-log10(runif(nrow(permeqtl_either)))), sort(-log10(permeqtl_either$bpval)),col= alpha("Red"))
+
+abline(0,1)
+legend("topleft", legend=c("ptt gene", "All other genes"),col=c("red", "black"), pch=16,bty = 'n')
+```
+
+

@@ -119,5 +119,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [pQTL example](pQTLexampleplot.html)
 
+* [pttQTL in expression data](pttQTLinE.html)
+
 
 
