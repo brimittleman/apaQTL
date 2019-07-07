@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-02
+<strong>Last updated:</strong> 2019-07-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed30bbd08941c0f0609b85dd824ee49b70f4191bbtargetblankd30bbd0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d30bbd08941c0f0609b85dd824ee49b70f4191bb" target="_blank">d30bbd0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree4a51b0470af1017376ab20f6d5df1a9652ee165btargetblank4a51b04a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/4a51b0470af1017376ab20f6d5df1a9652ee165b" target="_blank">4a51b04</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed30bbd08941c0f0609b85dd824ee49b70f4191bbtargetblankd30bbd0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree4a51b0470af1017376ab20f6d5df1a9652ee165btargetblank4a51b04a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -460,12 +460,15 @@ Untracked files:
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/gwasOverlap.Rmd
     Untracked:  analysis/mergeRNA.Rmd
+    Untracked:  analysis/nucSpecinEQTLs.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
     Untracked:  code/._FC_NucintornUpandDown.sh
     Untracked:  code/._FC_UTR.sh
@@ -475,6 +478,7 @@ Untracked files:
     Untracked:  code/._HMMpermuteTotal.py
     Untracked:  code/._HmmPermute.py
     Untracked:  code/._LC_samplegroups.py
+    Untracked:  code/._LD_qtl.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -579,6 +583,7 @@ Untracked files:
     Untracked:  code/._namePeaks.py
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
+    Untracked:  code/._nucSpeceffectsize.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -625,6 +630,7 @@ Untracked files:
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
+    Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
     Untracked:  code/.snakemake/
@@ -649,6 +655,7 @@ Untracked files:
     Untracked:  code/DistPAS2Sig.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
+    Untracked:  code/EandPqtl_perm.sh
     Untracked:  code/EandPqtls.sh
     Untracked:  code/EncodeRNADTPlotGeneRegions.err
     Untracked:  code/EncodeRNADTPlotGeneRegions.out
@@ -671,6 +678,8 @@ Untracked files:
     Untracked:  code/HmmPermute.p
     Untracked:  code/HmmPermute.py
     Untracked:  code/LC_samplegroups.py
+    Untracked:  code/LD_qtl.sh
+    Untracked:  code/LD_vcftools.hap.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
     Untracked:  code/NascentDTPlotPAS.err
@@ -748,6 +757,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/changePermQTLres2geneName.py
     Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
@@ -829,6 +839,7 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/nucSpeceffectsize.py
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/processYRIgen.py
     Untracked:  code/pullTwoMechData.py
@@ -836,6 +847,7 @@ Untracked files:
     Untracked:  code/qtlFacetBoxplots.out
     Untracked:  code/qtlRegionseq.sh
     Untracked:  code/qtlsPvalOppFrac.py
+    Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
     Untracked:  code/runCorrectNomEqtl.sh
@@ -922,6 +934,7 @@ Untracked files:
     Untracked:  code/tabixSNPS.sh
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/totSeceffectsize.py
     Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf2bed.py
@@ -939,6 +952,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
     Untracked:  data/Li_eQTLs/
@@ -1025,7 +1039,6 @@ Unstaged changes:
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/propeQTLs_explained.Rmd
-    Modified:   analysis/signalsiteanalysis.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1079,6 +1092,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/b6aa8cbfb3380eaa1161319ebe8b4092677536e9/docs/PASdescriptiveplots.html" target="_blank">b6aa8cb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1396,6 +1426,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b6aa8cbfb3380eaa1161319ebe8b4092677536e9/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-3-1.png" target="_blank">b6aa8cb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/660979c1a837c05078f56a7aa6344e555ae5262a/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-3-1.png" target="_blank">660979c</a>
 </td>
 <td>
@@ -1482,6 +1523,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b6aa8cbfb3380eaa1161319ebe8b4092677536e9/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-4-1.png" target="_blank">b6aa8cb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/660979c1a837c05078f56a7aa6344e555ae5262a/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-4-1.png" target="_blank">660979c</a>
@@ -1571,6 +1623,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b6aa8cbfb3380eaa1161319ebe8b4092677536e9/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-5-1.png" target="_blank">b6aa8cb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/660979c1a837c05078f56a7aa6344e555ae5262a/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-5-1.png" target="_blank">660979c</a>
 </td>
 <td>
@@ -1652,6 +1715,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b6aa8cbfb3380eaa1161319ebe8b4092677536e9/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-6-1.png" target="_blank">b6aa8cb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/660979c1a837c05078f56a7aa6344e555ae5262a/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-6-1.png" target="_blank">660979c</a>
@@ -1849,7 +1923,10 @@ character vector</code></pre>
 <p>Melt:</p>
 <pre class="r"><code>fullDF_melt=melt(FullDF,id.vars = &quot;Category&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NGenes&quot;) %&gt;% mutate(propGene=NGenes/nrow(annotation))
 
-ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar(width=.5, stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;Purples&quot;) + labs(title=&quot;Proportion of genes with Multiple PAS by Total Usage filter&quot;,y=&quot;Proportion of 19,243 genes&quot;, x=&quot;Usage Filter cutoff&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))</code></pre>
+
+totalPropgenes=ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar(width=.5, stat=&quot;identity&quot;) + labs(title=&quot;Total Fraction&quot;, y=&quot;Proportion of 19,243 genes&quot;, x=&quot;Usage Filter cutoff&quot;) + theme(axis.text.x = element_text(angle = 90, hjust =1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))+  theme(text = element_text(size=16),legend.position = &quot;bottom&quot;)+scale_fill_brewer(name = &quot;&quot;, labels = c(&quot;Multiple PAS&quot;, &quot;One PAS&quot;, &quot;Zero Identified PAS&quot;),palette=&quot;Dark2&quot;)
+
+totalPropgenes</code></pre>
 <p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
@@ -1873,6 +1950,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b6aa8cbfb3380eaa1161319ebe8b4092677536e9/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" target="_blank">b6aa8cb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/b3cbd22c465fa9192782b8a8ca2a13cefeffa296/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-13-1.png" target="_blank">b3cbd22</a>
@@ -1979,67 +2067,13 @@ character vector</code></pre>
 <pre class="r"><code>colnames(FullDFNuc)=c(&quot;Category&quot;,cutoffs[1:10])</code></pre>
 <pre class="r"><code>FullDFNuc_melt=melt(FullDFNuc,id.vars = &quot;Category&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NGenes&quot;) %&gt;% mutate(propGene=NGenes/nrow(annotation))
 
-ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( width=.5,stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;Blues&quot;) + labs(title=&quot;Proportion of genes with Multiple PAS by Nuclear Usage filter&quot;,y=&quot;Proportion of 19,243 genes&quot;, x=&quot;Usage Filter cutoff&quot;)</code></pre>
-<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
-Past versions of unnamed-chunk-17-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-17-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/b3cbd22c465fa9192782b8a8ca2a13cefeffa296/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" target="_blank">b3cbd22</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-21
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/660979c1a837c05078f56a7aa6344e555ae5262a/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" target="_blank">660979c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-13
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/a88eedf9feeaeba2af44f429f931361c419ff930/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-17-1.png" target="_blank">a88eedf</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+nuclearPropgenes=ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( width=.5,stat=&quot;identity&quot;)  + labs(title=&quot;Nuclear Fraction&quot;,y=&quot;Proportion of 19,243 genes&quot;, x=&quot;Usage Filter cutoff&quot;) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;)) +  theme(text = element_text(size=16), legend.position = &quot;bottom&quot;)+ scale_fill_brewer(name = &quot;&quot;, labels = c(&quot;Multiple PAS&quot;, &quot;One PAS&quot;, &quot;Zero Identified PAS&quot;),palette=&quot;Dark2&quot;)</code></pre>
+<pre class="r"><code>title_theme &lt;- ggdraw() +
+  draw_label(&quot;Proportion of Genes by PAS identification&quot;,  x = 0.28, hjust = 0,size=20, fontface=&quot;bold&quot;)
+
+withouttitle=plot_grid(totalPropgenes,nuclearPropgenes, rel_widths = c(1, 1))
+plot_grid(title_theme,withouttitle,ncol = 1, rel_heights = c(0.2, 1))</code></pre>
+<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="location-of-pas-by-filter" class="section level2">
 <h2>Location of PAS by filter</h2>
@@ -2074,7 +2108,7 @@ FullDF_loc=cbind(FullDF_loc,val=locbycutoff_tot(val))
 <p>Melt:</p>
 <pre class="r"><code>FullDF_loc_melt=melt(FullDF_loc,id.vars = &quot;Location&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NPas&quot;) %&gt;% group_by(Cutoff) %&gt;%  mutate(propPAS=NPas/sum(NPas))
 
-totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width=.5, stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;BuPu&quot;) + labs(title=&quot;PAS location\n Total Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))</code></pre>
+totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width=.5, stat=&quot;identity&quot;)  + labs(title=&quot;Total Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))+  theme(text = element_text(size=16), legend.position = &quot;bottom&quot;)+ scale_fill_brewer(name = &quot;&quot;, labels = c(&quot;Coding&quot;, &quot;5KB downstread&quot;, &quot;Intronic&quot;, &quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;),palette=&quot;Dark2&quot;)+guides(fill=guide_legend(nrow=2,byrow=TRUE))</code></pre>
 <p>Nuclear</p>
 <pre class="r"><code>locbycutoff_nuc=function(fraction){
 nucapaMeananno_filt=nucapaMeananno %&gt;% filter(meanUsage &gt;=fraction) %&gt;% separate(ID, into=c(&quot;chrom&quot;, &quot;start&quot;,&quot;end&quot;, &quot;peakID&quot;),sep=&quot;:&quot;) %&gt;% separate(peakID, into=c(&quot;Gene&quot;,&quot;loc&quot;, &quot;strand&quot;, &quot;peak&quot;),sep=&quot;_&quot;) %&gt;% group_by(loc) %&gt;% summarise(PerLoc=n()) %&gt;%filter(loc!= &quot;008559&quot;)
@@ -2106,9 +2140,9 @@ NucFullDF_loc=cbind(NucFullDF_loc,val=locbycutoff_nuc(val))
 <p>Melt:</p>
 <pre class="r"><code>NucFullDF_locMelt=melt(NucFullDF_loc,id.vars = &quot;Location&quot;,variable.name = &quot;Cutoff&quot;, value.name = &quot;NPas&quot;) %&gt;% group_by(Cutoff) %&gt;%  mutate(propPAS=NPas/sum(NPas))
 
-nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width = .5, stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;YlGnBu&quot;) + labs(title=&quot;PAS location\n Nuclear Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))</code></pre>
-<p>Plot next to eachother</p>
-<pre class="r"><code>nucplotloc</code></pre>
+nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width = .5, stat=&quot;identity&quot;) + labs(title=&quot;Nuclear Fraction&quot;,y=&quot;Proportion of PAS&quot;, x=&quot;Usage Filter cutoff&quot;)+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name=&quot;Usage Filter cutoff&quot;, breaks=c(&quot;0&quot;,&quot;0.1&quot;,&quot;0.2&quot;, &quot;0.3&quot;, &quot;0.4&quot;,&quot;0.5&quot;))+  theme(text = element_text(size=16), legend.position = &quot;bottom&quot;)+ scale_fill_brewer(name = &quot;&quot;, labels = c(&quot;Coding&quot;, &quot;5KB downstread&quot;, &quot;Intronic&quot;, &quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;),palette=&quot;Dark2&quot;) + guides(fill=guide_legend(nrow=2,byrow=TRUE))
+
+nucplotloc</code></pre>
 <p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
@@ -2180,67 +2214,17 @@ brimittleman
 </table>
 </div>
 </div>
-<pre class="r"><code>totplotloc</code></pre>
-<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
-Past versions of unnamed-chunk-25-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-25-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/b3cbd22c465fa9192782b8a8ca2a13cefeffa296/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-25-1.png" target="_blank">b3cbd22</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-21
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/660979c1a837c05078f56a7aa6344e555ae5262a/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-25-1.png" target="_blank">660979c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-13
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/0dbb65b68f8406c2927ad14ee1f4e86d29717a77/docs/figure/PASdescriptiveplots.Rmd/unnamed-chunk-25-1.png" target="_blank">0dbb65b</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-05-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>Plot next to eachother</p>
+<pre class="r"><code>title_loc &lt;- ggdraw() +
+  draw_label(&quot;Location of Identified PAS&quot;,  x = 0.35, hjust = 0,size=20, fontface=&quot;bold&quot;)
+
+
+locPlots=plot_grid(totplotloc,nucplotloc)
+
+
+locPlotswtitle=plot_grid(title_loc,locPlots,ncol = 1, rel_heights = c(0.2, 1))</code></pre>
+<pre class="r"><code>locPlotswtitle</code></pre>
+<p><img src="figure/PASdescriptiveplots.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
