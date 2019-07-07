@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
+library(seqLogo)
 library(tidyverse)
+library(RColorBrewer)
 library(workflowr)
 library(reshape2)
 library(gplots)
@@ -64,6 +66,10 @@ Join these together:
 ```{r}
 AllsiteDF=as.data.frame(rbind(Loc_AATAAA,Loc_AAAAAG,Loc_AATACA,Loc_AATAGA,Loc_AATATA,Loc_ACTAAA,Loc_AGTAAA,Loc_ATTAAA, Loc_GATAAA,Loc_TATAAA,Loc_CATAAA, Loc_AAAAAA))
 ```
+```{r}
+colourCount = length(unique(AllsiteDF$Site))
+getPalette = colorRampPalette(brewer.pal(8, "Set1"))
+```
 
 
 
@@ -100,7 +106,7 @@ AllsiteDF_1per=read.table(file="../data/SignalSiteFiles/AllSignalSite_1perPAS.tx
 Plot
 
 ```{r}
-dist2signalsiteplot=ggplot(AllsiteDF_1per, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of annotated signal sites")
+dist2signalsiteplot=ggplot(AllsiteDF_1per, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of annotated signal sites")  +  scale_fill_manual(values = getPalette(colourCount))
 dist2signalsiteplot
 
 ggsave(dist2signalsiteplot, file="../output/SignalSitePlot.png")
@@ -114,7 +120,7 @@ AllsiteDF_1per_prop= AllsiteDF_1per %>% group_by(Site,NegCount) %>% summarise(Co
 
 Plot with prop:
 ```{r}
-dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites",fill="Site Sequence") 
+dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites",fill="Site Sequence") +  scale_fill_manual(values = getPalette(colourCount))+ theme(text = element_text(size=20, face="bold"),axis.text.x = element_text(size = 16),axis.text.y = element_text(size = 16), legend.position = "bottom",plot.title = element_text(size=22))+ guides(fill=guide_legend(nrow=3,byrow=TRUE))
 dist2signalsiteplotprop
 ```
 ```{r}
@@ -129,7 +135,7 @@ AllsiteDF_1per_sep= AllsiteDF_1per %>%separate(PAS, int=c("GenePeak", "Location"
 ```
 
 ```{r}
-dist2signalsiteplot_byloc=ggplot(AllsiteDF_1per_sep, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of annotated signal sites") + facet_wrap(~Location)
+dist2signalsiteplot_byloc=ggplot(AllsiteDF_1per_sep, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of annotated signal sites") + facet_wrap(~Location)+  scale_fill_manual(values = getPalette(colourCount))
 
 dist2signalsiteplot_byloc
 
@@ -146,12 +152,12 @@ colnames(allPAS_byloc_new) = allPAS_byloc$loc
 
 AllsiteDF_1per_sep_INTRON=AllsiteDF_1per_sep %>% filter(Location=="intron") %>%  group_by(Site,NegCount) %>% summarise(CountperPos=n()) %>% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron))
 
-ggplot(AllsiteDF_1per_sep_INTRON, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=5, stat="identity" ) + labs(x="Distance from PAS", y="Propotion of Intron annotated Sites", title="Location of annotated signal sites") 
+ggplot(AllsiteDF_1per_sep_INTRON, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack",bins=5, stat="identity" ) + labs(x="Distance from PAS", y="Propotion of Intron annotated Sites", title="Location of annotated signal sites") +  scale_fill_manual(values = getPalette(colourCount))
 ```
 ```{r}
 AllsiteDF_1per_sep_UTR=AllsiteDF_1per_sep %>% filter(Location=="utr3") %>%  group_by(Site,NegCount) %>% summarise(CountperPos=n()) %>% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron))
 
-ggplot(AllsiteDF_1per_sep_UTR, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack", stat="identity" ) + labs(x="Distance from PAS", y="Propotion of UTR annotated Sites", title="Location of annotated signal sites in UTR") 
+ggplot(AllsiteDF_1per_sep_UTR, aes(group=Site, x=NegCount,y=prop, fill=Site)) + geom_histogram(position="stack", stat="identity" ) + labs(x="Distance from PAS", y="Propotion of UTR annotated Sites", title="Location of annotated signal sites in UTR")+  scale_fill_manual(values = getPalette(colourCount)) 
 ```
 
 ```{r}
@@ -209,4 +215,7 @@ Write these out for
 ```{r}
 write.table(AllsiteDF_1per_use, file="../data/PAS/PASwSignalSite.txt", col.names = T, row.names = F, quote = F, sep="\t")
 ```
+
+
+
 
