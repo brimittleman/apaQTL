@@ -115,6 +115,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [eQTL and pQTL effect sizes for apaQTLs](eQTLeffectNucspecapa.html)
 
+* [Nuclear specific apaQTL genes in eQTL results](nucSpecinEQTLs.html)
+
 * [pQTL example](pQTLexampleplot.html)
 
 

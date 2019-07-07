@@ -1,0 +1,73 @@
+---
+title: "Nuclear specific in eQTLs"
+author: "Briana Mittleman"
+date: "7/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to make a qq plot for the eQTL results then seperate the values by genes with a nuclear specific apaQTL.
+
+
+```{r}
+library(tidyverse)
+library(workflowr)
+
+
+```
+
+First i need to run the permutations on the eQTL data to get the top snp gene associations.
+```{bash,eval=F}
+sbatch EandPqtl_perm.sh
+```
+
+
+```{bash,eval=F}
+cat ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.chunk* > ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.AllNomRes.txt
+
+python changePermQTLres2geneName.py
+```
+
+```{r}
+permeqtl=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.AllNomRes.GeneName.txt", col.names = c("gene", "nvar","shape1", "shape2", "dummy", "RSID", "dist","nomPval","slope","ppval", "bpval"),stringsAsFactors = F)
+
+permeqtl$bh=p.adjust(permeqtl$bpval, method="fdr")
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(permeqtl))), -log10(permeqtl$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="eQTL")
+abline(0,1)
+```
+Seperate for genes with a nuclear specific apaQTL  
+
+nuclear specific are in ../data/QTLoverlap_nonNorm/NuclearSpecQTLinNuclearNominal_nonNorm.txt  
+
+```{r}
+nucSpecgene=read.table("../data/QTLoverlap_nonNorm/NuclearSpecQTLinNuclearNominal_nonNorm.txt",header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "Originalslope")) %>% separate(peakID,into=c("gene","loc", "strand", "PAS"),sep="_") %>% select(gene) %>% unique()
+```
+
+There are 172 genes in this set. 
+
+```{r}
+permeqtl_nucSpec= permeqtl  %>% filter(gene %in%nucSpecgene$gene )
+
+permeqtl_notnucSpec= permeqtl  %>% anti_join(permeqtl_nucSpec,by = c("gene", "nvar", "shape1", "shape2", "dummy", "RSID", "dist", "nomPval", "slope", "ppval", "bpval", "bh"))
+```
+
+
+
+```{r}
+qqplot(-log10(runif(nrow(permeqtl_notnucSpec))), -log10(permeqtl_notnucSpec$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="eQTL")
+points(sort(-log10(runif(nrow(permeqtl_nucSpec)))), sort(-log10(permeqtl_nucSpec$bpval)),col= alpha("Red"))
+
+abline(0,1)
+legend("topleft", legend=c("Nuclear specific apaQTL genes", "All other genes"),col=c("red", "black"), pch=16,bty = 'n')
+```
+```{r}
+wilcox.test(permeqtl_notnucSpec$ppval,permeqtl_nucSpec$ppval)
+```
+
