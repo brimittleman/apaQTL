@@ -12,7 +12,7 @@
 <meta name="author" content="Briana Mittleman" />
 
 
-<title>pttQTL genes in eQTLs</title>
+<title>apaQTL and PTTqtls</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -316,9 +316,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">pttQTL genes in eQTLs</h1>
+<h1 class="title toc-ignore">apaQTL and PTTqtls</h1>
 <h4 class="author"><em>Briana Mittleman</em></h4>
-<h4 class="date"><em>7/7/2019</em></h4>
+<h4 class="date"><em>7/8/2019</em></h4>
 
 </div>
 
@@ -1027,7 +1027,6 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
-    Untracked:  docs/figure/pttgeneinAPA.Rmd/
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1101,36 +1100,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/5566d80d193fc0bc7a9c04534806fb842536d67f/docs/pttQTLinE.html" target="_blank">5566d80</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-07-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f85f6d0a598ea970e3f520af9d1a75fee6e6abf4/analysis/pttQTLinE.Rmd" target="_blank">f85f6d0</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/b1e6dd1873e3cc8bc0c05026a0ef4554c7d8819d/analysis/pttgeneinAPA.Rmd" target="_blank">b1e6dd1</a>
 </td>
 <td>
 brimittleman
 </td>
 <td>
-2019-07-07
+2019-07-08
 </td>
 <td>
-add ptt eqtls
+update ptt analysis
 </td>
 </tr>
 </tbody>
@@ -1140,7 +1122,7 @@ add ptt eqtls
 </div>
 </div>
 </div>
-<p>This analysis will be similar to the nuclear specific in egenes analysis. I want to ask if a gene is more likely to be associated with expression if it has a pttQTL in total or nuclear.</p>
+<p>I am interesting in understanding the PTTqtls a bit more. I want to ask if pttQTLs are apaQTLs. I will ask if the PTTqtl genes are also apaQTL genes.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>── Attaching packages ───────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
@@ -1153,148 +1135,72 @@ add ptt eqtls
 <pre class="r"><code>library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
-<pre class="r"><code>permeqtl=read.table(&quot;../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.AllNomRes.GeneName.txt&quot;, col.names = c(&quot;gene&quot;, &quot;nvar&quot;,&quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;RSID&quot;, &quot;dist&quot;,&quot;nomPval&quot;,&quot;slope&quot;,&quot;ppval&quot;, &quot;bpval&quot;),stringsAsFactors = F)</code></pre>
+<p>PTT</p>
 <pre class="r"><code>totptt=read.table(&quot;../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, stringsAsFactors = F, header = T) %&gt;% filter(-log10(bh)&gt;1) %&gt;% separate(pid,into = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
-nucptt=read.table(&quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, stringsAsFactors = F, header = T) %&gt;% filter(-log10(bh)&gt;1) %&gt;% separate(pid,into = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()</code></pre>
-<pre class="r"><code>permeqtl_tot= permeqtl  %&gt;% filter(gene %in%totptt$gene )
 
-permeqtl_nottot= permeqtl  %&gt;% anti_join(permeqtl_tot,by = c(&quot;gene&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;RSID&quot;, &quot;dist&quot;, &quot;nomPval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))</code></pre>
-<pre class="r"><code>qqplot(-log10(runif(nrow(permeqtl_nottot))), -log10(permeqtl_nottot$bpval),ylab=&quot;-log10 expression permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;eQTL&quot;)
-points(sort(-log10(runif(nrow(permeqtl_tot)))), sort(-log10(permeqtl_tot$bpval)),col= alpha(&quot;Red&quot;))
+totpttQTL=read.table(&quot;../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, stringsAsFactors = F, header = T) %&gt;% filter(-log10(bh)&gt;1)
+write.table(totpttQTL, file=&quot;../data/pttQTL/TotalPttQTL.txt&quot;, col.names = T, row.names = F, quote = F, sep=&quot;\t&quot;)
 
-abline(0,1)
-legend(&quot;topleft&quot;, legend=c(&quot;Total ptt gene&quot;, &quot;All other genes&quot;),col=c(&quot;red&quot;, &quot;black&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/pttQTLinE.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
-Past versions of unnamed-chunk-5-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/5566d80d193fc0bc7a9c04534806fb842536d67f/docs/figure/pttQTLinE.Rmd/unnamed-chunk-5-1.png" target="_blank">5566d80</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-07-07
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>permeqtl_nuc= permeqtl  %&gt;% filter(gene %in%nucptt$gene )
+nucptt=read.table(&quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, stringsAsFactors = F, header = T) %&gt;% filter(-log10(bh)&gt;1) %&gt;% separate(pid,into = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
 
-permeqtl_nottnuc= permeqtl  %&gt;% anti_join(permeqtl_nuc,by = c(&quot;gene&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;RSID&quot;, &quot;dist&quot;, &quot;nomPval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))</code></pre>
-<pre class="r"><code>qqplot(-log10(runif(nrow(permeqtl_nottnuc))), -log10(permeqtl_nottnuc$bpval),ylab=&quot;-log10 expression permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;eQTL&quot;)
-points(sort(-log10(runif(nrow(permeqtl_nuc)))), sort(-log10(permeqtl_nuc$bpval)),col= alpha(&quot;Red&quot;))
 
-abline(0,1)
-legend(&quot;topleft&quot;, legend=c(&quot;Nuclear ptt gene&quot;, &quot;All other genes&quot;),col=c(&quot;red&quot;, &quot;black&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/pttQTLinE.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
-Past versions of unnamed-chunk-7-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-7-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/5566d80d193fc0bc7a9c04534806fb842536d67f/docs/figure/pttQTLinE.Rmd/unnamed-chunk-7-1.png" target="_blank">5566d80</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-07-07
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>In either:</p>
-<pre class="r"><code>permeqtl_either= permeqtl  %&gt;% filter(gene %in%totptt$gene |gene %in%nucptt$gene )
-
-permeqtl_noteither= permeqtl  %&gt;% anti_join(permeqtl_either,by = c(&quot;gene&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;RSID&quot;, &quot;dist&quot;, &quot;nomPval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))</code></pre>
-<pre class="r"><code>qqplot(-log10(runif(nrow(permeqtl_noteither))), -log10(permeqtl_noteither$bpval),ylab=&quot;-log10 expression permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;eQTL&quot;)
-points(sort(-log10(runif(nrow(permeqtl_either)))), sort(-log10(permeqtl_either$bpval)),col= alpha(&quot;Red&quot;))
-
+nucpttQTL=read.table(&quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, stringsAsFactors = F, header = T) %&gt;% filter(-log10(bh)&gt;1)
+write.table(nucpttQTL, file=&quot;../data/pttQTL/NuclearPttQTL.txt&quot;, col.names = T, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>APA</p>
+<pre class="r"><code>nucAPA=read.table(&quot;../data/apaQTLs/NuclearapaQTLGenes.txt&quot;, col.names = c(&quot;gene&quot;),stringsAsFactors = F)
+totAPA=read.table(&quot;../data/apaQTLs/TotalapaQTLGenes.txt&quot;, col.names = c(&quot;gene&quot;),stringsAsFactors = F)</code></pre>
+<pre class="r"><code>totptt %&gt;% inner_join(totAPA,by=&quot;gene&quot;) %&gt;% nrow()</code></pre>
+<pre><code>[1] 32</code></pre>
+<pre class="r"><code>totptt %&gt;% anti_join(totAPA,by=&quot;gene&quot;) %&gt;% nrow()</code></pre>
+<pre><code>[1] 8</code></pre>
+<pre class="r"><code>nucptt %&gt;% inner_join(nucAPA,by=&quot;gene&quot;) %&gt;% nrow()</code></pre>
+<pre><code>[1] 89</code></pre>
+<pre class="r"><code>nucptt %&gt;% anti_join(nucAPA,by=&quot;gene&quot;) %&gt;% nrow()</code></pre>
+<pre><code>[1] 14</code></pre>
+<p>There are 8 total ptt genes that are not apaQTL genes and there are 15 nuclear ptt genes that are not apaQTL genes.</p>
+<p>Look at the distribution. To do this I will pull out the ptt associations from the apa data.</p>
+<p>I will right a script that takes a the fraction, pulls the ptt associations into 2 files, one for the associations and one for the non associations.</p>
+<pre class="bash"><code>python pttQTLsinapaQTL.py Total
+python pttQTLsinapaQTL.py Nuclear</code></pre>
+<pre class="r"><code>names=c(&#39;pid&#39; ,&#39;nvar&#39; ,&#39;shape1&#39; ,&#39;shape2&#39;, &#39;dummy&#39; ,&#39;sid&#39;, &#39;dist&#39;, &#39;npval&#39;, &#39;slope&#39;, &#39;ppval&#39; ,&#39;bpval&#39;, &#39;bh&#39;)
+totapaPTT=read.table(&quot;../data/pttQTL/Totalapa_TotalPttQTL.txt&quot;, col.names = names, stringsAsFactors = F)
+totapaNotPTT=read.table(&quot;../data/pttQTL/Totalapa_NOT_TotalPttQTL.txt&quot;, col.names = names, stringsAsFactors = F)</code></pre>
+<pre class="r"><code>qqplot(-log10(runif(nrow(totapaNotPTT))), -log10(totapaNotPTT$bpval),ylab=&quot;-log10 expression permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Total PTT genes in Total apaQTL&quot;)
+points(sort(-log10(runif(nrow(totapaPTT)))), sort(-log10(totapaPTT$bpval)),col= alpha(&quot;Red&quot;))
 abline(0,1)
 legend(&quot;topleft&quot;, legend=c(&quot;ptt gene&quot;, &quot;All other genes&quot;),col=c(&quot;red&quot;, &quot;black&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/pttQTLinE.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
-Past versions of unnamed-chunk-9-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-9-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/5566d80d193fc0bc7a9c04534806fb842536d67f/docs/figure/pttQTLinE.Rmd/unnamed-chunk-9-1.png" target="_blank">5566d80</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-07-07
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/pttgeneinAPA.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>nucapaPTT=read.table(&quot;../data/pttQTL/Nuclearapa_NuclearPttQTL.txt&quot;, col.names = names, stringsAsFactors = F)
+nucapaNotPTT=read.table(&quot;../data/pttQTL/Nuclearapa_NOT_NuclearPttQTL.txt&quot;, col.names = names, stringsAsFactors = F)</code></pre>
+<pre class="r"><code>qqplot(-log10(runif(nrow(nucapaNotPTT))), -log10(nucapaNotPTT$bpval),ylab=&quot;-log10 expression permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Nuclear PTT genes in Nuclear apaQTL&quot;)
+points(sort(-log10(runif(nrow(nucapaPTT)))), sort(-log10(nucapaPTT$bpval)),col= alpha(&quot;Red&quot;))
+abline(0,1)
+
+legend(&quot;topleft&quot;, legend=c(&quot;ptt gene&quot;, &quot;All other genes&quot;),col=c(&quot;red&quot;, &quot;black&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+<p><img src="figure/pttgeneinAPA.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>These show the sharing is super high and we are getting at similar phenotypes in ptt and apa.</p>
+<p>Is there something interesting about the non overlap genes:</p>
+<pre class="r"><code>pttOnlyTot=totptt %&gt;% anti_join(totAPA,by=&quot;gene&quot;)
+
+
+totapaPTT_pttstatus=totapaPTT %&gt;% separate(pid, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;),sep=&quot;:&quot;)  %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;pos&quot;, &quot;strand&quot;, &quot;pas&quot;),sep=&quot;_&quot;) %&gt;% mutate(APAQTL=ifelse(gene %in% pttOnlyTot$gene, &quot;No&quot;, &quot;Yes&quot;))</code></pre>
+<pre class="r"><code>ggplot(totapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()</code></pre>
+<p><img src="figure/pttgeneinAPA.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pttOnlyTot$gene</code></pre>
+<pre><code>[1] &quot;C10orf88&quot; &quot;UROS&quot;     &quot;LRRC57&quot;   &quot;ELMOD3&quot;   &quot;USP37&quot;    &quot;PLSCR1&quot;  
+[7] &quot;ZNF718&quot;   &quot;ZSCAN12&quot; </code></pre>
+<pre class="r"><code>pttOnlyNuc=nucptt %&gt;% anti_join(nucAPA,by=&quot;gene&quot;)
+
+
+nucapaPTT_pttstatus=nucapaPTT %&gt;% separate(pid, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;),sep=&quot;:&quot;)  %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;pos&quot;, &quot;strand&quot;, &quot;pas&quot;),sep=&quot;_&quot;) %&gt;% mutate(APAQTL=ifelse(gene %in% pttOnlyTot$gene, &quot;No&quot;, &quot;Yes&quot;))
+
+
+ggplot(nucapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()</code></pre>
+<p><img src="figure/pttgeneinAPA.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pttOnlyNuc$gene</code></pre>
+<pre><code> [1] &quot;PPFIA1&quot;    &quot;ZDHHC17&quot;   &quot;ZNF844&quot;    &quot;PRKCZ&quot;     &quot;POU2F1&quot;   
+ [6] &quot;MAP3K7CL&quot;  &quot;BCL2L13&quot;   &quot;LINC00342&quot; &quot;DZIP3&quot;     &quot;SUB1&quot;     
+[11] &quot;BLVRA&quot;     &quot;NAPEPLD&quot;   &quot;WNT2&quot;      &quot;HACD4&quot;    </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1337,8 +1243,9 @@ loaded via a namespace (and not attached):
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
 [33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
+[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
+[49] crayon_1.3.4    </code></pre>
 </div>
 
 

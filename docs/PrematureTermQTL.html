@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-02
+<strong>Last updated:</strong> 2019-07-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefe7b5dc04946d3867ea3555d5904aa5ebfa25a4dtargetblankfe7b5dca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fe7b5dc04946d3867ea3555d5904aa5ebfa25a4d" target="_blank">fe7b5dc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb1e6dd1873e3cc8bc0c05026a0ef4554c7d8819dtargetblankb1e6dd1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b1e6dd1873e3cc8bc0c05026a0ef4554c7d8819d" target="_blank">b1e6dd1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefe7b5dc04946d3867ea3555d5904aa5ebfa25a4dtargetblankfe7b5dca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb1e6dd1873e3cc8bc0c05026a0ef4554c7d8819dtargetblankb1e6dd1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -460,12 +460,14 @@ Untracked files:
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/gwasOverlap.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
     Untracked:  code/._FC_NucintornUpandDown.sh
     Untracked:  code/._FC_UTR.sh
@@ -475,6 +477,7 @@ Untracked files:
     Untracked:  code/._HMMpermuteTotal.py
     Untracked:  code/._HmmPermute.py
     Untracked:  code/._LC_samplegroups.py
+    Untracked:  code/._LD_qtl.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -579,11 +582,13 @@ Untracked files:
     Untracked:  code/._namePeaks.py
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
+    Untracked:  code/._nucSpeceffectsize.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
     Untracked:  code/._phenoQTLfromlist.py
     Untracked:  code/._processYRIgen.py
+    Untracked:  code/._pttQTLsinapaQTL.py
     Untracked:  code/._qtlRegionseq.sh
     Untracked:  code/._qtlsPvalOppFrac.py
     Untracked:  code/._quantassign2parsedpeak.py
@@ -625,6 +630,7 @@ Untracked files:
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
+    Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
     Untracked:  code/.snakemake/
@@ -649,6 +655,7 @@ Untracked files:
     Untracked:  code/DistPAS2Sig.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
+    Untracked:  code/EandPqtl_perm.sh
     Untracked:  code/EandPqtls.sh
     Untracked:  code/EncodeRNADTPlotGeneRegions.err
     Untracked:  code/EncodeRNADTPlotGeneRegions.out
@@ -671,6 +678,8 @@ Untracked files:
     Untracked:  code/HmmPermute.p
     Untracked:  code/HmmPermute.py
     Untracked:  code/LC_samplegroups.py
+    Untracked:  code/LD_qtl.sh
+    Untracked:  code/LD_vcftools.hap.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
     Untracked:  code/NascentDTPlotPAS.err
@@ -748,6 +757,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/changePermQTLres2geneName.py
     Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
@@ -829,13 +839,16 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/nucSpeceffectsize.py
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/processYRIgen.py
+    Untracked:  code/pttQTLsinapaQTL.py
     Untracked:  code/pullTwoMechData.py
     Untracked:  code/qtlFacetBoxplots.err
     Untracked:  code/qtlFacetBoxplots.out
     Untracked:  code/qtlRegionseq.sh
     Untracked:  code/qtlsPvalOppFrac.py
+    Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
     Untracked:  code/runCorrectNomEqtl.sh
@@ -922,6 +935,7 @@ Untracked files:
     Untracked:  code/tabixSNPS.sh
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/totSeceffectsize.py
     Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf2bed.py
@@ -939,6 +953,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
     Untracked:  data/Li_eQTLs/
@@ -1006,11 +1021,13 @@ Untracked files:
     Untracked:  data/peaks_5perc/
     Untracked:  data/phenotype/
     Untracked:  data/phenotype_5perc/
+    Untracked:  data/pttQTL/
     Untracked:  data/sigDiffGenes.txt
     Untracked:  data/sort/
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
+    Untracked:  docs/figure/pttgeneinAPA.Rmd/
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1019,12 +1036,16 @@ Untracked files:
     Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
+    Modified:   analysis/DiffIsoAnalysis.Rmd
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
+    Modified:   analysis/QTLlocation.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/chromHHMQTL.Rmd
+    Modified:   analysis/nonNormQTL.Rmd
+    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/propeQTLs_explained.Rmd
-    Modified:   analysis/signalsiteanalysis.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1078,6 +1099,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b1e6dd1873e3cc8bc0c05026a0ef4554c7d8819d/analysis/PrematureTermQTL.Rmd" target="_blank">b1e6dd1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-08
+</td>
+<td>
+update ptt analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/429432a3b340717c049cd133338fd8bec37d1312/docs/PrematureTermQTL.html" target="_blank">429432a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1243,12 +1298,12 @@ library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>Many papers have started to talk about premature termination. Premature terminated isoforms may be truncated protein or may be degraded. I am going to create a measure for this and test for genetic variation associated with it in my data. The measure will be sum of the reads in intronic PAS and the sum of the UTR reads. I will use leafcutter to put the ratios onto a normal distribution. I will then test for QTLs these ratios.</p>
@@ -1372,6 +1427,9 @@ brimittleman
 </table>
 </div>
 </div>
+<pre class="r"><code>ggplot(totRes, aes(x=dist)) + geom_histogram(bins=100)</code></pre>
+<pre><code>Warning: Removed 340 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="nuclear-1" class="section level4">
 <h4>Nuclear:</h4>
@@ -1387,66 +1445,28 @@ nucRes_sig_genes=nucRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;st
 
 write.table(nucRes, file = &quot;../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
 <pre class="r"><code>nrow(nucRes_sig_genes)</code></pre>
-<pre><code>[1] 106</code></pre>
+<pre><code>[1] 103</code></pre>
 <p>Proportion of genes tested:</p>
 <pre class="r"><code>nuctested_genes=nucRes %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;) %&gt;% select(gene) %&gt;% unique()
 nrow(nucRes_sig_genes)/nrow(nuctested_genes)</code></pre>
-<pre><code>[1] 0.02061856</code></pre>
+<pre><code>[1] 0.02003501</code></pre>
 <p>qqplot:</p>
 <pre class="r"><code>qqplot(-log10(runif(nrow(nucRes))), -log10(nucRes$bpval),ylab=&quot;-log10 Nuclear permuted pvalue&quot;, xlab=&quot;Uniform expectation&quot;, main=&quot;Nuclear premature termination&quot;)
 abline(0,1)</code></pre>
-<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
-Past versions of unnamed-chunk-18-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-18-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/dad7bd80a9bddb1e7ae1641f39140f11474b5961/docs/figure/PrematureTermQTL.Rmd/unnamed-chunk-18-1.png" target="_blank">dad7bd8</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-07-02
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>More likely in nuclear:</p>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /> More likely in nuclear:</p>
 <pre class="r"><code>prop.test(x=c(nrow(nucRes_sig_genes),nrow(totRes_sig_genes)), n=c(nrow(nuctested_genes),nrow(tottested_genes)),alternative = &quot;greater&quot;)</code></pre>
 <pre><code>
     2-sample test for equality of proportions with continuity
     correction
 
 data:  c(nrow(nucRes_sig_genes), nrow(totRes_sig_genes)) out of c(nrow(nuctested_genes), nrow(tottested_genes))
-X-squared = 9.4405, df = 1, p-value = 0.001061
+X-squared = 8.393, df = 1, p-value = 0.001883
 alternative hypothesis: greater
 95 percent confidence interval:
- 0.004317405 1.000000000
+ 0.003767208 1.000000000
 sample estimates:
     prop 1     prop 2 
-0.02061856 0.01162453 </code></pre>
+0.02003501 0.01162453 </code></pre>
 </div>
 <div id="overlap-with-egenes" class="section level3">
 <h3>overlap with eGenes</h3>
@@ -1477,24 +1497,24 @@ nrow(TotPre_uneGene)/nrow(unexplainedEgenes)</code></pre>
 <pre class="r"><code>#nuclear
 
 nrow(NucPre_uneGene)/nrow(unexplainedEgenes)</code></pre>
-<pre><code>[1] 0.01447368</code></pre>
+<pre><code>[1] 0.01184211</code></pre>
 <pre class="r"><code>nrow(NucPre_exeGene)/nrow(explainedEgenes)</code></pre>
 <pre><code>[1] 0.01221805</code></pre>
 <pre class="r"><code>nrow(NucPre_alleGene)/nrow(allEgenes)</code></pre>
-<pre><code>[1] 0.01315789</code></pre>
+<pre><code>[1] 0.0120614</code></pre>
 <pre class="r"><code>prop.test(x=c(nrow(NucPre_uneGene),nrow(TotPre_uneGene)), n=c(nrow(unexplainedEgenes),nrow(unexplainedEgenes)))</code></pre>
 <pre><code>
     2-sample test for equality of proportions with continuity
     correction
 
 data:  c(nrow(NucPre_uneGene), nrow(TotPre_uneGene)) out of c(nrow(unexplainedEgenes), nrow(unexplainedEgenes))
-X-squared = 0.95182, df = 1, p-value = 0.3293
+X-squared = 0.26932, df = 1, p-value = 0.6038
 alternative hypothesis: two.sided
 95 percent confidence interval:
- -0.005305117  0.018463011
+ -0.007305071  0.015199808
 sample estimates:
      prop 1      prop 2 
-0.014473684 0.007894737 </code></pre>
+0.011842105 0.007894737 </code></pre>
 <pre class="r"><code>prop.test(x=c(nrow(NucPre_exeGene),nrow(TotPre_exeGene)), n=c(nrow(explainedEgenes),nrow(explainedEgenes)))</code></pre>
 <pre><code>
     2-sample test for equality of proportions with continuity
@@ -1511,6 +1531,46 @@ sample estimates:
 <p>Conclusion:</p>
 <p>Total- 13 overlaps with all eGenes, 7 ex, 6 unexplained Nuclear- 24 overlaps with all eGenes, 13 ex, 11 unexpained</p>
 <p>All eGenes=1824 Unexplained=760 Explained=1064</p>
+<p>Are the total in the nuclear:</p>
+<pre class="r"><code>totInuc=totRes_sig_genes %&gt;% anti_join(nucRes_sig_genes,by=&quot;gene&quot;) 
+nrow(totRes_sig_genes)-nrow(totInuc)</code></pre>
+<pre><code>[1] 22</code></pre>
+<pre class="r"><code>#did we test all of the 
+totInucTESTEDnuc=totInuc %&gt;% anti_join(nuctested_genes, by=&quot;gene&quot;) 
+nrow(totInucTESTEDnuc)</code></pre>
+<pre><code>[1] 2</code></pre>
+<pre class="r"><code>totInucTESTEDnuc</code></pre>
+<pre><code>    gene
+1 IPO5P1
+2 ZNF718</code></pre>
+<pre class="r"><code>#all
+totInuc %&gt;% inner_join(allEgenes,by=&quot;gene&quot;)</code></pre>
+<pre><code>     gene
+1 ATF7IP2
+2  MTHFSD
+3  IPO5P1
+4  ELMOD3
+5 ANKRD44</code></pre>
+<pre class="r"><code>#explained
+totInuc %&gt;% inner_join(explainedEgenes,by=&quot;gene&quot;)</code></pre>
+<pre><code>     gene
+1 ATF7IP2
+2  IPO5P1</code></pre>
+<pre class="r"><code>#unexplained
+totInuc %&gt;% inner_join(unexplainedEgenes,by=&quot;gene&quot;)</code></pre>
+<pre><code>     gene
+1  MTHFSD
+2  ELMOD3
+3 ANKRD44</code></pre>
+</div>
+<div id="direction-of-effect-size" class="section level3">
+<h3>Direction of effect size:</h3>
+<pre class="r"><code>nucRes_sig_dir= nucRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;)</code></pre>
+<pre class="r"><code>ggplot(nucRes_sig_dir, aes(x=Frac, y=slope)) + geom_boxplot() + geom_jitter(aes(col=Frac)) + labs(title=&quot;Nuclear premature APA QTL effect sizes&quot;, y=&quot;Effect size&quot;,x=&quot;&quot;) + scale_x_discrete(labels=c( &quot;Intronic Usage&quot;,&quot;3&#39; UTR Usage&quot;))+ scale_color_discrete(name =&quot;&quot;, labels=c( &quot;Intronic Usage&quot;,&quot;3&#39; UTR Usage&quot;)) </code></pre>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>totRes_sig_dir= totRes_sig %&gt;% separate(pid, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;Frac&quot;),sep=&quot;_&quot;)</code></pre>
+<pre class="r"><code>ggplot(totRes_sig_dir, aes(x=Frac, y=slope)) + geom_boxplot() + geom_jitter(aes(col=Frac))+ labs(title=&quot;Total premature APA QTL effect sizes&quot;, y=&quot;Effect size&quot;,x=&quot;&quot;) + scale_x_discrete(labels=c( &quot;Intronic Usage&quot;,&quot;3&#39; UTR Usage&quot;))+ scale_color_discrete(name =&quot;&quot;, labels=c( &quot;Intronic Usage&quot;,&quot;3&#39; UTR Usage&quot;)) </code></pre>
+<p><img src="figure/PrematureTermQTL.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /> The difference may just be due to the numbers but most of the variants are associated with decreased utr usage and increase intronic usage.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1553,8 +1613,9 @@ loaded via a namespace (and not attached):
 [29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
 [33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
 [37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 labeling_0.3    
+[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
+[49] crayon_1.3.4    </code></pre>
 </div>
 </div>
 </div>
