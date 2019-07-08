@@ -75,6 +75,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Pre-termination QTLs](PrematureTermQTL.html)
 
+* [Overlap pttQTL and apaQTLs](pttgeneinAPA.html)
+
 ##Differential Isoform Analysis  
 
 * [Run leafcutter to compare fractions](DiffIsoAnalysis.html)  

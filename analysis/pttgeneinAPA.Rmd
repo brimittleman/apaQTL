@@ -1,0 +1,136 @@
+---
+title: "apaQTL and PTTqtls"
+author: "Briana Mittleman"
+date: "7/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I am interesting in understanding the PTTqtls a bit more. I want to ask if pttQTLs are apaQTLs. I will ask if the PTTqtl genes are also apaQTL genes.  
+
+```{r}
+library(tidyverse)
+library(workflowr)
+```
+
+
+
+PTT
+```{r}
+totptt=read.table("../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1) %>% separate(pid,into = c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+
+totpttQTL=read.table("../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1)
+write.table(totpttQTL, file="../data/pttQTL/TotalPttQTL.txt", col.names = T, row.names = F, quote = F, sep="\t")
+
+nucptt=read.table("../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1) %>% separate(pid,into = c("chr", "start", "end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_") %>% select(gene) %>% unique()
+
+
+nucpttQTL=read.table("../data/PrematureQTLPermuted/Nuclear_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1)
+write.table(nucpttQTL, file="../data/pttQTL/NuclearPttQTL.txt", col.names = T, row.names = F, quote = F, sep="\t")
+```
+
+APA
+
+```{r}
+nucAPA=read.table("../data/apaQTLs/NuclearapaQTLGenes.txt", col.names = c("gene"),stringsAsFactors = F)
+totAPA=read.table("../data/apaQTLs/TotalapaQTLGenes.txt", col.names = c("gene"),stringsAsFactors = F)
+
+```
+
+```{r}
+totptt %>% inner_join(totAPA,by="gene") %>% nrow()
+totptt %>% anti_join(totAPA,by="gene") %>% nrow()
+
+
+```
+
+```{r}
+
+nucptt %>% inner_join(nucAPA,by="gene") %>% nrow()
+nucptt %>% anti_join(nucAPA,by="gene") %>% nrow()
+
+
+```
+
+
+There are 8 total ptt genes that are not apaQTL genes and there are 15 nuclear ptt genes that are not apaQTL genes. 
+
+
+Look at the distribution. To do this I will pull out the ptt associations from the apa data.
+
+I will right a script that takes a the fraction, pulls the ptt associations into 2 files, one for the associations and one for the non associations.  
+
+
+```{bash,eval=F}
+python pttQTLsinapaQTL.py Total
+python pttQTLsinapaQTL.py Nuclear
+```
+
+
+```{r}
+names=c('pid' ,'nvar' ,'shape1' ,'shape2', 'dummy' ,'sid', 'dist', 'npval', 'slope', 'ppval' ,'bpval', 'bh')
+totapaPTT=read.table("../data/pttQTL/Totalapa_TotalPttQTL.txt", col.names = names, stringsAsFactors = F)
+totapaNotPTT=read.table("../data/pttQTL/Totalapa_NOT_TotalPttQTL.txt", col.names = names, stringsAsFactors = F)
+```
+
+```{r}
+qqplot(-log10(runif(nrow(totapaNotPTT))), -log10(totapaNotPTT$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="Total PTT genes in Total apaQTL")
+points(sort(-log10(runif(nrow(totapaPTT)))), sort(-log10(totapaPTT$bpval)),col= alpha("Red"))
+abline(0,1)
+legend("topleft", legend=c("ptt gene", "All other genes"),col=c("red", "black"), pch=16,bty = 'n')
+```
+
+```{r}
+nucapaPTT=read.table("../data/pttQTL/Nuclearapa_NuclearPttQTL.txt", col.names = names, stringsAsFactors = F)
+nucapaNotPTT=read.table("../data/pttQTL/Nuclearapa_NOT_NuclearPttQTL.txt", col.names = names, stringsAsFactors = F)
+```
+
+```{r}
+qqplot(-log10(runif(nrow(nucapaNotPTT))), -log10(nucapaNotPTT$bpval),ylab="-log10 expression permuted pvalue", xlab="Uniform expectation", main="Nuclear PTT genes in Nuclear apaQTL")
+points(sort(-log10(runif(nrow(nucapaPTT)))), sort(-log10(nucapaPTT$bpval)),col= alpha("Red"))
+abline(0,1)
+
+legend("topleft", legend=c("ptt gene", "All other genes"),col=c("red", "black"), pch=16,bty = 'n')
+```
+
+
+These show the sharing is super high and we are getting at similar phenotypes in ptt and apa.  
+
+
+
+Is there something interesting about the non overlap genes:  
+
+```{r}
+pttOnlyTot=totptt %>% anti_join(totAPA,by="gene")
+
+
+totapaPTT_pttstatus=totapaPTT %>% separate(pid, into=c("chr", "start", "end", "geneID"),sep=":")  %>% separate(geneID, into=c("gene", "pos", "strand", "pas"),sep="_") %>% mutate(APAQTL=ifelse(gene %in% pttOnlyTot$gene, "No", "Yes"))
+
+```
+
+
+```{r}
+ggplot(totapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()
+```
+```{r}
+pttOnlyTot$gene
+```
+
+
+
+```{r}
+pttOnlyNuc=nucptt %>% anti_join(nucAPA,by="gene")
+
+
+nucapaPTT_pttstatus=nucapaPTT %>% separate(pid, into=c("chr", "start", "end", "geneID"),sep=":")  %>% separate(geneID, into=c("gene", "pos", "strand", "pas"),sep="_") %>% mutate(APAQTL=ifelse(gene %in% pttOnlyTot$gene, "No", "Yes"))
+
+
+ggplot(nucapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()
+```
+```{r}
+pttOnlyNuc$gene
+```
+

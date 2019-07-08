@@ -143,6 +143,11 @@ qqplot(-log10(runif(nrow(totRes))), -log10(totRes$bpval),ylab="-log10 Total perm
 abline(0,1)
 ```
 
+
+```{r}
+ggplot(totRes, aes(x=dist)) + geom_histogram(bins=100)
+```
+
 ####Nuclear:
 
 ```{r}
@@ -241,3 +246,44 @@ Nuclear- 24 overlaps with all eGenes, 13 ex, 11 unexpained
 All eGenes=1824
 Unexplained=760
 Explained=1064
+
+Are the total in the nuclear:
+
+```{r}
+totInuc=totRes_sig_genes %>% anti_join(nucRes_sig_genes,by="gene") 
+nrow(totRes_sig_genes)-nrow(totInuc)
+
+
+#did we test all of the 
+totInucTESTEDnuc=totInuc %>% anti_join(nuctested_genes, by="gene") 
+nrow(totInucTESTEDnuc)
+totInucTESTEDnuc
+```
+
+
+```{r}
+#all
+totInuc %>% inner_join(allEgenes,by="gene")
+#explained
+totInuc %>% inner_join(explainedEgenes,by="gene")
+#unexplained
+totInuc %>% inner_join(unexplainedEgenes,by="gene")
+```
+###Direction of effect size:
+
+```{r}
+nucRes_sig_dir= nucRes_sig %>% separate(pid, into=c("chr","start","end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_")
+```
+
+```{r}
+ggplot(nucRes_sig_dir, aes(x=Frac, y=slope)) + geom_boxplot() + geom_jitter(aes(col=Frac)) + labs(title="Nuclear premature APA QTL effect sizes", y="Effect size",x="") + scale_x_discrete(labels=c( "Intronic Usage","3' UTR Usage"))+ scale_color_discrete(name ="", labels=c( "Intronic Usage","3' UTR Usage")) 
+```
+
+```{r}
+totRes_sig_dir= totRes_sig %>% separate(pid, into=c("chr","start","end", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "Frac"),sep="_")
+```
+
+```{r}
+ggplot(totRes_sig_dir, aes(x=Frac, y=slope)) + geom_boxplot() + geom_jitter(aes(col=Frac))+ labs(title="Total premature APA QTL effect sizes", y="Effect size",x="") + scale_x_discrete(labels=c( "Intronic Usage","3' UTR Usage"))+ scale_color_discrete(name ="", labels=c( "Intronic Usage","3' UTR Usage")) 
+```
+The difference may just be due to the numbers but most of the variants are associated with decreased utr usage and increase intronic usage. 
