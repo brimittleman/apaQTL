@@ -173,7 +173,10 @@ allboth=bind_rows(NuclearBoth,TotalBoth) %>% mutate(PropQTLofTested=nLoc/nTested
 
 
 ```{r}
-ggplot(allboth,aes(x=Loc, y=PropQTLofTested, fill=Loc)) + geom_bar(stat="identity") +facet_grid(~fraction) + scale_fill_brewer(palette = "Dark2") + labs(title="Proportion of Tested PAS with a QTL", y="Proportion PAS tested") + geom_text(aes(label=nLoc),nudge_y = .001)
+ggplot(allboth,aes(x=Loc, y=PropQTLofTested, fill=Loc)) + geom_bar(stat="identity") +facet_grid(~fraction) + scale_fill_brewer(palette = "Dark2", labels=c("Coding", "5KB downstream", "Intronic", "3' UTR","5' UTR")) + labs(title="Proportion of Tested PAS with a QTL", y="Proportion PAS tested",x="") + geom_text(aes(label=nLoc),nudge_y = .001) + theme(legend.position = "top", legend.title = element_blank(),axis.text.x = element_text(angle = 45, hjust = 1)) + scale_x_discrete(labels=c("Coding", "5KB downstream", "Intronic", "3' UTR","5' UTR"))
+
+
+
 ```
 
 
