@@ -184,7 +184,7 @@ Melt:
 fullDF_melt=melt(FullDF,id.vars = "Category",variable.name = "Cutoff", value.name = "NGenes") %>% mutate(propGene=NGenes/nrow(annotation))
 
 
-totalPropgenes=ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar(width=.5, stat="identity") + labs(title="Total Fraction", y="Proportion of 19,243 genes", x="Usage Filter cutoff") + theme(axis.text.x = element_text(angle = 90, hjust =1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))+  theme(text = element_text(size=16),legend.position = "bottom")+scale_fill_brewer(name = "", labels = c("Multiple PAS", "One PAS", "Zero Identified PAS"),palette="Dark2")
+totalPropgenes=ggplot(fullDF_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar(width=1, stat="identity") + labs(title="Total Fraction", y="Proportion of 19,243 genes", x="Usage Filter cutoff") + theme(axis.text.x = element_text(angle = 90, hjust =1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))+  theme(text = element_text(size=16),legend.position = "bottom")+scale_fill_brewer(name = "", labels = c("Multiple PAS", "One PAS", "Zero Identified PAS"),palette="Dark2")
 
 totalPropgenes
 ```
@@ -226,7 +226,7 @@ colnames(FullDFNuc)=c("Category",cutoffs[1:10])
 ```{r}
 FullDFNuc_melt=melt(FullDFNuc,id.vars = "Category",variable.name = "Cutoff", value.name = "NGenes") %>% mutate(propGene=NGenes/nrow(annotation))
 
-nuclearPropgenes=ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( width=.5,stat="identity")  + labs(title="Nuclear Fraction",y="Proportion of 19,243 genes", x="Usage Filter cutoff") + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5")) +  theme(text = element_text(size=16), legend.position = "bottom")+ scale_fill_brewer(name = "", labels = c("Multiple PAS", "One PAS", "Zero Identified PAS"),palette="Dark2")
+nuclearPropgenes=ggplot(FullDFNuc_melt,aes(x=Cutoff, y=propGene, by=Category, fill=Category)) + geom_bar( width=1,stat="identity")  + labs(title="Nuclear Fraction",y="Proportion of 19,243 genes", x="Usage Filter cutoff") + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5")) +  theme(text = element_text(size=16), legend.position = "bottom")+ scale_fill_brewer(name = "", labels = c("Multiple PAS", "One PAS", "Zero Identified PAS"),palette="Dark2")
 
 
 ```
@@ -275,7 +275,7 @@ Melt:
 ```{r}
 FullDF_loc_melt=melt(FullDF_loc,id.vars = "Location",variable.name = "Cutoff", value.name = "NPas") %>% group_by(Cutoff) %>%  mutate(propPAS=NPas/sum(NPas))
 
-totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width=.5, stat="identity")  + labs(title="Total Fraction",y="Proportion of PAS", x="Usage Filter cutoff")+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))+  theme(text = element_text(size=16), legend.position = "bottom")+ scale_fill_brewer(name = "", labels = c("Coding", "5KB downstread", "Intronic", "3' UTR", "5' UTR"),palette="Dark2")+guides(fill=guide_legend(nrow=2,byrow=TRUE))
+totplotloc=ggplot(FullDF_loc_melt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width=1, stat="identity")  + labs(title="Total Fraction",y="Proportion of PAS", x="Usage Filter cutoff")+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))+  theme(text = element_text(size=16), legend.position = "bottom")+ scale_fill_brewer(name = "", labels = c("Coding", "5KB downstread", "Intronic", "3' UTR", "5' UTR"),palette="Dark2")+guides(fill=guide_legend(nrow=2,byrow=TRUE))
 
 
 
@@ -313,7 +313,7 @@ Melt:
 ```{r}
 NucFullDF_locMelt=melt(NucFullDF_loc,id.vars = "Location",variable.name = "Cutoff", value.name = "NPas") %>% group_by(Cutoff) %>%  mutate(propPAS=NPas/sum(NPas))
 
-nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width = .5, stat="identity") + labs(title="Nuclear Fraction",y="Proportion of PAS", x="Usage Filter cutoff")+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))+  theme(text = element_text(size=16), legend.position = "bottom")+ scale_fill_brewer(name = "", labels = c("Coding", "5KB downstread", "Intronic", "3' UTR", "5' UTR"),palette="Dark2") + guides(fill=guide_legend(nrow=2,byrow=TRUE))
+nucplotloc=ggplot(NucFullDF_locMelt,aes(x=Cutoff, y=propPAS, by=Location, fill=Location)) + geom_bar(width = 1, stat="identity") + labs(title="Nuclear Fraction",y="Proportion of PAS", x="Usage Filter cutoff")+ theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_x_discrete(name="Usage Filter cutoff", breaks=c("0","0.1","0.2", "0.3", "0.4","0.5"))+  theme(text = element_text(size=16), legend.position = "bottom")+ scale_fill_brewer(name = "", labels = c("Coding", "5KB downstread", "Intronic", "3' UTR", "5' UTR"),palette="Dark2") + guides(fill=guide_legend(nrow=2,byrow=TRUE))
 
 nucplotloc
 ```
