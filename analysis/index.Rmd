@@ -28,11 +28,11 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Make descriptive plots for called PAS](PASdescriptiveplots.html)  
 
-* [Plot signal site dristributions](signalsiteanalysis.html)
+* [Plot signal site dristributions](signalsiteanalysis.html)  
 
-* [Count and usage correlation](corrbetweenind.html)
+* [Count and usage correlation](corrbetweenind.html)  
 
-* [Sequencing meta data by batch](seqmetadatanalysis.html)  
+* [Sequencing meta data by batch](seqmetadatanalysis.html)    
 
 * [Understand new PAS](NewvOldPeakQC.html)  
 
@@ -43,6 +43,10 @@ These files create some of the QC metrics I used for the analysis.
 * [Intron RNA seq ratios](intonRNAratio.html)
 
 * [Prepare genotypes for downstream analysis](geno_proc.html)
+
+* [Compare to Annotations](compareAnnotatedpas.html)  
+
+* [Addition coverage plots](additionalCoveragePlots.html)
 
 ##apaQTL  
 

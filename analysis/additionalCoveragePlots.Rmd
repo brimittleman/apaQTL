@@ -1,0 +1,41 @@
+---
+title: "Additional coverage plots"
+author: "Briana Mittleman"
+date: "7/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to make some additional plots of the coverage of 3' seq at locations. I will use the deeptools plots.
+
+For these I will make seperate total and nuclear plots 
+
+
+###PacBio  
+
+I will use the PAS called using LCL pacbio data. Ankeeta created the file. 
+```{bash,eval=F}
+mkdir ../data/pacbio
+cp /project2/yangili1/ankeetashah/APA_tools/pacbio_3/PACBIO.ANNOTATED.USAGE.BED ../data/pacbio/PACBIO.Annotated.usage.PublicData.bed
+
+#remove chr and sort
+
+sed 's/^chr//' ../data/pacbio/PACBIO.Annotated.usage.PublicData.bed | sort -k1,1 -k2,2n > ../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort.bed
+
+../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort.bed
+
+```
+
+```{bash,eval=F}
+sbatch pacbioDT.sh
+```
+
+###intronic PAS  
+
+```{bash,eval=F}
+sbatch IntronicPASDT.sh
+```
+

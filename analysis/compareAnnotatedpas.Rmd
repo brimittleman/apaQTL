@@ -1,0 +1,67 @@
+---
+title: "Compare to annotated PAS"
+author: "Briana Mittleman"
+date: "7/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(workflowr)
+library(tidyverse)
+
+```
+
+
+I will se the annotated PAS from the Tian lab database (http://exon.umdnj.edu/polya_db/v3/misc/download.php)
+
+```{bash,eval=F}
+mkdir ../data/AnnotatedPAS/
+  
+#file =human.PAS.txt
+```
+
+I want to make this into a file I can overlap with my PAS. In order to know what resolution I should use for calling a PAS the same, I will look for the closest annotated PAS to each of my sites. To do this I will need to create a bed file with these.  
+
+
+```{bash,eval=F}
+python annotatedPAS2bed.py
+sort -k1,1 -k2,2n ../data/AnnotatedPAS/human.PAS.bed > ../data/AnnotatedPAS/human.PAS.sort.bed
+
+sbatch closestannotated.sh
+```
+
+
+```{r}
+dist=read.table("../data/AnnotatedPAS/DistanceMyPAS2Anno.bed", col.names = c("chr", "start","end","myPAS", "score","strand","chr2", "start2", "end2", "anno", "score2", "strand2", "distance"),stringsAsFactors = F)
+```
+
+Plot the distance.
+
+```{r}
+ggplot(dist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)
+```
+
+Looks like about 10 basepairs is ok resolution. I need to make sure these map 1 to 1 when you filter these.  
+
+```{r}
+PAS_withmatch=dist %>% filter(abs(distance)<=10) %>% select(myPAS,anno) %>% unique() %>% separate(myPAS, into=c("pasNum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_")
+
+ggplot(PAS_withmatch,aes(x=loc)) + geom_histogram(stat="count")
+```
+
+I want to look at those I find that they do not.
+
+```{r}
+allMyPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed",stringsAsFactors = F, col.names = c("chr","start","end", "PASID", "score","strand"))  %>% separate(PASID, into=c("pasNum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% mutate(withAnno=ifelse(pasNum %in% PAS_withmatch$pasNum, "Yes","No"))
+
+PASnoMatch=allMyPAS %>% anti_join(PAS_withmatch,by="pasNum")
+```
+
+```{r}
+ggplot(allMyPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "PAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
+```
+
+
