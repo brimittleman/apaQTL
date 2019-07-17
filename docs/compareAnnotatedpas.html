@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2572d13fdfcffbc34a3ea77dee3701d41f942a0etargetblank2572d13a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2572d13fdfcffbc34a3ea77dee3701d41f942a0e" target="_blank">2572d13</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree67481dfb5fbce0db7b9a4a1cb22465d49f934401targetblank67481dfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/67481dfb5fbce0db7b9a4a1cb22465d49f934401" target="_blank">67481df</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2572d13fdfcffbc34a3ea77dee3701d41f942a0etargetblank2572d13a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree67481dfb5fbce0db7b9a4a1cb22465d49f934401targetblank67481dfa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -532,6 +532,7 @@ Untracked files:
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._NomResfromPASSNP.py
+    Untracked:  code/._NuclearPAS_5per.bed.py
     Untracked:  code/._PTTfacetboxplots.R
     Untracked:  code/._PrematureQTLNominal.sh
     Untracked:  code/._PrematureQTLPermuted.sh
@@ -543,9 +544,11 @@ Untracked files:
     Untracked:  code/._TESplots100bp.sh
     Untracked:  code/._TESplots150bp.sh
     Untracked:  code/._TESplots200bp.sh
+    Untracked:  code/._TotalPAS_5perc.bed.py
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
@@ -559,10 +562,12 @@ Untracked files:
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
     Untracked:  code/._changenomQTLres2geneName.py
+    Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
     Untracked:  code/._chooseSignalSite
     Untracked:  code/._chooseSignalSite.py
     Untracked:  code/._closestannotated.sh
+    Untracked:  code/._closestannotated_byfrac.sh
     Untracked:  code/._cluster.json
     Untracked:  code/._clusterPAS.json
     Untracked:  code/._clusterfiltPAS.json
@@ -634,6 +639,7 @@ Untracked files:
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpeceffectsize.py
     Untracked:  code/._pacbioDT.sh
+    Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -762,10 +768,13 @@ Untracked files:
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
     Untracked:  code/NomResfromPASSNP.py
+    Untracked:  code/NuclearPAS_5per.bed.py
     Untracked:  code/Nuclear_example.err
     Untracked:  code/Nuclear_example.out
     Untracked:  code/PACbioDT.err
     Untracked:  code/PACbioDT.out
+    Untracked:  code/PACbioDTitronic.err
+    Untracked:  code/PACbioDTitronic.out
     Untracked:  code/PTTfacetboxplots.R
     Untracked:  code/PrematureQTLNominal.sh
     Untracked:  code/PrematureQTLPermuted.sh
@@ -793,13 +802,17 @@ Untracked files:
     Untracked:  code/TESplots200bp.err
     Untracked:  code/TESplots200bp.out
     Untracked:  code/TESplots200bp.sh
+    Untracked:  code/TotalPAS_5perc.bed.py
     Untracked:  code/Total_example.err
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
+    Untracked:  code/annotatedPASregion.err
+    Untracked:  code/annotatedPASregion.out
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
@@ -824,9 +837,13 @@ Untracked files:
     Untracked:  code/bothFrac_FC.sh
     Untracked:  code/changePermQTLres2geneName.py
     Untracked:  code/changenomQTLres2geneName.py
+    Untracked:  code/chooseAnno2PAS_pacbio.py
     Untracked:  code/closestannotated.err
     Untracked:  code/closestannotated.out
     Untracked:  code/closestannotated.sh
+    Untracked:  code/closestannotated_byfrac.sh
+    Untracked:  code/closestannotatedbyfrac.err
+    Untracked:  code/closestannotatedbyfrac.out
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
     Untracked:  code/correctNomeqtl.R
@@ -911,6 +928,7 @@ Untracked files:
     Untracked:  code/nucQTLGWAS.py
     Untracked:  code/nucSpeceffectsize.py
     Untracked:  code/pacbioDT.sh
+    Untracked:  code/pacbioIntronicDT.sh
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/plink.log
     Untracked:  code/processYRIgen.py
@@ -1184,6 +1202,23 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/fb1fde62ce14925599b84571616edfd5433fe318/docs/compareAnnotatedpas.html" target="_blank">fb1fde6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -1232,12 +1267,86 @@ sbatch closestannotated.sh</code></pre>
 <pre class="r"><code>ggplot(dist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)</code></pre>
 <pre><code>Warning: Removed 20495 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/fb1fde62ce14925599b84571616edfd5433fe318/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-5-1.png" target="_blank">fb1fde6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Looks like about 10 basepairs is ok resolution. I need to make sure these map 1 to 1 when you filter these.</p>
 <pre class="r"><code>PAS_withmatch=dist %&gt;% filter(abs(distance)&lt;=10) %&gt;% select(myPAS,anno) %&gt;% unique() %&gt;% separate(myPAS, into=c(&quot;pasNum&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;)
 
 ggplot(PAS_withmatch,aes(x=loc)) + geom_histogram(stat=&quot;count&quot;)</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/fb1fde62ce14925599b84571616edfd5433fe318/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-6-1.png" target="_blank">fb1fde6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I want to look at those I find that they do not.</p>
 <pre class="r"><code>allMyPAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;PASID&quot;, &quot;score&quot;,&quot;strand&quot;))  %&gt;% separate(PASID, into=c(&quot;pasNum&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% mutate(withAnno=ifelse(pasNum %in% PAS_withmatch$pasNum, &quot;Yes&quot;,&quot;No&quot;))
 
@@ -1245,6 +1354,93 @@ PASnoMatch=allMyPAS %&gt;% anti_join(PAS_withmatch,by=&quot;pasNum&quot;)</code>
 <pre class="r"><code>ggplot(allMyPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;PAS by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/fb1fde62ce14925599b84571616edfd5433fe318/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-8-1.png" target="_blank">fb1fde6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Look at total and nuclear seperatly.</p>
+<pre class="bash"><code>python NuclearPAS_5per.bed.py
+
+
+python TotalPAS_5perc.bed.py
+sort -k1,1 -k2,2n ../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.bed &gt; ../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed
+
+sort -k1,1 -k2,2n ../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.bed &gt; ../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed
+</code></pre>
+<p>Run the distance script with these.</p>
+<pre class="bash"><code>sbatch closestannotated_byfrac.sh</code></pre>
+<div id="total" class="section level3">
+<h3>Total</h3>
+<pre class="r"><code>Totaldist=read.table(&quot;../data/AnnotatedPAS/Total_DistanceMyPAS2Anno.bed&quot;, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;,&quot;myPAS&quot;, &quot;score&quot;,&quot;strand&quot;,&quot;chr2&quot;, &quot;start2&quot;, &quot;end2&quot;, &quot;anno&quot;, &quot;score2&quot;, &quot;strand2&quot;, &quot;distance&quot;),stringsAsFactors = F)
+
+ggplot(Totaldist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)</code></pre>
+<pre><code>Warning: Removed 13578 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Totaldist_withAnno=Totaldist %&gt;% filter(abs(distance)&lt;=10) %&gt;% select(myPAS,anno) %&gt;% unique() %&gt;% separate(myPAS, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;)
+
+allTotalPAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;PASID&quot;, &quot;score&quot;,&quot;strand&quot;))  %&gt;% separate(PASID, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(withAnno=ifelse(pasNum %in% Totaldist_withAnno$pasNum, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
+<pre class="r"><code>ggplot(allTotalPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;TotalPAS by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="nuclear" class="section level3">
+<h3>Nuclear</h3>
+<pre class="r"><code>Nucleardist=read.table(&quot;../data/AnnotatedPAS/Nuclear_DistanceMyPAS2Anno.bed&quot;, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;,&quot;myPAS&quot;, &quot;score&quot;,&quot;strand&quot;,&quot;chr2&quot;, &quot;start2&quot;, &quot;end2&quot;, &quot;anno&quot;, &quot;score2&quot;, &quot;strand2&quot;, &quot;distance&quot;),stringsAsFactors = F)
+
+ggplot(Nucleardist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)</code></pre>
+<pre><code>Warning: Removed 19400 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Nucleardist_withAnno=Nucleardist %&gt;% filter(abs(distance)&lt;=10) %&gt;% select(myPAS,anno) %&gt;% unique() %&gt;% separate(myPAS, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;)
+
+allNuclearPAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;PASID&quot;, &quot;score&quot;,&quot;strand&quot;))  %&gt;% separate(PASID, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(withAnno=ifelse(pasNum %in% Nucleardist_withAnno$pasNum, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
+<pre class="r"><code>ggplot(allNuclearPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;Nuclear PAS by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Nuclear specific:</p>
+<pre class="r"><code>NuclearSpec=allNuclearPAS %&gt;% anti_join(allTotalPAS,by = &quot;pasNum&quot;)
+
+ggplot(NuclearSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;Nuclear  Specific PAS by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Total Specific:</p>
+<pre class="r"><code>TotalSpec=allTotalPAS %&gt;% anti_join(allNuclearPAS,by = &quot;pasNum&quot;)
+
+ggplot(TotalSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;Total  Specific PAS by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1294,6 +1490,7 @@ loaded via a namespace (and not attached):
 [43] rvest_0.3.2        assertthat_0.2.0   colorspace_1.3-2  
 [46] labeling_0.3       stringi_1.2.4      lazyeval_0.2.1    
 [49] munsell_0.5.0      broom_0.5.1        crayon_1.3.4      </code></pre>
+</div>
 </div>
 
 

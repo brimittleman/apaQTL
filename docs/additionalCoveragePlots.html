@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2572d13fdfcffbc34a3ea77dee3701d41f942a0etargetblank2572d13a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2572d13fdfcffbc34a3ea77dee3701d41f942a0e" target="_blank">2572d13</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree67481dfb5fbce0db7b9a4a1cb22465d49f934401targetblank67481dfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/67481dfb5fbce0db7b9a4a1cb22465d49f934401" target="_blank">67481df</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2572d13fdfcffbc34a3ea77dee3701d41f942a0etargetblank2572d13a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree67481dfb5fbce0db7b9a4a1cb22465d49f934401targetblank67481dfa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -532,6 +532,7 @@ Untracked files:
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._NomResfromPASSNP.py
+    Untracked:  code/._NuclearPAS_5per.bed.py
     Untracked:  code/._PTTfacetboxplots.R
     Untracked:  code/._PrematureQTLNominal.sh
     Untracked:  code/._PrematureQTLPermuted.sh
@@ -543,9 +544,11 @@ Untracked files:
     Untracked:  code/._TESplots100bp.sh
     Untracked:  code/._TESplots150bp.sh
     Untracked:  code/._TESplots200bp.sh
+    Untracked:  code/._TotalPAS_5perc.bed.py
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
@@ -559,10 +562,12 @@ Untracked files:
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
     Untracked:  code/._changenomQTLres2geneName.py
+    Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
     Untracked:  code/._chooseSignalSite
     Untracked:  code/._chooseSignalSite.py
     Untracked:  code/._closestannotated.sh
+    Untracked:  code/._closestannotated_byfrac.sh
     Untracked:  code/._cluster.json
     Untracked:  code/._clusterPAS.json
     Untracked:  code/._clusterfiltPAS.json
@@ -634,6 +639,7 @@ Untracked files:
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpeceffectsize.py
     Untracked:  code/._pacbioDT.sh
+    Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -762,10 +768,13 @@ Untracked files:
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
     Untracked:  code/NomResfromPASSNP.py
+    Untracked:  code/NuclearPAS_5per.bed.py
     Untracked:  code/Nuclear_example.err
     Untracked:  code/Nuclear_example.out
     Untracked:  code/PACbioDT.err
     Untracked:  code/PACbioDT.out
+    Untracked:  code/PACbioDTitronic.err
+    Untracked:  code/PACbioDTitronic.out
     Untracked:  code/PTTfacetboxplots.R
     Untracked:  code/PrematureQTLNominal.sh
     Untracked:  code/PrematureQTLPermuted.sh
@@ -793,13 +802,17 @@ Untracked files:
     Untracked:  code/TESplots200bp.err
     Untracked:  code/TESplots200bp.out
     Untracked:  code/TESplots200bp.sh
+    Untracked:  code/TotalPAS_5perc.bed.py
     Untracked:  code/Total_example.err
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
+    Untracked:  code/annotatedPASregion.err
+    Untracked:  code/annotatedPASregion.out
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
@@ -824,9 +837,13 @@ Untracked files:
     Untracked:  code/bothFrac_FC.sh
     Untracked:  code/changePermQTLres2geneName.py
     Untracked:  code/changenomQTLres2geneName.py
+    Untracked:  code/chooseAnno2PAS_pacbio.py
     Untracked:  code/closestannotated.err
     Untracked:  code/closestannotated.out
     Untracked:  code/closestannotated.sh
+    Untracked:  code/closestannotated_byfrac.sh
+    Untracked:  code/closestannotatedbyfrac.err
+    Untracked:  code/closestannotatedbyfrac.out
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
     Untracked:  code/correctNomeqtl.R
@@ -911,6 +928,7 @@ Untracked files:
     Untracked:  code/nucQTLGWAS.py
     Untracked:  code/nucSpeceffectsize.py
     Untracked:  code/pacbioDT.sh
+    Untracked:  code/pacbioIntronicDT.sh
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/plink.log
     Untracked:  code/processYRIgen.py
@@ -1187,6 +1205,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/67481dfb5fbce0db7b9a4a1cb22465d49f934401/analysis/additionalCoveragePlots.Rmd" target="_blank">67481df</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-16
+</td>
+<td>
+frac spec anno and intron Pacbio
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/fb1fde62ce14925599b84571616edfd5433fe318/docs/additionalCoveragePlots.html" target="_blank">fb1fde6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/2572d13fdfcffbc34a3ea77dee3701d41f942a0e/analysis/additionalCoveragePlots.Rmd" target="_blank">2572d13</a>
 </td>
 <td>
@@ -1208,6 +1260,18 @@ add compare annotated and additional coverage
 </div>
 <p>I want to make some additional plots of the coverage of 3’ seq at locations. I will use the deeptools plots.</p>
 <p>For these I will make seperate total and nuclear plots</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>── Conflicts ────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.4.0
+Run ?workflowr for help getting started</code></pre>
 <div id="pacbio" class="section level3">
 <h3>PacBio</h3>
 <p>I will use the PAS called using LCL pacbio data. Ankeeta created the file.</p>
@@ -1221,10 +1285,21 @@ sed &#39;s/^chr//&#39; ../data/pacbio/PACBIO.Annotated.usage.PublicData.bed | so
 ../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort.bed
 </code></pre>
 <pre class="bash"><code>sbatch pacbioDT.sh</code></pre>
+<p>Subset to those falling in intronic regions. I can do this by intersecting with my original annotation file.<br />
+/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed</p>
+<pre class="bash"><code>sbatch annotatePacBioPASregion.sh</code></pre>
+<p>I need to parse this like I did my original file.</p>
+<pre class="r"><code>pacbio=read.table(&quot;../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort_withAnnotationparsed.SAF&quot;, header = T,stringsAsFactors = F) %&gt;% separate(GeneID, into =c(&quot;PASnum&quot;, &quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;strand&quot;,&quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% separate(geneID, into = c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% filter(loc==&quot;intron&quot;) %&gt;% mutate(pASid=paste(PASnum, gene, sep=&quot;:&quot;), score=&quot;.&quot;) %&gt;% select(Chr, Start, End, pASid, score, strand)
+
+write.table(pacbio, file=&quot;../data/pacbio/IntronicPacBioPAS.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<pre class="bash"><code>sbatch pacbioIntronicDT.sh</code></pre>
 </div>
 <div id="intronic-pas" class="section level3">
 <h3>intronic PAS</h3>
-<pre class="bash"><code>sbatch IntronicPASDT.sh</code></pre>
+<pre class="bash"><code>sbatch IntronicPASDT.sh
+
+python chooseAnno2PAS_pacbio.py ../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort_withAnnotation.bed ../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort_withAnnotationparsed.SAF
+</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1251,12 +1326,25 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] workflowr_1.4.0 forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
+ [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
+ [9] ggplot2_3.1.1   tidyverse_1.2.1
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.4.0 Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2
- [5] backports_1.1.2 git2r_0.25.2    magrittr_1.5    evaluate_0.12  
- [9] highr_0.7       stringi_1.2.4   fs_1.3.1        whisker_0.3-2  
-[13] rmarkdown_1.10  tools_3.5.1     stringr_1.3.1   glue_1.3.0     
-[17] yaml_2.2.0      compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+ [1] Rcpp_1.0.0       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
+ [5] pillar_1.3.1     git2r_0.25.2     highr_0.7        tools_3.5.1     
+ [9] digest_0.6.18    lubridate_1.7.4  jsonlite_1.6     evaluate_0.12   
+[13] nlme_3.1-137     gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2 
+[17] rlang_0.4.0      cli_1.1.0        rstudioapi_0.10  yaml_2.2.0      
+[21] haven_1.1.2      withr_2.1.2      xml2_1.2.0       httr_1.3.1      
+[25] knitr_1.20       hms_0.4.2        generics_0.0.2   fs_1.3.1        
+[29] rprojroot_1.3-2  grid_3.5.1       tidyselect_0.2.5 glue_1.3.0      
+[33] R6_2.3.0         readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
+[49] crayon_1.3.4    </code></pre>
 </div>
 </div>
 
