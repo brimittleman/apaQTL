@@ -134,7 +134,7 @@ NucBothwSpec=bind_rows(NucBoth_set, nucSpec)
 ```{r}
 summary(lm(NucBothwSpec$slope ~ NucBothwSpec$Originalslope))
 
-nucspecplot=ggplot(NucBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")+  annotate("text", y=1, x=0, label="R2=.66, slope=0.62") + scale_color_brewer(palette = "Dark2")
+nucspecplot=ggplot(NucBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") +  annotate("text", y=1, x=0, label="R2=.66, slope=0.62",size=6) + scale_color_brewer(palette = "Dark2")+ theme(text = element_text(size=16), legend.position = "bottom")
 ```
 Do this in the other fraction to see what is looks like.
 
@@ -152,7 +152,9 @@ TotBothwSpec=bind_rows(TotBoth_set, totSpec)
 ```{r}
 summary(lm(TotBothwSpec$slope ~ TotBothwSpec$Originalslope))
 
-totspecplot=ggplot(TotBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")+  annotate("text", y=1, x=0, label="R2=.62, slope=0.64") + scale_color_brewer(palette = "Dark2")
+totspecplot=ggplot(TotBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") +  annotate("text", y=1, x=0, label="R2=.62, slope=0.64", size=6) + scale_color_brewer(palette = "Dark2") + theme(text = element_text(size=16), legend.position = "bottom")
+
+totspecplot
 ```
 ```{r}
 plot_grid(nucspecplot,totspecplot)
