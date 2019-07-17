@@ -222,12 +222,13 @@ write.table(AllsiteDF_1per_use, file="../data/PAS/PASwSignalSite.txt", col.names
 
 ```{r}
 
-AllsiteDF_1per_prop_col= AllsiteDF_1per_prop %>% mutate(Cononical=ifelse(Site=="AATAAA", "AATAAA", "Other"))
+AllsiteDF_1per_prop_col= AllsiteDF_1per_prop %>% mutate(Cononical=ifelse(Site=="AATAAA", "AATAAA", ifelse(Site=="ATTAAA", "AATTAA", "Other")))
 
-dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop_col, aes(group=Cononical, x=NegCount,y=prop, fill=Cononical)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites",fill="Site Sequence") +  scale_fill_manual(values = getPalette(colourCount))+ theme(text = element_text(size=20, face="bold"),axis.text.x = element_text(size = 16),axis.text.y = element_text(size = 16), legend.position = "bottom",plot.title = element_text(size=22))+ guides(fill=guide_legend(nrow=3,byrow=TRUE))
-dist2signalsiteplotprop
+dist2signalsiteplotprop=ggplot(AllsiteDF_1per_prop_col, aes(group=Cononical, x=NegCount,y=prop, fill=Cononical)) + geom_histogram(position="stack",bins=50,stat="identity" ) + labs(x="Distance from PAS", y="Proportion of annotated Sites", title="Location of annotated signal sites",fill=" ", caption = "Other: AAAAAA, AAAAAG, AATACA, AATAGA,AATATA, ACTAAA, AGTAAA,CATAAA, GATAAA,TATAAA") +  scale_fill_brewer(palette="Dark2")+ theme(text = element_text(size=20, face="bold"),axis.text.x = element_text(size = 16),axis.text.y = element_text(size = 16),plot.title = element_text(size=22),plot.caption = element_text(hjust = 0,size=10))+ guides(fill=guide_legend(nrow=3,byrow=TRUE))  
+dist2signalsiteplotprop 
 
 
+#scale_fill_discrete(name="Site", labels=c("AATAAA","ATTAAA", "AAAAAA, AAAAAG, AATACA, AATAGA, AATATA, ACTAAA, AGTAAA,CATAAA, GATAAA,TATAAA")
 ```
 
 
