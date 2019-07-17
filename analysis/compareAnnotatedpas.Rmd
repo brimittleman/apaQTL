@@ -65,3 +65,70 @@ ggplot(allMyPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(
 ```
 
 
+Look at total and nuclear seperatly. 
+
+```{bash,eval=F}
+python NuclearPAS_5per.bed.py
+
+
+python TotalPAS_5perc.bed.py
+sort -k1,1 -k2,2n ../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.bed > ../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed
+
+sort -k1,1 -k2,2n ../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.bed > ../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed
+
+```
+Run the distance script with these.  
+
+```{bash,eval=F}
+sbatch closestannotated_byfrac.sh
+```
+
+###Total
+```{r}
+Totaldist=read.table("../data/AnnotatedPAS/Total_DistanceMyPAS2Anno.bed", col.names = c("chr", "start","end","myPAS", "score","strand","chr2", "start2", "end2", "anno", "score2", "strand2", "distance"),stringsAsFactors = F)
+
+ggplot(Totaldist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)
+
+```
+```{r}
+Totaldist_withAnno=Totaldist %>% filter(abs(distance)<=10) %>% select(myPAS,anno) %>% unique() %>% separate(myPAS, into=c("pasNum", "geneID", "loc"), sep=":")
+
+allTotalPAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed",stringsAsFactors = F, col.names = c("chr","start","end", "PASID", "score","strand"))  %>% separate(PASID, into=c("pasNum", "geneID", "loc"), sep=":") %>% mutate(withAnno=ifelse(pasNum %in% Totaldist_withAnno$pasNum, "Yes","No"))
+```
+
+```{r}
+ggplot(allTotalPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "TotalPAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
+```
+
+###Nuclear  
+```{r}
+Nucleardist=read.table("../data/AnnotatedPAS/Nuclear_DistanceMyPAS2Anno.bed", col.names = c("chr", "start","end","myPAS", "score","strand","chr2", "start2", "end2", "anno", "score2", "strand2", "distance"),stringsAsFactors = F)
+
+ggplot(Nucleardist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)
+
+```
+```{r}
+Nucleardist_withAnno=Nucleardist %>% filter(abs(distance)<=10) %>% select(myPAS,anno) %>% unique() %>% separate(myPAS, into=c("pasNum", "geneID", "loc"), sep=":")
+
+allNuclearPAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",stringsAsFactors = F, col.names = c("chr","start","end", "PASID", "score","strand"))  %>% separate(PASID, into=c("pasNum", "geneID", "loc"), sep=":") %>% mutate(withAnno=ifelse(pasNum %in% Nucleardist_withAnno$pasNum, "Yes","No"))
+```
+
+```{r}
+ggplot(allNuclearPAS,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "Nuclear PAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
+```
+
+Nuclear specific:
+
+```{r}
+NuclearSpec=allNuclearPAS %>% anti_join(allTotalPAS,by = "pasNum")
+
+ggplot(NuclearSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "Nuclear  Specific PAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
+```
+
+Total Specific:
+```{r}
+TotalSpec=allTotalPAS %>% anti_join(allNuclearPAS,by = "pasNum")
+
+ggplot(TotalSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "Total  Specific PAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
+```
+

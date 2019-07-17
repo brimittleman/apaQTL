@@ -12,6 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 I want to make some additional plots of the coverage of 3' seq at locations. I will use the deeptools plots.
 
 For these I will make seperate total and nuclear plots 
+```{r}
+library(tidyverse)
+library(workflowr)
+```
 
 
 ###PacBio  
@@ -33,9 +37,34 @@ sed 's/^chr//' ../data/pacbio/PACBIO.Annotated.usage.PublicData.bed | sort -k1,1
 sbatch pacbioDT.sh
 ```
 
+Subset to those falling in intronic regions. I can do this by intersecting with my original annotation file.  
+/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed
+
+```{bash,eval=F}
+sbatch annotatePacBioPASregion.sh
+```
+
+I need to parse this like I did my original file.  
+
+```{r}
+pacbio=read.table("../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort_withAnnotationparsed.SAF", header = T,stringsAsFactors = F) %>% separate(GeneID, into =c("PASnum", "chr", "start","end", "strand","geneID"),sep=":") %>% separate(geneID, into = c("gene", "loc"), sep="_") %>% filter(loc=="intron") %>% mutate(pASid=paste(PASnum, gene, sep=":"), score=".") %>% select(Chr, Start, End, pASid, score, strand)
+
+write.table(pacbio, file="../data/pacbio/IntronicPacBioPAS.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+```{bash,eval=F}
+sbatch pacbioIntronicDT.sh
+```
+
+
 ###intronic PAS  
 
 ```{bash,eval=F}
 sbatch IntronicPASDT.sh
+
+python chooseAnno2PAS_pacbio.py ../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort_withAnnotation.bed ../data/pacbio/pacbioPACBIO.Annotated.usage.PublicData.sort_withAnnotationparsed.SAF
+
+
 ```
+
+
 
