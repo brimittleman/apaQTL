@@ -1,0 +1,44 @@
+---
+title: "GWAS overlap"
+author: "Briana Mittleman"
+date: "7/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+https://brimittleman.github.io/threeprimeseq/apaQTLoverlapGWAS.html
+
+https://brimittleman.github.io/threeprimeseq/OverlapFullGWASCatelog.html
+
+
+
+Nuclear qtls: ../data/apaQTLs/NuclearQTLSNPsRSID.txt
+Total qtls: ../data/apaQTLs/TotalQTLSNPsRSID.txt 
+
+
+```{bash,eval=F}
+mkdir  ../data/GWAS_overlap/
+mkdir ../data/GWAS_overlap/TotalApaQTL_LD/
+mkdir  ../data/GWAS_overlap/NuclearApaQTL_LD/
+sbatch LD_qtl.sh
+```
+
+
+```{bash,eval=F}
+python nucQTLGWAS.py
+```
+
+
+Check examples:
+
+1311	chr5	95242930	95242931	rs56219066	26007630	Swaminathan B	2015-05-26	Nat Commun	Variants in ELL2 influencing immunoglobulin levels associate with multiple myeloma.	Multiple myeloma and monoclonal gammopathy	2,194 European ancestry multiple myeloma cases, 251 European ancestry monoclonal gammopathy cases, 294,390 European ancestry controls	586 European ancestry multiple myeloma cases, 2,111 European ancestry controls	5q15	ELL2	rs56219066-T	0.711	2E-10	1.24	[1.16-1.33]	Illumina [12100000] (imputed)	N
+ELL2 intron + peak106823 rs56219066
+
+
+1536	chr10	124693586	124693587	rs7904973	30275531	Klarin D	2018-10-01	Nat Genet	Genetics of blood lipids among ~300,000 multi-ethnic participants of the Million Veteran Program.	LDL cholesterol	215,551 European ancestry individuals, 57,332 African American individuals, 24,743 Hispanic individuals	Up to 319,677 individuals	10q26.13	C10orf88	rs7904973-T	0.5573	1E-14		0.0203	[0.015-0.025] mg dl-1 increase	Affymetrix [up to 31400000] (imputed)	N
+
+
+ C10orf88 intron + peak19881 rs7904973

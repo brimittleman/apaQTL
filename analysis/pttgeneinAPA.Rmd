@@ -99,6 +99,9 @@ legend("topleft", legend=c("ptt gene", "All other genes"),col=c("red", "black"),
 
 These show the sharing is super high and we are getting at similar phenotypes in ptt and apa.  
 
+```{r}
+wilcox.test(nucapaPTT$bpval,nucapaNotPTT$bpval,alternative="less")
+```
 
 
 Is there something interesting about the non overlap genes:  
@@ -134,3 +137,49 @@ ggplot(nucapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()
 pttOnlyNuc$gene
 ```
 
+Plot these:
+
+```{r}
+nucpttQTL %>% separate(pid, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene","loc"),sep="_") %>%  anti_join(nucAPA,by="gene") %>% select(gene, chr,sid)
+```
+
+```{bash,eval=F}
+sbatch  run_qtlFacetBoxplots.sh Nuclear PPFIA1 11 rs188630869 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear ZDHHC17	12	rs74792673 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear ZNF844	19	rs116146966 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear PRKCZ	1	rs13302944 none
+
+
+sbatch  run_qtlFacetBoxplots.sh Nuclear POU2F1	1	rs6668193 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear MAP3K7CL	21	rs9808644 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear BCL2L13	22	rs8141618 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear LINC00342	2	rs193252777 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear DZIP3	3	rs112409302 none
+
+sbatch  run_qtlFacetBoxplots.sh Nuclear SUB1	5	rs76941541 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear BLVRA	7	rs1181594 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear NAPEPLD	7	rs56047178 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear WNT2	7	rs76105832 none
+sbatch  run_qtlFacetBoxplots.sh Nuclear HACD4	9	rs57721805 none
+
+```
+
+
+```{r}
+totpttQTL %>% separate(pid, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene","loc"),sep="_") %>%  anti_join(totAPA,by="gene") %>% select(gene, chr,sid)
+```
+```{bash,eval=F}
+sbatch  run_qtlFacetBoxplots.sh Total C10orf88	10	rs7091776 none
+sbatch  run_qtlFacetBoxplots.sh Total UROS	10	rs11244646 none
+sbatch  run_qtlFacetBoxplots.sh Total LRRC57	15	rs61489160 none
+sbatch  run_qtlFacetBoxplots.sh Total ELMOD3	2	rs908302 none
+sbatch  run_qtlFacetBoxplots.sh Total USP37	2	rs79468589 none
+sbatch  run_qtlFacetBoxplots.sh Total PLSCR1	3	rs59690244 none
+sbatch  run_qtlFacetBoxplots.sh Total ZNF718	4	rs6814287 none
+sbatch  run_qtlFacetBoxplots.sh Total ZSCAN12	6	rs3799500 none
+
+```
+
+
+
+Moved these reslts to a ptt dir in the example qtl dir.

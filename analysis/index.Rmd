@@ -127,5 +127,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [pttQTL in expression data](pttQTLinE.html)
 
+* [GWAS overlap](gwasOverlap.html)
 
 

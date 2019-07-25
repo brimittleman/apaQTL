@@ -11,6 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 I will rerun the eQTLs and pQTLs to overlap effect sizes with my data. These were downloaded from Li et al 2016 and processed in https://brimittleman.github.io/threeprimeseq/. 
 
+```{r}
+library(tidyverse)
+```
 
 I will move the sample, pca, and phenotpye files to the apaQTL dir.  
 
@@ -36,4 +39,24 @@ Fix gene names in the results:
 ```{bash,eval=F}
 python changenomQTLres2geneName.py
 ```
+
+
+How many genes are tested in nuclear apa and protein and expression
+```{r}
+permProt=read.table("../data/molQTLs/fastqtl_qqnorm_prot.fixed.perm.AllNomRes.GeneName.txt", header = F, stringsAsFactors = F,col.names=c("Gene", "nvar", "shape1", "shape2", "dummy", "rsid", "dist", "nom", "slope", "perm1", "bpval"))
+
+permEx=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.AllNomRes.GeneName.txt", header = F, stringsAsFactors = F,col.names=c("Gene", "nvar", "shape1", "shape2", "dummy", "rsid", "dist", "nom", "slope", "perm1", "bpval")) %>% select(Gene)
+
+```
+
+
+```{r}
+nuclearperm=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt",stringsAsFactors = F, header = T) %>% separate(pid, into=c("chr", "start", "end", "geneID"),sep=":") %>% separate(geneID, into=c("Gene", "loc", "strand", "PAS"), sep="_") %>% select(Gene) %>% unique()
+```
+
+```{r}
+permProt %>% inner_join(nuclearperm, by="Gene") %>% inner_join(permEx, by="Gene") %>% nrow()
+```
+
+
 
