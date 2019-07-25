@@ -12,7 +12,7 @@
 <meta name="author" content="Briana Mittleman" />
 
 
-<title>Run molecular QTLs</title>
+<title>GWAS overlap</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -316,9 +316,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">Run molecular QTLs</h1>
+<h1 class="title toc-ignore">GWAS overlap</h1>
 <h4 class="author"><em>Briana Mittleman</em></h4>
-<h4 class="date"><em>6/17/2019</em></h4>
+<h4 class="date"><em>7/3/2019</em></h4>
 
 </div>
 
@@ -1205,7 +1205,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f3e3e163403506253b5b9b6c67aa6b519ed3bd53/analysis/molQTL.Rmd" target="_blank">f3e3e16</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/f3e3e163403506253b5b9b6c67aa6b519ed3bd53/analysis/gwasOverlap.Rmd" target="_blank">f3e3e16</a>
 </td>
 <td>
 brimittleman
@@ -1217,74 +1217,6 @@ brimittleman
 small edits from paper writing and add gwas analysis
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/cd60f500464e8501b43d1fed4293158c01ce4a83/docs/molQTL.html" target="_blank">cd60f50</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/6df08b6071d3f3b93b3ed3c759b424fc0967d976/analysis/molQTL.Rmd" target="_blank">6df08b6</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-20
-</td>
-<td>
-change analysis to include not tested in total as nuc spec
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/2b8bf0c04f31d885fea508981e63eb5a3ad2204f/docs/molQTL.html" target="_blank">2b8bf0c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-17
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/54946d73b9da2c8e7eb7e8c2134096584c1809c6/analysis/molQTL.Rmd" target="_blank">54946d7</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-17
-</td>
-<td>
-add mol qtl code
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1292,34 +1224,18 @@ add mol qtl code
 </div>
 </div>
 </div>
-<p>I will rerun the eQTLs and pQTLs to overlap effect sizes with my data. These were downloaded from Li et al 2016 and processed in <a href="https://brimittleman.github.io/threeprimeseq/" class="uri">https://brimittleman.github.io/threeprimeseq/</a>.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
-✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
-✔ tidyr   0.8.3       ✔ stringr 1.3.1  
-✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-<p>I will move the sample, pca, and phenotpye files to the apaQTL dir.</p>
-<pre class="bash"><code>mkdir ../data/molPhenos/
-mkdir ../data/molQTLs/
-sbatch EandPqtls.sh</code></pre>
-<p>Concatinate the results:</p>
-<pre class="bash"><code>cat ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.chunk* &gt; ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.txt
-
-
-cat ../data/molQTLs/fastqtl_qqnorm_prot.fixed.nominal.chunk* &gt; ../data/molQTLs/fastqtl_qqnorm_prot.fixed.nominal.AllNomRes.txt</code></pre>
-<p>Fix gene names in the results:</p>
-<pre class="bash"><code>python changenomQTLres2geneName.py</code></pre>
-<p>How many genes are tested in nuclear apa and protein and expression</p>
-<pre class="r"><code>permProt=read.table(&quot;../data/molQTLs/fastqtl_qqnorm_prot.fixed.perm.AllNomRes.GeneName.txt&quot;, header = F, stringsAsFactors = F,col.names=c(&quot;Gene&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;rsid&quot;, &quot;dist&quot;, &quot;nom&quot;, &quot;slope&quot;, &quot;perm1&quot;, &quot;bpval&quot;))
-
-permEx=read.table(&quot;../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.perm.AllNomRes.GeneName.txt&quot;, header = F, stringsAsFactors = F,col.names=c(&quot;Gene&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;rsid&quot;, &quot;dist&quot;, &quot;nom&quot;, &quot;slope&quot;, &quot;perm1&quot;, &quot;bpval&quot;)) %&gt;% select(Gene)</code></pre>
-<pre class="r"><code>nuclearperm=read.table(&quot;../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt&quot;,stringsAsFactors = F, header = T) %&gt;% separate(pid, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;Gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PAS&quot;), sep=&quot;_&quot;) %&gt;% select(Gene) %&gt;% unique()</code></pre>
-<pre class="r"><code>permProt %&gt;% inner_join(nuclearperm, by=&quot;Gene&quot;) %&gt;% inner_join(permEx, by=&quot;Gene&quot;) %&gt;% nrow()</code></pre>
-<pre><code>[1] 1549</code></pre>
+<p><a href="https://brimittleman.github.io/threeprimeseq/apaQTLoverlapGWAS.html" class="uri">https://brimittleman.github.io/threeprimeseq/apaQTLoverlapGWAS.html</a></p>
+<p><a href="https://brimittleman.github.io/threeprimeseq/OverlapFullGWASCatelog.html" class="uri">https://brimittleman.github.io/threeprimeseq/OverlapFullGWASCatelog.html</a></p>
+<p>Nuclear qtls: ../data/apaQTLs/NuclearQTLSNPsRSID.txt Total qtls: ../data/apaQTLs/TotalQTLSNPsRSID.txt</p>
+<pre class="bash"><code>mkdir  ../data/GWAS_overlap/
+mkdir ../data/GWAS_overlap/TotalApaQTL_LD/
+mkdir  ../data/GWAS_overlap/NuclearApaQTL_LD/
+sbatch LD_qtl.sh</code></pre>
+<pre class="bash"><code>python nucQTLGWAS.py</code></pre>
+<p>Check examples:</p>
+<p>1311 chr5 95242930 95242931 rs56219066 26007630 Swaminathan B 2015-05-26 Nat Commun Variants in ELL2 influencing immunoglobulin levels associate with multiple myeloma. Multiple myeloma and monoclonal gammopathy 2,194 European ancestry multiple myeloma cases, 251 European ancestry monoclonal gammopathy cases, 294,390 European ancestry controls 586 European ancestry multiple myeloma cases, 2,111 European ancestry controls 5q15 ELL2 rs56219066-T 0.711 2E-10 1.24 [1.16-1.33] Illumina [12100000] (imputed) N ELL2 intron + peak106823 rs56219066</p>
+<p>1536 chr10 124693586 124693587 rs7904973 30275531 Klarin D 2018-10-01 Nat Genet Genetics of blood lipids among ~300,000 multi-ethnic participants of the Million Veteran Program. LDL cholesterol 215,551 European ancestry individuals, 57,332 African American individuals, 24,743 Hispanic individuals Up to 319,677 individuals 10q26.13 C10orf88 rs7904973-T 0.5573 1E-14 0.0203 [0.015-0.025] mg dl-1 increase Affymetrix [up to 31400000] (imputed) N</p>
+<p>C10orf88 intron + peak19881 rs7904973</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1346,25 +1262,12 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
-other attached packages:
-[1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
-[5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
-[9] tidyverse_1.2.1
-
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
- [5] pillar_1.3.1     git2r_0.25.2     highr_0.7        workflowr_1.4.0 
- [9] tools_3.5.1      digest_0.6.18    lubridate_1.7.4  jsonlite_1.6    
-[13] evaluate_0.12    nlme_3.1-137     gtable_0.2.0     lattice_0.20-38 
-[17] pkgconfig_2.0.2  rlang_0.4.0      cli_1.1.0        rstudioapi_0.10 
-[21] yaml_2.2.0       haven_1.1.2      withr_2.1.2      xml2_1.2.0      
-[25] httr_1.3.1       knitr_1.20       hms_0.4.2        generics_0.0.2  
-[29] fs_1.3.1         rprojroot_1.3-2  grid_3.5.1       tidyselect_0.2.5
-[33] glue_1.3.0       R6_2.3.0         readxl_1.1.0     rmarkdown_1.10  
-[37] modelr_0.1.2     magrittr_1.5     whisker_0.3-2    backports_1.1.2 
-[41] scales_1.0.0     htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
-[45] colorspace_1.3-2 stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
-[49] broom_0.5.1      crayon_1.3.4    </code></pre>
+ [1] workflowr_1.4.0 Rcpp_1.0.0      digest_0.6.18   rprojroot_1.3-2
+ [5] backports_1.1.2 git2r_0.25.2    magrittr_1.5    evaluate_0.12  
+ [9] highr_0.7       stringi_1.2.4   fs_1.3.1        whisker_0.3-2  
+[13] rmarkdown_1.10  tools_3.5.1     stringr_1.3.1   glue_1.3.0     
+[17] yaml_2.2.0      compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
 </div>
 
 
