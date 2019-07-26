@@ -70,13 +70,13 @@ Only looking at 8 and 2. This isnt very good.  Cant make claim.
 
 ```{r}
 nEandShare=nrow(NuclearSpecQTL_gene %>% filter(Shared=="Yes", uneplained=="Yes" |explained=="Yes" ))
-
+allShare=NuclearSpecQTL_gene %>% filter(Shared=="Yes")
 nEandShare
 nEandNotShare=nrow(NuclearSpecQTL_gene %>% filter(Shared=="No", uneplained=="Yes" |explained=="Yes"))
 nEandNotShare
+allNotShare=NuclearSpecQTL_gene %>% filter(Shared=="No")
 
-
-prop.test(x=c(nEandShare,nEandNotShare),n=c(nrow(NuclearSpecQTL_gene),nrow(NuclearSpecQTL_gene)))
+prop.test(x=c(nEandShare,nEandNotShare),n=c(nrow(allShare),nrow(allNotShare)))
 ```
 
 I want to not count genes with multiple qtl  
@@ -119,7 +119,7 @@ ggplot(NuclearSpecQTL__group, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat="
 ```{r}
 NuclearSpecQTL__group_small=NuclearSpecQTL__group %>% filter( Loc=="intron" |Loc=="utr3")
 
-ggplot(NuclearSpecQTL__group_small, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat="identity") + labs(title="Proportion of apaQTL by \nlocation that are nuclear specific") 
+ggplot(NuclearSpecQTL__group_small, aes(x=Loc, y=prop, fill=Shared)) + geom_bar(stat="identity") + labs(title="Proportion of apaQTL by \nlocation that are nuclear specific", y="Proportion of QTLs") + scale_fill_discrete(labels = c("Specific","Shared"))  + scale_fill_manual(values=c("orange", "blue"))
 
 ```
 ```{r}
@@ -128,6 +128,8 @@ NuclearSpecQTL__group_small
 
 ```{r}
 prop.test(x=c(183,87),n=c(297,355))
+
+prop.test(x=c(183,87),n=c(297,355))$p.value
 ```
 
 I want to know if the shared or specific are more likely to decrease/increase 

@@ -157,6 +157,8 @@ APAandTranscrption$density <- get_density(APAandTranscrption$APAVal, APAandTrans
 
 
 summary(lm(data=APAandTranscrption, APAVal~Transcription))
+
+cor.test(x=APAandTranscrption$Transcription,y=APAandTranscrption$APAVal)$p.value
 ```
 
 Plot:

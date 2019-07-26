@@ -101,6 +101,8 @@ These show the sharing is super high and we are getting at similar phenotypes in
 
 ```{r}
 wilcox.test(nucapaPTT$bpval,nucapaNotPTT$bpval,alternative="less")
+
+wilcox.test(nucapaPTT$bpval,nucapaNotPTT$bpval,alternative="less")$p.value
 ```
 
 
