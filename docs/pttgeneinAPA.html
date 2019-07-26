@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-25
+<strong>Last updated:</strong> 2019-07-26
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef3e3e163403506253b5b9b6c67aa6b519ed3bd53targetblankf3e3e16a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f3e3e163403506253b5b9b6c67aa6b519ed3bd53" target="_blank">f3e3e16</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecee6ce0a426f36095eadd3de1f15d6a505e10853targetblankcee6ce0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/cee6ce0a426f36095eadd3de1f15d6a505e10853" target="_blank">cee6ce0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef3e3e163403506253b5b9b6c67aa6b519ed3bd53targetblankf3e3e16a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecee6ce0a426f36095eadd3de1f15d6a505e10853targetblankcee6ce0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1134,7 +1134,6 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/DiffIsoAnalysis.Rmd
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/PrematureTermQTL.Rmd
     Modified:   analysis/QTLlocation.Rmd
@@ -1205,6 +1204,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/cee6ce0a426f36095eadd3de1f15d6a505e10853/analysis/pttgeneinAPA.Rmd" target="_blank">cee6ce0</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-26
+</td>
+<td>
+get pvalues form &lt;-16 tests
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/33a700ae055a545ff1d3a8c2bf7d9d97f2e430b8/docs/pttgeneinAPA.html" target="_blank">33a700a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/f3e3e163403506253b5b9b6c67aa6b519ed3bd53/analysis/pttgeneinAPA.Rmd" target="_blank">f3e3e16</a>
 </td>
 <td>
@@ -1260,12 +1293,12 @@ update ptt analysis
 </div>
 <p>I am interesting in understanding the PTTqtls a bit more. I want to ask if pttQTLs are apaQTLs. I will ask if the PTTqtl genes are also apaQTL genes.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -1396,6 +1429,8 @@ brimittleman
 data:  nucapaPTT$bpval and nucapaNotPTT$bpval
 W = 3440100, p-value &lt; 2.2e-16
 alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>wilcox.test(nucapaPTT$bpval,nucapaNotPTT$bpval,alternative=&quot;less&quot;)$p.value</code></pre>
+<pre><code>[1] 2.557828e-68</code></pre>
 <p>Is there something interesting about the non overlap genes:</p>
 <pre class="r"><code>pttOnlyTot=totptt %&gt;% anti_join(totAPA,by=&quot;gene&quot;)
 
@@ -1403,6 +1438,43 @@ alternative hypothesis: true location shift is less than 0</code></pre>
 totapaPTT_pttstatus=totapaPTT %&gt;% separate(pid, into=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;geneID&quot;),sep=&quot;:&quot;)  %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;pos&quot;, &quot;strand&quot;, &quot;pas&quot;),sep=&quot;_&quot;) %&gt;% mutate(APAQTL=ifelse(gene %in% pttOnlyTot$gene, &quot;No&quot;, &quot;Yes&quot;))</code></pre>
 <pre class="r"><code>ggplot(totapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()</code></pre>
 <p><img src="figure/pttgeneinAPA.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/33a700ae055a545ff1d3a8c2bf7d9d97f2e430b8/docs/figure/pttgeneinAPA.Rmd/unnamed-chunk-13-1.png" target="_blank">33a700a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pttOnlyTot$gene</code></pre>
 <pre><code>[1] &quot;C10orf88&quot; &quot;UROS&quot;     &quot;LRRC57&quot;   &quot;ELMOD3&quot;   &quot;USP37&quot;    &quot;PLSCR1&quot;  
 [7] &quot;ZNF718&quot;   &quot;ZSCAN12&quot; </code></pre>
@@ -1414,6 +1486,43 @@ nucapaPTT_pttstatus=nucapaPTT %&gt;% separate(pid, into=c(&quot;chr&quot;, &quot
 
 ggplot(nucapaPTT_pttstatus,aes(x=APAQTL, y=bpval)) + geom_boxplot()</code></pre>
 <p><img src="figure/pttgeneinAPA.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/33a700ae055a545ff1d3a8c2bf7d9d97f2e430b8/docs/figure/pttgeneinAPA.Rmd/unnamed-chunk-15-1.png" target="_blank">33a700a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pttOnlyNuc$gene</code></pre>
 <pre><code> [1] &quot;PPFIA1&quot;    &quot;ZDHHC17&quot;   &quot;ZNF844&quot;    &quot;PRKCZ&quot;     &quot;POU2F1&quot;   
  [6] &quot;MAP3K7CL&quot;  &quot;BCL2L13&quot;   &quot;LINC00342&quot; &quot;DZIP3&quot;     &quot;SUB1&quot;     
