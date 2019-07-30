@@ -21,7 +21,9 @@ mkdir ../output/dtPlots
 module load Anaconda3 
 source activate three-prime-env
 
-sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Total.SamplesMerged.bw sbatch bam2bw.sh ../data/mergedbyFracBam/Nuclear.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Nuclear.SamplesMerged.bw
+sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Total.SamplesMerged.bw 
+
+sbatch bam2bw.sh ../data/mergedbyFracBam/Nuclear.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Nuclear.SamplesMerged.bw
 ```
 
 ##Map along gene bodies  
@@ -31,7 +33,6 @@ sbatch bam2bw.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/me
 sbatch BothFracDTPlotGeneRegions.sh
 ```
 
-![Normalized deep tools plots.](../output/dtPlots/BothFrac_Transcript_labeled.png)
 
 ##Redo with Normalized RPKM  
 
@@ -48,11 +49,42 @@ Next I create the plot with deeptools.
 sbatch BothFracDTPlotGeneRegions_normalized.sh
 ```
 
-![Normalized deep tools plots.](../output/dtPlots/BothFrac_Transcript_normalize.png)
 
 
 ##Same plots with RNA seq  
 
-![Our RNA.](../output/dtPlots/RNAseq_Transcriptlabeled.png)
+ I combined 6 samples of the Geuvadis RNA seq into one file for this. 
+```{bash,eval=F}
+sbatch RNAseqDTplot.sh
+```
 
-![encode RNA.](../output/dtPlots/EncodeRNA_Transcript.png)
+
+##Zoom in on the TES  
+
+I will use the non normalized version of the merged bigwig and plot the 100bp up and downstream of annoated TES using bedtools. I will also do this in our RNA data.  
+
+BW total/nuclear: 
+../data/mergedBW_byfrac/Total.SamplesMerged.bw 
+../data/mergedBW_byfrac/Nuclear.SamplesMerged.bw
+
+RNA: 
+../data/GeuvadisRNA/RNAseqGeuvadis_STAR_6samp_MergedBams.sort.bw 
+
+TES:  
+/project2/gilad/briana/genome_anotation_data/ncbiRefSeq_endProtCodGenes_sort.bed
+
+```{bash,eval=F}
+sbatch TESplots100bp.sh
+sbatch TESplots150bp.sh
+sbatch TESplots200bp.sh
+```
+
+I want to only look at the first base in each read. This is the actual PAS. I can recompute the BW with the  –Offset argument.  
+
+```{bash,eval=F}
+sbatch bam2BW_5primemost.sh ../data/mergedbyFracBam/Total.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Total.SamplesMerged.5primemost.bw 
+
+sbatch bam2BW_5primemost.sh ../data/mergedbyFracBam/Nuclear.SamplesMerged.sort.bam ../data/mergedBW_byfrac/Nuclear.SamplesMerged.5primemost.bw 
+```
+
+
