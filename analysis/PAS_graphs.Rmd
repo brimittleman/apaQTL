@@ -1,0 +1,340 @@
+---
+title: "PAS graph (r markdown)"
+author: "Mayher"
+date: "7/26/2019"
+output: html_document
+---
+
+I first install all of the packages and librarys that will be necessary for the formation of these graphs. Lattice Extra in particular has the "doubleYScale()" function that helps me a lot when making these plots. 
+
+```{r setup, include=FALSE}
+#install.packages("tidyverse")
+require("dplyr")
+#install.packages("latticeExtra")
+require("tidyr")
+require(latticeExtra)
+```
+
+The current data frame has two columns - ID, and meanUsage. ID is a very long string containing a lot of currently irrelevant information. In this step, I am trying to solely get the type of the PAS from the ID column in the data frame along with its respective mean usage. To do this, I first read in the data frame. I then split the ID column into 5 columns, each for it's respective type of information. Though I only need "type" it is easier to access the other information if needed in the future. Then, I create a new data frame containing "type" and "mean usage".
+```{r needed info}
+#reading in the data frame
+df <- read.delim("data.txt")
+
+#splitting the ID column
+sep <- 
+  separate(data = df, col = ID, into = c("chr", "start","end", "thing", "peak"), sep = "\\:|\\_\\+\\_|\\_\\-\\_", remove = TRUE, convert = FALSE, extra = "warn", fill = "warn")
+sep <- 
+  separate(data = sep, col = thing, into = c("thing", "type"), sep = "\\_", remove = TRUE, convert = FALSE, extra = "warn", fill = "warn")
+
+#deleting extraneous information (everything except type and mean usage)
+keeps <- c("type","meanUsage")
+total <- sep[keeps]
+```
+
+Now that I have  the information I want, I have to seperate it based on type. Here, I create 5 data frames that contain only the mean usage for each type, as well as the one for total. I then convert each data frame to a data matrix, which changes the type from a list to a double, allowing it to be put in a plot. 
+
+```{r different df for PAS}
+
+#get the meanUsage per type in a data frame
+utr3 <- subset(total, type == "utr3", select = c(meanUsage))
+utr5 <- subset(total, type == "utr5", select = c(meanUsage))
+end <- subset(total, type == "end", select = c(meanUsage))
+cds <- subset(total, type == "cds", select = c(meanUsage))
+intron <- subset(total, type == "intron", select = c(meanUsage))
+
+#then, do the same for total
+total <- total["meanUsage"]
+
+#convert the data frame to a data matrix so it can be used in a plot
+utr3_graph <- data.matrix(utr3)
+utr5_graph <- data.matrix(utr5)
+end_graph <- data.matrix(end)
+cds_graph <- data.matrix(cds)
+intron_graph <- data.matrix(intron)
+total_graph <- data.matrix(total)
+```
+
+Here, I prepare for the next step by initializing 6 data frames, one for each type of PAS and one for the total data. Because I want meanUsage cutoff (number of values above a specific cutoff), instead of meanUsage itself, I need this extra step. 
+
+```{r initializing cutoff data frame}
+cutoff_utr3 <- data.frame("cutoff numbers" = c(0,0,0,0,0,0,0,0,0,0))
+cutoff_utr5 <- data.frame("cutoff numbers" = c(0,0,0,0,0,0,0,0,0,0))
+cutoff_end <- data.frame("cutoff numbers" = c(0,0,0,0,0,0,0,0,0,0))
+cutoff_cds <- data.frame("cutoff numbers" = c(0,0,0,0,0,0,0,0,0,0))
+cutoff_intron <- data.frame("cutoff numbers" = c(0,0,0,0,0,0,0,0,0,0))
+cutoff_total <- data.frame("cutoff" = c(0,0,0,0,0,0,0,0,0,0))
+```
+
+In this step, I take each data matrix, and insert frequencies into the cutoff data frames. For example, if there is a meanUsage greater than 0.4, the cutoff for 0.4, 0.3, 0.2, and 0.1 will increase by one. I do this by using a for loop, and a lot of if statements per for loop to sift the mean usages in their correct "bins". I do this for all 6 data sets.
+```{r filling cutoff data frames}
+for (i in utr3_graph){
+  if(i >0.1){
+    cutoff_utr3[1,]<- cutoff_utr3[1,] +1
+  } 
+  if(i>0.2) {
+    cutoff_utr3[2,]<- cutoff_utr3[2,] +1
+  } 
+  if (i>0.3) {
+    cutoff_utr3[3,]<- cutoff_utr3[3,] +1
+  }
+  if(i>0.4) {
+    cutoff_utr3[4,]<- cutoff_utr3[4,] +1
+  } 
+  if(i>0.5) {
+    cutoff_utr3[5,]<- cutoff_utr3[5,] +1
+  }
+  if(i>0.6) {
+    cutoff_utr3[6,]<- cutoff_utr3[6,] +1
+  } 
+  if(i>0.7) {
+    cutoff_utr3[7,]<- cutoff_utr3[7,] +1
+  }
+  if(i>0.8) {
+    cutoff_utr3[8,]<- cutoff_utr3[8,] +1
+  } 
+  if(i>0.9) {
+    cutoff_utr3[9,]<- cutoff_utr3[9,] +1
+  } 
+  if(i>=1.0) {
+    cutoff_utr3[10,]<- cutoff_utr3[10,] +1
+  }
+}  
+
+for (i in utr5_graph){
+  if(i >0.1){
+    cutoff_utr5[1,]<- cutoff_utr5[1,] +1
+  } 
+  if(i>0.2) {
+    cutoff_utr5[2,]<- cutoff_utr5[2,] +1
+  } 
+  if (i>0.3) {
+    cutoff_utr5[3,]<- cutoff_utr5[3,] +1
+  }
+  if(i>0.4) {
+    cutoff_utr5[4,]<- cutoff_utr5[4,] +1
+  } 
+  if(i>0.5) {
+    cutoff_utr5[5,]<- cutoff_utr5[5,] +1
+  }
+  if(i>0.6) {
+    cutoff_utr5[6,]<- cutoff_utr5[6,] +1
+  } 
+  if(i>0.7) {
+    cutoff_utr5[7,]<- cutoff_utr5[7,] +1
+  }
+  if(i>0.8) {
+    cutoff_utr5[8,]<- cutoff_utr5[8,] +1
+  } 
+  if(i>0.9) {
+    cutoff_utr5[9,]<- cutoff_utr5[9,] +1
+  } 
+  if(i>=1.0) {
+    cutoff_utr5[10,]<- cutoff_utr5[10,] +1
+  }
+} 
+
+
+for (i in end_graph){
+  if(i >0.1){
+    cutoff_end[1,]<- cutoff_end[1,] +1
+  } 
+  if(i>0.2) {
+    cutoff_end[2,]<- cutoff_end[2,] +1
+  } 
+  if (i>0.3) {
+    cutoff_end[3,]<- cutoff_end[3,] +1
+  }
+  if(i>0.4) {
+    cutoff_end[4,]<- cutoff_end[4,] +1
+  } 
+  if(i>0.5) {
+    cutoff_end[5,]<- cutoff_end[5,] +1
+  }
+  if(i>0.6) {
+    cutoff_end[6,]<- cutoff_end[6,] +1
+  } 
+  if(i>0.7) {
+    cutoff_end[7,]<- cutoff_end[7,] +1
+  }
+  if(i>0.8) {
+    cutoff_end[8,]<- cutoff_end[8,] +1
+  } 
+  if(i>0.9) {
+    cutoff_end[9,]<- cutoff_end[9,] +1
+  } 
+  if(i>=1.0) {
+    cutoff_end[10,]<- cutoff_end[10,] +1
+  }
+}  
+
+for (i in cds_graph){
+  if(i >0.1){
+    cutoff_cds[1,]<- cutoff_cds[1,] +1
+  } 
+  if(i>0.2) {
+    cutoff_cds[2,]<- cutoff_cds[2,] +1
+  } 
+  if (i>0.3) {
+    cutoff_cds[3,]<- cutoff_cds[3,] +1
+  }
+  if(i>0.4) {
+    cutoff_cds[4,]<- cutoff_cds[4,] +1
+  } 
+  if(i>0.5) {
+    cutoff_cds[5,]<- cutoff_cds[5,] +1
+  }
+  if(i>0.6) {
+    cutoff_cds[6,]<- cutoff_cds[6,] +1
+  } 
+  if(i>0.7) {
+    cutoff_cds[7,]<- cutoff_cds[7,] +1
+  }
+  if(i>0.8) {
+    cutoff_cds[8,]<- cutoff_cds[8,] +1
+  } 
+  if(i>0.9) {
+    cutoff_cds[9,]<- cutoff_cds[9,] +1
+  } 
+  if(i>=1.0) {
+    cutoff_cds[10,]<- cutoff_cds[10,] +1
+  }
+}  
+
+for (i in intron_graph){
+  if(i >0.1){
+    cutoff_intron[1,]<- cutoff_intron[1,] +1
+  } 
+  if(i>0.2) {
+    cutoff_intron[2,]<- cutoff_intron[2,] +1
+  } 
+  if (i>0.3) {
+    cutoff_intron[3,]<- cutoff_intron[3,] +1
+  }
+  if(i>0.4) {
+    cutoff_intron[4,]<- cutoff_intron[4,] +1
+  } 
+  if(i>0.5) {
+    cutoff_intron[5,]<- cutoff_intron[5,] +1
+  }
+  if(i>0.6) {
+    cutoff_intron[6,]<- cutoff_intron[6,] +1
+  } 
+  if(i>0.7) {
+    cutoff_intron[7,]<- cutoff_intron[7,] +1
+  }
+  if(i>0.8) {
+    cutoff_intron[8,]<- cutoff_intron[8,] +1
+  } 
+  if(i>0.9) {
+    cutoff_intron[9,]<- cutoff_intron[9,] +1
+  } 
+  if(i>=1.0) {
+    cutoff_intron[10,]<- cutoff_intron[10,] +1
+  }
+} 
+
+for (i in total_graph){
+  if(i >0.1){
+    cutoff_total[1,]<- cutoff_total[1,] +1
+  } 
+  if(i>0.2) {
+    cutoff_total[2,]<- cutoff_total[2,] +1
+  } 
+  if (i>0.3) {
+    cutoff_total[3,]<- cutoff_total[3,] +1
+  }
+  if(i>0.4) {
+    cutoff_total[4,]<- cutoff_total[4,] +1
+  } 
+  if(i>0.5) {
+    cutoff_total[5,]<- cutoff_total[5,] +1
+  }
+  if(i>0.6) {
+    cutoff_total[6,]<- cutoff_total[6,] +1
+  } 
+  if(i>0.7) {
+    cutoff_total[7,]<- cutoff_total[7,] +1
+  }
+  if(i>0.8) {
+    cutoff_total[8,]<- cutoff_total[8,] +1
+  } 
+  if(i>0.9) {
+    cutoff_total[9,]<- cutoff_total[9,] +1
+  } 
+  if(i>=1.0) {
+    cutoff_total[10,]<- cutoff_total[10,] +1
+  }
+}  
+
+
+```
+
+I now make data frames that contain the proportion of the specific type of PAS with respect to the total. I do this by dividing the frequency of the mean usage per cutoff of the type, by the same in the total. 
+
+```{r}
+utr3_prop <- cutoff_utr3/cutoff_total
+utr5_prop <- cutoff_utr5/cutoff_total
+end_prop <- cutoff_end/cutoff_total
+cds_prop <- cutoff_cds/cutoff_total
+intron_prop <- cutoff_intron/cutoff_total
+```
+
+Here, I create a data frame called "breaks_new" that has all of the mean usage cutoffs I used for the other data. I then combined this data frame with the proportion to create the data frames needed for all of the plots. 
+
+```{r}
+breaks_new <- data.frame(xval = c(0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00))
+
+totalMeanUsageFreq <- data.frame(breaks_new, cutoff_total)
+Utr3prop <- data.frame(breaks_new, utr3_prop)
+Utr5prop <- data.frame(breaks_new, utr5_prop)
+endprop <- data.frame(breaks_new, end_prop)
+cdsprop <- data.frame(breaks_new, cds_prop)
+intronprop <- data.frame(breaks_new, intron_prop)
+
+```
+
+Here, I initialixe the objects, which have all of the information in them, such as the type of plots, y axis label, and scale. The first object (obj1), is the one for the total frequency, which will be one side for the double Y axis plot. 
+
+```{r}
+obj1 <- xyplot(cutoff ~ xval, totalMeanUsageFreq,
+                ylab = "Frequency of Total", xlab = "meanUsage cutoff", col.lab = "black")
+
+obj2 <- xyplot(cutoff.numbers ~ xval, Utr3prop,
+               panel = function(...)panel.xyplot(type = "l",lty = 2,grid=TRUE,...), ylab = "Proportion of UTR3", scales = list(y=list(limits=c(0,1))))
+
+obj3 <- xyplot(cutoff.numbers ~ xval, Utr5prop,
+               panel = function(...)panel.xyplot(type = "l",lty = 2,grid=TRUE,...), ylab = "Proportion of UTR5", scales = list(y=list(limits=c(0,1))))
+
+obj4 <- xyplot(cutoff.numbers ~ xval, endprop,
+               panel = function(...)panel.xyplot(type = "l",lty = 2,grid=TRUE,...), ylab = "Proportion of END", scales = list(y=list(limits=c(0,1))))
+
+obj5 <- xyplot(cutoff.numbers ~ xval, cdsprop,
+               panel = function(...)panel.xyplot(type = "l",lty = 2,grid=TRUE,...), ylab = "Proportion of CDS", scales = list(y=list(limits=c(0,1))))
+
+obj6 <- xyplot(cutoff.numbers ~ xval, intronprop,
+               panel = function(...)panel.xyplot(type = "l",lty = 2,grid=TRUE,...), ylab = "Proportion of INTRON", scales = list(y=list(limits=c(0,1))))
+
+```
+
+And lastly, I create the final, double Y axis plots
+
+```{r pressure, echo=FALSE}
+
+#Blue = Frequency of Total, Pink = Proportion of UTR3
+#Shows that for every mean usage cutoff, as total frequency decreases, the proportion of UTR3 increases
+doubleYScale(obj1, obj2,add.ylab2 =TRUE)
+
+#Blue = Frequency of Total, Pink = Proportion of UTR5
+doubleYScale(obj1, obj3,add.ylab2 =TRUE)
+
+#Blue = Frequency of Total, Pink = Proportion of END
+doubleYScale(obj1, obj4,add.ylab2 =TRUE)
+
+#Blue = Frequency of Total, Pink = Proportion of CDS
+doubleYScale(obj1, obj5,add.ylab2 =TRUE)
+
+#Blue = Frequency of Total, Pink = Proportion of INTRON
+doubleYScale(obj1, obj6,add.ylab2 =TRUE)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
