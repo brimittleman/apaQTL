@@ -53,7 +53,7 @@ allPAS_loc= allPAS %>% group_by(loc,SS) %>% summarise(nSS=n()) %>% ungroup() %>%
 withSSPlot=ggplot(allPAS_loc, aes(x=loc, y=prop, fill=SS)) + geom_bar(stat="identity") +scale_fill_brewer(palette="Dark2") +labs(title="Proportion of PAS with signal site", x="Location", y="Propotion")  + labs(fill = "Presence of Signal Site",x="") +scale_x_discrete(labels = c('Coding','5KB downstream','Intronic',"3' UTR", "5' UTR")) +theme(axis.text.x = element_text(angle = 45, hjust = 1,size=14),axis.text.y = element_text(size=14),legend.position = "top" )  
 withSSPlot
 ```
-```{r figure1bsubset, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=TRUE}
+```{r figure1bsubset, include=FALSE, dev="pdf", fig.height=4, fig.width=5, crop=FALSE}
 withSSPlot
 ```
 
