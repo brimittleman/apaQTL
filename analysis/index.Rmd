@@ -130,3 +130,7 @@ These files create some of the QC metrics I used for the analysis.
 * [GWAS overlap](gwasOverlap.html)
 
 
+##Graph from Mayher   
+
+* [Location and usage of PAS](PAS_graphs.html)  
+

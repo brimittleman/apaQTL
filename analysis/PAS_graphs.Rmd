@@ -18,7 +18,7 @@ require(latticeExtra)
 The current data frame has two columns - ID, and meanUsage. ID is a very long string containing a lot of currently irrelevant information. In this step, I am trying to solely get the type of the PAS from the ID column in the data frame along with its respective mean usage. To do this, I first read in the data frame. I then split the ID column into 5 columns, each for it's respective type of information. Though I only need "type" it is easier to access the other information if needed in the future. Then, I create a new data frame containing "type" and "mean usage".
 ```{r needed info}
 #reading in the data frame
-df <- read.delim("data.txt")
+df <- read.delim("../data/PAS/NuclearPASMeanUsage.txt")
 
 #splitting the ID column
 sep <- 
