@@ -338,3 +338,14 @@ doubleYScale(obj1, obj6,add.ylab2 =TRUE)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+PDF for the figures:
+
+```{r figure1CUTR, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+doubleYScale(obj1, obj2,add.ylab2 =TRUE)
+```
+```{r figure1CIntron, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+doubleYScale(obj1, obj6,add.ylab2 =TRUE)
+```
+
