@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-17
+<strong>Last updated:</strong> 2019-08-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreebf42ee61fc1d0368e0e6305be7a40e6c3c089a9btargetblankbf42ee6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/bf42ee61fc1d0368e0e6305be7a40e6c3c089a9b" target="_blank">bf42ee6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree4fd345dc7ed27e5be44ebc6587e5b6683e6d6760targetblank4fd345da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/4fd345dc7ed27e5be44ebc6587e5b6683e6d6760" target="_blank">4fd345d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreebf42ee61fc1d0368e0e6305be7a40e6c3c089a9btargetblankbf42ee6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree4fd345dc7ed27e5be44ebc6587e5b6683e6d6760targetblank4fd345da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -492,24 +492,27 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
     Untracked:  .Rprofile
     Untracked:  ._.DS_Store
     Untracked:  .gitignore
+    Untracked:  @
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
-    Untracked:  analysis/gwasOverlap.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
+    Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
@@ -539,6 +542,7 @@ Untracked files:
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
+    Untracked:  code/._RNAseqDTplot.sh
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -788,6 +792,9 @@ Untracked files:
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
     Untracked:  code/RNAbam2bw.sh
+    Untracked:  code/RNAseqDTPlotGeneRegions.err
+    Untracked:  code/RNAseqDTPlotGeneRegions.out
+    Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
@@ -1125,6 +1132,8 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
+    Untracked:  docs/._.DS_Store
+    Untracked:  docs/figure/._.DS_Store
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1133,19 +1142,15 @@ Untracked files:
     Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
-    Modified:   analysis/DiffIsoAnalysis.Rmd
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
-    Modified:   analysis/PASdescriptiveplots.Rmd
+    Modified:   analysis/PAS_graphs.Rmd
     Modified:   analysis/PrematureTermQTL.Rmd
-    Modified:   analysis/QTLlocation.Rmd
-    Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/chromHHMQTL.Rmd
+    Modified:   analysis/compareAnnotatedpas.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
     Modified:   analysis/propeQTLs_explained.Rmd
-    Modified:   analysis/pttgeneinAPA.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1199,6 +1204,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4fd345dc7ed27e5be44ebc6587e5b6683e6d6760/analysis/nonNormQTL.Rmd" target="_blank">4fd345d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-01
+</td>
+<td>
+figure2D
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/6757ce6c048a3d84093b3f9c85ea0f8b4dfae462/docs/nonNormQTL.html" target="_blank">6757ce6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-17
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1500,12 +1539,12 @@ add code to prepare non norm qtl
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(cowplot)</code></pre>
@@ -1709,6 +1748,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 0.07341 on 769 degrees of freedom
 Multiple R-squared:  0.6569,    Adjusted R-squared:  0.6565 
 F-statistic:  1473 on 1 and 769 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>cor.test(y=NucBothwSpec$slope, x=NucBothwSpec$Originalslope)$p.value</code></pre>
+<pre><code>[1] 8.056366e-181</code></pre>
 <pre class="r"><code>nucspecplot=ggplot(NucBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method=&quot;lm&quot;) + labs(title=&quot;Nuclear apaQTL effect sizes&quot;, x=&quot;Effect size in Nuclear&quot;,y=&quot;Effect size in Total&quot;) +  annotate(&quot;text&quot;, y=1, x=0, label=&quot;R2=.66, slope=0.62&quot;,size=6) + scale_color_brewer(palette = &quot;Dark2&quot;)+ theme(text = element_text(size=16), legend.position = &quot;bottom&quot;)</code></pre>
 <p>Do this in the other fraction to see what is looks like.</p>
 <pre class="bash"><code>python totSeceffectsize.py</code></pre>
@@ -1738,7 +1779,45 @@ F-statistic: 726.3 on 1 and 438 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 totspecplot</code></pre>
 <p><img src="figure/nonNormQTL.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>plot_grid(nucspecplot,totspecplot)</code></pre>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6757ce6c048a3d84093b3f9c85ea0f8b4dfae462/docs/figure/nonNormQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">6757ce6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>grideffectplot=plot_grid(nucspecplot,totspecplot)
+grideffectplot</code></pre>
 <p><img src="figure/nonNormQTL.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
@@ -1764,6 +1843,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6757ce6c048a3d84093b3f9c85ea0f8b4dfae462/docs/figure/nonNormQTL.Rmd/unnamed-chunk-17-1.png" target="_blank">6757ce6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-17
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/4297ae4fb56a448886e914d3723a4126688d344e/docs/figure/nonNormQTL.Rmd/unnamed-chunk-17-1.png" target="_blank">4297ae4</a>
 </td>
 <td>
@@ -1777,6 +1867,23 @@ brimittleman
 </table>
 </div>
 </div>
+<pre class="r"><code>TotBothwSpec %&gt;% filter(set==&quot;Specific&quot;) %&gt;% nrow()</code></pre>
+<pre><code>[1] 34</code></pre>
+<pre class="r"><code>NucBothwSpec %&gt;% filter(set==&quot;Specific&quot;) %&gt;% nrow()</code></pre>
+<pre><code>[1] 178</code></pre>
+<pre class="r"><code>prop.test(x=c(178,34), n=c(771,440), alternative =&quot;greater&quot;)</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(178, 34) out of c(771, 440)
+X-squared = 44.705, df = 1, p-value = 1.145e-11
+alternative hypothesis: greater
+95 percent confidence interval:
+ 0.1192301 1.0000000
+sample estimates:
+    prop 1     prop 2 
+0.23086900 0.07727273 </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
