@@ -170,18 +170,42 @@ colnames(TotalResMPropQuant)=c("HMMname", "twentyfive", "fifty", "seventyfive", 
 
 ```{r}
 
-AllQTLsProp95=as.data.frame(rbind(NuclearResMPropQuant,TotalResMPropQuant,unexplainedResMPropQuant,explainedResMPropQuant)) 
+AllQTLsProp95=as.data.frame(rbind(NuclearResMPropQuant,unexplainedResMPropQuant,explainedResMPropQuant)) 
+AllQTLsProp95$category=factor(AllQTLsProp95$category, levels=c("NuclearApa", "UnexplainedeQTL","ExplainedeQTL"))
+
 ```
 
 
 ```{r}
-ggplot(AllQTLsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs")
+ggplot(AllQTLsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.9)) + theme(axis.text.x=element_text(angle=45, hjust=1),legend.position = "top", legend.title = element_blank())+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs") + scale_fill_brewer(palette="Dark2")
 ```
+
+```{r}
+AllQTLsProp95_certcat=AllQTLsProp95 %>% filter(HMMname %in% c("Active_Promoter", "Strong_Enhancer","Txn_Elongation", "Weak_Enhancer", "Weak_Promter","Poised_Promoter", "Weak_Txn" ))
+
+AllQTLsProp95_certcat$HMMname= factor(AllQTLsProp95_certcat$HMMname, levels=c('Strong_Enhancer','Weak_Enhancer','Poised_Promoter',"Active_Promoter", 'Weak_Promter','Txn_Elongation',  'Weak_Txn' ))
+
+
+chromhmmplot=ggplot(AllQTLsProp95_certcat, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.9)) + theme(axis.text.x=element_text(angle=45, hjust=1),legend.position = "top", legend.title = element_blank())+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for all QTLs") + scale_fill_brewer(palette="Dark2",labels=c("apaQTL","Unexaplined eQTL", "Explained eQTL"))+scale_x_discrete(labels= c("Strong Enhancer", "Weak Enhancer", "Poised Promoter", "Active Promoter", "Transcription Elongation", "Weak Transcription"))
+
+chromhmmplot
+
+
+```
+
+
+
+```{r figure3D, include=FALSE, dev="pdf", fig.height=5, fig.width=5, crop=FALSE}
+chromhmmplot
+```
+
+
+
 Plot only the total and nuclear:  
 
 ```{r}
 APAqtlsProp95=as.data.frame(rbind(NuclearResMPropQuant,TotalResMPropQuant)) 
 
-ggplot(APAqtlsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.75)) + theme(axis.text.x=element_text(angle=90, hjust=1))+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for apaQTLs") +scale_fill_manual(values=c("deepskyblue3","darkviolet"))
+ggplot(APAqtlsProp95, aes(x=HMMname, y=fifty, fill=category)) + geom_bar(stat="identity", position="dodge")+ geom_errorbar(aes(ymin=twentyfive, ymax=seventyfive),width=.5, position = position_dodge(0.9)) + theme(axis.text.x=element_text(angle=45, hjust=1),legend.position = "top", legend.title = element_blank())+labs(y="Proportion of QTLs", x="ChromHMM Category", title="ChromHMM locations for apaQTLs") +scale_fill_manual(values=c("deepskyblue3","darkviolet"))
 ```
 

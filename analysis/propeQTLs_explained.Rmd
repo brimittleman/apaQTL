@@ -165,7 +165,7 @@ allLocProp=BothnuclearLoc %>% full_join(BothTotalLoc, by="loc") %>% select(loc,p
 allLocPropmelt= melt(allLocProp, id.vars = "loc") %>% mutate(Fraction=ifelse(grepl("Total", variable), "Total", "Nuclear"),eQTL=ifelse(grepl("Un", variable), "Unexplained", "Explained"))
 
 
-ggplot(allLocPropmelt,aes(x=loc, fill=eQTL, y=value)) + geom_histogram(stat="identity", position = "dodge") + facet_grid(~Fraction)+ labs(y="Proportion of PAS", title="apaQTLs overlaping eQTLs by PAS location")
+ggplot(allLocPropmelt,aes(x=loc, fill=eQTL, y=value)) + geom_histogram(stat="identity", position = "dodge") + facet_grid(~Fraction)+ labs(y="Proportion of PAS", title="apaQTLs overlaping eQTLs by PAS location")  + scale_fill_manual(values=c("orange", "blue"))
 ```
 
 This is a very stringent test. A less stringent way to get an upper bound would be to make an informed decision about which peak to use. This will make it so I am only testing one PAS per gene.  
@@ -247,7 +247,7 @@ AllPropDF$Prop=as.numeric(AllPropDF$Prop)
 Plot this:
 
 ```{r}
-ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + geom_text(aes(label=Prop))
+ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + labs(title="Proportion of eQTLs explained by apaQTLs", y="Proportion", "P-Value cut off") + scale_fill_manual(values=c("orange", "blue"))
 ```
 
 ##Concordance of directions for intronic pas usage and eQTL  
@@ -269,6 +269,12 @@ eQTLeffect=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nomina
 
 total: 
 ```{r}
+
+#totalunex_all=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_")
+
+#totalex_all=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>%  separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_")
+
+
 alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
 
 
@@ -283,12 +289,15 @@ Nuclear:
 alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
 
 
-ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=-1, x=-1.5, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="Nuclear apa effect sizes vs eQTL eqtl effect sizes", y="Nuclear apaQTL effect size",x="eQTL effect size")
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
 
 
 summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))
 ```
 
+```{r figure3B, include=FALSE, dev="pdf", fig.height=5, fig.width=5, crop=FALSE}
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
+```
 
 ##Examples for overlap:  
 
@@ -367,5 +376,25 @@ write.table(RNA_KDELR2_LZ,"../data/locusZoom/RNAKDELR2_LZ.txt", col.names = T, r
 ```
 Use locuszoom.org  
 
+locus zoom plot for C10ofr88 variant in nuclear: 
 
 
+peak19881
+```{bash,eval=F}
+
+grep peak19881  ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt > ../data/locusZoom/NuclearAPA.peak119699.C10ofr88.nomNuc.txt
+
+grep ENSG00000119965 ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.txt > ../data/locusZoom/RNA.C10ofr88.txt
+
+```
+
+
+```{r}
+APATNuclear_orf_LZ=read.table("../data/locusZoom/NuclearAPA.peak119699.C10ofr88.nomNuc.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(APATNuclear_orf_LZ,"../data/locusZoom/apaNuclearC10orf88_LZ.txt", col.names = T, row.names = F, quote = F)
+
+RNA_orf_LZ=read.table("../data/locusZoom/RNA.C10ofr88.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(RNA_orf_LZ,"../data/locusZoom/RNAC10orf88_LZ.txt", col.names = T, row.names = F, quote = F)
+```

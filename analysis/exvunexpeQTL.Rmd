@@ -107,13 +107,22 @@ nuc.un=na.omit(nuc.un)
 ```
 
 
-```{r}
+```{r figure3C, include=FALSE, dev="pdf", fig.height=5, fig.width=5, crop=FALSE}
 qqplot(-log10(runif(nrow(nuc.notE))), -log10(nuc.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
 points(sort(-log10(runif(nrow(nuc.ex)))), sort(-log10(nuc.ex$bpval)),col= alpha("Red"))
 points(sort(-log10(runif(nrow(nuc.un)))), sort(-log10(nuc.un$bpval)),col= alpha("Blue"))
 abline(0,1)
 legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
 
+```
+
+
+```{r}
+qqplot(-log10(runif(nrow(nuc.notE))), -log10(nuc.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.ex)))), sort(-log10(nuc.ex$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(nuc.un)))), sort(-log10(nuc.un$bpval)),col= alpha("Blue"))
+abline(0,1)
+legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
 ```
 
 ```{r}
