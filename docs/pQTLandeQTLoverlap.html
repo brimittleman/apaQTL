@@ -325,7 +325,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -334,7 +334,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -343,10 +343,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-06-27
+<strong>Last updated:</strong> 2019-08-01
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>apaQTL/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -374,12 +374,56 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongobjectspresent"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Environment:</strong> objects present </a>
 </p>
 </div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div id="strongEnvironmentstrongobjectspresent" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+<p>
+The global environment had objects present when the code in the R Markdown file was run. These objects can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment. Use <code>wflow_publish</code> or <code>wflow_build</code> to ensure that the code is always run in an empty environment.
+</p>
+<p>
+The following objects were defined in the global environment when these results were created:
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Class
+</th>
+<th style="text-align:left;">
+Size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+data
+</td>
+<td style="text-align:left;">
+environment
+</td>
+<td style="text-align:left;">
+56 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+env
+</td>
+<td style="text-align:left;">
+environment
+</td>
+<td style="text-align:left;">
+56 bytes
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -434,10 +478,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb8e60356fb4a57182e79ef281cecac6916dce26btargetblankb8e6035a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b8e60356fb4a57182e79ef281cecac6916dce26b" target="_blank">b8e6035</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree99c751e29cd2500616470245b3cfdbba44aa95d5targetblank99c751ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/99c751e29cd2500616470245b3cfdbba44aa95d5" target="_blank">99c751e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb8e60356fb4a57182e79ef281cecac6916dce26btargetblankb8e6035a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree99c751e29cd2500616470245b3cfdbba44aa95d5targetblank99c751ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,12 +492,15 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
     Untracked:  .Rprofile
     Untracked:  ._.DS_Store
     Untracked:  .gitignore
+    Untracked:  @
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
@@ -465,7 +512,9 @@ Untracked files:
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
+    Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
     Untracked:  code/._FC_NucintornUpandDown.sh
     Untracked:  code/._FC_UTR.sh
@@ -474,7 +523,9 @@ Untracked files:
     Untracked:  code/._FC_newPeaks_olddata.sh
     Untracked:  code/._HMMpermuteTotal.py
     Untracked:  code/._HmmPermute.py
+    Untracked:  code/._IntronicPASDT.sh
     Untracked:  code/._LC_samplegroups.py
+    Untracked:  code/._LD_qtl.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -484,17 +535,25 @@ Untracked files:
     Untracked:  code/._NascnetRNAdtPlotPAS.sh
     Untracked:  code/._NetSeq_fourthintronDT.sh
     Untracked:  code/._NomResfromPASSNP.py
+    Untracked:  code/._NuclearPAS_5per.bed.py
+    Untracked:  code/._PTTfacetboxplots.R
+    Untracked:  code/._PrematureQTLNominal.sh
+    Untracked:  code/._PrematureQTLPermuted.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
+    Untracked:  code/._RNAseqDTplot.sh
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
     Untracked:  code/._TESplots150bp.sh
     Untracked:  code/._TESplots200bp.sh
+    Untracked:  code/._TotalPAS_5perc.bed.py
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._annotatePacBioPASregion.sh
+    Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTL_Nominal.sh
     Untracked:  code/._apaQTL_permuted.sh
@@ -507,9 +566,12 @@ Untracked files:
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
     Untracked:  code/._changenomQTLres2geneName.py
+    Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
     Untracked:  code/._chooseSignalSite
     Untracked:  code/._chooseSignalSite.py
+    Untracked:  code/._closestannotated.sh
+    Untracked:  code/._closestannotated_byfrac.sh
     Untracked:  code/._cluster.json
     Untracked:  code/._clusterPAS.json
     Untracked:  code/._clusterfiltPAS.json
@@ -520,6 +582,7 @@ Untracked files:
     Untracked:  code/._convertNominal2SNPLOC.py
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._correctNomeqtl.R
+    Untracked:  code/._createPlinkSampfile.py
     Untracked:  code/._dag.pdf
     Untracked:  code/._eQTL_switch2snploc.py
     Untracked:  code/._eQTLgenestestedapa.py
@@ -577,11 +640,16 @@ Untracked files:
     Untracked:  code/._namePeaks.py
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
+    Untracked:  code/._nucQTLGWAS.py
+    Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._pacbioDT.sh
+    Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
     Untracked:  code/._phenoQTLfromlist.py
     Untracked:  code/._processYRIgen.py
+    Untracked:  code/._pttQTLsinapaQTL.py
     Untracked:  code/._qtlRegionseq.sh
     Untracked:  code/._qtlsPvalOppFrac.py
     Untracked:  code/._quantassign2parsedpeak.py
@@ -599,6 +667,7 @@ Untracked files:
     Untracked:  code/._run_getapafromeQTL.sh
     Untracked:  code/._run_getapapval4eqtl_unexp.sh
     Untracked:  code/._run_leafcutterDiffIso.sh
+    Untracked:  code/._run_pttfacetboxplot.sh
     Untracked:  code/._run_sepUsagephen.sh
     Untracked:  code/._run_sepgenobychrom.sh
     Untracked:  code/._selectNominalPvalues.py
@@ -623,8 +692,12 @@ Untracked files:
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
+    Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
+    Untracked:  code/._writePTTexamplecode.py
+    Untracked:  code/._writePTTexamplecode.sh
+    Untracked:  code/.pversion
     Untracked:  code/.snakemake/
     Untracked:  code/APAqtl_nominal.err
     Untracked:  code/APAqtl_nominal.out
@@ -647,6 +720,7 @@ Untracked files:
     Untracked:  code/DistPAS2Sig.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
+    Untracked:  code/EandPqtl_perm.sh
     Untracked:  code/EandPqtls.sh
     Untracked:  code/EncodeRNADTPlotGeneRegions.err
     Untracked:  code/EncodeRNADTPlotGeneRegions.out
@@ -668,7 +742,12 @@ Untracked files:
     Untracked:  code/HMMpermuteTotal.py
     Untracked:  code/HmmPermute.p
     Untracked:  code/HmmPermute.py
+    Untracked:  code/IntronicPASDT.err
+    Untracked:  code/IntronicPASDT.out
+    Untracked:  code/IntronicPASDT.sh
     Untracked:  code/LC_samplegroups.py
+    Untracked:  code/LD_qtl.sh
+    Untracked:  code/LD_vcftools.hap.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
     Untracked:  code/NascentDTPlotPAS.err
@@ -693,16 +772,33 @@ Untracked files:
     Untracked:  code/NascnetRNAdtPlotPAS.sh
     Untracked:  code/NetSeq_fourthintronDT.sh
     Untracked:  code/NomResfromPASSNP.py
+    Untracked:  code/NuclearPAS_5per.bed.py
     Untracked:  code/Nuclear_example.err
     Untracked:  code/Nuclear_example.out
+    Untracked:  code/PACbioDT.err
+    Untracked:  code/PACbioDT.out
+    Untracked:  code/PACbioDTitronic.err
+    Untracked:  code/PACbioDTitronic.out
+    Untracked:  code/PTTfacetboxplots.R
+    Untracked:  code/PrematureQTLNominal.sh
+    Untracked:  code/PrematureQTLPermuted.sh
+    Untracked:  code/Prematureqtl_nominal.err
+    Untracked:  code/Prematureqtl_nominal.out
+    Untracked:  code/Prematureqtl_permuted.err
+    Untracked:  code/Prematureqtl_permuted.out
     Untracked:  code/QTL2bed.py
     Untracked:  code/QTL2bed_withstrand.py
     Untracked:  code/README.md
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
     Untracked:  code/RNAbam2bw.sh
+    Untracked:  code/RNAseqDTPlotGeneRegions.err
+    Untracked:  code/RNAseqDTPlotGeneRegions.out
+    Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
+    Untracked:  code/Script4TotalPTTqtlexamples.sh
     Untracked:  code/Script4TotalQTLexamples.sh
     Untracked:  code/TESplots100bp.err
     Untracked:  code/TESplots100bp.out
@@ -713,12 +809,17 @@ Untracked files:
     Untracked:  code/TESplots200bp.err
     Untracked:  code/TESplots200bp.out
     Untracked:  code/TESplots200bp.sh
+    Untracked:  code/TotalPAS_5perc.bed.py
     Untracked:  code/Total_example.err
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/annotatePacBioPASregion.sh
+    Untracked:  code/annotatedPAS2bed.py
+    Untracked:  code/annotatedPASregion.err
+    Untracked:  code/annotatedPASregion.out
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
@@ -735,15 +836,25 @@ Untracked files:
     Untracked:  code/bam2bw.out
     Untracked:  code/bam2bw_5primemost.err
     Untracked:  code/bam2bw_5primemost.out
+    Untracked:  code/binary_fileset.log
     Untracked:  code/bothFracDTplot1stintron.sh
     Untracked:  code/bothFracDTplot4thintron.sh
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/changePermQTLres2geneName.py
     Untracked:  code/changenomQTLres2geneName.py
+    Untracked:  code/chooseAnno2PAS_pacbio.py
+    Untracked:  code/closestannotated.err
+    Untracked:  code/closestannotated.out
+    Untracked:  code/closestannotated.sh
+    Untracked:  code/closestannotated_byfrac.sh
+    Untracked:  code/closestannotatedbyfrac.err
+    Untracked:  code/closestannotatedbyfrac.out
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
     Untracked:  code/correctNomeqtl.R
+    Untracked:  code/createPlinkSampfile.py
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
@@ -821,12 +932,22 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/nucQTLGWAS.py
+    Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/pacbioDT.sh
+    Untracked:  code/pacbioIntronicDT.sh
     Untracked:  code/phenoQTLfromlist.py
+    Untracked:  code/plink.log
     Untracked:  code/processYRIgen.py
+    Untracked:  code/pttFacetBoxplots.err
+    Untracked:  code/pttFacetBoxplots.out
+    Untracked:  code/pttQTLsinapaQTL.py
+    Untracked:  code/pullTwoMechData.py
     Untracked:  code/qtlFacetBoxplots.err
     Untracked:  code/qtlFacetBoxplots.out
     Untracked:  code/qtlRegionseq.sh
     Untracked:  code/qtlsPvalOppFrac.py
+    Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
     Untracked:  code/runCorrectNomEqtl.sh
@@ -865,6 +986,7 @@ Untracked files:
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/run_pttfacetboxplot.sh
     Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
     Untracked:  code/run_sepgenobychrom.err
@@ -913,15 +1035,19 @@ Untracked files:
     Untracked:  code/tabixSNPS.sh
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/totSeceffectsize.py
     Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf2bed.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
     Untracked:  code/writeExampleQTLcode.py
+    Untracked:  code/writePTTexamplecode.py
     Untracked:  code/zipandtabPhen.err
     Untracked:  code/zipandtabPhen.out
     Untracked:  data/._.DS_Store
+    Untracked:  data/._MetaDataSequencing.txt
+    Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
     Untracked:  data/Battle_pQTL/
@@ -930,6 +1056,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
     Untracked:  data/Li_eQTLs/
@@ -937,6 +1064,9 @@ Untracked files:
     Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
     Untracked:  data/PolyA_DB/
+    Untracked:  data/PreTerm_pheno/
+    Untracked:  data/PrematureQTLNominal/
+    Untracked:  data/PrematureQTLPermuted/
     Untracked:  data/QTLGenotypes/
     Untracked:  data/QTLoverlap/
     Untracked:  data/QTLoverlap_nonNorm/
@@ -990,14 +1120,21 @@ Untracked files:
     Untracked:  data/nuc_10upclean/
     Untracked:  data/overlapeQTL_try2/
     Untracked:  data/overlapeQTLs/
+    Untracked:  data/pacbio/
     Untracked:  data/peakCoverage/
     Untracked:  data/peaks_5perc/
     Untracked:  data/phenotype/
     Untracked:  data/phenotype_5perc/
+    Untracked:  data/pttQTL/
+    Untracked:  data/pttQTLplots/
     Untracked:  data/sigDiffGenes.txt
     Untracked:  data/sort/
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
+    Untracked:  data/twoMech/
+    Untracked:  docs/._.DS_Store
+    Untracked:  docs/figure/._.DS_Store
+    Untracked:  docs/figure/nonNormQTL.Rmd/._figure2D-1.pdf
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1007,10 +1144,12 @@ Untracked files:
 
 Unstaged changes:
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/PAS_graphs.Rmd
+    Modified:   analysis/PrematureTermQTL.Rmd
+    Modified:   analysis/compareAnnotatedpas.Rmd
+    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/propeQTLs_explained.Rmd
-    Modified:   analysis/signalsiteanalysis.Rmd
+    Modified:   analysis/pQTLexampleplot.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1064,6 +1203,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/99c751e29cd2500616470245b3cfdbba44aa95d5/analysis/pQTLandeQTLoverlap.Rmd" target="_blank">99c751e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-01
+</td>
+<td>
+pdf for figure 3
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/416f8e843e11416af4ba73d11ed4274f020ecb6a/docs/pQTLandeQTLoverlap.html" target="_blank">416f8e8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1191,12 +1364,12 @@ add pqtl overlap
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -1344,6 +1517,43 @@ abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;,&quot;green&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
 <p><img src="figure/pQTLandeQTLoverlap.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/416f8e843e11416af4ba73d11ed4274f020ecb6a/docs/figure/pQTLandeQTLoverlap.Rmd/unnamed-chunk-9-1.png" target="_blank">416f8e8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code> wilcox.test(nuc.PS$bpval,nuc.notEorP$bpval,alternative=&quot;less&quot;)</code></pre>
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -1397,18 +1607,19 @@ other attached packages:
  [9] ggplot2_3.1.1   tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0       cellranger_1.1.0 pillar_1.3.1     compiler_3.5.1  
- [5] git2r_0.25.2     plyr_1.8.4       tools_3.5.1      digest_0.6.18   
- [9] lubridate_1.7.4  jsonlite_1.6     evaluate_0.12    nlme_3.1-137    
-[13] gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2  rlang_0.3.1     
-[17] cli_1.0.1        rstudioapi_0.10  yaml_2.2.0       haven_1.1.2     
-[21] withr_2.1.2      xml2_1.2.0       httr_1.3.1       knitr_1.20      
-[25] hms_0.4.2        generics_0.0.2   fs_1.2.6         rprojroot_1.3-2 
-[29] grid_3.5.1       tidyselect_0.2.5 glue_1.3.0       R6_2.3.0        
-[33] readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2     magrittr_1.5    
-[37] whisker_0.3-2    backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.2.4   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+ [1] Rcpp_1.0.0       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
+ [5] pillar_1.3.1     git2r_0.25.2     highr_0.7        tools_3.5.1     
+ [9] digest_0.6.18    lubridate_1.7.4  jsonlite_1.6     evaluate_0.12   
+[13] nlme_3.1-137     gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2 
+[17] rlang_0.4.0      cli_1.1.0        rstudioapi_0.10  yaml_2.2.0      
+[21] haven_1.1.2      withr_2.1.2      xml2_1.2.0       httr_1.3.1      
+[25] knitr_1.20       hms_0.4.2        generics_0.0.2   fs_1.3.1        
+[29] rprojroot_1.3-2  grid_3.5.1       tidyselect_0.2.5 glue_1.3.0      
+[33] R6_2.3.0         readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+[45] stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1     
+[49] crayon_1.3.4    </code></pre>
 </div>
 
 
