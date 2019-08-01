@@ -163,7 +163,7 @@ grideffectplot=plot_grid(nucspecplot,totspecplot)
 grideffectplot
 ```
 
-```{r figure2D, include=FALSE, dev="pdf", fig.height=4, fig.width=20, crop=FALSE}
+```{r figure2D, include=FALSE, dev="pdf", fig.height=8, fig.width=20, crop=FALSE}
 grideffectplot
 ```
 
