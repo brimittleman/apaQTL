@@ -295,7 +295,7 @@ ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(me
 summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))
 ```
 
-```{r figure3B, include=FALSE, dev="pdf", fig.height=5, fig.width=5, crop=FALSE}
+```{r figure3B, include=FALSE, dev="pdf", fig.height=10, fig.width=10, crop=FALSE}
 ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
 ```
 

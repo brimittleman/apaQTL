@@ -107,7 +107,7 @@ nuc.un=na.omit(nuc.un)
 ```
 
 
-```{r figure3C, include=FALSE, dev="pdf", fig.height=5, fig.width=5, crop=FALSE}
+```{r figure3C, include=FALSE, dev="pdf", fig.height=6, fig.width=10, crop=FALSE}
 qqplot(-log10(runif(nrow(nuc.notE))), -log10(nuc.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
 points(sort(-log10(runif(nrow(nuc.ex)))), sort(-log10(nuc.ex$bpval)),col= alpha("Red"))
 points(sort(-log10(runif(nrow(nuc.un)))), sort(-log10(nuc.un$bpval)),col= alpha("Blue"))

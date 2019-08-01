@@ -115,7 +115,7 @@ abline(0,1)
 
 legend("topleft", legend=c("Neither eGenes nor pGenes", "pGenes", "eGenes"),col=c("black", "red","blue","green"), pch=16,bty = 'n')
 ```
-```{r figure3A, include=FALSE, dev="pdf", fig.height=5, fig.width=5, crop=FALSE}
+```{r figure3A, include=FALSE, dev="pdf", fig.height=6, fig.width=10, crop=FALSE}
 qqplot(-log10(runif(nrow(nuc.notEorP))), -log10(nuc.notEorP$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
 points(sort(-log10(runif(nrow(nuc.PS)))), sort(-log10(nuc.PS$bpval)),col= alpha("Red"))
 points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha("blue"))
