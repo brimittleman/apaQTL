@@ -67,7 +67,17 @@ totalQTLdist=totQTLs %>% select(dist2PAS) %>% mutate(Fraction="Total")
 nuclearQTLdist=nucQTLs %>% select(dist2PAS) %>% mutate(Fraction="Nuclear")
 bothFractDist=bind_rows(totalQTLdist, nuclearQTLdist)
 
-ggplot(bothFractDist, aes(x=dist2PAS, fill=Fraction )) + geom_histogram(bins=100) +labs(y="Number of apaQTLs", x="Distance QTL SNP to PAS", title="Distance from QTL SNP to PAS by Fraction") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) 
+PASdistplot=ggplot(bothFractDist, aes(x=dist2PAS, fill=Fraction )) + geom_histogram(bins=100,aes(y = (..count..)/sum(..count..))) +labs(y="Proportion of apaQTLs", x="Distance QTL SNP to PAS", title="Distance from QTL SNP to PAS by Fraction") + scale_fill_manual(values=c("deepskyblue3","darkviolet"))  + facet_grid(~Fraction) + theme(text = element_text(size=16),legend.position = "bottom", axis.text.x =element_text(size=14), axis.text.y=element_text(size=14))
+```
+
+```{r figure2B, include=FALSE, dev="pdf", fig.height=4, fig.width=10, crop=FALSE}
+PASdistplot
+```
+
+
+```{r}
+ggplot(bothFractDist, aes(x=dist2PAS, fill=Fraction )) + geom_density() +labs( x="Distance QTL SNP to PAS", title="Distance from QTL SNP to PAS") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + facet_grid(~Fraction) + theme(legend.position = "none")
+  
 ```
 
 ##Metagene plot  
@@ -81,7 +91,7 @@ genes=read.table("../../genome_anotation_data/refseq.ProteinCoding.bed",col.name
 Total: 
 
 ```{r}
-totQTLs_gene= totQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTL=ifelse(strand=="+",as.numeric(SNPend)-as.numeric(Genestart), as.numeric(Geneend)-as.numeric(SNPend)), propGene=dist2QTL/geneLength)  %>% filter(propGene>-5 & propGene<5)
+totQTLs_gene= totQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart) %>% mutate(dist2QTL=ifelse(strand=="+",as.numeric(SNPend)-as.numeric(Genestart), as.numeric(Geneend)-as.numeric(SNPend)), propGene=dist2QTL/geneLength)  %>% filter(propGene>-3 & propGene<3)
 
 ```
 
@@ -110,7 +120,7 @@ There are 181 in the gene body
 
 Nuclear:
 ```{r}
-nucQTLs_gene= nucQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart)%>% mutate(dist2QTL=ifelse(strand=="+",as.numeric(SNPend)-as.numeric(Genestart), as.numeric(Geneend)-as.numeric(SNPend)), propGene=dist2QTL/geneLength)  %>% filter(propGene>-5 & propGene<5)
+nucQTLs_gene= nucQTLs %>% inner_join(genes, by="gene")%>% mutate(geneLength=Geneend-Genestart)%>% mutate(dist2QTL=ifelse(strand=="+",as.numeric(SNPend)-as.numeric(Genestart), as.numeric(Geneend)-as.numeric(SNPend)), propGene=dist2QTL/geneLength)  %>% filter(propGene>-3 & propGene<3)
 
 ```
 
@@ -151,6 +161,18 @@ ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_histogram(bins=100) +
 Density plot
 
 ```{r}
-ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_density(bins=100) + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")+ scale_fill_manual(values=c("deepskyblue3","darkviolet"))  + labs(x="Proportion of gene body", title="Metagene plot for apaQTL SNP location")
+propgenebodyplot=ggplot(genepropboth, aes(x=propGene,fill=Fraction)) + geom_histogram(bins=100,aes(y = (..count..)/sum(..count..))) + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")+ scale_fill_manual(values=c("deepskyblue3","darkviolet"))  + labs(y="Proportion of qtls",x="Proportion of gene body", title="Metagene plot for apaQTL SNP location")+  theme(text = element_text(size=16),legend.position = "bottom", axis.text.x =element_text(size=14), axis.text.y=element_text(size=14)) + facet_grid(~Fraction)
+propgenebodyplot
 ```
+```{r figure2C, include=FALSE, dev="pdf", fig.height=4, fig.width=10, crop=FALSE}
+propgenebodyplot
+```
+
+
+```{r}
+geneprop_nuc=genepropboth %>% filter(Fraction=="Nuclear")
+
+ggplot(geneprop_nuc, aes(x=propGene)) + geom_density(bins=100, fill="#7570B3") + geom_vline(xintercept =0,color= "black") + geom_vline(xintercept =1,color= "black")  + labs(x="Proportion of gene body", title="apaQTL SNP location")+  theme(text = element_text(size=16), axis.text.x =element_text(size=14), axis.text.y=element_text(size=14))
+```
+
 
