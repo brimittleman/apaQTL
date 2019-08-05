@@ -96,8 +96,8 @@ WHich factors correlate with PCs:
 
 ```{r}
 metadata=read.table("../data/MetaDataSequencing.txt", stringsAsFactors = F, header = T)
-metadata_tot=metadata %>% filter(fraction=="total") %>% select(batch,Sex, alive_avg, undiluted_avg, library_conc,ratio260_280)
-metadata_nuc=metadata %>% filter(fraction=="nuclear") %>% select(batch,Sex, alive_avg, undiluted_avg, library_conc,ratio260_280)
+metadata_tot=metadata %>% filter(fraction=="total") %>% select(batch,Sex, alive_avg, undiluted_avg,ratio260_280)
+metadata_nuc=metadata %>% filter(fraction=="nuclear") %>% select(batch,Sex, alive_avg, undiluted_avg,ratio260_280)
 ```
 
 Function from Ben 
@@ -160,13 +160,8 @@ covariate_pc_pve_heatmap <- function(pc_df, covariate_df, title) {
 
 ```{r}
 covariate_pc_pve_heatmap(pca_tot_df,metadata_tot, title="Total PCs")
-```
-```{r}
-summary(lm(pca_tot_df$PC6~metadata_tot$library_conc))
+
+covariate_pc_pve_heatmap(pca_nuc_df,metadata_nuc, title="Nuclear PCs")
+
 ```
 
-
-
-```{r}
-#covariate_pc_pve_heatmap(pca_nuc_df,metadata_nuc, title="Nuclear PCs")
-```
