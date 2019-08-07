@@ -1,0 +1,73 @@
+---
+title: "Reads_graphs"
+author: "Mayher"
+date: "8/1/2019"
+output: html_document
+---
+
+I first install and download all necessary libraries and packages
+```{r setup, include=FALSE}
+#install.packages("tidyverse")
+#install.packages("writexl")
+require(writexl)
+require("dplyr")
+require("tidyr")
+require(ggplot2)
+```
+
+Then, I am reading in my file, and then only keeping the columns that I need: mapped, mapped no mispriming, reads, and the Sample Line ID. 
+```{r file}
+df <- read.delim("MetaDataSequencing.txt")
+keeps <- c("line","fraction", "reads", "mapped", "Mapped_noMP")
+frac_dif <- df[keeps]
+```
+
+Next, I am dividing the data set into it's two categories: nuclear and total
+```{r nuc and total}
+nuclear <- subset(frac_dif, fraction == "nuclear", c(fraction, line, reads, mapped, Mapped_noMP))
+total <- subset(frac_dif, fraction == "total", c(fraction, line, reads, mapped, Mapped_noMP))
+```
+
+Here, I create my data matrices. Each are proportions of reads. There is mapped, mapped with mispriming, mapped without mispriming, and unmapped. I do this for both nuclear and total. 
+```{r prop df}
+#nuclear proportions
+nuc_mapped_prop <- data.matrix(nuclear$mapped/nuclear$reads)
+nuc_mapped_noMP_prop <- data.matrix(nuclear$Mapped_noMP/nuclear$reads)
+nuc_mapped_MP <- nuc_mapped_prop - nuc_mapped_noMP_prop
+nuc_none <- 1 - nuc_mapped_prop
+nuc_lines <- data.matrix(nuclear$line)
+
+#total proportions
+total_mapped_prop <- data.matrix(total$mapped/total$reads)
+total_mapped_noMP_prop <- data.matrix(total$Mapped_noMP/total$reads)
+total_mapped_MP <-total_mapped_prop - total_mapped_noMP_prop
+total_none <- 1 - total_mapped_prop
+total_lines <- data.matrix(total$line)
+```
+
+Then, I combine these proportions into a large data frame called "combination", which I can then easily create my plots.The gather() function tidies my data so that it is in the format that ggplot uses to create the bar plots. I then make the type column a factor with 3 levels. These levels allow me to order the stacks in the way I want them to. 
+```{r combination}
+nuc_combination <- data.frame(nuc_lines, nuc_mapped_noMP_prop, nuc_mapped_MP, nuc_none)
+nuc_combination <- gather(nuc_combination, nuc_mapped_noMP_prop, nuc_mapped_MP, nuc_none, key = "type", value = "count")
+nuc_combination$type <- factor(nuc_combination$type, levels=c("nuc_none", "nuc_mapped_MP", "nuc_mapped_noMP_prop"))
+
+total_combination <- data.frame(total_lines, total_mapped_noMP_prop, total_mapped_MP, total_none)
+total_combination <- gather(total_combination, total_mapped_noMP_prop, total_mapped_MP, total_none, key = "type", value = "count")
+total_combination$type <- factor(total_combination$type, levels=c("total_none", "total_mapped_MP", "total_mapped_noMP_prop"))
+```
+
+
+Finally, I create my graphs, one for nuclear and the other for total. geom_col allows me to make bar graphs based off of heights in the data, instead of frequency, which geom_bar does. I stacked the bar plots using three proportions - mapped with mispriming, mapped without mispriming, and unmapped. 
+```{r pressure, echo=FALSE}
+ggplot(data = nuc_combination, aes(x = nuc_lines, y = count, fill = type)) + geom_col() + theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + xlab("lines") + ylab("proportions") + scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP")) +  ggtitle("nuclear lines vs. proportion")
+
+ggplot(data = total_combination, aes(x = total_lines, y = count, fill = type)) + geom_col() + theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + xlab("lines") + ylab("proportions") + scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP")) +  ggtitle("total lines vs. proportion")
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+
+```
+
