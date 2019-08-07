@@ -134,3 +134,5 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Location and usage of PAS](PAS_graphs.html)  
 
+* [Read metadata plots](reads_graphs.html)
+
