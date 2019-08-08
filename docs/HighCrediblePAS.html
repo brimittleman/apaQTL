@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-31
+<strong>Last updated:</strong> 2019-08-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree74b0b5e4409f758eb45e03ebe88cd6af7215128ctargetblank74b0b5ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/74b0b5e4409f758eb45e03ebe88cd6af7215128c" target="_blank">74b0b5e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb71d1be927aa0b29961e7b5472ff860cde41e19etargetblankb71d1bea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b71d1be927aa0b29961e7b5472ff860cde41e19e" target="_blank">b71d1be</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree74b0b5e4409f758eb45e03ebe88cd6af7215128ctargetblank74b0b5ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb71d1be927aa0b29961e7b5472ff860cde41e19etargetblankb71d1bea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -491,7 +491,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    data/.DS_Store
     Ignored:    docs/.DS_Store
     Ignored:    docs/figure/.DS_Store
@@ -527,6 +526,7 @@ Untracked files:
     Untracked:  code/._IntronicPASDT.sh
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._LD_qtl.sh
+    Untracked:  code/._LD_snpsproxy.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -593,6 +593,7 @@ Untracked files:
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
+    Untracked:  code/._filterLDsnps.py
     Untracked:  code/._filterpeaks.py
     Untracked:  code/._finalPASbed2SAF.py
     Untracked:  code/._fix4su304corr.py
@@ -645,6 +646,7 @@ Untracked files:
     Untracked:  code/._nucSpeceffectsize.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
+    Untracked:  code/._parseBestbamid.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -663,14 +665,18 @@ Untracked files:
     Untracked:  code/._runMakeeQTLempirical.sh
     Untracked:  code/._run_bam2bw_all3prime.sh
     Untracked:  code/._run_bam2bw_extra3.sh
+    Untracked:  code/._run_bestbamid.sj
+    Untracked:  code/._run_filtersnpLD.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
     Untracked:  code/._run_getapafromeQTL.py
     Untracked:  code/._run_getapafromeQTL.sh
     Untracked:  code/._run_getapapval4eqtl_unexp.sh
     Untracked:  code/._run_leafcutterDiffIso.sh
+    Untracked:  code/._run_prxySNP.sh
     Untracked:  code/._run_pttfacetboxplot.sh
     Untracked:  code/._run_sepUsagephen.sh
     Untracked:  code/._run_sepgenobychrom.sh
+    Untracked:  code/._run_verifybam.sh
     Untracked:  code/._selectNominalPvalues.py
     Untracked:  code/._sepUsagePhen.py
     Untracked:  code/._sepgenobychrom.py
@@ -693,9 +699,11 @@ Untracked files:
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
+    Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
+    Untracked:  code/._wrap_verifybam.sh
     Untracked:  code/._writePTTexamplecode.py
     Untracked:  code/._writePTTexamplecode.sh
     Untracked:  code/.pversion
@@ -748,6 +756,7 @@ Untracked files:
     Untracked:  code/IntronicPASDT.sh
     Untracked:  code/LC_samplegroups.py
     Untracked:  code/LD_qtl.sh
+    Untracked:  code/LD_snpsproxy.sh
     Untracked:  code/LD_vcftools.hap.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
@@ -865,6 +874,7 @@ Untracked files:
     Untracked:  code/extractGenotypes.py
     Untracked:  code/extractseqfromqtlfastq.py
     Untracked:  code/fc2leafphen.py
+    Untracked:  code/filterLDsnps.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fix4su304corr.py
@@ -934,12 +944,16 @@ Untracked files:
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucQTLGWAS.py
+    Untracked:  code/nucQTLGWAS_withLD.py
     Untracked:  code/nucSpeceffectsize.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
+    Untracked:  code/parseBestbamid.py
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/plink.log
     Untracked:  code/processYRIgen.py
+    Untracked:  code/prxySNP.err
+    Untracked:  code/prxySNP.out
     Untracked:  code/pttFacetBoxplots.err
     Untracked:  code/pttFacetBoxplots.out
     Untracked:  code/pttQTLsinapaQTL.py
@@ -951,9 +965,12 @@ Untracked files:
     Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
+    Untracked:  code/runBestBamID.err
     Untracked:  code/runCorrectNomEqtl.sh
     Untracked:  code/runCorrectNomeqtl.err
     Untracked:  code/runCorrectNomeqtl.out
+    Untracked:  code/runFilterLD.err
+    Untracked:  code/runFilterLD.out
     Untracked:  code/runHMMpermute.err
     Untracked:  code/runHMMpermute.out
     Untracked:  code/runHMMpermuteAPAqtls.sh
@@ -974,7 +991,9 @@ Untracked files:
     Untracked:  code/run_bam2bw_extra3.sh
     Untracked:  code/run_bam2bwexta.err
     Untracked:  code/run_bam2bwexta.out
+    Untracked:  code/run_bestbamid.sh
     Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/run_filtersnpLD.sh
     Untracked:  code/run_getAPAfromanyeQTL.err
     Untracked:  code/run_getAPAfromanyeQTL.out
     Untracked:  code/run_getApaPval4eQTLs.err
@@ -987,6 +1006,7 @@ Untracked files:
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/run_prxySNP.sh
     Untracked:  code/run_pttfacetboxplot.sh
     Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
@@ -995,6 +1015,11 @@ Untracked files:
     Untracked:  code/run_sepgenobychrom.sh
     Untracked:  code/run_sepusage.err
     Untracked:  code/run_sepusage.out
+    Untracked:  code/run_verifybam.err
+    Untracked:  code/run_verifybam.out
+    Untracked:  code/run_verifybam.sh
+    Untracked:  code/runprxySNP.err
+    Untracked:  code/runprxySNP.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -1036,12 +1061,18 @@ Untracked files:
     Untracked:  code/tabixSNPS.sh
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/testVerifyBam.sh
+    Untracked:  code/test_verifybam.err
+    Untracked:  code/test_verifybam.out
     Untracked:  code/totSeceffectsize.py
     Untracked:  code/transcriptdm2bed.py
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf2bed.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
+    Untracked:  code/wrap_verifybam.err
+    Untracked:  code/wrap_verifybam.out
+    Untracked:  code/wrap_verifybam.sh
     Untracked:  code/writeExampleQTLcode.py
     Untracked:  code/writePTTexamplecode.py
     Untracked:  code/zipandtabPhen.err
@@ -1133,8 +1164,10 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
+    Untracked:  data/verifyBAM/
     Untracked:  docs/._.DS_Store
     Untracked:  docs/figure/._.DS_Store
+    Untracked:  docs/figure/nonNormQTL.Rmd/._figure2D-1.pdf
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1143,18 +1176,13 @@ Untracked files:
     Untracked:  output/meanCorrelationPhenotypes.svg
 
 Unstaged changes:
-    Modified:   analysis/DiffIsoAnalysis.Rmd
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PASdescriptiveplots.Rmd
+    Modified:   analysis/PAS_graphs.Rmd
     Modified:   analysis/PrematureTermQTL.Rmd
-    Modified:   analysis/QTLlocation.Rmd
-    Modified:   analysis/chromHHMQTL.Rmd
     Modified:   analysis/compareAnnotatedpas.Rmd
-    Modified:   analysis/nonNormQTL.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
-    Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
     Deleted:    code/Upstream10Bases_general.py
@@ -1171,6 +1199,7 @@ Unstaged changes:
     Modified:   code/makePheno.py
     Deleted:    code/test.txt
     Deleted:    docs/figure/HighCrediblePAS.Rmd/figure1bsubset-1.pdf
+    Deleted:    reads_graphs.Rmd
 
 </code></pre>
 <p>
@@ -1209,6 +1238,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b71d1be927aa0b29961e7b5472ff860cde41e19e/analysis/HighCrediblePAS.Rmd" target="_blank">b71d1be</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-08
+</td>
+<td>
+add prop test
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/86dbd940a73aab916ded4be0d6eb4e6948a1310a/docs/HighCrediblePAS.html" target="_blank">86dbd94</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-31
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1404,12 +1467,12 @@ add credible set analysis
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -1540,6 +1603,19 @@ brimittleman
 </table>
 </div>
 </div>
+<pre class="r"><code>prop.test(x=c(15098, 3207), n=c(20318,14433))</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity
+    correction
+
+data:  c(15098, 3207) out of c(20318, 14433)
+X-squared = 9182.5, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.5117660 0.5300056
+sample estimates:
+   prop 1    prop 2 
+0.7430849 0.2221991 </code></pre>
 <p>Look at usage of those with a signal site to those without. In each fraction</p>
 <div id="total" class="section level3">
 <h3>Total:</h3>
@@ -1547,44 +1623,7 @@ brimittleman
 
 allPAS_totUsage=allPAS %&gt;% inner_join(TotalPASUsage, by=&quot;PAS&quot;)</code></pre>
 <pre class="r"><code>ggplot(allPAS_totUsage, aes(x=loc, y=TotalUsage, fill=SS)) + geom_boxplot() + labs(title=&quot;Mean Usage in total fraction\n by presence of signal site&quot;)</code></pre>
-<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
-Past versions of unnamed-chunk-7-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-7-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/8bed6113f04ede11fbd26b734e05d92b5a725a8d/docs/figure/HighCrediblePAS.Rmd/unnamed-chunk-7-1.png" target="_blank">8bed611</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="nuclear" class="section level3">
 <h3>Nuclear</h3>
@@ -1592,44 +1631,7 @@ brimittleman
 
 allPAS_nucUsage=allPAS %&gt;% inner_join(NuclearPASUsage, by=&quot;PAS&quot;)</code></pre>
 <pre class="r"><code>ggplot(allPAS_nucUsage, aes(x=loc, y=NuclearUsage, fill=SS)) + geom_boxplot()</code></pre>
-<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
-Past versions of unnamed-chunk-9-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-9-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/8bed6113f04ede11fbd26b734e05d92b5a725a8d/docs/figure/HighCrediblePAS.Rmd/unnamed-chunk-9-1.png" target="_blank">8bed611</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="intronic-credible-set" class="section level2">
@@ -1660,61 +1662,6 @@ rnaintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=RNA, x=perlength)) + geom_
 
 bothintronlength=ggplot(PAS_signalandRNA_Len, aes(fill=BothEv, x=perlength)) + geom_density(alpha=.5)+ labs(title=&quot;Distribution of intronic PAS along genes\n by Both lines of evidence&quot;, x=&quot;Percent gene length&quot;)</code></pre>
 <pre class="r"><code>plot_grid(ssintronlength,rnaintronlength,bothintronlength)</code></pre>
-<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
-Past versions of unnamed-chunk-14-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-14-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/e22e31c38b58fd8ebcf2eefd8d4a781d4bac934d/docs/figure/HighCrediblePAS.Rmd/unnamed-chunk-14-1.png" target="_blank">e22e31c</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/8bed6113f04ede11fbd26b734e05d92b5a725a8d/docs/figure/HighCrediblePAS.Rmd/unnamed-chunk-14-1.png" target="_blank">8bed611</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Which intron are these in.</p>
-<pre class="r"><code>nucIntronIDPAS=read.table(&quot;../data/intron_analysis/NuclearIntronPASwithWhichintron.txt&quot;,header = T, stringsAsFactors = F) %&gt;% separate(PeakID, into=c(&quot;PAS&quot;, &quot;gene2&quot;,&quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, &quot;yes&quot;,&quot;no&quot;)) %&gt;% mutate(IntronCat=ifelse(nintron&lt;=6, &quot;first (&lt;6)&quot;, ifelse(nintron&gt;6 &amp;nintron&lt;=11, &quot;second (6-11)&quot;, ifelse(nintron&gt;11 &amp;nintron&lt;=18, &quot;third (11-18)&quot;, &quot;fourth (&gt;18)&quot;))))
-
-ggplot(nucIntronIDPAS, aes(x=Intronid, fill=SS)) + geom_bar(alpha=.5,position = &quot;dodge&quot;) + xlim(0,10) + facet_grid(~IntronCat)</code></pre>
-<pre><code>Warning: Removed 2108 rows containing non-finite values (stat_count).</code></pre>
-<pre><code>Warning: Removed 3 rows containing missing values (geom_bar).</code></pre>
 <p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
@@ -1753,10 +1700,11 @@ brimittleman
 </table>
 </div>
 </div>
-<pre class="r"><code>totIntronIDPAS=read.table(&quot;../data/intron_analysis/TotalIntronPASwithWhichintron.txt&quot;,header = T, stringsAsFactors = F) %&gt;% separate(PeakID, into=c(&quot;PAS&quot;, &quot;gene2&quot;,&quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, &quot;yes&quot;,&quot;no&quot;)) %&gt;% mutate(IntronCat=ifelse(nintron&lt;=6, &quot;first (&lt;6)&quot;, ifelse(nintron&gt;6 &amp;nintron&lt;=11, &quot;second (6-11)&quot;, ifelse(nintron&gt;11 &amp;nintron&lt;=18, &quot;third (11-18)&quot;, &quot;fourth (&gt;18)&quot;))))
+<p>Which intron are these in.</p>
+<pre class="r"><code>nucIntronIDPAS=read.table(&quot;../data/intron_analysis/NuclearIntronPASwithWhichintron.txt&quot;,header = T, stringsAsFactors = F) %&gt;% separate(PeakID, into=c(&quot;PAS&quot;, &quot;gene2&quot;,&quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, &quot;yes&quot;,&quot;no&quot;)) %&gt;% mutate(IntronCat=ifelse(nintron&lt;=6, &quot;first (&lt;6)&quot;, ifelse(nintron&gt;6 &amp;nintron&lt;=11, &quot;second (6-11)&quot;, ifelse(nintron&gt;11 &amp;nintron&lt;=18, &quot;third (11-18)&quot;, &quot;fourth (&gt;18)&quot;))))
 
-ggplot(totIntronIDPAS, aes(x=Intronid, fill=SS)) + geom_bar(alpha=.5,position = &quot;dodge&quot;) + xlim(0,10) + facet_grid(~IntronCat)</code></pre>
-<pre><code>Warning: Removed 1327 rows containing non-finite values (stat_count).</code></pre>
+ggplot(nucIntronIDPAS, aes(x=Intronid, fill=SS)) + geom_bar(alpha=.5,position = &quot;dodge&quot;) + xlim(0,10) + facet_grid(~IntronCat)</code></pre>
+<pre><code>Warning: Removed 2108 rows containing non-finite values (stat_count).</code></pre>
 <pre><code>Warning: Removed 3 rows containing missing values (geom_bar).</code></pre>
 <p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1796,6 +1744,12 @@ brimittleman
 </table>
 </div>
 </div>
+<pre class="r"><code>totIntronIDPAS=read.table(&quot;../data/intron_analysis/TotalIntronPASwithWhichintron.txt&quot;,header = T, stringsAsFactors = F) %&gt;% separate(PeakID, into=c(&quot;PAS&quot;, &quot;gene2&quot;,&quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(SS=ifelse(PAS %in% signalPASIntronicVec, &quot;yes&quot;,&quot;no&quot;)) %&gt;% mutate(IntronCat=ifelse(nintron&lt;=6, &quot;first (&lt;6)&quot;, ifelse(nintron&gt;6 &amp;nintron&lt;=11, &quot;second (6-11)&quot;, ifelse(nintron&gt;11 &amp;nintron&lt;=18, &quot;third (11-18)&quot;, &quot;fourth (&gt;18)&quot;))))
+
+ggplot(totIntronIDPAS, aes(x=Intronid, fill=SS)) + geom_bar(alpha=.5,position = &quot;dodge&quot;) + xlim(0,10) + facet_grid(~IntronCat)</code></pre>
+<pre><code>Warning: Removed 1327 rows containing non-finite values (stat_count).</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values (geom_bar).</code></pre>
+<p><img src="figure/HighCrediblePAS.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>No signal ###QTL</p>
 <p>Are any of these total QTLs?</p>
 <pre class="r"><code>totQTL=read.table(&quot;../data/apaQTLs/Total_apaQTLs_5fdr.txt&quot;, header = T, stringsAsFactors = F) %&gt;% dplyr::rename(&quot;PAS&quot;=Peak)</code></pre>
