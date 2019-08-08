@@ -57,7 +57,15 @@ withSSPlot
 withSSPlot
 ```
 
+
+```{r}
+prop.test(x=c(15098, 3207), n=c(20318,14433))
+```
+
+
 Look at usage of those with a signal site to those without. In each fraction
+
+
 
 ###Total:
 
