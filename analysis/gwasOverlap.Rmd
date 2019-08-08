@@ -18,18 +18,33 @@ https://brimittleman.github.io/threeprimeseq/OverlapFullGWASCatelog.html
 Nuclear qtls: ../data/apaQTLs/NuclearQTLSNPsRSID.txt
 Total qtls: ../data/apaQTLs/TotalQTLSNPsRSID.txt 
 
+```{r}
+require(tidyverse)
+```
+
+
 
 ```{bash,eval=F}
 mkdir  ../data/GWAS_overlap/
 mkdir ../data/GWAS_overlap/TotalApaQTL_LD/
 mkdir  ../data/GWAS_overlap/NuclearApaQTL_LD/
-sbatch LD_qtl.sh
+#sbatch LD_qtl.sh
 ```
 
 
 ```{bash,eval=F}
 python nucQTLGWAS.py
 ```
+
+```{r}
+results=read.table("../data/GWAS_overlap/NuclearSNPinGWAS.txt",header = F, stringsAsFactors = F,sep="\t")
+
+
+resultsSNPs=results %>% select(V5) %>% unique()
+
+```
+
+
 
 
 Check examples:
@@ -42,3 +57,48 @@ ELL2 intron + peak106823 rs56219066
 
 
  C10orf88 intron + peak19881 rs7904973
+ 
+ 
+ Full catelog: 
+ Get snps in LD using the https://ldlink.nci.nih.gov/#ldproxy-tab. Run this with through command line. To output code for each snp:
+ 
+```{bash,eval=F}
+sbatch LD_snpproxy.sh 
+```
+Run each line independently
+Concatinate all results 
+filter for r2 >.9  
+
+```{bash, eval=F}
+sbatch run_filtersnpLD.sh
+```
+
+Concatinate this with the RSID for the astual QTLS
+
+```{bash,eval=F}
+cat /project2/gilad/briana/apaQTL/data/apaQTLs/LDsnps_9/* ../data/apaQTLs/NuclearQTLSNPsRSID.txt  > /project2/gilad/briana/apaQTL/data/apaQTLs/NuclearQTLSNPsRSID_withLD.txt
+```
+
+../data/apaQTLs/NuclearQTLSNPsRSID_withLD.txt
+
+
+
+
+```{bash,eval=F}
+python nucQTLGWAS_withLD.py
+```
+
+
+```{bash,eval=F}
+cut -f 5 ../data/GWAS_overlap/NuclearSNPinGWAS_withLD.txt | sort | uniq | wc -l
+
+#87
+```
+
+87 overlaps of 702 uniq snps
+
+```{r}
+87/702
+```
+
+
