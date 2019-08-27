@@ -48,6 +48,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Addition coverage plots](additionalCoveragePlots.html)
 
+* [Additional MP QC](flagMPpas.html)
+
 ##apaQTL  
 
 

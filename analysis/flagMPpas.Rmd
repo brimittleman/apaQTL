@@ -1,0 +1,153 @@
+---
+title: "Flag potential MP PAS"
+author: "Briana Mittleman"
+date: "8/26/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(cowplot)
+```
+
+After looking at PAC bio long read seq for 5 of the lines we are concered 3' seq is not base pair specific. This means we are removing misprimmed reads but we may still have PAS with evidence for misprimming. In order to account for this in my analysis I will flag these PAS and rerun the QTL analysis. 
+
+I will look for a stretch of 6 As in the 20bp downstream of the PAS. I will look at the 10 basepairs downstream of ../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed. These are corrected for strand and have the specific base for the PAS. 
+
+I will make a new bed file with the 20 basepiars downstream. 
+
+```{bash,eval=F}
+mkdir ../data/PAS_postFlag/
+```
+
+```{bash,eval=F}
+python fiftyBPupstreamPAS.py
+python tenBPupstreamPAS.py
+python fifteenBPupstreamPAS.py
+
+sort -k1,1n -k2,2 ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.10down.bed > ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.10down.sort.bed
+
+sort -k1,1n -k2,2 ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.50down.bed > ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.50down.sort.bed
+
+sort -k1,1n -k2,2 ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.15down.bed > ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.15down.sort.bed
+```
+
+Use bedtools nuc to get the nucleotide for these positions. 
+
+```{bash,eval=F}
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.50down.sort.bed > ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.50downNUC.txt
+
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.10down.sort.bed > ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.10downNUC.txt
+
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.15down.sort.bed > ../data/PAS_postFlag/APAPAS_GeneLocAnno.5perc.15downNUC.txt
+
+```
+
+
+```{bash,eval=F}
+python filterMPPAS.py
+python filterMPPAS_50.py
+python filterMPPAS_15.py
+```
+
+PAS: 43963
+
+6 A's in 50 upstream: 37682
+6 A's in 50 upstream or 70% As: 37671
+
+6 A's in 40 upstream: 38031
+6 A's in 40 upstream or 70% As: 38005
+
+6 A's in 30 upstream: 38403
+6 A's in 30 upstream or 70% As: 38313
+
+
+6 A's in 20 upstream: 38863
+6 A's in 20 upstream or 70% As: 38280
+39991
+
+6 A's in 10 upstream: 42802
+6 A's in 10 upstream or 70% As: 42356
+
+graph results:
+
+```{r}
+flagstats=read.csv("../data/PAS_postFlag/potentialMPPAS.csv", head=T) %>% mutate(PropPAS=FilteredPAS/All_PAS)
+```
+
+```{r}
+ggplot(flagstats, aes(x=N_basepair, y=PropPAS, group=Filter, fill=Filter)) + geom_bar(stat="identity", position="dodge") + labs(x="Number of Basepairs downstream of PAS", y="Proportion of PAS passing filter", title="Proportions of PAS passing various cutoffs")  + 
+  geom_text(aes(label = round(flagstats$PropPAS,digits=2), hjust = 1.5), position = position_dodge(width = 10), 
+            angle = 90)
+
+```
+
+
+```{r}
+ggplot(flagstats, aes(x=N_basepair, y=FilteredPAS, group=Filter, fill=Filter)) + geom_bar(stat="identity", position="dodge")
+```
+
+
+I want to see if any of the filtered out PAS are nuclear apaQTLs. I will need to 10,50,15. I can do this with filter join. 
+
+
+```{r}
+bednames=c("chr", "start", "end", "name", "score","strand")
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed", col.names = bednames, stringsAsFactors = F)
+PAS_50=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.50noMP.bed", col.names = bednames, stringsAsFactors = F) 
+PAS_15=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.15noMP.bed", col.names = bednames, stringsAsFactors = F)
+PAS_10=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.10noMP.bed", col.names = bednames, stringsAsFactors = F)
+```
+
+```{r}
+Removed50=PAS %>% anti_join(PAS_50, by=c("chr", "start", "end", "name", "score","strand")) %>% separate(name,into=c("PAS","gene"), sep=":") %>% mutate(Peak=paste("peak", PAS,sep=""))
+Removed15=PAS %>% anti_join(PAS_15, by=c("chr", "start", "end", "name", "score","strand"))%>% separate(name,into=c("PAS","gene"), sep=":") %>% mutate(Peak=paste("peak", PAS,sep=""))
+Removed10=PAS %>% anti_join(PAS_10, by=c("chr", "start", "end", "name", "score","strand"))%>% separate(name,into=c("PAS","gene"), sep=":") %>% mutate(Peak=paste("peak", PAS,sep=""))
+
+```
+
+Nuclear QTLs:
+
+```{r}
+QTLPAS=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt",stringsAsFactors = F, header = T)
+```
+
+
+```{r}
+Removed50_qtl=Removed50 %>% inner_join(QTLPAS, by="Peak") 
+Removed15_qtl=Removed15 %>% inner_join(QTLPAS, by="Peak")
+Removed10_qtl=Removed10 %>% inner_join(QTLPAS, by="Peak")
+```
+
+
+```{r}
+propofremoved=c(nrow(Removed50_qtl)/nrow(Removed50),nrow(Removed15_qtl)/nrow(Removed15),nrow(Removed10_qtl)/nrow(Removed10))
+propofQTL=c(nrow(Removed50_qtl)/nrow(QTLPAS),nrow(Removed15_qtl)/nrow(QTLPAS),nrow(Removed10_qtl)/nrow(QTLPAS))
+cutoffs=c("50 basepairs", "15 basepairs", "10 basepairs")
+
+propqithQTLdf=as.data.frame(cbind(cutoffs,propofremoved,propofQTL ))
+
+propqithQTLdf$propofremoved= as.numeric(as.character(propqithQTLdf$propofremoved))
+propqithQTLdf$propofQTL= as.numeric(as.character(propqithQTLdf$propofQTL))
+
+nrow(QTLPAS)/nrow(PAS)
+```
+
+```{r}
+removedPlot=ggplot(propqithQTLdf, aes(x=cutoffs, y=propofremoved )) + geom_bar(stat="identity", fill="darkorchid4") + labs(title="Proportion of Removed PAS with a Nuclear QTL", y="Proportion of removed", x="Filter")
+
+
+```
+
+```{r}
+removedQTLPlot=ggplot(propqithQTLdf, aes(x=cutoffs, y=propofQTL )) + geom_bar(stat="identity", fill="blue4") + labs(title="Proportion of Nuclear QTL in a removed PAS", y="Proportion of QTLs",x="Filter")
+```
+```{r}
+plot_grid(removedPlot,removedQTLPlot)
+```
+
