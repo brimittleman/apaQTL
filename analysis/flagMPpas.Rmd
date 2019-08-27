@@ -151,3 +151,65 @@ removedQTLPlot=ggplot(propqithQTLdf, aes(x=cutoffs, y=propofQTL )) + geom_bar(st
 plot_grid(removedPlot,removedQTLPlot)
 ```
 
+
+Total QTLs:
+
+```{r}
+TotalQTLPAS=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt",stringsAsFactors = F, header = T)
+```
+
+
+```{r}
+Removed50_TOTALqtl=Removed50 %>% inner_join(TotalQTLPAS, by="Peak") 
+Removed15_TOTALqtl=Removed15 %>% inner_join(TotalQTLPAS, by="Peak")
+Removed10_TOTALqtl=Removed10 %>% inner_join(TotalQTLPAS, by="Peak")
+```
+
+
+```{r}
+propofremovedT=c(nrow(Removed50_TOTALqtl)/nrow(Removed50),nrow(Removed15_TOTALqtl)/nrow(Removed15),nrow(Removed10_TOTALqtl)/nrow(Removed10))
+propofQTLT=c(nrow(Removed50_TOTALqtl)/nrow(TotalQTLPAS),nrow(Removed15_TOTALqtl)/nrow(TotalQTLPAS),nrow(Removed10_TOTALqtl)/nrow(TotalQTLPAS))
+
+
+propqithQTLdfT=as.data.frame(cbind(cutoffs,propofremovedT,propofQTLT ))
+
+propqithQTLdfT$propofremovedT= as.numeric(as.character(propqithQTLdfT$propofremovedT))
+propqithQTLdfT$propofQTLT= as.numeric(as.character(propqithQTLdfT$propofQTLT))
+
+
+```
+
+```{r}
+removedPlotT=ggplot(propqithQTLdfT, aes(x=cutoffs, y=propofremovedT )) + geom_bar(stat="identity", fill="darkorchid4") + labs(title="Proportion of Removed PAS with a Total QTL", y="Proportion of removed", x="Filter")
+
+
+```
+
+```{r}
+removedQTLPlotT=ggplot(propqithQTLdfT, aes(x=cutoffs, y=propofQTLT )) + geom_bar(stat="identity", fill="blue4") + labs(title="Proportion of Total QTL in a removed PAS", y="Proportion of QTLs",x="Filter")
+```
+```{r}
+plot_grid(removedPlotT,removedQTLPlotT)
+```
+
+
+Try with 7As in a row.  
+```{bash,eval=F}
+python filterMPPAS_15_7As.py
+```
+
+```{r}
+PAS_15_7=read.table("../data/PAS/APAPAS_GeneLocAnno.15noMP_7As.bed", col.names = bednames, stringsAsFactors = F)
+
+nrow(PAS_15_7)
+
+nrow(PAS_15)
+```
+
+```{r}
+Removed15_7=PAS %>% anti_join(PAS_15_7, by=c("chr", "start", "end", "name", "score","strand"))%>% separate(name,into=c("PAS","gene"), sep=":") %>% mutate(Peak=paste("peak", PAS,sep=""))
+Removed15_7_qtl=Removed15_7 %>% inner_join(QTLPAS, by="Peak")
+nrow(Removed15_7_qtl)/nrow(QTLPAS)
+
+```
+
