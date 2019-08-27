@@ -343,10 +343,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-08-26
+<strong>Last updated:</strong> 2019-08-27
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>apaQTL/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -362,12 +362,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5289aa1cbd94dfc0369789c7078332339ed4edd0targetblank5289aa1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5289aa1cbd94dfc0369789c7078332339ed4edd0" target="_blank">5289aa1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree21b9ef634e42b9be6146b6ca0d633d817de08b17targetblank21b9ef6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/21b9ef634e42b9be6146b6ca0d633d817de08b17" target="_blank">21b9ef6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5289aa1cbd94dfc0369789c7078332339ed4edd0targetblank5289aa1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree21b9ef634e42b9be6146b6ca0d633d817de08b17targetblank21b9ef6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -492,7 +492,8 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
-    Ignored:    data/FlaggedPAS/
+    Ignored:    data/Version15bp6As/
+    Ignored:    data/Version15bp7As/
     Ignored:    docs/.DS_Store
     Ignored:    docs/figure/.DS_Store
     Ignored:    output/.DS_Store
@@ -512,6 +513,7 @@ Untracked files:
     Untracked:  analysis/interpret_verifybam.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
+    Untracked:  analysis/version15bpfilter.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
@@ -547,6 +549,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -594,6 +597,7 @@ Untracked files:
     Untracked:  code/._extractGenotypes.py
     Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
+    Untracked:  code/._fc_filteredPAS6and7As.sh
     Untracked:  code/._fifteenBPupstreamPAS.py
     Untracked:  code/._fiftyBPupstreamPAS.py
     Untracked:  code/._filter5perc.R
@@ -601,7 +605,9 @@ Untracked files:
     Untracked:  code/._filterLDsnps.py
     Untracked:  code/._filterMPPAS.py
     Untracked:  code/._filterMPPAS_15.py
+    Untracked:  code/._filterMPPAS_15_7As.py
     Untracked:  code/._filterMPPAS_50.py
+    Untracked:  code/._filterSAFforMP.py
     Untracked:  code/._filterpeaks.py
     Untracked:  code/._finalPASbed2SAF.py
     Untracked:  code/._fix4su304corr.py
@@ -713,6 +719,10 @@ Untracked files:
     Untracked:  code/._twentyBPupstreamPAS.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
+    Untracked:  code/._verifyBam18517N.sh
+    Untracked:  code/._verifyBam18517T.sh
+    Untracked:  code/._verifyBam19128N.sh
+    Untracked:  code/._verifyBam19128T.sh
     Untracked:  code/._wrap_verifybam.sh
     Untracked:  code/._writePTTexamplecode.py
     Untracked:  code/._writePTTexamplecode.sh
@@ -817,6 +827,7 @@ Untracked files:
     Untracked:  code/RNAseqDTPlotGeneRegions.out
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/SAF215upbed.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
     Untracked:  code/Script4TotalPTTqtlexamples.sh
@@ -887,12 +898,15 @@ Untracked files:
     Untracked:  code/extractGenotypes.py
     Untracked:  code/extractseqfromqtlfastq.py
     Untracked:  code/fc2leafphen.py
+    Untracked:  code/fc_filteredPAS6and7As.sh
     Untracked:  code/fifteenBPupstreamPAS.py
     Untracked:  code/fiftyBPupstreamPAS.py
     Untracked:  code/filterLDsnps.py
     Untracked:  code/filterMPPAS.py
     Untracked:  code/filterMPPAS_15.py
+    Untracked:  code/filterMPPAS_15_7As.py
     Untracked:  code/filterMPPAS_50.py
+    Untracked:  code/filterSAFforMP.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fix4su304corr.py
@@ -1036,6 +1050,14 @@ Untracked files:
     Untracked:  code/run_verifybam.err
     Untracked:  code/run_verifybam.out
     Untracked:  code/run_verifybam.sh
+    Untracked:  code/run_verifybam128N.err
+    Untracked:  code/run_verifybam128N.out
+    Untracked:  code/run_verifybam128T.err
+    Untracked:  code/run_verifybam128T.out
+    Untracked:  code/run_verifybam517N.err
+    Untracked:  code/run_verifybam517N.out
+    Untracked:  code/run_verifybam517T.err
+    Untracked:  code/run_verifybam517T.out
     Untracked:  code/run_verifybam_fullVCF.sh
     Untracked:  code/runprxySNP.err
     Untracked:  code/runprxySNP.out
@@ -1091,6 +1113,10 @@ Untracked files:
     Untracked:  code/vcf2bed.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
+    Untracked:  code/verifyBam18517N.sh
+    Untracked:  code/verifyBam18517T.sh
+    Untracked:  code/verifyBam19128N.sh
+    Untracked:  code/verifyBam19128T.sh
     Untracked:  code/wrap_verifybam.err
     Untracked:  code/wrap_verifybam.out
     Untracked:  code/wrap_verifybam.sh
@@ -1110,6 +1136,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/FlaggedPAS/
     Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
@@ -1204,7 +1231,6 @@ Unstaged changes:
     Modified:   analysis/PAS_graphs.Rmd
     Modified:   analysis/PrematureTermQTL.Rmd
     Modified:   analysis/compareAnnotatedpas.Rmd
-    Modified:   analysis/flagMPpas.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
@@ -1271,6 +1297,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/21b9ef634e42b9be6146b6ca0d633d817de08b17/analysis/flagMPpas.Rmd" target="_blank">21b9ef6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-27
+</td>
+<td>
+add 7As
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/4cd5f2813535e689adfa9c55d93d981267a23f70/docs/flagMPpas.html" target="_blank">4cd5f28</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1345,8 +1405,82 @@ python filterMPPAS_15.py</code></pre>
   geom_text(aes(label = round(flagstats$PropPAS,digits=2), hjust = 1.5), position = position_dodge(width = 10), 
             angle = 90)</code></pre>
 <p><img src="figure/flagMPpas.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4cd5f2813535e689adfa9c55d93d981267a23f70/docs/figure/flagMPpas.Rmd/unnamed-chunk-7-1.png" target="_blank">4cd5f28</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(flagstats, aes(x=N_basepair, y=FilteredPAS, group=Filter, fill=Filter)) + geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)</code></pre>
 <p><img src="figure/flagMPpas.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4cd5f2813535e689adfa9c55d93d981267a23f70/docs/figure/flagMPpas.Rmd/unnamed-chunk-8-1.png" target="_blank">4cd5f28</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I want to see if any of the filtered out PAS are nuclear apaQTLs. I will need to 10,50,15. I can do this with filter join.</p>
 <pre class="r"><code>bednames=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;name&quot;, &quot;score&quot;,&quot;strand&quot;)
 PAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed&quot;, col.names = bednames, stringsAsFactors = F)
@@ -1376,6 +1510,43 @@ nrow(QTLPAS)/nrow(PAS)</code></pre>
 <pre class="r"><code>removedQTLPlot=ggplot(propqithQTLdf, aes(x=cutoffs, y=propofQTL )) + geom_bar(stat=&quot;identity&quot;, fill=&quot;blue4&quot;) + labs(title=&quot;Proportion of Nuclear QTL in a removed PAS&quot;, y=&quot;Proportion of QTLs&quot;,x=&quot;Filter&quot;)</code></pre>
 <pre class="r"><code>plot_grid(removedPlot,removedQTLPlot)</code></pre>
 <p><img src="figure/flagMPpas.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4cd5f2813535e689adfa9c55d93d981267a23f70/docs/figure/flagMPpas.Rmd/unnamed-chunk-16-1.png" target="_blank">4cd5f28</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Total QTLs:</p>
 <pre class="r"><code>TotalQTLPAS=read.table(&quot;../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt&quot;,stringsAsFactors = F, header = T)</code></pre>
 <pre class="r"><code>Removed50_TOTALqtl=Removed50 %&gt;% inner_join(TotalQTLPAS, by=&quot;Peak&quot;) 
@@ -1393,6 +1564,55 @@ propqithQTLdfT$propofQTLT= as.numeric(as.character(propqithQTLdfT$propofQTLT))</
 <pre class="r"><code>removedQTLPlotT=ggplot(propqithQTLdfT, aes(x=cutoffs, y=propofQTLT )) + geom_bar(stat=&quot;identity&quot;, fill=&quot;blue4&quot;) + labs(title=&quot;Proportion of Total QTL in a removed PAS&quot;, y=&quot;Proportion of QTLs&quot;,x=&quot;Filter&quot;)</code></pre>
 <pre class="r"><code>plot_grid(removedPlotT,removedQTLPlotT)</code></pre>
 <p><img src="figure/flagMPpas.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
+Past versions of unnamed-chunk-22-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4cd5f2813535e689adfa9c55d93d981267a23f70/docs/figure/flagMPpas.Rmd/unnamed-chunk-22-1.png" target="_blank">4cd5f28</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Try with 7As in a row.</p>
+<pre class="bash"><code>python filterMPPAS_15_7As.py</code></pre>
+<pre class="r"><code>PAS_15_7=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.15noMP_7As.bed&quot;, col.names = bednames, stringsAsFactors = F)
+
+nrow(PAS_15_7)</code></pre>
+<pre><code>[1] 40859</code></pre>
+<pre class="r"><code>nrow(PAS_15)</code></pre>
+<pre><code>[1] 39991</code></pre>
+<pre class="r"><code>Removed15_7=PAS %&gt;% anti_join(PAS_15_7, by=c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;name&quot;, &quot;score&quot;,&quot;strand&quot;))%&gt;% separate(name,into=c(&quot;PAS&quot;,&quot;gene&quot;), sep=&quot;:&quot;) %&gt;% mutate(Peak=paste(&quot;peak&quot;, PAS,sep=&quot;&quot;))
+Removed15_7_qtl=Removed15_7 %&gt;% inner_join(QTLPAS, by=&quot;Peak&quot;)
+nrow(Removed15_7_qtl)/nrow(QTLPAS)</code></pre>
+<pre><code>[1] 0.156939</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
