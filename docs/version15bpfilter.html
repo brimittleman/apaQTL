@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1c31e020c00096426d657bc7de619aa7031a323dtargetblank1c31e02a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1c31e020c00096426d657bc7de619aa7031a323d" target="_blank">1c31e02</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree22e9f6ae6f7f1e833d84ba29796e51ed456d1648targetblank22e9f6aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/22e9f6ae6f7f1e833d84ba29796e51ed456d1648" target="_blank">22e9f6a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1c31e020c00096426d657bc7de619aa7031a323dtargetblank1c31e02a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree22e9f6ae6f7f1e833d84ba29796e51ed456d1648targetblank22e9f6aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1328,6 +1328,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22e9f6ae6f7f1e833d84ba29796e51ed456d1648/analysis/version15bpfilter.Rmd" target="_blank">22e9f6a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+<td>
+add explained
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/aacf73d7acb59ce3118db0b0edc923a4bbc680ef/docs/version15bpfilter.html" target="_blank">aacf73d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1c31e020c00096426d657bc7de619aa7031a323d/analysis/version15bpfilter.Rmd" target="_blank">1c31e02</a>
 </td>
 <td>
@@ -1636,13 +1670,24 @@ SixapaUnexplained_sig= SixapaUnexplained %&gt;% filter(adjPval&lt;.05)
 
 nrow(SixapaUnexplained_sig)/nrow(SixapaUnexplained)</code></pre>
 <pre><code>[1] 0.1518771</code></pre>
-<pre class="r"><code>nomnames=c(&quot;peakID&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;)
-SevenapaUnexplained=read.table(&quot;../data/Version15bp7As/overlapeQTL/apa_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;% dplyr::slice(which.min(adjPval))
+<pre class="r"><code>SixapaExplained=read.table(&quot;../data/Version15bp6As/overlapeQTL/apa_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;% dplyr::slice(which.min(adjPval))
+
+SixapaExplained_sig= SixapaExplained %&gt;% filter(adjPval&lt;.05)
+
+nrow(SixapaExplained_sig)/nrow(SixapaExplained)</code></pre>
+<pre><code>[1] 0.126071</code></pre>
+<pre class="r"><code>SevenapaUnexplained=read.table(&quot;../data/Version15bp7As/overlapeQTL/apa_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;% dplyr::slice(which.min(adjPval))
 
 SevenapaUnexplained_sig= SevenapaUnexplained %&gt;% filter(adjPval&lt;.05)
 
 nrow(SevenapaUnexplained_sig)/nrow(SevenapaUnexplained)</code></pre>
 <pre><code>[1] 0.1482112</code></pre>
+<pre class="r"><code>SevenapaExplained=read.table(&quot;../data/Version15bp7As/overlapeQTL/apa_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;% dplyr::slice(which.min(adjPval))
+
+SevenapaExplained_sig= SevenapaExplained %&gt;% filter(adjPval&lt;.05)
+
+nrow(SevenapaExplained_sig)/nrow(SevenapaExplained)</code></pre>
+<pre><code>[1] 0.1221001</code></pre>
 </div>
 <div id="pqtl" class="section level2">
 <h2>Pqtl</h2>
@@ -1677,13 +1722,13 @@ points(sort(-log10(runif(nrow(six_allE)))), sort(-log10(six_allE$bpval)),col= al
 abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
-Past versions of unnamed-chunk-24-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-24-1" class="collapse">
+<div id="fig-unnamed-chunk-26-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1702,7 +1747,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/a850a6e65fbf15e2b409b21383395f1caee1c558/docs/figure/version15bpfilter.Rmd/unnamed-chunk-24-1.png" target="_blank">a850a6e</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/aacf73d7acb59ce3118db0b0edc923a4bbc680ef/docs/figure/version15bpfilter.Rmd/unnamed-chunk-26-1.png" target="_blank">aacf73d</a>
 </td>
 <td>
 brimittleman
@@ -1732,7 +1777,7 @@ points(sort(-log10(runif(nrow(seven_allE)))), sort(-log10(seven_allE$bpval)),col
 abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
