@@ -242,9 +242,25 @@ python convertNominal2SNPloc2Versions.py 7
 mkdir ../data/Version15bp6As/overlapeQTL
 mkdir ../data/Version15bp7As/overlapeQTL
 
-sbatch run_getapafromeQTL_version6.7.sh
+sbatch run_getAPAfromeQTL_version6.7.sh
 ```
 
+```{r}
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+SixapaUnexplained=read.table("../data/Version15bp6As/overlapeQTL/apa_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
+
+SixapaUnexplained_sig= SixapaUnexplained %>% filter(adjPval<.05)
+
+nrow(SixapaUnexplained_sig)/nrow(SixapaUnexplained)
+```
+```{r}
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+SevenapaUnexplained=read.table("../data/Version15bp7As/overlapeQTL/apa_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
+
+SevenapaUnexplained_sig= SevenapaUnexplained %>% filter(adjPval<.05)
+
+nrow(SevenapaUnexplained_sig)/nrow(SevenapaUnexplained)
+```
 
 
 
