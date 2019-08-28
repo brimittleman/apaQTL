@@ -253,8 +253,23 @@ SixapaUnexplained_sig= SixapaUnexplained %>% filter(adjPval<.05)
 
 nrow(SixapaUnexplained_sig)/nrow(SixapaUnexplained)
 ```
+
 ```{r}
-nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+
+SixapaExplained=read.table("../data/Version15bp6As/overlapeQTL/apa_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
+
+SixapaExplained_sig= SixapaExplained %>% filter(adjPval<.05)
+
+nrow(SixapaExplained_sig)/nrow(SixapaExplained)
+```
+
+
+
+
+
+
+```{r}
+
 SevenapaUnexplained=read.table("../data/Version15bp7As/overlapeQTL/apa_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
 
 SevenapaUnexplained_sig= SevenapaUnexplained %>% filter(adjPval<.05)
@@ -262,6 +277,14 @@ SevenapaUnexplained_sig= SevenapaUnexplained %>% filter(adjPval<.05)
 nrow(SevenapaUnexplained_sig)/nrow(SevenapaUnexplained)
 ```
 
+```{r}
+
+SevenapaExplained=read.table("../data/Version15bp7As/overlapeQTL/apa_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
+
+SevenapaExplained_sig= SevenapaExplained %>% filter(adjPval<.05)
+
+nrow(SevenapaExplained_sig)/nrow(SevenapaExplained)
+```
 
 
 ##Pqtl  
@@ -280,6 +303,7 @@ python subsetpermAPAwithGenelist_2versions.py ../data/Battle_pQTL/esQTLGenes.txt
 
 python subsetAPAnotEorPgene_2versions.py 6 ../data/Version15bp6As/ApaByPgene/ApaNOTPorEGenes.txt
 python subsetAPAnotEorPgene_2versions.py 7 ../data/Version15bp7As/ApaByPgene/ApaNOTPorEGenes.txt
+
 
 ```
 
