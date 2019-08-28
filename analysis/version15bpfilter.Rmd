@@ -1,0 +1,317 @@
+---
+title: "Version with 15nt"
+author: "Briana Mittleman"
+date: "8/27/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyverse)
+```
+
+
+```{bash,eval=F}
+mkdir ../data/Version15bp6As
+mkdir ../data/Version15bp7As
+```
+
+I am going to test 2 filtering versions. I will run these in parallel here. I will put each step of the analysis in the directories above. I will start in the SnakefileFiltPAS with the named SAF file. I will need to convert this to a bed file to use bedtools nuc. I will then filter the final SAF and run the quantification. 
+
+
+These are still on the opposite strand. I will look at the 15 bases upstream of each PAS for T's.
+
+For + strand:
+startnew=start-15
+endnew=start
+
+for - strand:
+startnew=end
+endnew=end +15
+
+```{bash,eval=F}
+mkdir ../data/Version15bp6As/filter15upfiles
+mkdir ../data/Version15bp7As/filter15upfiles
+```
+
+##Filter 
+```{bash,eval=F}
+python SAF215upbed.py ../data/Version15bp6As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15up.bed
+python SAF215upbed.py ../data/Version15bp7As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15up.bed
+```
+
+Run bedtools nuc on these:  
+
+```{bash,eval=F}
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/Version15bp6As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15up.bed > ../data/Version15bp6As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC.txt
+
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/Version15bp7As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15up.bed > ../data/Version15bp7As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC.txt
+
+```
+
+Filter out 6 or 7 A. I will do this by making a dictionary with the Ok and outputting only the SAF file PAS in this dictionary. 
+
+I will make a script that takes the input, output, the number of A's to filter 
+
+```{bash,eval=F}
+python filterSAFforMP.py ../data/Version15bp6As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC.txt ../data/Version15bp6As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC6A.SAF 6
+
+python filterSAFforMP.py ../data/Version15bp7As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC.txt ../data/Version15bp7As/filter15upfiles/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC7A.SAF 7
+```
+
+Now i can run feature counts for these files: 
+
+```{bas,eval=F}
+mkdir ../data/Version15bp6As/peakCoverage/
+mkdir ../data/Version15bp7As/peakCoverage/
+sbatch fc_filteredPAS6and7As.sh
+```
+
+```{bash,eval=F}
+python fixFChead_short.py ../data/Version15bp6As/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC6A.Nuclear.Quant.fc ../data/Version15bp6As/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC6A.Nuclear.Quant.fixed.fc
+
+python fixFChead_short.py  ../data/Version15bp7As/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC7A.Nuclear.Quant.fc ../data/Version15bp7As/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC7A.Nuclear.Quant.fixed.fc
+```
+
+##Make phenotype 
+
+```{bash,eval=F}
+mkdir ../data/Version15bp6As/phenotype/
+mkdir ../data/Version15bp7As/phenotype/
+  
+  
+python makePheno.py ../data/Version15bp6As/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC6A.Nuclear.Quant.fixed.fc ../data/peakCoverage/file_id_mapping_Nuclear_Transcript.txt  ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.fc
+
+
+python makePheno.py ../data/Version15bp7As/peakCoverage/APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.15upNUC7A.Nuclear.Quant.fixed.fc ../data/peakCoverage/file_id_mapping_Nuclear_Transcript.txt ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.fc
+
+Rscript pheno2countonly.R -I ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.fc -O ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.CountsOnly
+
+Rscript pheno2countonly.R -I ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.fc -O ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.CountsOnly
+
+python convertNumeric.py ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.CountsOnly ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.CountsOnlyNumeric
+
+python convertNumeric.py ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.CountsOnly ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.CountsOnlyNumeric
+
+mkdir ../data/Version15bp7As/peaks_5perc/
+mkdir ../data/Version15bp6As/peaks_5perc/
+
+Rscript filter5perc.R -P ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.fc -N ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.CountsOnlyNumeric -O  ../data/Version15bp6As/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp6Aperc.fc
+ 
+ Rscript filter5perc.R -P ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.fc -N ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.CountsOnlyNumeric -O  ../data/Version15bp7As/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp7Aperc.fc
+ 
+mkdir ../data/Version15bp7As/phenotype_5perc/
+mkdir ../data/Version15bp6As/phenotype_5perc/
+
+
+ python filter5percPheno.py ../data/Version15bp6As/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp6Aperc.fc ../data/Version15bp6As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.fc ../data/Version15bp6As/phenotype_5perc/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.5perc.fc
+ 
+  python filter5percPheno.py ../data/Version15bp7As/peaks_5perc/APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp7Aperc.fc ../data/Version15bp7As/phenotype/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.fc ../data/Version15bp7As/phenotype_5perc/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.5perc.fc
+  
+  
+  #cut -f1-3,7,8,6 -d " " APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp6Aperc.fc > APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp6Aperc.bed
+  
+ # cut -f1-3,7,8,6 -d " " APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp7Aperc.fc > APApeak_Peaks_GeneLocAnno.Nuclear.5_15bp7Aperc.bed
+```
+
+##QTL analysis  
+
+
+```{bash, eval=F}
+module load python
+
+gzip ../data/Version15bp6As/phenotype_5perc/APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.5perc.fc
+gzip ../data/Version15bp7As/phenotype_5perc/APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.5perc.fc
+
+#do in dir
+python ../../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.5perc.fc.gz
+python ../../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.5perc.fc.gz
+```
+
+```{bash,eval=F}
+
+
+sh APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.5perc.fc.gz_prepare.sh
+head -n 5 APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno_15bp6A.Nuclear.5perc.fc.gz.4PCs
+
+
+sh APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.5perc.fc.gz_prepare.sh
+head -n 5 APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno_15bp7A.Nuclear.5perc.fc.gz.4PCs
+
+
+mkdir ../data/Version15bp6As/apaQTLPermuted
+mkdir ../data/Version15bp6As/apaQTLNominal
+mkdir ../data/Version15bp7As/apaQTLPermuted
+mkdir ../data/Version15bp7As/apaQTLNominal
+
+sbatch apaQTL_permuted_test6A7A.sh
+sbatch apaQTL_nominalv67.sh
+
+
+
+cat ../data/Version15bp6As/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp6A.5perc.fc.gz.qqnorm_chr* > ../data/Version15bp6As/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp6A.5perc_permRes.txt
+cat ../data/Version15bp7As/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp7A.5perc.fc.gz.qqnorm_chr* > ../data/Version15bp7As/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp7A.5perc_permRes.txt
+
+cat ../data/Version15bp6As/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp6A.5perc.fc.gz.qqnorm_chr* >../data/Version15bp6As/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp6A.5perc_nomRes.txt
+cat ../data/Version15bp7As/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp7A.5perc.fc.gz.qqnorm_chr* >../data/Version15bp7As/apaQTLNominal/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp7A.5perc_nomRes.txt
+
+Rscript apaQTLCorrectedpval_6or7a.R
+
+
+
+```
+
+```{r}
+QTL6A=read.table("../data/Version15bp6As/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp6A.5perc_permResBH.txt", stringsAsFactors = F, header = T) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Loc", "Strand","Peak"), sep="_")
+
+QTL6ASog= QTL6A %>% filter(-log10(bh)>=1)
+nrow(QTL6ASog)
+
+
+
+```
+```{r}
+QTL7A=read.table("../data/Version15bp7As/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_15bp7A.5perc_permResBH.txt", stringsAsFactors = F, header = T) %>% separate(pid, into=c("Chr", "Start", "End", "PeakID"), sep=":") %>% separate(PeakID, into=c("Gene", "Loc", "Strand","Peak"), sep="_")
+
+QTL7Sog= QTL7A %>% filter(-log10(bh)>=1)
+nrow(QTL7Sog)
+```
+
+
+
+
+##Explained v unexplained QTL  
+
+
+
+```{bash,eval=F}
+
+mkdir ../data/Version15bp6As/ApaByEgene
+mkdir ../data/Version15bp7As/ApaByEgene
+
+python subsetpermAPAwithGenelist_2versions.py ../data/Li_eQTLs/explainedEgenes.txt 6 ../data/Version15bp6As/ApaByEgene/ApaexplainedeGenes.txt
+python subsetpermAPAwithGenelist_2versions.py ../data/Li_eQTLs/explainedEgenes.txt 7 ../data/Version15bp7As/ApaByEgene/ApaexplainedeGenes.txt
+
+python subsetpermAPAwithGenelist_2versions.py ../data/Li_eQTLs/UnexplainedEgenes.txt 6 ../data/Version15bp6As/ApaByEgene/ApaUnaexplainedeGenes.txt
+python subsetpermAPAwithGenelist_2versions.py ../data/Li_eQTLs/UnexplainedEgenes.txt 7 ../data/Version15bp7As/ApaByEgene/ApaUnexplainedeGenes.txt
+
+
+python subsetApanoteGene_2versions.py 6 ../data/Version15bp6As/ApaByEgene/ApaNOTeGene.txt
+python subsetApanoteGene_2versions.py 7 ../data/Version15bp7As/ApaByEgene/ApaNOTeGene.txt
+
+```
+
+
+6As
+```{r}
+six.notE=read.table("../data/Version15bp6As/ApaByEgene/ApaNOTeGene.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+six.ex=read.table("../data/Version15bp6As/ApaByEgene/ApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+six.un=read.table("../data/Version15bp6As/ApaByEgene/ApaUnaexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+six.un=na.omit(six.un)
+```
+```{r}
+qqplot(-log10(runif(nrow(six.notE))), -log10(six.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear 6A Apa")
+points(sort(-log10(runif(nrow(six.ex)))), sort(-log10(six.ex$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(six.un)))), sort(-log10(six.un$bpval)),col= alpha("Blue"))
+abline(0,1)
+
+legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
+```
+7As
+```{r}
+seven.notE=read.table("../data/Version15bp7As/ApaByEgene/ApaNOTeGene.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+seven.ex=read.table("../data/Version15bp7As/ApaByEgene/ApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+seven.un=read.table("../data/Version15bp7As/ApaByEgene/ApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+seven.un=na.omit(seven.un)
+```
+```{r}
+qqplot(-log10(runif(nrow(seven.notE))), -log10(seven.notE$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear 7A Apa")
+points(sort(-log10(runif(nrow(seven.ex)))), sort(-log10(seven.ex$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(seven.un)))), sort(-log10(seven.un$bpval)),col= alpha("Blue"))
+abline(0,1)
+
+legend("topleft", legend=c("Not eGenes", "Explained eGenes", "Unexplained eGenes"),col=c("black", "red", "blue"), pch=16,bty = 'n')
+```
+
+```{bash,eval=F}
+python convertNominal2SNPloc2Versions.py 6
+python convertNominal2SNPloc2Versions.py 7
+
+mkdir ../data/Version15bp6As/overlapeQTL
+mkdir ../data/Version15bp7As/overlapeQTL
+
+sbatch run_getapafromeQTL_version6.7.sh
+```
+
+
+
+
+##Pqtl  
+
+```{bash,eval=F}
+mkdir ../data/Version15bp6As/ApaByPgene
+mkdir ../data/Version15bp7As/ApaByPgene
+
+python subsetpermAPAwithGenelist_2versions.py ../data/Battle_pQTL/psQTLGeneNames.txt 6 ../data/Version15bp6As/ApaByPgene/ApaPSGenes.txt
+
+python subsetpermAPAwithGenelist_2versions.py ../data/Battle_pQTL/esQTLGenes.txt 6 ../data/Version15bp6As/ApaByPgene/ApaESGenes.txt
+
+python subsetpermAPAwithGenelist_2versions.py ../data/Battle_pQTL/psQTLGeneNames.txt 7 ../data/Version15bp7As/ApaByPgene/ApaPSGenes.txt
+
+python subsetpermAPAwithGenelist_2versions.py ../data/Battle_pQTL/esQTLGenes.txt 7 ../data/Version15bp7As/ApaByPgene/ApaESGenes.txt
+
+python subsetAPAnotEorPgene_2versions.py 6 ../data/Version15bp6As/ApaByPgene/ApaNOTPorEGenes.txt
+python subsetAPAnotEorPgene_2versions.py 7 ../data/Version15bp7As/ApaByPgene/ApaNOTPorEGenes.txt
+
+```
+
+6As
+
+```{r}
+six.notEorP=read.table("../data/Version15bp6As/ApaByPgene/ApaNOTPorEGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+six.PS=read.table("../data/Version15bp6As/ApaByPgene/ApaPSGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+six.ES=read.table("../data/Version15bp6As/ApaByPgene/ApaESGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+
+
+six_allE=as.data.frame(rbind(six.ex,six.un))
+six.PS=na.omit(six.PS)
+six.notEorP=na.omit(six.notEorP)
+six.ES=na.omit(six.ES)
+six.un=na.omit(six.un)
+```
+
+
+
+```{r}
+qqplot(-log10(runif(nrow(six.notEorP))), -log10(six.notEorP$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="6A Nuclear Apa")
+points(sort(-log10(runif(nrow(six.PS)))), sort(-log10(six.PS$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(six_allE)))), sort(-log10(six_allE$bpval)),col= alpha("blue"))
+abline(0,1)
+
+legend("topleft", legend=c("Neither eGenes nor pGenes", "pGenes", "eGenes"),col=c("black", "red","blue"), pch=16,bty = 'n')
+```
+7As
+
+```{r}
+seven.notEorP=read.table("../data/Version15bp7As/ApaByPgene/ApaNOTPorEGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+seven.PS=read.table("../data/Version15bp7As/ApaByPgene/ApaPSGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+seven.ES=read.table("../data/Version15bp7As/ApaByPgene/ApaESGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+
+
+seven_allE=as.data.frame(rbind(seven.ex,seven.un))
+seven.PS=na.omit(seven.PS)
+seven.notEorP=na.omit(seven.notEorP)
+seven.ES=na.omit(seven.ES)
+seven.un=na.omit(seven.un)
+```
+
+```{r}
+qqplot(-log10(runif(nrow(seven.notEorP))), -log10(seven.notEorP$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="7A Nuclear Apa")
+points(sort(-log10(runif(nrow(seven.PS)))), sort(-log10(seven.PS$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(seven_allE)))), sort(-log10(seven_allE$bpval)),col= alpha("blue"))
+abline(0,1)
+
+legend("topleft", legend=c("Neither eGenes nor pGenes", "pGenes", "eGenes"),col=c("black", "red","blue"), pch=16,bty = 'n')
+```
