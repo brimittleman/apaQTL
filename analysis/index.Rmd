@@ -48,7 +48,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Addition coverage plots](additionalCoveragePlots.html)
 
-* [Additional MP QC](flagMPpas.html)
 
 ##apaQTL  
 
@@ -138,3 +137,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Read metadata plots](reads_graphs.html)
 
+##Additional QC about MP
+
+* [Test number of PAS affected at different filters](flagMPpas.html)
+
+* [Test if results are robust to cuttoff](version15bpfilter.html)
