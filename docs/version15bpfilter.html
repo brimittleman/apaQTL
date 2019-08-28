@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2f378371965efb2c341b5266b90a5e8b976be544targetblank2f37837a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/2f378371965efb2c341b5266b90a5e8b976be544" target="_blank">2f37837</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1c31e020c00096426d657bc7de619aa7031a323dtargetblank1c31e02a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/1c31e020c00096426d657bc7de619aa7031a323d" target="_blank">1c31e02</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree2f378371965efb2c341b5266b90a5e8b976be544targetblank2f37837a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree1c31e020c00096426d657bc7de619aa7031a323dtargetblank1c31e02a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -491,7 +491,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
     Ignored:    data/.DS_Store
     Ignored:    docs/.DS_Store
     Ignored:    docs/figure/.DS_Store
@@ -1329,6 +1328,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1c31e020c00096426d657bc7de619aa7031a323d/analysis/version15bpfilter.Rmd" target="_blank">1c31e02</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+<td>
+add proportion expained
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/a850a6e65fbf15e2b409b21383395f1caee1c558/docs/version15bpfilter.html" target="_blank">a850a6e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/2f378371965efb2c341b5266b90a5e8b976be544/analysis/version15bpfilter.Rmd" target="_blank">2f37837</a>
 </td>
 <td>
@@ -1502,7 +1535,45 @@ points(sort(-log10(runif(nrow(six.un)))), sort(-log10(six.un$bpval)),col= alpha(
 abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Not eGenes&quot;, &quot;Explained eGenes&quot;, &quot;Unexplained eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;, &quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /> 7As</p>
+<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a850a6e65fbf15e2b409b21383395f1caee1c558/docs/figure/version15bpfilter.Rmd/unnamed-chunk-16-1.png" target="_blank">a850a6e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>7As</p>
 <pre class="r"><code>seven.notE=read.table(&quot;../data/Version15bp7As/ApaByEgene/ApaNOTeGene.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 seven.ex=read.table(&quot;../data/Version15bp7As/ApaByEgene/ApaexplainedeGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 seven.un=read.table(&quot;../data/Version15bp7As/ApaByEgene/ApaUnexplainedeGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
@@ -1514,13 +1585,64 @@ abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Not eGenes&quot;, &quot;Explained eGenes&quot;, &quot;Unexplained eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;, &quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
 <p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a850a6e65fbf15e2b409b21383395f1caee1c558/docs/figure/version15bpfilter.Rmd/unnamed-chunk-18-1.png" target="_blank">a850a6e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="bash"><code>python convertNominal2SNPloc2Versions.py 6
 python convertNominal2SNPloc2Versions.py 7
 
 mkdir ../data/Version15bp6As/overlapeQTL
 mkdir ../data/Version15bp7As/overlapeQTL
 
-sbatch run_getapafromeQTL_version6.7.sh</code></pre>
+sbatch run_getAPAfromeQTL_version6.7.sh</code></pre>
+<pre class="r"><code>nomnames=c(&quot;peakID&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;)
+SixapaUnexplained=read.table(&quot;../data/Version15bp6As/overlapeQTL/apa_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;% dplyr::slice(which.min(adjPval))
+
+SixapaUnexplained_sig= SixapaUnexplained %&gt;% filter(adjPval&lt;.05)
+
+nrow(SixapaUnexplained_sig)/nrow(SixapaUnexplained)</code></pre>
+<pre><code>[1] 0.1518771</code></pre>
+<pre class="r"><code>nomnames=c(&quot;peakID&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;)
+SevenapaUnexplained=read.table(&quot;../data/Version15bp7As/overlapeQTL/apa_unexplainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp)  %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;% dplyr::slice(which.min(adjPval))
+
+SevenapaUnexplained_sig= SevenapaUnexplained %&gt;% filter(adjPval&lt;.05)
+
+nrow(SevenapaUnexplained_sig)/nrow(SevenapaUnexplained)</code></pre>
+<pre><code>[1] 0.1482112</code></pre>
 </div>
 <div id="pqtl" class="section level2">
 <h2>Pqtl</h2>
@@ -1555,7 +1677,45 @@ points(sort(-log10(runif(nrow(six_allE)))), sort(-log10(six_allE$bpval)),col= al
 abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /> 7As</p>
+<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
+Past versions of unnamed-chunk-24-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-24-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a850a6e65fbf15e2b409b21383395f1caee1c558/docs/figure/version15bpfilter.Rmd/unnamed-chunk-24-1.png" target="_blank">a850a6e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>7As</p>
 <pre class="r"><code>seven.notEorP=read.table(&quot;../data/Version15bp7As/ApaByPgene/ApaNOTPorEGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 seven.PS=read.table(&quot;../data/Version15bp7As/ApaByPgene/ApaPSGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
 seven.ES=read.table(&quot;../data/Version15bp7As/ApaByPgene/ApaESGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
@@ -1572,7 +1732,7 @@ points(sort(-log10(runif(nrow(seven_allE)))), sort(-log10(seven_allE$bpval)),col
 abline(0,1)
 
 legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor pGenes&quot;, &quot;pGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
-<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/version15bpfilter.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
