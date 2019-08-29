@@ -44,16 +44,25 @@ abline(0,1)
 ```
 Seperate for genes with a nuclear specific apaQTL  
 
-nuclear specific are in ../data/QTLoverlap_nonNorm/NuclearSpecQTLinNuclearNominal_nonNorm.txt  
+nuclear specific (only tested in nuclear) are in ../data/QTLoverlap_nonNorm/NuclearSpecQTLinNuclearNominal_nonNorm.txt 
+
+nuclear specific not sig in total:
+
 
 ```{r}
 nucSpecgene=read.table("../data/QTLoverlap_nonNorm/NuclearSpecQTLinNuclearNominal_nonNorm.txt",header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "Originalslope")) %>% separate(peakID,into=c("gene","loc", "strand", "PAS"),sep="_") %>% select(gene) %>% unique()
+
+nucAPAinTot=read.table("../data/QTLoverlap/NuclearQTLinTotalNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% separate(peakID,into=c("chr", "start", "end", "geneID"),sep=":" ) %>% separate(geneID, into=c("gene", "loc", "strand", "peakNum"), sep="_")
+nucAPAinTot_NOTSIG=nucAPAinTot %>% filter(pval>.05) %>% select(gene) %>% unique()
+
+allNucspec=nucAPAinTot_NOTSIG %>% full_join(nucSpecgene,by="gene")
+
 ```
 
 There are 172 genes in this set. 
 
 ```{r}
-permeqtl_nucSpec= permeqtl  %>% filter(gene %in%nucSpecgene$gene )
+permeqtl_nucSpec= permeqtl  %>% filter(gene %in%allNucspec$gene )
 
 permeqtl_notnucSpec= permeqtl  %>% anti_join(permeqtl_nucSpec,by = c("gene", "nvar", "shape1", "shape2", "dummy", "RSID", "dist", "nomPval", "slope", "ppval", "bpval", "bh"))
 ```
@@ -70,4 +79,36 @@ legend("topleft", legend=c("Nuclear specific apaQTL genes", "All other genes"),c
 ```{r}
 wilcox.test(permeqtl_notnucSpec$ppval,permeqtl_nucSpec$ppval)
 ```
+
+Compare effect sizes: 
+
+```{r}
+#allNucspec is the nuclear specific gene, will pull these genes out 
+
+nuclearQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt", header = T,stringsAsFactors = F) %>% rename("gene"= Gene) %>% semi_join(allNucspec, by="gene")
+
+write.table(nuclearQTLs, file="../data/apaQTLs/NuclearSpecificAPAqtls.txt", col.names = T, row.names = F, quote = F, sep="\t")
+```
+
+```{bash,eval=F}
+python nucSpecQTLineData.py
+```
+
+Join these by snp and gene.  
+
+```{r}
+nomNamesE=c("gene", "sid",'dist', 'pval', 'Eslope' )
+eQTLforNucspec=read.table("../data/eQTLs/NuclearSPecificAPAqtlsinEqtl.txt",stringsAsFactors = F, col.names = nomNamesE)
+
+bothNucspecandE=eQTLforNucspec %>% inner_join(nuclearQTLs, by=c("gene", "sid"))
+
+summary(lm(bothNucspecandE$slope~bothNucspecandE$Eslope))
+cor.test(bothNucspecandE$slope,bothNucspecandE$Eslope, alternative="less")
+
+```
+
+```{r}
+ggplot(bothNucspecandE, aes(x=Eslope, y=slope)) + geom_point() + geom_smooth(method="lm") + labs(x="eQTL effect size", y="apaQTL effect size", title="Effect size in eQTL for nuclear specific apaQTL")
+```
+
 
