@@ -44,7 +44,7 @@ allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
 
 allRNA$genotype=as.factor(allRNA$genotype)
 
-ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "YlOrRd") + labs(title="eQTL: EIF2A - rs9820529")
+ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="eQTL: EIF2A - rs9820529") + theme(legend.position = "bottom")
 ```
 
 ```{r}
@@ -60,7 +60,37 @@ allprot=full_geno %>% inner_join(full_phenoprot, by="Ind")
 
 allprot$genotype=as.factor(allprot$genotype)
 
-ggplot(allprot, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "YlOrRd") + labs(title="pQTL: EIF2A - rs9820529", y="Protein Level")
+ggplot(allprot, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="pQTL: EIF2A - rs9820529", y="Protein Level")+ theme(legend.position = "bottom")
 ```
+
+
+Broader: Ask how many examples: 
+
+Ask for apaQTLs sig in P not in E
+
+
+```{bash,eval=F}
+mkdir ../data/pQTLoverlap
+python apaInPandE.py
+```
+
+```{r}
+apaQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", stringsAsFactors = F, header = T)
+apainE=read.table("../data/pQTLoverlap/NucAPAinExpression.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Exppval', 'slope')) %>% select(Gene, sid, Exppval)
+apainP=read.table("../data/pQTLoverlap/NucAPAinProt.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Protppval', 'slope')) %>% select(Gene, sid, Protppval )
+
+#combine  
+allQTL=apaQTL %>% inner_join(apainE,by=c("Gene", "sid")) %>% inner_join(apainP, by=c("Gene","sid"))
+
+
+#select sig in p not e
+pnote=allQTL %>% filter(Exppval>.05) %>% filter(Protppval<.05)
+
+```
+
+This has 6 examples not including the EIF2A one because one is not in the name switched file. but the ensg id is 
+
+"ENSG00000144895.7 2546 1.06055 359.96 50.1383 rs6805230 -242262 0.00147383 0.502235 0.675325 0.652291"
+
 
 
