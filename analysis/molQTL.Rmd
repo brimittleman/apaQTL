@@ -58,5 +58,12 @@ nuclearperm=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno
 permProt %>% inner_join(nuclearperm, by="Gene") %>% inner_join(permEx, by="Gene") %>% nrow()
 ```
 
+###ribo data 
+I also want to look at ribo data so I need to call QTLs with these as well.  
 
+
+
+```{bash,eval=F}
+sbatch riboQTL.sh
+```
 

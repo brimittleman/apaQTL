@@ -76,21 +76,19 @@ python apaInPandE.py
 
 ```{r}
 apaQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", stringsAsFactors = F, header = T)
-apainE=read.table("../data/pQTLoverlap/NucAPAinExpression.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Exppval', 'slope')) %>% select(Gene, sid, Exppval)
-apainP=read.table("../data/pQTLoverlap/NucAPAinProt.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Protppval', 'slope')) %>% select(Gene, sid, Protppval )
+apainE=read.table("../data/pQTLoverlap/NucAPAinExpression.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Exppval', 'Eslope')) %>% select(Gene, sid, Exppval,Eslope)
+apainP=read.table("../data/pQTLoverlap/NucAPAinProt.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Protppval', 'Pslope')) %>% select(Gene, sid, Protppval ,Pslope)
 
 #combine  
 allQTL=apaQTL %>% inner_join(apainE,by=c("Gene", "sid")) %>% inner_join(apainP, by=c("Gene","sid"))
 
 
 #select sig in p not e
-pnote=allQTL %>% filter(Exppval>.05) %>% filter(Protppval<.05)
+pnote=allQTL %>% filter(Exppval>.05) %>% filter(Protppval<.05) %>% select(Gene, sid) %>% unique()
 
 ```
 
-This has 6 examples not including the EIF2A one because one is not in the name switched file. but the ensg id is 
 
-"ENSG00000144895.7 2546 1.06055 359.96 50.1383 rs6805230 -242262 0.00147383 0.502235 0.675325 0.652291"
 
 
 
