@@ -65,5 +65,10 @@ I also want to look at ribo data so I need to call QTLs with these as well.
 
 ```{bash,eval=F}
 sbatch riboQTL.sh
+
+
+cat ../data/molQTLs/fastqtl_qqnorm_ribo.fixed.nominal.chunk* > ../data/molQTLs/fastqtl_qqnorm_ribo.fixed.nominal.AllNomRes.txt
+
+python changeRibonomQTLres2genename.py
 ```
 

@@ -62,6 +62,45 @@ allprot$genotype=as.factor(allprot$genotype)
 
 ggplot(allprot, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="pQTL: EIF2A - rs9820529", y="Protein Level")+ theme(legend.position = "bottom")
 ```
+Ribo plot:
+
+#ENSG00000144895
+```{r}
+ribohead=as.data.frame(read.table("../data/molPhenos/RiboHead.txt", stringsAsFactors = F, header = F)[,5:74] %>% t())
+
+ribopheno=as.data.frame(read.table("../data/molPhenos/ribo_EIF2A.txt", stringsAsFactors = F, header = F) [,5:74] %>% t())
+
+full_phenoribo=bind_cols(Ind=ribohead$V1, Expression=ribopheno$V1)
+
+allribo=full_geno %>% inner_join(full_phenoribo, by="Ind")
+
+allribo$genotype=as.factor(allribo$genotype)
+
+ggplot(allribo, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="riboQTL: EIF2A - rs9820529", y="Ribo Level")+ theme(legend.position = "bottom")
+```
+
+Make Locus zoom files: 
+
+```{r}
+
+prot_LZ=read.table("../data/locusZoom/Prot.EIF2A.nom.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(prot_LZ,"../data/locusZoom/ProtEIF2ALZ.txt", col.names = T, row.names = F, quote = F)
+
+
+
+ribo_LZ=read.table("../data/locusZoom/Ribo.EIF2A.nom.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(ribo_LZ,"../data/locusZoom/RiboEIF2ALZ.txt", col.names = T, row.names = F, quote = F)
+
+
+
+ribo_LZ=read.table("../data/locusZoom/RNA.EIF2A.nom.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
+write.table(ribo_LZ,"../data/locusZoom/RNAEIF2ALZ.txt", col.names = T, row.names = F, quote = F)
+
+```
+
 
 
 Broader: Ask how many examples: 
@@ -87,6 +126,7 @@ allQTL=apaQTL %>% inner_join(apainE,by=c("Gene", "sid")) %>% inner_join(apainP, 
 pnote=allQTL %>% filter(Exppval>.05) %>% filter(Protppval<.05) %>% select(Gene, sid) %>% unique()
 
 ```
+
 
 
 
