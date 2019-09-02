@@ -111,6 +111,7 @@ Ask for apaQTLs sig in P not in E
 ```{bash,eval=F}
 mkdir ../data/pQTLoverlap
 python apaInPandE.py
+
 ```
 
 ```{r}
@@ -129,6 +130,22 @@ pnote=allQTL %>% filter(Exppval>.05) %>% filter(Protppval<.05) %>% select(Gene, 
 
 
 
+add Ribo data.  
+
+```{bash,eval=F}
+python apainRibo.py
+```
 
 
+```{r}
+apainRibo=read.table("../data/pQTLoverlap/NucAPAinRibo.txt", stringsAsFactors = F, col.names = c("Gene", 'sid','dist', 'Riboppval', 'Riboslope')) %>% select(Gene, sid, Riboppval,Riboslope)
+
+#combine  
+allQTL_withribo=apaQTL %>% inner_join(apainE,by=c("Gene", "sid")) %>% inner_join(apainP, by=c("Gene","sid")) %>% inner_join(apainRibo, by=c("Gene","sid"))
+
+#select sig in p not e
+pnoteorr=allQTL_withribo %>% filter(Exppval>.05) %>% filter(Protppval<.05) %>% filter(Riboppval<.05) %>%  select(Gene, sid) %>% unique()
+
+nrow(pnoteorr)
+```
 
