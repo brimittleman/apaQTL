@@ -32,21 +32,13 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Count and usage correlation](corrbetweenind.html)  
 
-* [Sequencing meta data by batch](seqmetadatanalysis.html)    
-
-* [Understand new PAS](NewvOldPeakQC.html)  
-
-* [Compare new and old data](recomputeusageold.html)
-
-* [Look at coverage in 3' UTR](reads2UTR.html)  
-
 * [Intron RNA seq ratios](intonRNAratio.html)
 
 * [Prepare genotypes for downstream analysis](geno_proc.html)
 
 * [Compare to Annotations](compareAnnotatedpas.html)  
 
-* [Addition coverage plots](additionalCoveragePlots.html)
+
 
 
 ##apaQTL  
@@ -54,11 +46,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Call apaQTLs in both fractions](mapapaQTL.html)  
 
-* [Check for batch effects in new QTLs](newQTLheatmap.html)  
-
 * [Look at how many PCs I should include](choosePCs.html)
-
-* [Code to make example plots](QTLexampleplots.html)
 
 * [Rerun qtl with PCs from previous analysis](rerunQTL_changePC.html)
 
@@ -68,13 +56,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Usage QTL analysis to look at non normal effect sizes](nonNormQTL.html)
 
-* [Motif distruption as apaQTL mechanism](motifDisruption.html)
-
 * [Are snps in Signal sites likely to be QTLs?](snpinSS.html)
-
-* [Transcription factor motif disruption for QTLs](TF_motifdisrupt.html)
-
-* [Gene Ontology](GO_apaQTLS.html)
 
 * [2 Regulatory mechanisms for apaQTLs](twoRegMech.html)
 
@@ -94,13 +76,6 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Relationship between APA fraction and nascent transcription](nascenttranscription.html)  
 
-* [Location of nuclear intronic peaks along introns](nucintronicanalysis.html)  
-
-* [Explore first intron PAS further](verifyFirstintronresult.html)
-
-* [Start looking at the nascent seq](nascentRNA.html)
-
-* [Credible set with RNA and signal sites](HighCrediblePAS.html)
 
 ##Characterize apaQTLs and compare to eQTLs 
 
@@ -142,3 +117,33 @@ These files create some of the QC metrics I used for the analysis.
 * [Test number of PAS affected at different filters](flagMPpas.html)
 
 * [Test if results are robust to cuttoff](version15bpfilter.html)
+
+##Exploratory analysis not used in MS  
+
+* [Sequencing meta data by batch](seqmetadatanalysis.html)    
+
+* [Understand new PAS](NewvOldPeakQC.html)  
+
+* [Compare new and old data](recomputeusageold.html)
+
+* [Look at coverage in 3' UTR](reads2UTR.html)  
+
+* [Addition coverage plots](additionalCoveragePlots.html)
+
+* [Check for batch effects in new QTLs](newQTLheatmap.html)  
+
+* [Code to make example plots](QTLexampleplots.html)
+
+* [Motif distruption as apaQTL mechanism](motifDisruption.html)  
+
+* [Transcription factor motif disruption for QTLs](TF_motifdisrupt.html)
+
+* [Gene Ontology](GO_apaQTLS.html)
+
+* [Location of nuclear intronic peaks along introns](nucintronicanalysis.html)  
+
+* [Explore first intron PAS further](verifyFirstintronresult.html)
+
+* [Start looking at the nascent seq](nascentRNA.html)
+
+* [Credible set with RNA and signal sites](HighCrediblePAS.html)

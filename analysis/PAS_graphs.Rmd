@@ -342,10 +342,10 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 PDF for the figures:
 
-```{r figure1CUTR, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+```{r figure1CUTR, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
 doubleYScale(obj1, obj2,add.ylab2 =TRUE)
 ```
-```{r figure1CIntron, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+```{r figure1CIntron, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
 doubleYScale(obj1, obj6,add.ylab2 =TRUE)
 ```
 

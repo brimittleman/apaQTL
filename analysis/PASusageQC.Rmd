@@ -42,8 +42,8 @@ I will do this in an R script that can be run from the code directory.
 The R script will take either Total and Nuclear.  
 
 ```{bash,eval=F}
-module load Anaconda3
-source activate three-prime-env
+gunzip ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz
+gunzip ../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz
 Rscript UsageDifferenceHeatmap.R -F Total
 Rscript UsageDifferenceHeatmap.R -F Nuclear
 ```

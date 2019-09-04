@@ -148,7 +148,7 @@ The annotaiton is annotation:
 
 
 totapaanno=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.fc",header = T,stringsAsFactors = F) 
-indiv=colnames(totapaanno)[2:55]
+indiv=colnames(totapaanno)[2:53]
 totapanum=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.CountsOnlyNumeric",header = F, col.names = indiv) 
 totapa_mean=rowMeans(totapanum)
 totapaMeananno=as.data.frame(cbind(ID=totapaanno$chrom, meanUsage=totapa_mean))
