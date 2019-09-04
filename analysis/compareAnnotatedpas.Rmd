@@ -29,7 +29,7 @@ I want to make this into a file I can overlap with my PAS. In order to know what
 ```{bash,eval=F}
 python annotatedPAS2bed.py
 sort -k1,1 -k2,2n ../data/AnnotatedPAS/human.PAS.bed > ../data/AnnotatedPAS/human.PAS.sort.bed
-
+sort -k1,1 -k2,2n ../data/PAS/APAPAS_GeneLocAnno.5perc.bed > ../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed
 sbatch closestannotated.sh
 ```
 
@@ -41,7 +41,7 @@ dist=read.table("../data/AnnotatedPAS/DistanceMyPAS2Anno.bed", col.names = c("ch
 Plot the distance.
 
 ```{r}
-ggplot(dist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)
+ggplot(dist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25) + labs(y="Number of PAS", x="Distance between PAS and closest annotated")
 ```
 
 Looks like about 10 basepairs is ok resolution. I need to make sure these map 1 to 1 when you filter these.  

@@ -22,7 +22,7 @@ less APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr*.gz > APApeak_
 ```
 
 ```{r}
-totalqqnorm=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom", col.names = c('Chr',	'start',	'end',	'ID',	'NA18486',	'NA18498',	'NA18499',	'NA18501',	'NA18502',	'NA18504', 'NA18505',	'NA18508',	'NA18510',	'NA18511',	'NA18516',	'NA18517',	'NA18519',	'NA18520',	'NA18522',	'NA18852', 'NA18853',	'NA18855',	'NA18856',	'NA18858',	'NA18861',	'NA18862',	'NA18870',	'NA18907',	'NA18909',	'NA18912', 'NA18913',	'NA18916',	'NA19092',	'NA19093',	'NA19101',	'NA19119',	'NA19128',	'NA19130',	'NA19131',	'NA19137','NA19138',	'NA19140',	'NA19141',	'NA19144',	'NA19152',	'NA19153',	'NA19160',	'NA19171',	'NA19193',	'NA19200','NA19207',	'NA19209',	'NA19210',	'NA19223',	'NA19225',	'NA19238',	'NA19239',	'NA19257') )
+totalqqnorm=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom", col.names = c('Chr',	'start',	'end',	'ID',	'NA18486',	'NA18498',	'NA18499',	'NA18501',	'NA18502',	'NA18504', 'NA18505',	'NA18508',	'NA18510',	'NA18511',	'NA18516',	'NA18519',	'NA18520',	'NA18522',	'NA18852', 'NA18853',	'NA18855',	'NA18856',	'NA18858',	'NA18861',	'NA18862',	'NA18870',	'NA18907',	'NA18909',	'NA18912', 'NA18913',	'NA18916',	'NA19092',	'NA19093',	'NA19101',	'NA19119',	'NA19130',	'NA19131',	'NA19137','NA19138',	'NA19140',	'NA19141',	'NA19144',	'NA19152',	'NA19153',	'NA19160',	'NA19171',	'NA19193',	'NA19200','NA19207',	'NA19209',	'NA19210',	'NA19223',	'NA19225',	'NA19238',	'NA19239',	'NA19257') )
 
 totalqqnorm_matrix=as.matrix(totalqqnorm %>% select(-Chr, -start, -end, -ID))
 ```
@@ -47,7 +47,7 @@ plot(proportion_tot)
 ```
 
 ```{r}
-nuclearqqnorm=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom", col.names = c('Chr',	'start',	'end',	'ID',	'NA18486',	'NA18498',	'NA18499',	'NA18501',	'NA18502',	'NA18504', 'NA18505',	'NA18508',	'NA18510',	'NA18511',	'NA18516',	'NA18517',	'NA18519',	'NA18520',	'NA18522',	'NA18852', 'NA18853',	'NA18855',	'NA18856',	'NA18858',	'NA18861',	'NA18862',	'NA18870',	'NA18907',	'NA18909',	'NA18912', 'NA18913',	'NA18916',	'NA19092',	'NA19093',	'NA19101',	'NA19119',	'NA19128',	'NA19130',	'NA19131',	'NA19137','NA19138',	'NA19140',	'NA19141',	'NA19144',	'NA19152',	'NA19153',	'NA19160',	'NA19171',	'NA19193',	'NA19200','NA19207',	'NA19209',	'NA19210',	'NA19223',	'NA19225',	'NA19238',	'NA19239',	'NA19257'))
+nuclearqqnorm=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom", col.names = c('Chr',	'start',	'end',	'ID',	'NA18486',	'NA18498',	'NA18499',	'NA18501',	'NA18502',	'NA18504', 'NA18505',	'NA18508',	'NA18510',	'NA18511',	'NA18516',	'NA18519',	'NA18520',	'NA18522',	'NA18852', 'NA18853',	'NA18855',	'NA18856',	'NA18858',	'NA18861',	'NA18862',	'NA18870',	'NA18907',	'NA18909',	'NA18912', 'NA18913',	'NA18916',	'NA19092',	'NA19093',	'NA19101',	'NA19119',	'NA19130',	'NA19131',	'NA19137','NA19138',	'NA19140',	'NA19141',	'NA19144',	'NA19152',	'NA19153',	'NA19160',	'NA19171',	'NA19193',	'NA19200','NA19207',	'NA19209',	'NA19210',	'NA19223',	'NA19225',	'NA19238',	'NA19239',	'NA19257'))
 
 nuclearqqnorm_matrix=as.matrix(nuclearqqnorm %>% select(-Chr, -start, -end, -ID))
 ```

@@ -26,7 +26,7 @@ It is best to run this analysis in the data/phenotype_5perc directory. I have co
 
 ```{bash,eval=F}
 #!/bin/bash
-module load python
+#python2 
 
 gzip APApeak_Phenotype_GeneLocAnno.Total.5perc.fc
 gzip APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc
@@ -40,8 +40,7 @@ python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Nucle
 This will output bash scripts to run. 
 
 ```{bash,eval=F}
-module load Anaconda3
-source activate three-prime-env
+#three-prime-env
 
 sh APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz_prepare.sh
 sh APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz_prepare.sh
@@ -52,8 +51,7 @@ sh APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz_prepare.sh
 Subset the PCs to use the first 2 in the qtl calling:  
 
 ```{bash,eval=F}
-module load Anaconda3
-source activate three-prime-env
+#three-prime-env
 
 head -n 3 APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.2PCs
 head -n 3 APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.2PCs
