@@ -242,7 +242,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-08-28
+<strong>Last updated:</strong> 2019-09-04
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed5f19ccb09974ef7af14939dde3a2d8300a2542atargetblankd5f19cca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d5f19ccb09974ef7af14939dde3a2d8300a2542a" target="_blank">d5f19cc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5984fad7f726f1327bb79690f1598e54e9541570targetblank5984fada"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5984fad7f726f1327bb79690f1598e54e9541570" target="_blank">5984fad</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed5f19ccb09974ef7af14939dde3a2d8300a2542atargetblankd5f19cca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5984fad7f726f1327bb79690f1598e54e9541570targetblank5984fada" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -287,6 +287,7 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    data/mergedBW_byfrac/
     Ignored:    docs/.DS_Store
     Ignored:    docs/figure/.DS_Store
     Ignored:    output/.DS_Store
@@ -306,6 +307,8 @@ Untracked files:
     Untracked:  analysis/interpret_verifybam.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
+    Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
@@ -353,12 +356,14 @@ Untracked files:
     Untracked:  code/._aAPAqtl_nominal39ind.sh
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
+    Untracked:  code/._apaInPandE.py
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
     Untracked:  code/._apaQTLCorrectpval_6or7a.R
     Untracked:  code/._apaQTL_Nominal.sh
     Untracked:  code/._apaQTL_nominalv67.sh
     Untracked:  code/._apaQTL_permuted.sh
     Untracked:  code/._apaQTL_permuted_test6A7A.sh
+    Untracked:  code/._apainRibo.py
     Untracked:  code/._assignNucIntonpeak2intronlocs.sh
     Untracked:  code/._assignTotIntronpeak2intronlocs.sh
     Untracked:  code/._bam2BW_5primemost.sh
@@ -367,6 +372,7 @@ Untracked files:
     Untracked:  code/._bothFracDTplot4thintron.sh
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
+    Untracked:  code/._changeRibonomQTLres2genename.py
     Untracked:  code/._changenomQTLres2geneName.py
     Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
@@ -455,7 +461,9 @@ Untracked files:
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
     Untracked:  code/._nucQTLGWAS.py
+    Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._parseBestbamid.py
@@ -470,6 +478,7 @@ Untracked files:
     Untracked:  code/._quantassign2parsedpeak.py
     Untracked:  code/._removeXfromHmm.py
     Untracked:  code/._removeloc_pheno.py
+    Untracked:  code/._riboQTL.sh
     Untracked:  code/._runCorrectNomEqtl.sh
     Untracked:  code/._runHMMpermuteAPAqtls.sh
     Untracked:  code/._runHMMpermuteeQTLS.sh
@@ -634,6 +643,7 @@ Untracked files:
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
     Untracked:  code/SAF215upbed.py
+    Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
     Untracked:  code/Script4TotalPTTqtlexamples.sh
@@ -652,13 +662,16 @@ Untracked files:
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
-    Untracked:  code/YRI_LCL.vcf
+    Untracked:  code/YRI_LCL.vcf.gz
+    Untracked:  code/YRI_LCL_chr1.vcf.gz.log
+    Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
     Untracked:  code/annotatedPASregion.out
+    Untracked:  code/apaInPandE.py
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
     Untracked:  code/apaQTLCorrectpval_6or7a.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
@@ -666,6 +679,7 @@ Untracked files:
     Untracked:  code/apaQTL_permuted.4pc.sh
     Untracked:  code/apaQTL_permuted_test6A7A.sh
     Untracked:  code/apafacetboxplots.R
+    Untracked:  code/apainRibo.py
     Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
@@ -686,6 +700,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.sh
     Untracked:  code/callSHscripts.txt
     Untracked:  code/changePermQTLres2geneName.py
+    Untracked:  code/changeRibonomQTLres2genename.py
     Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/chooseAnno2PAS_pacbio.py
     Untracked:  code/closestannotated.err
@@ -718,6 +733,7 @@ Untracked files:
     Untracked:  code/filterMPPAS_15_7As.py
     Untracked:  code/filterMPPAS_50.py
     Untracked:  code/filterSAFforMP.py
+    Untracked:  code/filterSAFforMP_gen.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fix4su304corr.py
@@ -790,7 +806,9 @@ Untracked files:
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucQTLGWAS.py
     Untracked:  code/nucQTLGWAS_withLD.py
+    Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
     Untracked:  code/parseBestbamid.py
@@ -810,6 +828,9 @@ Untracked files:
     Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
+    Untracked:  code/riboQTL.sh
+    Untracked:  code/riboqtl.err
+    Untracked:  code/riboqtl.out
     Untracked:  code/runBestBamID.err
     Untracked:  code/runCorrectNomEqtl.sh
     Untracked:  code/runCorrectNomeqtl.err
@@ -947,7 +968,9 @@ Untracked files:
     Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
+    Untracked:  data/BadLines/
     Untracked:  data/Battle_pQTL/
+    Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
@@ -984,6 +1007,7 @@ Untracked files:
     Untracked:  data/apaQTLPermuted_4pc/
     Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
+    Untracked:  data/assignedPeaks_15Up/
     Untracked:  data/bam/
     Untracked:  data/bam_clean/
     Untracked:  data/bam_waspfilt/
@@ -1008,7 +1032,6 @@ Untracked files:
     Untracked:  data/intron_analysis/
     Untracked:  data/locusZoom/
     Untracked:  data/mergedBG/
-    Untracked:  data/mergedBW_byfrac/
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
@@ -1019,8 +1042,10 @@ Untracked files:
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
     Untracked:  data/nuc_10upclean/
+    Untracked:  data/oldPASfiles/
     Untracked:  data/overlapeQTL_try2/
     Untracked:  data/overlapeQTLs/
+    Untracked:  data/pQTLoverlap/
     Untracked:  data/pacbio/
     Untracked:  data/peakCoverage/
     Untracked:  data/peaks_5perc/
@@ -1049,15 +1074,15 @@ Untracked files:
 
 Unstaged changes:
     Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PAS_graphs.Rmd
     Modified:   analysis/PrematureTermQTL.Rmd
+    Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/compareAnnotatedpas.Rmd
-    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/pQTLexampleplot.Rmd
+    Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
+    Modified:   code/SnakefilefiltPAS
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_Nominal.sh
     Modified:   code/apaQTL_permuted.sh
@@ -1080,6 +1105,7 @@ Unstaged changes:
     Modified:   code/submit-snakemakePAS.sh
     Modified:   code/submit-snakemakefiltPAS.sh
     Deleted:    code/test.txt
+    Modified:   data/MetaDataSequencing.txt
     Deleted:    reads_graphs.Rmd
 
 </code></pre>
@@ -1119,6 +1145,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5984fad7f726f1327bb79690f1598e54e9541570/analysis/index.Rmd" target="_blank">5984fad</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+<td>
+update for new filter condition
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/07d9709bc73c4ce164b4364f22c11994976e898d/docs/index.html" target="_blank">07d9709</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -2929,31 +2989,21 @@ Start workflowr project.
 <li><p><a href="PASdescriptiveplots.html">Make descriptive plots for called PAS</a></p></li>
 <li><p><a href="signalsiteanalysis.html">Plot signal site dristributions</a></p></li>
 <li><p><a href="corrbetweenind.html">Count and usage correlation</a></p></li>
-<li><p><a href="seqmetadatanalysis.html">Sequencing meta data by batch</a></p></li>
-<li><p><a href="NewvOldPeakQC.html">Understand new PAS</a></p></li>
-<li><p><a href="recomputeusageold.html">Compare new and old data</a></p></li>
-<li><p><a href="reads2UTR.html">Look at coverage in 3’ UTR</a></p></li>
 <li><p><a href="intonRNAratio.html">Intron RNA seq ratios</a></p></li>
 <li><p><a href="geno_proc.html">Prepare genotypes for downstream analysis</a></p></li>
 <li><p><a href="compareAnnotatedpas.html">Compare to Annotations</a></p></li>
-<li><p><a href="additionalCoveragePlots.html">Addition coverage plots</a></p></li>
 </ul>
 </div>
 <div id="apaqtl" class="section level2">
 <h2>apaQTL</h2>
 <ul>
 <li><p><a href="mapapaQTL.html">Call apaQTLs in both fractions</a></p></li>
-<li><p><a href="newQTLheatmap.html">Check for batch effects in new QTLs</a></p></li>
 <li><p><a href="choosePCs.html">Look at how many PCs I should include</a></p></li>
-<li><p><a href="QTLexampleplots.html">Code to make example plots</a></p></li>
 <li><p><a href="rerunQTL_changePC.html">Rerun qtl with PCs from previous analysis</a></p></li>
 <li><p><a href="QTLlocation.html">Location of QTLs with respect to PAS and gene body</a></p></li>
 <li><p><a href="apaQTLoverlap.html">apaQTL in opposite fraction</a></p></li>
 <li><p><a href="nonNormQTL.html">Usage QTL analysis to look at non normal effect sizes</a></p></li>
-<li><p><a href="motifDisruption.html">Motif distruption as apaQTL mechanism</a></p></li>
 <li><p><a href="snpinSS.html">Are snps in Signal sites likely to be QTLs?</a></p></li>
-<li><p><a href="TF_motifdisrupt.html">Transcription factor motif disruption for QTLs</a></p></li>
-<li><p><a href="GO_apaQTLS.html">Gene Ontology</a></p></li>
 <li><p><a href="twoRegMech.html">2 Regulatory mechanisms for apaQTLs</a></p></li>
 <li><p><a href="PrematureTermQTL.html">Pre-termination QTLs</a></p></li>
 <li><p><a href="pttgeneinAPA.html">Overlap pttQTL and apaQTLs</a></p></li>
@@ -2967,10 +3017,6 @@ Start workflowr project.
 <li><p><a href="diffuse_logef1.html">Results when logef &gt; 1</a></p></li>
 <li><p><a href="rna_netseq_h3k12ac.html">Regulatory correlation heatmap</a></p></li>
 <li><p><a href="nascenttranscription.html">Relationship between APA fraction and nascent transcription</a></p></li>
-<li><p><a href="nucintronicanalysis.html">Location of nuclear intronic peaks along introns</a></p></li>
-<li><p><a href="verifyFirstintronresult.html">Explore first intron PAS further</a></p></li>
-<li><p><a href="nascentRNA.html">Start looking at the nascent seq</a></p></li>
-<li><p><a href="HighCrediblePAS.html">Credible set with RNA and signal sites</a></p></li>
 </ul>
 </div>
 <div id="characterize-apaqtls-and-compare-to-eqtls" class="section level2">
@@ -3003,6 +3049,25 @@ Start workflowr project.
 <ul>
 <li><p><a href="flagMPpas.html">Test number of PAS affected at different filters</a></p></li>
 <li><p><a href="version15bpfilter.html">Test if results are robust to cuttoff</a></p></li>
+</ul>
+</div>
+<div id="exploratory-analysis-not-used-in-ms" class="section level2">
+<h2>Exploratory analysis not used in MS</h2>
+<ul>
+<li><p><a href="seqmetadatanalysis.html">Sequencing meta data by batch</a></p></li>
+<li><p><a href="NewvOldPeakQC.html">Understand new PAS</a></p></li>
+<li><p><a href="recomputeusageold.html">Compare new and old data</a></p></li>
+<li><p><a href="reads2UTR.html">Look at coverage in 3’ UTR</a></p></li>
+<li><p><a href="additionalCoveragePlots.html">Addition coverage plots</a></p></li>
+<li><p><a href="newQTLheatmap.html">Check for batch effects in new QTLs</a></p></li>
+<li><p><a href="QTLexampleplots.html">Code to make example plots</a></p></li>
+<li><p><a href="motifDisruption.html">Motif distruption as apaQTL mechanism</a></p></li>
+<li><p><a href="TF_motifdisrupt.html">Transcription factor motif disruption for QTLs</a></p></li>
+<li><p><a href="GO_apaQTLS.html">Gene Ontology</a></p></li>
+<li><p><a href="nucintronicanalysis.html">Location of nuclear intronic peaks along introns</a></p></li>
+<li><p><a href="verifyFirstintronresult.html">Explore first intron PAS further</a></p></li>
+<li><p><a href="nascentRNA.html">Start looking at the nascent seq</a></p></li>
+<li><p><a href="HighCrediblePAS.html">Credible set with RNA and signal sites</a></p></li>
 </ul>
 </div>
 
