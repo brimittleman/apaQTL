@@ -28,7 +28,7 @@ id file= APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz, APApeak_Phenotype_Ge
 ```{r}
 totAnno= read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz", stringsAsFactors = F, header = T) %>% separate(chrom, into=c("Chrchrom", "Start", "End", "ID"),sep=":") %>% mutate(Chr=str_sub(Chrchrom, 4, str_length(Chrchrom)))
                                                                                                                                                                                                                 
-colnamesTot= colnames(totAnno)[5:58]
+colnamesTot= colnames(totAnno)[5:56]
 totUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Total.5perc.CountsNumeric", stringsAsFactors = F, header = F, col.names = colnamesTot) 
 
 totUsageAnno=as.data.frame(cbind(Chr=totAnno$Chr, start=totAnno$Start, end=totAnno$End, ID=totAnno$ID, totUsage ))
@@ -40,7 +40,7 @@ write.table(totUsageAnno,file="../data/nonNorm_pheno/TotalUsageAllChrom.txt", co
 
 ```{r}
 nucAnno= read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz", stringsAsFactors = F, header = T)%>% separate(chrom, into=c("Chrchrom", "Start", "End", "ID"),sep=":") %>% mutate(Chr=str_sub(Chrchrom, 4, str_length(Chrchrom)))
-colnamesNuc= colnames(nucAnno)[5:58]
+colnamesNuc= colnames(nucAnno)[5:56]
 nucUsage=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric", stringsAsFactors = F, header = F, col.names = colnamesNuc) 
 
 
@@ -71,7 +71,7 @@ cat ../data/nonNorm_pheno/NuclearUsageChrom*.nominal.out > ../data/nonNorm_pheno
 
 
 ```{bash,eval=F}
-python qtlsPvalOppFrac.py  ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt  
+python qtlsPvalOppFrac.py   ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/TotalUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinTotalNominal_nonNorm.txt  
 
 python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/nonNorm_pheno/NuclearUsageChrom_Nominal_AllChrom.txt ../data/QTLoverlap_nonNorm/NuclearQTLinNuclearNominal_nonNorm.txt  
 
@@ -104,7 +104,7 @@ TotBoth= totAPAinNuc %>% inner_join(totAPAinTot,by=c("peakID", "snp"))
 summary(lm(TotBoth$slope ~ TotBoth$Originalslope))
 
 
-totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nucler") + geom_density_2d(col="red") + annotate("text", y=1, x=0, label="R2=.64, slope=0.65")
+totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nucler") + geom_density_2d(col="red") + annotate("text", y=1, x=0, label="R2=.67, slope=0.64")
 ```
 ##Nuclear  
 
@@ -112,7 +112,7 @@ totbothplot=ggplot(TotBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_s
 NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
 summary(lm(NucBoth$slope ~ NucBoth$Originalslope))
 
-Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") +  annotate("text", y=1, x=0, label="R2=.76, slope=0.71")
+Nucbothplot=ggplot(NucBoth, aes(x=Originalslope, y=slope))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red") +  annotate("text", y=1, x=0, label="R2=.8, slope=0.78")
 ```
 
 ```{r}
@@ -136,7 +136,7 @@ summary(lm(NucBothwSpec$slope ~ NucBothwSpec$Originalslope))
 
 cor.test(y=NucBothwSpec$slope, x=NucBothwSpec$Originalslope)$p.value
 
-nucspecplot=ggplot(NucBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") +  annotate("text", y=1, x=0, label="R2=.66, slope=0.62",size=6) + scale_color_brewer(palette = "Dark2")+ theme(text = element_text(size=16), legend.position = "bottom")
+nucspecplot=ggplot(NucBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") +  annotate("text", y=1, x=0, label="R2=.68, slope=0.66",size=6) + scale_color_brewer(palette = "Dark2")+ theme(text = element_text(size=16), legend.position = "bottom")
 ```
 Do this in the other fraction to see what is looks like.
 
@@ -154,7 +154,7 @@ TotBothwSpec=bind_rows(TotBoth_set, totSpec)
 ```{r}
 summary(lm(TotBothwSpec$slope ~ TotBothwSpec$Originalslope))
 
-totspecplot=ggplot(TotBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") +  annotate("text", y=1, x=0, label="R2=.62, slope=0.64", size=6) + scale_color_brewer(palette = "Dark2") + theme(text = element_text(size=16), legend.position = "bottom")
+totspecplot=ggplot(TotBothwSpec, aes(x=Originalslope, y=slope))+geom_point(aes( col=set)) + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") +  annotate("text", y=1, x=0, label="R2=.65, slope=0.62", size=6) + scale_color_brewer(palette = "Dark2") + theme(text = element_text(size=16), legend.position = "bottom")
 
 totspecplot
 ```
@@ -171,6 +171,6 @@ grideffectplot
 
 TotBothwSpec %>% filter(set=="Specific") %>% nrow()
 NucBothwSpec %>% filter(set=="Specific") %>% nrow()
-prop.test(x=c(178,34), n=c(771,440), alternative ="greater")
+prop.test(x=c(117,40), n=c(565,378), alternative ="greater")
 ```
 

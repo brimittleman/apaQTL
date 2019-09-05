@@ -22,6 +22,12 @@ library(qvalue)
 Concatinate nominal results and run
 
 ```{bash,eval=F}
+#concatinate nominal res
+
+cat ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_chr* >../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt
+
+cat ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_chr* >../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt
+
 mkdir ../data/QTLoverlap/
 python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/QTLoverlap/TotalQTLinNuclearNominal.txt  
 
@@ -45,7 +51,7 @@ par(mfrow=c(1,2))
 hist(totAPAinNuc$pval, xlab="Nuclear Pvalue", main="Significant Total APA QTLs \n Nuclear")
 text(.8,300, paste("pi_1=", round((1-qval_tot$pi0), digit=3), sep=" "))
 hist(nucAPAinTot$pval, xlab="Total Pvalue", main="Significant Nuclear APA QTLs \n Total")
-text(.8,450, paste("pi_1=", round((1-qval_nuc$pi0), digit=3), sep=" "))
+text(.8,350, paste("pi_1=", round((1-qval_nuc$pi0), digit=3), sep=" "))
 ```
 
 

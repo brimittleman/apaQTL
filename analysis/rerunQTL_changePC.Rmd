@@ -126,6 +126,8 @@ apaQTL genes:
 ```{r}
 NucQTLs_gene= NucQTLs %>% group_by(Gene)  %>% summarise(nQTL=n())
 
+
+nrow(NucQTLs_gene)
 summary(NucQTLs_gene$nQTL)
 
 hist(NucQTLs_gene$nQTL)
