@@ -297,11 +297,12 @@ ggplot(effectsize_deltaPAUProp_both_melt_sm, aes(x=loc, y=Proportion, by=Fractio
 
 
 ```{r}
+effectsize_deltaPAUProp_both_melt_sm
 #intronic
-prop.test(x=c(473,160), n=c(700,1396),alternative = "greater")
+prop.test(x=c(387,126), n=c(591,1173),alternative = "greater")
 
 #3' utr
-prop.test(x=c(104,1085), n=c(700,1396),alternative = "less")
+prop.test(x=c(101,916), n=c(591,1173),alternative = "less")
 ```
 
 

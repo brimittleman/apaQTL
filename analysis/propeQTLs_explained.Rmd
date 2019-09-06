@@ -66,7 +66,7 @@ nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)
 ```
 
 
-I tested 588 unexplained eQTLs in the total fraction and 96 have a bonforoni corrected significant peak. 
+
 
 Compare to explained eQTLS:  
 
@@ -77,8 +77,7 @@ totalapaexplained_sig= totalapaexplained %>% filter(adjPval<.05)
 
 nrow(totalapaexplained_sig)/nrow(totalapaexplained)
 ```
-I am testing 820 explained eQTLs and of those 107 have a bonforoni corrected significant peak. 
- 
+
 difference of proportions:
 
 ```{r}
@@ -116,7 +115,7 @@ nuclearapaUnexplained_sig= nuclearapaUnexplained %>% filter(adjPval<.05)
 nrow(nuclearapaUnexplained_sig)/nrow(nuclearapaUnexplained)
 ```
 
-I tested 594 unexplained eQTLs in the nuclear fraction and 98 have a bonforoni corrected significant peak. 
+
 
 ```{r}
 nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))
@@ -125,8 +124,7 @@ nuclearapaexplained_sig= nuclearapaexplained %>% filter(adjPval<.05)
 
 nrow(nuclearapaexplained_sig)/nrow(nuclearapaexplained)
 ```
-I tested 829 explained eQTLs in the nuclear fraction and 110 have a nominally significant peak. 
-difference of proportions:
+
 
 ```{r}
 prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(nuclearapaexplained)))
@@ -145,11 +143,7 @@ BothnuclearLoc=nuclearapaUnexplained_sig_loc %>% full_join(nuclearapaexplained_s
 
 BothnuclearLoc
 ```
-```{r}
-prop.test(x=c(18,33), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
 
-prop.test(x=c(66,63), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))
-```
 
 
 ###total v nuclear  
@@ -278,7 +272,7 @@ total:
 alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
 
 
-ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=-1, x=-1.5, label="slope: -0.21 p-value: .01, r2=0.06") + labs(title="Total apa effect sizes vs eQTL eqtl effect sizes", y="Total apaQTL effect size",x="eQTL effect size")
+ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=-1, x=-1.5, label="slope: -0.22 p-value: 0.00002, r2=0.08") + labs(title="Total apa effect sizes vs eQTL eqtl effect sizes", y="Total apaQTL effect size",x="eQTL effect size")
 
 summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))
 ```
@@ -289,14 +283,14 @@ Nuclear:
 alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
 
 
-ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.20 p-value: 9.0 * 10 ^ -9, r2=0.08") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
 
 
 summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))
 ```
 
 ```{r figure3B, include=FALSE, dev="pdf", fig.height=10, fig.width=10, crop=FALSE}
-ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.18 p-value: .005, r2=0.05") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.20 p-value: 9.0 * 10 ^ -9, r2=0.08") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
 ```
 
 ##Examples for overlap:  

@@ -471,3 +471,43 @@ summary(lm(data=transcriptionallPAS, Difference~Transcription))
 This has a small positive correlation.  
 
 
+
+##RNA decay 
+Do this with Athma's decay. 
+
+```{r}
+decay=read.table(file = "../data/fourSU/tr_decay_table_norm.txt", header=T, stringsAsFactors = F) %>% dplyr::select(gene_id,contains("RNAdecay"))
+
+decay_geneNames=decay %>% inner_join(geneNames, by="gene_id") %>% dplyr::select(GeneName, contains("RNAdecay"))
+
+decay_geneNames_long=melt(decay_geneNames,id.vars = "GeneName", value.name = "RNA_Decay", variable.name = "Decay_Ind") %>% separate(Decay_Ind, into=c("type", "ind"), sep="_") %>% mutate(line=paste("NA" , ind, sep="")) %>% dplyr::select(GeneName, line, RNA_Decay) %>% dplyr::rename( "gene"=GeneName)
+
+```
+
+```{r}
+
+APAandDecay=decay_geneNames_long %>% inner_join(ApaBothFrac_melt, by=c('gene', 'line'))
+ngenes=APAandDecay %>% dplyr::select(gene) %>% unique() %>% nrow()
+ngenes
+
+summary(lm(data=APAandDecay, APA_val~RNA_Decay))
+
+ngenes=APAandDecay %>% dplyr::select(gene) %>% unique() %>% nrow()
+ngenes
+
+decay_byGene= decay_geneNames_long %>% group_by(gene) %>% summarise(MeanDecay=mean(RNA_Decay))
+APAandDecayMean=decay_byGene %>% inner_join(ApaBothFracStand_geneMean_spread, by=c('gene'))
+
+
+
+APAandDecayMean$density <- get_density(APAandDecayMean$APAVal, APAandDecayMean$MeanDecay, n = 100)
+
+ggplot(APAandDecayMean, aes(x=MeanDecay, y=APAVal)) + geom_point(aes(color=density)) + geom_smooth(method="lm") + labs(x="relative Decay", y="Nuclear/(Total+Nuclear)", title="Relationship between Nuclear proportion and RNA decay")+ scale_color_viridis()
+
+```
+
+
+```{r}
+summary(lm(data=APAandDecayMean, APAVal~MeanDecay))
+```
+

@@ -25,6 +25,12 @@ I test 589 of the apaQTls in the total fraction.
 nucAPAinTot=read.table("../data/QTLoverlap/NuclearQTLinTotalNominal.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope")) %>% separate(peakID,into=c("chr", "start", "end", "geneID"),sep=":" ) %>% separate(geneID, into=c("gene", "loc", "strand", "peakNum"), sep="_")
 nucAPAinTot_NOTSIG=nucAPAinTot %>% filter(pval>.05)
 nucAPAinTot_SIG=nucAPAinTot %>% filter(pval<.05)
+
+
+shared=nucAPAinTot_SIG %>% select(-dist,-pval, -slope)
+#write out shared qtls  
+
+write.table(shared,"../data/apaQTLs/SharedAPAQTLs.txt",col.names = T, row.names = F, quote = F, sep="\t" )
 ```
 
 ```{r}

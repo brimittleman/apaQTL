@@ -154,7 +154,7 @@ t.test(totQTL_vareff_int$EffectVar, totQTL_vareff_utr$EffectVar , alternative = 
 
 
 ```{r}
-ggplot(totQTL_vareff,aes(x=Loc, y=log10(EffectVar), fill=Loc) )+ geom_boxplot() + scale_fill_manual(values=c("blue","orange")) + labs(title="No difference in QTL type between total PAS location", x="PAS Location") + geom_text(x=1.5,y=0.5, label="P-value=  0.25") 
+ggplot(totQTL_vareff,aes(x=Loc, y=log10(EffectVar), fill=Loc) )+ geom_boxplot() + scale_fill_manual(values=c("blue","orange")) + labs(title="No difference in QTL type between total PAS location", x="PAS Location") + geom_text(x=1.5,y=0.5, label="P-value=  0.42") 
 
 ```
 
@@ -172,6 +172,6 @@ t.test(nucQTL_vareff_int$EffectVar, nucQTL_vareff_utr$EffectVar , alternative = 
 ```
 
 ```{r}
-ggplot(nucQTL_vareff,aes(x=Loc, y=log10(EffectVar), fill=Loc) )+ geom_boxplot() + scale_fill_manual(values=c("blue","orange")) + labs(title="Nuclear Intronic QTL more likely to lead to buffering", x="PAS Location") + geom_text(x=1.5,y=0.5, label="P-value= 0.00067\n***") 
+ggplot(nucQTL_vareff,aes(x=Loc, y=log10(EffectVar), fill=Loc) )+ geom_boxplot() + scale_fill_manual(values=c("blue","orange")) + labs(title="Nuclear Intronic QTL more likely to lead to buffering", x="PAS Location") + geom_text(x=1.5,y=0.5, label="P-value= 0.01\n***") 
 ```
 

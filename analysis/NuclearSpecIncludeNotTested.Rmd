@@ -127,9 +127,9 @@ NuclearSpecQTL__group_small
 ```
 
 ```{r}
-prop.test(x=c(183,87),n=c(297,355))
+prop.test(x=c(110,71),n=c(297,322))
 
-prop.test(x=c(183,87),n=c(297,355))$p.value
+prop.test(x=c(110,71),n=c(297,322))$p.value
 ```
 
 I want to know if the shared or specific are more likely to decrease/increase 

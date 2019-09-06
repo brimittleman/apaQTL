@@ -39,7 +39,7 @@ totalPASPheno=totalPAS %>% melt(id.vars="chrom", variable.name="Ind", value.name
 totalPASPheno_melt= totalPASPheno %>% melt(id.vars=c("Ind", "gene"), variable.name="Type", value.name = "Value") %>% mutate(chrom=paste(gene, Type, sep="_")) %>% spread(Ind, Value) %>% select(-gene, -Type)
 
 
-#write.table(totalPASPheno_melt,"../data/PreTerm_pheno/Total_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep=" ")
+write.table(totalPASPheno_melt,"../data/PreTerm_pheno/Total_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep=" ")
 
 ```
 
@@ -71,7 +71,7 @@ nuclearPASPheno=nuclearPAS %>% melt(id.vars="chrom", variable.name="Ind", value.
 nuclearPASPheno_melt= nuclearPASPheno %>% melt(id.vars=c("Ind", "gene"), variable.name="Type", value.name = "Value") %>% mutate(chrom=paste(gene, Type, sep="_")) %>% spread(Ind, Value) %>% select(-gene, -Type)
 
 
-#write.table(nuclearPASPheno_melt,"../data/PreTerm_pheno/Nuclear_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep=" ")
+write.table(nuclearPASPheno_melt,"../data/PreTerm_pheno/Nuclear_preterminationPheno.txt",quote=F, row.names=F,col.names=T, sep=" ")
 
 ```
 
@@ -287,3 +287,90 @@ totRes_sig_dir= totRes_sig %>% separate(pid, into=c("chr","start","end", "geneID
 ggplot(totRes_sig_dir, aes(x=Frac, y=slope)) + geom_boxplot() + geom_jitter(aes(col=Frac))+ labs(title="Total premature APA QTL effect sizes", y="Effect size",x="") + scale_x_discrete(labels=c( "Intronic Usage","3' UTR Usage"))+ scale_color_discrete(name ="", labels=c( "Intronic Usage","3' UTR Usage")) 
 ```
 The difference may just be due to the numbers but most of the variants are associated with decreased utr usage and increase intronic usage. 
+
+
+Code that will plot the non normalized intronic ratio:  
+
+
+```{bash,eval=F}
+mkdir ../data/pttQTLplots
+```
+
+```{r}
+TotPretermPhen=read.table("../data/PreTerm_pheno/Total_preterminationPheno.txt.gz", header = T,stringsAsFactors = F) %>% separate(chrom, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into = c("gene", "loc"),sep="_") %>% filter(loc=="PreTermInt") %>% select(-start,-chr,-end,-loc)
+
+TotPretermPhen_melt=melt(TotPretermPhen, id.vars = "gene", variable.name = "Individual") %>% separate(value, into=c("num", "den"),sep="/") %>% mutate(ratio=as.integer(num)/as.integer(den)) %>% select(-num,-den)
+
+write.table(TotPretermPhen_melt,file="../data/pttQTLplots/TotalPhenotype.txt",col.names = T, row.names = F, quote=F, sep="\t")
+
+
+```
+
+
+```{r}
+totpttQTL=read.table("../data/PrematureQTLPermuted/Total_preterminationPheno.txt.gz.qqnorm_AllChrBH.txt", stringsAsFactors = F, header = T) %>% filter(-log10(bh)>1) %>% select(pid,sid )
+head(totpttQTL)
+```
+
+```{bash,eval=F}
+less ../../li_genotypes/genotypesYRI.gen.proc.5MAF.vcf.gz | head -n 1 > ../data/pttQTLplots/genoHead.txt
+
+
+less ../../li_genotypes/genotypesYRI.gen.proc.5MAF.chr10.vcf.gz | grep rs7091776 > ../data/pttQTLplots/rs7091776.txt
+
+```
+
+Remove #
+
+```{r}
+geno_head=read.table("../data/pttQTLplots/genoHead.txt", header =T,stringsAsFactors = F)
+
+rs7091776=read.table("../data/pttQTLplots/rs7091776.txt", col.names =colnames(geno_head),stringsAsFactors = F)%>% select(ID,contains("NA"))
+
+lettersGeno=read.table("../data/pttQTLplots/rs7091776.txt", col.names =colnames(geno_head), colClasses = c("character")) %>% select(REF,ALT)
+
+refAllele=as.character(lettersGeno$REF)
+altAllele=as.character(lettersGeno$ALT)
+
+
+genoMelt=melt(rs7091776, id.vars = "ID", value.name = "FullGeno", variable.name = "Individual" ) %>% select(Individual, FullGeno) %>% mutate(genotype=ifelse(round(as.integer(FullGeno))==0, paste(refAllele, refAllele, sep=""), ifelse(round(as.integer(FullGeno))==1, paste(refAllele,altAllele, sep=""), paste(altAllele,altAllele,sep=""))))
+
+
+
+TotPretermPhen_melt_C10orf88= TotPretermPhen_melt %>% filter(gene=="C10orf88") %>% inner_join(genoMelt, by="Individual") 
+```
+
+
+```{r}
+ggplot(TotPretermPhen_melt_C10orf88,aes(x=genotype, y=ratio, fill=genotype)) +  geom_boxplot(width=.5)+ geom_jitter(alpha=1) + labs(y="Intronic PAS usage Ratio") + scale_fill_brewer(palette = "Dark2")
+```
+
+```{r}
+NucPretermPhen=read.table("../data/PreTerm_pheno/Nuclear_preterminationPheno.txt.gz", header = T,stringsAsFactors = F) %>% separate(chrom, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into = c("gene", "loc"),sep="_") %>% filter(loc=="PreTermInt") %>% select(-start,-chr,-end,-loc)
+
+NucPretermPhen_melt=melt(NucPretermPhen, id.vars = "gene", variable.name = "Individual") %>% separate(value, into=c("num", "den"),sep="/") %>% mutate(ratio=as.integer(num)/as.integer(den)) %>% select(-num,-den)
+
+write.table(NucPretermPhen_melt,file="../data/pttQTLplots/NuclearPhenotype.txt",col.names = T, row.names = F, quote=F, sep="\t")
+
+
+```
+
+
+Code to run this for any example:
+
+```{bash,eval=F}
+sbatch run_pttfacetboxplot.sh Total C10orf88 10 rs7091776
+```
+
+#### Not necessary to rerun: not using 
+This works. I want to write a script that will make all of them. 
+
+
+```{bash,eval=F}
+python writePTTexamplecode.py Total
+python writePTTexamplecode.py Nuclear
+
+sbatch Script4TotalPTTqtlexamples.sh
+sbatch Script4NuclearPTTqtlexamples.sh
+```
+

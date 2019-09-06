@@ -63,7 +63,7 @@ ELL2 intron + peak106823 rs56219066
  Get snps in LD using the https://ldlink.nci.nih.gov/#ldproxy-tab. Run this with through command line. To output code for each snp:
  
 ```{bash,eval=F}
-sbatch LD_snpproxy.sh 
+sbatch LD_snpsproxy.sh 
 ```
 Run each line independently
 Concatinate all results 
@@ -92,13 +92,13 @@ python nucQTLGWAS_withLD.py
 ```{bash,eval=F}
 cut -f 5 ../data/GWAS_overlap/NuclearSNPinGWAS_withLD.txt | sort | uniq | wc -l
 
-#87
+#105
 ```
 
-87 overlaps of 702 uniq snps
+105 overlaps of 544  snps
 
 ```{r}
-87/702
+105/544
 ```
 
 

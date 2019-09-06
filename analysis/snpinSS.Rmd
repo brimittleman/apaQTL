@@ -25,7 +25,7 @@ mkdir ../data/SNPinSS
 I want a bed file with 50bp upstream of these PAS. 
 ```{r}
 PASwSS=read.table("../data/PAS/PASwSignalSite.txt", header = T,stringsAsFactors = F)
-PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""),PASname=paste(PAS, geneiD, sep="_")) 
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""),PASname=paste(PAS, geneiD, sep="_")) 
 
 PASwSSregion=PASwSS %>% inner_join(PAS, by="PAS") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50)) %>% select(chr, newStart,newEnd, PASname, score, strand)
 
@@ -35,8 +35,8 @@ write.table(PASwSSregion,"../data/SNPinSS/FiftyupstreamPASwSS.bed", col.names = 
 
 
 ```{bash,eval=F}
-sed 's/^chr//' ../data/SNPinSS/FiftyupstreamPASwSS.bed  > ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed
-sort -k1,1 -k2,2n ../data/SNPinSS/FiftyupstreamPASwSS.nochr.bed > ../data/SNPinSS/FiftyupstreamPASwSS.nochr.sort.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/FiftyupstreamPASwSS.bed > ../data/SNPinSS/FiftyupstreamPASwSS.sortbed
 sbatch subsetVCF_upstreamPAS.sh
 
 cat  ../data/SNPinSS/SNPSinFiftyupstreamPAS_chr* >../data/SNPinSS/SNPSinFiftyupstreamPAS_Allchr.recode.vcf
@@ -57,8 +57,8 @@ write.table(SSregions,"../data/SNPinSS/SignalSiteRegions.bed", col.names = F, ro
 ```
 
 ```{bash,eval=F}
-sed 's/^chr//' ../data/SNPinSS/SignalSiteRegions.bed  > ../data/SNPinSS/SignalSiteRegions.nochr.bed
-sort -k1,1 -k2,2n ../data/SNPinSS/SignalSiteRegions.nochr.bed > ../data/SNPinSS/SignalSiteRegions.nochr.sort.bed
+../data/SNPinSS/SSregions_Allchr.sort.bed
+sort -k1,1 -k2,2n ../data/SNPinSS/SignalSiteRegions.bed > ../data/SNPinSS/SignalSiteRegions.sort.bed
 sbatch subsetVCF_SS.sh
 
 cat  ../data/SNPinSS/SSregions_chr* > ../data/SNPinSS/SSregions_Allchr.recode.vcf
@@ -75,8 +75,8 @@ write.table(SS_diffregion,"../data/SNPinSS/OtherSSRegions.bed", col.names = F, r
 
 
 ```{bash,eval=F}
-sed 's/^chr//' ../data/SNPinSS/OtherSSRegions.bed  > ../data/SNPinSS/OtherSSRegions.nochr.bed
-sort -k1,1 -k2,2n ../data/SNPinSS/OtherSSRegions.nochr.bed > ../data/SNPinSS/OtherSSRegions.nochr.sort.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/OtherSSRegions.bed  > ../data/SNPinSS/OtherSSRegions.sort.bed 
 sbatch subsetvcf_otherreg.sh 
 
 cat  ../data/SNPinSS/Otherregions_chr* > ../data/SNPinSS/Otherregions_Allchr.recode.vcf
@@ -95,8 +95,8 @@ write.table(SSregions_perm,"../data/SNPinSS/SSRegions_permuted.bed", col.names =
 
 
 ```{bash,eval=F}
-sed 's/^chr//' ../data/SNPinSS/SSRegions_permuted.bed  > ../data/SNPinSS/SSRegions_permuted.nochr.bed
-sort -k1,1 -k2,2n ../data/SNPinSS/SSRegions_permuted.nochr.bed > ../data/SNPinSS/SSRegions_permuted.nochr.sort.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/SSRegions_permuted.bed > ../data/SNPinSS/SSRegions_permuted.sort.bed
 sbatch subsetvcf_permSS.sh 
 
 cat  ../data/SNPinSS/SSRegionsPerm_chr* > ../data/SNPinSS/SSRegionsPerm_Allchr.recode.vcf
@@ -200,6 +200,10 @@ python fixPASregionSNPs.py
 
 Run this with total and nuclear 
 ```{bash,eval=F}
+
+sbatch RunRes2PAS.sh
+
+#all of this code is in the above batch script 
 python NomResfromPASSNP.py ../data/SNPinSS/SS_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/SS_Nuclear_nomRes.txt 
 
 python NomResfromPASSNP.py ../data/SNPinSS/SS_PASandSNPs.txt ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt ../data/apaQTLNominal_4pc/SS_Total_nomRes.txt 
@@ -279,15 +283,15 @@ The benchmark set is the UTRs without signal sites
 
 ```{r}
 PASwSS=read.table("../data/PAS/PASwSignalSite.txt", header = T,stringsAsFactors = F)
-PAS_noSS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc_withCHR.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""),PASname=paste(PAS, geneiD, sep="_")) %>% anti_join(PASwSS, by="PAS") %>% separate(geneiD,into=c("gene", "loc"), sep="_") %>% filter(loc=="utr3") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50))%>% select(chr, newStart,newEnd, PASname, score, strand)
+PAS_noSS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, header = F, col.names = c("chr", "start", "end", "PASid","score", "strand")) %>% separate(PASid, into=c("pasNum", "geneiD"), sep=":") %>% mutate(PAS=paste("peak", pasNum, sep=""),PASname=paste(PAS, geneiD, sep="_")) %>% anti_join(PASwSS, by="PAS") %>% separate(geneiD,into=c("gene", "loc"), sep="_") %>% filter(loc=="utr3") %>% mutate(newEnd=ifelse(strand=="+", end+50, end),newStart=ifelse(strand=="+", start, start-50))%>% select(chr, newStart,newEnd, PASname, score, strand)
 
 write.table(PAS_noSS,"../data/SNPinSS/UTRregionsPASnoSS.bed", col.names = F, row.names = F, quote = F, sep="\t")
 ```
 
 
 ```{bash,eval=F}
-sed 's/^chr//' ../data/SNPinSS/UTRregionsPASnoSS.bed  > ../data/SNPinSS/UTRregionsPASnoSS.nochr.bed
-sort -k1,1 -k2,2n ../data/SNPinSS/UTRregionsPASnoSS.nochr.bed > ../data/SNPinSS/UTRregionsPASnoSS.nochr.sort.bed
+
+sort -k1,1 -k2,2n ../data/SNPinSS/UTRregionsPASnoSS.bed > ../data/SNPinSS/UTRregionsPASnoSS.sort.bed
 
 
 sbatch subsetVCF_noSSregions.sh
@@ -302,6 +306,8 @@ sort -k1,1 -k2,2n ../data/SNPinSS/UTRnoSS_SNPsAllchr.bed > ../data/SNPinSS/UTRno
 
 sbatch mapSSsnps2PAS.sh
 ```
+
+
 ```{r}
 NOSSsnpswithPAS=read.table("../data/SNPinSS/UTRnoSS_SNPsAllchr2PAS.txt",col.names = c("chr","start", "end", "PASname", "score", "strand", "SNP")) %>% filter(SNP!=".") %>% separate(PASname, into=c("PAS", "gene", "loc"),sep="_") %>% select(PAS, SNP)
 write.table(NOSSsnpswithPAS, "../data/SNPinSS/NoSSUTR_PASandSNPs.txt", row.names = F, col.names = F, quote = F, sep="\t")

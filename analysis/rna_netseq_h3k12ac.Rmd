@@ -130,7 +130,7 @@ allpheno_matrix= as.matrix(allpheno %>% dplyr::select(-ID))
 my_palette <- colorRampPalette(c("white", "yellow", "orange", "red", "black"))(n = 100)
 allphenocorr= abs(round(cor(allpheno_matrix,method="spearman"),2))
 ##4su-red, h3k27-green, RNA-blue, netseq-purple, nuc-orange, total-yellow
-colBar=c(rep("Red",65), rep("Green", 59), rep("Blue",69), rep("Purple", 16),rep("Orange", 54),rep("Yellow", 54))
+colBar=c(rep("Red",65), rep("Green", 59), rep("Blue",69), rep("Purple", 16),rep("Orange", 52),rep("Yellow", 52))
 heatmap.2(as.matrix(allphenocorr),trace="none", dendrogram='col',ColSideColors=colBar, col=my_palette)
           
 ```

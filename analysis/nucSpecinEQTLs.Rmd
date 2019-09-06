@@ -59,7 +59,7 @@ allNucspec=nucAPAinTot_NOTSIG %>% full_join(nucSpecgene,by="gene")
 
 ```
 
-There are 172 genes in this set. 
+There are 210 genes in this set. 
 
 ```{r}
 permeqtl_nucSpec= permeqtl  %>% filter(gene %in%allNucspec$gene )
@@ -85,7 +85,7 @@ Compare effect sizes:
 ```{r}
 #allNucspec is the nuclear specific gene, will pull these genes out 
 
-nuclearQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt", header = T,stringsAsFactors = F) %>% rename("gene"= Gene) %>% semi_join(allNucspec, by="gene")
+nuclearQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt", header = T,stringsAsFactors = F) %>% dplyr::rename( "gene"= Gene) %>% semi_join(allNucspec, by="gene")
 
 write.table(nuclearQTLs, file="../data/apaQTLs/NuclearSpecificAPAqtls.txt", col.names = T, row.names = F, quote = F, sep="\t")
 ```
@@ -97,11 +97,11 @@ python nucSpecQTLineData.py
 Join these by snp and gene.  
 
 ```{r}
-nomNamesE=c("gene", "sid",'dist', 'pval', 'Eslope' )
+nomNamesE=c("gene", "sid",'dist', 'Epval', 'Eslope' )
 eQTLforNucspec=read.table("../data/eQTLs/NuclearSPecificAPAqtlsinEqtl.txt",stringsAsFactors = F, col.names = nomNamesE)
 
 bothNucspecandE=eQTLforNucspec %>% inner_join(nuclearQTLs, by=c("gene", "sid"))
-
+nrow(bothNucspecandE)
 summary(lm(bothNucspecandE$slope~bothNucspecandE$Eslope))
 cor.test(bothNucspecandE$slope,bothNucspecandE$Eslope, alternative="less")
 
@@ -109,6 +109,19 @@ cor.test(bothNucspecandE$slope,bothNucspecandE$Eslope, alternative="less")
 
 ```{r}
 ggplot(bothNucspecandE, aes(x=Eslope, y=slope)) + geom_point() + geom_smooth(method="lm") + labs(x="eQTL effect size", y="apaQTL effect size", title="Effect size in eQTL for nuclear specific apaQTL")
+```
+
+Subset to nominally significant eQTLs: 
+
+```{r}
+bothNucspecandE_sig= bothNucspecandE %>% filter(Eslope<.05)
+nrow(bothNucspecandE_sig)
+summary(lm(bothNucspecandE_sig$slope~bothNucspecandE_sig$Eslope))
+cor.test(bothNucspecandE_sig$slope,bothNucspecandE_sig$Eslope, alternative="less")
+
+```
+```{r}
+ggplot(bothNucspecandE_sig, aes(x=Eslope, y=slope)) + geom_point() + geom_smooth(method="lm") + labs(x="eQTL effect size (nominally Sig)", y="apaQTL effect size", title="Effect size in eQTL for nuclear specific apaQTL")
 ```
 
 

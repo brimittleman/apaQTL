@@ -145,6 +145,10 @@ Plot these:
 nucpttQTL %>% separate(pid, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene","loc"),sep="_") %>%  anti_join(nucAPA,by="gene") %>% select(gene, chr,sid)
 ```
 
+
+####Examples done need to rerun 
+
+These are from exploratory analysis
 ```{bash,eval=F}
 sbatch  run_qtlFacetBoxplots.sh Nuclear PPFIA1 11 rs188630869 none
 sbatch  run_qtlFacetBoxplots.sh Nuclear ZDHHC17	12	rs74792673 none

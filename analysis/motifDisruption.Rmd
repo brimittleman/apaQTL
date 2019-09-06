@@ -90,20 +90,20 @@ python extractseqfromqtlfastq.py Tot
 python extractseqfromqtlfastq.py Nuc
 ```
 
-
+####not needed
 
 ```{r}
-Totsequp=read.table("../data/motifdistrupt/TotQTLregionSequenceOnly.txt", header = F, stringsAsFactors = F, col.names = "CorrectSeq")
-TotSeqComp=as.data.frame(cbind(totSeq,Totsequp)) %>% mutate(sig=ifelse(grepl("AATAAA",CorrectSeq),1, 0))
-TotSeqCompSig=TotSeqComp %>% filter(sig==1)
-TotSeqCompSig
+#Totsequp=read.table("../data/motifdistrupt/TotQTLregionSequenceOnly.txt", header = F, stringsAsFactors = F, col.names = "CorrectSeq")
+#TotSeqComp=as.data.frame(cbind(totSeq,Totsequp)) %>% mutate(sig=ifelse(grepl("AATAAA",CorrectSeq),1, 0))
+#TotSeqCompSig=TotSeqComp %>% filter(sig==1)
+#TotSeqCompSig
 ```
 
 ```{r}
-Nucsequp=read.table("../data/motifdistrupt/NucQTLregionSequenceOnly.txt", header = F, stringsAsFactors = F, col.names = "CorrectSeq")
-NucSeqComp=as.data.frame(cbind(nucSeq,Nucsequp)) %>% mutate(sig=ifelse(grepl("AATAAA",CorrectSeq),1, 0))
-NucSeqCompSig=NucSeqComp %>% filter(sig==1)
-NucSeqCompSig
+#Nucsequp=read.table("../data/motifdistrupt/NucQTLregionSequenceOnly.txt", header = F, stringsAsFactors = F, col.names = "CorrectSeq")
+#NucSeqComp=as.data.frame(cbind(nucSeq,Nucsequp)) %>% mutate(sig=ifelse(grepl("AATAAA",CorrectSeq),1, 0))
+#NucSeqCompSig=NucSeqComp %>% filter(sig==1)
+#NucSeqCompSig
 ```
 
 These are pretty far from the peak and probably not the mechanism for these.  
@@ -111,8 +111,8 @@ These are pretty far from the peak and probably not the mechanism for these.
 I can look at this another way by subsetting to those close to the peak.
 
 ```{r}
-TotSeqComp_Close=TotSeqComp %>% filter(abs(Dist)<200) %>% select(name,Dist,CorrectSeq,sig)
-NucSeqComp_Close=NucSeqComp %>% filter(abs(Dist)<200) %>% select(name,Dist,CorrectSeq,sig)
+#TotSeqComp_Close=TotSeqComp %>% filter(abs(Dist)<200) %>% select(name,Dist,CorrectSeq,sig)
+#NucSeqComp_Close=NucSeqComp %>% filter(abs(Dist)<200) %>% select(name,Dist,CorrectSeq,sig)
 ```
 
 
@@ -143,21 +143,3 @@ Disrupt:
 - KLF2:peak64650:utr3 rs11086029  T- A disrupt signal site for peak64650, increased usage of upstream pas still in UTR  
 
 
-
-
-Make boxplots for these:
-
-I wrote the code for these in the [example plots analysis]("QTLexampleplots.html")
-
-Fraction=$1
-gene=$2
-chrom=$3
-snp=$4
-peakID=$5
-```{bash,eval=F}
-sbatch run_qtlFacetBoxplots.sh Nuclear ZNF418 19 rs75991626 peak68038
-
-```
-
-
-This is not the best way to look at this. It may be a snp in LD. Also this is the distance to the peak not the PAS. 
