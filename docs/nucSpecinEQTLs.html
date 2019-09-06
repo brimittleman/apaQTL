@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-08-30
+<strong>Last updated:</strong> 2019-09-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree80f8466798529b1009cc9184132ed667c5160589targetblank80f8466a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/80f8466798529b1009cc9184132ed667c5160589" target="_blank">80f8466</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5976ed7e0423551d9136c548a0a8acd0b8583231" target="_blank">5976ed7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree80f8466798529b1009cc9184132ed667c5160589targetblank80f8466a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -504,6 +504,8 @@ Untracked files:
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
@@ -511,6 +513,7 @@ Untracked files:
     Untracked:  analysis/interpret_verifybam.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
+    Untracked:  analysis/remove_badlines.Rmd
     Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
@@ -547,6 +550,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
@@ -566,6 +570,7 @@ Untracked files:
     Untracked:  code/._apaQTL_nominalv67.sh
     Untracked:  code/._apaQTL_permuted.sh
     Untracked:  code/._apaQTL_permuted_test6A7A.sh
+    Untracked:  code/._apainRibo.py
     Untracked:  code/._assignNucIntonpeak2intronlocs.sh
     Untracked:  code/._assignTotIntronpeak2intronlocs.sh
     Untracked:  code/._bam2BW_5primemost.sh
@@ -574,6 +579,7 @@ Untracked files:
     Untracked:  code/._bothFracDTplot4thintron.sh
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
+    Untracked:  code/._changeRibonomQTLres2genename.py
     Untracked:  code/._changenomQTLres2geneName.py
     Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
@@ -843,7 +849,9 @@ Untracked files:
     Untracked:  code/RNAseqDTPlotGeneRegions.out
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/RunRes2PAS.sh
     Untracked:  code/SAF215upbed.py
+    Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
     Untracked:  code/Script4TotalPTTqtlexamples.sh
@@ -879,6 +887,7 @@ Untracked files:
     Untracked:  code/apaQTL_permuted.4pc.sh
     Untracked:  code/apaQTL_permuted_test6A7A.sh
     Untracked:  code/apafacetboxplots.R
+    Untracked:  code/apainRibo.py
     Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
@@ -899,6 +908,7 @@ Untracked files:
     Untracked:  code/bothFrac_FC.sh
     Untracked:  code/callSHscripts.txt
     Untracked:  code/changePermQTLres2geneName.py
+    Untracked:  code/changeRibonomQTLres2genename.py
     Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/chooseAnno2PAS_pacbio.py
     Untracked:  code/closestannotated.err
@@ -931,6 +941,7 @@ Untracked files:
     Untracked:  code/filterMPPAS_15_7As.py
     Untracked:  code/filterMPPAS_50.py
     Untracked:  code/filterSAFforMP.py
+    Untracked:  code/filterSAFforMP_gen.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fix4su304corr.py
@@ -1093,6 +1104,8 @@ Untracked files:
     Untracked:  code/run_verifybam_fullVCF.sh
     Untracked:  code/runprxySNP.err
     Untracked:  code/runprxySNP.out
+    Untracked:  code/runres2pas.err
+    Untracked:  code/runres2pas.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -1165,7 +1178,9 @@ Untracked files:
     Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
+    Untracked:  data/BadLines/
     Untracked:  data/Battle_pQTL/
+    Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
@@ -1202,6 +1217,7 @@ Untracked files:
     Untracked:  data/apaQTLPermuted_4pc/
     Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
+    Untracked:  data/assignedPeaks_15Up/
     Untracked:  data/bam/
     Untracked:  data/bam_clean/
     Untracked:  data/bam_waspfilt/
@@ -1237,6 +1253,7 @@ Untracked files:
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
     Untracked:  data/nuc_10upclean/
+    Untracked:  data/oldPASfiles/
     Untracked:  data/overlapeQTL_try2/
     Untracked:  data/overlapeQTLs/
     Untracked:  data/pQTLoverlap/
@@ -1256,7 +1273,6 @@ Untracked files:
     Untracked:  data/verifyBAM_full/
     Untracked:  docs/._.DS_Store
     Untracked:  docs/figure/._.DS_Store
-    Untracked:  docs/figure/nonNormQTL.Rmd/._figure2D-1.pdf
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1267,15 +1283,12 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PAS_graphs.Rmd
-    Modified:   analysis/PrematureTermQTL.Rmd
-    Modified:   analysis/compareAnnotatedpas.Rmd
+    Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/rerunQTL_changePC.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
+    Modified:   code/SnakefilefiltPAS
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_Nominal.sh
     Modified:   code/apaQTL_permuted.sh
@@ -1298,6 +1311,13 @@ Unstaged changes:
     Modified:   code/submit-snakemakePAS.sh
     Modified:   code/submit-snakemakefiltPAS.sh
     Deleted:    code/test.txt
+    Modified:   data/MetaDataSequencing.txt
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Emain-1.pdf
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Esubset-1.pdf
+    Modified:   docs/figure/chromHHMQTL.Rmd/figure3D-1.pdf
+    Modified:   docs/figure/exvunexpeQTL.Rmd/figure3C-1.pdf
+    Modified:   docs/figure/pQTLandeQTLoverlap.Rmd/figure3A-1.pdf
+    Modified:   docs/figure/propeQTLs_explained.Rmd/figure3B-1.pdf
     Deleted:    reads_graphs.Rmd
 
 </code></pre>
@@ -1337,6 +1357,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5976ed7e0423551d9136c548a0a8acd0b8583231/analysis/nucSpecinEQTLs.Rmd" target="_blank">5976ed7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+<td>
+update post new filter
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/16cbaa3d3f465ce188684c3ff2f7ce528e8852b2/docs/nucSpecinEQTLs.html" target="_blank">16cbaa3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1482,7 +1536,7 @@ nucAPAinTot=read.table(&quot;../data/QTLoverlap/NuclearQTLinTotalNominal.txt&quo
 nucAPAinTot_NOTSIG=nucAPAinTot %&gt;% filter(pval&gt;.05) %&gt;% select(gene) %&gt;% unique()
 
 allNucspec=nucAPAinTot_NOTSIG %&gt;% full_join(nucSpecgene,by=&quot;gene&quot;)</code></pre>
-<p>There are 172 genes in this set.</p>
+<p>There are 210 genes in this set.</p>
 <pre class="r"><code>permeqtl_nucSpec= permeqtl  %&gt;% filter(gene %in%allNucspec$gene )
 
 permeqtl_notnucSpec= permeqtl  %&gt;% anti_join(permeqtl_nucSpec,by = c(&quot;gene&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;RSID&quot;, &quot;dist&quot;, &quot;nomPval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;, &quot;bh&quot;))</code></pre>
@@ -1545,52 +1599,53 @@ brimittleman
     Wilcoxon rank sum test with continuity correction
 
 data:  permeqtl_notnucSpec$ppval and permeqtl_nucSpec$ppval
-W = 194420, p-value = 0.1278
+W = 1261500, p-value = 0.02179
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Compare effect sizes:</p>
 <pre class="r"><code>#allNucspec is the nuclear specific gene, will pull these genes out 
 
-nuclearQTLs=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt&quot;, header = T,stringsAsFactors = F) %&gt;% rename(&quot;gene&quot;= Gene) %&gt;% semi_join(allNucspec, by=&quot;gene&quot;)
+nuclearQTLs=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs_5fdr.txt&quot;, header = T,stringsAsFactors = F) %&gt;% dplyr::rename( &quot;gene&quot;= Gene) %&gt;% semi_join(allNucspec, by=&quot;gene&quot;)
 
 write.table(nuclearQTLs, file=&quot;../data/apaQTLs/NuclearSpecificAPAqtls.txt&quot;, col.names = T, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
 <pre class="bash"><code>python nucSpecQTLineData.py</code></pre>
 <p>Join these by snp and gene.</p>
-<pre class="r"><code>nomNamesE=c(&quot;gene&quot;, &quot;sid&quot;,&#39;dist&#39;, &#39;pval&#39;, &#39;Eslope&#39; )
+<pre class="r"><code>nomNamesE=c(&quot;gene&quot;, &quot;sid&quot;,&#39;dist&#39;, &#39;Epval&#39;, &#39;Eslope&#39; )
 eQTLforNucspec=read.table(&quot;../data/eQTLs/NuclearSPecificAPAqtlsinEqtl.txt&quot;,stringsAsFactors = F, col.names = nomNamesE)
 
 bothNucspecandE=eQTLforNucspec %&gt;% inner_join(nuclearQTLs, by=c(&quot;gene&quot;, &quot;sid&quot;))
-
-summary(lm(bothNucspecandE$slope~bothNucspecandE$Eslope))</code></pre>
+nrow(bothNucspecandE)</code></pre>
+<pre><code>[1] 153</code></pre>
+<pre class="r"><code>summary(lm(bothNucspecandE$slope~bothNucspecandE$Eslope))</code></pre>
 <pre><code>
 Call:
 lm(formula = bothNucspecandE$slope ~ bothNucspecandE$Eslope)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.8866 -1.0886  0.4571  0.7981  2.2386 
+-2.5998 -1.2076  0.4449  0.8290  2.0147 
 
 Coefficients:
                        Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)             0.38684    0.07066   5.475 1.15e-07 ***
-bothNucspecandE$Eslope -0.11181    0.23729  -0.471    0.638    
+(Intercept)             0.38066    0.09332   4.079  7.3e-05 ***
+bothNucspecandE$Eslope -0.20575    0.29709  -0.693     0.49    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 1.071 on 228 degrees of freedom
-Multiple R-squared:  0.0009729, Adjusted R-squared:  -0.003409 
-F-statistic: 0.222 on 1 and 228 DF,  p-value: 0.6379</code></pre>
+Residual standard error: 1.147 on 151 degrees of freedom
+Multiple R-squared:  0.003166,  Adjusted R-squared:  -0.003435 
+F-statistic: 0.4796 on 1 and 151 DF,  p-value: 0.4897</code></pre>
 <pre class="r"><code>cor.test(bothNucspecandE$slope,bothNucspecandE$Eslope, alternative=&quot;less&quot;)</code></pre>
 <pre><code>
     Pearson&#39;s product-moment correlation
 
 data:  bothNucspecandE$slope and bothNucspecandE$Eslope
-t = -0.4712, df = 228, p-value = 0.319
+t = -0.69256, df = 151, p-value = 0.2448
 alternative hypothesis: true correlation is less than 0
 95 percent confidence interval:
- -1.00000000  0.07781426
+ -1.0000000  0.0778145
 sample estimates:
-        cor 
--0.03119076 </code></pre>
+       cor 
+-0.0562701 </code></pre>
 <pre class="r"><code>ggplot(bothNucspecandE, aes(x=Eslope, y=slope)) + geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(x=&quot;eQTL effect size&quot;, y=&quot;apaQTL effect size&quot;, title=&quot;Effect size in eQTL for nuclear specific apaQTL&quot;)</code></pre>
 <p><img src="figure/nucSpecinEQTLs.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1617,6 +1672,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/16cbaa3d3f465ce188684c3ff2f7ce528e8852b2/docs/figure/nucSpecinEQTLs.Rmd/unnamed-chunk-13-1.png" target="_blank">16cbaa3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1d8fbcb96578e6165e9b90d802576fb73b0fd861/docs/figure/nucSpecinEQTLs.Rmd/unnamed-chunk-13-1.png" target="_blank">1d8fbcb</a>
 </td>
 <td>
@@ -1630,6 +1696,43 @@ brimittleman
 </table>
 </div>
 </div>
+<p>Subset to nominally significant eQTLs:</p>
+<pre class="r"><code>bothNucspecandE_sig= bothNucspecandE %&gt;% filter(Eslope&lt;.05)
+nrow(bothNucspecandE_sig)</code></pre>
+<pre><code>[1] 97</code></pre>
+<pre class="r"><code>summary(lm(bothNucspecandE_sig$slope~bothNucspecandE_sig$Eslope))</code></pre>
+<pre><code>
+Call:
+lm(formula = bothNucspecandE_sig$slope ~ bothNucspecandE_sig$Eslope)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6375 -1.1869  0.4736  0.8187  1.8860 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)                  0.2932     0.1579   1.857   0.0663 .
+bothNucspecandE_sig$Eslope  -0.4300     0.5155  -0.834   0.4063  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.136 on 95 degrees of freedom
+Multiple R-squared:  0.007269,  Adjusted R-squared:  -0.003181 
+F-statistic: 0.6956 on 1 and 95 DF,  p-value: 0.4063</code></pre>
+<pre class="r"><code>cor.test(bothNucspecandE_sig$slope,bothNucspecandE_sig$Eslope, alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Pearson&#39;s product-moment correlation
+
+data:  bothNucspecandE_sig$slope and bothNucspecandE_sig$Eslope
+t = -0.83404, df = 95, p-value = 0.2032
+alternative hypothesis: true correlation is less than 0
+95 percent confidence interval:
+ -1.0000000  0.0839884
+sample estimates:
+        cor 
+-0.08525947 </code></pre>
+<pre class="r"><code>ggplot(bothNucspecandE_sig, aes(x=Eslope, y=slope)) + geom_point() + geom_smooth(method=&quot;lm&quot;) + labs(x=&quot;eQTL effect size (nominally Sig)&quot;, y=&quot;apaQTL effect size&quot;, title=&quot;Effect size in eQTL for nuclear specific apaQTL&quot;)</code></pre>
+<p><img src="figure/nucSpecinEQTLs.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

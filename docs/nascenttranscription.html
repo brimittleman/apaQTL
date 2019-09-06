@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-07-26
+<strong>Last updated:</strong> 2019-09-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecee6ce0a426f36095eadd3de1f15d6a505e10853targetblankcee6ce0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/cee6ce0a426f36095eadd3de1f15d6a505e10853" target="_blank">cee6ce0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5976ed7e0423551d9136c548a0a8acd0b8583231" target="_blank">5976ed7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecee6ce0a426f36095eadd3de1f15d6a505e10853targetblankcee6ce0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -492,23 +492,33 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
     Untracked:  .Rprofile
     Untracked:  ._.DS_Store
     Untracked:  .gitignore
+    Untracked:  @
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/interpret verify bam.Rmd
+    Untracked:  analysis/interpret_verifybam.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
+    Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
+    Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
@@ -522,6 +532,7 @@ Untracked files:
     Untracked:  code/._IntronicPASDT.sh
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._LD_qtl.sh
+    Untracked:  code/._LD_snpsproxy.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -538,6 +549,9 @@ Untracked files:
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
+    Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._RunRes2PAS.sh
+    Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -549,9 +563,14 @@ Untracked files:
     Untracked:  code/._aAPAqtl_nominal39ind.sh
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
+    Untracked:  code/._apaInPandE.py
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
+    Untracked:  code/._apaQTLCorrectpval_6or7a.R
     Untracked:  code/._apaQTL_Nominal.sh
+    Untracked:  code/._apaQTL_nominalv67.sh
     Untracked:  code/._apaQTL_permuted.sh
+    Untracked:  code/._apaQTL_permuted_test6A7A.sh
+    Untracked:  code/._apainRibo.py
     Untracked:  code/._assignNucIntonpeak2intronlocs.sh
     Untracked:  code/._assignTotIntronpeak2intronlocs.sh
     Untracked:  code/._bam2BW_5primemost.sh
@@ -560,6 +579,7 @@ Untracked files:
     Untracked:  code/._bothFracDTplot4thintron.sh
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
+    Untracked:  code/._changeRibonomQTLres2genename.py
     Untracked:  code/._changenomQTLres2geneName.py
     Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
@@ -575,6 +595,7 @@ Untracked files:
     Untracked:  code/._config2.yaml
     Untracked:  code/._configOLD.yaml
     Untracked:  code/._convertNominal2SNPLOC.py
+    Untracked:  code/._convertNominal2SNPloc2Versions.py
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._correctNomeqtl.R
     Untracked:  code/._createPlinkSampfile.py
@@ -585,8 +606,17 @@ Untracked files:
     Untracked:  code/._extractGenotypes.py
     Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
+    Untracked:  code/._fc_filteredPAS6and7As.sh
+    Untracked:  code/._fifteenBPupstreamPAS.py
+    Untracked:  code/._fiftyBPupstreamPAS.py
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
+    Untracked:  code/._filterLDsnps.py
+    Untracked:  code/._filterMPPAS.py
+    Untracked:  code/._filterMPPAS_15.py
+    Untracked:  code/._filterMPPAS_15_7As.py
+    Untracked:  code/._filterMPPAS_50.py
+    Untracked:  code/._filterSAFforMP.py
     Untracked:  code/._filterpeaks.py
     Untracked:  code/._finalPASbed2SAF.py
     Untracked:  code/._fix4su304corr.py
@@ -596,6 +626,7 @@ Untracked files:
     Untracked:  code/._fixExandUnexeQTL.py
     Untracked:  code/._fixFChead.py
     Untracked:  code/._fixFChead_bothfrac.py
+    Untracked:  code/._fixFChead_short.py
     Untracked:  code/._fixH3k12ac.py
     Untracked:  code/._fixPASregionSNPs.py
     Untracked:  code/._fixRNAhead4corr.py
@@ -605,6 +636,7 @@ Untracked files:
     Untracked:  code/._getAPAfromanyeQTL.py
     Untracked:  code/._getApapval4eqtl.py
     Untracked:  code/._getApapval4eqtl_unexp.py
+    Untracked:  code/._getApapval4eqtl_version67.py
     Untracked:  code/._getDownstreamIntronNuclear.py
     Untracked:  code/._getIntronDownstreamPAS.py
     Untracked:  code/._getIntronUpstreamPAS.py
@@ -636,9 +668,12 @@ Untracked files:
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
     Untracked:  code/._nucQTLGWAS.py
+    Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
+    Untracked:  code/._parseBestbamid.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -650,6 +685,7 @@ Untracked files:
     Untracked:  code/._quantassign2parsedpeak.py
     Untracked:  code/._removeXfromHmm.py
     Untracked:  code/._removeloc_pheno.py
+    Untracked:  code/._riboQTL.sh
     Untracked:  code/._runCorrectNomEqtl.sh
     Untracked:  code/._runHMMpermuteAPAqtls.sh
     Untracked:  code/._runHMMpermuteeQTLS.sh
@@ -657,14 +693,19 @@ Untracked files:
     Untracked:  code/._runMakeeQTLempirical.sh
     Untracked:  code/._run_bam2bw_all3prime.sh
     Untracked:  code/._run_bam2bw_extra3.sh
+    Untracked:  code/._run_bestbamid.sj
+    Untracked:  code/._run_filtersnpLD.sh
+    Untracked:  code/._run_getAPAfromeQTL_version6.7.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
     Untracked:  code/._run_getapafromeQTL.py
     Untracked:  code/._run_getapafromeQTL.sh
     Untracked:  code/._run_getapapval4eqtl_unexp.sh
     Untracked:  code/._run_leafcutterDiffIso.sh
+    Untracked:  code/._run_prxySNP.sh
     Untracked:  code/._run_pttfacetboxplot.sh
     Untracked:  code/._run_sepUsagephen.sh
     Untracked:  code/._run_sepgenobychrom.sh
+    Untracked:  code/._run_verifybam.sh
     Untracked:  code/._selectNominalPvalues.py
     Untracked:  code/._sepUsagePhen.py
     Untracked:  code/._sepgenobychrom.py
@@ -674,34 +715,50 @@ Untracked files:
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subsetAPAnotEorPgene.py
+    Untracked:  code/._subsetAPAnotEorPgene_2versions.py
     Untracked:  code/._subsetApanoteGene.py
+    Untracked:  code/._subsetApanoteGene_2versions.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
     Untracked:  code/._subsetVCF_SS.sh
     Untracked:  code/._subsetVCF_noSSregions.sh
     Untracked:  code/._subsetVCF_upstreamPAS.sh
     Untracked:  code/._subset_diffisopheno.py
     Untracked:  code/._subsetpermAPAwithGenelist.py
+    Untracked:  code/._subsetpermAPAwithGenelist_2versions.py
     Untracked:  code/._subsetvcf_otherreg.sh
     Untracked:  code/._subsetvcf_permSS.sh
     Untracked:  code/._subtrachfiveprimeUTR.sh
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
+    Untracked:  code/._tenBPupstreamPAS.py
+    Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
+    Untracked:  code/._twentyBPupstreamPAS.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
+    Untracked:  code/._verifyBam18517N.sh
+    Untracked:  code/._verifyBam18517T.sh
+    Untracked:  code/._verifyBam19128N.sh
+    Untracked:  code/._verifyBam19128T.sh
+    Untracked:  code/._wrap_verifybam.sh
     Untracked:  code/._writePTTexamplecode.py
     Untracked:  code/._writePTTexamplecode.sh
     Untracked:  code/.pversion
     Untracked:  code/.snakemake/
+    Untracked:  code/1
     Untracked:  code/APAqtl_nominal.err
     Untracked:  code/APAqtl_nominal.out
     Untracked:  code/APAqtl_nominal_39.err
     Untracked:  code/APAqtl_nominal_39.out
     Untracked:  code/APAqtl_nominal_nonNorm.err
     Untracked:  code/APAqtl_nominal_nonNorm.out
+    Untracked:  code/APAqtl_nominal_versions67.err
+    Untracked:  code/APAqtl_nominal_versions67.out
     Untracked:  code/APAqtl_permuted.err
     Untracked:  code/APAqtl_permuted.out
+    Untracked:  code/APAqtl_permuted_versions67.err
+    Untracked:  code/APAqtl_permuted_versions67.out
     Untracked:  code/ApaQTL_nominalNonnorm.sh
     Untracked:  code/BothFracDTPlot1stintron.err
     Untracked:  code/BothFracDTPlot1stintron.out
@@ -742,6 +799,7 @@ Untracked files:
     Untracked:  code/IntronicPASDT.sh
     Untracked:  code/LC_samplegroups.py
     Untracked:  code/LD_qtl.sh
+    Untracked:  code/LD_snpsproxy.sh
     Untracked:  code/LD_vcftools.hap.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
@@ -787,7 +845,13 @@ Untracked files:
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
     Untracked:  code/RNAbam2bw.sh
+    Untracked:  code/RNAseqDTPlotGeneRegions.err
+    Untracked:  code/RNAseqDTPlotGeneRegions.out
+    Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/RunRes2PAS.sh
+    Untracked:  code/SAF215upbed.py
+    Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
     Untracked:  code/Script4TotalPTTqtlexamples.sh
@@ -806,16 +870,24 @@ Untracked files:
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
+    Untracked:  code/YRI_LCL.vcf.gz
+    Untracked:  code/YRI_LCL_chr1.vcf.gz.log
+    Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
     Untracked:  code/annotatedPASregion.out
+    Untracked:  code/apaInPandE.py
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
+    Untracked:  code/apaQTLCorrectpval_6or7a.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
+    Untracked:  code/apaQTL_nominalv67.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/apaQTL_permuted_test6A7A.sh
     Untracked:  code/apafacetboxplots.R
+    Untracked:  code/apainRibo.py
     Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
@@ -834,7 +906,9 @@ Untracked files:
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/callSHscripts.txt
     Untracked:  code/changePermQTLres2geneName.py
+    Untracked:  code/changeRibonomQTLres2genename.py
     Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/chooseAnno2PAS_pacbio.py
     Untracked:  code/closestannotated.err
@@ -845,6 +919,7 @@ Untracked files:
     Untracked:  code/closestannotatedbyfrac.out
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
+    Untracked:  code/convertNominal2SNPloc2Versions.py
     Untracked:  code/correctNomeqtl.R
     Untracked:  code/createPlinkSampfile.py
     Untracked:  code/dag.pdf
@@ -853,9 +928,20 @@ Untracked files:
     Untracked:  code/eQTL_switch2snploc.py
     Untracked:  code/eQTLgenestestedapa.py
     Untracked:  code/encodeRNADTplots.sh
+    Untracked:  code/environmentLeaf.yaml
     Untracked:  code/extractGenotypes.py
     Untracked:  code/extractseqfromqtlfastq.py
     Untracked:  code/fc2leafphen.py
+    Untracked:  code/fc_filteredPAS6and7As.sh
+    Untracked:  code/fifteenBPupstreamPAS.py
+    Untracked:  code/fiftyBPupstreamPAS.py
+    Untracked:  code/filterLDsnps.py
+    Untracked:  code/filterMPPAS.py
+    Untracked:  code/filterMPPAS_15.py
+    Untracked:  code/filterMPPAS_15_7As.py
+    Untracked:  code/filterMPPAS_50.py
+    Untracked:  code/filterSAFforMP.py
+    Untracked:  code/filterSAFforMP_gen.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fix4su304corr.py
@@ -864,6 +950,7 @@ Untracked files:
     Untracked:  code/fixExandUnexeQTL
     Untracked:  code/fixExandUnexeQTL.py
     Untracked:  code/fixFChead_bothfrac.py
+    Untracked:  code/fixFChead_short.py
     Untracked:  code/fixFChead_summary.py
     Untracked:  code/fixH3k12ac.py
     Untracked:  code/fixPASregionSNPs.py
@@ -877,6 +964,7 @@ Untracked files:
     Untracked:  code/getAPAfromanyeQTL.py
     Untracked:  code/getApapval4eqtl.py
     Untracked:  code/getApapval4eqtl_unexp.py
+    Untracked:  code/getApapval4eqtl_version67.py
     Untracked:  code/getDownstreamIntronNuclear.py
     Untracked:  code/getIntronDownstreamPAS.py
     Untracked:  code/getIntronUpstreamPAS.py
@@ -925,12 +1013,18 @@ Untracked files:
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucQTLGWAS.py
+    Untracked:  code/nucQTLGWAS_withLD.py
+    Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
+    Untracked:  code/parseBestbamid.py
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/plink.log
     Untracked:  code/processYRIgen.py
+    Untracked:  code/prxySNP.err
+    Untracked:  code/prxySNP.out
     Untracked:  code/pttFacetBoxplots.err
     Untracked:  code/pttFacetBoxplots.out
     Untracked:  code/pttQTLsinapaQTL.py
@@ -942,9 +1036,15 @@ Untracked files:
     Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
+    Untracked:  code/riboQTL.sh
+    Untracked:  code/riboqtl.err
+    Untracked:  code/riboqtl.out
+    Untracked:  code/runBestBamID.err
     Untracked:  code/runCorrectNomEqtl.sh
     Untracked:  code/runCorrectNomeqtl.err
     Untracked:  code/runCorrectNomeqtl.out
+    Untracked:  code/runFilterLD.err
+    Untracked:  code/runFilterLD.out
     Untracked:  code/runHMMpermute.err
     Untracked:  code/runHMMpermute.out
     Untracked:  code/runHMMpermuteAPAqtls.sh
@@ -965,9 +1065,12 @@ Untracked files:
     Untracked:  code/run_bam2bw_extra3.sh
     Untracked:  code/run_bam2bwexta.err
     Untracked:  code/run_bam2bwexta.out
+    Untracked:  code/run_bestbamid.sh
     Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/run_filtersnpLD.sh
     Untracked:  code/run_getAPAfromanyeQTL.err
     Untracked:  code/run_getAPAfromanyeQTL.out
+    Untracked:  code/run_getAPAfromeQTL_version6.7.sh
     Untracked:  code/run_getApaPval4eQTLs.err
     Untracked:  code/run_getApaPval4eQTLs.out
     Untracked:  code/run_getApaPval4eQTLsunexplained.err
@@ -978,6 +1081,7 @@ Untracked files:
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/run_prxySNP.sh
     Untracked:  code/run_pttfacetboxplot.sh
     Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
@@ -986,6 +1090,22 @@ Untracked files:
     Untracked:  code/run_sepgenobychrom.sh
     Untracked:  code/run_sepusage.err
     Untracked:  code/run_sepusage.out
+    Untracked:  code/run_verifybam.err
+    Untracked:  code/run_verifybam.out
+    Untracked:  code/run_verifybam.sh
+    Untracked:  code/run_verifybam128N.err
+    Untracked:  code/run_verifybam128N.out
+    Untracked:  code/run_verifybam128T.err
+    Untracked:  code/run_verifybam128T.out
+    Untracked:  code/run_verifybam517N.err
+    Untracked:  code/run_verifybam517N.out
+    Untracked:  code/run_verifybam517T.err
+    Untracked:  code/run_verifybam517T.out
+    Untracked:  code/run_verifybam_fullVCF.sh
+    Untracked:  code/runprxySNP.err
+    Untracked:  code/runprxySNP.out
+    Untracked:  code/runres2pas.err
+    Untracked:  code/runres2pas.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -999,13 +1119,16 @@ Untracked files:
     Untracked:  code/sortindexRNABam.out
     Untracked:  code/sortindexRNAbam.sh
     Untracked:  code/subsetAPAnotEorPgene.py
+    Untracked:  code/subsetAPAnotEorPgene_2versions.py
     Untracked:  code/subsetApanoteGene.py
+    Untracked:  code/subsetApanoteGene_2versions.py
     Untracked:  code/subsetUnexplainedeQTLs.py
     Untracked:  code/subsetVCF_SS.sh
     Untracked:  code/subsetVCF_noSSregions.sh
     Untracked:  code/subsetVCF_upstreamPAS.sh
     Untracked:  code/subset_diffisopheno.py
     Untracked:  code/subsetpermAPAwithGenelist.py
+    Untracked:  code/subsetpermAPAwithGenelist_2versions.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
     Untracked:  code/subsetvcf_noSS.err
@@ -1027,12 +1150,25 @@ Untracked files:
     Untracked:  code/tabixSNPS.sh
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/tenBPupstreamPAS.py
+    Untracked:  code/testVerifyBam.sh
+    Untracked:  code/test_verifybam.err
+    Untracked:  code/test_verifybam.out
     Untracked:  code/totSeceffectsize.py
     Untracked:  code/transcriptdm2bed.py
+    Untracked:  code/twentyBPupstreamPAS.py
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf2bed.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
+    Untracked:  code/verifyBam18517N.sh
+    Untracked:  code/verifyBam18517T.sh
+    Untracked:  code/verifyBam19128N.sh
+    Untracked:  code/verifyBam19128T.sh
+    Untracked:  code/wrap_verifybam.err
+    Untracked:  code/wrap_verifybam.out
+    Untracked:  code/wrap_verifybam.sh
+    Untracked:  code/wrap_verifybam_full.sh
     Untracked:  code/writeExampleQTLcode.py
     Untracked:  code/writePTTexamplecode.py
     Untracked:  code/zipandtabPhen.err
@@ -1042,12 +1178,15 @@ Untracked files:
     Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
+    Untracked:  data/BadLines/
     Untracked:  data/Battle_pQTL/
+    Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/FlaggedPAS/
     Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
@@ -1055,6 +1194,7 @@ Untracked files:
     Untracked:  data/NascentRNA/
     Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
+    Untracked:  data/PAS_postFlag/
     Untracked:  data/PolyA_DB/
     Untracked:  data/PreTerm_pheno/
     Untracked:  data/PrematureQTLNominal/
@@ -1069,12 +1209,15 @@ Untracked files:
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/TF_motifdisruption/
     Untracked:  data/ThirtyNineIndQtl_nominal/
+    Untracked:  data/Version15bp6As/
+    Untracked:  data/Version15bp7As/
     Untracked:  data/apaQTLNominal/
     Untracked:  data/apaQTLNominal_4pc/
     Untracked:  data/apaQTLPermuted/
     Untracked:  data/apaQTLPermuted_4pc/
     Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
+    Untracked:  data/assignedPeaks_15Up/
     Untracked:  data/bam/
     Untracked:  data/bam_clean/
     Untracked:  data/bam_waspfilt/
@@ -1110,8 +1253,10 @@ Untracked files:
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
     Untracked:  data/nuc_10upclean/
+    Untracked:  data/oldPASfiles/
     Untracked:  data/overlapeQTL_try2/
     Untracked:  data/overlapeQTLs/
+    Untracked:  data/pQTLoverlap/
     Untracked:  data/pacbio/
     Untracked:  data/peakCoverage/
     Untracked:  data/peaks_5perc/
@@ -1124,31 +1269,26 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
+    Untracked:  data/verifyBAM/
+    Untracked:  data/verifyBAM_full/
+    Untracked:  docs/._.DS_Store
+    Untracked:  docs/figure/._.DS_Store
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
     Untracked:  output/dtPlots/
     Untracked:  output/fastqc/
     Untracked:  output/meanCorrelationPhenotypes.svg
+    Untracked:  run_verifybam517N.err
+    Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/DiffIsoAnalysis.Rmd
-    Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PASdescriptiveplots.Rmd
-    Modified:   analysis/PrematureTermQTL.Rmd
-    Modified:   analysis/QTLlocation.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
-    Modified:   analysis/chromHHMQTL.Rmd
-    Modified:   analysis/compareAnnotatedpas.Rmd
-    Modified:   analysis/nonNormQTL.Rmd
-    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/pQTLexampleplot.Rmd
-    Modified:   analysis/propeQTLs_explained.Rmd
-    Modified:   analysis/signalsiteanalysis.Rmd
+    Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
-    Deleted:    code/Upstream10Bases_general.py
+    Modified:   code/SnakefilefiltPAS
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_Nominal.sh
     Modified:   code/apaQTL_permuted.sh
@@ -1160,7 +1300,21 @@ Unstaged changes:
     Modified:   code/config.yaml
     Modified:   code/environment.yaml
     Modified:   code/makePheno.py
+    Modified:   code/mergeAllBam.sh
+    Modified:   code/mergeByFracBam.sh
+    Modified:   code/mergePeaks.sh
+    Modified:   code/peakFC.sh
+    Modified:   code/snakemake.batch
+    Modified:   code/snakemakePAS.batch
+    Modified:   code/snakemakefiltPAS.batch
+    Modified:   code/submit-snakemake.sh
+    Modified:   code/submit-snakemakePAS.sh
+    Modified:   code/submit-snakemakefiltPAS.sh
     Deleted:    code/test.txt
+    Modified:   data/MetaDataSequencing.txt
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Emain-1.pdf
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Esubset-1.pdf
+    Deleted:    reads_graphs.Rmd
 
 </code></pre>
 <p>
@@ -1199,6 +1353,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/00fe2b4f57d3844bd9daa14a39192a80ffc47fa2/docs/nascenttranscription.html" target="_blank">00fe2b4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1466,12 +1637,12 @@ library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(viridis)</code></pre>
@@ -1580,20 +1751,20 @@ lm(formula = APAVal ~ Transcription, data = APAandTranscrption)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.36850 -0.10126  0.00913  0.10928  0.38590 
+-0.36495 -0.10143  0.00799  0.10823  0.38633 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   0.390735   0.007327   53.33   &lt;2e-16 ***
-Transcription 0.279417   0.013667   20.45   &lt;2e-16 ***
+(Intercept)   0.391266   0.007299   53.61   &lt;2e-16 ***
+Transcription 0.268111   0.013614   19.69   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.135 on 7885 degrees of freedom
-Multiple R-squared:  0.05034,   Adjusted R-squared:  0.05022 
-F-statistic:   418 on 1 and 7885 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1343 on 7879 degrees of freedom
+Multiple R-squared:  0.04691,   Adjusted R-squared:  0.04679 
+F-statistic: 387.8 on 1 and 7879 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>cor.test(x=APAandTranscrption$Transcription,y=APAandTranscrption$APAVal)$p.value</code></pre>
-<pre><code>[1] 1.434459e-90</code></pre>
+<pre><code>[1] 2.560137e-84</code></pre>
 <p>Plot:</p>
 <pre class="r"><code>ggplot(APAandTranscrption, aes(x=Transcription, y=APAVal))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/4su+RNA&quot;, y=&quot;Nuclear/Nuclear+Total&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -1726,19 +1897,19 @@ Call:
 lm(formula = APAValLoc ~ Transcription, data = APAlocationandTranscrption)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--0.37748 -0.19928 -0.06962  0.15961  0.73348 
+    Min      1Q  Median      3Q     Max 
+-0.3265 -0.1894 -0.0686  0.1418  0.7199 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.13859    0.02161   6.414  1.6e-10 ***
-Transcription  0.33661    0.03889   8.656  &lt; 2e-16 ***
+(Intercept)    0.13634    0.02166   6.294 3.49e-10 ***
+Transcription  0.30874    0.03889   7.939 2.74e-15 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.2425 on 3618 degrees of freedom
-Multiple R-squared:  0.02029,   Adjusted R-squared:  0.02002 
-F-statistic: 74.93 on 1 and 3618 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.2353 on 3401 degrees of freedom
+Multiple R-squared:  0.0182,    Adjusted R-squared:  0.01791 
+F-statistic: 63.03 on 1 and 3401 DF,  p-value: 2.743e-15</code></pre>
 <p>Just the ratio:</p>
 <pre class="r"><code>APAlocationandTranscrption2= Transcription2 %&gt;% inner_join(ApaBothFracLocStand_geneMean_spread2, by=&quot;gene&quot;)
 APAlocationandTranscrption2$density &lt;- get_density(APAlocationandTranscrption2$APAValLoc, APAlocationandTranscrption2$Transcription, n = 100)
@@ -1749,18 +1920,18 @@ lm(formula = log10(APAValLoc) ~ log10(Transcription), data = APAlocationandTrans
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.59020 -0.44292 -0.04325  0.39823  2.53804 
+-1.56425 -0.42530 -0.04272  0.37494  2.55395 
 
 Coefficients:
                      Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          -0.47676    0.01104 -43.202   &lt;2e-16 ***
-log10(Transcription)  0.51566    0.05285   9.756   &lt;2e-16 ***
+(Intercept)          -0.51548    0.01116 -46.208   &lt;2e-16 ***
+log10(Transcription)  0.49074    0.05312   9.238   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.608 on 3618 degrees of freedom
-Multiple R-squared:  0.02563,   Adjusted R-squared:  0.02536 
-F-statistic: 95.18 on 1 and 3618 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.5932 on 3401 degrees of freedom
+Multiple R-squared:  0.02448,   Adjusted R-squared:  0.02419 
+F-statistic: 85.34 on 1 and 3401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>ggplot(APAlocationandTranscrption2, aes(x=log10(Transcription), y=log10(APAValLoc)))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;log10(4su/RNA)&quot;, y=&quot;log10(NuclearIntron/TotalUTR)&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1833,18 +2004,18 @@ lm(formula = log10(APAValLoc) ~ log10(Transcription), data = APAUTRandTranscrpti
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.69129 -0.18916 -0.00344  0.19699  0.90698 
+-0.70017 -0.18961 -0.00315  0.19567  0.91050 
 
 Coefficients:
                      Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          0.153728   0.008935   17.20   &lt;2e-16 ***
-log10(Transcription) 0.481833   0.029049   16.59   &lt;2e-16 ***
+(Intercept)          0.152115   0.009048   16.81   &lt;2e-16 ***
+log10(Transcription) 0.486492   0.029505   16.49   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.2526 on 7709 degrees of freedom
-Multiple R-squared:  0.03446,   Adjusted R-squared:  0.03433 
-F-statistic: 275.1 on 1 and 7709 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.2518 on 7709 degrees of freedom
+Multiple R-squared:  0.03407,   Adjusted R-squared:  0.03394 
+F-statistic: 271.9 on 1 and 7709 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>ggplot(APAUTRandTranscrption, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/RNA&quot;, y=&quot;NuclearUTR/TotalUTR&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1906,18 +2077,18 @@ lm(formula = log10(APAValLoc) ~ log10(Transcription), data = APAUTRandTranscrpti
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.45003 -0.08569  0.01581  0.10162  0.37243 
+-0.45859 -0.08654  0.01628  0.10173  0.37084 
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          -0.234761   0.004493  -52.25   &lt;2e-16 ***
-log10(Transcription)  0.268002   0.014607   18.35   &lt;2e-16 ***
+(Intercept)          -0.235769   0.004561   -51.7   &lt;2e-16 ***
+log10(Transcription)  0.269145   0.014872    18.1   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.127 on 7709 degrees of freedom
-Multiple R-squared:  0.04184,   Adjusted R-squared:  0.04171 
-F-statistic: 336.6 on 1 and 7709 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1269 on 7709 degrees of freedom
+Multiple R-squared:  0.04075,   Adjusted R-squared:  0.04063 
+F-statistic: 327.5 on 1 and 7709 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>ggplot(APAUTRandTranscrption2, aes(x=Transcription, y=APAValLoc))+ geom_point(aes(color=density)) + geom_smooth(method = &quot;lm&quot;) + labs(x=&quot;4su/RNA+4su&quot;, y=&quot;NuclearUTR/TotalUTR+NuclearUTR&quot;, title=&quot;Relationship between APA fraction and transcription&quot;) + scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -2026,18 +2197,18 @@ lm(formula = MeanIntronoverAll ~ log10(Mean_RNA), data = nuclearandRNA)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.35450 -0.15791 -0.05443  0.11943  0.79506 
+-0.34199 -0.15170 -0.05155  0.11068  0.80839 
 
 Coefficients:
                  Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     -0.219268   0.033634  -6.519 8.02e-11 ***
-log10(Mean_RNA) -0.124686   0.007854 -15.876  &lt; 2e-16 ***
+(Intercept)     -0.234585   0.033994  -6.901 6.11e-12 ***
+log10(Mean_RNA) -0.125270   0.007938 -15.780  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.2087 on 3714 degrees of freedom
-Multiple R-squared:  0.06355,   Adjusted R-squared:  0.0633 
-F-statistic:   252 on 1 and 3714 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.203 on 3489 degrees of freedom
+Multiple R-squared:  0.06662,   Adjusted R-squared:  0.06635 
+F-statistic:   249 on 1 and 3489 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div id="same-plot-with-transcription-phenotype-on-bottom" class="section level3">
 <h3>Same plot with transcription phenotype on bottom:</h3>
 <pre class="r"><code>ApaNuclear_byloc_rename=ApaNuclear_byloc %&gt;% dplyr::rename(&quot;gene&quot;=GeneName)
@@ -2102,18 +2273,18 @@ lm(formula = MeanIntronoverAll ~ Transcription, data = nuclearandtranscription)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.29672 -0.17586 -0.05984  0.12726  0.69787 
+-0.28328 -0.16653 -0.05979  0.11668  0.70545 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.29093    0.01895  15.350   &lt;2e-16 ***
-Transcription  0.03847    0.03412   1.128     0.26    
+(Intercept)    0.29220    0.01902  15.366   &lt;2e-16 ***
+Transcription  0.01262    0.03416   0.369    0.712    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.2156 on 3714 degrees of freedom
-Multiple R-squared:  0.0003423, Adjusted R-squared:  7.31e-05 
-F-statistic: 1.272 on 1 and 3714 DF,  p-value: 0.2595</code></pre>
+Residual standard error: 0.2101 on 3489 degrees of freedom
+Multiple R-squared:  3.91e-05,  Adjusted R-squared:  -0.0002475 
+F-statistic: 0.1364 on 1 and 3489 DF,  p-value: 0.7119</code></pre>
 </div>
 </div>
 <div id="intron-total-over-all-total" class="section level2">
@@ -2188,18 +2359,18 @@ lm(formula = MeanIntronoverAll ~ log10(Mean_RNA), data = totalandRNA)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.31993 -0.11685 -0.05411  0.05877  0.91482 
+-0.31597 -0.11142 -0.05084  0.05668  0.91908 
 
 Coefficients:
                  Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     -0.382135   0.029020  -13.17   &lt;2e-16 ***
-log10(Mean_RNA) -0.137356   0.006776  -20.27   &lt;2e-16 ***
+(Intercept)     -0.387446   0.029256  -13.24   &lt;2e-16 ***
+log10(Mean_RNA) -0.137665   0.006832  -20.15   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.18 on 3714 degrees of freedom
-Multiple R-squared:  0.09961,   Adjusted R-squared:  0.09936 
-F-statistic: 410.9 on 1 and 3714 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1747 on 3489 degrees of freedom
+Multiple R-squared:  0.1042,    Adjusted R-squared:  0.104 
+F-statistic:   406 on 1 and 3489 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div id="same-plot-with-transcription-phenotype-on-bottom-1" class="section level3">
 <h3>Same plot with transcription phenotype on bottom:</h3>
 <pre class="r"><code>ApaTotal_byloc_rename=ApaTotal_byloc %&gt;% dplyr::rename(&quot;gene&quot;=GeneName)
@@ -2275,18 +2446,18 @@ lm(formula = MeanIntronoverAll ~ Transcription, data = totalandtranscription)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.19577 -0.13018 -0.06396  0.06526  0.80910 
+-0.19479 -0.12577 -0.06159  0.06326  0.80891 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.17703    0.01667  10.617   &lt;2e-16 ***
-Transcription  0.04765    0.03002   1.588    0.112    
+(Intercept)    0.18698    0.01671  11.193   &lt;2e-16 ***
+Transcription  0.02206    0.03001   0.735    0.462    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.1897 on 3714 degrees of freedom
-Multiple R-squared:  0.0006781, Adjusted R-squared:  0.0004091 
-F-statistic:  2.52 on 1 and 3714 DF,  p-value: 0.1125</code></pre>
+Residual standard error: 0.1846 on 3489 degrees of freedom
+Multiple R-squared:  0.0001549, Adjusted R-squared:  -0.0001316 
+F-statistic: 0.5407 on 1 and 3489 DF,  p-value: 0.4622</code></pre>
 </div>
 </div>
 <div id="put-it-all-together" class="section level2">
@@ -2363,18 +2534,18 @@ lm(formula = log10(fullAPA) ~ Transcription, data = BothlocPhenoandtranscription
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.99008 -0.15847 -0.00751  0.15050  0.83773 
+-1.04512 -0.15891 -0.00646  0.15119  0.97338 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.39298    0.02119  18.546  &lt; 2e-16 ***
-Transcription -0.25482    0.03814  -6.681 2.73e-11 ***
+(Intercept)    0.36597    0.02186  16.741  &lt; 2e-16 ***
+Transcription -0.23538    0.03927  -5.995 2.25e-09 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.241 on 3714 degrees of freedom
-Multiple R-squared:  0.01187,   Adjusted R-squared:  0.01161 
-F-statistic: 44.63 on 1 and 3714 DF,  p-value: 2.733e-11</code></pre>
+Residual standard error: 0.2416 on 3489 degrees of freedom
+Multiple R-squared:  0.01019,   Adjusted R-squared:  0.009911 
+F-statistic: 35.94 on 1 and 3489 DF,  p-value: 2.248e-09</code></pre>
 </div>
 <div id="does-number-of-pas-correlate-with-nascent-transcription" class="section level2">
 <h2>Does number of PAS correlate with nascent transcription</h2>
@@ -2434,18 +2605,18 @@ lm(formula = nPASN ~ Transcription, data = transcriptionPAS)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.8788 -1.2951 -0.3395  1.0042  8.4575 
+-3.8031 -1.2709 -0.3399  0.9833  8.3229 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.38595    0.09275   4.161  3.2e-05 ***
-Transcription  4.96412    0.17301  28.692  &lt; 2e-16 ***
+(Intercept)    0.30831    0.09171   3.362 0.000779 ***
+Transcription  4.96629    0.17108  29.030  &lt; 2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 1.709 on 7885 degrees of freedom
-Multiple R-squared:  0.09454,   Adjusted R-squared:  0.09442 
-F-statistic: 823.2 on 1 and 7885 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.687 on 7879 degrees of freedom
+Multiple R-squared:  0.09662,   Adjusted R-squared:  0.09651 
+F-statistic: 842.7 on 1 and 7879 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Try for total fraction:</p>
 <pre class="r"><code>nPAStot=read.table(&quot;../data/peaks_5perc/APApeak_Peaks_GeneLocAnno.Total.5perc.fc&quot;, header = F, stringsAsFactors = F, col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;,&quot;gene&quot;, &quot;loc&quot;,&quot;strand&quot;, &quot;peakNum&quot;, &quot;meanusage&quot;)) %&gt;% group_by(gene) %&gt;% summarise(nPAST=n())
 
@@ -2502,18 +2673,18 @@ lm(formula = nPAST ~ Transcription, data = transcriptionTOTPAS)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.3359 -1.0608 -0.2954  0.8024  6.7777 
+-3.2809 -1.0575 -0.2933  0.7959  7.0142 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.15080    0.07847   1.922   0.0547 .  
-Transcription  4.62411    0.14637  31.591   &lt;2e-16 ***
+(Intercept)    0.14210    0.07792   1.824   0.0682 .  
+Transcription  4.57287    0.14534  31.462   &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 1.446 on 7885 degrees of freedom
-Multiple R-squared:  0.1124,    Adjusted R-squared:  0.1122 
-F-statistic:   998 on 1 and 7885 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 1.434 on 7879 degrees of freedom
+Multiple R-squared:  0.1116,    Adjusted R-squared:  0.1115 
+F-statistic: 989.9 on 1 and 7879 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Look at the difference in PAS number:</p>
 <pre class="r"><code>nPASall= nPAStot %&gt;% inner_join(nPASnuc, by=&quot;gene&quot;) %&gt;% mutate(Difference= nPASN-nPAST) 
 
@@ -2567,19 +2738,82 @@ lm(formula = Difference ~ Transcription, data = transcriptionallPAS)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.4613 -0.4299 -0.3865  0.5733  6.5790 
+-5.3758 -0.3925 -0.3446  0.5983  5.6461 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    0.23515    0.05423   4.336 1.47e-05 ***
-Transcription  0.34001    0.10116   3.361  0.00078 ***
+(Intercept)    0.16621    0.05165   3.218   0.0013 ** 
+Transcription  0.39342    0.09634   4.084 4.48e-05 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.9991 on 7885 degrees of freedom
-Multiple R-squared:  0.001431,  Adjusted R-squared:  0.001304 
-F-statistic:  11.3 on 1 and 7885 DF,  p-value: 0.0007798</code></pre>
+Residual standard error: 0.9503 on 7879 degrees of freedom
+Multiple R-squared:  0.002112,  Adjusted R-squared:  0.001985 
+F-statistic: 16.68 on 1 and 7879 DF,  p-value: 4.476e-05</code></pre>
 <p>This has a small positive correlation.</p>
+</div>
+<div id="rna-decay" class="section level2">
+<h2>RNA decay</h2>
+<p>Do this with Athma’s decay.</p>
+<pre class="r"><code>decay=read.table(file = &quot;../data/fourSU/tr_decay_table_norm.txt&quot;, header=T, stringsAsFactors = F) %&gt;% dplyr::select(gene_id,contains(&quot;RNAdecay&quot;))
+
+decay_geneNames=decay %&gt;% inner_join(geneNames, by=&quot;gene_id&quot;) %&gt;% dplyr::select(GeneName, contains(&quot;RNAdecay&quot;))
+
+decay_geneNames_long=melt(decay_geneNames,id.vars = &quot;GeneName&quot;, value.name = &quot;RNA_Decay&quot;, variable.name = &quot;Decay_Ind&quot;) %&gt;% separate(Decay_Ind, into=c(&quot;type&quot;, &quot;ind&quot;), sep=&quot;_&quot;) %&gt;% mutate(line=paste(&quot;NA&quot; , ind, sep=&quot;&quot;)) %&gt;% dplyr::select(GeneName, line, RNA_Decay) %&gt;% dplyr::rename( &quot;gene&quot;=GeneName)</code></pre>
+<pre class="r"><code>APAandDecay=decay_geneNames_long %&gt;% inner_join(ApaBothFrac_melt, by=c(&#39;gene&#39;, &#39;line&#39;))
+ngenes=APAandDecay %&gt;% dplyr::select(gene) %&gt;% unique() %&gt;% nrow()
+ngenes</code></pre>
+<pre><code>[1] 7881</code></pre>
+<pre class="r"><code>summary(lm(data=APAandDecay, APA_val~RNA_Decay))</code></pre>
+<pre><code>
+Call:
+lm(formula = APA_val ~ RNA_Decay, data = APAandDecay)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+  -849   -454   -356   -145 809821 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  512.257      4.058  126.24   &lt;2e-16 ***
+RNA_Decay    388.772     24.162   16.09   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3492 on 756574 degrees of freedom
+Multiple R-squared:  0.0003421, Adjusted R-squared:  0.0003407 
+F-statistic: 258.9 on 1 and 756574 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>ngenes=APAandDecay %&gt;% dplyr::select(gene) %&gt;% unique() %&gt;% nrow()
+ngenes</code></pre>
+<pre><code>[1] 7881</code></pre>
+<pre class="r"><code>decay_byGene= decay_geneNames_long %&gt;% group_by(gene) %&gt;% summarise(MeanDecay=mean(RNA_Decay))
+APAandDecayMean=decay_byGene %&gt;% inner_join(ApaBothFracStand_geneMean_spread, by=c(&#39;gene&#39;))
+
+
+
+APAandDecayMean$density &lt;- get_density(APAandDecayMean$APAVal, APAandDecayMean$MeanDecay, n = 100)
+
+ggplot(APAandDecayMean, aes(x=MeanDecay, y=APAVal)) + geom_point(aes(color=density)) + geom_smooth(method=&quot;lm&quot;) + labs(x=&quot;relative Decay&quot;, y=&quot;Nuclear/(Total+Nuclear)&quot;, title=&quot;Relationship between Nuclear proportion and RNA decay&quot;)+ scale_color_viridis()</code></pre>
+<p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(data=APAandDecayMean, APAVal~MeanDecay))</code></pre>
+<pre><code>
+Call:
+lm(formula = APAVal ~ MeanDecay, data = APAandDecayMean)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.36888 -0.10414  0.00977  0.11337  0.35047 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.530569   0.001577 336.413  &lt; 2e-16 ***
+MeanDecay   -0.054487   0.012607  -4.322 1.56e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.1374 on 7879 degrees of freedom
+Multiple R-squared:  0.002365,  Adjusted R-squared:  0.002239 
+F-statistic: 18.68 on 1 and 7879 DF,  p-value: 1.564e-05</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

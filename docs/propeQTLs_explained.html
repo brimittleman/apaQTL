@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-08-01
+<strong>Last updated:</strong> 2019-09-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee4d84f65bf7b452afd1adce24640c6649990caf8targetblanke4d84f6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e4d84f65bf7b452afd1adce24640c6649990caf8" target="_blank">e4d84f6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5976ed7e0423551d9136c548a0a8acd0b8583231" target="_blank">5976ed7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee4d84f65bf7b452afd1adce24640c6649990caf8targetblanke4d84f6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -504,11 +504,17 @@ Untracked files:
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
+    Untracked:  analysis/interpret verify bam.Rmd
+    Untracked:  analysis/interpret_verifybam.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
+    Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
@@ -526,6 +532,7 @@ Untracked files:
     Untracked:  code/._IntronicPASDT.sh
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._LD_qtl.sh
+    Untracked:  code/._LD_snpsproxy.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -543,6 +550,8 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._RunRes2PAS.sh
+    Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
     Untracked:  code/._TESplots100bp.sh
@@ -554,9 +563,14 @@ Untracked files:
     Untracked:  code/._aAPAqtl_nominal39ind.sh
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
+    Untracked:  code/._apaInPandE.py
     Untracked:  code/._apaQTLCorrectPvalMakeQQ.R
+    Untracked:  code/._apaQTLCorrectpval_6or7a.R
     Untracked:  code/._apaQTL_Nominal.sh
+    Untracked:  code/._apaQTL_nominalv67.sh
     Untracked:  code/._apaQTL_permuted.sh
+    Untracked:  code/._apaQTL_permuted_test6A7A.sh
+    Untracked:  code/._apainRibo.py
     Untracked:  code/._assignNucIntonpeak2intronlocs.sh
     Untracked:  code/._assignTotIntronpeak2intronlocs.sh
     Untracked:  code/._bam2BW_5primemost.sh
@@ -565,6 +579,7 @@ Untracked files:
     Untracked:  code/._bothFracDTplot4thintron.sh
     Untracked:  code/._bothFrac_FC.sh
     Untracked:  code/._callPeaksYL.py
+    Untracked:  code/._changeRibonomQTLres2genename.py
     Untracked:  code/._changenomQTLres2geneName.py
     Untracked:  code/._chooseAnno2PAS_pacbio.py
     Untracked:  code/._chooseAnno2SAF.py
@@ -580,6 +595,7 @@ Untracked files:
     Untracked:  code/._config2.yaml
     Untracked:  code/._configOLD.yaml
     Untracked:  code/._convertNominal2SNPLOC.py
+    Untracked:  code/._convertNominal2SNPloc2Versions.py
     Untracked:  code/._convertNumeric.py
     Untracked:  code/._correctNomeqtl.R
     Untracked:  code/._createPlinkSampfile.py
@@ -590,8 +606,17 @@ Untracked files:
     Untracked:  code/._extractGenotypes.py
     Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
+    Untracked:  code/._fc_filteredPAS6and7As.sh
+    Untracked:  code/._fifteenBPupstreamPAS.py
+    Untracked:  code/._fiftyBPupstreamPAS.py
     Untracked:  code/._filter5perc.R
     Untracked:  code/._filter5percPheno.py
+    Untracked:  code/._filterLDsnps.py
+    Untracked:  code/._filterMPPAS.py
+    Untracked:  code/._filterMPPAS_15.py
+    Untracked:  code/._filterMPPAS_15_7As.py
+    Untracked:  code/._filterMPPAS_50.py
+    Untracked:  code/._filterSAFforMP.py
     Untracked:  code/._filterpeaks.py
     Untracked:  code/._finalPASbed2SAF.py
     Untracked:  code/._fix4su304corr.py
@@ -601,6 +626,7 @@ Untracked files:
     Untracked:  code/._fixExandUnexeQTL.py
     Untracked:  code/._fixFChead.py
     Untracked:  code/._fixFChead_bothfrac.py
+    Untracked:  code/._fixFChead_short.py
     Untracked:  code/._fixH3k12ac.py
     Untracked:  code/._fixPASregionSNPs.py
     Untracked:  code/._fixRNAhead4corr.py
@@ -610,6 +636,7 @@ Untracked files:
     Untracked:  code/._getAPAfromanyeQTL.py
     Untracked:  code/._getApapval4eqtl.py
     Untracked:  code/._getApapval4eqtl_unexp.py
+    Untracked:  code/._getApapval4eqtl_version67.py
     Untracked:  code/._getDownstreamIntronNuclear.py
     Untracked:  code/._getIntronDownstreamPAS.py
     Untracked:  code/._getIntronUpstreamPAS.py
@@ -641,9 +668,12 @@ Untracked files:
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
     Untracked:  code/._nucQTLGWAS.py
+    Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
+    Untracked:  code/._parseBestbamid.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -655,6 +685,7 @@ Untracked files:
     Untracked:  code/._quantassign2parsedpeak.py
     Untracked:  code/._removeXfromHmm.py
     Untracked:  code/._removeloc_pheno.py
+    Untracked:  code/._riboQTL.sh
     Untracked:  code/._runCorrectNomEqtl.sh
     Untracked:  code/._runHMMpermuteAPAqtls.sh
     Untracked:  code/._runHMMpermuteeQTLS.sh
@@ -662,14 +693,19 @@ Untracked files:
     Untracked:  code/._runMakeeQTLempirical.sh
     Untracked:  code/._run_bam2bw_all3prime.sh
     Untracked:  code/._run_bam2bw_extra3.sh
+    Untracked:  code/._run_bestbamid.sj
+    Untracked:  code/._run_filtersnpLD.sh
+    Untracked:  code/._run_getAPAfromeQTL_version6.7.sh
     Untracked:  code/._run_getApaPval4eqtl.sh
     Untracked:  code/._run_getapafromeQTL.py
     Untracked:  code/._run_getapafromeQTL.sh
     Untracked:  code/._run_getapapval4eqtl_unexp.sh
     Untracked:  code/._run_leafcutterDiffIso.sh
+    Untracked:  code/._run_prxySNP.sh
     Untracked:  code/._run_pttfacetboxplot.sh
     Untracked:  code/._run_sepUsagephen.sh
     Untracked:  code/._run_sepgenobychrom.sh
+    Untracked:  code/._run_verifybam.sh
     Untracked:  code/._selectNominalPvalues.py
     Untracked:  code/._sepUsagePhen.py
     Untracked:  code/._sepgenobychrom.py
@@ -679,34 +715,50 @@ Untracked files:
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subsetAPAnotEorPgene.py
+    Untracked:  code/._subsetAPAnotEorPgene_2versions.py
     Untracked:  code/._subsetApanoteGene.py
+    Untracked:  code/._subsetApanoteGene_2versions.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
     Untracked:  code/._subsetVCF_SS.sh
     Untracked:  code/._subsetVCF_noSSregions.sh
     Untracked:  code/._subsetVCF_upstreamPAS.sh
     Untracked:  code/._subset_diffisopheno.py
     Untracked:  code/._subsetpermAPAwithGenelist.py
+    Untracked:  code/._subsetpermAPAwithGenelist_2versions.py
     Untracked:  code/._subsetvcf_otherreg.sh
     Untracked:  code/._subsetvcf_permSS.sh
     Untracked:  code/._subtrachfiveprimeUTR.sh
     Untracked:  code/._subtractExons.sh
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
+    Untracked:  code/._tenBPupstreamPAS.py
+    Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
+    Untracked:  code/._twentyBPupstreamPAS.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
+    Untracked:  code/._verifyBam18517N.sh
+    Untracked:  code/._verifyBam18517T.sh
+    Untracked:  code/._verifyBam19128N.sh
+    Untracked:  code/._verifyBam19128T.sh
+    Untracked:  code/._wrap_verifybam.sh
     Untracked:  code/._writePTTexamplecode.py
     Untracked:  code/._writePTTexamplecode.sh
     Untracked:  code/.pversion
     Untracked:  code/.snakemake/
+    Untracked:  code/1
     Untracked:  code/APAqtl_nominal.err
     Untracked:  code/APAqtl_nominal.out
     Untracked:  code/APAqtl_nominal_39.err
     Untracked:  code/APAqtl_nominal_39.out
     Untracked:  code/APAqtl_nominal_nonNorm.err
     Untracked:  code/APAqtl_nominal_nonNorm.out
+    Untracked:  code/APAqtl_nominal_versions67.err
+    Untracked:  code/APAqtl_nominal_versions67.out
     Untracked:  code/APAqtl_permuted.err
     Untracked:  code/APAqtl_permuted.out
+    Untracked:  code/APAqtl_permuted_versions67.err
+    Untracked:  code/APAqtl_permuted_versions67.out
     Untracked:  code/ApaQTL_nominalNonnorm.sh
     Untracked:  code/BothFracDTPlot1stintron.err
     Untracked:  code/BothFracDTPlot1stintron.out
@@ -747,6 +799,7 @@ Untracked files:
     Untracked:  code/IntronicPASDT.sh
     Untracked:  code/LC_samplegroups.py
     Untracked:  code/LD_qtl.sh
+    Untracked:  code/LD_snpsproxy.sh
     Untracked:  code/LD_vcftools.hap.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
@@ -796,6 +849,9 @@ Untracked files:
     Untracked:  code/RNAseqDTPlotGeneRegions.out
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/RunRes2PAS.sh
+    Untracked:  code/SAF215upbed.py
+    Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
     Untracked:  code/Script4NuclearQTLexamples.sh
     Untracked:  code/Script4TotalPTTqtlexamples.sh
@@ -814,16 +870,24 @@ Untracked files:
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
     Untracked:  code/Upstream100Bases_general.py
+    Untracked:  code/YRI_LCL.vcf.gz
+    Untracked:  code/YRI_LCL_chr1.vcf.gz.log
+    Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
     Untracked:  code/annotatedPASregion.out
+    Untracked:  code/apaInPandE.py
     Untracked:  code/apaQTLCorrectPvalMakeQQ_4pc.R
+    Untracked:  code/apaQTLCorrectpval_6or7a.R
     Untracked:  code/apaQTL_Nominal_4pc.sh
+    Untracked:  code/apaQTL_nominalv67.sh
     Untracked:  code/apaQTL_permuted.4pc.sh
+    Untracked:  code/apaQTL_permuted_test6A7A.sh
     Untracked:  code/apafacetboxplots.R
+    Untracked:  code/apainRibo.py
     Untracked:  code/apaqtlfacetboxplots.R
     Untracked:  code/assignNucIntonpeak2intronlocs.sh
     Untracked:  code/assignPeak2Intronicregion.err
@@ -842,7 +906,9 @@ Untracked files:
     Untracked:  code/bothFrac_FC.err
     Untracked:  code/bothFrac_FC.out
     Untracked:  code/bothFrac_FC.sh
+    Untracked:  code/callSHscripts.txt
     Untracked:  code/changePermQTLres2geneName.py
+    Untracked:  code/changeRibonomQTLres2genename.py
     Untracked:  code/changenomQTLres2geneName.py
     Untracked:  code/chooseAnno2PAS_pacbio.py
     Untracked:  code/closestannotated.err
@@ -853,6 +919,7 @@ Untracked files:
     Untracked:  code/closestannotatedbyfrac.out
     Untracked:  code/codingdms2bed.py
     Untracked:  code/convertNominal2SNPLOC.py
+    Untracked:  code/convertNominal2SNPloc2Versions.py
     Untracked:  code/correctNomeqtl.R
     Untracked:  code/createPlinkSampfile.py
     Untracked:  code/dag.pdf
@@ -861,9 +928,20 @@ Untracked files:
     Untracked:  code/eQTL_switch2snploc.py
     Untracked:  code/eQTLgenestestedapa.py
     Untracked:  code/encodeRNADTplots.sh
+    Untracked:  code/environmentLeaf.yaml
     Untracked:  code/extractGenotypes.py
     Untracked:  code/extractseqfromqtlfastq.py
     Untracked:  code/fc2leafphen.py
+    Untracked:  code/fc_filteredPAS6and7As.sh
+    Untracked:  code/fifteenBPupstreamPAS.py
+    Untracked:  code/fiftyBPupstreamPAS.py
+    Untracked:  code/filterLDsnps.py
+    Untracked:  code/filterMPPAS.py
+    Untracked:  code/filterMPPAS_15.py
+    Untracked:  code/filterMPPAS_15_7As.py
+    Untracked:  code/filterMPPAS_50.py
+    Untracked:  code/filterSAFforMP.py
+    Untracked:  code/filterSAFforMP_gen.py
     Untracked:  code/finalPASbed2SAF.py
     Untracked:  code/findbuginpeaks.R
     Untracked:  code/fix4su304corr.py
@@ -872,6 +950,7 @@ Untracked files:
     Untracked:  code/fixExandUnexeQTL
     Untracked:  code/fixExandUnexeQTL.py
     Untracked:  code/fixFChead_bothfrac.py
+    Untracked:  code/fixFChead_short.py
     Untracked:  code/fixFChead_summary.py
     Untracked:  code/fixH3k12ac.py
     Untracked:  code/fixPASregionSNPs.py
@@ -885,6 +964,7 @@ Untracked files:
     Untracked:  code/getAPAfromanyeQTL.py
     Untracked:  code/getApapval4eqtl.py
     Untracked:  code/getApapval4eqtl_unexp.py
+    Untracked:  code/getApapval4eqtl_version67.py
     Untracked:  code/getDownstreamIntronNuclear.py
     Untracked:  code/getIntronDownstreamPAS.py
     Untracked:  code/getIntronUpstreamPAS.py
@@ -933,12 +1013,18 @@ Untracked files:
     Untracked:  code/netseqFC.sh
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucQTLGWAS.py
+    Untracked:  code/nucQTLGWAS_withLD.py
+    Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
+    Untracked:  code/parseBestbamid.py
     Untracked:  code/phenoQTLfromlist.py
     Untracked:  code/plink.log
     Untracked:  code/processYRIgen.py
+    Untracked:  code/prxySNP.err
+    Untracked:  code/prxySNP.out
     Untracked:  code/pttFacetBoxplots.err
     Untracked:  code/pttFacetBoxplots.out
     Untracked:  code/pttQTLsinapaQTL.py
@@ -950,9 +1036,15 @@ Untracked files:
     Untracked:  code/rLD_vcftools.hap.err
     Untracked:  code/removeXfromHmm.py
     Untracked:  code/removeloc_pheno.py
+    Untracked:  code/riboQTL.sh
+    Untracked:  code/riboqtl.err
+    Untracked:  code/riboqtl.out
+    Untracked:  code/runBestBamID.err
     Untracked:  code/runCorrectNomEqtl.sh
     Untracked:  code/runCorrectNomeqtl.err
     Untracked:  code/runCorrectNomeqtl.out
+    Untracked:  code/runFilterLD.err
+    Untracked:  code/runFilterLD.out
     Untracked:  code/runHMMpermute.err
     Untracked:  code/runHMMpermute.out
     Untracked:  code/runHMMpermuteAPAqtls.sh
@@ -973,9 +1065,12 @@ Untracked files:
     Untracked:  code/run_bam2bw_extra3.sh
     Untracked:  code/run_bam2bwexta.err
     Untracked:  code/run_bam2bwexta.out
+    Untracked:  code/run_bestbamid.sh
     Untracked:  code/run_distPAS2Sig.sh
+    Untracked:  code/run_filtersnpLD.sh
     Untracked:  code/run_getAPAfromanyeQTL.err
     Untracked:  code/run_getAPAfromanyeQTL.out
+    Untracked:  code/run_getAPAfromeQTL_version6.7.sh
     Untracked:  code/run_getApaPval4eQTLs.err
     Untracked:  code/run_getApaPval4eQTLs.out
     Untracked:  code/run_getApaPval4eQTLsunexplained.err
@@ -986,6 +1081,7 @@ Untracked files:
     Untracked:  code/run_leafcutterDiffIso.sh
     Untracked:  code/run_leafcutter_ds.err
     Untracked:  code/run_leafcutter_ds.out
+    Untracked:  code/run_prxySNP.sh
     Untracked:  code/run_pttfacetboxplot.sh
     Untracked:  code/run_qtlFacetBoxplots.sh
     Untracked:  code/run_sepUsagephen.sh
@@ -994,6 +1090,22 @@ Untracked files:
     Untracked:  code/run_sepgenobychrom.sh
     Untracked:  code/run_sepusage.err
     Untracked:  code/run_sepusage.out
+    Untracked:  code/run_verifybam.err
+    Untracked:  code/run_verifybam.out
+    Untracked:  code/run_verifybam.sh
+    Untracked:  code/run_verifybam128N.err
+    Untracked:  code/run_verifybam128N.out
+    Untracked:  code/run_verifybam128T.err
+    Untracked:  code/run_verifybam128T.out
+    Untracked:  code/run_verifybam517N.err
+    Untracked:  code/run_verifybam517N.out
+    Untracked:  code/run_verifybam517T.err
+    Untracked:  code/run_verifybam517T.out
+    Untracked:  code/run_verifybam_fullVCF.sh
+    Untracked:  code/runprxySNP.err
+    Untracked:  code/runprxySNP.out
+    Untracked:  code/runres2pas.err
+    Untracked:  code/runres2pas.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -1007,13 +1119,16 @@ Untracked files:
     Untracked:  code/sortindexRNABam.out
     Untracked:  code/sortindexRNAbam.sh
     Untracked:  code/subsetAPAnotEorPgene.py
+    Untracked:  code/subsetAPAnotEorPgene_2versions.py
     Untracked:  code/subsetApanoteGene.py
+    Untracked:  code/subsetApanoteGene_2versions.py
     Untracked:  code/subsetUnexplainedeQTLs.py
     Untracked:  code/subsetVCF_SS.sh
     Untracked:  code/subsetVCF_noSSregions.sh
     Untracked:  code/subsetVCF_upstreamPAS.sh
     Untracked:  code/subset_diffisopheno.py
     Untracked:  code/subsetpermAPAwithGenelist.py
+    Untracked:  code/subsetpermAPAwithGenelist_2versions.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
     Untracked:  code/subsetvcf_noSS.err
@@ -1035,12 +1150,25 @@ Untracked files:
     Untracked:  code/tabixSNPS.sh
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/tenBPupstreamPAS.py
+    Untracked:  code/testVerifyBam.sh
+    Untracked:  code/test_verifybam.err
+    Untracked:  code/test_verifybam.out
     Untracked:  code/totSeceffectsize.py
     Untracked:  code/transcriptdm2bed.py
+    Untracked:  code/twentyBPupstreamPAS.py
     Untracked:  code/utrdms2saf.py
     Untracked:  code/vcf2bed.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
+    Untracked:  code/verifyBam18517N.sh
+    Untracked:  code/verifyBam18517T.sh
+    Untracked:  code/verifyBam19128N.sh
+    Untracked:  code/verifyBam19128T.sh
+    Untracked:  code/wrap_verifybam.err
+    Untracked:  code/wrap_verifybam.out
+    Untracked:  code/wrap_verifybam.sh
+    Untracked:  code/wrap_verifybam_full.sh
     Untracked:  code/writeExampleQTLcode.py
     Untracked:  code/writePTTexamplecode.py
     Untracked:  code/zipandtabPhen.err
@@ -1050,12 +1178,15 @@ Untracked files:
     Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
+    Untracked:  data/BadLines/
     Untracked:  data/Battle_pQTL/
+    Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
     Untracked:  data/DTmatrix/
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/FlaggedPAS/
     Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
@@ -1063,6 +1194,7 @@ Untracked files:
     Untracked:  data/NascentRNA/
     Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
+    Untracked:  data/PAS_postFlag/
     Untracked:  data/PolyA_DB/
     Untracked:  data/PreTerm_pheno/
     Untracked:  data/PrematureQTLNominal/
@@ -1077,12 +1209,15 @@ Untracked files:
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/TF_motifdisruption/
     Untracked:  data/ThirtyNineIndQtl_nominal/
+    Untracked:  data/Version15bp6As/
+    Untracked:  data/Version15bp7As/
     Untracked:  data/apaQTLNominal/
     Untracked:  data/apaQTLNominal_4pc/
     Untracked:  data/apaQTLPermuted/
     Untracked:  data/apaQTLPermuted_4pc/
     Untracked:  data/apaQTLs/
     Untracked:  data/assignedPeaks/
+    Untracked:  data/assignedPeaks_15Up/
     Untracked:  data/bam/
     Untracked:  data/bam_clean/
     Untracked:  data/bam_waspfilt/
@@ -1118,8 +1253,10 @@ Untracked files:
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
     Untracked:  data/nuc_10upclean/
+    Untracked:  data/oldPASfiles/
     Untracked:  data/overlapeQTL_try2/
     Untracked:  data/overlapeQTLs/
+    Untracked:  data/pQTLoverlap/
     Untracked:  data/pacbio/
     Untracked:  data/peakCoverage/
     Untracked:  data/peaks_5perc/
@@ -1132,27 +1269,26 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
+    Untracked:  data/verifyBAM/
+    Untracked:  data/verifyBAM_full/
     Untracked:  docs/._.DS_Store
     Untracked:  docs/figure/._.DS_Store
-    Untracked:  docs/figure/nonNormQTL.Rmd/._figure2D-1.pdf
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
     Untracked:  output/dtPlots/
     Untracked:  output/fastqc/
     Untracked:  output/meanCorrelationPhenotypes.svg
+    Untracked:  run_verifybam517N.err
+    Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PAS_graphs.Rmd
-    Modified:   analysis/PrematureTermQTL.Rmd
-    Modified:   analysis/compareAnnotatedpas.Rmd
-    Modified:   analysis/nucSpecinEQTLs.Rmd
+    Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/pQTLexampleplot.Rmd
+    Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
-    Deleted:    code/Upstream10Bases_general.py
+    Modified:   code/SnakefilefiltPAS
     Modified:   code/apaQTLCorrectPvalMakeQQ.R
     Modified:   code/apaQTL_Nominal.sh
     Modified:   code/apaQTL_permuted.sh
@@ -1164,10 +1300,24 @@ Unstaged changes:
     Modified:   code/config.yaml
     Modified:   code/environment.yaml
     Modified:   code/makePheno.py
+    Modified:   code/mergeAllBam.sh
+    Modified:   code/mergeByFracBam.sh
+    Modified:   code/mergePeaks.sh
+    Modified:   code/peakFC.sh
+    Modified:   code/snakemake.batch
+    Modified:   code/snakemakePAS.batch
+    Modified:   code/snakemakefiltPAS.batch
+    Modified:   code/submit-snakemake.sh
+    Modified:   code/submit-snakemakePAS.sh
+    Modified:   code/submit-snakemakefiltPAS.sh
     Deleted:    code/test.txt
+    Modified:   data/MetaDataSequencing.txt
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Emain-1.pdf
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Esubset-1.pdf
+    Modified:   docs/figure/chromHHMQTL.Rmd/figure3D-1.pdf
     Modified:   docs/figure/exvunexpeQTL.Rmd/figure3C-1.pdf
-    Modified:   docs/figure/pQTLandeQTLoverlap.Rmd/figure3A-1.pdf
     Deleted:    docs/figure/propeQTLs_explained.Rmd/figure3B-1.pdf
+    Deleted:    reads_graphs.Rmd
 
 </code></pre>
 <p>
@@ -1206,6 +1356,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/27af5c8500acccc5e7a8bf9520baeb9cf324c3e3/docs/propeQTLs_explained.html" target="_blank">27af5c8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1537,12 +1704,12 @@ more prop explained to new analysis
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(workflowr)</code></pre>
@@ -1626,16 +1793,14 @@ brimittleman
 </div>
 <p>Proportion explained:</p>
 <pre class="r"><code>nrow(totalapaUnexplained_sig)/nrow(totalapaUnexplained)</code></pre>
-<pre><code>[1] 0.1632653</code></pre>
-<p>I tested 588 unexplained eQTLs in the total fraction and 96 have a bonforoni corrected significant peak.</p>
+<pre><code>[1] 0.1678201</code></pre>
 <p>Compare to explained eQTLS:</p>
 <pre class="r"><code>totalapaexplained=read.table(&quot;../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp) %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;%  dplyr::slice(which.min(adjPval))
 
 totalapaexplained_sig= totalapaexplained %&gt;% filter(adjPval&lt;.05)
 
 nrow(totalapaexplained_sig)/nrow(totalapaexplained)</code></pre>
-<pre><code>[1] 0.1304878</code></pre>
-<p>I am testing 820 explained eQTLs and of those 107 have a bonforoni corrected significant peak.</p>
+<pre><code>[1] 0.1248455</code></pre>
 <p>difference of proportions:</p>
 <pre class="r"><code>prop.test(x=c(nrow(totalapaUnexplained_sig),nrow(totalapaexplained_sig)), n=c(nrow(totalapaUnexplained),nrow(totalapaexplained)))</code></pre>
 <pre><code>
@@ -1643,13 +1808,13 @@ nrow(totalapaexplained_sig)/nrow(totalapaexplained)</code></pre>
     correction
 
 data:  c(nrow(totalapaUnexplained_sig), nrow(totalapaexplained_sig)) out of c(nrow(totalapaUnexplained), nrow(totalapaexplained))
-X-squared = 2.722, df = 1, p-value = 0.09898
+X-squared = 4.7427, df = 1, p-value = 0.02942
 alternative hypothesis: two.sided
 95 percent confidence interval:
- -0.00641871  0.07197371
+ 0.003452285 0.082496876
 sample estimates:
    prop 1    prop 2 
-0.1632653 0.1304878 </code></pre>
+0.1678201 0.1248455 </code></pre>
 <pre class="r"><code>ggplot(totalapaUnexplained_sig,aes(x=loc)) + geom_histogram(stat=&quot;count&quot;,aes(y=..count../sum(..count..))) + labs(y=&quot;Proportion&quot;, title = &quot;Total apaQTLs explaining eQTLs&quot;)</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -1710,11 +1875,11 @@ BothTotalLoc</code></pre>
 <pre><code># A tibble: 5 x 5
   loc    nLocTotalUn propTotalUn nLocTotalEx propTotalEx
   &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1 cds              7      0.0729           8      0.0748
-2 end              9      0.0938           7      0.0654
-3 intron          17      0.177           20      0.187 
-4 utr3            59      0.615           70      0.654 
-5 utr5             4      0.0417           2      0.0187</code></pre>
+1 cds              6      0.0619           7      0.0693
+2 end              7      0.0722           9      0.0891
+3 intron          16      0.165           15      0.149 
+4 utr3            65      0.670           68      0.673 
+5 utr5             3      0.0309           2      0.0198</code></pre>
 </div>
 <div id="nuclear" class="section level3">
 <h3>nuclear</h3>
@@ -1723,28 +1888,26 @@ BothTotalLoc</code></pre>
 nuclearapaUnexplained_sig= nuclearapaUnexplained %&gt;% filter(adjPval&lt;.05)
 
 nrow(nuclearapaUnexplained_sig)/nrow(nuclearapaUnexplained)</code></pre>
-<pre><code>[1] 0.1649832</code></pre>
-<p>I tested 594 unexplained eQTLs in the nuclear fraction and 98 have a bonforoni corrected significant peak.</p>
+<pre><code>[1] 0.1726496</code></pre>
 <pre class="r"><code>nuclearapaexplained=read.table(&quot;../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt&quot;, stringsAsFactors = F, col.names = nomnames) %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PASnum&quot;), sep=&quot;_&quot;) %&gt;% group_by(gene, snp) %&gt;%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %&gt;%  dplyr::slice(which.min(adjPval))
 
 nuclearapaexplained_sig= nuclearapaexplained %&gt;% filter(adjPval&lt;.05)
 
 nrow(nuclearapaexplained_sig)/nrow(nuclearapaexplained)</code></pre>
-<pre><code>[1] 0.13269</code></pre>
-<p>I tested 829 explained eQTLs in the nuclear fraction and 110 have a nominally significant peak. difference of proportions:</p>
+<pre><code>[1] 0.1239264</code></pre>
 <pre class="r"><code>prop.test(x=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)), n=c(nrow(nuclearapaUnexplained),nrow(nuclearapaexplained)))</code></pre>
 <pre><code>
     2-sample test for equality of proportions with continuity
     correction
 
 data:  c(nrow(nuclearapaUnexplained_sig), nrow(nuclearapaexplained_sig)) out of c(nrow(nuclearapaUnexplained), nrow(nuclearapaexplained))
-X-squared = 2.6386, df = 1, p-value = 0.1043
+X-squared = 6.1593, df = 1, p-value = 0.01307
 alternative hypothesis: two.sided
 95 percent confidence interval:
- -0.006890426  0.071476780
+ 0.009179856 0.088266529
 sample estimates:
    prop 1    prop 2 
-0.1649832 0.1326900 </code></pre>
+0.1726496 0.1239264 </code></pre>
 <pre class="r"><code>ggplot(nuclearapaUnexplained_sig,aes(x=loc))  + geom_histogram(stat=&quot;count&quot;,aes(y=..count../sum(..count..))) + labs(title = &quot;Nuclear apaQTLs explaining eQTLs&quot;, y=&quot;Proportion&quot;)</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -1805,37 +1968,11 @@ BothnuclearLoc</code></pre>
 <pre><code># A tibble: 5 x 5
   loc    nLocnuclearUn propnuclearUn nLocnuclearEx propnuclearEx
   &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-1 cds                4        0.0408             3        0.0273
-2 end               10        0.102              9        0.0818
-3 intron            18        0.184             33        0.3   
-4 utr3              66        0.673             63        0.573 
-5 utr5               0        0                  2        0.0182</code></pre>
-<pre class="r"><code>prop.test(x=c(18,33), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))</code></pre>
-<pre><code>
-    2-sample test for equality of proportions with continuity
-    correction
-
-data:  c(18, 33) out of c(nrow(nuclearapaUnexplained_sig), nrow(nuclearapaexplained_sig))
-X-squared = 3.1869, df = 1, p-value = 0.07423
-alternative hypothesis: two.sided
-95 percent confidence interval:
- -0.240913267  0.008260206
-sample estimates:
-   prop 1    prop 2 
-0.1836735 0.3000000 </code></pre>
-<pre class="r"><code>prop.test(x=c(66,63), n=c(nrow(nuclearapaUnexplained_sig),nrow(nuclearapaexplained_sig)))</code></pre>
-<pre><code>
-    2-sample test for equality of proportions with continuity
-    correction
-
-data:  c(66, 63) out of c(nrow(nuclearapaUnexplained_sig), nrow(nuclearapaexplained_sig))
-X-squared = 1.8258, df = 1, p-value = 0.1766
-alternative hypothesis: two.sided
-95 percent confidence interval:
- -0.03992433  0.24140856
-sample estimates:
-   prop 1    prop 2 
-0.6734694 0.5727273 </code></pre>
+1 cds                3        0.0297             3       0.0297 
+2 end               11        0.109             12       0.119  
+3 intron            23        0.228             32       0.317  
+4 utr3              64        0.634             53       0.525  
+5 utr5               0        0                  1       0.00990</code></pre>
 </div>
 <div id="total-v-nuclear" class="section level3">
 <h3>total v nuclear</h3>
@@ -1845,13 +1982,13 @@ sample estimates:
     correction
 
 data:  c(nrow(nuclearapaUnexplained_sig), nrow(totalapaUnexplained_sig)) out of c(nrow(nuclearapaUnexplained), nrow(totalapaUnexplained))
-X-squared = 1.4301e-06, df = 1, p-value = 0.999
+X-squared = 0.019903, df = 1, p-value = 0.8878
 alternative hypothesis: two.sided
 95 percent confidence interval:
- -0.04220475  0.04564046
+ -0.04008930  0.04974831
 sample estimates:
    prop 1    prop 2 
-0.1649832 0.1632653 </code></pre>
+0.1726496 0.1678201 </code></pre>
 <p>Differences in proportion by location</p>
 <pre class="r"><code>allLocProp=BothnuclearLoc %&gt;% full_join(BothTotalLoc, by=&quot;loc&quot;) %&gt;% select(loc,propnuclearUn,propnuclearEx,propTotalUn,propTotalEx )
 
@@ -1860,13 +1997,13 @@ allLocPropmelt= melt(allLocProp, id.vars = &quot;loc&quot;) %&gt;% mutate(Fracti
 
 ggplot(allLocPropmelt,aes(x=loc, fill=eQTL, y=value)) + geom_histogram(stat=&quot;identity&quot;, position = &quot;dodge&quot;) + facet_grid(~Fraction)+ labs(y=&quot;Proportion of PAS&quot;, title=&quot;apaQTLs overlaping eQTLs by PAS location&quot;)  + scale_fill_manual(values=c(&quot;orange&quot;, &quot;blue&quot;))</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
-<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
-Past versions of unnamed-chunk-19-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div id="fig-unnamed-chunk-18-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1885,35 +2022,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/ab8482d0026893aba29e4e1e967172f0b3b9c44c/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-19-1.png" target="_blank">ab8482d</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/6b164c8c8915fb27b5037b77c3985e160f9720f8/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-18-1.png" target="_blank">6b164c8</a>
 </td>
 <td>
 brimittleman
 </td>
 <td>
-2019-08-01
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/ca379ce9997f329e4c0e1a3928cb2424d31fa755/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-19-1.png" target="_blank">ca379ce</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-13
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/b907ac180d6cc4f2e7467360fcb30c3b87df0ea1/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-19-1.png" target="_blank">b907ac1</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-12
+2019-06-07
 </td>
 </tr>
 </tbody>
@@ -2017,66 +2132,7 @@ coercing into character vector</code></pre>
 <pre class="r"><code>AllPropDF$Prop=as.numeric(AllPropDF$Prop)</code></pre>
 <p>Plot this:</p>
 <pre class="r"><code>ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = &quot;dodge&quot;, stat=&quot;identity&quot;) + facet_grid(~Fraction) + labs(title=&quot;Proportion of eQTLs explained by apaQTLs&quot;, y=&quot;Proportion&quot;, &quot;P-Value cut off&quot;) + scale_fill_manual(values=c(&quot;orange&quot;, &quot;blue&quot;))</code></pre>
-<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
-Past versions of unnamed-chunk-22-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-22-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/ab8482d0026893aba29e4e1e967172f0b3b9c44c/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-22-1.png" target="_blank">ab8482d</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-08-01
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/ec8d7dc4ef90735f59ea32f89a77fa3843efa98d/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-22-1.png" target="_blank">ec8d7dc</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-26
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/0fae25e6322e5bf5e3c3411f60e478a493586fc5/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-22-1.png" target="_blank">0fae25e</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="concordance-of-directions-for-intronic-pas-usage-and-eqtl" class="section level2">
 <h2>Concordance of directions for intronic pas usage and eQTL</h2>
@@ -2094,7 +2150,32 @@ brimittleman
 alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %&gt;% filter(loc==&quot;intron&quot;) %&gt;% inner_join(eQTLeffect, by=c(&quot;gene&quot;,&quot;snp&quot;))
 
 
-ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) +geom_text(y=-1, x=-1.5, label=&quot;slope: -0.21 p-value: .01, r2=0.06&quot;) + labs(title=&quot;Total apa effect sizes vs eQTL eqtl effect sizes&quot;, y=&quot;Total apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
+ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) +geom_text(y=-1, x=-1.5, label=&quot;slope: -0.22 p-value: 0.00002, r2=0.08&quot;) + labs(title=&quot;Total apa effect sizes vs eQTL eqtl effect sizes&quot;, y=&quot;Total apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))</code></pre>
+<pre><code>
+Call:
+lm(formula = alleQTLS_total$slope ~ alleQTLS_total$eQTL_es)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.15866 -0.31339 -0.00043  0.26661  1.46869 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             0.03214    0.03132   1.026    0.306    
+alleQTLS_total$eQTL_es -0.21510    0.04901  -4.389 1.83e-05 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4474 on 202 degrees of freedom
+Multiple R-squared:  0.08707,   Adjusted R-squared:  0.08255 
+F-statistic: 19.27 on 1 and 202 DF,  p-value: 1.833e-05</code></pre>
+<p>Nuclear:</p>
+<pre class="r"><code>alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %&gt;% filter(loc==&quot;intron&quot;) %&gt;% inner_join(eQTLeffect, by=c(&quot;gene&quot;,&quot;snp&quot;))
+
+
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) +geom_text(y=1.5, x=-1, label=&quot;slope: -0.20 p-value: 9.0 * 10 ^ -9, r2=0.08&quot;) + labs(title=&quot;&quot;, y=&quot;apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
 <p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
@@ -2144,90 +2225,6 @@ brimittleman
 </table>
 </div>
 </div>
-<pre class="r"><code>summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))</code></pre>
-<pre><code>
-Call:
-lm(formula = alleQTLS_total$slope ~ alleQTLS_total$eQTL_es)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.12882 -0.29223 -0.00704  0.29545  1.11825 
-
-Coefficients:
-                       Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept)             0.04771    0.04766   1.001    0.320  
-alleQTLS_total$eQTL_es -0.20567    0.07919  -2.597    0.011 *
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 0.447 on 87 degrees of freedom
-Multiple R-squared:  0.07196,   Adjusted R-squared:  0.0613 
-F-statistic: 6.746 on 1 and 87 DF,  p-value: 0.01103</code></pre>
-<p>Nuclear:</p>
-<pre class="r"><code>alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %&gt;% filter(loc==&quot;intron&quot;) %&gt;% inner_join(eQTLeffect, by=c(&quot;gene&quot;,&quot;snp&quot;))
-
-
-ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) +geom_text(y=1.5, x=-1, label=&quot;slope: -0.18 p-value: .005, r2=0.05&quot;) + labs(title=&quot;&quot;, y=&quot;apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
-<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
-Past versions of unnamed-chunk-26-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-26-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/ab8482d0026893aba29e4e1e967172f0b3b9c44c/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">ab8482d</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-08-01
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/d73d818fadb788d024a767c69fcecddb73fe47a4/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">d73d818</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-26
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">06de9df</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <pre class="r"><code>summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))</code></pre>
 <pre><code>
 Call:
@@ -2235,18 +2232,18 @@ lm(formula = alleQTLS_nuclear$slope ~ alleQTLS_nuclear$eQTL_es)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.18775 -0.26653 -0.03384  0.29319  1.16355 
+-1.19658 -0.29003 -0.00934  0.26184  1.54707 
 
 Coefficients:
-                          Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)              -0.009364   0.036972  -0.253  0.80041   
-alleQTLS_nuclear$eQTL_es -0.178352   0.062232  -2.866  0.00478 **
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)              -0.008894   0.022167  -0.401    0.688    
+alleQTLS_nuclear$eQTL_es -0.205079   0.034819  -5.890 8.97e-09 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 0.4455 on 144 degrees of freedom
-Multiple R-squared:  0.05396,   Adjusted R-squared:  0.04739 
-F-statistic: 8.213 on 1 and 144 DF,  p-value: 0.004782</code></pre>
+Residual standard error: 0.418 on 355 degrees of freedom
+Multiple R-squared:  0.08902,   Adjusted R-squared:  0.08646 
+F-statistic: 34.69 on 1 and 355 DF,  p-value: 8.97e-09</code></pre>
 </div>
 <div id="examples-for-overlap" class="section level2">
 <h2>Examples for overlap:</h2>
@@ -2257,31 +2254,35 @@ nucQTL=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed&quot;, strin
 <pre class="r"><code>totQTL_unex=totQTL %&gt;% inner_join(unexplained_snps, by=c(&quot;chr&quot;, &quot;loc&quot;))
 nucQTL_unex=nucQTL %&gt;% inner_join(unexplained_snps, by=c(&quot;chr&quot;, &quot;loc&quot;))</code></pre>
 <pre class="r"><code>totQTL_unex</code></pre>
-<pre><code>  chr  bedstart       loc                       ID     score strand
-1  19  57706377  57706378  ZNF264:peak67836:intron -0.732823      .
-2  20   1350708   1350709    FKBP1A:peak80048:utr3 -0.565488      .
-3   2 197855151 197855152 ANKRD44:peak77452:intron -0.976492      .
-4   7   6497500   6497501   KDELR2:peak119697:utr3  0.962082      .
-5   7   6497500   6497501   KDELR2:peak119699:utr3 -1.013800      .
-     gene
-1  ZNF264
-2  FKBP1A
-3 ANKRD44
-4  KDELR2
-5  KDELR2</code></pre>
+<pre><code>  chr  bedstart       loc                        ID     score strand
+1  10 124693586 124693587 C10orf88:peak19682:intron  0.829354      .
+2  19  57706377  57706378   ZNF264:peak67214:intron -0.765818      .
+3  20   1350708   1350709     FKBP1A:peak79304:utr3 -0.569411      .
+4   2 197855151 197855152    ANKRD44:peak76705:utr3  0.464009      .
+5   2 197855151 197855152  ANKRD44:peak76708:intron -1.022620      .
+6   6  44275010  44275011     AARS2:peak113590:utr3  0.968958      .
+7   7   6497500   6497501    KDELR2:peak118586:utr3  1.003000      .
+8   7   6497500   6497501    KDELR2:peak118588:utr3 -1.032740      .
+      gene
+1 C10orf88
+2   ZNF264
+3   FKBP1A
+4  ANKRD44
+5  ANKRD44
+6    AARS2
+7   KDELR2
+8   KDELR2</code></pre>
 <pre class="r"><code>nucQTL_unex</code></pre>
 <pre><code>  chr  bedstart       loc                        ID     score strand
-1  10 124693586 124693587 C10orf88:peak19881:intron  1.314860      .
-2  19  57706377  57706378   ZNF264:peak67836:intron -0.541008      .
-3   4  44702719  44702720       GUF1:peak98095:utr3  0.837665      .
-4   4  44702719  44702720       GUF1:peak98096:utr3 -1.361180      .
-5   7 156760698 156760699      NOM1:peak127488:utr3  0.972826      .
+1  10 124693586 124693587 C10orf88:peak19682:intron  1.255120      .
+2  19  57706377  57706378   ZNF264:peak67214:intron -0.496966      .
+3   4  44702719  44702720       GUF1:peak97168:utr3  0.882583      .
+4   4  44702719  44702720       GUF1:peak97169:utr3 -1.377620      .
       gene
 1 C10orf88
 2   ZNF264
 3   GNPDA2
-4   GNPDA2
-5     NOM1</code></pre>
+4   GNPDA2</code></pre>
 <p>Make a plot for KDELR2 7:6497501</p>
 <pre class="r"><code>genohead=as.data.frame(read.table(&quot;../data/ExampleQTLPlots/genotypeHeader.txt&quot;, stringsAsFactors = F, header = F)[,10:128] %&gt;% t())
 colnames(genohead)=c(&quot;header&quot;)
@@ -2301,44 +2302,7 @@ character vector</code></pre>
 <pre class="r"><code>allRNA$genotype=as.factor(allRNA$genotype)</code></pre>
 <p>Ref,T Alt= G</p>
 <pre class="r"><code>ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = &quot;YlOrRd&quot;) + labs(title=&quot;Unexplained eQTL: KDELR2 - rs6962012&quot;)</code></pre>
-<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
-Past versions of unnamed-chunk-32-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-32-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-32-1.png" target="_blank">06de9df</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-06-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Make locus zoom</p>
 <pre class="bash"><code>mkdir ../data/locusZoom</code></pre>
 <p>peak119699 KDELR2 ENSG00000136240.5</p>
