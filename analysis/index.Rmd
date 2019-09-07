@@ -38,6 +38,7 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Compare to Annotations](compareAnnotatedpas.html)  
 
+* [3' UTR PAS enrichment](UtrPASenrichment.html)
 
 
 

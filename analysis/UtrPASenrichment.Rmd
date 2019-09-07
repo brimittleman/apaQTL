@@ -1,0 +1,70 @@
+---
+title: "3' UTR PAS enrichment"
+author: "Briana Mittleman"
+date: "9/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+In this analysis I will look at the enrichment of 3' UTR pas over all PAS. I need to get the size of all UTR regions and the size of all regions. I can do this by merging the annotations. 
+
+I can use bedtools merge on
+
+ncbiRefSeq_FormatedallAnnotation.sort.bed and the UTR 3 regions of this. 
+
+
+```{r}
+annotation=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("chr", "start", "end", "id", "score", "strand")) %>% separate(id,into=c("loc", "gene"),sep=":")
+
+utr3=annotation %>% filter(loc=="utr3") 
+
+write.table(utr3, "/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_UTR3.bed", col.names = F, row.names = F,quote = F, sep="\t")
+```
+
+
+sort: 
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_3UTR.dms > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_3UTR.sort.bed
+
+sed 's/^chr//' /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_3UTR.sort.bed > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_3UTR.sort.noCHR.bed
+sbatch mergeAnnotations.sh
+```
+
+```{r}
+chroms=as.character(seq(1,22))
+
+utrMerged=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged_UTR3.sort.bed",col.names = c("chr", "start", "end")) %>% mutate(length=end-start) %>% filter(chr %in% chroms)
+allMerged=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged.FormatedallAnnotation.sort.bed" , col.names = c("chr", "start", "end")) %>% mutate(length=end-start) %>% filter(chr %in% chroms)
+totalLength=sum(allMerged$length)
+utrLength=sum(utrMerged$length)
+```
+
+N pas in UTR3
+```{r}
+utr3pas=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", col.names = c("chr", "start", "end", "id","score", "strand")) %>% separate(id, into = c("pasnum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>% filter(loc=="utr3")
+allPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed")
+```
+
+Values:
+
+
+```{r}
+pas_length=nrow(allPAS)/totalLength
+utr_length=nrow(utr3pas)/utrLength 
+
+
+enrichment=utr_length/pas_length
+enrichment
+
+```
+
+This is a 19.43 enrichment.
