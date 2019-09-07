@@ -174,3 +174,15 @@ NucBothwSpec %>% filter(set=="Specific") %>% nrow()
 prop.test(x=c(117,40), n=c(565,378), alternative ="greater")
 ```
 
+ specific PAS:
+
+```{r}
+totalPAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed",stringsAsFactors = F,col.names = c("chr", "start","end","name", "score", "strand"))
+nuclearPAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",stringsAsFactors = F,col.names = c("chr", "start","end","name", "score", "strand"))
+
+totalSpec=totalPAS %>% anti_join(nuclearPAS,by="name")
+40/nrow(totalSpec)
+
+```
+
+
