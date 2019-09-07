@@ -275,6 +275,8 @@ alleQTLS_total=bind_rows(totalapaUnexplained, totalapaexplained) %>% filter(loc=
 ggplot(alleQTLS_total,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=-1, x=-1.5, label="slope: -0.22 p-value: 0.00002, r2=0.08") + labs(title="Total apa effect sizes vs eQTL eqtl effect sizes", y="Total apaQTL effect size",x="eQTL effect size")
 
 summary(lm(alleQTLS_total$slope ~alleQTLS_total$eQTL_es))
+
+cor.test(alleQTLS_total$slope ,alleQTLS_total$eQTL_es, alternative="less")
 ```
 
 Nuclear:
@@ -287,6 +289,8 @@ ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(me
 
 
 summary(lm(alleQTLS_nuclear$slope ~alleQTLS_nuclear$eQTL_es))
+cor.test(alleQTLS_nuclear$slope, alleQTLS_nuclear$eQTL_es, alternative="less")
+
 ```
 
 ```{r figure3B, include=FALSE, dev="pdf", fig.height=10, fig.width=10, crop=FALSE}
