@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-09-04
+<strong>Last updated:</strong> 2019-09-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree73f583359c594469007d32c5a8fcda17e69cfe62targetblank73f5833a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/73f583359c594469007d32c5a8fcda17e69cfe62" target="_blank">73f5833</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3088c20612fea9738a514aef5c63453b7adb70fdtargetblank3088c20a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3088c20612fea9738a514aef5c63453b7adb70fd" target="_blank">3088c20</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree73f583359c594469007d32c5a8fcda17e69cfe62targetblank73f5833a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3088c20612fea9738a514aef5c63453b7adb70fdtargetblank3088c20a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,6 +550,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
@@ -657,6 +658,7 @@ Untracked files:
     Untracked:  code/._mapSSsnps2PAS.sh
     Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeAnnotations.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
@@ -848,6 +850,7 @@ Untracked files:
     Untracked:  code/RNAseqDTPlotGeneRegions.out
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/RunRes2PAS.sh
     Untracked:  code/SAF215upbed.py
     Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
@@ -990,6 +993,9 @@ Untracked files:
     Untracked:  code/makegencondeTSSfile.py
     Untracked:  code/mapSSsnps2PAS.sh
     Untracked:  code/mergRNABam.sh
+    Untracked:  code/mergeAnno.err
+    Untracked:  code/mergeAnno.out
+    Untracked:  code/mergeAnnotations.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
@@ -1102,6 +1108,8 @@ Untracked files:
     Untracked:  code/run_verifybam_fullVCF.sh
     Untracked:  code/runprxySNP.err
     Untracked:  code/runprxySNP.out
+    Untracked:  code/runres2pas.err
+    Untracked:  code/runres2pas.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -1279,10 +1287,11 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PrematureTermQTL.Rmd
+    Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/compareAnnotatedpas.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
+    Modified:   analysis/signalsiteanalysis.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
@@ -1310,8 +1319,6 @@ Unstaged changes:
     Modified:   code/submit-snakemakefiltPAS.sh
     Deleted:    code/test.txt
     Modified:   data/MetaDataSequencing.txt
-    Modified:   docs/figure/QTLlocation.Rmd/figure2B-1.pdf
-    Modified:   docs/figure/QTLlocation.Rmd/figure2C-1.pdf
     Deleted:    docs/figure/nonNormQTL.Rmd/figure2D-1.pdf
     Deleted:    reads_graphs.Rmd
 
@@ -1352,6 +1359,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3088c20612fea9738a514aef5c63453b7adb70fd/analysis/nonNormQTL.Rmd" target="_blank">3088c20</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-07
+</td>
+<td>
+add tot spec PAS
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/7711ef903346150e80bfc3c59f4a25f43248ea89/docs/nonNormQTL.html" target="_blank">7711ef9</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1755,12 +1796,12 @@ add code to prepare non norm qtl
 <pre><code>This is workflowr version 1.4.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(cowplot)</code></pre>
@@ -1894,6 +1935,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/7711ef903346150e80bfc3c59f4a25f43248ea89/docs/figure/nonNormQTL.Rmd/unnamed-chunk-10-1.png" target="_blank">7711ef9</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/0c7c682ba0d6851aeba4f606b585231a42c81df9/docs/figure/nonNormQTL.Rmd/unnamed-chunk-10-1.png" target="_blank">0c7c682</a>
 </td>
 <td>
@@ -2019,6 +2071,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/7711ef903346150e80bfc3c59f4a25f43248ea89/docs/figure/nonNormQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">7711ef9</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/6757ce6c048a3d84093b3f9c85ea0f8b4dfae462/docs/figure/nonNormQTL.Rmd/unnamed-chunk-16-1.png" target="_blank">6757ce6</a>
 </td>
 <td>
@@ -2057,6 +2120,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/7711ef903346150e80bfc3c59f4a25f43248ea89/docs/figure/nonNormQTL.Rmd/unnamed-chunk-17-1.png" target="_blank">7711ef9</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/6757ce6c048a3d84093b3f9c85ea0f8b4dfae462/docs/figure/nonNormQTL.Rmd/unnamed-chunk-17-1.png" target="_blank">6757ce6</a>
@@ -2100,6 +2174,13 @@ alternative hypothesis: greater
 sample estimates:
    prop 1    prop 2 
 0.2070796 0.1058201 </code></pre>
+<p>specific PAS:</p>
+<pre class="r"><code>totalPAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed&quot;,stringsAsFactors = F,col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;,&quot;name&quot;, &quot;score&quot;, &quot;strand&quot;))
+nuclearPAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed&quot;,stringsAsFactors = F,col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;,&quot;name&quot;, &quot;score&quot;, &quot;strand&quot;))
+
+totalSpec=totalPAS %&gt;% anti_join(nuclearPAS,by=&quot;name&quot;)
+40/nrow(totalSpec)</code></pre>
+<pre><code>[1] 0.01509434</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
