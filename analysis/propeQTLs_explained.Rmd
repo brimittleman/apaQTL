@@ -297,6 +297,17 @@ cor.test(alleQTLS_nuclear$slope, alleQTLS_nuclear$eQTL_es, alternative="less")
 ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") +geom_text(y=1.5, x=-1, label="slope: -0.20 p-value: 9.0 * 10 ^ -9, r2=0.08") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
 ```
 
+
+remove outlier and see if it holds:
+
+```{r}
+alleQTLS_nuclear_noOut=alleQTLS_nuclear %>% filter(eQTL_es > -2)
+ggplot(alleQTLS_nuclear_noOut,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") + labs(title="", y="apaQTL effect size",x="eQTL effect size")
+summary(lm(alleQTLS_nuclear_noOut$slope ~alleQTLS_nuclear_noOut$eQTL_es))
+```
+
+
+
 ##Examples for overlap:  
 
 ```{r}
