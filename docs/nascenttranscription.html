@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-09-06
+<strong>Last updated:</strong> 2019-09-09
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5976ed7e0423551d9136c548a0a8acd0b8583231" target="_blank">5976ed7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeac31b33bc82302e7c8b0abe243d86a56cff8c837targetblankac31b33a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/ac31b33bc82302e7c8b0abe243d86a56cff8c837" target="_blank">ac31b33</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5976ed7e0423551d9136c548a0a8acd0b8583231targetblank5976ed7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeac31b33bc82302e7c8b0abe243d86a56cff8c837targetblankac31b33a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -514,6 +514,7 @@ Untracked files:
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totSpecIncludenotTested.Rmd
     Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
@@ -561,6 +562,8 @@ Untracked files:
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._allNucSpecQTLine.py
+    Untracked:  code/._allNucSpecfromNonNorm.py
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaInPandE.py
@@ -658,6 +661,7 @@ Untracked files:
     Untracked:  code/._mapSSsnps2PAS.sh
     Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeAnnotations.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
@@ -670,6 +674,7 @@ Untracked files:
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._nucspecnucPASine.py
     Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
@@ -875,6 +880,8 @@ Untracked files:
     Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/allNucSpecQTLine.py
+    Untracked:  code/allNucSpecfromNonNorm.py
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
@@ -992,6 +999,9 @@ Untracked files:
     Untracked:  code/makegencondeTSSfile.py
     Untracked:  code/mapSSsnps2PAS.sh
     Untracked:  code/mergRNABam.sh
+    Untracked:  code/mergeAnno.err
+    Untracked:  code/mergeAnno.out
+    Untracked:  code/mergeAnnotations.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
@@ -1016,6 +1026,7 @@ Untracked files:
     Untracked:  code/nucQTLGWAS_withLD.py
     Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/nucspecnucPASine.py
     Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
@@ -1283,8 +1294,12 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
+    Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/compareAnnotatedpas.Rmd
+    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
+    Modified:   analysis/signalsiteanalysis.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
@@ -1312,8 +1327,7 @@ Unstaged changes:
     Modified:   code/submit-snakemakefiltPAS.sh
     Deleted:    code/test.txt
     Modified:   data/MetaDataSequencing.txt
-    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Emain-1.pdf
-    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Esubset-1.pdf
+    Modified:   docs/figure/HighCrediblePAS.Rmd/figure1bsubset-1.pdf
     Deleted:    reads_graphs.Rmd
 
 </code></pre>
@@ -1353,6 +1367,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ac31b33bc82302e7c8b0abe243d86a56cff8c837/analysis/nascenttranscription.Rmd" target="_blank">ac31b33</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-09
+</td>
+<td>
+add figure for nascent and credible sites
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/nascenttranscription.html" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1792,6 +1840,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-14-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fea2ed9095558db2403ce5afde2d825524dd3fe/docs/figure/nascenttranscription.Rmd/unnamed-chunk-14-1.png" target="_blank">1fea2ed</a>
 </td>
 <td>
@@ -1878,6 +1937,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-19-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/5b239b1cc630395b3c01ec2160af1b68ee1541e7/docs/figure/nascenttranscription.Rmd/unnamed-chunk-19-1.png" target="_blank">5b239b1</a>
 </td>
 <td>
@@ -1956,6 +2026,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-21-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/5b239b1cc630395b3c01ec2160af1b68ee1541e7/docs/figure/nascenttranscription.Rmd/unnamed-chunk-21-1.png" target="_blank">5b239b1</a>
@@ -2042,6 +2123,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-24-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/5b239b1cc630395b3c01ec2160af1b68ee1541e7/docs/figure/nascenttranscription.Rmd/unnamed-chunk-24-1.png" target="_blank">5b239b1</a>
 </td>
 <td>
@@ -2115,6 +2207,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-25-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/5b239b1cc630395b3c01ec2160af1b68ee1541e7/docs/figure/nascenttranscription.Rmd/unnamed-chunk-25-1.png" target="_blank">5b239b1</a>
 </td>
 <td>
@@ -2164,6 +2267,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-28-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fea2ed9095558db2403ce5afde2d825524dd3fe/docs/figure/nascenttranscription.Rmd/unnamed-chunk-28-1.png" target="_blank">1fea2ed</a>
@@ -2240,6 +2354,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-30-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fea2ed9095558db2403ce5afde2d825524dd3fe/docs/figure/nascenttranscription.Rmd/unnamed-chunk-30-1.png" target="_blank">1fea2ed</a>
@@ -2328,6 +2453,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-34-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fea2ed9095558db2403ce5afde2d825524dd3fe/docs/figure/nascenttranscription.Rmd/unnamed-chunk-34-1.png" target="_blank">1fea2ed</a>
 </td>
 <td>
@@ -2402,6 +2538,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-36-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fea2ed9095558db2403ce5afde2d825524dd3fe/docs/figure/nascenttranscription.Rmd/unnamed-chunk-36-1.png" target="_blank">1fea2ed</a>
@@ -2503,6 +2650,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-37-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/1fea2ed9095558db2403ce5afde2d825524dd3fe/docs/figure/nascenttranscription.Rmd/unnamed-chunk-37-1.png" target="_blank">1fea2ed</a>
 </td>
 <td>
@@ -2585,6 +2743,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-38-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9dd4b6ea31db1fb41403f02c95d576798dcaede1/docs/figure/nascenttranscription.Rmd/unnamed-chunk-38-1.png" target="_blank">9dd4b6e</a>
 </td>
 <td>
@@ -2653,6 +2822,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-39-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9dd4b6ea31db1fb41403f02c95d576798dcaede1/docs/figure/nascenttranscription.Rmd/unnamed-chunk-39-1.png" target="_blank">9dd4b6e</a>
 </td>
 <td>
@@ -2716,6 +2896,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-40-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9dd4b6ea31db1fb41403f02c95d576798dcaede1/docs/figure/nascenttranscription.Rmd/unnamed-chunk-40-1.png" target="_blank">9dd4b6e</a>
@@ -2795,6 +2986,43 @@ APAandDecayMean$density &lt;- get_density(APAandDecayMean$APAVal, APAandDecayMea
 
 ggplot(APAandDecayMean, aes(x=MeanDecay, y=APAVal)) + geom_point(aes(color=density)) + geom_smooth(method=&quot;lm&quot;) + labs(x=&quot;relative Decay&quot;, y=&quot;Nuclear/(Total+Nuclear)&quot;, title=&quot;Relationship between Nuclear proportion and RNA decay&quot;)+ scale_color_viridis()</code></pre>
 <p><img src="figure/nascenttranscription.Rmd/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-42-1">
+Past versions of unnamed-chunk-42-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-42-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/nascenttranscription.Rmd/unnamed-chunk-42-1.png" target="_blank">22541b3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(lm(data=APAandDecayMean, APAVal~MeanDecay))</code></pre>
 <pre><code>
 Call:
