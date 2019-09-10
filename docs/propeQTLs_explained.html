@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-09-06
+<strong>Last updated:</strong> 2019-09-10
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea2c35ac01e476edc6ce7bc05dd84d964d34bfec5targetblanka2c35aca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a2c35ac01e476edc6ce7bc05dd84d964d34bfec5" target="_blank">a2c35ac</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5bcc43cd535ca10c716193e128402a5c61370779targetblank5bcc43ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5bcc43cd535ca10c716193e128402a5c61370779" target="_blank">5bcc43c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea2c35ac01e476edc6ce7bc05dd84d964d34bfec5targetblanka2c35aca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5bcc43cd535ca10c716193e128402a5c61370779targetblank5bcc43ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -514,6 +514,7 @@ Untracked files:
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totSpecIncludenotTested.Rmd
     Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
@@ -561,6 +562,8 @@ Untracked files:
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._allNucSpecQTLine.py
+    Untracked:  code/._allNucSpecfromNonNorm.py
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaInPandE.py
@@ -658,6 +661,7 @@ Untracked files:
     Untracked:  code/._mapSSsnps2PAS.sh
     Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeAnnotations.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
@@ -670,6 +674,7 @@ Untracked files:
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._nucspecnucPASine.py
     Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
@@ -875,6 +880,8 @@ Untracked files:
     Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/allNucSpecQTLine.py
+    Untracked:  code/allNucSpecfromNonNorm.py
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
@@ -992,6 +999,9 @@ Untracked files:
     Untracked:  code/makegencondeTSSfile.py
     Untracked:  code/mapSSsnps2PAS.sh
     Untracked:  code/mergRNABam.sh
+    Untracked:  code/mergeAnno.err
+    Untracked:  code/mergeAnno.out
+    Untracked:  code/mergeAnnotations.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
@@ -1016,6 +1026,7 @@ Untracked files:
     Untracked:  code/nucQTLGWAS_withLD.py
     Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/nucspecnucPASine.py
     Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
@@ -1286,6 +1297,7 @@ Unstaged changes:
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/compareAnnotatedpas.Rmd
+    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/signalsiteanalysis.Rmd
     Modified:   analysis/version15bpfilter.Rmd
@@ -1355,6 +1367,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5bcc43cd535ca10c716193e128402a5c61370779/analysis/propeQTLs_explained.Rmd" target="_blank">5bcc43c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-10
+</td>
+<td>
+test outlier removal
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/bec23da56ff74b759e07f17eb8f78b24215271aa/docs/propeQTLs_explained.html" target="_blank">bec23da</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -2430,6 +2476,88 @@ alternative hypothesis: true correlation is less than 0
 sample estimates:
        cor 
 -0.2983651 </code></pre>
+<p>remove outlier and see if it holds:</p>
+<pre class="r"><code>alleQTLS_nuclear_noOut=alleQTLS_nuclear %&gt;% filter(eQTL_es &gt; -2)
+ggplot(alleQTLS_nuclear_noOut,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;) + labs(title=&quot;&quot;, y=&quot;apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ab8482d0026893aba29e4e1e967172f0b3b9c44c/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">ab8482d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-08-01
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d73d818fadb788d024a767c69fcecddb73fe47a4/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">d73d818</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-26-1.png" target="_blank">06de9df</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>summary(lm(alleQTLS_nuclear_noOut$slope ~alleQTLS_nuclear_noOut$eQTL_es))</code></pre>
+<pre><code>
+Call:
+lm(formula = alleQTLS_nuclear_noOut$slope ~ alleQTLS_nuclear_noOut$eQTL_es)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.19565 -0.29112 -0.00921  0.25549  1.54399 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                    -0.01106    0.02205  -0.502    0.616    
+alleQTLS_nuclear_noOut$eQTL_es -0.19013    0.03520  -5.402 1.21e-07 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.4155 on 354 degrees of freedom
+Multiple R-squared:  0.07615,   Adjusted R-squared:  0.07354 
+F-statistic: 29.18 on 1 and 354 DF,  p-value: 1.213e-07</code></pre>
 </div>
 <div id="examples-for-overlap" class="section level2">
 <h2>Examples for overlap:</h2>
@@ -2488,13 +2616,13 @@ character vector</code></pre>
 <pre class="r"><code>allRNA$genotype=as.factor(allRNA$genotype)</code></pre>
 <p>Ref,T Alt= G</p>
 <pre class="r"><code>ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = &quot;YlOrRd&quot;) + labs(title=&quot;Unexplained eQTL: KDELR2 - rs6962012&quot;)</code></pre>
-<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/propeQTLs_explained.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-1">
-Past versions of unnamed-chunk-31-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
+Past versions of unnamed-chunk-32-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-31-1" class="collapse">
+<div id="fig-unnamed-chunk-32-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2513,13 +2641,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/22541b3fb4e6c1408a6517e7d4b530bd4a2492a8/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-31-1.png" target="_blank">22541b3</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/06de9dffb48034c9c4065fb3bc1373069f1f146b/docs/figure/propeQTLs_explained.Rmd/unnamed-chunk-32-1.png" target="_blank">06de9df</a>
 </td>
 <td>
 brimittleman
 </td>
 <td>
-2019-09-06
+2019-06-26
 </td>
 </tr>
 </tbody>
