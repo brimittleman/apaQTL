@@ -167,7 +167,10 @@ Plot:
 
 ggplot(APAandTranscrption, aes(x=Transcription, y=APAVal))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="Nuclear/Nuclear+Total", title="Relationship between APA fraction and transcription") + scale_color_viridis()
 ```
+```{r figrue1_4su, include=FALSE, dev="pdf", fig.height=4, fig.width=5, crop=FALSE}
+ggplot(APAandTranscrption, aes(x=Transcription, y=APAVal))+ geom_point(aes(color=density)) + geom_smooth(method = "lm") + labs(x="4su/4su+RNA", y="Nuclear/Nuclear+Total", title="Relationship between APA fraction and transcription") + scale_color_viridis()
 
+```
 
 ##Split Nuclear by intronic  
 
@@ -502,6 +505,10 @@ APAandDecayMean=decay_byGene %>% inner_join(ApaBothFracStand_geneMean_spread, by
 
 APAandDecayMean$density <- get_density(APAandDecayMean$APAVal, APAandDecayMean$MeanDecay, n = 100)
 
+ggplot(APAandDecayMean, aes(x=MeanDecay, y=APAVal)) + geom_point(aes(color=density)) + geom_smooth(method="lm") + labs(x="relative Decay", y="Nuclear/(Total+Nuclear)", title="Relationship between Nuclear proportion and RNA decay")+ scale_color_viridis()
+
+```
+```{r decayfigure, include=FALSE, dev="pdf", fig.height=4, fig.width=5, crop=FALSE}
 ggplot(APAandDecayMean, aes(x=MeanDecay, y=APAVal)) + geom_point(aes(color=density)) + geom_smooth(method="lm") + labs(x="relative Decay", y="Nuclear/(Total+Nuclear)", title="Relationship between Nuclear proportion and RNA decay")+ scale_color_viridis()
 
 ```
