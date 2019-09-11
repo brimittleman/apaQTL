@@ -11,6 +11,7 @@ I first install and download all necessary libraries and packages
 require("dplyr")
 require("tidyr")
 require(ggplot2)
+require(reshape2)
 ```
 
 Then, I am reading in my file, and then only keeping the columns that I need: mapped, mapped no mispriming, reads, and the Sample Line ID. 
@@ -65,7 +66,27 @@ ggplot(data = total_combination, aes(x = total_lines, y = count, fill = type)) +
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-```{r}
 
+Plot the number of reads:
+```{r}
+nuclear_melt=melt(nuclear,id.vars = c("fraction", "line"), variable.name = "read", value.name = "Number")
 ```
 
+
+
+```{r}
+
+
+ggplot(nuclear_melt, aes(x=line, y=Number, fill=read))+ geom_bar(stat="identity")+ scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP"))+  theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + labs(x="lines", y="Number of Reads", title="Nuclear Fraction")  
+```
+```{r}
+total_melt=melt(total,id.vars = c("fraction", "line"), variable.name = "read", value.name = "Number")
+```
+
+
+
+```{r}
+
+
+ggplot(total_melt, aes(x=line, y=Number, fill=read))+ geom_bar(stat="identity")+ scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP"))+  theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + labs(x="lines", y="Number of Reads", title="Total Fraction")  
+```
