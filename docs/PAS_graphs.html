@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-09-04
+<strong>Last updated:</strong> 2019-09-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5984fad7f726f1327bb79690f1598e54e9541570targetblank5984fada"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5984fad7f726f1327bb79690f1598e54e9541570" target="_blank">5984fad</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5ad175a2e8d617f07251914073f0eacbac147290targetblank5ad175aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/5ad175a2e8d617f07251914073f0eacbac147290" target="_blank">5ad175a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5984fad7f726f1327bb79690f1598e54e9541570targetblank5984fada" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree5ad175a2e8d617f07251914073f0eacbac147290targetblank5ad175aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -492,9 +492,9 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
-    Ignored:    data/mergedBW_byfrac/
     Ignored:    docs/.DS_Store
     Ignored:    docs/figure/.DS_Store
+    Ignored:    docs/figure/choosePCs.Rmd/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -505,6 +505,8 @@ Untracked files:
     Untracked:  _workflowr.yml
     Untracked:  analysis/._PASdescriptiveplots.Rmd
     Untracked:  analysis/._cuttoffPercUsage.Rmd
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom
+    Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom
     Untracked:  analysis/QTLexampleplots.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
@@ -513,6 +515,7 @@ Untracked files:
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totSpecIncludenotTested.Rmd
     Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
@@ -549,6 +552,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
@@ -559,6 +563,8 @@ Untracked files:
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._allNucSpecQTLine.py
+    Untracked:  code/._allNucSpecfromNonNorm.py
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaInPandE.py
@@ -656,6 +662,7 @@ Untracked files:
     Untracked:  code/._mapSSsnps2PAS.sh
     Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeAnnotations.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
@@ -668,6 +675,7 @@ Untracked files:
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._nucspecnucPASine.py
     Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
@@ -847,6 +855,7 @@ Untracked files:
     Untracked:  code/RNAseqDTPlotGeneRegions.out
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/RunRes2PAS.sh
     Untracked:  code/SAF215upbed.py
     Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
@@ -872,6 +881,8 @@ Untracked files:
     Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/allNucSpecQTLine.py
+    Untracked:  code/allNucSpecfromNonNorm.py
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
@@ -989,6 +1000,9 @@ Untracked files:
     Untracked:  code/makegencondeTSSfile.py
     Untracked:  code/mapSSsnps2PAS.sh
     Untracked:  code/mergRNABam.sh
+    Untracked:  code/mergeAnno.err
+    Untracked:  code/mergeAnno.out
+    Untracked:  code/mergeAnnotations.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
@@ -1013,6 +1027,7 @@ Untracked files:
     Untracked:  code/nucQTLGWAS_withLD.py
     Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/nucspecnucPASine.py
     Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
@@ -1101,6 +1116,8 @@ Untracked files:
     Untracked:  code/run_verifybam_fullVCF.sh
     Untracked:  code/runprxySNP.err
     Untracked:  code/runprxySNP.out
+    Untracked:  code/runres2pas.err
+    Untracked:  code/runres2pas.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -1237,6 +1254,7 @@ Untracked files:
     Untracked:  data/intron_analysis/
     Untracked:  data/locusZoom/
     Untracked:  data/mergedBG/
+    Untracked:  data/mergedBW_byfrac/
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
@@ -1267,7 +1285,8 @@ Untracked files:
     Untracked:  data/verifyBAM_full/
     Untracked:  docs/._.DS_Store
     Untracked:  docs/figure/._.DS_Store
-    Untracked:  docs/figure/nonNormQTL.Rmd/._figure2D-1.pdf
+    Untracked:  docs/figure/PAS_graphs_total.Rmd/
+    Untracked:  docs/figure/choosePCs.Rmd/._.DS_Store
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1278,12 +1297,12 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PrematureTermQTL.Rmd
+    Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/compareAnnotatedpas.Rmd
+    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/rerunQTL_changePC.Rmd
+    Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
@@ -1313,7 +1332,6 @@ Unstaged changes:
     Modified:   data/MetaDataSequencing.txt
     Deleted:    docs/figure/PAS_graphs.Rmd/figure1CIntron-1.pdf
     Deleted:    docs/figure/PAS_graphs.Rmd/figure1CUTR-1.pdf
-    Modified:   docs/figure/PASdescriptiveplots.Rmd/figure1D-1.pdf
     Deleted:    reads_graphs.Rmd
 
 </code></pre>
@@ -1353,6 +1371,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/3b2586048c7319f136082026b6bc3b260970d423/docs/PAS_graphs.html" target="_blank">3b25860</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1735,22 +1770,22 @@ cdsprop &lt;- data.frame(breaks_new, cds_prop)
 intronprop &lt;- data.frame(breaks_new, intron_prop)</code></pre>
 <p>Here, I initialixe the objects, which have all of the information in them, such as the type of plots, y axis label, and scale. The first object (obj1), is the one for the total frequency, which will be one side for the double Y axis plot.</p>
 <pre class="r"><code>obj1 &lt;- xyplot(cutoff ~ xval, totalMeanUsageFreq,
-                ylab = &quot;Frequency of Total&quot;, xlab = &quot;meanUsage cutoff&quot;, col.lab = &quot;black&quot;)
+                ylab = &quot;Number of Nuclear PAS&quot;, xlab = &quot;meanUsage cutoff&quot;, col.lab = &quot;black&quot;)
 
 obj2 &lt;- xyplot(cutoff.numbers ~ xval, Utr3prop,
-               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion of UTR3&quot;, scales = list(y=list(limits=c(0,1))))
+               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion in 3&#39; UTR&quot;, scales = list(y=list(limits=c(0,1))))
 
 obj3 &lt;- xyplot(cutoff.numbers ~ xval, Utr5prop,
-               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion of UTR5&quot;, scales = list(y=list(limits=c(0,1))))
+               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion in 5&#39; UTR&quot;, scales = list(y=list(limits=c(0,1))))
 
 obj4 &lt;- xyplot(cutoff.numbers ~ xval, endprop,
-               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion of END&quot;, scales = list(y=list(limits=c(0,1))))
+               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion Downstream&quot;, scales = list(y=list(limits=c(0,1))))
 
 obj5 &lt;- xyplot(cutoff.numbers ~ xval, cdsprop,
-               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion of CDS&quot;, scales = list(y=list(limits=c(0,1))))
+               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion in Coding&quot;, scales = list(y=list(limits=c(0,1))))
 
 obj6 &lt;- xyplot(cutoff.numbers ~ xval, intronprop,
-               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion of INTRON&quot;, scales = list(y=list(limits=c(0,1))))</code></pre>
+               panel = function(...)panel.xyplot(type = &quot;l&quot;,lty = 2,grid=TRUE,...), ylab = &quot;Proportion Intronic&quot;, scales = list(y=list(limits=c(0,1))))</code></pre>
 <p>And lastly, I create the final, double Y axis plots</p>
 <p><img src="figure/PAS_graphs.Rmd/pressure-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1775,6 +1810,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3b2586048c7319f136082026b6bc3b260970d423/docs/figure/PAS_graphs.Rmd/pressure-1.png" target="_blank">3b25860</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d13025bc575c3e548de1520d9af6806a78512508/docs/figure/PAS_graphs.Rmd/pressure-1.png" target="_blank">d13025b</a>
@@ -1815,6 +1861,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3b2586048c7319f136082026b6bc3b260970d423/docs/figure/PAS_graphs.Rmd/pressure-2.png" target="_blank">3b25860</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d13025bc575c3e548de1520d9af6806a78512508/docs/figure/PAS_graphs.Rmd/pressure-2.png" target="_blank">d13025b</a>
 </td>
 <td>
@@ -1851,6 +1908,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3b2586048c7319f136082026b6bc3b260970d423/docs/figure/PAS_graphs.Rmd/pressure-3.png" target="_blank">3b25860</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d13025bc575c3e548de1520d9af6806a78512508/docs/figure/PAS_graphs.Rmd/pressure-3.png" target="_blank">d13025b</a>
@@ -1891,6 +1959,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3b2586048c7319f136082026b6bc3b260970d423/docs/figure/PAS_graphs.Rmd/pressure-4.png" target="_blank">3b25860</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d13025bc575c3e548de1520d9af6806a78512508/docs/figure/PAS_graphs.Rmd/pressure-4.png" target="_blank">d13025b</a>
 </td>
 <td>
@@ -1927,6 +2006,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3b2586048c7319f136082026b6bc3b260970d423/docs/figure/PAS_graphs.Rmd/pressure-5.png" target="_blank">3b25860</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d13025bc575c3e548de1520d9af6806a78512508/docs/figure/PAS_graphs.Rmd/pressure-5.png" target="_blank">d13025b</a>
