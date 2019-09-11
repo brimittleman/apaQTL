@@ -149,3 +149,16 @@ pnoteorr=allQTL_withribo %>% filter(Exppval>.05) %>% filter(Protppval<.05) %>% f
 nrow(pnoteorr)
 ```
 
+Make supplementary table: 
+
+```{r}
+pnote_withR=allQTL_withribo  %>% filter(Exppval>.05) %>% filter(Protppval<.05) %>% select(Gene, Loc, Peak, sid,bpval, slope, Exppval,Eslope, Protppval, Pslope, Riboppval, Riboslope)
+colnames(pnote_withR)=c("Gene", "PAS_Loc", "PAS_ID", "SNP", "apa_pvalue","apa_EffectSize", "expression_pvalue","expresion_EffectSize", "protein_pvalue", "protein_EffectSize", "ribo_pvalue", "ribo_EffectSize")
+```
+
+
+
+```{r}
+write.table(pnote_withR, file="../data/ExpressionIndependentapaQTLs.txt", col.names = T, row.names =F, quote = F)
+```
+
