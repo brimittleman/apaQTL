@@ -109,7 +109,9 @@ These files create some of the QC metrics I used for the analysis.
 
 ##Graph from Mayher   
 
-* [Location and usage of PAS](PAS_graphs.html)  
+* [Location and usage of PAS Nuclear Fraction](PAS_graphs.html)  
+
+* [Location and usage of PAS Total Fraction](PAS_graphs_total.html)  
 
 * [Read metadata plots](reads_graphs.html)
 

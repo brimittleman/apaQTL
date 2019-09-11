@@ -1,13 +1,18 @@
 ---
-title: "PAS graph (r markdown)"
-author: "Mayher"
-date: "7/26/2019"
+title: "PAS_graphs_totalfraction"
+author: "Briana Mittleman"
+date: "9/11/2019"
 output: html_document
 ---
 
-I first install all of the packages and librarys that will be necessary for the formation of these graphs. Lattice Extra in particular has the "doubleYScale()" function that helps me a lot when making these plots. 
-
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In the PAS graphs analyis Mayher made plots for the nuclear fraction. I will make the total fraction plots for the suppliment.
+
+
+```{r }
 #install.packages("tidyverse")
 require("dplyr")
 #install.packages("latticeExtra")
@@ -18,7 +23,7 @@ require(latticeExtra)
 The current data frame has two columns - ID, and meanUsage. ID is a very long string containing a lot of currently irrelevant information. In this step, I am trying to solely get the type of the PAS from the ID column in the data frame along with its respective mean usage. To do this, I first read in the data frame. I then split the ID column into 5 columns, each for it's respective type of information. Though I only need "type" it is easier to access the other information if needed in the future. Then, I create a new data frame containing "type" and "mean usage".
 ```{r needed info}
 #reading in the data frame
-df <- read.delim("../data/PAS/NuclearPASMeanUsage.txt")
+df <- read.delim("../data/PAS/TotalPASMeanUsage.txt")
 
 #splitting the ID column
 sep <- 
@@ -297,7 +302,7 @@ Here, I initialixe the objects, which have all of the information in them, such 
 
 ```{r}
 obj1 <- xyplot(cutoff ~ xval, totalMeanUsageFreq,
-                ylab = "Number of Nuclear PAS", xlab = "meanUsage cutoff", col.lab = "black")
+                ylab = "Number of Total PAS", xlab = "meanUsage cutoff", col.lab = "black")
 
 obj2 <- xyplot(cutoff.numbers ~ xval, Utr3prop,
                panel = function(...)panel.xyplot(type = "l",lty = 2,grid=TRUE,...), ylab = "Proportion in 3' UTR", scales = list(y=list(limits=c(0,1))))
@@ -340,12 +345,4 @@ doubleYScale(obj1, obj6,add.ylab2 =TRUE)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 
-PDF for the figures:
-
-```{r figure1CUTR, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
-doubleYScale(obj1, obj2,add.ylab2 =TRUE)
-```
-```{r figure1CIntron, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
-doubleYScale(obj1, obj6,add.ylab2 =TRUE)
-```
 
