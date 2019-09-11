@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-09-04
+<strong>Last updated:</strong> 2019-09-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -478,10 +478,10 @@ environment
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree41d19613c421d0d373335f6086351fc46125c846targetblank41d1961a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/41d19613c421d0d373335f6086351fc46125c846" target="_blank">41d1961</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6362c16a3e2ff7a9e2538c0644e95c6b50391664targetblank6362c16a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6362c16a3e2ff7a9e2538c0644e95c6b50391664" target="_blank">6362c16</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree41d19613c421d0d373335f6086351fc46125c846targetblank41d1961a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6362c16a3e2ff7a9e2538c0644e95c6b50391664targetblank6362c16a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -514,6 +514,7 @@ Untracked files:
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  analysis/remove_badlines.Rmd
+    Untracked:  analysis/totSpecIncludenotTested.Rmd
     Untracked:  analysis/totalspec.Rmd
     Untracked:  apaQTL.Rproj
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
@@ -550,6 +551,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
     Untracked:  code/._SnakefilefiltPAS
@@ -560,6 +562,8 @@ Untracked files:
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
+    Untracked:  code/._allNucSpecQTLine.py
+    Untracked:  code/._allNucSpecfromNonNorm.py
     Untracked:  code/._annotatePacBioPASregion.sh
     Untracked:  code/._annotatedPAS2bed.py
     Untracked:  code/._apaInPandE.py
@@ -657,6 +661,7 @@ Untracked files:
     Untracked:  code/._mapSSsnps2PAS.sh
     Untracked:  code/._mergRNABam.sh
     Untracked:  code/._mergeAllBam.sh
+    Untracked:  code/._mergeAnnotations.sh
     Untracked:  code/._mergeBW_norm.sh
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
@@ -669,6 +674,7 @@ Untracked files:
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
+    Untracked:  code/._nucspecnucPASine.py
     Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
@@ -848,6 +854,7 @@ Untracked files:
     Untracked:  code/RNAseqDTPlotGeneRegions.out
     Untracked:  code/RNAseqDTplot.sh
     Untracked:  code/Rplots.pdf
+    Untracked:  code/RunRes2PAS.sh
     Untracked:  code/SAF215upbed.py
     Untracked:  code/SAF215upbed_gen.py
     Untracked:  code/Script4NuclearPTTqtlexamples.sh
@@ -873,6 +880,8 @@ Untracked files:
     Untracked:  code/YRI_LCL_chr1.vcf.gz.recode.vcf
     Untracked:  code/ZipandTabPheno.sh
     Untracked:  code/aAPAqtl_nominal39ind.sh
+    Untracked:  code/allNucSpecQTLine.py
+    Untracked:  code/allNucSpecfromNonNorm.py
     Untracked:  code/annotatePacBioPASregion.sh
     Untracked:  code/annotatedPAS2bed.py
     Untracked:  code/annotatedPASregion.err
@@ -990,6 +999,9 @@ Untracked files:
     Untracked:  code/makegencondeTSSfile.py
     Untracked:  code/mapSSsnps2PAS.sh
     Untracked:  code/mergRNABam.sh
+    Untracked:  code/mergeAnno.err
+    Untracked:  code/mergeAnno.out
+    Untracked:  code/mergeAnnotations.sh
     Untracked:  code/mergeBW_norm.sh
     Untracked:  code/mergeBWnorm.err
     Untracked:  code/mergeBWnorm.out
@@ -1014,6 +1026,7 @@ Untracked files:
     Untracked:  code/nucQTLGWAS_withLD.py
     Untracked:  code/nucSpecQTLineData.py
     Untracked:  code/nucSpeceffectsize.py
+    Untracked:  code/nucspecnucPASine.py
     Untracked:  code/pQTLsotherdata.py
     Untracked:  code/pacbioDT.sh
     Untracked:  code/pacbioIntronicDT.sh
@@ -1102,6 +1115,8 @@ Untracked files:
     Untracked:  code/run_verifybam_fullVCF.sh
     Untracked:  code/runprxySNP.err
     Untracked:  code/runprxySNP.out
+    Untracked:  code/runres2pas.err
+    Untracked:  code/runres2pas.out
     Untracked:  code/selectNominalPvalues.py
     Untracked:  code/sepUsagePhen.py
     Untracked:  code/sepgenobychrom.py
@@ -1269,7 +1284,6 @@ Untracked files:
     Untracked:  data/verifyBAM_full/
     Untracked:  docs/._.DS_Store
     Untracked:  docs/figure/._.DS_Store
-    Untracked:  docs/figure/nonNormQTL.Rmd/._figure2D-1.pdf
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
     Untracked:  output/._meanCorrelationPhenotypes.svg
@@ -1280,11 +1294,12 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/NuclearSpecAPAqtl.Rmd
-    Modified:   analysis/PrematureTermQTL.Rmd
+    Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/compareAnnotatedpas.Rmd
+    Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
-    Modified:   analysis/rerunQTL_changePC.Rmd
+    Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/BothFracDTPlotGeneRegions.sh
     Modified:   code/Snakefile
@@ -1352,6 +1367,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6362c16a3e2ff7a9e2538c0644e95c6b50391664/analysis/signalsiteanalysis.Rmd" target="_blank">6362c16</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-11
+</td>
+<td>
+upate y axis label
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/signalsiteanalysis.html" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1956,6 +2005,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-8-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-8-1.png" target="_blank">96d85de</a>
 </td>
 <td>
@@ -2002,6 +2062,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-13-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-13-1.png" target="_blank">96d85de</a>
@@ -2063,6 +2134,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-15-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-15-1.png" target="_blank">96d85de</a>
 </td>
 <td>
@@ -2106,6 +2188,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-18-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-18-1.png" target="_blank">96d85de</a>
@@ -2155,7 +2248,7 @@ colnames(allPAS_byloc_new) = allPAS_byloc$loc
 
 AllsiteDF_1per_sep_INTRON=AllsiteDF_1per_sep %&gt;% filter(Location==&quot;intron&quot;) %&gt;%  group_by(Site,NegCount) %&gt;% summarise(CountperPos=n()) %&gt;% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron)) %&gt;% mutate(Cononical=ifelse(Site==&quot;AATAAA&quot;, &quot;AATAAA&quot;, ifelse(Site==&quot;ATTAAA&quot;, &quot;AATTAA&quot;, &quot;Other&quot;)))
 
-ggplot(AllsiteDF_1per_sep_INTRON, aes(group=Cononical, x=NegCount,y=prop, fill=Cononical)) + geom_histogram(position=&quot;stack&quot;,bins=5, stat=&quot;identity&quot; ) + labs(x=&quot;Distance from PAS&quot;, y=&quot;Propotion of Intron annotated Sites&quot;, title=&quot;Location of annotated signal sites \nfor Intronic PAS&quot;, caption = &quot;Other: AAAAAA, AAAAAG, AATACA, AATAGA,AATATA, ACTAAA, AGTAAA,CATAAA, GATAAA,TATAAA&quot;) +  scale_fill_manual(values = getPalette(colourCount))+  theme(text = element_text(size=20, face=&quot;bold&quot;),axis.text.x = element_text(size = 16), legend.position = &quot;bottom&quot;, axis.text.y = element_text(size = 16),plot.title = element_text(size=22),plot.caption = element_text(hjust = 0,size=10))</code></pre>
+ggplot(AllsiteDF_1per_sep_INTRON, aes(group=Cononical, x=NegCount,y=prop, fill=Cononical)) + geom_histogram(position=&quot;stack&quot;,bins=5, stat=&quot;identity&quot; ) + labs(x=&quot;Distance from PAS&quot;, y=&quot;Propotion of annotated Sites&quot;, title=&quot;Location of annotated signal sites \nfor Intronic PAS&quot;, caption = &quot;Other: AAAAAA, AAAAAG, AATACA, AATAGA,AATATA, ACTAAA, AGTAAA,CATAAA, GATAAA,TATAAA&quot;) +  scale_fill_manual(values = getPalette(colourCount))+  theme(text = element_text(size=20, face=&quot;bold&quot;),axis.text.x = element_text(size = 16), legend.position = &quot;bottom&quot;, axis.text.y = element_text(size = 16),plot.title = element_text(size=22),plot.caption = element_text(hjust = 0,size=10))</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/signalsiteanalysis.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -2180,6 +2273,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-19-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9c38a22ce1a8993145c4f2c718644f473c23c895/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-19-1.png" target="_blank">9c38a22</a>
@@ -2241,7 +2345,7 @@ brimittleman
 </div>
 <pre class="r"><code>AllsiteDF_1per_sep_UTR=AllsiteDF_1per_sep %&gt;% filter(Location==&quot;utr3&quot;) %&gt;%  group_by(Site,NegCount) %&gt;% summarise(CountperPos=n()) %&gt;% mutate(TotCount=sum(CountperPos),prop=CountperPos/(allPAS_byloc_new$intron)) %&gt;% mutate(Cononical=ifelse(Site==&quot;AATAAA&quot;, &quot;AATAAA&quot;, ifelse(Site==&quot;ATTAAA&quot;, &quot;AATTAA&quot;, &quot;Other&quot;)))
 
-ggplot(AllsiteDF_1per_sep_UTR, aes(group=Cononical, x=NegCount,y=prop, fill=Cononical)) + geom_histogram(position=&quot;stack&quot;, stat=&quot;identity&quot; ) + labs(x=&quot;Distance from PAS&quot;, y=&quot;Propotion of UTR annotated Sites&quot;, title=&quot;Location of annotated signal sites \nin UTR&quot;,caption = &quot;Other: AAAAAA, AAAAAG, AATACA, AATAGA,AATATA, ACTAAA, AGTAAA,CATAAA, GATAAA,TATAAA&quot;) +  scale_fill_manual(values = getPalette(colourCount)) + theme(text = element_text(size=20, face=&quot;bold&quot;),axis.text.x = element_text(size = 16), legend.position = &quot;bottom&quot;, axis.text.y = element_text(size = 16),plot.title = element_text(size=22),plot.caption = element_text(hjust = 0,size=10))+ guides(fill=guide_legend(nrow=1,byrow=TRUE))</code></pre>
+ggplot(AllsiteDF_1per_sep_UTR, aes(group=Cononical, x=NegCount,y=prop, fill=Cononical)) + geom_histogram(position=&quot;stack&quot;, stat=&quot;identity&quot; ) + labs(x=&quot;Distance from PAS&quot;, y=&quot;Propotion of annotated Sites&quot;, title=&quot;Location of annotated signal sites \nin UTR&quot;,caption = &quot;Other: AAAAAA, AAAAAG, AATACA, AATAGA,AATATA, ACTAAA, AGTAAA,CATAAA, GATAAA,TATAAA&quot;) +  scale_fill_manual(values = getPalette(colourCount)) + theme(text = element_text(size=20, face=&quot;bold&quot;),axis.text.x = element_text(size = 16), legend.position = &quot;bottom&quot;, axis.text.y = element_text(size = 16),plot.title = element_text(size=22),plot.caption = element_text(hjust = 0,size=10))+ guides(fill=guide_legend(nrow=1,byrow=TRUE))</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/signalsiteanalysis.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -2266,6 +2370,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-20-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9c38a22ce1a8993145c4f2c718644f473c23c895/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-20-1.png" target="_blank">9c38a22</a>
@@ -2297,7 +2412,68 @@ Locations=c(&quot;intron&quot;, &quot;utr3&quot;, &quot;utr5&quot;, &quot;Coding
 propdf=as.data.frame(cbind(Location=Locations,Proportion=Propwith))
 propdf$Proportion=as.numeric(as.character(propdf$Proportion))
 
-all=ggplot(propdf,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat=&quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+all=ggplot(propdf,aes(x=Location, y=Proportion, fill=Location)) + geom_bar(stat=&quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+all</code></pre>
+<p><img src="figure/signalsiteanalysis.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9c1dd66c4d7c960521231923a505ea17718e8f33/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-21-1.png" target="_blank">9c1dd66</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-13
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ef7ddfe335d40bf773e79c96c88f6c8da1c892ef/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-21-1.png" target="_blank">ef7ddfe</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-27
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/4eb21abb0f226c48b84a9347a40b07dcf91a0da6/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-21-1.png" target="_blank">4eb21ab</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>AllsiteDF_1per_sep_noncon=AllsiteDF_1per_sep %&gt;% filter(Site != &quot;AATAAA&quot;)
 
 Propwithnotcon=c(nrow(AllsiteDF_1per_sep_noncon %&gt;% filter(Location==&quot;intron&quot;))/allPAS_byloc_new$intron,nrow(AllsiteDF_1per_sep_noncon %&gt;% filter(Location==&quot;utr3&quot;))/allPAS_byloc_new$utr3,nrow(AllsiteDF_1per_sep_noncon %&gt;% filter(Location==&quot;utr5&quot;))/allPAS_byloc_new$utr5,nrow(AllsiteDF_1per_sep_noncon %&gt;% filter(Location==&quot;cds&quot;))/allPAS_byloc_new$cds,nrow(AllsiteDF_1per_sep_noncon %&gt;% filter(Location==&quot;end&quot;))/allPAS_byloc_new$end)
@@ -2330,6 +2506,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-22-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-22-1.png" target="_blank">96d85de</a>
@@ -2412,6 +2599,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-23-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-23-1.png" target="_blank">96d85de</a>
 </td>
 <td>
@@ -2484,6 +2682,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-24-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-24-1.png" target="_blank">96d85de</a>
 </td>
 <td>
@@ -2526,6 +2735,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-26-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/96d85de950281f127d3899521af41b736684e280/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-26-1.png" target="_blank">96d85de</a>
@@ -2574,6 +2794,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-28-1.png" target="_blank">74d7b8d</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-04
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/9c38a22ce1a8993145c4f2c718644f473c23c895/docs/figure/signalsiteanalysis.Rmd/unnamed-chunk-28-1.png" target="_blank">9c38a22</a>
