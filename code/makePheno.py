@@ -41,7 +41,7 @@ def main(inputFile, fileID, outputF):
           i_list=i.split()
           id=i_list[0]
           id_list=id.split(":")
-          gene=id_list[5]
+          gene=id_list[5].split("_")[0]
           if gene not in genes:
               genes.append(gene)
 
@@ -60,7 +60,7 @@ def main(inputFile, fileID, outputF):
           i_list=i.split()
           id=i_list[0]
           id_list=id.split(":")
-          g= id_list[5]
+          g= id_list[5].split("_")[0]
           values=list(i_list[6:])
           list_list=[]
           for ind,val in zip(inds, values):
@@ -87,7 +87,8 @@ def main(inputFile, fileID, outputF):
           i_list=i.split()
           id=i_list[0]
           id_list=id.split(":")
-          gene=id_list[5]
+          genefull=id_list[5]
+          gene=id_list[5].split("_")[0]
           #start=dic_geneS[id_list[5]]
           start=int(id_list[2])
           #end=dic_geneE[id_list[5]]

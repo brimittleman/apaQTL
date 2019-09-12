@@ -14,7 +14,7 @@ from snakemake.utils import R
 
 
 configfile: "config.yaml"
-
+genomeFA= config["file_genomeFA"]
 
 dir_proj= config["dir_proj"]
 dir_data= dir_proj + "data/"
@@ -23,6 +23,7 @@ inclusivePeaks= dir_data + "inclusivePeaks/"
 mergePeakFC= dir_data + "inclusivePeaks_FC/"
 filterpeaks= dir_data + "filterPeaks/"
 assignedPeaks= dir_data + "assignedPeaks/"
+Bed15Peaks= dir_data + "assignedPeaks_15Up/"
 quantPeaks= dir_data + "peakCoverage/"
 phenotype= dir_data + "phenotype/"
 phenotype5perc= dir_data + "phenotype_5perc/"
@@ -53,7 +54,7 @@ rule all:
 
 rule mergePeaks:
     input:
-       directory(inclusivePeaks)
+       inclusivePeaks
     output:
        inclusivePeaks + "APApeaks.ALLChrom.bed"
     shell: "bash mergePeaks.sh {input} {output}"
@@ -110,10 +111,37 @@ rule parseGeneLoc:
       assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF"
     shell: "python chooseAnno2SAF.py {input} {output}"
 
+#add new rules for 6A filter
+
+rule bed15upPAS:
+    input:
+        assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF"
+    output:
+        Bed15Peaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_15up.bed"
+    shell: "python SAF215upbed_gen.py {input} {output}"
+
+rule upstreamSeq:
+    input:
+        genome= genomeFA,
+        bed=Bed15Peaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_15up.bed"
+    output:
+        Bed15Peaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_15upNucleotides.bed"
+    shell: "bedtools nuc -s -seq -fi {input.genome} -bed {input.bed} > {output}"
+
+rule filter_PAS15_6A:
+    input:
+        Bed= Bed15Peaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_15upNucleotides.bed",
+        SAF= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF"
+    params:
+        nfilter= 6
+    output:
+        assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_cleaned.SAF"
+    shell: "python filterSAFforMP_gen.py {input.Bed} {input.SAF} {output} {params.nfilter}"
+
 
 rule quantassign2paredPeakT:
     input:
-      anno= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF",
+      anno= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_cleaned.SAF",
       inputdir= directory(bamclean_sort_dir)
     output:
       quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Total.Quant.fc",
@@ -121,10 +149,10 @@ rule quantassign2paredPeakT:
 
 rule quantassign2paredPeakN:
     input:
-      anno= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF",
+      anno= assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_cleaned.SAF",
       inputdir= directory(bamclean_sort_dir)
     output:
-      quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.fc",
+      quantPeaks + "APAPeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.Nuclear.Quant.fc"
     shell: "featureCounts -O -a {input.anno} -F SAF -o {output} {input.inputdir}*N*.bam -s 1"
 
 rule fixFCheader:
@@ -191,7 +219,7 @@ rule filterAllpeaks:
   input:
     total= peak5perc + "APApeak_Peaks_GeneLocAnno.Total.5perc.fc",
     nuclear =peak5perc + "APApeak_Peaks_GeneLocAnno.Nuclear.5perc.fc",
-    allPeaks = assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.SAF"
+    allPeaks = assignedPeaks + "APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED_cleaned.SAF"
   output:
     peak5perc + "APApeak_Peaks_GeneLocAnno.5perc.bed"
   shell: "python make5percPeakbed.py {input.total} {input.nuclear} {input.allPeaks} {output}"

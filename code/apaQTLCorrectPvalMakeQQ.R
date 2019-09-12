@@ -2,7 +2,7 @@ library(dplyr)
 
 
 ##total results
-tot.perm= read.table("../data/apaQTLPermuted/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Total_permRes.txt",head=F, stringsAsFactors=F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+tot.perm= read.table("../data/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Total_permRes.txt",head=F, stringsAsFactors=F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 
 
 #BH correction
@@ -21,7 +21,7 @@ write.table(tot.perm, file = "../data/apaQTLPermuted/APApeak_Phenotype_GeneLocAn
 ##nuclear results
 
 
-nuc.perm= read.table("../data/apaQTLPermuted/apaQTLPermuted/APApeak_Phenotype_GeneLocAnno.Nuclear_permRes.txt"",head=F, stringsAsFactors=F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+nuc.perm= read.table("../data/apaQTLPermuted//APApeak_Phenotype_GeneLocAnno.Nuclear_permRes.txt",head=F, stringsAsFactors=F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.perm$bh=p.adjust(nuc.perm$bpval, method="fdr")
 
 

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source activate three-prime-env
-
+#source activate three-prime-env
+source ~/activate_anaconda.sh
+conda activate three-prime-env
 snakemake \
     -kp \
     --ri \

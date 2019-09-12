@@ -1,4 +1,4 @@
-#Snakemakeconfiguration file
+#Snakemake configuration file
 #
 dir_proj: /project2/gilad/briana/apaQTL/
 dir_anno: /project2/gilad/briana/genome_anotation_data/

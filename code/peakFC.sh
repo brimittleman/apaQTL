@@ -9,8 +9,10 @@
 #SBATCH --mem=12G
 #SBATCH --mail-type=END
 
-module load Anaconda3
-source activate three-prime-env
+#module load Anaconda3
+#source activate three-prime-env
+source ~/activate_anaconda.sh
+conda activate three-prime-env
 
 anno=$1
 inDir= $2

@@ -1,7 +1,7 @@
 {
     "__default__" :
     {
-        "mem" : 4000,
+        "mem" : 8000,
         "n" : 2,
         "tasks" : 2,
         "name" : "{rule}-{wildcards}",

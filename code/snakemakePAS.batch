@@ -13,8 +13,8 @@
 #SBATCH --mail-type=END
 
 
-module load Anaconda3
-source activate three-prime-env
+#module load Anaconda3
+#source activate three-prime-env
 
 
 bash submit-snakemakePAS.sh $*

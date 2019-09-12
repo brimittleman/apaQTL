@@ -76,3 +76,6 @@ dependencies:
     - meme
     #- pyvcf 
     #- ucsc-liftover
+    #- r-biocmanager
+    #- bioconductor-motifbreakr
+    - r-ggpubr

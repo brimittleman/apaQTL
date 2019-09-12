@@ -54,6 +54,7 @@ bedClean_dir = dir_data + "bed_clean/"
 bedClean_sort_dir = dir_data + "bed_clean_sort/"
 bamclean_dir = dir_data + "bam_clean/"
 bamclean_sort_dir= dir_data + "sort_clean/"
+bw_dir= dir_data + "bw_norm/"
 
 
 assert os.path.exists(dir_proj), "Project directory exists"
@@ -88,7 +89,8 @@ rule all:
        expand(bedClean_sort_dir+ "{samples}-clean-sort.bed", samples=samples),
        expand(bamclean_dir+ "{samples}-clean.bam", samples=samples),
        expand(bamclean_sort_dir + "{samples}-clean.sort.bam", samples=samples),
-       expand(bamclean_sort_dir + "{samples}-clean.sort.bam.bai", samples=samples)
+       expand(bamclean_sort_dir + "{samples}-clean.sort.bam.bai", samples=samples),
+       expand(bw_dir + "{samples}-RPKM.bw", samples=samples)
 
 
 
@@ -230,3 +232,10 @@ rule index_cleanBam:
     output:
        bamclean_sort_dir + "{samples}-clean.sort.bam.bai"
     shell: "samtools index {input} > {output}"
+
+rule bam2bw:
+    input:
+       bamclean_sort_dir + "{samples}-clean.sort.bam"
+    output:
+       bw_dir + "{samples}-RPKM.bw"
+    shell: "bamCoverage -b {input} -o {output} -of 'bigwig' --normalizeUsingRPKM"

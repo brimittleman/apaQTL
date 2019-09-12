@@ -51,5 +51,10 @@
 "index_cleanBam":
     {
              "mem":8000
+    },
+"bam2bw":
+    {
+             "mem":50000,
+             "tasks" : 8
     }
 }

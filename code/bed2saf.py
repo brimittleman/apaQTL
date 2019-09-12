@@ -7,7 +7,6 @@ def main(inFile, outFile):
          ID = "peak_%s_%s_%s"%(chrom,start, end)
          if strand=="+":
              fout.write("%s\t%s\t%s\t%s\t+\n"%(ID+"_+", chrom.replace("chr",""), start, end))
-         else:
              fout.write("%s\t%s\t%s\t%s\t-\n"%(ID+"_-", chrom.replace("chr",""), start, end))
     fout.close()
 

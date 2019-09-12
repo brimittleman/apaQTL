@@ -1,0 +1,74 @@
+#
+# comments taken from John's scqtl environment file
+# Conda configuration file to reproduce computing environment
+#
+# Create the conda environment:
+#
+# conda env create --file environmentLeaf.yaml
+#
+# Update the conda environment:
+#
+# conda env update --file environmentLeaf.yaml
+#
+# Activate the conda environment:
+#
+# source activate leafcutter
+#
+# Deactivate the conda environment:
+#
+# source deactivate leafcutter
+#
+# Resources:
+#built python 2
+
+name:
+    leafcutter
+channels:
+    - bioconda
+    - conda-forge
+    - jdblischak
+    - defaults
+    - r
+    - davidaknowles
+  
+
+dependencies:
+    - python
+    - pysam
+    - fastqc
+    - snakemake
+    - umi_tools
+    - STAR
+    - subread
+    - samtools >= 1.8
+    - r-base
+    - multiqc
+    - cutadapt
+    - r-dplyr
+    - r-ggplot2
+    - r-tidyr
+    - r-tidyverse
+    - r-stringr
+    - r-optparse
+    - bedtools >= 2.27.0
+    - deeptools
+    - ucsc-genepredtogtf
+    - ucsc-bedtogenepred
+    - ucsc-gtfToGenePred
+    - gffutils
+    - bedops
+    - bwa
+    - picard >= 2.9.2
+    - verifybamid
+    - numpy
+    - sra-tools
+    - ucsc-bedgraphtobigwig
+    - ucsc-bigwigmerge
+    - ucsc-wigtobigwig
+    - ucsc-bigwigtobedgraph
+    - kallisto
+    - verifybamid
+    - pygenometracks 
+    - pybedtools
+    - r-leafcutter
+
