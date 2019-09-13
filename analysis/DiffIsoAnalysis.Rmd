@@ -416,9 +416,12 @@ summary(effectsize$logef)
 ```
 
 ```{r}
-ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(,bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.1,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.1,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
 ```
 
+```{r figure1EHistogramversion, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_histogram(bins=50)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", y="Number of PAS", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = c(0.1,.9), legend.direction = "horizontal")+  theme(panel.background = element_blank())
+```
 
 ```{r}
 densitylocdifuse=ggplot(effectsize_length_cat, aes(x=PercLength, by=fraction, fill=fraction))+ geom_density(alpha=.75)  + labs(title="Location of differentially used PAS \nwithin a gene body", fill="Fraction", x="Percent of Gene Length")+scale_fill_manual(values=c("deepskyblue3","darkviolet"),labels = c("Nuclear", "Total"))+ theme(legend.position = "bottom", legend.direction = "horizontal")+  theme(panel.background = element_blank(),text = element_text(size=16), plot.title = element_text(size = 20, face = "bold"))
