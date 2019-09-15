@@ -150,3 +150,5 @@ These files create some of the QC metrics I used for the analysis.
 * [Start looking at the nascent seq](nascentRNA.html)
 
 * [Credible set with RNA and signal sites](HighCrediblePAS.html)
+
+* [Specificity of QTL inclusive](QTL_inclusivePASset.html)

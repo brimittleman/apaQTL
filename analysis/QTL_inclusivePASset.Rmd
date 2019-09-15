@@ -1,0 +1,132 @@
+---
+title: "Call QTLs with more inclusive PAS set"
+author: "Briana Mittleman"
+date: "9/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(qvalue)
+
+```
+
+I want to call QTLs with all of the PAS to check for specificity.  
+
+I can filter the phenotypes in ../data/phenotype by the PAS in 
+
+APApeak_Phenotype_GeneLocAnno.Total.fc
+
+```{r}
+allPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed", header=F,col.names=c("chr","start", "end", "ID", "score","strand"),stringsAsFactors = F) %>% separate(ID, into = c("PASnum", "geneID"),sep=":") %>% mutate(PAS_ID=paste("peak", PASnum, sep=""))
+```
+
+
+TotalPheno:
+
+```{r}
+totalPheo=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.fc",header = T,stringsAsFactors = F) 
+
+totalPheo_peaknum= totalPheo%>% separate(chrom, into=c("chr","start","end", "ID"),sep=":") %>% separate(ID, into=c("gene", "loc", "strand", "PAS_ID"), sep="_") %>% semi_join(allPAS, by="PAS_ID") %>% mutate(ID=paste(gene,loc,strand,PAS_ID,sep="_"), chrom= paste(chr,start,end,ID,sep=":")) %>% select(chrom)
+
+totalPheo_filt=totalPheo %>% semi_join(totalPheo_peaknum,by="chrom")
+
+```
+
+
+NuclearPheno:
+
+```{r}
+NuclearPheno=read.table("../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc",header = T,stringsAsFactors = F) 
+
+NuclearPheno_peaknum= NuclearPheno%>% separate(chrom, into=c("chr","start","end", "ID"),sep=":") %>% separate(ID, into=c("gene", "loc", "strand", "PAS_ID"), sep="_") %>% semi_join(allPAS, by="PAS_ID") %>% mutate(ID=paste(gene,loc,strand,PAS_ID,sep="_"), chrom= paste(chr,start,end,ID,sep=":")) %>% select(chrom)
+
+NuclearPheno_filt=NuclearPheno %>% semi_join(NuclearPheno,by="chrom")
+
+```
+
+write out: 
+
+
+```{bash,eval=F}
+mkdir ../data/phenotype_inclusivePAS
+mkdir ../data/apaQTLNominal_inclusive
+```
+
+```{r}
+write.table(NuclearPheno_filt, row.names = F, col.names = T, "../data/phenotype_inclusivePAS/APApeak_Phenotype_GeneLocAnno.Nuclear.fc", quote=F)
+
+write.table(totalPheo_filt, row.names = F, col.names = T, "../data/phenotype_inclusivePAS/APApeak_Phenotype_GeneLocAnno.Total.fc", quote=F)
+```
+
+
+```{bash,eval=F}
+#!/bin/bash
+#python2 
+
+gzip APApeak_Phenotype_GeneLocAnno.Total.fc
+gzip APApeak_Phenotype_GeneLocAnno.Nuclear.fc
+
+python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Total.fc.gz
+python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz
+
+sh APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz_prepare.sh
+sh APApeak_Phenotype_GeneLocAnno.Total.fc.gz_prepare.sh
+
+head -n5 APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.4PCs
+head -n5 APApeak_Phenotype_GeneLocAnno.Total.fc.gz.PCs > APApeak_Phenotype_GeneLocAnno.Total.fc.gz.4PCs
+
+#code dir
+sbatch apaQTL_nominalInclusive.sh
+
+#concatinate res: 
+
+cat ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_chr* > ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_allChr.txt
+cat ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.qqnorm_chr* > ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.qqnorm_allChr.txt
+
+
+mkdir ../data/QTLoverlap_inclusive/
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.qqnorm_allChr.txt ../data/QTLoverlap_inclusive/TotalQTLinNuclearNominal_inc.txt 
+
+
+python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_allChr.txt ../data/QTLoverlap_inclusive/NuclearQTLinTotalNominal_inc.txt 
+```
+
+
+
+
+```{r}
+totAPAinNuc=read.table("../data/QTLoverlap_inclusive/TotalQTLinNuclearNominal_inc.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope"))
+qval_tot=pi0est(totAPAinNuc$pval, pi0.method = "bootstrap")
+
+nucAPAinTot=read.table("../data/QTLoverlap_inclusive/NuclearQTLinTotalNominal_inc.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "pval", "slope"))
+qval_nuc=pi0est(nucAPAinTot$pval, pi0.method = "bootstrap")
+
+
+par(mfrow=c(1,2))
+hist(totAPAinNuc$pval, xlab="Nuclear Pvalue", main="Significant Total APA QTLs \n Nuclear")
+text(.8,300, paste("pi_1=", round((1-qval_tot$pi0), digit=3), sep=" "))
+hist(nucAPAinTot$pval, xlab="Total Pvalue", main="Significant Nuclear APA QTLs \n Total")
+text(.8,350, paste("pi_1=", round((1-qval_nuc$pi0), digit=3), sep=" "))
+```
+
+
+
+```{r}
+totAPAinNuc_notsig=totAPAinNuc %>% filter(pval>.05)
+nrow(totAPAinNuc_notsig)
+nucAPAinTot_notsig=nucAPAinTot %>% filter(pval>.05)
+nrow(nucAPAinTot_notsig)
+
+
+prop.test(x=c(97,151),n=c(443,603), alternative="less")
+```
+
+
+
