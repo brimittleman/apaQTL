@@ -12,7 +12,7 @@
 <meta name="author" content="Briana Mittleman" />
 
 
-<title>Call QTLs with more inclusive PAS set</title>
+<title>IntronicPASenrichment</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -316,9 +316,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">Call QTLs with more inclusive PAS set</h1>
+<h1 class="title toc-ignore">IntronicPASenrichment</h1>
 <h4 class="author"><em>Briana Mittleman</em></h4>
-<h4 class="date"><em>9/13/2019</em></h4>
+<h4 class="date"><em>9/16/2019</em></h4>
 
 </div>
 
@@ -1120,6 +1120,10 @@ Unstaged changes:
     Modified:   code/DistPAS2Sig.py
     Modified:   code/apaQTLsnake.err
     Deleted:    code/test.txt
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1EHistogramversion-1.pdf
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Emain-1.pdf
+    Modified:   docs/figure/DiffIsoAnalysis.Rmd/figure1Esubset-1.pdf
+    Modified:   docs/figure/signalsiteanalysis.Rmd/figure1bMain-1.pdf
     Deleted:    reads_graphs.Rmd
 
 </code></pre>
@@ -1164,7 +1168,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f8cb7b8003863aa0430bce2d14dfe916c8c74c2a/analysis/QTL_inclusivePASset.Rmd" target="_blank">f8cb7b8</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/f8cb7b8003863aa0430bce2d14dfe916c8c74c2a/analysis/IntronicPASenrichment.Rmd" target="_blank">f8cb7b8</a>
 </td>
 <td>
 brimittleman
@@ -1174,40 +1178,6 @@ brimittleman
 </td>
 <td>
 move inclusive, get numbers for paper
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/2bc41872f9000e1832157dbd2dbae24530238fa8/docs/QTL_inclusivePASset.html" target="_blank">2bc4187</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-09-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/7c4debc598593d17584d34f8a3d959f7f7c933f7/analysis/QTL_inclusivePASset.Rmd" target="_blank">7c4debc</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-09-15
-</td>
-<td>
-add inclusive PAS analysis
 </td>
 </tr>
 </tbody>
@@ -1226,171 +1196,39 @@ add inclusive PAS analysis
 <pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(qvalue)</code></pre>
-<p>I want to call QTLs with all of the PAS to check for specificity.</p>
-<p>I can filter the phenotypes in ../data/phenotype by the PAS in</p>
-<p>APApeak_Phenotype_GeneLocAnno.Total.fc</p>
-<pre class="r"><code>allPAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed&quot;, header=F,col.names=c(&quot;chr&quot;,&quot;start&quot;, &quot;end&quot;, &quot;ID&quot;, &quot;score&quot;,&quot;strand&quot;),stringsAsFactors = F) %&gt;% separate(ID, into = c(&quot;PASnum&quot;, &quot;geneID&quot;),sep=&quot;:&quot;) %&gt;% mutate(PAS_ID=paste(&quot;peak&quot;, PASnum, sep=&quot;&quot;))</code></pre>
-<p>TotalPheno:</p>
-<pre class="r"><code>totalPheo=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Total.fc&quot;,header = T,stringsAsFactors = F) 
+<p>In this analysis I will look at the enrichment of intron pas over all PAS. I need to get the size of all intronic regions and the size of all regions. I can do this by merging the annotations.</p>
+<p>I can use bedtools merge on</p>
+<p>ncbiRefSeq_FormatedallAnnotation.sort.bed and the intron regions of this.</p>
+<pre class="r"><code>annotation=read.table(&quot;/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed&quot;, col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;id&quot;, &quot;score&quot;, &quot;strand&quot;)) %&gt;% separate(id,into=c(&quot;loc&quot;, &quot;gene&quot;),sep=&quot;:&quot;)
 
-totalPheo_peaknum= totalPheo%&gt;% separate(chrom, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;ID&quot;),sep=&quot;:&quot;) %&gt;% separate(ID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PAS_ID&quot;), sep=&quot;_&quot;) %&gt;% semi_join(allPAS, by=&quot;PAS_ID&quot;) %&gt;% mutate(ID=paste(gene,loc,strand,PAS_ID,sep=&quot;_&quot;), chrom= paste(chr,start,end,ID,sep=&quot;:&quot;)) %&gt;% select(chrom)</code></pre>
-<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 3 rows [12630,
-12631, 12632].</code></pre>
-<pre class="r"><code>totalPheo_filt=totalPheo %&gt;% semi_join(totalPheo_peaknum,by=&quot;chrom&quot;)</code></pre>
-<p>NuclearPheno:</p>
-<pre class="r"><code>NuclearPheno=read.table(&quot;../data/phenotype/APApeak_Phenotype_GeneLocAnno.Nuclear.fc&quot;,header = T,stringsAsFactors = F) 
+intron=annotation %&gt;% filter(loc==&quot;intron&quot;) 
 
-NuclearPheno_peaknum= NuclearPheno%&gt;% separate(chrom, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;ID&quot;),sep=&quot;:&quot;) %&gt;% separate(ID, into=c(&quot;gene&quot;, &quot;loc&quot;, &quot;strand&quot;, &quot;PAS_ID&quot;), sep=&quot;_&quot;) %&gt;% semi_join(allPAS, by=&quot;PAS_ID&quot;) %&gt;% mutate(ID=paste(gene,loc,strand,PAS_ID,sep=&quot;_&quot;), chrom= paste(chr,start,end,ID,sep=&quot;:&quot;)) %&gt;% select(chrom)</code></pre>
-<pre><code>Warning: Expected 4 pieces. Additional pieces discarded in 3 rows [12630,
-12631, 12632].</code></pre>
-<pre class="r"><code>NuclearPheno_filt=NuclearPheno %&gt;% semi_join(NuclearPheno,by=&quot;chrom&quot;)</code></pre>
-<p>write out:</p>
-<pre class="bash"><code>mkdir ../data/phenotype_inclusivePAS
-mkdir ../data/apaQTLNominal_inclusive</code></pre>
-<pre class="r"><code>write.table(NuclearPheno_filt, row.names = F, col.names = T, &quot;../data/phenotype_inclusivePAS/APApeak_Phenotype_GeneLocAnno.Nuclear.fc&quot;, quote=F)
+write.table(intron, &quot;/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intron.bed&quot;, col.names = F, row.names = F,quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>sort:</p>
+<pre class="bash"><code>sort -k1,1 -k2,2n /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.dms &gt; /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.dms
 
-write.table(totalPheo_filt, row.names = F, col.names = T, &quot;../data/phenotype_inclusivePAS/APApeak_Phenotype_GeneLocAnno.Total.fc&quot;, quote=F)</code></pre>
-<pre class="bash"><code>#!/bin/bash
-#python2 
-
-gzip APApeak_Phenotype_GeneLocAnno.Total.fc
-gzip APApeak_Phenotype_GeneLocAnno.Nuclear.fc
-
-python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Total.fc.gz
-python ../../code/prepare_phenotype_table.py APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz
-
-sh APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz_prepare.sh
-sh APApeak_Phenotype_GeneLocAnno.Total.fc.gz_prepare.sh
-
-head -n5 APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.PCs &gt; APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.4PCs
-head -n5 APApeak_Phenotype_GeneLocAnno.Total.fc.gz.PCs &gt; APApeak_Phenotype_GeneLocAnno.Total.fc.gz.4PCs
-
-#code dir
-sbatch apaQTL_nominalInclusive.sh
-
-#concatinate res: 
-
-cat ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_chr* &gt; ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_allChr.txt
-cat ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.qqnorm_chr* &gt; ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.qqnorm_allChr.txt
+sed &#39;s/^chr//&#39; /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.dms &gt; /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.noCHR.bed
 
 
-mkdir ../data/QTLoverlap_inclusive/
+bedtools merge -i /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.noCHR.bed -s &gt; /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged_intron.sort.bed</code></pre>
+<pre class="r"><code>chroms=as.character(seq(1,22))
 
-python qtlsPvalOppFrac.py ../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Nuclear.fc.gz.qqnorm_allChr.txt ../data/QTLoverlap_inclusive/TotalQTLinNuclearNominal_inc.txt 
-
-
-python qtlsPvalOppFrac.py ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_allChr.txt ../data/QTLoverlap_inclusive/NuclearQTLinTotalNominal_inc.txt </code></pre>
-<pre class="r"><code>totAPAinNuc=read.table(&quot;../data/QTLoverlap_inclusive/TotalQTLinNuclearNominal_inc.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;))
-qval_tot=pi0est(totAPAinNuc$pval, pi0.method = &quot;bootstrap&quot;)
-
-nucAPAinTot=read.table(&quot;../data/QTLoverlap_inclusive/NuclearQTLinTotalNominal_inc.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;pval&quot;, &quot;slope&quot;))
-qval_nuc=pi0est(nucAPAinTot$pval, pi0.method = &quot;bootstrap&quot;)
-
-
-par(mfrow=c(1,2))
-hist(totAPAinNuc$pval, xlab=&quot;Nuclear Pvalue&quot;, main=&quot;Significant Total APA QTLs \n Nuclear&quot;)
-text(.8,300, paste(&quot;pi_1=&quot;, round((1-qval_tot$pi0), digit=3), sep=&quot; &quot;))
-hist(nucAPAinTot$pval, xlab=&quot;Total Pvalue&quot;, main=&quot;Significant Nuclear APA QTLs \n Total&quot;)
-text(.8,350, paste(&quot;pi_1=&quot;, round((1-qval_nuc$pi0), digit=3), sep=&quot; &quot;))</code></pre>
-<p><img src="figure/QTL_inclusivePASset.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
-Past versions of unnamed-chunk-8-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-8-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/2bc41872f9000e1832157dbd2dbae24530238fa8/docs/figure/QTL_inclusivePASset.Rmd/unnamed-chunk-8-1.png" target="_blank">2bc4187</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2019-09-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>totAPAinNuc_notsig=totAPAinNuc %&gt;% filter(pval&gt;.05)
-nrow(totAPAinNuc_notsig)</code></pre>
-<pre><code>[1] 97</code></pre>
-<pre class="r"><code>nucAPAinTot_notsig=nucAPAinTot %&gt;% filter(pval&gt;.05)
-nrow(nucAPAinTot_notsig)</code></pre>
-<pre><code>[1] 151</code></pre>
-<pre class="r"><code>prop.test(x=c(97,151),n=c(443,603), alternative=&quot;less&quot;)</code></pre>
-<pre><code>
-    2-sample test for equality of proportions with continuity
-    correction
-
-data:  c(97, 151) out of c(443, 603)
-X-squared = 1.2283, df = 1, p-value = 0.1339
-alternative hypothesis: less
-95 percent confidence interval:
- -1.00000000  0.01394063
-sample estimates:
-   prop 1    prop 2 
-0.2189616 0.2504146 </code></pre>
-<p>location for specific:</p>
-<pre class="r"><code>totAPAinNuc_notsig_loc=totAPAinNuc_notsig %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;pasid&quot;), sep=&quot;:&quot;) %&gt;% separate(pasid, into=c(&quot;gene&quot;,&quot;loc&quot;,&quot;strand&quot;,&quot;pas&quot;), sep=&quot;_&quot;) %&gt;% group_by(loc) %&gt;% summarize(n=n())
+intronMerged=read.table(&quot;/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged_intron.sort.bed&quot;,col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;)) %&gt;% mutate(length=end-start) %&gt;% filter(chr %in% chroms)
+allMerged=read.table(&quot;/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged.FormatedallAnnotation.sort.bed&quot; , col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;)) %&gt;% mutate(length=end-start) %&gt;% filter(chr %in% chroms)
+intronLength=sum(intronMerged$length)
+totalLength=sum(allMerged$length)</code></pre>
+<p>N pas in intron</p>
+<pre class="r"><code>intronpas=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.bed&quot;, col.names = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;id&quot;,&quot;score&quot;, &quot;strand&quot;)) %&gt;% separate(id, into = c(&quot;pasnum&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;),sep=&quot;_&quot;) %&gt;% filter(loc==&quot;intron&quot;)
+allPAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.bed&quot;)</code></pre>
+<p>Values:</p>
+<pre class="r"><code>pas_length=nrow(allPAS)/totalLength
+intron_length=nrow(intronpas)/intronLength 
 
 
-totAPAinNuc_notsig_loc</code></pre>
-<pre><code># A tibble: 5 x 2
-  loc        n
-  &lt;chr&gt;  &lt;int&gt;
-1 cds       11
-2 end        6
-3 intron    25
-4 utr3      54
-5 utr5       1</code></pre>
-<pre class="r"><code>25/nrow(totAPAinNuc_notsig)</code></pre>
-<pre><code>[1] 0.257732</code></pre>
-<pre class="r"><code>nucAPAinTot_notsig_loc=nucAPAinTot_notsig %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;pasid&quot;), sep=&quot;:&quot;) %&gt;% separate(pasid, into=c(&quot;gene&quot;,&quot;loc&quot;,&quot;strand&quot;,&quot;pas&quot;), sep=&quot;_&quot;) %&gt;% group_by(loc) %&gt;% summarize(n=n())
-
-
-nucAPAinTot_notsig_loc</code></pre>
-<pre><code># A tibble: 5 x 2
-  loc        n
-  &lt;chr&gt;  &lt;int&gt;
-1 cds        7
-2 end       22
-3 intron    50
-4 utr3      67
-5 utr5       5</code></pre>
-<pre class="r"><code>50/nrow(nucAPAinTot_notsig)</code></pre>
-<pre><code>[1] 0.3311258</code></pre>
-<p>Look at nuclear specific in eQTL:</p>
-<pre class="r"><code>nucAPAinTot_notsig_small=nucAPAinTot_notsig %&gt;% separate(peakID, into=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;pasid&quot;), sep=&quot;:&quot;) %&gt;% separate(pasid, into=c(&quot;gene&quot;,&quot;loc&quot;,&quot;strand&quot;,&quot;pas&quot;), sep=&quot;_&quot;) %&gt;% select(gene, pas, snp)
-
-write.table(nucAPAinTot_notsig_small, &quot;../data/QTLoverlap_inclusive/NuclearSpecApaQTLinclusive.txt&quot;, col.names=T, row.names=F, quote=F)</code></pre>
-<p>Test these is edata:</p>
-<pre class="bash"><code>python nucspecinE.py</code></pre>
-<pre class="r"><code>nucspecinE=read.table(&quot;../data/QTLoverlap_inclusive/NuclearSpecApaQTLinclusive_withE.txt&quot;, stringsAsFactors =F, col.names=c(&quot;peakID&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;))
-
-sig=nucspecinE %&gt;% filter(pval&lt;.05)
-
-nrow(sig)</code></pre>
-<pre><code>[1] 13</code></pre>
+enrichment=intron_length/pas_length
+enrichment</code></pre>
+<pre><code>[1] 0.3508243</code></pre>
+<p>This is a 0.35 enrichment.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1418,25 +1256,24 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] qvalue_2.14.0   forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
- [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.1   tidyverse_1.2.1
+[1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
+[5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
+[9] tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
- [1] tidyselect_0.2.5 reshape2_1.4.3   splines_3.5.1    haven_1.1.2     
- [5] lattice_0.20-38  colorspace_1.3-2 generics_0.0.2   htmltools_0.3.6 
- [9] yaml_2.2.0       utf8_1.1.4       rlang_0.4.0      pillar_1.3.1    
-[13] glue_1.3.0       withr_2.1.2      modelr_0.1.2     readxl_1.1.0    
-[17] plyr_1.8.4       munsell_0.5.0    gtable_0.2.0     workflowr_1.4.0 
-[21] cellranger_1.1.0 rvest_0.3.2      evaluate_0.12    knitr_1.20      
-[25] fansi_0.4.0      highr_0.7        broom_0.5.1      Rcpp_1.0.2      
-[29] scales_1.0.0     backports_1.1.2  jsonlite_1.6     fs_1.3.1        
-[33] hms_0.4.2        digest_0.6.18    stringi_1.2.4    grid_3.5.1      
-[37] rprojroot_1.3-2  cli_1.1.0        tools_3.5.1      magrittr_1.5    
-[41] lazyeval_0.2.1   crayon_1.3.4     whisker_0.3-2    pkgconfig_2.0.2 
-[45] xml2_1.2.0       lubridate_1.7.4  assertthat_0.2.0 rmarkdown_1.10  
-[49] httr_1.3.1       rstudioapi_0.10  R6_2.3.0         nlme_3.1-137    
-[53] git2r_0.25.2     compiler_3.5.1  </code></pre>
+ [1] Rcpp_1.0.2       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
+ [5] pillar_1.3.1     git2r_0.25.2     highr_0.7        workflowr_1.4.0 
+ [9] tools_3.5.1      digest_0.6.18    lubridate_1.7.4  jsonlite_1.6    
+[13] evaluate_0.12    nlme_3.1-137     gtable_0.2.0     lattice_0.20-38 
+[17] pkgconfig_2.0.2  rlang_0.4.0      cli_1.1.0        rstudioapi_0.10 
+[21] yaml_2.2.0       haven_1.1.2      withr_2.1.2      xml2_1.2.0      
+[25] httr_1.3.1       knitr_1.20       hms_0.4.2        generics_0.0.2  
+[29] fs_1.3.1         rprojroot_1.3-2  grid_3.5.1       tidyselect_0.2.5
+[33] glue_1.3.0       R6_2.3.0         readxl_1.1.0     rmarkdown_1.10  
+[37] modelr_0.1.2     magrittr_1.5     whisker_0.3-2    backports_1.1.2 
+[41] scales_1.0.0     htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
+[45] colorspace_1.3-2 stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
+[49] broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 
