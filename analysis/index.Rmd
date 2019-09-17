@@ -40,6 +40,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [3' UTR PAS enrichment](UtrPASenrichment.html)
 
+* [Intronic PAS enrichment](IntronicPASenrichment.html)
+
 
 
 ##apaQTL  
@@ -56,6 +58,8 @@ These files create some of the QC metrics I used for the analysis.
 * [apaQTL in opposite fraction](apaQTLoverlap.html)
 
 * [Usage QTL analysis to look at non normal effect sizes](nonNormQTL.html)
+
+* [Specificity of QTL inclusive](QTL_inclusivePASset.html)
 
 * [Are snps in Signal sites likely to be QTLs?](snpinSS.html)
 
@@ -151,4 +155,4 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Credible set with RNA and signal sites](HighCrediblePAS.html)
 
-* [Specificity of QTL inclusive](QTL_inclusivePASset.html)
+

@@ -237,3 +237,98 @@ dist2signalsiteplotprop
 dist2signalsiteplotprop
 ```
 
+
+
+Enrichment in intron
+
+N intronic that have a PAS:
+```{r}
+propwSS_intron=AllsiteDF_1per_use %>% filter(loc=="intron") %>% nrow()
+
+#nuclear PAS
+intronPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", col.names = c("chr","start","end", "id", "score", "strand")) %>% separate(id, into=c("pas", "loc"), sep="_") %>% filter(loc=="intron") %>% nrow()
+
+
+withSS_intron=propwSS_intron/intronPAS
+withSS_intron
+```
+
+
+```{r}
+intronannotation=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intron.sort.bed", col.names = c("chr", "start", "end", "loc", "gene", "score", "strand"))%>% mutate(name=paste(gene, loc, strand, sep="_")) %>% select(chr, start, end, name, score, strand)
+
+
+
+write.table(intronannotation, "/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intronNamed.sort.bed", col.names = F, row.names = F,quote = F, sep="\t")
+```
+
+
+Compare this to a background: 
+
+I need 40 basepair regions in introns. 
+
+```{bash,eval=F}
+bedtools makewindows -i src -b /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intronNamed.sort.bed -w 40 > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intron.sort_randomIntervals.bed
+```
+Make this into a bed file (with strand):  
+
+```{bash,eval=F}
+python fix_randomIntron.py
+```
+
+
+
+I need to get the sequences for these with bedtools nuc.  
+
+```{bash,eval=F}
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intron.sort_randomIntervals.fixed.bed > /project2/gilad/briana/apaQTL/data/SignalSiteFiles/ncbiRefSeq_intron.sort_randomIntervalsSeq.bed
+```
+
+
+
+```{bash,eval=F}
+sbatch run_dist2sig_randomintron.sh
+```
+
+
+Upload all of the results:
+
+```{r}
+Loc_AATAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_AATAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATAAA")
+Loc_AAAAAG_randomIntron= read.table("../data/SignalSiteFiles/Loc_AAAAAG_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AAAAAG")
+Loc_AATACA_randomIntron= read.table("../data/SignalSiteFiles/Loc_AATACA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATACA")
+Loc_AATAGA_randomIntron= read.table("../data/SignalSiteFiles/Loc_AATAGA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATAGA")
+Loc_AATATA_randomIntron= read.table("../data/SignalSiteFiles/Loc_AATATA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATATA")
+Loc_ACTAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_ACTAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="ACTAAA")
+Loc_AGTAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_AGTAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AGTAAA")
+Loc_ATTAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_ATTAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="ATTAAA")
+Loc_CATAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_CATAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="CATAAA")
+Loc_GATAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_GATAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="GATAAA")
+Loc_TATAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_TATAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="TATAAA")
+Loc_AAAAAA_randomIntron= read.table("../data/SignalSiteFiles/Loc_AAAAAA_Distance2end_randomIntron.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AAAAAA")
+```
+
+Join these together:  
+
+```{r}
+AllsiteDF_randomIntron=as.data.frame(rbind(Loc_AATAAA_randomIntron,Loc_AAAAAG_randomIntron,Loc_AATACA_randomIntron,Loc_AATAGA_randomIntron,Loc_AATATA_randomIntron,Loc_ACTAAA_randomIntron,Loc_AGTAAA_randomIntron,Loc_ATTAAA_randomIntron, Loc_GATAAA_randomIntron,Loc_TATAAA_randomIntron,Loc_CATAAA_randomIntron, Loc_AAAAAA_randomIntron))
+```
+
+Number of tested sites: 
+
+
+```{r}
+withSS_random=nrow(AllsiteDF_randomIntron)
+possiblereg=84432042
+
+propwithRandom=withSS_random/possiblereg
+propwithRandom
+```
+
+
+Difference in prop test:  
+
+```{r}
+prop.test(x=c(withSS_random,propwSS_intron), n=c(possiblereg,intronPAS),alternative = "less" )
+```
+

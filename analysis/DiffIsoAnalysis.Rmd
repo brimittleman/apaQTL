@@ -238,7 +238,13 @@ effectsize_deltaPAU_nuclear_loc=effectsize_deltaPAU_nuclear %>% inner_join(PAS, 
 
 
 ggplot(effectsize_deltaPAU_nuclear_loc,aes(x=loc)) + geom_histogram(stat="count") + labs(title="Location of Nuclear peaks >.2 PAU")
+
+
+effectsize_deltaPAU_nuclear_loc %>% separate(intron, into=c("chr", "start", "end","gene"),sep=":")  %>%  group_by(gene) %>% summarize(n=n()) %>% nrow()
+
+effectsize_deltaPAU_nuclear_loc %>% filter(Total <.1) %>% nrow()
 ```
+
 
 I will want to look at proportions. I need to know how many peaks are in each location: 
 
@@ -471,3 +477,5 @@ lbls <- paste(lbls, pct, sep="\n   ") # add percents to labels
 lbls <- paste(lbls,"%",sep="") # ad % to labels 
 pie(slices, labels = lbls,col=c("Azure2", "Aquamarine1","Darkslateblue"))
 ```
+
+

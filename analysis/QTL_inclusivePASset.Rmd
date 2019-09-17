@@ -127,6 +127,43 @@ nrow(nucAPAinTot_notsig)
 
 prop.test(x=c(97,151),n=c(443,603), alternative="less")
 ```
+location for specific: 
+```{r}
+totAPAinNuc_notsig_loc=totAPAinNuc_notsig %>% separate(peakID, into=c("chr","start","end", "pasid"), sep=":") %>% separate(pasid, into=c("gene","loc","strand","pas"), sep="_") %>% group_by(loc) %>% summarize(n=n())
 
 
+totAPAinNuc_notsig_loc
+
+25/nrow(totAPAinNuc_notsig)
+
+
+nucAPAinTot_notsig_loc=nucAPAinTot_notsig %>% separate(peakID, into=c("chr","start","end", "pasid"), sep=":") %>% separate(pasid, into=c("gene","loc","strand","pas"), sep="_") %>% group_by(loc) %>% summarize(n=n())
+
+
+nucAPAinTot_notsig_loc
+
+50/nrow(nucAPAinTot_notsig)
+```
+
+Look at nuclear specific in eQTL: 
+
+```{r}
+nucAPAinTot_notsig_small=nucAPAinTot_notsig %>% separate(peakID, into=c("chr","start","end", "pasid"), sep=":") %>% separate(pasid, into=c("gene","loc","strand","pas"), sep="_") %>% select(gene, pas, snp)
+
+write.table(nucAPAinTot_notsig_small, "../data/QTLoverlap_inclusive/NuclearSpecApaQTLinclusive.txt", col.names=T, row.names=F, quote=F)
+```
+
+Test these is edata: 
+
+```{bash,eval=F}
+python nucspecinE.py
+```
+
+```{r}
+nucspecinE=read.table("../data/QTLoverlap_inclusive/NuclearSpecApaQTLinclusive_withE.txt", stringsAsFactors =F, col.names=c("peakID", 'snp','dist', 'pval', 'slope'))
+
+sig=nucspecinE %>% filter(pval<.05)
+
+nrow(sig)
+```
 

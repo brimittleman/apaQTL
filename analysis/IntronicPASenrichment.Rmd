@@ -1,0 +1,71 @@
+---
+title: "IntronicPASenrichment"
+author: "Briana Mittleman"
+date: "9/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+In this analysis I will look at the enrichment of intron pas over all PAS. I need to get the size of all intronic regions and the size of all regions. I can do this by merging the annotations. 
+
+I can use bedtools merge on
+
+ncbiRefSeq_FormatedallAnnotation.sort.bed and the intron regions of this. 
+
+
+```{r}
+annotation=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_FormatedallAnnotation.sort.bed", col.names = c("chr", "start", "end", "id", "score", "strand")) %>% separate(id,into=c("loc", "gene"),sep=":")
+
+intron=annotation %>% filter(loc=="intron") 
+
+write.table(intron, "/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_intron.bed", col.names = F, row.names = F,quote = F, sep="\t")
+```
+
+
+sort: 
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.dms > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.dms
+
+sed 's/^chr//' /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.dms > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.noCHR.bed
+
+
+bedtools merge -i /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefseq_intron.sort.noCHR.bed -s > /project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged_intron.sort.bed
+```
+
+```{r}
+chroms=as.character(seq(1,22))
+
+intronMerged=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged_intron.sort.bed",col.names = c("chr", "start", "end")) %>% mutate(length=end-start) %>% filter(chr %in% chroms)
+allMerged=read.table("/project2/gilad/briana/genome_anotation_data/RefSeq_annotations/ncbiRefSeq_Merged.FormatedallAnnotation.sort.bed" , col.names = c("chr", "start", "end")) %>% mutate(length=end-start) %>% filter(chr %in% chroms)
+intronLength=sum(intronMerged$length)
+totalLength=sum(allMerged$length)
+```
+
+N pas in intron
+```{r}
+intronpas=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", col.names = c("chr", "start", "end", "id","score", "strand")) %>% separate(id, into = c("pasnum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>% filter(loc=="intron")
+allPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed")
+```
+
+Values:
+
+
+```{r}
+pas_length=nrow(allPAS)/totalLength
+intron_length=nrow(intronpas)/intronLength 
+
+
+enrichment=intron_length/pas_length
+enrichment
+
+```
+
+This is a 0.35 enrichment.
