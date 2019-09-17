@@ -125,12 +125,22 @@ NuclearSpec=allNuclearPAS %>% anti_join(allTotalPAS,by = "pasNum")
 ggplot(NuclearSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "Nuclear  Specific PAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
 ```
 
+```{r}
+usedmoreNuc=read.table("../data/PAS/UsedMoreNuclearPAU2.bed")
+```
+
+
+
+
 Total Specific:
 ```{r}
 TotalSpec=allTotalPAS %>% anti_join(allNuclearPAS,by = "pasNum")
 
 ggplot(TotalSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "Total  Specific PAS by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2")
 ```
+
+Used more in nuclear: 
+
 
 ##By usage
 
@@ -163,6 +173,9 @@ allNuclearPAS_75= allNuclearPAS %>% mutate(PAS=paste("peak", pasNum,sep="")) %>%
 
 ggplot(allNuclearPAS_75,aes(x=loc,fill=withAnno)) + geom_histogram(stat="count") + labs(title = "Nuclear PAS 75% by annotated PAS within 10bp") +scale_fill_brewer(palette = "Dark2") 
 ```
+
+
+
 Proportion of previosly identified:
 
 ```{r}
@@ -223,7 +236,7 @@ AllCuttoff=as.data.frame(cbind(cutoff=cutoffs,Nuclear=propYes, Total=propYesTot)
 AllCuttoff_melt=melt(AllCuttoff,id.vars="cutoff", variable.name = "Fraction", value.name = "PropwithAnno")
 
 
-ggplot(AllCuttoff_melt, aes(x=cutoff, col=Fraction, y= PropwithAnno)) + geom_line(size=2) + scale_color_brewer(palette = "Dark2") + labs(title="Cumulative proportion of PAS in annoation \n by usage filter", y="Proportion in Annotation", x="Usage Filter")
+ggplot(AllCuttoff_melt, aes(x=cutoff, col=Fraction, y= PropwithAnno)) + geom_line(size=2) + scale_color_brewer(palette = "Dark2") + labs(title="Cumulative proportion of PAS in annotation \n by usage filter", y="Proportion in Annotation", x="Usage Filter")
 ```
 
 
