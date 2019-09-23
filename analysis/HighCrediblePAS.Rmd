@@ -53,9 +53,7 @@ allPAS_loc= allPAS %>% group_by(loc,SS) %>% summarise(nSS=n()) %>% ungroup() %>%
 withSSPlot=ggplot(allPAS_loc, aes(x=loc, y=prop, fill=SS)) + geom_bar(stat="identity") +scale_fill_brewer(palette="Dark2") +labs(title="Proportion of PAS with signal site", x="Location", y="Propotion")  + labs(fill = "Presence of Signal Site",x="") +scale_x_discrete(labels = c('Coding','5KB downstream','Intronic',"3' UTR", "5' UTR")) +theme(axis.text.x = element_text(angle = 45, hjust = 1,size=14),axis.text.y = element_text(size=14),legend.position = "top" )  
 withSSPlot
 ```
-```{r figure1bsubset, include=FALSE, dev="pdf", fig.height=4, fig.width=5, crop=FALSE}
-withSSPlot
-```
+
 
 
 ```{r}
@@ -65,7 +63,18 @@ prop.test(x=c(15098, 3207), n=c(20318,14433))
 
 Look at usage of those with a signal site to those without. In each fraction
 
+Add the background signal site distribution for this.  
 
+```{r}
+allPAS_loc$loc <- factor(allPAS_loc$loc, levels=c("utr5", "cds", "intron", "utr3", "end"))
+allPAS_loc_small =allPAS_loc %>% filter(SS=="Yes") %>% select(-nLoc, -SS,-nLoc)
+
+ggplot(allPAS_loc_small, aes(x=loc, y=prop)) + geom_bar(stat="identity",fill="darkblue") +labs(title="Proportion of PAS with signal site", x="Location", y="Propotion")   +theme(axis.text.x = element_text(angle = 45, hjust = 1,size=14),axis.text.y = element_text(size=14),legend.position = "top" )  + scale_x_discrete(labels = c("5' UTR","Coding",'Intronic',"3' UTR", "Downstream")) + geom_hline(yintercept =0.002426792,color="red",linetype = "dashed",size=2)
+```
+
+```{r figure1bsubset, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
+ggplot(allPAS_loc_small, aes(x=loc, y=prop)) + geom_bar(stat="identity",fill="darkblue") +labs(title="Proportion of PAS with signal site", x="Location", y="Propotion")   +theme(axis.text.x = element_text(angle = 45, hjust = 1,size=14),axis.text.y = element_text(size=14),legend.position = "top" )  + scale_x_discrete(labels = c("5' UTR","Coding",'Intronic',"3' UTR", "Downstream")) + geom_hline(yintercept =0.002426792,color="red",linetype = "dashed",size=2)
+```
 
 ###Total:
 
