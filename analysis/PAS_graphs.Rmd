@@ -13,6 +13,8 @@ require("dplyr")
 #install.packages("latticeExtra")
 require("tidyr")
 require(latticeExtra)
+require(tidyverse)
+library(reshape2)
 ```
 
 The current data frame has two columns - ID, and meanUsage. ID is a very long string containing a lot of currently irrelevant information. In this step, I am trying to solely get the type of the PAS from the ID column in the data frame along with its respective mean usage. To do this, I first read in the data frame. I then split the ID column into 5 columns, each for it's respective type of information. Though I only need "type" it is easier to access the other information if needed in the future. Then, I create a new data frame containing "type" and "mean usage".
@@ -347,5 +349,31 @@ doubleYScale(obj1, obj2,add.ylab2 =TRUE)
 ```
 ```{r figure1CIntron, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
 doubleYScale(obj1, obj6,add.ylab2 =TRUE)
+```
+
+Remake these with ggplot. I can plot the utr and intron on the same plot. I can make a second plot with the absolute numbers.  
+
+```{r}
+Utr3propfixed = Utr3prop %>% dplyr::rename("UTR"=cutoff.numbers)
+intronpropfixed= intronprop %>% dplyr::rename("intron"=cutoff.numbers)
+utrandIntron=Utr3propfixed %>% inner_join(intronpropfixed,by="xval")
+
+utrandIntron_melt=melt(utrandIntron, id.vars = "xval", variable.name = "location", value.name = "prop")
+
+
+full=as.data.frame(cbind(cutoff_total, utrandIntron))
+```
+
+```{r}
+ggplot(utrandIntron_melt,aes(x=xval, y=prop, color=location))+ geom_line(size=3) 
+
+ggplot(data=full, aes(x=xval, y=cutoff ))+ geom_line(size=3)
+```
+```{r figure1Both, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
+ggplot(utrandIntron_melt,aes(x=xval, y=prop, color=location))+ geom_line(size=1) 
+```
+
+```{r figure1quant, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
+ggplot(data=full, aes(x=xval, y=cutoff ))+ geom_line(size=1)
 ```
 
