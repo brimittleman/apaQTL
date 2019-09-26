@@ -1,0 +1,36 @@
+---
+title: "New Deep tools plots"
+author: "Briana Mittleman"
+date: "9/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to make new deeptools plots for figure 1a with 5 individuals in each.  
+
+I need to merge bam files then convert to BW.  
+
+```{bash,eval=F}
+mkdir ../data/FiveMergedBam/
+sbatch merge5RNAbam.sh 
+sbatch merge53prime.sh 
+```
+
+Next I need to make bigwigs for each of these:
+
+```{bash,eval=F}
+mkdir ../data/FiveMergedBW
+sbatch bam2bw.sh ../data/FiveMergedBam/RNAeuvadisBams_5mergeds.sort.bam ../data/FiveMergedBW/RNAeuvadisBams_5mergeds.sort.bw
+
+sbatch bam2bw.sh ../data/FiveMergedBam/threeprimeN_Bams_5mergeds.sort.bam ../data/FiveMergedBam/threeprimeN_Bams_5mergeds.sort.bw
+```
+
+```{bash,eval=F}
+sbatch NuclearandRNA5samp_dtplots.sh 
+```
+
+
+

@@ -26,6 +26,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Look at read distribution accross features](Readdistagainstfeatures.html) 
 
+* [RNA and 3' seq plots with 5 individuals](newDTplots.html) 
+
 * [Make descriptive plots for called PAS](PASdescriptiveplots.html)  
 
 * [Plot signal site dristributions](signalsiteanalysis.html)  
