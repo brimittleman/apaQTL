@@ -251,6 +251,16 @@ intronPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", col.names = c("
 
 withSS_intron=propwSS_intron/intronPAS
 withSS_intron
+
+
+propwSS_utr=AllsiteDF_1per_use %>% filter(loc=="utr3") %>% nrow()
+
+#nuclear PAS
+utrPAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", col.names = c("chr","start","end", "id", "score", "strand")) %>% separate(id, into=c("pas", "loc"), sep="_") %>% filter(loc=="utr3") %>% nrow()
+
+
+propwSS_utr/utrPAS
+
 ```
 
 
@@ -331,4 +341,6 @@ Difference in prop test:
 ```{r}
 prop.test(x=c(withSS_random,propwSS_intron), n=c(possiblereg,intronPAS),alternative = "less" )
 ```
+
+
 
