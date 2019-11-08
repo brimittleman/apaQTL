@@ -1,0 +1,86 @@
+---
+title: "Check for first intron enrichment"
+author: "Briana Mittleman"
+date: "11/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Check for enrichment in first intron.  
+
+This uses files created in the verifyFirstintronresult analysis. 
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(reshape2)
+```
+
+```{r}
+pas2intron= read.table( "../data/intron_analysis/NuclearIntronPASwithWhichintron.txt", stringsAsFactors = F, header = T)
+```
+
+
+I need to know how many 1st introns there are, how many second introns there are... 
+
+The number of introns in these genes is in the nintron column. 
+
+I can group the number of genes with each number of introns. 
+
+
+
+```{r}
+pas2intron_genes= pas2intron %>% select(gene, nintron) %>% unique() %>% group_by(nintron) %>% summarize(nGenes=n())
+
+head(pas2intron_genes)
+
+
+```
+
+I want to add these numbers but only include below. For example, all of these have 1 intron, only those above 5 have 5 introns. 
+
+Do this manually for 1-10 first. 
+
+
+```{r}
+n1intron=sum(pas2intron_genes$nGenes)
+n2intron=sum(pas2intron_genes$nGenes)
+n3intron=sum(pas2intron_genes$nGenes)
+n4intron= pas2intron_genes %>% filter(nintron >=4) 
+n5intron= pas2intron_genes %>% filter(nintron >=5) 
+n6intron= pas2intron_genes %>% filter(nintron >=6) 
+n7intron= pas2intron_genes %>% filter(nintron >=7) 
+n8intron= pas2intron_genes %>% filter(nintron >=8) 
+n9intron= pas2intron_genes %>% filter(nintron >=9) 
+n10intron= pas2intron_genes %>% filter(nintron >=10) 
+
+
+nGenesum=c(n1intron,n2intron,n3intron, sum(n4intron$nGenes),sum(n5intron$nGenes),sum(n6intron$nGenes),sum(n7intron$nGenes),sum(n8intron$nGenes),sum(n9intron$nGenes),sum(n10intron$nGenes))
+```
+
+
+```{r}
+pas2intron_intron_grouped=pas2intron %>% group_by(Intronid) %>% summarise(nBin=n(), meanSize=mean(intronLength))  %>% mutate(normNBin=nBin/meanSize) 
+
+pas2intron_intron_grouped_small=pas2intron_intron_grouped %>% filter(Intronid <=10) 
+
+pas2intron_intron_grouped_small_withnintron=as.data.frame(cbind(pas2intron_intron_grouped_small, nGenesum)) %>% mutate(NormbylengthandN=normNBin/nGenesum)
+
+ggplot(pas2intron_intron_grouped_small_withnintron, aes(x=Intronid, y=NormbylengthandN)) +geom_bar(stat="identity") + labs(title="PAS by Intron \n normalized by intron mean length and number of introns tested", y="normalized number in intron category", x="intron category")
+
+
+
+```
+
+
+Look at just genes with 3 introns.  
+
+```{r}
+pas2intron_3introns=pas2intron %>% filter(nintron==3) %>% group_by(Intronid) %>% summarise(nBin=n(), meanSize=mean(intronLength))  %>% mutate(normNBin=nBin/meanSize)
+
+ggplot(pas2intron_3introns,aes(y=normNBin,x=Intronid)) + geom_bar(stat = "identity") + labs(x="Intron in Gene",y="Number introns / average intron length", title="Intron position for genes with 3 introns")
+```
+

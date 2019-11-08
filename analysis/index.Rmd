@@ -153,6 +153,8 @@ These files create some of the QC metrics I used for the analysis.
 
 * [Explore first intron PAS further](verifyFirstintronresult.html)
 
+* [Are PAS enriched in first intron](checkfirstintron.html)
+
 * [Start looking at the nascent seq](nascentRNA.html)
 
 * [Credible set with RNA and signal sites](HighCrediblePAS.html)

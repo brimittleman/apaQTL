@@ -99,6 +99,31 @@ nuclear_cdf=ggplot(pas2intron_intron_usagecat_introncat,aes(x=Intronid, fill=Int
 
 ```
 
+Number of introns in each and normalize by average intron size.  
+
+```{r}
+
+pas2intron_intron_grouped=pas2intron_intron %>% group_by(Intronid) %>% summarise(nBin=n(), meanSize=mean(intronLength))  %>% mutate(normNBin=nBin/meanSize) 
+
+
+pas2intron_intron_grouped$Intronid=as.integer(as.character(pas2intron_intron_grouped$Intronid))
+
+ggplot(pas2intron_intron_grouped, aes(x=Intronid, y=normNBin)) +geom_bar(stat="identity") + labs(title="PAS by Intron", y="normalized number in intron category", x="intron category")
+
+#zoom in 1-10  
+pas2intron_intron_grouped_small=pas2intron_intron_grouped %>% filter(Intronid <=10)
+ggplot(pas2intron_intron_grouped_small, aes(x=Intronid, y=normNBin)) +geom_bar(stat="identity") + labs(title="PAS by Intron", y="normalized number in intron category", x="intron category")
+```
+
+
+
+
+
+
+
+
+
+
 ##Total  
 
 ###First intron   
