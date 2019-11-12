@@ -76,6 +76,23 @@ ggplot(pas2intron_intron_grouped_small_withnintron, aes(x=Intronid, y=Normbyleng
 ```
 
 
+Assess enrichment based on introns 1-10 with a uniform distribution:
+
+I will need to sum the number of PAS in these introns and divide them evenily. 
+
+```{r}
+nIntron1.10=sum(pas2intron_intron_grouped_small_withnintron$nBin)
+pas2intron_intron_grouped_small_withnintron_enrich=pas2intron_intron_grouped_small_withnintron %>% mutate(nUniform=nIntron1.10/10, UniformNormLength=nUniform/meanSize, UnformlengthandN=UniformNormLength/nGenesum)
+
+```
+
+Enrichment is the actual normalized number/uniform number:
+
+```{r}
+pas2intron_intron_grouped_small_withnintron_enrich[1,6] / pas2intron_intron_grouped_small_withnintron_enrich[1,9] 
+```
+
+
 Look at just genes with 3 introns.  
 
 ```{r}
