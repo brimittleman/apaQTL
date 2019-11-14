@@ -69,3 +69,17 @@ enrichment
 ```
 
 This is a 0.35 enrichment.
+
+
+Average usage of these across. 
+
+```{r}
+UsageNuclear=read.table("../data/PAS/NuclearPASMeanUsage.txt", stringsAsFactors = F,header = T) %>% filter(meanUsage>.05) %>% separate(ID,into=c("chr", "start","end", "PASID"), sep=":") %>% separate(PASID, into=c("gene", "loc","strand","PAS"),sep="_")
+
+intronpasNum= intronpas %>% mutate(PAS=paste("peak", pasnum, sep="")) %>% select(PAS)
+IntronicWusage=UsageNuclear %>% filter(PAS %in% intronpasNum$PAS)
+
+mean(IntronicWusage$meanUsage)
+
+```
+
