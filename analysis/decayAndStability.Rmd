@@ -1,0 +1,150 @@
+---
+title: "Decay and stability"
+author: "Briana Mittleman"
+date: "1/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+In this analysis I want to look as both decay and stability elements. I can see if there are overlaps with apaQTLs of the differentially used between total and nuclear.  
+
+##NMD  
+
+Colombo et al. looked at transcriptome wide identification of NMD-targeted transcripts, in https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5238794/pdf/189.pdf.  
+
+Supplemental table 2 has a list of differentailly expressed genes. They say top 1000 are the most significant. This analysis is in hela cells. The meta_meta column has the pvalues used for the final analysis. It is from a combind score from the SMGs and UPF1 data.  
+
+
+Nguyen et al. - Similar analysis in LCLs but from individuals with intelectual disability. The knock down experiment is in hela cells. table 1 has similar studies that used micro arrays    
+
+
+I will use the Colombo set because it is the most recent and comprehensive. This study used RNA seq rather than arrays. 
+
+```{bash, eval=F}
+mkdir ../data/NMD
+```
+Saved the supplementary table there.
+
+Pull in the apaQTL genes, NMD genes, and Total/nuclear genes. 
+
+I will need all of those tested in each set to do the overlap.  
+
+```{r}
+NMD=read.table("../data/NMD/NMD_res_Colomboetal.txt",stringsAsFactors = F, header = T) 
+NMD_sig= NMD %>% slice(1:1000)
+```
+
+```{r}
+apaTested=read.table("../data/apaQTLs/TestedNuclearapaQTLGenes.txt",col.names = c('gene'),stringsAsFactors = F)
+apaSig=read.table("../data/apaQTLs/NuclearapaQTLGenes.txt", col.names = c("gene"),stringsAsFactors = F) 
+
+totalTest=read.table("../data/apaQTLs/TestedTotalapaQTLGenes.txt",col.names = c('gene'),stringsAsFactors = F)
+totalSig=read.table("../data/apaQTLs/TotalapaQTLGenes.txt", col.names = c("gene"),stringsAsFactors = F) 
+```
+
+```{r}
+#chr10:27035787:27035907:ABI1  
+TvNTested=read.table("../data/DiffIso/EffectSizes.txt", header = T,stringsAsFactors = F) %>% separate(intron, into = c("chr", "start","end", "gene"),sep=":")
+
+TvNsig=read.table("../data/highdiffsiggenes.txt",col.names = "gene", stringsAsFactors = F)
+```
+
+Overlap:  
+
+Nuclear  QTL set 
+```{r}
+x=length(intersect(apaSig$gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=nrow(apaSig)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
+Total qtls:  
+
+```{r}
+x=length(intersect(totalSig$gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=nrow(totalSig)
+  
+#length(intersect(apaSig$gene, NMD$gene_name))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+Nuclear apaQTLs are more enriched for NMD
+
+TVN set 
+```{r}
+x=length(intersect(TvNsig$gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=length(TvNsig$gene)
+  
+  #length(intersect(TvNsig$gene, NMD$gene_name))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
+Look at the expression independent ones: 
+
+```{r}
+expInd=read.table("../data/ExpressionIndependentapaQTLs.txt", header = T, stringsAsFactors = F) %>% dplyr::select(Gene) %>% unique()
+
+x=length(intersect(expInd$Gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=length(expInd$Gene)
+  
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+
+```
+No overlap here 
+
+###Stability  
+
+From the ARED come back to this.  
+

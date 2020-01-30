@@ -160,3 +160,8 @@ These files create some of the QC metrics I used for the analysis.
 * [Credible set with RNA and signal sites](HighCrediblePAS.html)
 
 
+Revisions (Thank you to the reviewers for suggestions)  
+
+* [Decay and stability of transcripts](decayAndStability.html)
+
+
