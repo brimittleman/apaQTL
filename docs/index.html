@@ -242,7 +242,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-11-08
+<strong>Last updated:</strong> 2020-01-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -252,7 +252,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.4.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed72c60459d865432c81106beb0ee801e97f68cc3targetblankd72c604a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d72c60459d865432c81106beb0ee801e97f68cc3" target="_blank">d72c604</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree97dec8377e688997aede4df245919c4939f2e97ftargetblank97dec83a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/97dec8377e688997aede4df245919c4939f2e97f" target="_blank">97dec83</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed72c60459d865432c81106beb0ee801e97f68cc3targetblankd72c604a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree97dec8377e688997aede4df245919c4939f2e97ftargetblank97dec83a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -287,12 +287,6 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
-    Ignored:    docs/.DS_Store
-    Ignored:    docs/figure/.DS_Store
-    Ignored:    docs/figure/PAS_graphs_total.Rmd/.DS_Store
-    Ignored:    docs/figure/choosePCs.Rmd/.DS_Store
-    Ignored:    docs/figure/exvunexpeQTL.Rmd/.DS_Store
-    Ignored:    docs/figure/snpinSS.Rmd/.DS_Store
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -818,6 +812,7 @@ Untracked files:
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
     Untracked:  data/Li_eQTLs/
+    Untracked:  data/NMD/
     Untracked:  data/NascentRNA/
     Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
@@ -901,22 +896,37 @@ Untracked files:
     Untracked:  data/twoMech/
     Untracked:  data/verifyBAM/
     Untracked:  data/verifyBAM_full/
-    Untracked:  docs/._.DS_Store
-    Untracked:  docs/figure/._.DS_Store
-    Untracked:  docs/figure/PAS_graphs.Rmd/._figure1Both-1.pdf
-    Untracked:  docs/figure/PAS_graphs.Rmd/._figure1CUTR-1.pdf
-    Untracked:  docs/figure/PAS_graphs.Rmd/._figure1quant-1.pdf
-    Untracked:  docs/figure/PAS_graphs_total.Rmd/._.DS_Store
-    Untracked:  docs/figure/checkfirstintron.Rmd/
-    Untracked:  docs/figure/choosePCs.Rmd/._.DS_Store
-    Untracked:  docs/figure/exvunexpeQTL.Rmd/._.DS_Store
-    Untracked:  docs/figure/snpinSS.Rmd/._.DS_Store
     Untracked:  nohup.out
     Untracked:  output/._.DS_Store
+    Untracked:  output/._AverageDiffHeatmap.Nuclear.png
+    Untracked:  output/._AverageDiffHeatmap.Total.png
+    Untracked:  output/._GeneswithAPApotential.png
+    Untracked:  output/._GeneswithAPApotentialAllPAS.png
+    Untracked:  output/._PASlocation.png
+    Untracked:  output/._SignalSitePlot.png
     Untracked:  output/._meanCorrelationPhenotypes.svg
+    Untracked:  output/._qqplot_Nuclear_APAperm.png
+    Untracked:  output/._qqplot_Nuclear_APAperm_4pc.png
+    Untracked:  output/._qqplot_Total_APAperm.png
+    Untracked:  output/._qqplot_Total_APAperm_4pc.png
+    Untracked:  output/AverageDiffHeatmap.Nuclear.png
+    Untracked:  output/AverageDiffHeatmap.Total.png
+    Untracked:  output/GeneswithAPApotential.png
+    Untracked:  output/GeneswithAPApotentialAllPAS.png
+    Untracked:  output/PASlocation.png
+    Untracked:  output/SignalSitePlot.png
+    Untracked:  output/SignalSitePlotbyLoc.png
     Untracked:  output/dtPlots/
     Untracked:  output/fastqc/
     Untracked:  output/meanCorrelationPhenotypes.svg
+    Untracked:  output/newnuc.png
+    Untracked:  output/newtot.png
+    Untracked:  output/oldnuc.png
+    Untracked:  output/oldtot.png
+    Untracked:  output/qqplot_Nuclear_APAperm.png
+    Untracked:  output/qqplot_Nuclear_APAperm_4pc.png
+    Untracked:  output/qqplot_Total_APAperm.png
+    Untracked:  output/qqplot_Total_APAperm_4pc.png
     Untracked:  run_verifybam517N.err
     Untracked:  run_verifybam517N.out
 
@@ -971,6 +981,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/97dec8377e688997aede4df245919c4939f2e97f/analysis/index.Rmd" target="_blank">97dec83</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-30
+</td>
+<td>
+add decay and stability, nmd analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/8a3d1eaad7a8e2ab4be8732c72e0a27557932744/docs/index.html" target="_blank">8a3d1ea</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-11-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1075,6 +1119,23 @@ Build site.
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/7c4debc598593d17584d34f8a3d959f7f7c933f7/analysis/index.Rmd" target="_blank">7c4debc</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-15
+</td>
+<td>
+add inclusive PAS analysis
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -1088,6 +1149,23 @@ brimittleman
 </td>
 <td>
 Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5ad175a2e8d617f07251914073f0eacbac147290/analysis/index.Rmd" target="_blank">5ad175a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-09-11
+</td>
+<td>
+udate pas graphs and asdd total
 </td>
 </tr>
 <tr>
@@ -1203,7 +1281,7 @@ html
 brimittleman
 </td>
 <td>
-2019-08-26
+2019-08-27
 </td>
 <td>
 Build site.
@@ -1220,7 +1298,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-08-26
+2019-08-27
 </td>
 <td>
 add extra MP qc
@@ -1483,6 +1561,23 @@ Build site.
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/75b84f45a4efb77b94fc72d3251be99bb4600dc0/analysis/index.Rmd" target="_blank">75b84f4</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-07-01
+</td>
+<td>
+add code premature term
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -1530,6 +1625,23 @@ brimittleman
 </td>
 <td>
 Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f00669b990182d7b99d8336bfac8fc9a39324c8b/analysis/index.Rmd" target="_blank">f00669b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-28
+</td>
+<td>
+add GO
 </td>
 </tr>
 <tr>
@@ -1717,6 +1829,23 @@ brimittleman
 </td>
 <td>
 Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/63e21eae9839b5b6f34748834411684550e92613/analysis/index.Rmd" target="_blank">63e21ea</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-18
+</td>
+<td>
+add credible set analysis
 </td>
 </tr>
 <tr>
@@ -2112,6 +2241,23 @@ Build site.
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/32091eec9a3afdd11c7b0c8e8c9acbee27aed7d5/analysis/index.Rmd" target="_blank">32091ee</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-06-07
+</td>
+<td>
+more prop explained to new analysis
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -2265,6 +2411,23 @@ Build site.
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3f630453232ae76d4a51f8520b79dabc2c3efa2e/analysis/index.Rmd" target="_blank">3f63045</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-24
+</td>
+<td>
+add code to prepare non norm qtl
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -2308,10 +2471,27 @@ html
 brimittleman
 </td>
 <td>
-2019-05-15
+2019-05-16
 </td>
 <td>
 Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ee9296437fb85f9bc1eee9ababefeebcb346be55/analysis/index.Rmd" target="_blank">ee92964</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-05-16
+</td>
+<td>
+start ideas for inton analysis
 </td>
 </tr>
 <tr>
@@ -2325,7 +2505,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-15
+2019-05-16
 </td>
 <td>
 Build site.
@@ -2342,7 +2522,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-15
+2019-05-16
 </td>
 <td>
 add nascent transcription plot
@@ -2359,7 +2539,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-15
+2019-05-16
 </td>
 <td>
 Build site.
@@ -2376,7 +2556,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-15
+2019-05-16
 </td>
 <td>
 add reg heatmap
@@ -2427,7 +2607,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-08
+2019-05-09
 </td>
 <td>
 Build site.
@@ -2444,7 +2624,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-08
+2019-05-09
 </td>
 <td>
 choose pcs and start qtl rerun
@@ -2461,7 +2641,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-08
+2019-05-09
 </td>
 <td>
 Build site.
@@ -2478,7 +2658,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-08
+2019-05-09
 </td>
 <td>
 add pca
@@ -2631,10 +2811,27 @@ html
 brimittleman
 </td>
 <td>
-2019-04-29
+2019-04-30
 </td>
 <td>
 Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/39a65720a87b13e232ed3ca1fb874dd9bd8e17e7/analysis/index.Rmd" target="_blank">39a6572</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-30
+</td>
+<td>
+add correlation genotype heatmap
 </td>
 </tr>
 <tr>
@@ -2656,6 +2853,23 @@ Build site.
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6cb0a9909fff660701379bf3e8317ee4fea55ab2/analysis/index.Rmd" target="_blank">6cb0a99</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-25
+</td>
+<td>
+add seq meta pltos
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -2665,7 +2879,7 @@ html
 brimittleman
 </td>
 <td>
-2019-04-24
+2019-04-25
 </td>
 <td>
 Build site.
@@ -2682,7 +2896,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-04-24
+2019-04-25
 </td>
 <td>
 add corr analysis
@@ -2724,6 +2938,23 @@ start signal site analysis
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/02e580fdca8f042e12fbf9e7b87297a9f794b4f7/analysis/index.Rmd" target="_blank">02e580f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-23
+</td>
+<td>
+add desc plots
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -2741,6 +2972,23 @@ Build site.
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/544b1d9452ddfb216b9c7e3f1e6787530fd1afe5/analysis/index.Rmd" target="_blank">544b1d9</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-23
+</td>
+<td>
+add pas descriptive plots
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -2750,7 +2998,7 @@ html
 brimittleman
 </td>
 <td>
-2019-04-22
+2019-04-23
 </td>
 <td>
 Build site.
@@ -2767,7 +3015,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-04-22
+2019-04-23
 </td>
 <td>
 add reads against feature
@@ -2877,6 +3125,23 @@ add bam 2 pas analysis
 </tr>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/13484a91ee142a3e9e50efcb8a58aafa3f5cd26c/analysis/index.Rmd" target="_blank">13484a9</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-13
+</td>
+<td>
+re-add analysis
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -2890,6 +3155,40 @@ brimittleman
 </td>
 <td>
 Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/549c7ff585b7276a30ad66e3e9af6089edf70e35/analysis/index.Rmd" target="_blank">549c7ff</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-12
+</td>
+<td>
+add helper scripts for pas snake
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/549c7ff585b7276a30ad66e3e9af6089edf70e35/docs/index.html" target="_blank">549c7ff</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-04-12
+</td>
+<td>
+add helper scripts for pas snake
 </td>
 </tr>
 <tr>
@@ -3070,6 +3369,10 @@ Start workflowr project.
 <li><p><a href="checkfirstintron.html">Are PAS enriched in first intron</a></p></li>
 <li><p><a href="nascentRNA.html">Start looking at the nascent seq</a></p></li>
 <li><p><a href="HighCrediblePAS.html">Credible set with RNA and signal sites</a></p></li>
+</ul>
+<p>Revisions (Thank you to the reviewers for suggestions)</p>
+<ul>
+<li><a href="decayAndStability.html">Decay and stability of transcripts</a></li>
 </ul>
 </div>
 
