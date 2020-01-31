@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-11-13
+<strong>Last updated:</strong> 2020-01-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree79d65a061e56b4ad024c4091d56e64a738d32f59targetblank79d65a0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/79d65a061e56b4ad024c4091d56e64a738d32f59" target="_blank">79d65a0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3d9f5c754c01ae4fc73d408b98f2025331594311targetblank3d9f5c7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3d9f5c754c01ae4fc73d408b98f2025331594311" target="_blank">3d9f5c7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree79d65a061e56b4ad024c4091d56e64a738d32f59targetblank79d65a0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3d9f5c754c01ae4fc73d408b98f2025331594311targetblank3d9f5c7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -836,6 +836,7 @@ Untracked files:
     Untracked:  code/intersectVCFPAS.err
     Untracked:  code/intersectVCFPAS.out
     Untracked:  code/log/
+    Untracked:  code/logs/
     Untracked:  code/merge53PRIMEbam.err
     Untracked:  code/merge53PRIMEbam.out
     Untracked:  code/merge53RNAbam.err
@@ -919,6 +920,8 @@ Untracked files:
     Untracked:  code/runprxySNP.out
     Untracked:  code/runres2pas.err
     Untracked:  code/runres2pas.out
+    Untracked:  code/scripts/
+    Untracked:  code/scripts_PAS_500_Lymph/
     Untracked:  code/seqQTLfastq.err
     Untracked:  code/seqQTLfastq.out
     Untracked:  code/seqQTLregion.err
@@ -972,7 +975,9 @@ Untracked files:
     Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
+    Untracked:  data/LDSR_annotations/
     Untracked:  data/Li_eQTLs/
+    Untracked:  data/NMD/
     Untracked:  data/NascentRNA/
     Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
@@ -1054,6 +1059,7 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/twoMech/
+    Untracked:  data/vareQTLvarAPAqtl/
     Untracked:  data/verifyBAM/
     Untracked:  data/verifyBAM_full/
     Untracked:  nohup.out
@@ -1091,6 +1097,7 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
+    Modified:   analysis/LDregress.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
@@ -1141,6 +1148,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/980865451f9c0b1e21d4331b3f616527cbf56be2/docs/UtrPASenrichment.html" target="_blank">9808654</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2019-11-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1200,12 +1224,12 @@ add enrichment analysis
 </div>
 </div>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ──────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ─────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>In this analysis I will look at the enrichment of 3’ UTR pas over all PAS. I need to get the size of all UTR regions and the size of all regions. I can do this by merging the annotations.</p>
