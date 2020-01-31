@@ -1,0 +1,190 @@
+---
+title: "Overlapping apaQTLs intronic and eQTLs"
+author: "Briana Mittleman"
+date: "1/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A reviewer asked for what percent of eQTL variance can be explained by apaQTL variance. This is dificult to answer because apaQTL variance is related to a usage ratio. I will look at a set I can understand. I assume that an intronic PAS leads to degradation of the transcript. I will look if the difference in usage of these toward usage in UTR PAS. I will sum over intronic and utr sites. I can then look at the opposite direction increase in expression by genotype.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+The set I am looking at comes from the prop eQTL explained analysis.  
+
+```{r}
+
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+
+nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
+
+nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))  
+
+eQTLeffect=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.GeneName_snploc.txt", stringsAsFactors = F, col.names = c("gene","snp","dist", "pval", "eQTL_es")) %>% select(gene, snp, eQTL_es)
+
+
+alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
+```
+
+Subset positive effect size for apa and negative for eQTL.  
+
+
+```{r}
+SubsetDir= alleQTLS_nuclear %>% filter(slope > 0, eQTL_es<0) %>% mutate(DiffES=slope-eQTL_es) %>% arrange(desc(slope))
+
+head(SubsetDir)
+```
+
+Look at examples:  
+
+```{sbatch,eval=F}
+sbatch run_qtlFacetBoxplots.sh Nuclear TMEM156 4 4:39030183 peak96746  
+```
+
+
+```{r}
+TMEMPheno=read.table("../data/ExampleQTLPlots/TMEM156_NuclearPeaksPheno.txt")
+```
+
+Pull in all phenos:  
+```{r}
+PhenoNum=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.CountsNumeric")
+PhenoAnno=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz", header = T) 
+
+
+PhenoBoth=as.data.frame(cbind(chrom=PhenoAnno$chrom,PhenoNum))
+colnames(PhenoBoth)=colnames(PhenoAnno)
+
+PhenoBoth_split= PhenoBoth %>% separate(chrom,into=c('chr', 'start', 'end', 'geneID') ,sep=":")%>% separate(geneID, into=c("gene", 'loc', 'strand', 'PAS'), sep="_") %>% dplyr::select(-chr, -start,-end,-strand)
+```
+
+Subset:  
+
+```{r}
+Pheno_TMEM=PhenoBoth_split %>% filter(gene=="TMEM156")
+```
+
+Look at the percent change between genotypes:  
+
+I need to get the genotypes:  
+
+```{r}
+genohead=as.data.frame(read.table("../data/ExampleQTLPlots/genotypeHeader.txt", stringsAsFactors = F, header = F)[,10:128] %>% t())
+colnames(genohead)=c("header")
+
+
+```
+
+
+```{bash,eval=F}
+mkdir ../data/vareQTLvarAPAqtl
+less /project2/gilad/briana/li_genotypes/genotypesYRI.gen.proc.5MAF.chr4.vcf.gz | grep 39030183 > ../data/vareQTLvarAPAqtl/TMEMGeno.txt
+```
+A/G
+```{r}
+genotype=as.data.frame(read.table("../data/vareQTLvarAPAqtl/TMEMGeno.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
+full_geno=bind_cols(Ind=genohead$header, dose=genotype$V1) %>% mutate(numdose=round(dose), genotype=ifelse(numdose==0, "TT", ifelse(numdose==1, "TA", "AA"))) %>% dplyr::select(Ind, genotype,numdose)
+
+
+Pheno_TMEM_gather=Pheno_TMEM %>% gather(Ind, value, -PAS,-loc,-gene) %>% inner_join(full_geno,by="Ind")
+
+#intronic
+Pheno_TMEM_peak96746= Pheno_TMEM_gather %>% filter(PAS=="peak96746") %>% group_by(genotype) %>% summarise(MeanUsage=mean(value)) %>% mutate(PAS="peak96746")
+
+
+Pheno_TMEM_peak96738= Pheno_TMEM_gather %>% filter(PAS=="peak96738") %>% group_by(genotype) %>% summarise(MeanUsage=mean(value)) %>% mutate(PAS="peak96738")
+#utr
+Pheno_TMEM_peak96733= Pheno_TMEM_gather %>% filter(PAS=="peak96733") %>% group_by(genotype) %>% summarise(MeanUsage=mean(value)) %>% mutate(PAS="peak96733")
+
+#end
+Pheno_TMEM_peak96732= Pheno_TMEM_gather %>% filter(PAS=="peak96732") %>% group_by(genotype) %>% summarise(MeanUsage=mean(value)) %>% mutate(PAS="peak96732")
+ 
+PhenoTMTMBoth= Pheno_TMEM_peak96746 %>% bind_rows(Pheno_TMEM_peak96733) %>% bind_rows(Pheno_TMEM_peak96738) %>% bind_rows(Pheno_TMEM_peak96732) 
+
+```
+
+We assume 0 reads make it out of the intron.  Sum over the end and UTR counts for each individual. Run DE with this?  
+
+
+```{r}
+AllCounts=read.table("../data/DiffIso/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.fixed.forLC.fc",header = T) %>% select(contains("_N")) %>% rownames_to_column("chrom")
+
+colnames(AllCounts)=colnames(PhenoAnno)
+
+AllCounts= AllCounts %>% separate(chrom,into=c('chr', 'start', 'end', 'geneID') ,sep=":")%>% separate(geneID, into=c("gene", 'loc'), sep="_") 
+
+#%>% dplyr::select(-chr, -start,-end,-strand)
+```
+
+
+Filter gene:  
+```{r}
+AllCounts_tmeme= AllCounts %>% filter(gene=="TMEM156", loc != "intron") %>% gather(Ind, count, -chr,-start,-end,-gene,-loc) %>% group_by(Ind) %>% summarise(APAcount=sum(count)) %>% inner_join(full_geno, by="Ind")
+```
+
+
+I also need the expression values:  
+
+```{r}
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'GeneName', 'source' ),stringsAsFactors = F, header = T)
+
+
+```
+
+
+```{bash,eval=F}
+
+less ../data/molPhenos/fastqtl_qqnorm_RNAseq_phase2.fixed.noChr.txt.gz | grep ENSG00000121895 > ../data/vareQTLvarAPAqtl/TMEM_RNA.txt
+```
+
+```{r}
+RNAhead=as.data.frame(read.table("../data/molPhenos/RNAhead.txt", stringsAsFactors = F, header = F)[,5:73] %>% t())
+
+RNApheno=as.data.frame(read.table("../data/vareQTLvarAPAqtl/TMEM_RNA.txt", stringsAsFactors = F, header = F) [,5:73] %>% t())
+
+full_pheno=bind_cols(Ind=RNAhead$V1, Expression=RNApheno$V1)
+
+allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
+
+
+```
+
+Join these:  
+
+```{r}
+APAandRNA=allRNA %>% inner_join(AllCounts_tmeme,by = c("Ind", "genotype", "numdose"))
+
+
+```
+
+
+
+```{r}
+ggplot(APAandRNA,aes(x=genotype, y=Expression, by=genotype, fill=genotype))+ geom_boxplot() + labs(title="Normalized expression")
+
+ggplot(APAandRNA,aes(x=genotype, y=APAcount, by=genotype, fill=genotype))+ geom_boxplot() + labs(title="UTR apa")
+```
+
+Test for effect on the residuals:  
+```{r}
+
+
+apa.LM=lm(APAandRNA$Expression ~ APAandRNA$APAcount)
+boxplot(APAandRNA$numdose,APAandRNA$Expression)
+```
+
+
+```{r}
+summary(lm(resid(apa.LM) ~  APAandRNA$numdose))
+
+
+boxplot(APAandRNA$numdose,resid(apa.LM))
+```
+
+Think about this more.   

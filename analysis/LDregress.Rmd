@@ -1,0 +1,55 @@
+---
+title: "LD score regression"
+author: "Briana Mittleman"
+date: "1/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+LD score regression with apaQTLs and multiple myeloma? 
+
+https://www.nature.com/articles/s41467-018-04989-w
+
+QTLs:
+
+Region around permuted snps. 500bp
+
+try a few different
+
+PAS:
+
+maybe 1000 base pairs around each PAS.
+
+bed file chrom start and end. - use CHR
+
+-b cells: lymphocite 
+
+
+GWAS atlas 
+
+http://www.computationalmedicine.fi/data#Cytokine_GWAS
+
+GWAS from Phenix= /project2/yangili1/zpmu/GWAS_loci/27863252 
+
+sle_Vyse_chr1-22.txt.gz 
+
+RA_GWASmeta_TransEthnic_v2.txt.gz
+
+http://www.nealelab.is/uk-biobank - myeloma and luekemias 
+
+HG 19 LD scores 
+
+- change to numpy 1.16 
+
+https://github.com/bulik/ldsc
+
+03,05,06,07
+
+/project2/yangili1/zpmu/ldsc/scripts
+
+
+
+

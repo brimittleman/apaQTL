@@ -162,6 +162,10 @@ These files create some of the QC metrics I used for the analysis.
 
 Revisions (Thank you to the reviewers for suggestions)  
 
-* [Decay and stability of transcripts](decayAndStability.html)
+* [Decay and stability of transcripts](decayAndStability.html)  
+
+* [LD score regression](LDregress.html)  
+
+* [Variance in eQTLs explained by apaQTL](varEqtl2varAPAqtl.html)  
 
 
