@@ -168,4 +168,6 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Variance in eQTLs explained by apaQTL](varEqtl2varAPAqtl.html)  
 
+* [Variance in APA and variance in ribosome occupancy](varAPAvarRibo.html)
+
 

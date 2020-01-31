@@ -1,0 +1,85 @@
+---
+title: "Variance in APA and variance in Ribosome occupancy"
+author: "Briana Mittleman"
+date: "1/31/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+In this analysis I will compare the variance in the APA data to variance in ribosome occupancy data. I will look at the top used PAS for this analysis first. I can then explore more if necessaary. I will compare the across individual variance for genes we have data in both phenotypes for. I will use the normalized usage. 
+
+
+First establish top used PAS per gene.  
+
+```{r}
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.bed", header = F,col.names = c("chr", "start","end","name", "score", "strand")) %>% separate(name, into=c("pasnum","gene", "loc"),sep=":") %>% group_by(gene) %>% arrange(desc(score)) %>% slice(1) %>% mutate(PAS=paste("peak",pasnum,sep=""))
+```
+
+
+```{r}
+
+Names=c("chr","start","end",colnames(read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz",header = T)))
+
+NuclearPheno=read.table("../data/phenotype_5perc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom",col.names = Names) %>% 
+  separate(chrom, into=c("c","s","e","peakgene"),sep=":") %>%
+  separate(peakgene, into=c("gene", "loc","strand","PAS"),sep="_")  %>% 
+  semi_join(PAS, by="PAS") %>% 
+  select(-chr,-start,-end,-c,-s,-e,-loc, -strand, -PAS) %>%
+  gather("Ind","value", -gene) %>%
+  group_by(gene) %>% 
+  summarise(VarAPA=var(value))
+```
+
+Ribosome occupancy normalized data:  
+
+Change gene names:  
+```{r}
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'GeneName', 'source' ),stringsAsFactors = F, header = T)  %>% select(gene_id, GeneName)
+```
+
+
+```{r}
+Rnames=colnames(read.table("../data/molPhenos/riboHead.txt", header = T))
+Ribo=read.table("../data/molPhenos/fastqtl_qqnorm_ribo_phase2.fixed.noChr.txt.gz", col.names = Rnames) %>% 
+  separate(ID,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames,by = "gene_id") %>% 
+  select(-Chr, -start,-end, -gene_id, -extra) %>% 
+  rename("gene"=GeneName) %>%
+  gather("Ind","value", -gene) %>%
+  group_by(gene) %>% 
+  summarise(VarRibo=var(value))
+```
+
+Join both together:  
+
+```{r}
+Both=Ribo %>% inner_join(NuclearPheno, by="gene")
+```
+
+We have 8780 genes with data in both.  
+
+```{r}
+cor.test(Both$VarRibo, Both$VarAPA,method="spearman")
+```
+
+```{r}
+ggplot(Both, aes(x=VarRibo, y=VarAPA)) + geom_point() +geom_smooth(method = "lm") + geom_density2d(col="red") + labs(y="Variance across individuals in nuclear APA", x="Variance across individuals in ribosome occupancy", title="Relationship between APA variance and Ribosome occupancy variance")
+```
+
+```{r}
+summary(lm(Both$VarAPA~ Both$VarRibo))
+```
+
+Significant positive correlation. This does not explain a lot of the variation. 
+
+
+
