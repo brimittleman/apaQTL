@@ -1,0 +1,70 @@
+---
+title: "QTL gene tissue specificity"
+author: "Briana Mittleman"
+date: "1/31/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to ask if genes with a apaQTL are more tissue specific. I will use the GTEX tissue data, similar to how I did for the number of PAS analysis.  
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(ggpubr)
+```
+The cutoff of 100 was chosen in a previous analysis. 
+
+```{r}
+
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'gene', 'source' ),stringsAsFactors = F, header = T)  %>% select(gene_id, gene)
+
+
+GTEX=read.table("../data/nPAS/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct", header = T, skip=2, sep = '\t') %>% 
+  separate(Name,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames, by="gene_id") %>% 
+  select(-gene_id,-Description,-extra) %>% 
+  gather("tissue", "TPM",-gene) %>% 
+  filter(TPM >= 100) %>%
+  group_by(gene) %>% 
+  summarise(nTissue=n()) %>% 
+  filter(nTissue<=54)
+```
+
+
+Join this information with my genes with and without QTLs.  
+
+```{r}
+NuclearQTLs=read.table("../data/apaQTLs/NuclearapaQTLGenes.txt", col.names = "gene", stringsAsFactors = F)
+NuclearQTLTested=read.table("../data/apaQTLs/TestedNuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F) %>% mutate(apaQTL=ifelse(gene %in%NuclearQTLs$gene, "Yes", "No" ))
+
+NuclearQTLTested$apaQTL=as.factor(NuclearQTLTested$apaQTL)
+```
+
+
+Join: 
+
+```{r}
+NuclearQTLTested_tissue= NuclearQTLTested %>% inner_join(GTEX, by="gene")
+```
+
+
+Plot:  
+
+```{r}
+ggplot(NuclearQTLTested_tissue, aes(x=apaQTL,fill=apaQTL,y=nTissue)) +geom_boxplot()+ stat_compare_means()
+
+ggplot(NuclearQTLTested_tissue, aes(by=apaQTL,fill=apaQTL,x=nTissue)) +geom_density(alpha=.4)
+```
+```{r}
+
+NuclearQTLTested_tissue_apa= NuclearQTLTested_tissue %>% filter(apaQTL=="Yes")
+NuclearQTLTested_tissue_noapa= NuclearQTLTested_tissue %>% filter(apaQTL=="No")
+wilcox.test(NuclearQTLTested_tissue_apa$nTissue, NuclearQTLTested_tissue_noapa$nTissue)
+```
+
+No difference in tissue expression.

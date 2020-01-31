@@ -1,0 +1,350 @@
+---
+title: "Test by number of PAS"
+author: "Briana Mittleman"
+date: "1/31/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(workflowr)
+library(ggpubr)
+library(tidyverse)
+```
+
+In this analysis I will answer the reviewer questions related to the number of PAS per gene.  
+
+First I want to get the number of PAS used at 5% per gene.  I am doing this with the nuclear results.  
+
+```{r}
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% separate(name,into=c("pas", 'gene','loc'), sep=":") %>% group_by(gene) %>% summarise(nPAS=n())
+```
+
+
+```{r}
+ggplot(PAS,aes(x=nPAS)) + geom_bar()
+```
+The data goes from 1-10 PAS per gene.  
+
+
+###length of gene  
+
+I will start with AllTranscriptsbyName.Grouped.bed. For this I will used the longest annotated transcript by transcription start and end. 
+
+```{r}
+genes=read.table("../../genome_anotation_data/RefSeq_annotations/Hg19_refseq_genes.txt",header = T,stringsAsFactors = F) %>%
+  mutate(Genelength=txEnd-txStart) %>% 
+  group_by(name2) %>% 
+  arrange(desc(Genelength)) %>% 
+  slice(1) %>% 
+  select(name2, Genelength) %>% 
+  rename("gene"=name2)
+
+
+```
+
+
+```{r}
+PAS_wLength= PAS %>% inner_join(genes, by="gene")
+```
+
+
+Check for correlation
+```{r}
+cor.test(PAS_wLength$Genelength, PAS_wLength$nPAS)
+```
+
+
+
+```{r}
+PAS_wLength$nPAS=as.factor(PAS_wLength$nPAS)
+
+ggplot(PAS_wLength, aes(x=nPAS,y=log10(Genelength), fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="log10(Length of Gene)", title="Relationship between gene length and Number of PAS") 
+```
+
+Seperate by only 1 pas vs multiple.  
+
+```{r}
+
+PAS_wLength$nPAS=as.numeric(as.character(PAS_wLength$nPAS))
+
+
+PAS_wLength_apa= PAS_wLength %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_wLength_apa,aes(x=APA, y=log10(Genelength))) + geom_boxplot() + stat_compare_means()
+```
+###UTR length
+I also will look at length of the longest annotated 3' UTR:  
+
+```{r}
+UTR=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_UTR3.sort.bed",col.names = c('chr','start','end','utr','gene', 'score','strand'),stringsAsFactors = F) %>% 
+  mutate(UTRlength=end-start) %>% 
+  group_by(gene) %>% 
+  arrange(desc(UTRlength)) %>% 
+  slice(1) %>% 
+  select(gene, UTRlength) 
+```
+
+```{r}
+PAS_wUTRLength= PAS %>% inner_join(UTR, by="gene")
+```
+
+
+Check for correlation
+```{r}
+cor.test(PAS_wLength$Genelength, PAS_wLength$nPAS)
+```
+
+```{r}
+
+PAS_wUTRLength$nPAS=as.factor(PAS_wUTRLength$nPAS)
+ggplot(PAS_wUTRLength, aes(x=nPAS,y=log10(UTRlength), fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="log10(Length of UTR)", title="Relationship between UTR length and Number of PAS") 
+```
+
+Seperate by only 1 pas vs multiple.  
+
+```{r}
+
+PAS_wUTRLength$nPAS=as.numeric(as.character(PAS_wUTRLength$nPAS))
+
+
+PAS_wUTRLength_apa= PAS_wUTRLength %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_wUTRLength_apa,aes(x=APA, y=log10(UTRlength))) + geom_boxplot() + stat_compare_means()
+
+ggplot(PAS_wUTRLength_apa,aes(by=APA, fill=APA, x=log10(UTRlength))) + geom_density(alpha=.5)
+```
+
+Only the UTR pas:  
+
+```{r}
+PAS_Utr= read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% 
+  separate(name,into=c("pas", 'gene','loc'), sep=":") %>% 
+  filter(loc=="utr3") %>% 
+  group_by(gene) %>% 
+  summarise(nUTRPAS=n())
+```
+
+
+```{r}
+UTRPAS_wUTRLength= PAS_Utr %>% inner_join(UTR, by="gene")
+```
+
+
+
+Check for correlation
+```{r}
+cor.test(UTRPAS_wUTRLength$UTRlength, UTRPAS_wUTRLength$nUTRPAS)
+
+summary(lm(log10(UTRPAS_wUTRLength$UTRlength) ~ UTRPAS_wUTRLength$nUTRPAS))
+```
+
+
+
+```{r}
+
+UTRPAS_wUTRLength$nUTRPAS=as.factor(UTRPAS_wUTRLength$nUTRPAS)
+ggplot(UTRPAS_wUTRLength, aes(x=nUTRPAS,y=log10(UTRlength), fill=nUTRPAS)) + geom_boxplot() + labs(x="Number of 3' UTR PAS", y="log10(Length of UTR)", title="Relationship between UTR length and Number of PAS") 
+```
+
+
+###Expression level
+Expression level by number of PAS 
+
+Calculate mean normalized gene expression values per gene.  
+
+```{r}
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'gene', 'source' ),stringsAsFactors = F, header = T)  %>% select(gene_id, gene)
+```
+
+```{r}
+Rnames=colnames(read.table("../data/molPhenos/RNAhead.txt", header = T))
+Expression=read.table("../data/molPhenos/fastqtl_qqnorm_RNAseq_phase2.fixed.noChr.txt.gz",col.names = Rnames) %>% 
+  separate(ID,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames,by = "gene_id") %>%
+  select(-Chr,-start,-end,-gene_id, -extra) %>% 
+  gather("ind", "exp", -gene) %>% 
+  group_by(gene) %>% 
+  summarise(MeanExp=mean(exp))
+  
+  
+```
+
+
+
+```{r}
+PAS_wExp= PAS %>% inner_join(Expression, by="gene")
+
+cor.test(PAS_wExp$MeanExp, PAS_wExp$nPAS)
+
+summary(lm(PAS_wExp$MeanExp ~ PAS_wExp$nPAS))
+```
+
+
+```{r}
+PAS_wExp$nPAS=as.factor(PAS_wExp$nPAS)
+
+ggplot(PAS_wExp, aes(x=nPAS,y=MeanExp, fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Mean normalized expression", title="Relationship between expression and Number of PAS") 
+```
+
+No aparent difference here. I will remove the 12 and test correlation again.  
+
+
+```{r}
+PAS_wExpFilt= PAS %>% inner_join(Expression, by="gene") %>% filter(nPAS <10)
+
+cor.test(PAS_wExpFilt$MeanExp, PAS_wExpFilt$nPAS)
+
+summary(lm(PAS_wExpFilt$MeanExp ~ PAS_wExpFilt$nPAS))
+```
+```{r}
+
+PAS_wExpFilt$nPAS=as.numeric(as.character(PAS_wExpFilt$nPAS))
+
+
+PAS_wExpFilt_apa= PAS_wExpFilt %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_wExpFilt_apa,aes(x=APA, y=MeanExp)) + geom_boxplot() + stat_compare_means()
+
+
+
+ggplot(PAS_wExpFilt_apa,aes(by=APA, fill=APA, x=MeanExp)) + geom_density(alpha=.5)
+```
+
+It looks like there is a significant difference here between genes with APA and those without, but visualy it doesnt look like number of PAS is driven by expression.  
+
+
+##Go terms  
+
+I will write out seperate lists for genes with 1 PAS and those with more than one. I will use GOrilla to test for gene set inforamtion  
+
+```{r}
+PAS_noapa= PAS %>% filter(nPAS==1) %>% select(gene)
+PAS_apa= PAS %>% filter(nPAS>1)%>%arrange(desc(nPAS)) %>% select(gene)
+```
+
+I will use 1 PAS as backgroun and with APA as the set.  
+
+```{bash,eval=F}
+mkdir ../data/nPAS/
+```
+
+```{r}
+write.table(PAS_noapa,"../data/nPAS/GenesNoAPA.txt", col.names = F, row.names = F, quote = F)
+write.table(PAS_apa,"../data/nPAS/GenesAPA.txt", col.names = F, row.names = F, quote = F)
+```
+
+Significant processes : FDR q <10^-9:  
+
+regulation of nucleobase-containing compound metabolic process	
+regulation of cellular macromolecule biosynthetic process	
+nucleic acid metabolic process	
+regulation of macromolecule biosynthetic process	
+regulation of cellular biosynthetic process	
+regulation of nucleic acid-templated transcription	
+regulation of RNA biosynthetic process	
+regulation of transcription, DNA-templated	
+regulation of biosynthetic process	
+regulation of nitrogen compound metabolic process	
+regulation of primary metabolic process	
+regulation of cellular metabolic process	
+RNA processing	
+
+Significant function : FDR q <10^-9:  
+
+heterocyclic compound binding	
+organic cyclic compound binding	
+nucleic acid binding	
+DNA binding	
+
+Significant component : FDR q <10^-9:  
+
+intracellular part
+nucleoplasm
+nuclear part	
+intracellular organelle
+nucleus	
+intracellular membrane-bounded organelle	
+intracellular organelle part	
+nucleoplasm part	
+organelle part	
+organelle  
+
+Not really sure what to do with this. I don't have an expectation for this. These are key ceullualar processes, functions, and regions. Most genes in this analysis have APA.  
+
+
+###Tissue specificity  
+
+Median gene-level TPM by tissue. Median expression was calculated from the file GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct.gz.	
+
+I will download information from gtex. I can then set a TPM cutoff and look at for each gene how many tissues it is expressed.  
+
+
+
+```{r}
+GTEX_test<-read.table("../data/nPAS/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct", header = T, skip=2, sep = '\t') %>% 
+  separate(Name,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames, by="gene_id") %>% 
+  select(-gene_id,-Description,-extra) %>% 
+  gather("tissue", "TPM",-gene)
+  
+  
+  
+```
+
+```{r}
+ggplot(GTEX_test,aes(y=log10(TPM), by=tissue, fill=tissue)) + geom_boxplot()+theme(legend.position = "none") 
+```
+
+Try logTPM of 2 - 100
+
+
+Filter genes that come up with more than 54 due to gene name issues. 
+```{r}
+GTEX=read.table("../data/nPAS/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct", header = T, skip=2, sep = '\t') %>% 
+  separate(Name,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames, by="gene_id") %>% 
+  select(-gene_id,-Description,-extra) %>% 
+  gather("tissue", "TPM",-gene) %>% 
+  filter(TPM >=100 )%>%
+  group_by(gene) %>% 
+  summarise(nTissue=n()) %>% 
+  filter(nTissue<=54)
+  
+```
+
+Join this with the PAS info:
+
+```{r}
+PAS_tissue=PAS %>% inner_join(GTEX,by="gene")
+```
+
+
+```{r}
+cor.test(PAS_tissue$nPAS, PAS_tissue$nTissue)
+```
+
+
+```{r}
+PAS_tissue$nPAS= as.factor(PAS_tissue$nPAS)
+ggplot(PAS_tissue, aes(x=nPAS,y=nTissue, fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Number of tissues median TPM>2", title="Relationship tissue specificity and Number of PAS") 
+```
+With and without APA
+
+```{r}
+
+PAS_tissue$nPAS=as.numeric(as.character(PAS_tissue$nPAS))
+
+
+PAS_tissue_apa= PAS_tissue %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_tissue_apa,aes(by=APA, x=nTissue,fill=APA)) + geom_density(alpha=.4)
+```
+
+
+Looks like genes with apa are a bit more specific. 
+

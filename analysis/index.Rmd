@@ -172,4 +172,8 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Conservation of PAS](ConservationPAS.html)
 
+* [Explore number of PAS and other parameters](ExploreNpas.html)
+
+* [Tissue specificity for apaQTL PAS](apaQTL_tissueSpec.html)
+
 
