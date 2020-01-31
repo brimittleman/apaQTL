@@ -1,0 +1,123 @@
+---
+title: "Conservation of PAS"
+author: "Briana Mittleman"
+date: "1/31/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I want to study the conservation of the PAS. I will compare PAS with QTLs and those without. I will use PhyloP score. PhyloP scores for 100 vertibrates are available on the genome browser.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(ggpubr)
+```
+
+```{bash,eval=F}
+mkdir ../data/phylop/
+```
+
+PhyloP: Column #1 contains a one-based position coordinate. Column #2 contains a score showing the posterior probability that the phylogenetic hidden Markov model (HMM) of phastCons is in its most conserved state at that base position. I will use pybigwig to extract the regions I care about.  
+
+I will look at the 200 basepairs around each PAS.  
+
+```{r}
+pas=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% mutate(newStart=end-100,newEnd=end+100) %>% select(chr,newStart,newEnd, name)
+
+write.table(pas,"../data/phylop/PAS_regions.txt",col.names = F,row.names = F,quote = F,sep="\t")
+```
+
+
+```{bash,eval=F}
+python extractPACmeanPhyloP.py
+```
+
+Add information about qtl or not:  
+
+```{r}
+nucQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt",header = T) 
+```
+
+```{r}
+phylores=read.table("../data/phylop/PAS_phyloP.txt", col.names = c("chr","start","end","name", "phyloP"), stringsAsFactors = F) %>% drop_na() %>% separate(name,into=c("pasnum","geneid"), sep=":") %>% mutate(PAS=paste("peak",pasnum,sep="")) %>% mutate(HasQTL=ifelse(PAS %in% nucQTL$Peak, "Yes","No"))
+
+```
+41,810 - 41649
+
+lost 161 to NAs
+
+Plot:  
+
+```{r}
+ggplot(phylores,aes(x=phyloP, by=HasQTL, fill=HasQTL)) +geom_density(alpha=.5)
+
+ggplot(phylores,aes(y=phyloP, x=HasQTL,fill=HasQTL)) + geom_boxplot() + stat_compare_means()+ scale_fill_brewer(palette = "Dark2", name="Signficant")
+```
+
+With a QTL is lower score.  Look at enrichment for negative  
+
+```{r}
+x=nrow(phylores %>% filter(HasQTL=="Yes", phyloP<0))
+m= nrow(phylores %>% filter(phyloP<0))
+n=nrow(phylores %>% filter(phyloP>=0))
+k=nrow(phylores %>% filter(HasQTL=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+
+Enriched for regions expected to be rapidly evolving.  
+
+
+
+Try with smaller regions:  
+
+```{r}
+pas100=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% mutate(newStart=end-50,newEnd=end+50) %>% select(chr,newStart,newEnd, name)
+
+write.table(pas,"../data/phylop/PAS100_regions.txt",col.names = F,row.names = F,quote = F,sep="\t")
+```
+```{bash,eval=F}
+python extactPAS100meanphyloP.py
+```
+
+```{r}
+phylores100=read.table("../data/phylop/PAS100_phyloP.txt", col.names = c("chr","start","end","name", "phyloP"), stringsAsFactors = F) %>% drop_na() %>% separate(name,into=c("pasnum","geneid"), sep=":") %>% mutate(PAS=paste("peak",pasnum,sep="")) %>% mutate(HasQTL=ifelse(PAS %in% nucQTL$Peak, "Yes","No"))
+
+```
+
+
+```{r}
+ggplot(phylores100,aes(x=phyloP, by=HasQTL, fill=HasQTL)) +geom_density(alpha=.5)
+
+ggplot(phylores100,aes(y=phyloP, x=HasQTL,fill=HasQTL)) + geom_boxplot() + stat_compare_means()+ scale_fill_brewer(palette = "Dark2", name="Signficant")
+```
+
+```{r}
+x=nrow(phylores100 %>% filter(HasQTL=="Yes", phyloP<0))
+m= nrow(phylores100 %>% filter(phyloP<0))
+n=nrow(phylores100 %>% filter(phyloP>=0))
+k=nrow(phylores100 %>% filter(HasQTL=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+Exact same results.  
