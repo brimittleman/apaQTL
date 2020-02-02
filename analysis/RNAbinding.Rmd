@@ -1,0 +1,354 @@
+---
+title: "RNA binding"
+author: "Briana Mittleman"
+date: "2/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+
+I will use eClip data from encode to study RNA binding. I will use the results from K562 cells. They do not have data for LCLs. 
+
+https://www.encodeproject.org/search/?type=Experiment&status=released&assay_title=eCLIP&biosample_ontology.term_name=K562&assay_title=eCLIP
+
+Downloading the bed files for 25 different proteins. 
+
+
+```{bash,eval=F}
+mkdir ../data/eCLip/
+```
+
+I will search in all of the gene UTRs for each of these. I will see if there is more likely to be an overlap in genes with APA.  
+
+I need to cut the CHR from each file.  
+
+
+```{bash,eval=F}
+for i in $(ls ../data/eCLip/*.bed)
+do
+name=$(echo ${i} | cut -f 4 -d '/' | cut -f 1 -d '.')
+sed 's/^chr//' $i >  ../data/eCLip/${name}.noCHR.bed
+done
+```
+
+Run overlap for all othese with bedtools. I will make a bedfile with the longest UTR annoation for each gene.  
+```{r}
+UTR=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_UTR3.sort.bed",col.names = c('chr','start','end','utr','gene', 'score','strand'),stringsAsFactors = F) %>% 
+  mutate(UTRlength=end-start) %>% 
+  group_by(gene)%>% 
+  arrange(desc(UTRlength)) %>% 
+  filter(row_number() == 1L) %>% 
+  select(chr, start,end, gene, score, strand)
+
+write.table(UTR, "../data/eCLip/UTRregions.bed", row.names = F, col.names = F, quote = F,sep="\t")
+```
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/eCLip/UTRregions.bed > ../data/eCLip/UTRregions.sort.bed
+```
+
+Merge the regions with the name being the name of the RNA.  
+
+```{bash,eval-F}
+cat ../data/eCLip/*.noCHR.bed > ../data/eCLip/ALLRBP.noCHR.bed
+sort -k1,1 -k2,2n ../data/eCLip/ALLRBP.noCHR.bed | cut -f 1-6 > ../data/eCLip/ALLRBP.noCHR.sort.bed
+```
+
+Now I can map.Print the distinct RBP in each UTR.  
+
+```{bash,eval=F}
+bedtools map -a ../data/eCLip/UTRregions.sort.bed -b ../data/eCLip/ALLRBP.noCHR.sort.bed -c 4 -o distinct -s > ../data/eCLip/AllUTRsMappedallRBP.txt
+```
+
+
+I will also run this all seperatly for downstream analysis:  
+
+```{bash,eval=F}
+sbatch MapAllRBP.sh
+```
+
+
+I will compare genes with and without QTLs.  
+```{r}
+QTL_genes=read.table("../data/apaQTLs/NuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F)
+QTLTested_genes=read.table("../data/apaQTLs/TestedNuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F) %>% mutate(QTL=ifelse(gene %in% QTL_genes$gene, "Yes","No"))
+```
+
+```{r}
+
+PHF6=read.table("../data/eCLip/UTRregions_ENCFF016IHL_PHF6.txt",header=F, col.names = c('chr','start','end','gene','score','strand','RBP'),stringsAsFactors = F) %>% inner_join(QTLTested_genes, by='gene') %>% mutate(PHF6=ifelse(RBP=="PHF6_K562_rep01", "Yes","No"))
+
+
+```
+
+```{r}
+x=nrow(PHF6 %>% filter(PHF6=="Yes", QTL=="Yes"))
+m= nrow(PHF6 %>% filter(PHF6=="Yes"))
+n=nrow(PHF6 %>% filter(PHF6!="Yes"))
+k=nrow(PHF6 %>% filter(QTL=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+
+
+Test for any RBP:  
+
+```{r}
+All=read.table("../data/eCLip/AllUTRsMappedallRBP.txt",header=F, col.names = c('chr','start','end','gene','score','strand','RBP'),stringsAsFactors = F)  %>% 
+  inner_join(QTLTested_genes, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+
+
+```
+
+```{r}
+x=nrow(All %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(All %>% filter(HasRBP=="Yes"))
+n=nrow(All %>% filter(HasRBP!="Yes"))
+k=nrow(All %>% filter(QTL=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+This means genes with QTLs are enriched for genes with an identified RBP in the its UTR.  
+
+
+Let's look at this by the location of QTL.  
+
+```{r}
+QTL_intron=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed",stringsAsFactors = F,header = T) %>% 
+  separate(name, into=c("gene", "PAS","loc"),sep=":") %>% 
+  filter(loc=="intron")
+QTL_UTR=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed",stringsAsFactors = F,header = T) %>% 
+  separate(name, into=c("gene", "PAS","loc"),sep=":") %>% 
+  filter(loc=="utr3")
+
+
+QTLTested_intron=read.table("../data/apaQTLs/TestedNuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F) %>% mutate(QTL=ifelse(gene %in% QTL_intron$gene, "Yes","No"))
+
+
+QTLTested_utr=read.table("../data/apaQTLs/TestedNuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F) %>% mutate(QTL=ifelse(gene %in% QTL_UTR$gene, "Yes","No"))
+```
+
+```{r}
+All_intron=read.table("../data/eCLip/AllUTRsMappedallRBP.txt",header=F, col.names = c('chr','start','end','gene','score','strand','RBP'),stringsAsFactors = F)  %>% 
+  inner_join(QTLTested_intron, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+
+x=nrow(All_intron %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(All_intron %>% filter(HasRBP=="Yes"))
+n=nrow(All_intron %>% filter(HasRBP!="Yes"))
+k=nrow(All_intron %>% filter(QTL=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+
+```
+
+```{r}
+All_UTR=read.table("../data/eCLip/AllUTRsMappedallRBP.txt",header=F, col.names = c('chr','start','end','gene','score','strand','RBP'),stringsAsFactors = F)  %>% 
+  inner_join(QTLTested_utr, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+
+x=nrow(All_UTR %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(All_UTR %>% filter(HasRBP=="Yes"))
+n=nrow(All_UTR %>% filter(HasRBP!="Yes"))
+k=nrow(All_UTR %>% filter(QTL=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+This is only significant for genes with QTL's associated with the 3' UTR. 
+
+
+Try to find which RBP is driving the assocations.  
+
+I want a function that will go through each of the RBPs and test for this enrichment association. 
+
+```{bash,eval=F}
+for i in $(ls ../data/eCLip/ENCFF*.small.noCHR.bed)
+do
+name=$(echo ${i} | cut -f 4 -d '/' | cut -f 1 -d '.')
+echo $name >> ../data/eCLip/RBPtested.txt
+done
+```
+
+```{r}
+RBP_names=read.table("../data/eCLip/RBPtested.txt", col.names = "RBP",stringsAsFactors = F)
+```
+
+```{r}
+expected=c()
+actual=c()
+pval=c()
+for (RBP in RBP_names$RBP){
+RBPfile=read.table(paste("../data/eCLip/UTRregions_", RBP,".txt", sep=""),header=F, col.names = c('chr','start','end','gene','score','strand','RBP'), stringsAsFactors = F) %>%
+  inner_join(QTLTested_genes, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+x=nrow(RBPfile %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(RBPfile %>% filter(HasRBP=="Yes"))
+n=nrow(RBPfile %>% filter(HasRBP!="Yes"))
+k=nrow(RBPfile %>% filter(QTL=="Yes"))
+expected=c(expected, which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k))))
+actual=c(actual,x)
+pval=c(pval,phyper(x,m,n,k,lower.tail=F))
+}
+
+
+```
+
+```{r}
+
+RBP_names_res= as.data.frame(cbind(RBP=RBP_names$RBP, expected,actual,pval)) %>% separate(RBP, into=c("exp", "protein"),sep="_")
+
+RBP_names_res$pval=as.numeric(as.character(RBP_names_res$pval))
+
+ggplot(RBP_names_res, aes(x=protein, y=-log10(pval),fill=protein))+geom_bar(stat="identity") +theme(legend.position = "none", axis.text.x = element_text(angle = 90)) +labs(title="Enrichment for nuclear apaQTL genes with RBP in UTR",y="-log10(Enrichment pval)") + geom_hline(yintercept = 2)
+```
+Do this for UTR QTL  
+
+```{r}
+expectedUTR=c()
+actualUTR=c()
+pvalUTR=c()
+for (RBP in RBP_names$RBP){
+RBPfile=read.table(paste("../data/eCLip/UTRregions_", RBP,".txt", sep=""),header=F, col.names = c('chr','start','end','gene','score','strand','RBP'), stringsAsFactors = F) %>%
+  inner_join(QTLTested_utr, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+x=nrow(RBPfile %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(RBPfile %>% filter(HasRBP=="Yes"))
+n=nrow(RBPfile %>% filter(HasRBP!="Yes"))
+k=nrow(RBPfile %>% filter(QTL=="Yes"))
+expectedUTR=c(expectedUTR, which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k))))
+actualUTR=c(actualUTR,x)
+pvalUTR=c(pvalUTR,phyper(x,m,n,k,lower.tail=F))
+}
+
+
+```
+
+```{r}
+
+RBP_names_resUTR= as.data.frame(cbind(RBP=RBP_names$RBP, expectedUTR,actualUTR,pvalUTR)) %>% separate(RBP, into=c("exp", "protein"),sep="_")
+
+RBP_names_resUTR$pvalUTR=as.numeric(as.character(RBP_names_resUTR$pvalUTR))
+
+ggplot(RBP_names_resUTR, aes(x=protein, y=-log10(pvalUTR),fill=protein))+geom_bar(stat="identity") +theme(legend.position = "none", axis.text.x = element_text(angle = 90)) +labs(title="Enrichment for 3' UTR nuclear apaQTL genes with RBP in UTR",y="-log10(Enrichment pval)") + geom_hline(yintercept = 2)
+```
+
+Intronic:  
+```{r}
+expectedIntron=c()
+actualIntron=c()
+pvalIntron=c()
+for (RBP in RBP_names$RBP){
+RBPfile=read.table(paste("../data/eCLip/UTRregions_", RBP,".txt", sep=""),header=F, col.names = c('chr','start','end','gene','score','strand','RBP'), stringsAsFactors = F) %>%
+  inner_join(QTLTested_intron, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+x=nrow(RBPfile %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(RBPfile %>% filter(HasRBP=="Yes"))
+n=nrow(RBPfile %>% filter(HasRBP!="Yes"))
+k=nrow(RBPfile %>% filter(QTL=="Yes"))
+expectedIntron=c(expectedIntron, which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k))))
+actualIntron=c(actualIntron,x)
+pvalIntron=c(pvalIntron,phyper(x,m,n,k,lower.tail=F))
+}
+
+
+```
+
+```{r}
+
+RBP_names_resIntron= as.data.frame(cbind(RBP=RBP_names$RBP, expectedIntron,actualIntron,pvalIntron)) %>% separate(RBP, into=c("exp", "protein"),sep="_")
+
+RBP_names_resIntron$pvalIntron=as.numeric(as.character(RBP_names_resIntron$pvalIntron))
+
+ggplot(RBP_names_resIntron, aes(x=protein, y=-log10(pvalIntron),fill=protein))+geom_bar(stat="identity") +theme(legend.position = "none", axis.text.x = element_text(angle = 90)) +labs(title="Enrichment for Intronic nuclear apaQTL genes with RBP in UTR",y="-log10(Enrichment pval)") + geom_hline(yintercept = 2)
+```
+
+Looks like the protiens driving this are SAFB and FUS.  
+
+FUS: Associated both with RNA splicing and nuclear export.  
+
+SAFB:  cotranscriptional.  
+
+
+Compare to total apaQTLs:  
+
+
+```{r}
+TotalQTL_genes=read.table("../data/apaQTLs/TotalapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F)
+TotalQTLTested_genes=read.table("../data/apaQTLs/TestedTotalapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F) %>% mutate(QTL=ifelse(gene %in% QTL_genes$gene, "Yes","No"))
+```
+
+
+```{r}
+expectedT=c()
+actualT=c()
+pvalT=c()
+for (RBP in RBP_names$RBP){
+RBPfile=read.table(paste("../data/eCLip/UTRregions_", RBP,".txt", sep=""),header=F, col.names = c('chr','start','end','gene','score','strand','RBP'), stringsAsFactors = F) %>%
+  inner_join(TotalQTLTested_genes, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+x=nrow(RBPfile %>% filter(HasRBP=="Yes", QTL=="Yes"))
+m= nrow(RBPfile %>% filter(HasRBP=="Yes"))
+n=nrow(RBPfile %>% filter(HasRBP!="Yes"))
+k=nrow(RBPfile %>% filter(QTL=="Yes"))
+expectedT=c(expectedT, which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k))))
+actualT=c(actualT,x)
+pvalT=c(pvalT,phyper(x,m,n,k,lower.tail=F))
+}
+```
+
+
+```{r}
+
+RBP_names_resT= as.data.frame(cbind(RBP=RBP_names$RBP, expectedT,actualT,pvalT)) %>% separate(RBP, into=c("exp", "protein"),sep="_")
+
+RBP_names_resT$pvalT=as.numeric(as.character(RBP_names_resT$pvalT))
+
+ggplot(RBP_names_resT, aes(x=protein, y=-log10(pvalT),fill=protein))+geom_bar(stat="identity") +theme(legend.position = "none", axis.text.x = element_text(angle = 90)) +labs(title="Enrichment for total apaQTL genes with RBP in UTR",y="-log10(Enrichment pval)") + geom_hline(yintercept = 2)
+```
+
+Total fraction GRWD1 and HNRNPC pop up too   
+
+GRWD1: encoded protein may play a critical role in ribosome biogenesis and may also play a role in histone methylation through interactions   
+
+HNRNPC: The hnRNPs are RNA binding proteins and they complex with heterogeneous nuclear RNA (hnRNA). These proteins are associated with pre-mRNAs in the nucleus and appear to influence pre-mRNA processing and other aspects of mRNA metabolism and transport
