@@ -1,0 +1,45 @@
+---
+title: "Number of TSS and PAS information"
+author: "Briana Mittleman"
+date: "2/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I will download encode cage data for TSS evidence in LCLs (GM12878). This cell line is a hapmap female of european ancestry.  I will download the bed TSS file for HG19 for the nuclear fraction.  I will also download the cytosolic fraction. This way I can ask if some of the isoforms in the nuclear specific overlap.  
+
+```{bash,eval=F}
+mkdir ../data/TSS
+```
+
+Nuclear file ENCFF358CEV.bed.gz  There are 12344 peaks reported.
+Cytosolic file ENCFF140PCA.bed.gz There are 10991 peaks reported 
+I will unzip and remove the chr.  
+
+```{bash,eval=F}
+gunzip ../data/TSS/ENCFF358CEV.bed.gz
+sed 's/^chr//' ../data/TSS/ENCFF358CEV.bed >  ../data/TSS/ENCFF358CEV_Nuclear_noChr.bed
+sort -k1,1  -k2,2n ../data/TSS/ENCFF358CEV_Nuclear_noChr.bed  > ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed
+
+
+gunzip ../data/TSS/ENCFF140PCA.bed.gz
+sed 's/^chr//' ../data/TSS/ENCFF140PCA.bed >  ../data/TSS/ENCFF140PCA_Cyto_noChr.bed
+sort -k1,1 -k2,2n ../data/TSS/ENCFF140PCA_Cyto_noChr.bed > ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed
+```
+
+
+I will look for nuclear specific TSS using bedtools. 
+
+-v in a not in b
+
+```{bash,eval=F}
+bedtools intersect -v -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed -b  ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed -s -sorted > CageSeq_NuclearSpecific.bed
+```
+
+There are 8049 TSS peaks in this set.  
+
+
+

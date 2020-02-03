@@ -166,14 +166,18 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [LD score regression](LDregress.html)  
 
-* [Variance in eQTLs explained by apaQTL](varEqtl2varAPAqtl.html)  
+* [Variance in eQTLs explained by apaQTL](varEqtl2varAPAqtl.html)   
 
-* [Variance in APA and variance in ribosome occupancy](varAPAvarRibo.html)
+* [Variance in APA and variance in ribosome occupancy](varAPAvarRibo.html)  
 
-* [Conservation of PAS](ConservationPAS.html)
+* [Conservation of PAS](ConservationPAS.html)  
 
-* [Explore number of PAS and other parameters](ExploreNpas.html)
+* [Explore number of PAS and other parameters](ExploreNpas.html)  
 
-* [Tissue specificity for apaQTL PAS](apaQTL_tissueSpec.html)
+* [Tissue specificity for apaQTL PAS](apaQTL_tissueSpec.html)  
+
+* [RNA binding proteins](RNAbinding.html)
+
+* [TSS analysis](TSS.html)
 
 
