@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-02
+<strong>Last updated:</strong> 2020-02-03
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6targetblankd0f4f33a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6" target="_blank">d0f4f33</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree63c435ab69dd792c739ba6802af779ad1475a942targetblank63c435aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/63c435ab69dd792c739ba6802af779ad1475a942" target="_blank">63c435a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6targetblankd0f4f33a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree63c435ab69dd792c739ba6802af779ad1475a942targetblank63c435aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -741,7 +741,6 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions.out
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
-    Untracked:  code/CageSeq_NuclearSpecific.bed
     Untracked:  code/DistPAS2Sig_RandomIntron.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
@@ -1166,6 +1165,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/63c435ab69dd792c739ba6802af779ad1475a942/analysis/TSS.Rmd" target="_blank">63c435a</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-03
+</td>
+<td>
+add mult TSS results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/723946b30059d4bdc03aa29c2e0762d84ee1faa3/docs/TSS.html" target="_blank">723946b</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6/analysis/TSS.Rmd" target="_blank">d0f4f33</a>
 </td>
 <td>
@@ -1185,6 +1218,28 @@ add TSS analysis
 </div>
 </div>
 </div>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ─────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>── Conflicts ────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.5.0
+Run ?workflowr for help getting started</code></pre>
+<pre class="r"><code>library(ggpubr)</code></pre>
+<pre><code>Loading required package: magrittr</code></pre>
+<pre><code>
+Attaching package: &#39;magrittr&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:purrr&#39;:
+
+    set_names</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    extract</code></pre>
 <p>I will download encode cage data for TSS evidence in LCLs (GM12878). This cell line is a hapmap female of european ancestry. I will download the bed TSS file for HG19 for the nuclear fraction. I will also download the cytosolic fraction. This way I can ask if some of the isoforms in the nuclear specific overlap.</p>
 <pre class="bash"><code>mkdir ../data/TSS</code></pre>
 <p>Nuclear file ENCFF358CEV.bed.gz There are 12344 peaks reported. Cytosolic file ENCFF140PCA.bed.gz There are 10991 peaks reported I will unzip and remove the chr.</p>
@@ -1198,8 +1253,147 @@ sed &#39;s/^chr//&#39; ../data/TSS/ENCFF140PCA.bed &gt;  ../data/TSS/ENCFF140PCA
 sort -k1,1 -k2,2n ../data/TSS/ENCFF140PCA_Cyto_noChr.bed &gt; ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed</code></pre>
 <p>I will look for nuclear specific TSS using bedtools.</p>
 <p>-v in a not in b</p>
-<pre class="bash"><code>bedtools intersect -v -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed -b  ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed -s -sorted &gt; CageSeq_NuclearSpecific.bed</code></pre>
+<pre class="bash"><code>bedtools intersect -v -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed -b  ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed -s -sorted &gt; ../data/TSS/CageSeq_NuclearSpecific.bed</code></pre>
 <p>There are 8049 TSS peaks in this set.</p>
+<pre class="bash"><code>cut -f 1-6 ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed  &gt; ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small.bed
+
+
+cut -f 1-6 ../data/TSS/CageSeq_NuclearSpecific.bed &gt; ../data/TSS/CageSeq_NuclearSpecific.small.bed
+
+
+cut -f 1-6 ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed  &gt; ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small.bed</code></pre>
+<p>I need to map these to genes. I will take the longest then extend the start 1000bp to account for changes</p>
+<pre class="r"><code>genes=read.table(&quot;../../genome_anotation_data/RefSeq_annotations/Hg19_refseq_genes.txt&quot;,header = T,stringsAsFactors = F) %&gt;%
+  mutate(Genelength=txEnd-txStart) %&gt;% 
+  group_by(name2) %&gt;% 
+  arrange(desc(Genelength)) %&gt;% 
+  dplyr::slice(1) %&gt;% 
+  mutate(newStart=ifelse(strand==&quot;+&quot;, txStart-1000, txStart), newEnd=ifelse(strand==&quot;+&quot;,txEnd, txEnd+1000 )) %&gt;% 
+  select(chrom,newStart, newEnd, name2,Genelength, strand)
+
+write.table(genes,&quot;../data/TSS/longest_transcript_refseqGene_exd1000.bed&quot;, sep=&quot;\t&quot;, col.names=F, row.names=F, quote=F)</code></pre>
+<p>Use bedtools closest to map all of the TSS to genes:</p>
+<pre class="bash"><code>sed &#39;s/^chr//&#39; ../data/TSS/longest_transcript_refseqGene_exd1000.bed | sort -k1,1 -k2,2n &gt; ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed
+
+bedtools closest -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small.bed -b ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed -s  &gt; ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small_withGene.txt
+
+bedtools closest -a ../data/TSS/CageSeq_NuclearSpecific.small.bed -b ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed -s  &gt; ../data/TSS/CageSeq_NuclearSpecific.small_withGene.txt
+
+bedtools closest -a ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small.bed -b ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed  -s  &gt; ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small_withGene.txt
+</code></pre>
+<div id="nuclear-tss" class="section level3">
+<h3>Nuclear TSS</h3>
+<p>Colapse to get the number of TSS</p>
+<pre class="r"><code>TSS=read.table(&quot;../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small_withGene.txt&quot;, col.names = c(&#39;tsschr&#39;,&#39;tssstart&#39;,&#39;tssend&#39;,&#39;tssName&#39;,&#39;tssscore&#39;,&#39;tssstrand&#39;, &#39;genechr&#39;,&#39;genestart&#39;,&#39;geneend&#39;,&#39;gene&#39;,&#39;length&#39;,&#39;strand&#39;), stringsAsFactors = F) %&gt;% 
+  group_by(gene) %&gt;% 
+  summarise(nTSS=n())</code></pre>
+<pre class="r"><code>PAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed&quot;,col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;name&quot;,&quot;score&quot;,&quot;strand&quot;)) %&gt;% separate(name,into=c(&quot;pas&quot;, &#39;gene&#39;,&#39;loc&#39;), sep=&quot;:&quot;) %&gt;% group_by(gene) %&gt;% summarise(nPAS=n())</code></pre>
+<p>Join, look only at genes with at least one TSS and PAS in the gene.</p>
+<pre class="r"><code>TSSandPAS=TSS %&gt;% inner_join(PAS, by=&quot;gene&quot;)</code></pre>
+<p>Looknig at 9896 genes.</p>
+<pre class="r"><code>ggplot(TSSandPAS,aes(x=nTSS,y=nPAS)) + geom_point()</code></pre>
+<p><img src="figure/TSS.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /> Correlation:</p>
+<pre class="r"><code>cor.test(TSSandPAS$nTSS, TSSandPAS$nPAS)</code></pre>
+<pre><code>
+    Pearson&#39;s product-moment correlation
+
+data:  TSSandPAS$nTSS and TSSandPAS$nPAS
+t = 5.9971, df = 9894, p-value = 2.079e-09
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.04052755 0.07979047
+sample estimates:
+       cor 
+0.06018229 </code></pre>
+<p>Low but significant correlation.</p>
+<pre class="r"><code>TSSandPAS_qual=TSSandPAS %&gt;% 
+  mutate(multTSS=ifelse(nTSS&gt;1, &quot;Yes&quot;,&quot;No&quot;), multPAS=ifelse(nPAS &gt;1, &quot;Yes&quot;,&quot;No&quot;)) </code></pre>
+<p>are genes with mure than 1 PAS enriched for genes with more than 1 TSS.</p>
+<pre class="r"><code>x=nrow(TSSandPAS_qual %&gt;% filter(multTSS==&quot;Yes&quot;, multPAS==&quot;Yes&quot;))
+m= nrow(TSSandPAS_qual %&gt;% filter(multTSS==&quot;Yes&quot;))
+n= nrow(TSSandPAS_qual %&gt;% filter(multTSS!=&quot;Yes&quot;))
+k=nrow(TSSandPAS_qual %&gt;% filter(multPAS==&quot;Yes&quot;))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
+<pre><code>[1] 2695</code></pre>
+<pre class="r"><code>#actual:
+x</code></pre>
+<pre><code>[1] 2788</code></pre>
+<pre class="r"><code>#pval
+phyper(x,m,n,k,lower.tail=F)</code></pre>
+<pre><code>[1] 7.974885e-06</code></pre>
+<p>Significant enrichment here.</p>
+<p>Look at if the gene has a QTL, is this associated with TSS number.</p>
+<pre class="r"><code>QTL_genes=read.table(&quot;../data/apaQTLs/NuclearapaQTLGenes.txt&quot;,col.names = &quot;gene&quot;,stringsAsFactors = F)
+QTLTested_genes=read.table(&quot;../data/apaQTLs/TestedNuclearapaQTLGenes.txt&quot;,col.names = &quot;gene&quot;,stringsAsFactors = F) %&gt;% mutate(QTL=ifelse(gene %in% QTL_genes$gene, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
+<pre class="r"><code>TSSandQTL=QTLTested_genes %&gt;% inner_join(TSS,by=&quot;gene&quot;) </code></pre>
+<p>8468 genes<br />
+Plot:</p>
+<pre class="r"><code>ggplot(TSSandQTL,aes(x=QTL, y=nTSS))+ geom_boxplot() + stat_compare_means()</code></pre>
+<p><img src="figure/TSS.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>TSSandQTL_filt= TSSandQTL %&gt;% filter(nTSS&lt;=5)
+
+ggplot(TSSandQTL_filt,aes(x=QTL, y=nTSS))+ geom_boxplot() + stat_compare_means()</code></pre>
+<p><img src="figure/TSS.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Small difference but not a strong relationship.</p>
+</div>
+<div id="cytoplasm-tss" class="section level3">
+<h3>Cytoplasm TSS</h3>
+<p>Do these analysis with the cytoplasm TSS.</p>
+<pre class="r"><code>TSS_cyt=read.table(&quot;../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small_withGene.txt&quot;, col.names = c(&#39;tsschr&#39;,&#39;tssstart&#39;,&#39;tssend&#39;,&#39;tssName&#39;,&#39;tssscore&#39;,&#39;tssstrand&#39;, &#39;genechr&#39;,&#39;genestart&#39;,&#39;geneend&#39;,&#39;gene&#39;,&#39;length&#39;,&#39;strand&#39;), stringsAsFactors = F) %&gt;% 
+  group_by(gene) %&gt;% 
+  summarise(nTSS=n())</code></pre>
+<p>Join, look only at genes with at least one TSS and PAS in the gene.</p>
+<pre class="r"><code>TSScytandPAS=TSS_cyt %&gt;% inner_join(PAS, by=&quot;gene&quot;)</code></pre>
+<p>Looknig at 8241 genes.</p>
+<pre class="r"><code>ggplot(TSScytandPAS,aes(x=nTSS,y=nPAS)) + geom_point()</code></pre>
+<p><img src="figure/TSS.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Correlation:</p>
+<pre class="r"><code>cor.test(TSScytandPAS$nTSS, TSScytandPAS$nPAS)</code></pre>
+<pre><code>
+    Pearson&#39;s product-moment correlation
+
+data:  TSScytandPAS$nTSS and TSScytandPAS$nPAS
+t = 2.0793, df = 8239, p-value = 0.03762
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.001311819 0.044470876
+sample estimates:
+       cor 
+0.02290202 </code></pre>
+<p>Low but significant correlation.</p>
+<pre class="r"><code>TSScytandPAS_qual=TSScytandPAS %&gt;% 
+  mutate(multTSS=ifelse(nTSS&gt;1, &quot;Yes&quot;,&quot;No&quot;), multPAS=ifelse(nPAS &gt;1, &quot;Yes&quot;,&quot;No&quot;)) </code></pre>
+<p>are genes with mure than 1 PAS enriched for genes with more than 1 TSS.</p>
+<pre class="r"><code>x=nrow(TSScytandPAS_qual %&gt;% filter(multTSS==&quot;Yes&quot;, multPAS==&quot;Yes&quot;))
+m= nrow(TSScytandPAS_qual %&gt;% filter(multTSS==&quot;Yes&quot;))
+n= nrow(TSScytandPAS_qual %&gt;% filter(multTSS!=&quot;Yes&quot;))
+k=nrow(TSScytandPAS_qual %&gt;% filter(multPAS==&quot;Yes&quot;))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
+<pre><code>[1] 2097</code></pre>
+<pre class="r"><code>#actual:
+x</code></pre>
+<pre><code>[1] 2161</code></pre>
+<pre class="r"><code>#pval
+phyper(x,m,n,k,lower.tail=F)</code></pre>
+<pre><code>[1] 0.0005400501</code></pre>
+<p>Enrichment is a bit lower but still significant.</p>
+</div>
+<div id="nuclear-specific-tss" class="section level3">
+<h3>Nuclear specific TSS</h3>
+<pre class="r"><code>TSS_nucSpec=read.table(&quot;../data/TSS/CageSeq_NuclearSpecific.small_withGene.txt&quot;, col.names = c(&#39;tsschr&#39;,&#39;tssstart&#39;,&#39;tssend&#39;,&#39;tssName&#39;,&#39;tssscore&#39;,&#39;tssstrand&#39;, &#39;genechr&#39;,&#39;genestart&#39;,&#39;geneend&#39;,&#39;gene&#39;,&#39;length&#39;,&#39;strand&#39;), stringsAsFactors = F) %&gt;% 
+  group_by(gene) %&gt;% 
+  summarise(nTSS=n())</code></pre>
+<p>Join, look only at genes with at least one TSS and PAS in the gene. Full join here starting with the PAS</p>
+<pre class="r"><code>TSS_nucSpecandPAS=PAS %&gt;% full_join(TSS_nucSpec, by=&quot;gene&quot;) %&gt;% replace_na(list(nTSS=0, nPAS=0)) %&gt;% mutate(SpecTSS=ifelse(nTSS&gt;0, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
+<p>Are genes with a nuclear specific tss more likely to have more than one PAS</p>
+<pre class="r"><code>ggplot(TSS_nucSpecandPAS,aes(x=SpecTSS,y=nPAS)) + geom_boxplot() + stat_compare_means()</code></pre>
+<p><img src="figure/TSS.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /> No significant difference.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1226,13 +1420,26 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] ggpubr_0.2      magrittr_1.5    workflowr_1.5.0 forcats_0.3.0  
+ [5] stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1    
+ [9] tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.5.0 Rcpp_1.0.2      digest_0.6.18   later_0.7.5    
- [5] rprojroot_1.3-2 R6_2.3.0        backports_1.1.2 git2r_0.26.1   
- [9] magrittr_1.5    evaluate_0.12   stringi_1.2.4   fs_1.3.1       
-[13] promises_1.0.1  whisker_0.3-2   rmarkdown_1.10  tools_3.5.1    
-[17] stringr_1.3.1   glue_1.3.0      httpuv_1.4.5    yaml_2.2.0     
-[21] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+ [1] tidyselect_0.2.5 haven_1.1.2      lattice_0.20-38  colorspace_1.3-2
+ [5] generics_0.0.2   htmltools_0.3.6  yaml_2.2.0       rlang_0.4.0     
+ [9] later_0.7.5      pillar_1.3.1     glue_1.3.0       withr_2.1.2     
+[13] modelr_0.1.2     readxl_1.1.0     plyr_1.8.4       munsell_0.5.0   
+[17] gtable_0.2.0     cellranger_1.1.0 rvest_0.3.2      evaluate_0.12   
+[21] labeling_0.3     knitr_1.20       httpuv_1.4.5     broom_0.5.1     
+[25] Rcpp_1.0.2       promises_1.0.1   scales_1.0.0     backports_1.1.2 
+[29] jsonlite_1.6     fs_1.3.1         hms_0.4.2        digest_0.6.18   
+[33] stringi_1.2.4    grid_3.5.1       rprojroot_1.3-2  cli_1.1.0       
+[37] tools_3.5.1      lazyeval_0.2.1   crayon_1.3.4     whisker_0.3-2   
+[41] pkgconfig_2.0.2  xml2_1.2.0       lubridate_1.7.4  assertthat_0.2.0
+[45] rmarkdown_1.10   httr_1.3.1       rstudioapi_0.10  R6_2.3.0        
+[49] nlme_3.1-137     git2r_0.26.1     compiler_3.5.1  </code></pre>
+</div>
 </div>
 
 
