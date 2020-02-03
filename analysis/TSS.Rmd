@@ -5,6 +5,13 @@ date: "2/2/2020"
 output: html_document
 ---
 
+
+```{r}
+library(tidyverse)
+library(workflowr)
+library(ggpubr)
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -36,10 +43,214 @@ I will look for nuclear specific TSS using bedtools.
 -v in a not in b
 
 ```{bash,eval=F}
-bedtools intersect -v -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed -b  ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed -s -sorted > CageSeq_NuclearSpecific.bed
+bedtools intersect -v -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed -b  ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed -s -sorted > ../data/TSS/CageSeq_NuclearSpecific.bed
 ```
 
 There are 8049 TSS peaks in this set.  
 
+```{bash,eval=F}
+cut -f 1-6 ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.bed  > ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small.bed
 
 
+cut -f 1-6 ../data/TSS/CageSeq_NuclearSpecific.bed > ../data/TSS/CageSeq_NuclearSpecific.small.bed
+
+
+cut -f 1-6 ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.bed  > ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small.bed
+```
+
+I need to map these to genes. I will take the longest then extend the start 1000bp to account for changes
+```{r}
+genes=read.table("../../genome_anotation_data/RefSeq_annotations/Hg19_refseq_genes.txt",header = T,stringsAsFactors = F) %>%
+  mutate(Genelength=txEnd-txStart) %>% 
+  group_by(name2) %>% 
+  arrange(desc(Genelength)) %>% 
+  dplyr::slice(1) %>% 
+  mutate(newStart=ifelse(strand=="+", txStart-1000, txStart), newEnd=ifelse(strand=="+",txEnd, txEnd+1000 )) %>% 
+  select(chrom,newStart, newEnd, name2,Genelength, strand)
+
+write.table(genes,"../data/TSS/longest_transcript_refseqGene_exd1000.bed", sep="\t", col.names=F, row.names=F, quote=F)
+
+```
+
+Use bedtools closest to map all of the TSS to genes:  
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/TSS/longest_transcript_refseqGene_exd1000.bed | sort -k1,1 -k2,2n > ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed
+
+bedtools closest -a ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small.bed -b ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed -s  > ../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small_withGene.txt
+
+bedtools closest -a ../data/TSS/CageSeq_NuclearSpecific.small.bed -b ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed -s  > ../data/TSS/CageSeq_NuclearSpecific.small_withGene.txt
+
+bedtools closest -a ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small.bed -b ../data/TSS/longest_transcript_refseqGene_exd1000.noChr.bed  -s  > ../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small_withGene.txt
+
+
+```
+
+
+###Nuclear TSS
+Colapse to get the number of TSS 
+
+```{r}
+TSS=read.table("../data/TSS/ENCFF358CEV_Nuclear_noChr.sort.small_withGene.txt", col.names = c('tsschr','tssstart','tssend','tssName','tssscore','tssstrand', 'genechr','genestart','geneend','gene','length','strand'), stringsAsFactors = F) %>% 
+  group_by(gene) %>% 
+  summarise(nTSS=n())
+```
+
+```{r}
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% separate(name,into=c("pas", 'gene','loc'), sep=":") %>% group_by(gene) %>% summarise(nPAS=n())
+```
+
+Join, look only at genes with at least one TSS and PAS in the gene.  
+```{r}
+TSSandPAS=TSS %>% inner_join(PAS, by="gene")
+```
+Looknig at 9896 genes.  
+```{r}
+ggplot(TSSandPAS,aes(x=nTSS,y=nPAS)) + geom_point()
+```
+Correlation:
+
+```{r}
+cor.test(TSSandPAS$nTSS, TSSandPAS$nPAS)
+```
+
+Low but significant correlation.  
+
+```{r}
+TSSandPAS_qual=TSSandPAS %>% 
+  mutate(multTSS=ifelse(nTSS>1, "Yes","No"), multPAS=ifelse(nPAS >1, "Yes","No")) 
+```
+
+are genes with mure than 1 PAS enriched for genes with more than 1 TSS.  
+
+```{r}
+x=nrow(TSSandPAS_qual %>% filter(multTSS=="Yes", multPAS=="Yes"))
+m= nrow(TSSandPAS_qual %>% filter(multTSS=="Yes"))
+n= nrow(TSSandPAS_qual %>% filter(multTSS!="Yes"))
+k=nrow(TSSandPAS_qual %>% filter(multPAS=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+Significant enrichment here.  
+
+
+
+Look at if the gene has a QTL, is this associated with TSS number.  
+
+```{r}
+QTL_genes=read.table("../data/apaQTLs/NuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F)
+QTLTested_genes=read.table("../data/apaQTLs/TestedNuclearapaQTLGenes.txt",col.names = "gene",stringsAsFactors = F) %>% mutate(QTL=ifelse(gene %in% QTL_genes$gene, "Yes","No"))
+```
+
+
+```{r}
+TSSandQTL=QTLTested_genes %>% inner_join(TSS,by="gene") 
+```
+
+8468 genes  
+Plot:
+
+```{r}
+ggplot(TSSandQTL,aes(x=QTL, y=nTSS))+ geom_boxplot() + stat_compare_means()
+
+```
+
+
+```{r}
+TSSandQTL_filt= TSSandQTL %>% filter(nTSS<=5)
+
+ggplot(TSSandQTL_filt,aes(x=QTL, y=nTSS))+ geom_boxplot() + stat_compare_means()
+
+```
+
+Small difference but not a strong relationship.  
+
+
+###Cytoplasm TSS
+Do these analysis with the cytoplasm TSS.  
+
+
+
+
+```{r}
+TSS_cyt=read.table("../data/TSS/ENCFF140PCA_Cyto_noChr.sort.small_withGene.txt", col.names = c('tsschr','tssstart','tssend','tssName','tssscore','tssstrand', 'genechr','genestart','geneend','gene','length','strand'), stringsAsFactors = F) %>% 
+  group_by(gene) %>% 
+  summarise(nTSS=n())
+```
+
+Join, look only at genes with at least one TSS and PAS in the gene.  
+```{r}
+TSScytandPAS=TSS_cyt %>% inner_join(PAS, by="gene")
+```
+Looknig at 8241 genes.  
+```{r}
+ggplot(TSScytandPAS,aes(x=nTSS,y=nPAS)) + geom_point()
+```
+
+Correlation:
+
+```{r}
+cor.test(TSScytandPAS$nTSS, TSScytandPAS$nPAS)
+```
+
+Low but significant correlation.  
+
+```{r}
+TSScytandPAS_qual=TSScytandPAS %>% 
+  mutate(multTSS=ifelse(nTSS>1, "Yes","No"), multPAS=ifelse(nPAS >1, "Yes","No")) 
+```
+
+are genes with mure than 1 PAS enriched for genes with more than 1 TSS.  
+
+```{r}
+x=nrow(TSScytandPAS_qual %>% filter(multTSS=="Yes", multPAS=="Yes"))
+m= nrow(TSScytandPAS_qual %>% filter(multTSS=="Yes"))
+n= nrow(TSScytandPAS_qual %>% filter(multTSS!="Yes"))
+k=nrow(TSScytandPAS_qual %>% filter(multPAS=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+```
+
+Enrichment is a bit lower but still significant.  
+
+
+
+
+###Nuclear specific TSS
+
+
+
+
+```{r}
+TSS_nucSpec=read.table("../data/TSS/CageSeq_NuclearSpecific.small_withGene.txt", col.names = c('tsschr','tssstart','tssend','tssName','tssscore','tssstrand', 'genechr','genestart','geneend','gene','length','strand'), stringsAsFactors = F) %>% 
+  group_by(gene) %>% 
+  summarise(nTSS=n())
+```
+
+Join, look only at genes with at least one TSS and PAS in the gene.  Full join here starting with the PAS 
+```{r}
+TSS_nucSpecandPAS=PAS %>% full_join(TSS_nucSpec, by="gene") %>% replace_na(list(nTSS=0, nPAS=0)) %>% mutate(SpecTSS=ifelse(nTSS>0, "Yes","No"))
+```
+
+Are genes with a nuclear specific tss more likely to have more than one PAS 
+
+```{r}
+ggplot(TSS_nucSpecandPAS,aes(x=SpecTSS,y=nPAS)) + geom_boxplot() + stat_compare_means()
+```
+No significant difference.  
