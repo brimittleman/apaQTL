@@ -40,9 +40,9 @@ genes=read.table("../../genome_anotation_data/RefSeq_annotations/Hg19_refseq_gen
   mutate(Genelength=txEnd-txStart) %>% 
   group_by(name2) %>% 
   arrange(desc(Genelength)) %>% 
-  slice(1) %>% 
-  select(name2, Genelength) %>% 
-  rename("gene"=name2)
+  dplyr::slice(1)%>% 
+  dplyr::select(name2, Genelength) %>% 
+  dplyr::rename("gene"= name2)
 
 
 ```
@@ -85,7 +85,7 @@ UTR=read.table("../../genome_anotation_data/RefSeq_annotations/ncbiRefSeq_UTR3.s
   mutate(UTRlength=end-start) %>% 
   group_by(gene) %>% 
   arrange(desc(UTRlength)) %>% 
-  slice(1) %>% 
+  dplyr::slice(1) %>% 
   select(gene, UTRlength) 
 ```
 
@@ -331,7 +331,7 @@ cor.test(PAS_tissue$nPAS, PAS_tissue$nTissue)
 
 ```{r}
 PAS_tissue$nPAS= as.factor(PAS_tissue$nPAS)
-ggplot(PAS_tissue, aes(x=nPAS,y=nTissue, fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Number of tissues median TPM>2", title="Relationship tissue specificity and Number of PAS") 
+ggplot(PAS_tissue, aes(x=nPAS,y=nTissue, fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Number of tissues median TPM>100", title="Relationship tissue specificity and Number of PAS") 
 ```
 With and without APA
 
@@ -347,4 +347,93 @@ ggplot(PAS_tissue_apa,aes(by=APA, x=nTissue,fill=APA)) + geom_density(alpha=.4)
 
 
 Looks like genes with apa are a bit more specific. 
+
+Try log(TPM)>1 
+
+```{r}
+GTEX_10=read.table("../data/nPAS/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct", header = T, skip=2, sep = '\t') %>% 
+  separate(Name,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames, by="gene_id") %>% 
+  select(-gene_id,-Description,-extra) %>% 
+  gather("tissue", "TPM",-gene) %>% 
+  filter(TPM >=10 )%>%
+  group_by(gene) %>% 
+  summarise(nTissue=n()) %>% 
+  filter(nTissue<=54)
+  
+```
+
+Join this with the PAS info:
+
+```{r}
+PAS_tissue10=PAS %>% inner_join(GTEX_10,by="gene")
+```
+
+
+```{r}
+cor.test(PAS_tissue10$nPAS, PAS_tissue10$nTissue)
+```
+
+
+```{r}
+PAS_tissue10$nPAS= as.factor(PAS_tissue10$nPAS)
+ggplot(PAS_tissue10, aes(x=nPAS,y=nTissue, fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Number of tissues median TPM>10", title="Relationship tissue specificity and Number of PAS") 
+```
+With and without APA
+
+```{r}
+
+PAS_tissue10$nPAS=as.numeric(as.character(PAS_tissue10$nPAS))
+
+
+PAS_tissue10_apa= PAS_tissue10 %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_tissue10_apa,aes(by=APA, x=nTissue,fill=APA)) + geom_density(alpha=.4)
+```
+
+
+
+Try log(TPM)>3
+
+```{r}
+GTEX_1000=read.table("../data/nPAS/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct", header = T, skip=2, sep = '\t') %>% 
+  separate(Name,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames, by="gene_id") %>% 
+  select(-gene_id,-Description,-extra) %>% 
+  gather("tissue", "TPM",-gene) %>% 
+  filter(TPM >=1000 )%>%
+  group_by(gene) %>% 
+  summarise(nTissue=n()) %>% 
+  filter(nTissue<=54)
+  
+```
+
+Join this with the PAS info:
+
+```{r}
+PAS_tissue1000=PAS %>% inner_join(GTEX_1000,by="gene")
+```
+
+
+```{r}
+cor.test(PAS_tissue1000$nPAS, PAS_tissue1000$nTissue)
+```
+
+
+```{r}
+PAS_tissue1000$nPAS= as.factor(PAS_tissue1000$nPAS)
+ggplot(PAS_tissue1000, aes(x=nPAS,y=nTissue, fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Number of tissues median TPM>1000", title="Relationship tissue specificity and Number of PAS") 
+```
+With and without APA
+
+```{r}
+
+PAS_tissue1000$nPAS=as.numeric(as.character(PAS_tissue1000$nPAS))
+
+
+PAS_tissue1000_apa= PAS_tissue1000 %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_tissue1000_apa,aes(by=APA, x=nTissue,fill=APA)) + geom_density(alpha=.4)
+```
+
 
