@@ -242,7 +242,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-01-31
+<strong>Last updated:</strong> 2020-02-02
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea1607df889371ad6d1a493b5e384c96b7f510215targetblanka1607dfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a1607df889371ad6d1a493b5e384c96b7f510215" target="_blank">a1607df</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6targetblankd0f4f33a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6" target="_blank">d0f4f33</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea1607df889371ad6d1a493b5e384c96b7f510215targetblanka1607dfa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6targetblankd0f4f33a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -332,6 +332,7 @@ Untracked files:
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._LD_qtl.sh
     Untracked:  code/._LD_snpsproxy.sh
+    Untracked:  code/._MapAllRBP.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -579,6 +580,7 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions.out
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
+    Untracked:  code/CageSeq_NuclearSpecific.bed
     Untracked:  code/DistPAS2Sig_RandomIntron.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
@@ -598,6 +600,9 @@ Untracked files:
     Untracked:  code/IntronicPASDT.err
     Untracked:  code/IntronicPASDT.out
     Untracked:  code/LD_vcftools.hap.out
+    Untracked:  code/MapAllRBP.sh
+    Untracked:  code/MapRBP.err
+    Untracked:  code/MapRBP.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
     Untracked:  code/NascentDTPlotPAS.err
@@ -824,91 +829,12 @@ Untracked files:
     Untracked:  data/NascentRNA/
     Untracked:  data/NucSpeceQTLeffect/
     Untracked:  data/PAS/
-    Untracked:  data/PAS_Nuclear1000.1.log
-    Untracked:  data/PAS_Nuclear1000.10.log
-    Untracked:  data/PAS_Nuclear1000.11.log
-    Untracked:  data/PAS_Nuclear1000.12.log
-    Untracked:  data/PAS_Nuclear1000.13.log
-    Untracked:  data/PAS_Nuclear1000.14.log
-    Untracked:  data/PAS_Nuclear1000.15.log
-    Untracked:  data/PAS_Nuclear1000.16.log
-    Untracked:  data/PAS_Nuclear1000.17.log
-    Untracked:  data/PAS_Nuclear1000.18.log
-    Untracked:  data/PAS_Nuclear1000.19.log
-    Untracked:  data/PAS_Nuclear1000.2.log
-    Untracked:  data/PAS_Nuclear1000.20.log
-    Untracked:  data/PAS_Nuclear1000.21.log
-    Untracked:  data/PAS_Nuclear1000.22.log
-    Untracked:  data/PAS_Nuclear1000.3.log
-    Untracked:  data/PAS_Nuclear1000.4.log
-    Untracked:  data/PAS_Nuclear1000.5.log
-    Untracked:  data/PAS_Nuclear1000.6.log
-    Untracked:  data/PAS_Nuclear1000.7.log
-    Untracked:  data/PAS_Nuclear1000.8.log
-    Untracked:  data/PAS_Nuclear1000.9.log
-    Untracked:  data/PAS_Nuclear500.1.log
-    Untracked:  data/PAS_Nuclear500.10.log
-    Untracked:  data/PAS_Nuclear500.11.log
-    Untracked:  data/PAS_Nuclear500.12.log
-    Untracked:  data/PAS_Nuclear500.13.log
-    Untracked:  data/PAS_Nuclear500.14.log
-    Untracked:  data/PAS_Nuclear500.15.log
-    Untracked:  data/PAS_Nuclear500.16.log
-    Untracked:  data/PAS_Nuclear500.17.log
-    Untracked:  data/PAS_Nuclear500.18.log
-    Untracked:  data/PAS_Nuclear500.19.log
-    Untracked:  data/PAS_Nuclear500.2.log
-    Untracked:  data/PAS_Nuclear500.20.log
-    Untracked:  data/PAS_Nuclear500.21.log
-    Untracked:  data/PAS_Nuclear500.22.log
-    Untracked:  data/PAS_Nuclear500.3.log
-    Untracked:  data/PAS_Nuclear500.4.log
-    Untracked:  data/PAS_Nuclear500.5.log
-    Untracked:  data/PAS_Nuclear500.6.log
-    Untracked:  data/PAS_Nuclear500.7.log
-    Untracked:  data/PAS_Nuclear500.8.log
-    Untracked:  data/PAS_Nuclear500.9.log
     Untracked:  data/PAS_postFlag/
     Untracked:  data/PolyA_DB/
     Untracked:  data/PreTerm_pheno/
     Untracked:  data/PrematureQTLNominal/
     Untracked:  data/PrematureQTLPermuted/
     Untracked:  data/QTLGenotypes/
-    Untracked:  data/QTL_Nuclear1000.10.log
-    Untracked:  data/QTL_Nuclear1000.11.log
-    Untracked:  data/QTL_Nuclear1000.12.log
-    Untracked:  data/QTL_Nuclear1000.13.log
-    Untracked:  data/QTL_Nuclear1000.14.log
-    Untracked:  data/QTL_Nuclear1000.15.log
-    Untracked:  data/QTL_Nuclear1000.16.log
-    Untracked:  data/QTL_Nuclear1000.17.log
-    Untracked:  data/QTL_Nuclear1000.18.log
-    Untracked:  data/QTL_Nuclear1000.19.log
-    Untracked:  data/QTL_Nuclear1000.20.log
-    Untracked:  data/QTL_Nuclear1000.21.log
-    Untracked:  data/QTL_Nuclear1000.22.log
-    Untracked:  data/QTL_Nuclear1000.4.log
-    Untracked:  data/QTL_Nuclear1000.5.log
-    Untracked:  data/QTL_Nuclear1000.7.log
-    Untracked:  data/QTL_Nuclear1000.8.log
-    Untracked:  data/QTL_Nuclear1000.9.log
-    Untracked:  data/QTL_Nuclear500.10.log
-    Untracked:  data/QTL_Nuclear500.11.log
-    Untracked:  data/QTL_Nuclear500.12.log
-    Untracked:  data/QTL_Nuclear500.13.log
-    Untracked:  data/QTL_Nuclear500.14.log
-    Untracked:  data/QTL_Nuclear500.15.log
-    Untracked:  data/QTL_Nuclear500.16.log
-    Untracked:  data/QTL_Nuclear500.17.log
-    Untracked:  data/QTL_Nuclear500.18.log
-    Untracked:  data/QTL_Nuclear500.19.log
-    Untracked:  data/QTL_Nuclear500.20.log
-    Untracked:  data/QTL_Nuclear500.21.log
-    Untracked:  data/QTL_Nuclear500.22.log
-    Untracked:  data/QTL_Nuclear500.5.log
-    Untracked:  data/QTL_Nuclear500.7.log
-    Untracked:  data/QTL_Nuclear500.8.log
-    Untracked:  data/QTL_Nuclear500.9.log
     Untracked:  data/QTLoverlap/
     Untracked:  data/QTLoverlap_inclusive/
     Untracked:  data/QTLoverlap_nonNorm/
@@ -918,6 +844,7 @@ Untracked files:
     Untracked:  data/SNPinSS/
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/TF_motifdisruption/
+    Untracked:  data/TSS/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/Version15bp6As/
     Untracked:  data/Version15bp7As/
@@ -940,6 +867,7 @@ Untracked files:
     Untracked:  data/bothFrac_FC/
     Untracked:  data/bw/
     Untracked:  data/bw_norm/
+    Untracked:  data/eCLip/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
     Untracked:  data/fastq/
@@ -1072,6 +1000,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d0f4f33f4073e9f3a20b5d7941a497ebcbe0b3e6/analysis/index.Rmd" target="_blank">d0f4f33</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-03
+</td>
+<td>
+add TSS analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/ddfe8413528d18ed7f8ac9d2f1414b343fcdc822/docs/index.html" target="_blank">ddfe841</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -3606,6 +3568,8 @@ Start workflowr project.
 <li><p><a href="ConservationPAS.html">Conservation of PAS</a></p></li>
 <li><p><a href="ExploreNpas.html">Explore number of PAS and other parameters</a></p></li>
 <li><p><a href="apaQTL_tissueSpec.html">Tissue specificity for apaQTL PAS</a></p></li>
+<li><p><a href="RNAbinding.html">RNA binding proteins</a></p></li>
+<li><p><a href="TSS.html">TSS analysis</a></p></li>
 </ul>
 </div>
 
