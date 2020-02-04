@@ -1,0 +1,148 @@
+---
+title: "PAS base composition"
+author: "Briana Mittleman"
+date: "2/4/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I will test the base composition for the 20 bases around  each PAS. I will get the sequences then make logo plots. 
+
+```{r}
+library(stringr)
+library(cowplot)
+require(ggseqlogo)
+library(RColorBrewer)
+library(workflowr)
+options(scipen = 999)
+library(tidyverse)
+cs1 = make_col_scheme(chars=c('A', 'T', 'C', 'G', 'N'), groups=c('A', 'T', 'C', 'G', 'N'), cols=c( "#1B9E77", "#D95F02" ,"#7570B3" ,"#E7298A", "#66A61E"))
+```
+
+I will add 10 to the end and subtract 10 from the end to get the 20 basepairs. 
+```{r}
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, col.names=c("chr","start","end","name","score", "strand")) %>% 
+  mutate(newStart=end-10,newEnd=end+10,len=newEnd-newStart)%>%
+  select(chr, newStart, newEnd, name, score, strand)
+```
+
+```{bash,eval=F}
+mkdir ../data/BaseComp
+```
+
+
+```{r}
+write.table(PAS,"../data/BaseComp/PAS_regions.txt", col.names = F,row.names = F, quote = F,sep="\t")
+
+```
+
+
+Now use bedtools nuc to get the sequence.  
+
+```{bash,eval=F}
+bedtools nuc -s -seq -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/BaseComp/PAS_regions.txt > ../data/BaseComp/PAS_regions_seq.txt
+```
+
+Results:  
+
+```{r}
+PASseq=read.table("../data/BaseComp/PAS_regions_seq.txt", col.names = c(colnames(PAS),"AT",'GC','As','Cs','Gs','Ts','N',"other","length","seq")) %>% 
+  mutate(seqUP=toupper(seq))
+
+Seqs=PASseq$seqUP
+```
+
+I will start by making a logo for all of this.  
+
+
+```{r}
+lngth=c()
+for (i in Seqs){
+  lngth=c(lngth, str_length(i))
+}
+
+plot(lngth)
+
+
+
+```
+
+
+```{r}
+ggseqlogo(Seqs, col_scheme=cs1, method = 'prob')
+```
+
+
+
+I can seperate these by those identified in the database.  
+
+
+Pull in closest to database. I am using the code from earlier in the workflow: 
+
+```{r}
+dist=read.table("../data/AnnotatedPAS/DistanceMyPAS2Anno.bed", col.names = c("chr", "start","end","myPAS", "score","strand","chr2", "start2", "end2", "anno", "score2", "strand2", "distance"),stringsAsFactors = F)
+PAS_withmatch=dist %>% filter(abs(distance)<=10) %>% select(myPAS,anno) %>% unique() %>% separate(myPAS, into=c("pasNum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_")
+```
+
+
+```{r}
+PASseq_anno= PASseq %>% separate(name,into=c("Num", 'geneID'),sep=":") %>% mutate(inDb=ifelse(Num %in% PAS_withmatch$pasNum,"Yes","No"))
+
+PASseq_anno_yes=PASseq_anno %>% filter(inDb=="Yes")
+
+PASseq_anno_no=PASseq_anno %>% filter(inDb=="No")
+
+```
+
+
+
+plot_grid(p1, p2, p3,  ncol = 1, align = 'v')
+
+```{r}
+pYes=ggseqlogo(PASseq_anno_yes$seqUP, col_scheme=cs1, method = 'prob')
+nNo=ggseqlogo(PASseq_anno_no$seqUP, col_scheme=cs1, method = 'prob')
+```
+
+```{r}
+plot_grid(pYes, nNo, ncol = 1, align = 'v',labels = c('PAS in DB', 'Novel PAS'))
+```
+
+Plot these by location:  
+
+```{r}
+PASseq_loc=PASseq_anno %>% separate(geneID, into=c("gene","loc"), sep="_")
+
+PASseq_UTR= PASseq_loc %>% filter(loc=="utr3")
+
+PASseq_intron= PASseq_loc %>% filter(loc=="intron")
+```
+
+
+
+```{r}
+pUTR=ggseqlogo(PASseq_UTR$seqUP, col_scheme=cs1, method = 'prob')
+pIntron=ggseqlogo(PASseq_intron$seqUP, col_scheme=cs1, method = 'prob')
+
+plot_grid(pUTR, pIntron, ncol = 1, align = 'v',labels = c('3 UTR', 'Intronic'))
+```
+
+
+```{r}
+PASseq_UTRYes= PASseq_loc %>% filter(loc=="utr3",inDb=="Yes")
+PASseq_UTRNo= PASseq_loc %>% filter(loc=="utr3",inDb=="No")
+
+PASseq_intronYes= PASseq_loc %>% filter(loc=="intron",inDb=="Yes")
+PASseq_intronNo= PASseq_loc %>% filter(loc=="intron",inDb=="No")
+```
+
+```{r}
+pUTRYes=ggseqlogo(PASseq_UTRYes$seqUP, col_scheme=cs1, method = 'prob')
+pUTRNo=ggseqlogo(PASseq_UTRNo$seqUP, col_scheme=cs1, method = 'prob')
+pIntronYes=ggseqlogo(PASseq_intronYes$seqUP, col_scheme=cs1, method = 'prob')
+pIntronNo=ggseqlogo(PASseq_intronNo$seqUP, col_scheme=cs1, method = 'prob')
+
+plot_grid(pUTRYes,pUTRNo, pIntronYes, pIntronNo,ncol = 2, align = 'v',labels = c('3 UTR, Yes','3 UTR, No', 'Intronic, Yes', "Intronic, No"))
+```

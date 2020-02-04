@@ -176,8 +176,10 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Tissue specificity for apaQTL PAS](apaQTL_tissueSpec.html)  
 
-* [RNA binding proteins](RNAbinding.html)
+* [RNA binding proteins](RNAbinding.html)  
 
-* [TSS analysis](TSS.html)
+* [TSS analysis](TSS.html)  
+
+* [Base composition around PAS](BaseComposition.html)  
 
 
