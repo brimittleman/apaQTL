@@ -1,0 +1,79 @@
+---
+title: "Mechanism for each expression independent apaQTL"
+author: "Briana Mittleman"
+date: "2/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will pull in the apaQTLs that are pQTLs or riboQTLs but are not eQTLs. I will look at their UTRs to think about mechanisms.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+```{r}
+QTLs=read.table("../data/ExpressionIndependentapaQTLs.txt",header = T,stringsAsFactors = F)
+
+
+
+QTLs %>% select(Gene, PAS_ID, apa_EffectSize,protein_EffectSize,protein_pvalue,ribo_EffectSize,ribo_pvalue)
+```
+
+DIP2B: QTL in proximal UTR, hsa-miR-143-3p, hsa-miR-6088, hsa-miR-4770, miRNAs are upstream of first 
+
+The K box (cTGTGATa) is present in one or more copies in many of these 3'UTRs and mediates negative post-transcriptional regulation, mainly effected by decreased transcript levels.
+
+C12orf73: 2nd of 3 UTR PAS:
+- POLR2A binding sites 
+-hsa-miR-9-5p 
+
+OAS1:  
+
+IFI44L: between 2 UTR FOS binding site 
+
+
+STXBP3: PUM1 binding in 3' UTR, translational regulator of specific mRNAs by binding to their 3' untranslated regions, reported kbox, many miRNAs conserved (miR-15-5p/16-5p/195-5p/424-5p/497-5p)  
+
+RBBP5: extended isoform,reported Brd-Box (Brd)  The Brd box (AGCTTTA) is present in one or more copies in many of these 3'UTRs and mediates negative post-transcriptional regulation by affecting transcript stability and translational efficiency. hsa-miR-338-3p
+
+PSMF1: UNR binding site: In humans, UNR has been implicated in the destabilization of c-fos mRNA (Chang et al., 2004) and the activation of translation driven by the IRESs of a number of transcripts, including c-myc, miR-103-3p/107
+
+MGME1- RBP binding for AQR, NIPBL, FUS (no DB results)
+
+FAM207A- (no DB results)
+
+APOL2- reported UNR binding site, SAFB binding between PAS in UTR
+
+MPHOSPH10-
+
+SACM1L-miR-181-5p
+
+EIF2A- annotated Brd-Box (Brd) site between middle 2 utr binding sites, reported kbox as well 
+
+
+PCYT1A- (no DB results) many binding sites between annotated utr and end PAS, miR-142-3p.2
+
+HTT: BRD-BOX, hsa-miR-216b-5p
+
+
+STAP1- LTR/ERVL-MaLR repete element 
+
+
+NUP155-KBOX, BRD BOX , GLUT1  element, miR-199-3p, hsa-miR-3129-5p
+
+ERAP1-MBE element - related to temporal regulation ,hsa-miR-4770, hsa-miR-143-3p, hsa-miR-6088
+
+SQSTM1- FLAM_A - SINE/Alu repeate, GY-BOX- involved in RNA duplexes, hsa-miR-7-5p
+
+BTBD9-  GY-BOX, conserved hsa-miR-212-5p binding site , hsa-miR-212-5p
+
+STX17- GY-BOX, BRD BOX, k-box, miR-15-5p/16-5p/195-5p/424-5p/497-5p
+
+Lit search for BRD box and K box only has results for human, info about regulation in drosophila 
+
+
