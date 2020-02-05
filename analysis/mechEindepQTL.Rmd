@@ -77,3 +77,55 @@ STX17- GY-BOX, BRD BOX, k-box, miR-15-5p/16-5p/195-5p/424-5p/497-5p
 Lit search for BRD box and K box only has results for human, info about regulation in drosophila 
 
 
+
+longer isoform, decreased protein: 
+* DIP2B  
+
+* IF144L  
+
+* RBBP5  
+
+* STAP1  
+
+* FAM207A  
+
+* APOL2  
+
+* EIF2A  
+
+* STXB  
+
+longer isoform, increased protein:  
+
+* C12orf72
+
+* OAS1  
+
+* PSMF1  
+
+* HTT  
+
+* ERAP 1 
+
+* SQSTM1  
+
+Intronic or coding PAS, decreased protein:  
+
+* KPNB1  
+
+* CCDC47  
+
+* DOCK7  
+
+* MGME1  
+
+* PCYT1A  
+
+* BTBD9  
+
+Intronic or coding PAS, increased protein:  
+
+* NUP155  
+
+* MPHOSPH10
+

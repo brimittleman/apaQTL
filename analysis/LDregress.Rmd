@@ -9,6 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
 LD score regression with apaQTLs and multiple myeloma? 
 
 https://www.nature.com/articles/s41467-018-04989-w
@@ -52,4 +58,92 @@ https://github.com/bulik/ldsc
 
 
 
+First I will prepare the PAS and apaQTL filese: 
+
+```{bash,eval=F}
+mkdir ../data/LDSR_annotations
+```
+
+Nuclear 5% PAS 
+```{r}
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",col.names = c("Chr","start","end","name","score","stand"),stringsAsFactors = F)
+
+PAS_500=PAS%>% mutate(chrom=paste("chr", Chr, sep=""),newStart=end-250, newEnd=end+250 ) %>% select(chrom,newStart,newEnd)
+
+PAS_1000=PAS%>% mutate(chrom=paste("chr", Chr, sep=""),newStart=end-1000, newEnd=end+1000 ) %>% select(chrom, newStart,newEnd)
+```
+
+```{r}
+write.table(PAS_500,"../data/LDSR_annotations/PAS_Nuclear500.bed", col.names = F, row.names = F, quote = F, sep="\t")
+
+write.table(PAS_1000,"../data/LDSR_annotations/PAS_Nuclear1000.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+Sort:  
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/LDSR_annotations/PAS_Nuclear500.bed > ../data/LDSR_annotations/PAS_Nuclear500.sort.bed
+
+sort -k1,1 -k2,2n ../data/LDSR_annotations/PAS_Nuclear1000.bed > ../data/LDSR_annotations/PAS_Nuclear1000.sort.bed
+```
+
+
+QTLS: 
+
+```{r}
+RSID=read.table("../../../briana/li_genotypes/RSID2snploc.txt", header = T, stringsAsFactors = F, col.names = c("snp","sid", "ref","alt"))
+NucQTL=read.table("../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt", header = T ,stringsAsFactors = F) %>% inner_join(RSID, by="sid") %>% separate(snp, into=c("chr","loc"),sep=":")
+
+NucQTL500=NucQTL%>% mutate(start=as.integer(loc)-250,end=as.integer(loc)+250, chrom=paste("chr",chr,by="")) %>% select(chrom,start,end)
+
+NucQTL1000=NucQTL%>% mutate(start=as.integer(loc)-500,end=as.integer(loc)+500, chrom=paste("chr",chr,by="")) %>% select(chrom,start,end)
+```
+
+
+
+```{r}
+write.table(NucQTL500,"../data/LDSR_annotations/QTL_Nuclear500.bed", col.names = F, row.names = F, quote = F, sep="\t")
+
+write.table(NucQTL1000,"../data/LDSR_annotations/QTL_Nuclear1000.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+
+Sort:  
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/LDSR_annotations/QTL_Nuclear500.bed > ../data/LDSR_annotations/QTL_Nuclear500.sort.bed
+
+sort -k1,1 -k2,2n ../data/LDSR_annotations/QTL_Nuclear1000.bed > ../data/LDSR_annotations/QTL_Nuclear1000.sort.bed
+```
+
+
+Choose test gwas:  
+
+Start with RA because it works with Phenoix's code. 
+
+I moved the scripts to my code directory. I will make a copy of it for PAS_500_Lymph
+
+```{bash,eval=F}
+cp -R scripts scripts_PAS_500_Lymph
+
+../data/LDSR_annotations/
+
+```
+
+Change the places in 03,05,06,07
+
+```{bash,eval=F}
+#03 will annotate all 4 of these  
+
+sbatch scripts_PAS_500_Lymph/03_immuneAtlas_annot.sh 
+
+sbatch scripts_PAS_500_Lymph/05_immuneAtlas_ldscore.sh
+
+sbatch scripts_PAS_500_Lymph/06_munge_gwas_lymphPAS500.sh
+
+mkdir /project2/gilad/briana/apaQTL/data/LDSR_annotations/results/
+
+sbatch scripts_PAS_500_Lymph/07_partition_h2g.sh 
+```
+
+stuck on 7. need baseline LD files 
 
