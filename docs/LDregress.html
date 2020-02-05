@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-01-30
+<strong>Last updated:</strong> 2020-02-05
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefd5ccd7f1e19bd5809e13eda96d7424bb004bf6etargetblankfd5ccd7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fd5ccd7f1e19bd5809e13eda96d7424bb004bf6e" target="_blank">fd5ccd7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea1f535544e0a3bd4fea08267adb3aa7158c3e94ctargetblanka1f5355a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a1f535544e0a3bd4fea08267adb3aa7158c3e94c" target="_blank">a1f5355</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefd5ccd7f1e19bd5809e13eda96d7424bb004bf6etargetblankfd5ccd7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea1f535544e0a3bd4fea08267adb3aa7158c3e94ctargetblanka1f5355a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -447,6 +447,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    code/logs/
     Ignored:    data/.DS_Store
     Ignored:    output/.DS_Store
 
@@ -492,6 +493,7 @@ Untracked files:
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._LD_qtl.sh
     Untracked:  code/._LD_snpsproxy.sh
+    Untracked:  code/._MapAllRBP.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -510,6 +512,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._Rplots.pdf
     Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
@@ -566,7 +569,9 @@ Untracked files:
     Untracked:  code/._eQTL_switch2snploc.py
     Untracked:  code/._eQTLgenestestedapa.py
     Untracked:  code/._encodeRNADTplots.sh
+    Untracked:  code/._extactPAS100meanphyloP.py
     Untracked:  code/._extractGenotypes.py
+    Untracked:  code/._extractPACmeanPhyloP.py
     Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._fc_filteredPAS6and7As.sh
@@ -700,6 +705,7 @@ Untracked files:
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
     Untracked:  code/._tenBPupstreamPAS.py
+    Untracked:  code/._test.pdf
     Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._twentyBPupstreamPAS.py
@@ -756,6 +762,9 @@ Untracked files:
     Untracked:  code/IntronicPASDT.err
     Untracked:  code/IntronicPASDT.out
     Untracked:  code/LD_vcftools.hap.out
+    Untracked:  code/MapAllRBP.sh
+    Untracked:  code/MapRBP.err
+    Untracked:  code/MapRBP.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
     Untracked:  code/NascentDTPlotPAS.err
@@ -823,6 +832,8 @@ Untracked files:
     Untracked:  code/dag.pdf
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
+    Untracked:  code/extactPAS100meanphyloP.py
+    Untracked:  code/extractPACmeanPhyloP.py
     Untracked:  code/fixExandUnexeQTL
     Untracked:  code/fix_randomIntron.py
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.log
@@ -919,6 +930,8 @@ Untracked files:
     Untracked:  code/runprxySNP.out
     Untracked:  code/runres2pas.err
     Untracked:  code/runres2pas.out
+    Untracked:  code/scripts/
+    Untracked:  code/scripts_PAS_500_Lymph/
     Untracked:  code/seqQTLfastq.err
     Untracked:  code/seqQTLfastq.out
     Untracked:  code/seqQTLregion.err
@@ -944,6 +957,7 @@ Untracked files:
     Untracked:  code/subtractExons.out
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/test.pdf
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
     Untracked:  code/vcf_keepsnps.err
@@ -958,6 +972,7 @@ Untracked files:
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
     Untracked:  data/BadLines/
+    Untracked:  data/BaseComp/
     Untracked:  data/Battle_pQTL/
     Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
@@ -965,6 +980,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/ExampleQTLPlots_update/
     Untracked:  data/ExpressionIndependentapaQTLs.txt
     Untracked:  data/FiveMergedBW/
     Untracked:  data/FiveMergedBam/
@@ -972,6 +988,7 @@ Untracked files:
     Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
+    Untracked:  data/LDSR_annotations/
     Untracked:  data/Li_eQTLs/
     Untracked:  data/NMD/
     Untracked:  data/NascentRNA/
@@ -992,6 +1009,7 @@ Untracked files:
     Untracked:  data/SNPinSS/
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/TF_motifdisruption/
+    Untracked:  data/TSS/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/Version15bp6As/
     Untracked:  data/Version15bp7As/
@@ -1014,6 +1032,7 @@ Untracked files:
     Untracked:  data/bothFrac_FC/
     Untracked:  data/bw/
     Untracked:  data/bw_norm/
+    Untracked:  data/eCLip/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
     Untracked:  data/fastq/
@@ -1034,6 +1053,7 @@ Untracked files:
     Untracked:  data/molPhenos/
     Untracked:  data/molQTLs/
     Untracked:  data/motifdistrupt/
+    Untracked:  data/nPAS/
     Untracked:  data/netseq/
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
@@ -1048,6 +1068,7 @@ Untracked files:
     Untracked:  data/phenotype/
     Untracked:  data/phenotype_5perc/
     Untracked:  data/phenotype_inclusivePAS/
+    Untracked:  data/phylop/
     Untracked:  data/pttQTL/
     Untracked:  data/pttQTLplots/
     Untracked:  data/sigDiffGenes.txt
@@ -1095,14 +1116,20 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
+    Modified:   analysis/RNAbinding.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/TSS.Rmd
+    Modified:   analysis/decayAndStability.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
     Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/DistPAS2Sig.py
+    Modified:   code/Script4NuclearQTLexamples.sh
+    Modified:   code/Script4TotalQTLexamples.sh
     Modified:   code/apaQTLsnake.err
+    Modified:   code/run_qtlFacetBoxplots.sh
     Deleted:    code/test.txt
     Deleted:    reads_graphs.Rmd
 
@@ -1148,6 +1175,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a1f535544e0a3bd4fea08267adb3aa7158c3e94c/analysis/LDregress.Rmd" target="_blank">a1f5355</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-05
+</td>
+<td>
+add potential mechanisms and ld scripts
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/3d9f5c754c01ae4fc73d408b98f2025331594311/docs/LDregress.html" target="_blank">3d9f5c7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/fd5ccd7f1e19bd5809e13eda96d7424bb004bf6e/analysis/LDregress.Rmd" target="_blank">fd5ccd7</a>
 </td>
 <td>
@@ -1167,6 +1228,18 @@ add LD regress notes and first var in apa
 </div>
 </div>
 </div>
+<pre class="r"><code>library(workflowr)</code></pre>
+<pre><code>This is workflowr version 1.5.0
+Run ?workflowr for help getting started</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>LD score regression with apaQTLs and multiple myeloma?</p>
 <p><a href="https://www.nature.com/articles/s41467-018-04989-w" class="uri">https://www.nature.com/articles/s41467-018-04989-w</a></p>
 <p>QTLs:</p>
@@ -1189,6 +1262,55 @@ add LD regress notes and first var in apa
 <p><a href="https://github.com/bulik/ldsc" class="uri">https://github.com/bulik/ldsc</a></p>
 <p>03,05,06,07</p>
 <p>/project2/yangili1/zpmu/ldsc/scripts</p>
+<p>First I will prepare the PAS and apaQTL filese:</p>
+<pre class="bash"><code>mkdir ../data/LDSR_annotations</code></pre>
+<p>Nuclear 5% PAS</p>
+<pre class="r"><code>PAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed&quot;,col.names = c(&quot;Chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;name&quot;,&quot;score&quot;,&quot;stand&quot;),stringsAsFactors = F)
+
+PAS_500=PAS%&gt;% mutate(chrom=paste(&quot;chr&quot;, Chr, sep=&quot;&quot;),newStart=end-250, newEnd=end+250 ) %&gt;% select(chrom,newStart,newEnd)
+
+PAS_1000=PAS%&gt;% mutate(chrom=paste(&quot;chr&quot;, Chr, sep=&quot;&quot;),newStart=end-1000, newEnd=end+1000 ) %&gt;% select(chrom, newStart,newEnd)</code></pre>
+<pre class="r"><code>write.table(PAS_500,&quot;../data/LDSR_annotations/PAS_Nuclear500.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)
+
+write.table(PAS_1000,&quot;../data/LDSR_annotations/PAS_Nuclear1000.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>Sort:</p>
+<pre class="bash"><code>sort -k1,1 -k2,2n ../data/LDSR_annotations/PAS_Nuclear500.bed &gt; ../data/LDSR_annotations/PAS_Nuclear500.sort.bed
+
+sort -k1,1 -k2,2n ../data/LDSR_annotations/PAS_Nuclear1000.bed &gt; ../data/LDSR_annotations/PAS_Nuclear1000.sort.bed</code></pre>
+<p>QTLS:</p>
+<pre class="r"><code>RSID=read.table(&quot;../../../briana/li_genotypes/RSID2snploc.txt&quot;, header = T, stringsAsFactors = F, col.names = c(&quot;snp&quot;,&quot;sid&quot;, &quot;ref&quot;,&quot;alt&quot;))
+NucQTL=read.table(&quot;../data/apaQTLPermuted_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear_permResBH.txt&quot;, header = T ,stringsAsFactors = F) %&gt;% inner_join(RSID, by=&quot;sid&quot;) %&gt;% separate(snp, into=c(&quot;chr&quot;,&quot;loc&quot;),sep=&quot;:&quot;)
+
+NucQTL500=NucQTL%&gt;% mutate(start=as.integer(loc)-250,end=as.integer(loc)+250, chrom=paste(&quot;chr&quot;,chr,by=&quot;&quot;)) %&gt;% select(chrom,start,end)
+
+NucQTL1000=NucQTL%&gt;% mutate(start=as.integer(loc)-500,end=as.integer(loc)+500, chrom=paste(&quot;chr&quot;,chr,by=&quot;&quot;)) %&gt;% select(chrom,start,end)</code></pre>
+<pre class="r"><code>write.table(NucQTL500,&quot;../data/LDSR_annotations/QTL_Nuclear500.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)
+
+write.table(NucQTL1000,&quot;../data/LDSR_annotations/QTL_Nuclear1000.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>Sort:</p>
+<pre class="bash"><code>sort -k1,1 -k2,2n ../data/LDSR_annotations/QTL_Nuclear500.bed &gt; ../data/LDSR_annotations/QTL_Nuclear500.sort.bed
+
+sort -k1,1 -k2,2n ../data/LDSR_annotations/QTL_Nuclear1000.bed &gt; ../data/LDSR_annotations/QTL_Nuclear1000.sort.bed</code></pre>
+<p>Choose test gwas:</p>
+<p>Start with RA because it works with Phenoix’s code.</p>
+<p>I moved the scripts to my code directory. I will make a copy of it for PAS_500_Lymph</p>
+<pre class="bash"><code>cp -R scripts scripts_PAS_500_Lymph
+
+../data/LDSR_annotations/
+</code></pre>
+<p>Change the places in 03,05,06,07</p>
+<pre class="bash"><code>#03 will annotate all 4 of these  
+
+sbatch scripts_PAS_500_Lymph/03_immuneAtlas_annot.sh 
+
+sbatch scripts_PAS_500_Lymph/05_immuneAtlas_ldscore.sh
+
+sbatch scripts_PAS_500_Lymph/06_munge_gwas_lymphPAS500.sh
+
+mkdir /project2/gilad/briana/apaQTL/data/LDSR_annotations/results/
+
+sbatch scripts_PAS_500_Lymph/07_partition_h2g.sh </code></pre>
+<p>stuck on 7. need baseline LD files</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1215,13 +1337,25 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
+ [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
+ [9] tidyverse_1.2.1 workflowr_1.5.0
+
 loaded via a namespace (and not attached):
- [1] workflowr_1.5.0 Rcpp_1.0.2      digest_0.6.18   later_0.7.5    
- [5] rprojroot_1.3-2 R6_2.3.0        backports_1.1.2 git2r_0.26.1   
- [9] magrittr_1.5    evaluate_0.12   stringi_1.2.4   fs_1.3.1       
-[13] promises_1.0.1  whisker_0.3-2   rmarkdown_1.10  tools_3.5.1    
-[17] stringr_1.3.1   glue_1.3.0      httpuv_1.4.5    yaml_2.2.0     
-[21] compiler_3.5.1  htmltools_0.3.6 knitr_1.20     </code></pre>
+ [1] Rcpp_1.0.2       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
+ [5] pillar_1.3.1     later_0.7.5      git2r_0.26.1     tools_3.5.1     
+ [9] digest_0.6.18    lubridate_1.7.4  jsonlite_1.6     evaluate_0.12   
+[13] nlme_3.1-137     gtable_0.2.0     lattice_0.20-38  pkgconfig_2.0.2 
+[17] rlang_0.4.0      cli_1.1.0        rstudioapi_0.10  yaml_2.2.0      
+[21] haven_1.1.2      withr_2.1.2      xml2_1.2.0       httr_1.3.1      
+[25] knitr_1.20       hms_0.4.2        generics_0.0.2   fs_1.3.1        
+[29] rprojroot_1.3-2  grid_3.5.1       tidyselect_0.2.5 glue_1.3.0      
+[33] R6_2.3.0         readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2    
+[37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
+[41] promises_1.0.1   htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
+[45] colorspace_1.3-2 httpuv_1.4.5     stringi_1.2.4    lazyeval_0.2.1  
+[49] munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 
