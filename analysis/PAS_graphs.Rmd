@@ -365,12 +365,19 @@ full=as.data.frame(cbind(cutoff_total, utrandIntron))
 ```
 
 ```{r}
-ggplot(utrandIntron_melt,aes(x=xval, y=prop, color=location))+ geom_line(size=3) 
+full_g=full %>% gather("Location", "prop", -cutoff, -xval)
+mycolors <- c("data1"="purple")
 
-ggplot(data=full, aes(x=xval, y=cutoff ))+ geom_line(size=3)
+
+fixedplotfig1=ggplot(data=full_g, aes(x=xval))+ geom_line(aes(y=cutoff),col="purple",size=3)+ geom_line(aes(x=xval, y=prop*30000 , col=Location),size=3)+  scale_y_continuous(sec.axis = sec_axis( ~./30000 , name="Proportion of PAS")) + labs(y="Number of PAS",title="Intronic PAS are used at low frequencies",x="Usage cutoff")+  scale_color_brewer(palette = "Dark2") +theme(axis.title.y.left = element_text(color = mycolors["data1"]), axis.text.y.left = element_text(color = mycolors["data1"]))
 ```
+
+```{r}
+fixedplotfig1
+```
+
 ```{r figure1Both, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
-ggplot(utrandIntron_melt,aes(x=xval, y=prop, color=location))+ geom_line(size=1) 
+fixedplotfig1
 ```
 
 ```{r figure1quant, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}

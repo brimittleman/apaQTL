@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
+library(data.table)
 library(workflowr)
 library(tidyverse)
 ```
@@ -146,4 +147,118 @@ sbatch scripts_PAS_500_Lymph/07_partition_h2g.sh
 ```
 
 stuck on 7. need baseline LD files 
+
+
+Try to munge another GWAS :
+
+ I need to understand the column names for the GWAS to put in the script.  
+ 
+
+
+VARIANT	ID_dbSNP49	CHR	BP	REF	ALT	ALT_MINOR	DIRECTION	EFFECT	SE	P	MLOG10P	ALT_FREQ	MA_FREQ
+1:10177_A_AC	rs367896724	1	10177	A	AC	TRUE	+	5.330523e-03	4.971989e-03	0.2837	5.471861e-01	3.926e-01	3.926e-01
+
+SNP: ID_dbSNP49 
+P: P
+A1: REF
+A2: ALT
+MAF: MA_FREQ
+ EFFECT  SE 
+
+
+Missing N baso_neut_sum, eo_baso_sum, and neut_eo_sum 
+
+
+
+
+```{r}
+metaDt <- fread("/project2/yangili1/zpmu/GWAS_loci/gwasATLAS_threePMID.txt") %>% 
+  filter(PMID == 27863252) %>% select(N, uniqTrait)
+
+traits=fread("/project2/yangili1/zpmu/GWAS_loci/27863252/TRAIT_MAP.tsv")
+
+
+metandTrait=traits %>% dplyr::rename("uniqTrait"= long_name) %>% full_join(metaDt,by="uniqTrait")
+
+
+write.table(metandTrait, "/project2/yangili1/zpmu/GWAS_loci/MetawTrait.txt", col.names = F,row.names = F,quote = F,sep="\t")
+```
+
+
+I need 
+
+SNP -- SNP identifier (e.g., rs number)
+N -- sample size (which may vary from SNP to SNP).
+Z -- z-score. Sign with respect to A1 (warning, possible gotcha)
+A1 -- first allele (effect allele)
+A2-- second allele (other allele)
+
+
+SNP is EFFECT/SE
+
+
+split up to _N for the name of the file.
+```{bash,eval=F}
+sbatch runFixGWAS4Munge.sh 
+mkdir ../data/LDSR_annotations/Munge/
+sbatch scripts_PAS_500_Lymph/mungeGWAS.sh
+sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_PAS1000.sh
+sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_PAS500.sh
+sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_qtl1000.sh
+sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_qtl500.sh
+```
+
+
+
+
+
+###code to rerun those that needed manual fixing for trait: 
+
+```{bash,eval=F}
+gunzip /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.tsv.gz
+
+python fixGWAS4Munge.py /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.tsv /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.fixed4Munge.tsv
+
+
+
+gzip /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.tsv
+gzip /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.fixed4Munge.tsv
+ 
+/project2/gilad/briana/ldsc/munge_sumstats.py --sumstats /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.fixed4Munge.tsv.gz --out /project2/gilad/briana/apaQTL/data/LDSR_annotations/Munge/baso_neut_sum_N170143_narrow_form.munge --merge-alleles /project2/yangili1/zpmu/ldsc/data/w_hm3.snplist --chunksize 500000
+	
+#2	
+gunzip /project2/yangili1/zpmu/GWAS_loci/27863252/eo_baso_sum_N171771_narrow_form.tsv.gz
+
+
+python fixGWAS4Munge.py /project2/yangili1/zpmu/GWAS_loci/27863252/eo_baso_sum_N171771_narrow_form.tsv /project2/yangili1/zpmu/GWAS_loci/27863252/eo_baso_sum_N171771_narrow_form.fixed4Munge.tsv   
+
+gzip /project2/yangili1/zpmu/GWAS_loci/27863252/eo_baso_sum_N171771_narrow_form.fixed4Munge.tsv   
+
+gzip /project2/yangili1/zpmu/GWAS_loci/27863252/eo_baso_sum_N171771_narrow_form.tsv
+
+ /project2/gilad/briana/ldsc/munge_sumstats.py \
+	--sumstats /project2/yangili1/zpmu/GWAS_loci/27863252/eo_baso_sum_N171771_narrow_form.fixed4Munge.tsv.gz \
+	--out /project2/gilad/briana/apaQTL/data/LDSR_annotations/Munge/eo_baso_sum_N171771_narrow_form.munge \
+	--merge-alleles /project2/yangili1/zpmu/ldsc/data/w_hm3.snplist \
+	--chunksize 500000
+
+#3  
+
+gunzip /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.tsv.gz
+
+
+python fixGWAS4Munge.py /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.tsv /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.fixed4Munge.tsv 
+
+gzip /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.fixed4Munge.tsv 
+gzip /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.tsv
+
+
+ /project2/gilad/briana/ldsc/munge_sumstats.py \
+	--sumstats /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.fixed4Munge.tsv.gz \
+	--out /project2/gilad/briana/apaQTL/data/LDSR_annotations/Munge/neut_eo_sum_N170384_narrow_form.munge \
+	--merge-alleles /project2/yangili1/zpmu/ldsc/data/w_hm3.snplist \
+	--chunksize 500000
+```
+
+
 
