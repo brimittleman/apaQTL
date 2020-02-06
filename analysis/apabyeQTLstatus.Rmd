@@ -1,0 +1,53 @@
+---
+title: "apaQTL effect size by eQTL status"
+author: "Briana Mittleman"
+date: "2/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(ggpubr)
+```
+
+
+```{r}
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+
+nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval)) %>% mutate(Set="Unexplained")
+
+nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))%>% mutate(Set="Explained")
+
+
+NuclearBoth= nuclearapaUnexplained %>% bind_rows(nuclearapaexplained)
+
+
+
+ggplot(NuclearBoth, aes(y=abs(slope), x=Set,fill=Set)) + geom_boxplot() + stat_compare_means() + scale_fill_brewer(palette = "Dark2") + theme(legend.position = "none") + labs(x="eQTL Set", y="abs(apaQTL Effect size)", title="Unexplained eQTLs have stronger effect sizes in apaQTLs")
+
+
+
+
+```
+
+```{r}
+
+
+totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval)) %>% mutate(Set="Unexplained")
+
+totlaapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))%>% mutate(Set="Explained")
+
+
+TotalBoth= totalapaUnexplained %>% bind_rows(totlaapaexplained)
+
+
+
+ggplot(TotalBoth, aes(y=abs(slope), x=Set,fill=Set)) + geom_boxplot() + stat_compare_means() + scale_fill_brewer(palette = "Dark2") + theme(legend.position = "none") + labs(x="eQTL Set", y="abs(Total mRNA apaQTL Effect size)", title="Unexplained eQTLs have stronger effect sizes in Total apaQTLs")
+
+```
+

@@ -182,4 +182,5 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Base composition around PAS](BaseComposition.html)  
 
+* [apaQTL effect sizes by eQTL set](apabyeQTLstatus.html)
 
