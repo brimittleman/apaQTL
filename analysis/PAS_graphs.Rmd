@@ -376,7 +376,7 @@ fixedplotfig1=ggplot(data=full_g, aes(x=xval))+ geom_line(aes(y=cutoff),col="pur
 fixedplotfig1
 ```
 
-```{r figure1Both, include=FALSE, dev="pdf", fig.height=4, fig.width=4, crop=FALSE}
+```{r figure1Both, include=FALSE, dev="pdf", fig.height=4, fig.width=10, crop=FALSE}
 fixedplotfig1
 ```
 
