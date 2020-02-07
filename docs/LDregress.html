@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-06
+<strong>Last updated:</strong> 2020-02-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8c102775d084c8f3011e4988b93b5e5dd3bc8277targetblank8c10277a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/8c102775d084c8f3011e4988b93b5e5dd3bc8277" target="_blank">8c10277</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef3da578b03b42b21aa082bb71287db865c8698d6targetblankf3da578a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f3da578b03b42b21aa082bb71287db865c8698d6" target="_blank">f3da578</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree8c102775d084c8f3011e4988b93b5e5dd3bc8277targetblank8c10277a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef3da578b03b42b21aa082bb71287db865c8698d6targetblankf3da578a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -462,7 +462,6 @@ Untracked files:
     Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm.allChrom
     Untracked:  analysis/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm.allChrom
     Untracked:  analysis/QTLexampleplots.Rmd
-    Untracked:  analysis/apabyeQTLstatus.Rmd
     Untracked:  analysis/cuttoffPercUsage.Rmd
     Untracked:  analysis/eQTLoverlap.Rmd
     Untracked:  analysis/interpret verify bam.Rmd
@@ -646,6 +645,8 @@ Untracked files:
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._parseBestbamid.py
+    Untracked:  code/._parseLDRes.py
+    Untracked:  code/._parseLDresBothPAS.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -877,6 +878,10 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucspecinE.py
+    Untracked:  code/parseLDRes.py
+    Untracked:  code/parseLDres.err
+    Untracked:  code/parseLDres.out
+    Untracked:  code/parseLDresBothPAS.sh
     Untracked:  code/plink.log
     Untracked:  code/prxySNP.err
     Untracked:  code/prxySNP.out
@@ -1127,6 +1132,7 @@ Unstaged changes:
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/TSS.Rmd
     Modified:   analysis/decayAndStability.Rmd
+    Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
@@ -1177,6 +1183,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f3da578b03b42b21aa082bb71287db865c8698d6/analysis/LDregress.Rmd" target="_blank">f3da578</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-07
+</td>
+<td>
+add LD res
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/7477dd794b29e8cda89bb75345ea33b668dbc54a/docs/LDregress.html" target="_blank">7477dd7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1274,12 +1314,12 @@ library(workflowr)</code></pre>
 <pre><code>This is workflowr version 1.5.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::between()   masks data.table::between()
 ✖ dplyr::filter()    masks stats::filter()
 ✖ dplyr::first()     masks data.table::first()
@@ -1383,6 +1423,29 @@ sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_PAS1000.sh
 sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_PAS500.sh
 sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_qtl1000.sh
 sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_qtl500.sh</code></pre>
+<p>Process the results:</p>
+<p>Create a python script that prints out the names of the gwas, the region, and the results.</p>
+<pre class="bash"><code>sbatch parseLDresBothPAS.sh</code></pre>
+<p>Results:</p>
+<pre class="r"><code>reshead=c(&quot;GWAS&quot;,colnames(read.table(&quot;../data/LDSR_annotations/results/PAS_Nuclear1000_baso_N171846_narrow_form.baseline.results&quot;,header=T)))
+PAS500res=read.table(&quot;../data/LDSR_annotations/results/allPAS_Nuclear500.txt&quot;, col.names = reshead) %&gt;% separate(GWAS, into=c(&quot;PAS&quot;, &quot;Type&quot;, &quot;extra&quot;),sep=&quot;_N&quot;) %&gt;%separate(Type, into=c(&quot;nuc&quot;, &quot;pheno&quot;),sep=&quot;0_&quot;)</code></pre>
+<pre><code>Warning: Expected 3 pieces. Missing pieces filled with `NA` in 1 rows [30].</code></pre>
+<pre class="r"><code>PAS500_snpsincluded=round(PAS500res$Prop._SNPs[1],3) * 100
+
+
+PAS1000res=read.table(&quot;../data/LDSR_annotations/results/allPAS_Nuclear1000.txt&quot;, col.names = reshead) %&gt;% separate(GWAS, into=c(&quot;PAS&quot;, &quot;Type&quot;, &quot;extra&quot;),sep=&quot;_N&quot;) %&gt;%separate(Type, into=c(&quot;nuc&quot;, &quot;pheno&quot;),sep=&quot;0_&quot;) </code></pre>
+<pre><code>Warning: Expected 3 pieces. Missing pieces filled with `NA` in 1 rows [30].</code></pre>
+<pre class="r"><code>PAS1000_snpsincluded=round(PAS1000res$Prop._SNPs[1],3) *100</code></pre>
+<p>Plot the H2 explained:</p>
+<pre class="r"><code>ggplot(PAS500res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat=&quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = &quot;none&quot;) + annotate(&quot;text&quot;, label=paste(&quot;% of SNPs included&quot;, PAS500_snpsincluded), x=10, y=.08)</code></pre>
+<p><img src="figure/LDregress.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(PAS500res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat=&quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = &quot;none&quot;) + annotate(&quot;text&quot;, label=paste(&quot;% of SNPs included&quot;, PAS500_snpsincluded), x=10, y=12)</code></pre>
+<p><img src="figure/LDregress.Rmd/unnamed-chunk-15-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Plot the H2 explained:</p>
+<pre class="r"><code>ggplot(PAS1000res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat=&quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = &quot;none&quot;) + annotate(&quot;text&quot;, label=paste(&quot;% of SNPs included&quot;, PAS1000_snpsincluded), x=10, y=.15)+labs(x=&quot;&quot;, title=&quot;LD scroe regressino results for 1000 BP around each PAS&quot;, y=&quot;% of heritability explained&quot;)</code></pre>
+<p><img src="figure/LDregress.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(PAS1000res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat=&quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = &quot;none&quot;) + annotate(&quot;text&quot;, label=paste(&quot;% of SNPs included&quot;, PAS1000_snpsincluded), x=10, y=12) +labs(x=&quot;&quot;, title=&quot;LD scroe regressino results for 1000 BP around each PAS&quot;)</code></pre>
+<p><img src="figure/LDregress.Rmd/unnamed-chunk-16-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="code-to-rerun-those-that-needed-manual-fixing-for-trait" class="section level3">
 <h3>code to rerun those that needed manual fixing for trait:</h3>
 <pre class="bash"><code>gunzip /project2/yangili1/zpmu/GWAS_loci/27863252/baso_neut_sum_N170143_narrow_form.tsv.gz
@@ -1472,8 +1535,8 @@ loaded via a namespace (and not attached):
 [33] R6_2.3.0         readxl_1.1.0     rmarkdown_1.10   modelr_0.1.2    
 [37] magrittr_1.5     whisker_0.3-2    backports_1.1.2  scales_1.0.0    
 [41] promises_1.0.1   htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
-[45] colorspace_1.3-2 httpuv_1.4.5     stringi_1.2.4    lazyeval_0.2.1  
-[49] munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+[45] colorspace_1.3-2 httpuv_1.4.5     labeling_0.3     stringi_1.2.4   
+[49] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 </div>
 
