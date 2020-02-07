@@ -209,7 +209,46 @@ sbatch scripts_PAS_500_Lymph/par_h2g_allGWAS_qtl500.sh
 ```
 
 
+Process the results:  
 
+Create a python script that prints out the names of the gwas, the region, and the results.  
+
+```{bash,eval=F}
+sbatch parseLDresBothPAS.sh
+```
+
+
+Results:  
+
+```{r}
+reshead=c("GWAS",colnames(read.table("../data/LDSR_annotations/results/PAS_Nuclear1000_baso_N171846_narrow_form.baseline.results",header=T)))
+PAS500res=read.table("../data/LDSR_annotations/results/allPAS_Nuclear500.txt", col.names = reshead) %>% separate(GWAS, into=c("PAS", "Type", "extra"),sep="_N") %>%separate(Type, into=c("nuc", "pheno"),sep="0_")
+PAS500_snpsincluded=round(PAS500res$Prop._SNPs[1],3) * 100
+
+
+PAS1000res=read.table("../data/LDSR_annotations/results/allPAS_Nuclear1000.txt", col.names = reshead) %>% separate(GWAS, into=c("PAS", "Type", "extra"),sep="_N") %>%separate(Type, into=c("nuc", "pheno"),sep="0_") 
+PAS1000_snpsincluded=round(PAS1000res$Prop._SNPs[1],3) *100
+
+
+```
+
+Plot the H2 explained: 
+
+```{r}
+ggplot(PAS500res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS500_snpsincluded), x=10, y=.08)
+
+
+ggplot(PAS500res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS500_snpsincluded), x=10, y=12)
+```
+
+Plot the H2 explained: 
+
+```{r}
+ggplot(PAS1000res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS1000_snpsincluded), x=10, y=.15)+labs(x="", title="LD scroe regressino results for 1000 BP around each PAS", y="% of heritability explained")
+
+
+ggplot(PAS1000res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS1000_snpsincluded), x=10, y=12) +labs(x="", title="LD scroe regressino results for 1000 BP around each PAS")
+```
 
 
 ###code to rerun those that needed manual fixing for trait: 
@@ -259,6 +298,7 @@ gzip /project2/yangili1/zpmu/GWAS_loci/27863252/neut_eo_sum_N170384_narrow_form.
 	--merge-alleles /project2/yangili1/zpmu/ldsc/data/w_hm3.snplist \
 	--chunksize 500000
 ```
+
 
 
 
