@@ -352,3 +352,11 @@ Total fraction GRWD1 and HNRNPC pop up too
 GRWD1: encoded protein may play a critical role in ribosome biogenesis and may also play a role in histone methylation through interactions   
 
 HNRNPC: The hnRNPs are RNA binding proteins and they complex with heterogeneous nuclear RNA (hnRNA). These proteins are associated with pre-mRNAs in the nucleus and appear to influence pre-mRNA processing and other aspects of mRNA metabolism and transport
+
+
+Linked to it:  
+-CPEB1 - shuttles between nucleus and the cytoplasm (Bava, F.A. et al. (2013) CPEB1 coordinates alternative 3-UTR formation with translational regulation. Nature 495, 121–125) consensus sequence 5'-UUUUUAU-3'
+
+Will most likely have to look for binding motfis for this one.
+
+
