@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(workflowr)
+require(data.table)
 library(tidyverse)
 ```
 
@@ -305,4 +306,66 @@ phyper(x, m, n, k,lower.tail=F)
 ```
 This is significant as well. miRNAs may be part of the reason we do not detect as many total transcripts as total transcripts.  
 
+###Exosome machinery  
 
+Knockdown of exosome activity in hela cells. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6499326/
+
+MTR4 and RRP40 knockdown in HeLa cells. 
+
+From supplement: Genes with RPM>1 and the ratio of
+MTR4/control or RRP40/control >1.5 are considered to be significantly accumulated.
+
+I will take the mean for each replicate and compare it to the mean control first tiwht MTR4 then RRP40.  
+
+```{bash,eval=F}
+mkdir ../data/exosome
+```
+
+```{r}
+Fandata=read.table("../data/exosome/Fanaldata.csv",header=T,stringsAsFactors = F,sep=",") %>% mutate(meanMt4=rowMeans(select(., contains(".mtr4.KD")), na.rm = TRUE),meanCont=rowMeans(select(., contains("luciferase")), na.rm = TRUE), meanrrp40=rowMeans(select(., contains("rrp40")), na.rm = TRUE) ) %>% select(-contains(".KD"), -Gene, -Type) %>% mutate(MtRatio=meanMt4/meanCont, rrp4Ratio=meanrrp40/meanCont)
+    
+
+MT4Up= Fandata %>% filter(meanMt4 > 1, MtRatio > 1.5)
+rrp4Up= Fandata %>% filter(meanrrp40 > 1, rrp4Ratio > 1.5)
+
+
+Fandata_wsig= Fandata %>% mutate(SigMT=ifelse(Name %in% MT4Up$Name, "Yes","No"), Sigrrp4=ifelse(Name %in% rrp4Up$Name, "Yes","No"))
+```
+
+Look in  TVN set 
+
+MTR4
+```{r}
+x=length(intersect(TvNsig$gene, MT4Up$Name))
+m=nrow(MT4Up) 
+n=Fandata_wsig %>% filter(SigMT=="No") %>% nrow()
+k=length(TvNsig$gene)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+rrp4
+```{r}
+x=length(intersect(TvNsig$gene, rrp4Up$Name))
+m=nrow(rrp4Up) 
+n=Fandata_wsig %>% filter(Sigrrp4=="No") %>% nrow()
+k=length(TvNsig$gene)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+No enrichment for these.  
