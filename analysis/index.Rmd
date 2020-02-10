@@ -184,3 +184,5 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [apaQTL effect sizes by eQTL set](apabyeQTLstatus.html)
 
+* [miRNA binding site disruption as QTL mechanism](miRNAdisrupt.html)
+

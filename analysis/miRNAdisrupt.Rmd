@@ -1,0 +1,24 @@
+---
+title: "Disruption of miRNA sites"
+author: "Briana Mittleman"
+date: "2/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will test if any of the QTLs distrupt conserved miRNA binding sites in conserved miRNA families. I will do this with a bed intersection starting with the QTLs.  
+
+```{bash,eval=F}
+sed 's/^chr//' ../data/miRNAbinding/Targets_CS_pctiles.hg19.consFam.consSite.bed > ../data/miRNAbinding/Targets_CS_pctiles.hg19.consFam.consSite.NoChr.bed
+
+
+sed '1d'  ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed | sort -k1,1 -k2,2n >  ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.sort.bed 
+sed '1d'   ../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.bed  | sort -k1,1 -k2,2n > ../data/apaQTLs/Total_apaQTLs4pc_5fdr.WITHSTRAND.sort.bed 
+
+
+sbatch miRNAdisrupt.sh
+```
+
