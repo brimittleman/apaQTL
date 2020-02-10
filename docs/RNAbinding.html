@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-02
+<strong>Last updated:</strong> 2020-02-10
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefda9908aeb351084ec32801624a74f745ca89626targetblankfda9908a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fda9908aeb351084ec32801624a74f745ca89626" target="_blank">fda9908</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree9ac4e5f8ca16074c09ba3bfd33856270fb6be145targetblank9ac4e5fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/9ac4e5f8ca16074c09ba3bfd33856270fb6be145" target="_blank">9ac4e5f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefda9908aeb351084ec32801624a74f745ca89626targetblankfda9908a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree9ac4e5f8ca16074c09ba3bfd33856270fb6be145targetblank9ac4e5fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -447,7 +447,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    code/logs/
     Ignored:    data/.DS_Store
     Ignored:    output/.DS_Store
 
@@ -512,6 +511,7 @@ Untracked files:
     Untracked:  code/._QTL2bed_withstrand.py
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._Rplots.pdf
     Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
@@ -594,6 +594,7 @@ Untracked files:
     Untracked:  code/._fixFChead.py
     Untracked:  code/._fixFChead_bothfrac.py
     Untracked:  code/._fixFChead_short.py
+    Untracked:  code/._fixGWAS4Munge.py
     Untracked:  code/._fixH3k12ac.py
     Untracked:  code/._fixPASregionSNPs.py
     Untracked:  code/._fixRNAhead4corr.py
@@ -631,6 +632,7 @@ Untracked files:
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
     Untracked:  code/._mergePeaks.sh
+    Untracked:  code/._miRNAdisrupt.sh
     Untracked:  code/._mnase1stintron.sh
     Untracked:  code/._mnaseDT_fourthintron.sh
     Untracked:  code/._namePeaks.py
@@ -644,6 +646,8 @@ Untracked files:
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._parseBestbamid.py
+    Untracked:  code/._parseLDRes.py
+    Untracked:  code/._parseLDresBothPAS.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -657,6 +661,7 @@ Untracked files:
     Untracked:  code/._removeloc_pheno.py
     Untracked:  code/._riboQTL.sh
     Untracked:  code/._runCorrectNomEqtl.sh
+    Untracked:  code/._runFixGWAS4Munge.sh
     Untracked:  code/._runHMMpermuteAPAqtls.sh
     Untracked:  code/._runHMMpermuteeQTLS.sh
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
@@ -704,6 +709,7 @@ Untracked files:
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
     Untracked:  code/._tenBPupstreamPAS.py
+    Untracked:  code/._test.pdf
     Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._twentyBPupstreamPAS.py
@@ -833,7 +839,9 @@ Untracked files:
     Untracked:  code/extactPAS100meanphyloP.py
     Untracked:  code/extractPACmeanPhyloP.py
     Untracked:  code/fixExandUnexeQTL
+    Untracked:  code/fixGWAS4Munge.py
     Untracked:  code/fix_randomIntron.py
+    Untracked:  code/fixmunge
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.log
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.recode.vcf
     Untracked:  code/getseq100up.err
@@ -845,6 +853,7 @@ Untracked files:
     Untracked:  code/intersectVCFPAS.err
     Untracked:  code/intersectVCFPAS.out
     Untracked:  code/log/
+    Untracked:  code/logs/
     Untracked:  code/merge53PRIMEbam.err
     Untracked:  code/merge53PRIMEbam.out
     Untracked:  code/merge53RNAbam.err
@@ -861,6 +870,9 @@ Untracked files:
     Untracked:  code/mergeBamNacent.out
     Untracked:  code/mergeRNAbam.err
     Untracked:  code/mergeRNAbam.out
+    Untracked:  code/miRNAdisrupt.err
+    Untracked:  code/miRNAdisrupt.out
+    Untracked:  code/miRNAdisrupt.sh
     Untracked:  code/mnaseDTPlot1stintron.err
     Untracked:  code/mnaseDTPlot1stintron.out
     Untracked:  code/mnaseDTPlot4thintron.err
@@ -870,6 +882,10 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucspecinE.py
+    Untracked:  code/parseLDRes.py
+    Untracked:  code/parseLDres.err
+    Untracked:  code/parseLDres.out
+    Untracked:  code/parseLDresBothPAS.sh
     Untracked:  code/plink.log
     Untracked:  code/prxySNP.err
     Untracked:  code/prxySNP.out
@@ -885,6 +901,7 @@ Untracked files:
     Untracked:  code/runCorrectNomeqtl.out
     Untracked:  code/runFilterLD.err
     Untracked:  code/runFilterLD.out
+    Untracked:  code/runFixGWAS4Munge.sh
     Untracked:  code/runHMMpermute.err
     Untracked:  code/runHMMpermute.out
     Untracked:  code/runHMMpermuteeQTLs.err
@@ -955,6 +972,8 @@ Untracked files:
     Untracked:  code/subtractExons.out
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/test.pdf
+    Untracked:  code/testFix.txt
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
     Untracked:  code/vcf_keepsnps.err
@@ -969,6 +988,7 @@ Untracked files:
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
     Untracked:  data/BadLines/
+    Untracked:  data/BaseComp/
     Untracked:  data/Battle_pQTL/
     Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
@@ -976,6 +996,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/ExampleQTLPlots_update/
     Untracked:  data/ExpressionIndependentapaQTLs.txt
     Untracked:  data/FiveMergedBW/
     Untracked:  data/FiveMergedBam/
@@ -1004,6 +1025,7 @@ Untracked files:
     Untracked:  data/SNPinSS/
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/TF_motifdisruption/
+    Untracked:  data/TSS/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/Version15bp6As/
     Untracked:  data/Version15bp7As/
@@ -1044,6 +1066,7 @@ Untracked files:
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
+    Untracked:  data/miRNAbinding/
     Untracked:  data/molPhenos/
     Untracked:  data/molQTLs/
     Untracked:  data/motifdistrupt/
@@ -1108,18 +1131,22 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/LDregress.Rmd
+    Modified:   analysis/ExploreNpas.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/TSS.Rmd
+    Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
     Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/DistPAS2Sig.py
+    Modified:   code/Script4NuclearQTLexamples.sh
+    Modified:   code/Script4TotalQTLexamples.sh
     Modified:   code/apaQTLsnake.err
+    Modified:   code/run_qtlFacetBoxplots.sh
     Deleted:    code/test.txt
     Deleted:    reads_graphs.Rmd
 
@@ -1165,6 +1192,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/9ac4e5f8ca16074c09ba3bfd33856270fb6be145/analysis/RNAbinding.Rmd" target="_blank">9ac4e5f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-10
+</td>
+<td>
+add upf1
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/RNAbinding.html" target="_blank">bd6d99c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/fda9908aeb351084ec32801624a74f745ca89626/analysis/RNAbinding.Rmd" target="_blank">fda9908</a>
 </td>
 <td>
@@ -1188,12 +1249,12 @@ add RBP res
 <pre><code>This is workflowr version 1.5.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <p>I will use eClip data from encode to study RNA binding. I will use the results from K562 cells. They do not have data for LCLs.</p>
@@ -1256,13 +1317,13 @@ k=nrow(All %&gt;% filter(QTL==&quot;Yes&quot;))
 
 #expected
 which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
-<pre><code>[1] 403</code></pre>
+<pre><code>[1] 423</code></pre>
 <pre class="r"><code>#actual:
 x</code></pre>
-<pre><code>[1] 429</code></pre>
+<pre><code>[1] 444</code></pre>
 <pre class="r"><code>#pval
 phyper(x,m,n,k,lower.tail=F)</code></pre>
-<pre><code>[1] 0.007323885</code></pre>
+<pre><code>[1] 0.0195104</code></pre>
 <p>This means genes with QTLs are enriched for genes with an identified RBP in the its UTR.</p>
 <p>Let’s look at this by the location of QTL.</p>
 <pre class="r"><code>QTL_intron=read.table(&quot;../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.bed&quot;,stringsAsFactors = F,header = T) %&gt;% 
@@ -1289,13 +1350,13 @@ k=nrow(All_intron %&gt;% filter(QTL==&quot;Yes&quot;))
 
 #expected
 which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
-<pre><code>[1] 110</code></pre>
+<pre><code>[1] 120</code></pre>
 <pre class="r"><code>#actual:
 x</code></pre>
-<pre><code>[1] 110</code></pre>
+<pre><code>[1] 120</code></pre>
 <pre class="r"><code>#pval
 phyper(x,m,n,k,lower.tail=F)</code></pre>
-<pre><code>[1] 0.8893598</code></pre>
+<pre><code>[1] 0.7092743</code></pre>
 <pre class="r"><code>All_UTR=read.table(&quot;../data/eCLip/AllUTRsMappedallRBP.txt&quot;,header=F, col.names = c(&#39;chr&#39;,&#39;start&#39;,&#39;end&#39;,&#39;gene&#39;,&#39;score&#39;,&#39;strand&#39;,&#39;RBP&#39;),stringsAsFactors = F)  %&gt;% 
   inner_join(QTLTested_utr, by=&#39;gene&#39;) %&gt;% 
   mutate(HasRBP=ifelse(RBP!=&quot;.&quot;, &quot;Yes&quot;,&quot;No&quot;))
@@ -1308,13 +1369,13 @@ k=nrow(All_UTR %&gt;% filter(QTL==&quot;Yes&quot;))
 
 #expected
 which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
-<pre><code>[1] 182</code></pre>
+<pre><code>[1] 191</code></pre>
 <pre class="r"><code>#actual:
 x</code></pre>
-<pre><code>[1] 201</code></pre>
+<pre><code>[1] 205</code></pre>
 <pre class="r"><code>#pval
 phyper(x,m,n,k,lower.tail=F)</code></pre>
-<pre><code>[1] 0.003616523</code></pre>
+<pre><code>[1] 0.01927862</code></pre>
 <p>This is only significant for genes with QTL’s associated with the 3’ UTR.</p>
 <p>Try to find which RBP is driving the assocations.</p>
 <p>I want a function that will go through each of the RBPs and test for this enrichment association.</p>
@@ -1344,7 +1405,45 @@ pval=c(pval,phyper(x,m,n,k,lower.tail=F))
 RBP_names_res$pval=as.numeric(as.character(RBP_names_res$pval))
 
 ggplot(RBP_names_res, aes(x=protein, y=-log10(pval),fill=protein))+geom_bar(stat=&quot;identity&quot;) +theme(legend.position = &quot;none&quot;, axis.text.x = element_text(angle = 90)) +labs(title=&quot;Enrichment for nuclear apaQTL genes with RBP in UTR&quot;,y=&quot;-log10(Enrichment pval)&quot;) + geom_hline(yintercept = 2)</code></pre>
-<p><img src="figure/RNAbinding.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /> Do this for UTR QTL</p>
+<p><img src="figure/RNAbinding.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-19-1.png" target="_blank">bd6d99c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Do this for UTR QTL</p>
 <pre class="r"><code>expectedUTR=c()
 actualUTR=c()
 pvalUTR=c()
@@ -1366,6 +1465,43 @@ RBP_names_resUTR$pvalUTR=as.numeric(as.character(RBP_names_resUTR$pvalUTR))
 
 ggplot(RBP_names_resUTR, aes(x=protein, y=-log10(pvalUTR),fill=protein))+geom_bar(stat=&quot;identity&quot;) +theme(legend.position = &quot;none&quot;, axis.text.x = element_text(angle = 90)) +labs(title=&quot;Enrichment for 3&#39; UTR nuclear apaQTL genes with RBP in UTR&quot;,y=&quot;-log10(Enrichment pval)&quot;) + geom_hline(yintercept = 2)</code></pre>
 <p><img src="figure/RNAbinding.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-21-1.png" target="_blank">bd6d99c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Intronic:</p>
 <pre class="r"><code>expectedIntron=c()
 actualIntron=c()
@@ -1388,6 +1524,43 @@ RBP_names_resIntron$pvalIntron=as.numeric(as.character(RBP_names_resIntron$pvalI
 
 ggplot(RBP_names_resIntron, aes(x=protein, y=-log10(pvalIntron),fill=protein))+geom_bar(stat=&quot;identity&quot;) +theme(legend.position = &quot;none&quot;, axis.text.x = element_text(angle = 90)) +labs(title=&quot;Enrichment for Intronic nuclear apaQTL genes with RBP in UTR&quot;,y=&quot;-log10(Enrichment pval)&quot;) + geom_hline(yintercept = 2)</code></pre>
 <p><img src="figure/RNAbinding.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
+Past versions of unnamed-chunk-23-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-23-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-23-1.png" target="_blank">bd6d99c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Looks like the protiens driving this are SAFB and FUS.</p>
 <p>FUS: Associated both with RNA splicing and nuclear export.</p>
 <p>SAFB: cotranscriptional.</p>
@@ -1415,9 +1588,49 @@ RBP_names_resT$pvalT=as.numeric(as.character(RBP_names_resT$pvalT))
 
 ggplot(RBP_names_resT, aes(x=protein, y=-log10(pvalT),fill=protein))+geom_bar(stat=&quot;identity&quot;) +theme(legend.position = &quot;none&quot;, axis.text.x = element_text(angle = 90)) +labs(title=&quot;Enrichment for total apaQTL genes with RBP in UTR&quot;,y=&quot;-log10(Enrichment pval)&quot;) + geom_hline(yintercept = 2)</code></pre>
 <p><img src="figure/RNAbinding.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-26-1.png" target="_blank">bd6d99c</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Total fraction GRWD1 and HNRNPC pop up too</p>
 <p>GRWD1: encoded protein may play a critical role in ribosome biogenesis and may also play a role in histone methylation through interactions</p>
 <p>HNRNPC: The hnRNPs are RNA binding proteins and they complex with heterogeneous nuclear RNA (hnRNA). These proteins are associated with pre-mRNAs in the nucleus and appear to influence pre-mRNA processing and other aspects of mRNA metabolism and transport</p>
+<p>Linked to it:<br />
+-CPEB1 - shuttles between nucleus and the cytoplasm (Bava, F.A. et al. (2013) CPEB1 coordinates alternative 3-UTR formation with translational regulation. Nature 495, 121–125) consensus sequence 5’-UUUUUAU-3’</p>
+<p>Will most likely have to look for binding motfis for this one.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
