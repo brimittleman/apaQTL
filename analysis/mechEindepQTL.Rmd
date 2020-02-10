@@ -129,3 +129,64 @@ Intronic or coding PAS, increased protein:
 
 * MPHOSPH10
 
+
+I have the miRNA sites. I will look for the following genes. * DIP2B  
+
+* IF144L, RBBP5, STAP1, FAM207A , APOL2  , EIF2A  , STXB  
+```{r}
+predMImech=c('IF144L', 'RBBP5', 'STAP1', 'FAM207A' , 'APOL2'  , 'EIF2A'  , 'STXB')
+
+miRNAtargets=read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.consFam.consSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets
+```
+
+
+It looks like there are many binding sites for miRNAs in RBBP5. I will look at where these are in relation to the QTL.  
+
+```{r}
+miRNAtargets_br=read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.broadConsFam.consSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets_br
+```
+
+This doesnt look like the explanation here. I am expanding to the unconserved and other families. 
+
+
+```{r}
+miRNAtargets_noconsite=  read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.consFam.nonConsSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets_noconsite
+```
+There are many miRNA sites for conserved family non conserved sites between the UTR isoform and the end isoform for fam207A. This is a good example.  
+
+The non conserved sites are very common in these UTRs. Not sure we should use this as the explanation.  
+
+
+
+```{r}
+miRNAtargets_nonConfam=  read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.nonConsFam.consSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets_nonConfam
+
+miRNAtargets_nonConfamnoconsite=  read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.nonConsFam.nonConsSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets_nonConfamnoconsite
+
+
+
+```
+There are conserved family, non conserved sites between the 2 PAS. 
+There are many more results when you include not conserved sites.  
+
+```{r}
+miRNAtargets_Otherconsite=  read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.otherFam.consSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets_Otherconsite
+
+
+miRNAtargets_OtherNonconsite=  read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.otherFam.nonConsSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% predMImech)
+
+miRNAtargets_OtherNonconsite
+```
+

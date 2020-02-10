@@ -40,7 +40,7 @@ I will need all of those tested in each set to do the overlap.
 
 ```{r}
 NMD=read.table("../data/NMD/NMD_res_Colomboetal.txt",stringsAsFactors = F, header = T) 
-NMD_sig= NMD %>% slice(1:1000)
+NMD_sig= NMD %>% dplyr::slice(1:1000)
 ```
 
 ```{r}
@@ -77,6 +77,52 @@ x
 #pval
 phyper(x, m, n, k,lower.tail=F)
 ```
+
+
+
+```{r}
+apaQTL_intron= read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header=T,stringsAsFactors = F) %>% filter(Loc=="intron")
+```
+
+
+```{r}
+apaQTL_utr= read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header=T,stringsAsFactors = F) %>% filter(Loc=="utr3")
+```
+
+
+```{r}
+x=length(intersect(apaQTL_intron$Gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=nrow(apaQTL_intron)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+```{r}
+x=length(intersect(apaQTL_utr$Gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=nrow(apaQTL_utr)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
 
 Total qtls:  
 
@@ -147,4 +193,116 @@ No overlap here
 ###Stability  
 
 From the ARED come back to this.  
+
+###miRNAs  
+
+http://www.targetscan.org/cgi-bin/targetscan/data_download.vert72.cgi
+
+```{bash,eval=F}
+mkdir ../data/miRNAbinding
+```
+
+I downloaded all of the targets and the bedfile with targets. 
+The Targets_CS_pctiles.hg19.consFam.consSite.bed   files has the conserved family miRNA and conserved binding sites. This is the most conservative analysis   
+
+```{r}
+
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed", col.names = c("chr",'start','end','id','score','strand')) %>% separate(id, into=c("num",'gene','loc'),sep=":")
+miRNAtargets=read.table("../data/miRNAbinding/Targets_CS_pctiles.hg19.consFam.consSite.bed", stringsAsFactors = F,col.names = c("chr", "start", "end", "ID", "score", "strand", "thikStart", "thinkEnd", "RGB", "blockcount", "blocksize", "blockstart")) %>% separate(ID, into= c("gene", "miRNA"), sep=":") %>% filter(gene %in% PAS$gene)
+
+
+PASGene=PAS %>% select(gene) %>% unique()
+```
+I will group by gene and look how many miRNA binding sites. 
+
+```{r}
+miRNAtargetsbygene=miRNAtargets %>% group_by(gene) %>% summarise(nMi=n()) %>% full_join(PASGene, by="gene") %>%  mutate(nMi = ifelse(is.na(nMi), 0, nMi), withSite=ifelse(nMi >0, "Yes", "No"),SigAPA=ifelse(gene %in% apaSig$gene,"Yes","No"), TvN=ifelse(gene %in% TvNsig$gene, "Yes","No"))
+```
+
+
+Are genes with QTLs more likely to have conserved miRNA sites.  
+
+
+```{r}
+x=miRNAtargetsbygene %>% filter(withSite=='Yes', SigAPA=='Yes') %>% nrow()
+m=miRNAtargetsbygene %>% filter(withSite=='Yes') %>% nrow()
+n=miRNAtargetsbygene %>% filter(withSite=='No') %>% nrow()
+k=miRNAtargetsbygene %>% filter(SigAPA=='Yes') %>% nrow()
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
+This is significant. We can say that genes with a QTL are enriched for genes with conserved miRNA target sites.  
+
+We expect to this to be stronger with looking at apaQTLs affecting UTR isoforms. The mechanism could be that one isoform is degraded by miRNAs and we only see the other isoform. This is more likely to be a utr mechanism.
+
+```{r}
+miRNAtargetsbyloc=miRNAtargets %>% group_by(gene) %>% summarise(nMi=n()) %>% full_join(PASGene, by="gene") %>%  mutate(nMi = ifelse(is.na(nMi), 0, nMi), withSite=ifelse(nMi >0, "Yes", "No"),Intronic=ifelse(gene %in% apaQTL_intron$Gene, "Yes","No"),UTR=ifelse(gene %in% apaQTL_utr$Gene, "Yes","No"))
+```
+
+```{r}
+x=miRNAtargetsbyloc %>% filter(withSite=='Yes', Intronic=='Yes') %>% nrow()
+m=miRNAtargetsbyloc %>% filter(withSite=='Yes') %>% nrow()
+n=miRNAtargetsbyloc %>% filter(withSite=='No') %>% nrow()
+k=miRNAtargetsbyloc %>% filter(Intronic=='Yes') %>% nrow()
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
+```{r}
+x=miRNAtargetsbyloc %>% filter(withSite=='Yes', UTR=='Yes') %>% nrow()
+m=miRNAtargetsbyloc %>% filter(withSite=='Yes') %>% nrow()
+n=miRNAtargetsbyloc %>% filter(withSite=='No') %>% nrow()
+k=miRNAtargetsbyloc %>% filter(UTR=='Yes') %>% nrow()
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+We cannot differentiate between location here either. This is most likely due to the ratios. We are not sure which isoform is actually the one with the mechanism of action and which is reactionary.  
+
+
+Do this with total v nuclear as well. 
+
+```{r}
+x=miRNAtargetsbygene %>% filter(withSite=='Yes', TvN=='Yes') %>% nrow()
+m=miRNAtargetsbygene %>% filter(withSite=='Yes') %>% nrow()
+n=miRNAtargetsbygene %>% filter(withSite=='No') %>% nrow()
+k=miRNAtargetsbygene %>% filter(TvN=='Yes') %>% nrow()
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+
+```
+This is significant as well. miRNAs may be part of the reason we do not detect as many total transcripts as total transcripts.  
+
 
