@@ -389,3 +389,71 @@ SRSF4 intronic QTL in a UPF1 binding site. UPF1 associated with NMD (https://www
 
 
 PRR13 2 UTR variants, in UPF1 binding. total and nuclear QTL. alternative C allele associated with decreased usage of downstream isoform. 
+
+these are not significant NMD genes. 
+
+
+###Enrichment in UTR for TvN genes   
+
+```{r}
+#chr10:27035787:27035907:ABI1  
+TvNTested=read.table("../data/DiffIso/EffectSizes.txt", header = T,stringsAsFactors = F) %>% separate(intron, into = c("chr", "start","end", "gene"),sep=":")
+
+TvNsig=read.table("../data/highdiffsiggenes.txt",col.names = "gene", stringsAsFactors = F)
+
+
+TvNTested_withinfor= TvNTested %>% select(gene) %>% unique() %>% mutate(sig=ifelse(gene %in% TvNsig$gene, "Yes", "No"))
+```
+
+
+```{r}
+expectedTvN=c()
+actualTvN=c()
+pvalTvN=c()
+for (RBP in RBP_names$RBP){
+RBPfile=read.table(paste("../data/eCLip/UTRregions_", RBP,".txt", sep=""),header=F, col.names = c('chr','start','end','gene','score','strand','RBP'), stringsAsFactors = F) %>%
+  inner_join(TvNTested_withinfor, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+x=nrow(RBPfile %>% filter(HasRBP=="Yes", sig=="Yes"))
+print(x)
+m= nrow(RBPfile %>% filter(HasRBP=="Yes"))
+n=nrow(RBPfile %>% filter(HasRBP!="Yes"))
+k=nrow(RBPfile %>% filter(sig=="Yes"))
+expectedTvN=c(expectedTvN, which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k))))
+actualTvN=c(actualTvN,x)
+pvalTvN=c(pvalTvN,phyper(x,m,n,k,lower.tail=F))
+}
+```
+
+```{r}
+
+RBP_names_resTvn= as.data.frame(cbind(RBP=RBP_names$RBP, expectedTvN,actualTvN,pvalTvN)) %>% separate(RBP, into=c("exp", "protein"),sep="_")
+
+RBP_names_resTvn$pvalTvN=as.numeric(as.character(RBP_names_resTvn$pvalTvN))
+
+ggplot(RBP_names_resTvn, aes(x=protein, y=-log10(pvalTvN),fill=protein))+geom_bar(stat="identity") +theme(legend.position = "none", axis.text.x = element_text(angle = 90)) +labs(title="Enrichment for TvN genes with RBP in UTR",y="-log10(Enrichment pval)") + geom_hline(yintercept = 2)
+```
+
+```{r}
+All_Tvn=read.table("../data/eCLip/AllUTRsMappedallRBP.txt",header=F, col.names = c('chr','start','end','gene','score','strand','RBP'),stringsAsFactors = F)  %>% 
+  inner_join(TvNTested_withinfor, by='gene') %>% 
+  mutate(HasRBP=ifelse(RBP!=".", "Yes","No"))
+
+x=nrow(All_Tvn %>% filter(HasRBP=="Yes", sig=="Yes"))
+m= nrow(All_Tvn %>% filter(HasRBP=="Yes"))
+n=nrow(All_Tvn %>% filter(HasRBP!="Yes"))
+k=nrow(All_Tvn %>% filter(sig=="Yes"))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+#actual:
+x
+
+#pval
+phyper(x,m,n,k,lower.tail=F)
+
+```
+
+RBP in UTRs does not explain TvN genes.  
