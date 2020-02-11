@@ -360,3 +360,32 @@ Linked to it:
 Will most likely have to look for binding motfis for this one.
 
 
+#binding disruption  
+Binding site disruption  
+
+Use the binding sites above  
+
+```{bash,eval=F}
+sbatch RBPdisrupt.sh 
+```
+
+
+```{r}
+NucRes=read.table("../data/eCLip/NuclearQTLoverlap_RBPbinding.txt",col.names = c("snpchr",'snpstart','snpend', 'qtl', 'dist', 'strand', 'chr','start','end', 'rbp','score', 'strndrbp'),stringsAsFactors = F)
+NucRes %>% select(qtl) %>% unique() %>% nrow()
+
+TotRes=read.table("../data/eCLip/TotalQTLoverlap_RBPbinding.txt",col.names = c("snpchr",'snpstart','snpend', 'qtl', 'dist', 'strand', 'chr','start','end', 'rbp','score', 'strndrbp'),stringsAsFactors = F)
+TotRes %>% select(qtl) %>% unique() %>% nrow()
+
+```
+
+37 nuclear and 26 total qtls overlap eclip binding.  
+
+```{r}
+head(NucRes)
+```
+
+SRSF4 intronic QTL in a UPF1 binding site. UPF1 associated with NMD (https://www.sciencedirect.com/science/article/pii/S2211124718305837). only a qtl in the nuclear fraction.  
+
+
+PRR13 2 UTR variants, in UPF1 binding. total and nuclear QTL. alternative C allele associated with decreased usage of downstream isoform. 
