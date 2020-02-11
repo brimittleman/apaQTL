@@ -353,7 +353,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree13c1e8f7881221e5b38f3ea13f8b8ae3f22c629ctargetblank13c1e8fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/13c1e8f7881221e5b38f3ea13f8b8ae3f22c629c" target="_blank">13c1e8f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3414736c77f7071b3ad49a79b495ce86a6254951targetblank3414736a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3414736c77f7071b3ad49a79b495ce86a6254951" target="_blank">3414736</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree13c1e8f7881221e5b38f3ea13f8b8ae3f22c629ctargetblank13c1e8fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3414736c77f7071b3ad49a79b495ce86a6254951targetblank3414736a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -448,6 +448,7 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    data/ProSeq/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -1199,6 +1200,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/3414736c77f7071b3ad49a79b495ce86a6254951/analysis/RNAbinding.Rmd" target="_blank">3414736</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-11
+</td>
+<td>
+add TvN analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/f006ad3ab405cf70fdd7ae16d4f4a0836651432e/docs/RNAbinding.html" target="_blank">f006ad3</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/13c1e8f7881221e5b38f3ea13f8b8ae3f22c629c/analysis/RNAbinding.Rmd" target="_blank">13c1e8f</a>
 </td>
 <td>
@@ -1287,7 +1322,7 @@ add RBP res
 </div>
 </div>
 <pre class="r"><code>library(workflowr)</code></pre>
-<pre><code>This is workflowr version 1.5.0
+<pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
@@ -1745,6 +1780,109 @@ TotRes %&gt;% select(qtl) %&gt;% unique() %&gt;% nrow()</code></pre>
 6 29479001 29479040   UPF1_K562_rep02   200        -</code></pre>
 <p>SRSF4 intronic QTL in a UPF1 binding site. UPF1 associated with NMD (<a href="https://www.sciencedirect.com/science/article/pii/S2211124718305837" class="uri">https://www.sciencedirect.com/science/article/pii/S2211124718305837</a>). only a qtl in the nuclear fraction.</p>
 <p>PRR13 2 UTR variants, in UPF1 binding. total and nuclear QTL. alternative C allele associated with decreased usage of downstream isoform.</p>
+<p>these are not significant NMD genes.</p>
+<div id="enrichment-in-utr-for-tvn-genes" class="section level3">
+<h3>Enrichment in UTR for TvN genes</h3>
+<pre class="r"><code>#chr10:27035787:27035907:ABI1  
+TvNTested=read.table(&quot;../data/DiffIso/EffectSizes.txt&quot;, header = T,stringsAsFactors = F) %&gt;% separate(intron, into = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;gene&quot;),sep=&quot;:&quot;)
+
+TvNsig=read.table(&quot;../data/highdiffsiggenes.txt&quot;,col.names = &quot;gene&quot;, stringsAsFactors = F)
+
+
+TvNTested_withinfor= TvNTested %&gt;% select(gene) %&gt;% unique() %&gt;% mutate(sig=ifelse(gene %in% TvNsig$gene, &quot;Yes&quot;, &quot;No&quot;))</code></pre>
+<pre class="r"><code>expectedTvN=c()
+actualTvN=c()
+pvalTvN=c()
+for (RBP in RBP_names$RBP){
+RBPfile=read.table(paste(&quot;../data/eCLip/UTRregions_&quot;, RBP,&quot;.txt&quot;, sep=&quot;&quot;),header=F, col.names = c(&#39;chr&#39;,&#39;start&#39;,&#39;end&#39;,&#39;gene&#39;,&#39;score&#39;,&#39;strand&#39;,&#39;RBP&#39;), stringsAsFactors = F) %&gt;%
+  inner_join(TvNTested_withinfor, by=&#39;gene&#39;) %&gt;% 
+  mutate(HasRBP=ifelse(RBP!=&quot;.&quot;, &quot;Yes&quot;,&quot;No&quot;))
+x=nrow(RBPfile %&gt;% filter(HasRBP==&quot;Yes&quot;, sig==&quot;Yes&quot;))
+print(x)
+m= nrow(RBPfile %&gt;% filter(HasRBP==&quot;Yes&quot;))
+n=nrow(RBPfile %&gt;% filter(HasRBP!=&quot;Yes&quot;))
+k=nrow(RBPfile %&gt;% filter(sig==&quot;Yes&quot;))
+expectedTvN=c(expectedTvN, which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k))))
+actualTvN=c(actualTvN,x)
+pvalTvN=c(pvalTvN,phyper(x,m,n,k,lower.tail=F))
+}</code></pre>
+<pre><code>[1] 115
+[1] 4
+[1] 417
+[1] 29
+[1] 269
+[1] 70
+[1] 222
+[1] 74
+[1] 230
+[1] 96
+[1] 143
+[1] 34
+[1] 456
+[1] 201
+[1] 331
+[1] 117
+[1] 307
+[1] 398
+[1] 28
+[1] 223
+[1] 37
+[1] 127
+[1] 102
+[1] 341
+[1] 122
+[1] 115
+[1] 4
+[1] 417
+[1] 29
+[1] 269
+[1] 70
+[1] 222
+[1] 74
+[1] 230
+[1] 96
+[1] 143
+[1] 34
+[1] 456
+[1] 201
+[1] 331
+[1] 117
+[1] 307
+[1] 398
+[1] 28
+[1] 223
+[1] 37
+[1] 127
+[1] 643
+[1] 102
+[1] 341
+[1] 122</code></pre>
+<pre class="r"><code>RBP_names_resTvn= as.data.frame(cbind(RBP=RBP_names$RBP, expectedTvN,actualTvN,pvalTvN)) %&gt;% separate(RBP, into=c(&quot;exp&quot;, &quot;protein&quot;),sep=&quot;_&quot;)
+
+RBP_names_resTvn$pvalTvN=as.numeric(as.character(RBP_names_resTvn$pvalTvN))
+
+ggplot(RBP_names_resTvn, aes(x=protein, y=-log10(pvalTvN),fill=protein))+geom_bar(stat=&quot;identity&quot;) +theme(legend.position = &quot;none&quot;, axis.text.x = element_text(angle = 90)) +labs(title=&quot;Enrichment for TvN genes with RBP in UTR&quot;,y=&quot;-log10(Enrichment pval)&quot;) + geom_hline(yintercept = 2)</code></pre>
+<p><img src="figure/RNAbinding.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>All_Tvn=read.table(&quot;../data/eCLip/AllUTRsMappedallRBP.txt&quot;,header=F, col.names = c(&#39;chr&#39;,&#39;start&#39;,&#39;end&#39;,&#39;gene&#39;,&#39;score&#39;,&#39;strand&#39;,&#39;RBP&#39;),stringsAsFactors = F)  %&gt;% 
+  inner_join(TvNTested_withinfor, by=&#39;gene&#39;) %&gt;% 
+  mutate(HasRBP=ifelse(RBP!=&quot;.&quot;, &quot;Yes&quot;,&quot;No&quot;))
+
+x=nrow(All_Tvn %&gt;% filter(HasRBP==&quot;Yes&quot;, sig==&quot;Yes&quot;))
+m= nrow(All_Tvn %&gt;% filter(HasRBP==&quot;Yes&quot;))
+n=nrow(All_Tvn %&gt;% filter(HasRBP!=&quot;Yes&quot;))
+k=nrow(All_Tvn %&gt;% filter(sig==&quot;Yes&quot;))
+
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
+<pre><code>[1] 870</code></pre>
+<pre class="r"><code>#actual:
+x</code></pre>
+<pre><code>[1] 870</code></pre>
+<pre class="r"><code>#pval
+phyper(x,m,n,k,lower.tail=F)</code></pre>
+<pre><code>[1] 0.9991365</code></pre>
+<p>RBP in UTRs does not explain TvN genes.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1774,7 +1912,7 @@ attached base packages:
 other attached packages:
  [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
  [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
- [9] tidyverse_1.2.1 workflowr_1.5.0
+ [9] tidyverse_1.2.1 workflowr_1.6.0
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.2       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
@@ -1790,6 +1928,7 @@ loaded via a namespace (and not attached):
 [41] promises_1.0.1   htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
 [45] colorspace_1.3-2 httpuv_1.4.5     labeling_0.3     stringi_1.2.4   
 [49] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+</div>
 </div>
 </div>
 
