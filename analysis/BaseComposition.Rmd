@@ -146,3 +146,14 @@ pIntronNo=ggseqlogo(PASseq_intronNo$seqUP, col_scheme=cs1, method = 'prob')
 
 plot_grid(pUTRYes,pUTRNo, pIntronYes, pIntronNo,ncol = 2, align = 'v',labels = c('3 UTR, Yes','3 UTR, No', 'Intronic, Yes', "Intronic, No"))
 ```
+
+
+write out seqs for use in github package:  
+
+```{r}
+write.table(PASseq_UTRYes, "../data/BaseComp/Compfiles_UTR_Yes.txt", col.names = T, row.names = F, quote = F)
+write.table(PASseq_UTRNo, "../data/BaseComp/Compfiles_UTR_No.txt",  col.names = T, row.names = F, quote = F)
+write.table(PASseq_intronYes, "../data/BaseComp/Compfiles_intron_Yes.txt", col.names = T, row.names = F, quote = F)
+write.table(PASseq_intronNo, "../data/BaseComp/Compfiles_intron_No.txt", col.names = T, row.names = F, quote = F)
+```
+
