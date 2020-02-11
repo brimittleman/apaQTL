@@ -184,5 +184,9 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [apaQTL effect sizes by eQTL set](apabyeQTLstatus.html)
 
-* [miRNA binding site disruption as QTL mechanism](miRNAdisrupt.html)
+* [miRNA binding site disruption as QTL mechanism](miRNAdisrupt.html)  
+
+* [Compare Effect Sizes for total and nuclear](TotNucQTLeffect.html)  
+
+* [Mechanism for each expression independent apaQTL](mechEindepQTL.html)  
 

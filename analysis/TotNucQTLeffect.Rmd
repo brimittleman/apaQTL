@@ -1,0 +1,128 @@
+---
+title: "Compare total and nuclear effect sizes"
+author: "Briana Mittleman"
+date: "2/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this analysis I will compare total nuclear effect sizes. I will see if there are a subset of QTLs identified in both fractions but whose effect size decreases in total. This could be do to buffering between nuclear and total.  
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(ggpubr)
+```
+
+This is looking at QTLs identified in both at 10% FDR.  
+```{r}
+TotQTL=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% select(Gene, Peak, sid, slope) %>% rename("TotalEffect"=slope)
+NucQTL=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% select(Gene, Peak, sid, slope) %>% rename("NuclearEffect"=slope)
+
+```
+
+Find those with the same snp PAS pair:  
+
+
+```{r}
+BothQTL=TotQTL %>% inner_join(NucQTL, by=c("Gene", "Peak", 'sid')) %>% mutate(AbsTot=abs(TotalEffect), AbsNuc=abs(NuclearEffect))
+BothQTL_abs= BothQTL %>% select(Peak,sid, Gene,contains("Abs"))
+BothQTLGat= BothQTL_abs %>% gather("Fraction","AbsEffect", -Peak,-sid,-Gene)
+
+```
+
+I can take the absolute value because they are all in the same direction. 
+
+
+```{r}
+
+ggplot(BothQTLGat,aes(x=Fraction,y=AbsEffect)) +geom_boxplot() + stat_compare_means()
+```
+
+```{r}
+BothQTL_abs= BothQTL_abs %>% mutate(Diff=AbsNuc-AbsTot)
+
+BothQTL_abs %>% filter(Diff<0) %>%  nrow()
+BothQTL_abs %>% filter(Diff>0) %>% nrow()
+```
+I am interested in when the nuclear is larger than the total. There are 57 of these. Not significantly more.  
+
+look at these genes. 
+
+```{r}
+Buff=BothQTL_abs %>% filter(Diff<0) %>% select(Gene) %>% unique()
+
+Opp=BothQTL_abs %>% filter(Diff>0) %>% select(Gene) %>% unique()
+```
+
+```{r}
+ggplot(BothQTL_abs,aes(x=AbsTot, y=AbsNuc))+ geom_point()
+```
+
+
+Are these genes enriched for NMD.  
+
+
+```{r}
+NMD=read.table("../data/NMD/NMD_res_Colomboetal.txt",stringsAsFactors = F, header = T) 
+NMD_sig= NMD %>% dplyr::slice(1:1000)
+```
+
+
+```{r}
+x=length(intersect(Buff$Gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=nrow(Buff)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
+Compare to opposite:  
+
+
+```{r}
+x=length(intersect(Opp$Gene, NMD_sig$gene_name))
+m=nrow(NMD_sig) 
+n=nrow(NMD)-1000
+k=nrow(Opp)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))  
+
+#actual:
+x
+
+#pval
+phyper(x, m, n, k,lower.tail=F)
+```
+
+Opposite are not. Numbers are low but this could be interesting.  
+
+Compare the NMD fdrs for each.  
+
+```{r}
+NMD_metameta= NMD %>% select(gene_name,meta_meta) %>% rename("Gene"=gene_name) %>% inner_join(BothQTL_abs,by="Gene") %>% mutate(Buffer=ifelse(Diff <0, "Yes","No"))
+
+ggplot(NMD_metameta,aes(x=Buffer, y=meta_meta,fill=Buffer))+ geom_violin() + stat_compare_means() + labs(y="NMD FDR") + scale_fill_brewer(palette = "Dark2")
+
+ggplot(NMD_metameta,aes(fill=Buffer,by=Buffer, x=meta_meta))+ geom_density(alpha=.4)  + labs(x="NMD FDR")+ scale_fill_brewer(palette = "Dark2")
+```
+
+This means the genes with a decrease in effect size are more likely to be genes marked for NMD. This could signal NMD could be part of the reason we see a decrease in effect size.  
+
+
+
