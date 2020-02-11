@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-04
+<strong>Last updated:</strong> 2020-02-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -353,7 +353,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeee3c3a83b09d6a287e0cbe783490674dcb6b7306targetblankee3c3a8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/ee3c3a83b09d6a287e0cbe783490674dcb6b7306" target="_blank">ee3c3a8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef0b588ff199ea8ab8ca618083bb2dc14ddfe08d5targetblankf0b588fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f0b588ff199ea8ab8ca618083bb2dc14ddfe08d5" target="_blank">f0b588f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeee3c3a83b09d6a287e0cbe783490674dcb6b7306targetblankee3c3a8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef0b588ff199ea8ab8ca618083bb2dc14ddfe08d5targetblankf0b588fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -447,8 +447,8 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    code/logs/
     Ignored:    data/.DS_Store
+    Ignored:    data/ProSeq/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -467,7 +467,6 @@ Untracked files:
     Untracked:  analysis/eQTLoverlap.Rmd
     Untracked:  analysis/interpret verify bam.Rmd
     Untracked:  analysis/interpret_verifybam.Rmd
-    Untracked:  analysis/mechEindepQTL.Rmd
     Untracked:  analysis/mergeRNA.Rmd
     Untracked:  analysis/oldstuffNotNeeded.Rmd
     Untracked:  analysis/remove_badlines.Rmd
@@ -511,8 +510,10 @@ Untracked files:
     Untracked:  code/._PrematureQTLPermuted.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
+    Untracked:  code/._RBPdisrupt.sh
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._Rplots.pdf
     Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
@@ -595,6 +596,7 @@ Untracked files:
     Untracked:  code/._fixFChead.py
     Untracked:  code/._fixFChead_bothfrac.py
     Untracked:  code/._fixFChead_short.py
+    Untracked:  code/._fixGWAS4Munge.py
     Untracked:  code/._fixH3k12ac.py
     Untracked:  code/._fixPASregionSNPs.py
     Untracked:  code/._fixRNAhead4corr.py
@@ -632,6 +634,7 @@ Untracked files:
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
     Untracked:  code/._mergePeaks.sh
+    Untracked:  code/._miRNAdisrupt.sh
     Untracked:  code/._mnase1stintron.sh
     Untracked:  code/._mnaseDT_fourthintron.sh
     Untracked:  code/._namePeaks.py
@@ -645,6 +648,8 @@ Untracked files:
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._parseBestbamid.py
+    Untracked:  code/._parseLDRes.py
+    Untracked:  code/._parseLDresBothPAS.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -658,6 +663,7 @@ Untracked files:
     Untracked:  code/._removeloc_pheno.py
     Untracked:  code/._riboQTL.sh
     Untracked:  code/._runCorrectNomEqtl.sh
+    Untracked:  code/._runFixGWAS4Munge.sh
     Untracked:  code/._runHMMpermuteAPAqtls.sh
     Untracked:  code/._runHMMpermuteeQTLS.sh
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
@@ -705,6 +711,7 @@ Untracked files:
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
     Untracked:  code/._tenBPupstreamPAS.py
+    Untracked:  code/._test.pdf
     Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._twentyBPupstreamPAS.py
@@ -791,6 +798,9 @@ Untracked files:
     Untracked:  code/Prematureqtl_nominal.out
     Untracked:  code/Prematureqtl_permuted.err
     Untracked:  code/Prematureqtl_permuted.out
+    Untracked:  code/RBPdisrupt.err
+    Untracked:  code/RBPdisrupt.out
+    Untracked:  code/RBPdisrupt.sh
     Untracked:  code/README.md
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
@@ -834,7 +844,9 @@ Untracked files:
     Untracked:  code/extactPAS100meanphyloP.py
     Untracked:  code/extractPACmeanPhyloP.py
     Untracked:  code/fixExandUnexeQTL
+    Untracked:  code/fixGWAS4Munge.py
     Untracked:  code/fix_randomIntron.py
+    Untracked:  code/fixmunge
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.log
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.recode.vcf
     Untracked:  code/getseq100up.err
@@ -846,6 +858,7 @@ Untracked files:
     Untracked:  code/intersectVCFPAS.err
     Untracked:  code/intersectVCFPAS.out
     Untracked:  code/log/
+    Untracked:  code/logs/
     Untracked:  code/merge53PRIMEbam.err
     Untracked:  code/merge53PRIMEbam.out
     Untracked:  code/merge53RNAbam.err
@@ -862,6 +875,9 @@ Untracked files:
     Untracked:  code/mergeBamNacent.out
     Untracked:  code/mergeRNAbam.err
     Untracked:  code/mergeRNAbam.out
+    Untracked:  code/miRNAdisrupt.err
+    Untracked:  code/miRNAdisrupt.out
+    Untracked:  code/miRNAdisrupt.sh
     Untracked:  code/mnaseDTPlot1stintron.err
     Untracked:  code/mnaseDTPlot1stintron.out
     Untracked:  code/mnaseDTPlot4thintron.err
@@ -871,6 +887,10 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucspecinE.py
+    Untracked:  code/parseLDRes.py
+    Untracked:  code/parseLDres.err
+    Untracked:  code/parseLDres.out
+    Untracked:  code/parseLDresBothPAS.sh
     Untracked:  code/plink.log
     Untracked:  code/prxySNP.err
     Untracked:  code/prxySNP.out
@@ -886,6 +906,7 @@ Untracked files:
     Untracked:  code/runCorrectNomeqtl.out
     Untracked:  code/runFilterLD.err
     Untracked:  code/runFilterLD.out
+    Untracked:  code/runFixGWAS4Munge.sh
     Untracked:  code/runHMMpermute.err
     Untracked:  code/runHMMpermute.out
     Untracked:  code/runHMMpermuteeQTLs.err
@@ -956,6 +977,8 @@ Untracked files:
     Untracked:  code/subtractExons.out
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/test.pdf
+    Untracked:  code/testFix.txt
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
     Untracked:  code/vcf_keepsnps.err
@@ -978,6 +1001,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/ExampleQTLPlots_update/
     Untracked:  data/ExpressionIndependentapaQTLs.txt
     Untracked:  data/FiveMergedBW/
     Untracked:  data/FiveMergedBam/
@@ -1032,6 +1056,7 @@ Untracked files:
     Untracked:  data/eCLip/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
+    Untracked:  data/exosome/
     Untracked:  data/fastq/
     Untracked:  data/filterPeaks/
     Untracked:  data/fourSU/
@@ -1047,6 +1072,7 @@ Untracked files:
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
+    Untracked:  data/miRNAbinding/
     Untracked:  data/molPhenos/
     Untracked:  data/molQTLs/
     Untracked:  data/motifdistrupt/
@@ -1111,13 +1137,14 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/LDregress.Rmd
+    Modified:   analysis/ExploreNpas.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
-    Modified:   analysis/RNAbinding.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/TSS.Rmd
     Modified:   analysis/decayAndStability.Rmd
+    Modified:   analysis/miRNAdisrupt.Rmd
+    Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
@@ -1127,6 +1154,7 @@ Unstaged changes:
     Modified:   code/Script4NuclearQTLexamples.sh
     Modified:   code/Script4TotalQTLexamples.sh
     Modified:   code/apaQTLsnake.err
+    Modified:   code/run_qtlFacetBoxplots.sh
     Deleted:    code/test.txt
     Deleted:    reads_graphs.Rmd
 
@@ -1172,6 +1200,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f0b588ff199ea8ab8ca618083bb2dc14ddfe08d5/analysis/BaseComposition.Rmd" target="_blank">f0b588f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-11
+</td>
+<td>
+add write out
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/ad502c6f1547a5ab791b0d7ebb46501e9c69eaf5/docs/BaseComposition.html" target="_blank">ad502c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/ee3c3a83b09d6a287e0cbe783490674dcb6b7306/analysis/BaseComposition.Rmd" target="_blank">ee3c3a8</a>
 </td>
 <td>
@@ -1204,7 +1266,7 @@ Attaching package: &#39;cowplot&#39;</code></pre>
 <pre><code>Loading required package: ggseqlogo</code></pre>
 <pre class="r"><code>library(RColorBrewer)
 library(workflowr)</code></pre>
-<pre><code>This is workflowr version 1.5.0
+<pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>options(scipen = 999)
 library(tidyverse)</code></pre>
@@ -1238,8 +1300,82 @@ for (i in Seqs){
 
 plot(lngth)</code></pre>
 <p><img src="figure/BaseComposition.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ad502c6f1547a5ab791b0d7ebb46501e9c69eaf5/docs/figure/BaseComposition.Rmd/unnamed-chunk-7-1.png" target="_blank">ad502c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggseqlogo(Seqs, col_scheme=cs1, method = &#39;prob&#39;)</code></pre>
 <p><img src="figure/BaseComposition.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ad502c6f1547a5ab791b0d7ebb46501e9c69eaf5/docs/figure/BaseComposition.Rmd/unnamed-chunk-8-1.png" target="_blank">ad502c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I can seperate these by those identified in the database.</p>
 <p>Pull in closest to database. I am using the code from earlier in the workflow:</p>
 <pre class="r"><code>dist=read.table(&quot;../data/AnnotatedPAS/DistanceMyPAS2Anno.bed&quot;, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;,&quot;myPAS&quot;, &quot;score&quot;,&quot;strand&quot;,&quot;chr2&quot;, &quot;start2&quot;, &quot;end2&quot;, &quot;anno&quot;, &quot;score2&quot;, &quot;strand2&quot;, &quot;distance&quot;),stringsAsFactors = F)
@@ -1254,6 +1390,43 @@ PASseq_anno_no=PASseq_anno %&gt;% filter(inDb==&quot;No&quot;)</code></pre>
 nNo=ggseqlogo(PASseq_anno_no$seqUP, col_scheme=cs1, method = &#39;prob&#39;)</code></pre>
 <pre class="r"><code>plot_grid(pYes, nNo, ncol = 1, align = &#39;v&#39;,labels = c(&#39;PAS in DB&#39;, &#39;Novel PAS&#39;))</code></pre>
 <p><img src="figure/BaseComposition.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ad502c6f1547a5ab791b0d7ebb46501e9c69eaf5/docs/figure/BaseComposition.Rmd/unnamed-chunk-12-1.png" target="_blank">ad502c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Plot these by location:</p>
 <pre class="r"><code>PASseq_loc=PASseq_anno %&gt;% separate(geneID, into=c(&quot;gene&quot;,&quot;loc&quot;), sep=&quot;_&quot;)
 
@@ -1265,6 +1438,43 @@ pIntron=ggseqlogo(PASseq_intron$seqUP, col_scheme=cs1, method = &#39;prob&#39;)
 
 plot_grid(pUTR, pIntron, ncol = 1, align = &#39;v&#39;,labels = c(&#39;3 UTR&#39;, &#39;Intronic&#39;))</code></pre>
 <p><img src="figure/BaseComposition.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ad502c6f1547a5ab791b0d7ebb46501e9c69eaf5/docs/figure/BaseComposition.Rmd/unnamed-chunk-14-1.png" target="_blank">ad502c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>PASseq_UTRYes= PASseq_loc %&gt;% filter(loc==&quot;utr3&quot;,inDb==&quot;Yes&quot;)
 PASseq_UTRNo= PASseq_loc %&gt;% filter(loc==&quot;utr3&quot;,inDb==&quot;No&quot;)
 
@@ -1277,6 +1487,48 @@ pIntronNo=ggseqlogo(PASseq_intronNo$seqUP, col_scheme=cs1, method = &#39;prob&#3
 
 plot_grid(pUTRYes,pUTRNo, pIntronYes, pIntronNo,ncol = 2, align = &#39;v&#39;,labels = c(&#39;3 UTR, Yes&#39;,&#39;3 UTR, No&#39;, &#39;Intronic, Yes&#39;, &quot;Intronic, No&quot;))</code></pre>
 <p><img src="figure/BaseComposition.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ad502c6f1547a5ab791b0d7ebb46501e9c69eaf5/docs/figure/BaseComposition.Rmd/unnamed-chunk-16-1.png" target="_blank">ad502c6</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>write out seqs for use in github package:</p>
+<pre class="r"><code>write.table(PASseq_UTRYes, &quot;../data/BaseComp/Compfiles_UTR_Yes.txt&quot;, col.names = T, row.names = F, quote = F)
+write.table(PASseq_UTRNo, &quot;../data/BaseComp/Compfiles_UTR_No.txt&quot;,  col.names = T, row.names = F, quote = F)
+write.table(PASseq_intronYes, &quot;../data/BaseComp/Compfiles_intron_Yes.txt&quot;, col.names = T, row.names = F, quote = F)
+write.table(PASseq_intronNo, &quot;../data/BaseComp/Compfiles_intron_No.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1306,7 +1558,7 @@ attached base packages:
 other attached packages:
  [1] forcats_0.3.0      dplyr_0.8.0.1      purrr_0.3.2       
  [4] readr_1.3.1        tidyr_0.8.3        tibble_2.1.1      
- [7] tidyverse_1.2.1    workflowr_1.5.0    RColorBrewer_1.1-2
+ [7] tidyverse_1.2.1    workflowr_1.6.0    RColorBrewer_1.1-2
 [10] ggseqlogo_0.1      cowplot_0.9.4      ggplot2_3.1.1     
 [13] stringr_1.3.1     
 
