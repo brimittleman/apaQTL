@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-10
+<strong>Last updated:</strong> 2020-02-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree9ac4e5f8ca16074c09ba3bfd33856270fb6be145targetblank9ac4e5fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/9ac4e5f8ca16074c09ba3bfd33856270fb6be145" target="_blank">9ac4e5f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree13c1e8f7881221e5b38f3ea13f8b8ae3f22c629ctargetblank13c1e8fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/13c1e8f7881221e5b38f3ea13f8b8ae3f22c629c" target="_blank">13c1e8f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree9ac4e5f8ca16074c09ba3bfd33856270fb6be145targetblank9ac4e5fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree13c1e8f7881221e5b38f3ea13f8b8ae3f22c629ctargetblank13c1e8fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -509,6 +509,7 @@ Untracked files:
     Untracked:  code/._PrematureQTLPermuted.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
+    Untracked:  code/._RBPdisrupt.sh
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
     Untracked:  code/._Rplots.pdf
@@ -796,6 +797,9 @@ Untracked files:
     Untracked:  code/Prematureqtl_nominal.out
     Untracked:  code/Prematureqtl_permuted.err
     Untracked:  code/Prematureqtl_permuted.out
+    Untracked:  code/RBPdisrupt.err
+    Untracked:  code/RBPdisrupt.out
+    Untracked:  code/RBPdisrupt.sh
     Untracked:  code/README.md
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
@@ -1051,6 +1055,7 @@ Untracked files:
     Untracked:  data/eCLip/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
+    Untracked:  data/exosome/
     Untracked:  data/fastq/
     Untracked:  data/filterPeaks/
     Untracked:  data/fourSU/
@@ -1136,6 +1141,8 @@ Unstaged changes:
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/TSS.Rmd
+    Modified:   analysis/decayAndStability.Rmd
+    Modified:   analysis/miRNAdisrupt.Rmd
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
@@ -1187,6 +1194,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/13c1e8f7881221e5b38f3ea13f8b8ae3f22c629c/analysis/RNAbinding.Rmd" target="_blank">13c1e8f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-11
+</td>
+<td>
+add examples for binding disruption
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/1c3d3e72446b391d9a2673af9ab6fa1e75055d39/docs/RNAbinding.html" target="_blank">1c3d3e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1430,6 +1471,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1c3d3e72446b391d9a2673af9ab6fa1e75055d39/docs/figure/RNAbinding.Rmd/unnamed-chunk-19-1.png" target="_blank">1c3d3e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-10
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-19-1.png" target="_blank">bd6d99c</a>
 </td>
 <td>
@@ -1489,6 +1541,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1c3d3e72446b391d9a2673af9ab6fa1e75055d39/docs/figure/RNAbinding.Rmd/unnamed-chunk-21-1.png" target="_blank">1c3d3e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-10
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-21-1.png" target="_blank">bd6d99c</a>
 </td>
 <td>
@@ -1546,6 +1609,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1c3d3e72446b391d9a2673af9ab6fa1e75055d39/docs/figure/RNAbinding.Rmd/unnamed-chunk-23-1.png" target="_blank">1c3d3e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-10
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-23-1.png" target="_blank">bd6d99c</a>
@@ -1612,6 +1686,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1c3d3e72446b391d9a2673af9ab6fa1e75055d39/docs/figure/RNAbinding.Rmd/unnamed-chunk-26-1.png" target="_blank">1c3d3e7</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-10
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/bd6d99cde1f8cfe27978f27c9a2911e6214cc1f5/docs/figure/RNAbinding.Rmd/unnamed-chunk-26-1.png" target="_blank">bd6d99c</a>
 </td>
 <td>
@@ -1631,6 +1716,35 @@ brimittleman
 <p>Linked to it:<br />
 -CPEB1 - shuttles between nucleus and the cytoplasm (Bava, F.A. et al. (2013) CPEB1 coordinates alternative 3-UTR formation with translational regulation. Nature 495, 121–125) consensus sequence 5’-UUUUUAU-3’</p>
 <p>Will most likely have to look for binding motfis for this one.</p>
+<div id="binding-disruption" class="section level1">
+<h1>binding disruption</h1>
+<p>Binding site disruption</p>
+<p>Use the binding sites above</p>
+<pre class="bash"><code>sbatch RBPdisrupt.sh </code></pre>
+<pre class="r"><code>NucRes=read.table(&quot;../data/eCLip/NuclearQTLoverlap_RBPbinding.txt&quot;,col.names = c(&quot;snpchr&quot;,&#39;snpstart&#39;,&#39;snpend&#39;, &#39;qtl&#39;, &#39;dist&#39;, &#39;strand&#39;, &#39;chr&#39;,&#39;start&#39;,&#39;end&#39;, &#39;rbp&#39;,&#39;score&#39;, &#39;strndrbp&#39;),stringsAsFactors = F)
+NucRes %&gt;% select(qtl) %&gt;% unique() %&gt;% nrow()</code></pre>
+<pre><code>[1] 37</code></pre>
+<pre class="r"><code>TotRes=read.table(&quot;../data/eCLip/TotalQTLoverlap_RBPbinding.txt&quot;,col.names = c(&quot;snpchr&quot;,&#39;snpstart&#39;,&#39;snpend&#39;, &#39;qtl&#39;, &#39;dist&#39;, &#39;strand&#39;, &#39;chr&#39;,&#39;start&#39;,&#39;end&#39;, &#39;rbp&#39;,&#39;score&#39;, &#39;strndrbp&#39;),stringsAsFactors = F)
+TotRes %&gt;% select(qtl) %&gt;% unique() %&gt;% nrow()</code></pre>
+<pre><code>[1] 26</code></pre>
+<p>37 nuclear and 26 total qtls overlap eclip binding.</p>
+<pre class="r"><code>head(NucRes)</code></pre>
+<pre><code>  snpchr snpstart   snpend                   qtl   dist strand chr
+1      1  2125171  2125172   FAAP20:peak318:utr3   1830      -   1
+2      1  2125171  2125172   FAAP20:peak318:utr3   1830      -   1
+3      1  2125171  2125172   FAAP20:peak318:utr3   1830      -   1
+4      1  6272492  6272493   RNF207:peak457:utr3  -8763      +   1
+5      1  6272492  6272493   RNF207:peak457:utr3  -8763      +   1
+6      1 29479003 29479004 SRSF4:peak2215:intron -14895      -   1
+     start      end               rbp score strndrbp
+1  2125091  2125187    FUS_K562_rep01   200        -
+2  2125111  2125192 ZNF800_K562_rep01   200        -
+3  2125158  2125213  ABCF1_K562_rep01   200        -
+4  6272477  6272514    AQR_K562_rep01   200        +
+5  6272478  6272505  GRWD1_K562_rep01   200        +
+6 29479001 29479040   UPF1_K562_rep02   200        -</code></pre>
+<p>SRSF4 intronic QTL in a UPF1 binding site. UPF1 associated with NMD (<a href="https://www.sciencedirect.com/science/article/pii/S2211124718305837" class="uri">https://www.sciencedirect.com/science/article/pii/S2211124718305837</a>). only a qtl in the nuclear fraction.</p>
+<p>PRR13 2 UTR variants, in UPF1 binding. total and nuclear QTL. alternative C allele associated with decreased usage of downstream isoform.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1676,6 +1790,7 @@ loaded via a namespace (and not attached):
 [41] promises_1.0.1   htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
 [45] colorspace_1.3-2 httpuv_1.4.5     labeling_0.3     stringi_1.2.4   
 [49] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
+</div>
 </div>
 
 
