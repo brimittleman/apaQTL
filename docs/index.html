@@ -242,7 +242,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-09
+<strong>Last updated:</strong> 2020-02-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -252,7 +252,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0ea6bf83ec074ff48ea6d89e7509926053bac8d4targetblank0ea6bf8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/0ea6bf83ec074ff48ea6d89e7509926053bac8d4" target="_blank">0ea6bf8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree66100b8d02722bf0aae4912424c13ea13e04825etargetblank66100b8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/66100b8d02722bf0aae4912424c13ea13e04825e" target="_blank">66100b8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree0ea6bf83ec074ff48ea6d89e7509926053bac8d4targetblank0ea6bf8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree66100b8d02722bf0aae4912424c13ea13e04825etargetblank66100b8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -287,6 +287,7 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+    Ignored:    data/ProSeq/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -348,6 +349,7 @@ Untracked files:
     Untracked:  code/._PrematureQTLPermuted.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
+    Untracked:  code/._RBPdisrupt.sh
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
     Untracked:  code/._Rplots.pdf
@@ -635,6 +637,9 @@ Untracked files:
     Untracked:  code/Prematureqtl_nominal.out
     Untracked:  code/Prematureqtl_permuted.err
     Untracked:  code/Prematureqtl_permuted.out
+    Untracked:  code/RBPdisrupt.err
+    Untracked:  code/RBPdisrupt.out
+    Untracked:  code/RBPdisrupt.sh
     Untracked:  code/README.md
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
@@ -890,6 +895,7 @@ Untracked files:
     Untracked:  data/eCLip/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
+    Untracked:  data/exosome/
     Untracked:  data/fastq/
     Untracked:  data/filterPeaks/
     Untracked:  data/fourSU/
@@ -973,9 +979,10 @@ Unstaged changes:
     Modified:   analysis/ExploreNpas.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
-    Modified:   analysis/RNAbinding.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/TSS.Rmd
+    Modified:   analysis/decayAndStability.Rmd
+    Modified:   analysis/miRNAdisrupt.Rmd
     Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
@@ -1032,13 +1039,47 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/66100b8d02722bf0aae4912424c13ea13e04825e/analysis/index.Rmd" target="_blank">66100b8</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-11
+</td>
+<td>
+add tot v nuc effect size info and mech
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/38ece5e7955bed30304ce2370b471e6b6a0a7728/docs/index.html" target="_blank">38ece5e</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/0ea6bf83ec074ff48ea6d89e7509926053bac8d4/analysis/index.Rmd" target="_blank">0ea6bf8</a>
 </td>
 <td>
 brimittleman
 </td>
 <td>
-2020-02-10
+2020-02-09
 </td>
 <td>
 add mirna disrupt analysis
@@ -1123,7 +1164,7 @@ html
 brimittleman
 </td>
 <td>
-2020-02-03
+2020-02-02
 </td>
 <td>
 Build site.
@@ -1140,7 +1181,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2020-02-03
+2020-02-02
 </td>
 <td>
 add TSS analysis
@@ -1259,7 +1300,7 @@ html
 brimittleman
 </td>
 <td>
-2020-01-31
+2020-01-30
 </td>
 <td>
 Build site.
@@ -1276,7 +1317,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2020-01-31
+2020-01-30
 </td>
 <td>
 add LD regress notes and first var in apa
@@ -1599,7 +1640,7 @@ html
 brimittleman
 </td>
 <td>
-2019-08-27
+2019-08-26
 </td>
 <td>
 Build site.
@@ -1616,7 +1657,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-08-27
+2019-08-26
 </td>
 <td>
 add extra MP qc
@@ -2789,7 +2830,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-16
+2019-05-15
 </td>
 <td>
 Build site.
@@ -2806,7 +2847,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-16
+2019-05-15
 </td>
 <td>
 start ideas for inton analysis
@@ -2823,7 +2864,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-16
+2019-05-15
 </td>
 <td>
 Build site.
@@ -2840,7 +2881,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-16
+2019-05-15
 </td>
 <td>
 add nascent transcription plot
@@ -2857,7 +2898,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-16
+2019-05-15
 </td>
 <td>
 Build site.
@@ -2874,7 +2915,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-16
+2019-05-15
 </td>
 <td>
 add reg heatmap
@@ -2925,7 +2966,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-09
+2019-05-08
 </td>
 <td>
 Build site.
@@ -2942,7 +2983,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-09
+2019-05-08
 </td>
 <td>
 choose pcs and start qtl rerun
@@ -2959,7 +3000,7 @@ html
 brimittleman
 </td>
 <td>
-2019-05-09
+2019-05-08
 </td>
 <td>
 Build site.
@@ -2976,7 +3017,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-05-09
+2019-05-08
 </td>
 <td>
 add pca
@@ -3129,7 +3170,7 @@ html
 brimittleman
 </td>
 <td>
-2019-04-30
+2019-04-29
 </td>
 <td>
 Build site.
@@ -3146,7 +3187,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-04-30
+2019-04-29
 </td>
 <td>
 add correlation genotype heatmap
@@ -3197,7 +3238,7 @@ html
 brimittleman
 </td>
 <td>
-2019-04-25
+2019-04-24
 </td>
 <td>
 Build site.
@@ -3214,7 +3255,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-04-25
+2019-04-24
 </td>
 <td>
 add corr analysis
@@ -3316,7 +3357,7 @@ html
 brimittleman
 </td>
 <td>
-2019-04-23
+2019-04-22
 </td>
 <td>
 Build site.
@@ -3333,7 +3374,7 @@ Rmd
 brimittleman
 </td>
 <td>
-2019-04-23
+2019-04-22
 </td>
 <td>
 add reads against feature
@@ -3702,6 +3743,8 @@ Start workflowr project.
 <li><p><a href="BaseComposition.html">Base composition around PAS</a></p></li>
 <li><p><a href="apabyeQTLstatus.html">apaQTL effect sizes by eQTL set</a></p></li>
 <li><p><a href="miRNAdisrupt.html">miRNA binding site disruption as QTL mechanism</a></p></li>
+<li><p><a href="TotNucQTLeffect.html">Compare Effect Sizes for total and nuclear</a></p></li>
+<li><p><a href="mechEindepQTL.html">Mechanism for each expression independent apaQTL</a></p></li>
 </ul>
 </div>
 
