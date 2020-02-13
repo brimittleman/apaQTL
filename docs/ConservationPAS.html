@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-01-31
+<strong>Last updated:</strong> 2020-02-12
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -353,7 +353,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3a8156fc5b4aa60e229d097f10bb107925ae26aftargetblank3a8156fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/3a8156fc5b4aa60e229d097f10bb107925ae26af" target="_blank">3a8156f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb8d57876b54763a167d98181fd32a5c47ce6518etargetblankb8d5787a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b8d57876b54763a167d98181fd32a5c47ce6518e" target="_blank">b8d5787</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree3a8156fc5b4aa60e229d097f10bb107925ae26aftargetblank3a8156fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb8d57876b54763a167d98181fd32a5c47ce6518etargetblankb8d5787a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -447,8 +447,8 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    code/logs/
     Ignored:    data/.DS_Store
+    Ignored:    data/ProSeq/
     Ignored:    output/.DS_Store
 
 Untracked files:
@@ -493,6 +493,7 @@ Untracked files:
     Untracked:  code/._LC_samplegroups.py
     Untracked:  code/._LD_qtl.sh
     Untracked:  code/._LD_snpsproxy.sh
+    Untracked:  code/._MapAllRBP.sh
     Untracked:  code/._NascentRNAdtPlot.sh
     Untracked:  code/._NascentRNAdtPlot3UTRPAS.sh
     Untracked:  code/._NascentRNAdtPlotExcludeFirstintronicPAS.sh
@@ -509,8 +510,10 @@ Untracked files:
     Untracked:  code/._PrematureQTLPermuted.sh
     Untracked:  code/._QTL2bed.py
     Untracked:  code/._QTL2bed_withstrand.py
+    Untracked:  code/._RBPdisrupt.sh
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._Rplots.pdf
     Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
     Untracked:  code/._SnakefilePAS
@@ -570,6 +573,8 @@ Untracked files:
     Untracked:  code/._extactPAS100meanphyloP.py
     Untracked:  code/._extractGenotypes.py
     Untracked:  code/._extractPACmeanPhyloP.py
+    Untracked:  code/._extractPhylop50up.py
+    Untracked:  code/._extractPhylopextra50.py
     Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._fc_filteredPAS6and7As.sh
@@ -593,6 +598,7 @@ Untracked files:
     Untracked:  code/._fixFChead.py
     Untracked:  code/._fixFChead_bothfrac.py
     Untracked:  code/._fixFChead_short.py
+    Untracked:  code/._fixGWAS4Munge.py
     Untracked:  code/._fixH3k12ac.py
     Untracked:  code/._fixPASregionSNPs.py
     Untracked:  code/._fixRNAhead4corr.py
@@ -630,6 +636,7 @@ Untracked files:
     Untracked:  code/._mergeBamNascent.sh
     Untracked:  code/._mergeByFracBam.sh
     Untracked:  code/._mergePeaks.sh
+    Untracked:  code/._miRNAdisrupt.sh
     Untracked:  code/._mnase1stintron.sh
     Untracked:  code/._mnaseDT_fourthintron.sh
     Untracked:  code/._namePeaks.py
@@ -643,6 +650,8 @@ Untracked files:
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
     Untracked:  code/._parseBestbamid.py
+    Untracked:  code/._parseLDRes.py
+    Untracked:  code/._parseLDresBothPAS.sh
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -656,6 +665,7 @@ Untracked files:
     Untracked:  code/._removeloc_pheno.py
     Untracked:  code/._riboQTL.sh
     Untracked:  code/._runCorrectNomEqtl.sh
+    Untracked:  code/._runFixGWAS4Munge.sh
     Untracked:  code/._runHMMpermuteAPAqtls.sh
     Untracked:  code/._runHMMpermuteeQTLS.sh
     Untracked:  code/._runMakeEmpiricaleQTL_unexp.sh
@@ -703,6 +713,7 @@ Untracked files:
     Untracked:  code/._subtractfiveprimeUTR.sh
     Untracked:  code/._tabixSNPS.sh
     Untracked:  code/._tenBPupstreamPAS.py
+    Untracked:  code/._test.pdf
     Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._twentyBPupstreamPAS.py
@@ -759,6 +770,9 @@ Untracked files:
     Untracked:  code/IntronicPASDT.err
     Untracked:  code/IntronicPASDT.out
     Untracked:  code/LD_vcftools.hap.out
+    Untracked:  code/MapAllRBP.sh
+    Untracked:  code/MapRBP.err
+    Untracked:  code/MapRBP.out
     Untracked:  code/NascentDTPlotGeneRegions.err
     Untracked:  code/NascentDTPlotGeneRegions.out
     Untracked:  code/NascentDTPlotPAS.err
@@ -786,6 +800,9 @@ Untracked files:
     Untracked:  code/Prematureqtl_nominal.out
     Untracked:  code/Prematureqtl_permuted.err
     Untracked:  code/Prematureqtl_permuted.out
+    Untracked:  code/RBPdisrupt.err
+    Untracked:  code/RBPdisrupt.out
+    Untracked:  code/RBPdisrupt.sh
     Untracked:  code/README.md
     Untracked:  code/RNABam2BW.err
     Untracked:  code/RNABam2BW.out
@@ -828,8 +845,12 @@ Untracked files:
     Untracked:  code/dagfiltPAS.pdf
     Untracked:  code/extactPAS100meanphyloP.py
     Untracked:  code/extractPACmeanPhyloP.py
+    Untracked:  code/extractPhylop50up.py
+    Untracked:  code/extractPhylopextra50.py
     Untracked:  code/fixExandUnexeQTL
+    Untracked:  code/fixGWAS4Munge.py
     Untracked:  code/fix_randomIntron.py
+    Untracked:  code/fixmunge
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.log
     Untracked:  code/genotypesYRI.gen.proc.keep.vcf.recode.vcf
     Untracked:  code/getseq100up.err
@@ -841,6 +862,7 @@ Untracked files:
     Untracked:  code/intersectVCFPAS.err
     Untracked:  code/intersectVCFPAS.out
     Untracked:  code/log/
+    Untracked:  code/logs/
     Untracked:  code/merge53PRIMEbam.err
     Untracked:  code/merge53PRIMEbam.out
     Untracked:  code/merge53RNAbam.err
@@ -857,6 +879,9 @@ Untracked files:
     Untracked:  code/mergeBamNacent.out
     Untracked:  code/mergeRNAbam.err
     Untracked:  code/mergeRNAbam.out
+    Untracked:  code/miRNAdisrupt.err
+    Untracked:  code/miRNAdisrupt.out
+    Untracked:  code/miRNAdisrupt.sh
     Untracked:  code/mnaseDTPlot1stintron.err
     Untracked:  code/mnaseDTPlot1stintron.out
     Untracked:  code/mnaseDTPlot4thintron.err
@@ -866,6 +891,10 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucspecinE.py
+    Untracked:  code/parseLDRes.py
+    Untracked:  code/parseLDres.err
+    Untracked:  code/parseLDres.out
+    Untracked:  code/parseLDresBothPAS.sh
     Untracked:  code/plink.log
     Untracked:  code/prxySNP.err
     Untracked:  code/prxySNP.out
@@ -881,6 +910,7 @@ Untracked files:
     Untracked:  code/runCorrectNomeqtl.out
     Untracked:  code/runFilterLD.err
     Untracked:  code/runFilterLD.out
+    Untracked:  code/runFixGWAS4Munge.sh
     Untracked:  code/runHMMpermute.err
     Untracked:  code/runHMMpermute.out
     Untracked:  code/runHMMpermuteeQTLs.err
@@ -951,6 +981,8 @@ Untracked files:
     Untracked:  code/subtractExons.out
     Untracked:  code/tabixSNPs.err
     Untracked:  code/tabixSNPs.out
+    Untracked:  code/test.pdf
+    Untracked:  code/testFix.txt
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
     Untracked:  code/vcf_keepsnps.err
@@ -965,6 +997,7 @@ Untracked files:
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
     Untracked:  data/BadLines/
+    Untracked:  data/BaseComp/
     Untracked:  data/Battle_pQTL/
     Untracked:  data/CheckSums/
     Untracked:  data/CompareOldandNew/
@@ -972,6 +1005,7 @@ Untracked files:
     Untracked:  data/DiffIso/
     Untracked:  data/EncodeRNA/
     Untracked:  data/ExampleQTLPlots/
+    Untracked:  data/ExampleQTLPlots_update/
     Untracked:  data/ExpressionIndependentapaQTLs.txt
     Untracked:  data/FiveMergedBW/
     Untracked:  data/FiveMergedBam/
@@ -1000,6 +1034,7 @@ Untracked files:
     Untracked:  data/SNPinSS/
     Untracked:  data/SignalSiteFiles/
     Untracked:  data/TF_motifdisruption/
+    Untracked:  data/TSS/
     Untracked:  data/ThirtyNineIndQtl_nominal/
     Untracked:  data/Version15bp6As/
     Untracked:  data/Version15bp7As/
@@ -1022,8 +1057,10 @@ Untracked files:
     Untracked:  data/bothFrac_FC/
     Untracked:  data/bw/
     Untracked:  data/bw_norm/
+    Untracked:  data/eCLip/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
+    Untracked:  data/exosome/
     Untracked:  data/fastq/
     Untracked:  data/filterPeaks/
     Untracked:  data/fourSU/
@@ -1039,9 +1076,11 @@ Untracked files:
     Untracked:  data/mergedBW_norm/
     Untracked:  data/mergedBam/
     Untracked:  data/mergedbyFracBam/
+    Untracked:  data/miRNAbinding/
     Untracked:  data/molPhenos/
     Untracked:  data/molQTLs/
     Untracked:  data/motifdistrupt/
+    Untracked:  data/nPAS/
     Untracked:  data/netseq/
     Untracked:  data/nonNorm_pheno/
     Untracked:  data/nuc_10up/
@@ -1102,17 +1141,25 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/LDregress.Rmd
+    Modified:   analysis/ExploreNpas.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
+    Modified:   analysis/TSS.Rmd
+    Modified:   analysis/decayAndStability.Rmd
+    Modified:   analysis/miRNAdisrupt.Rmd
+    Modified:   analysis/nascenttranscription.Rmd
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
     Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/DistPAS2Sig.py
+    Modified:   code/Script4NuclearQTLexamples.sh
+    Modified:   code/Script4TotalQTLexamples.sh
     Modified:   code/apaQTLsnake.err
+    Modified:   code/environment.yaml
+    Modified:   code/run_qtlFacetBoxplots.sh
     Deleted:    code/test.txt
     Deleted:    reads_graphs.Rmd
 
@@ -1158,6 +1205,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/b8d57876b54763a167d98181fd32a5c47ce6518e/analysis/ConservationPAS.Rmd" target="_blank">b8d5787</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-12
+</td>
+<td>
+add tissue var and conservation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/5d293680ab66d2f94f47c75a0da8edb81980d31b/docs/ConservationPAS.html" target="_blank">5d29368</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/3a8156fc5b4aa60e229d097f10bb107925ae26af/analysis/ConservationPAS.Rmd" target="_blank">3a8156f</a>
 </td>
 <td>
@@ -1179,15 +1260,15 @@ wflow_publish(c(“analysis/index.Rmd”, “analysis/ConservationPAS.Rmd”))
 </div>
 <p>In this analysis I want to study the conservation of the PAS. I will compare PAS with QTLs and those without. I will use PhyloP score. PhyloP scores for 100 vertibrates are available on the genome browser.</p>
 <pre class="r"><code>library(workflowr)</code></pre>
-<pre><code>This is workflowr version 1.5.0
+<pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggpubr)</code></pre>
@@ -1215,8 +1296,82 @@ write.table(pas,&quot;../data/phylop/PAS_regions.txt&quot;,col.names = F,row.nam
 <p>Plot:</p>
 <pre class="r"><code>ggplot(phylores,aes(x=phyloP, by=HasQTL, fill=HasQTL)) +geom_density(alpha=.5)</code></pre>
 <p><img src="figure/ConservationPAS.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5d293680ab66d2f94f47c75a0da8edb81980d31b/docs/figure/ConservationPAS.Rmd/unnamed-chunk-7-1.png" target="_blank">5d29368</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(phylores,aes(y=phyloP, x=HasQTL,fill=HasQTL)) + geom_boxplot() + stat_compare_means()+ scale_fill_brewer(palette = &quot;Dark2&quot;, name=&quot;Signficant&quot;)</code></pre>
 <p><img src="figure/ConservationPAS.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-2">
+Past versions of unnamed-chunk-7-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5d293680ab66d2f94f47c75a0da8edb81980d31b/docs/figure/ConservationPAS.Rmd/unnamed-chunk-7-2.png" target="_blank">5d29368</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>With a QTL is lower score. Look at enrichment for negative</p>
 <pre class="r"><code>x=nrow(phylores %&gt;% filter(HasQTL==&quot;Yes&quot;, phyloP&lt;0))
 m= nrow(phylores %&gt;% filter(phyloP&lt;0))
@@ -1242,8 +1397,82 @@ write.table(pas,&quot;../data/phylop/PAS100_regions.txt&quot;,col.names = F,row.
 <pre class="r"><code>phylores100=read.table(&quot;../data/phylop/PAS100_phyloP.txt&quot;, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;name&quot;, &quot;phyloP&quot;), stringsAsFactors = F) %&gt;% drop_na() %&gt;% separate(name,into=c(&quot;pasnum&quot;,&quot;geneid&quot;), sep=&quot;:&quot;) %&gt;% mutate(PAS=paste(&quot;peak&quot;,pasnum,sep=&quot;&quot;)) %&gt;% mutate(HasQTL=ifelse(PAS %in% nucQTL$Peak, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
 <pre class="r"><code>ggplot(phylores100,aes(x=phyloP, by=HasQTL, fill=HasQTL)) +geom_density(alpha=.5)</code></pre>
 <p><img src="figure/ConservationPAS.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5d293680ab66d2f94f47c75a0da8edb81980d31b/docs/figure/ConservationPAS.Rmd/unnamed-chunk-12-1.png" target="_blank">5d29368</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(phylores100,aes(y=phyloP, x=HasQTL,fill=HasQTL)) + geom_boxplot() + stat_compare_means()+ scale_fill_brewer(palette = &quot;Dark2&quot;, name=&quot;Signficant&quot;)</code></pre>
 <p><img src="figure/ConservationPAS.Rmd/unnamed-chunk-12-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-2">
+Past versions of unnamed-chunk-12-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/5d293680ab66d2f94f47c75a0da8edb81980d31b/docs/figure/ConservationPAS.Rmd/unnamed-chunk-12-2.png" target="_blank">5d29368</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-01-31
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>x=nrow(phylores100 %&gt;% filter(HasQTL==&quot;Yes&quot;, phyloP&lt;0))
 m= nrow(phylores100 %&gt;% filter(phyloP&lt;0))
 n=nrow(phylores100 %&gt;% filter(phyloP&gt;=0))
@@ -1260,6 +1489,60 @@ x</code></pre>
 phyper(x,m,n,k,lower.tail=F)</code></pre>
 <pre><code>[1] 8.44718e-08</code></pre>
 <p>Exact same results.</p>
+<div id="conservation-of-regions" class="section level2">
+<h2>Conservation of regions</h2>
+<p>I will look at the region 50bp upstream of PAS. The upstream 50bp would contain the signal site. I will compare the regions 50upstream to 50 upstream of that.</p>
+<p>I can look at genes by number of PAS.</p>
+<p>Create the bed regions</p>
+<p>upstream: + strand :subtract 50 from start</p>
+<ul>
+<li>strand :add 50 to end</li>
+</ul>
+<p>region higher:</p>
+<ul>
+<li>strand:</li>
+<li>strand:</li>
+</ul>
+<pre class="r"><code>pas50up=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed&quot;,col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;name&quot;,&quot;score&quot;,&quot;strand&quot;)) %&gt;% mutate(newStart=ifelse(strand==&quot;+&quot;, start - 50, start), newEnd=ifelse(strand==&quot;+&quot;, end, end +50)) %&gt;% select(chr, newStart,newEnd, name, score, strand)
+
+
+write.table(pas50up,&quot;../data/phylop/PAS_50upregions.bed&quot;,col.names = F,row.names = F,quote = F,sep=&quot;\t&quot;)
+
+pas100up=pas50up %&gt;% mutate(start2=ifelse(strand==&quot;+&quot;, newStart-50, newEnd), end2=ifelse(strand==&quot;+&quot;, newStart, newEnd + 50)) %&gt;% select(chr, start2,end2, name, score, strand)
+write.table(pas100up,&quot;../data/phylop/PAS_extra50upregions.bed&quot;,col.names = F,row.names = F,quote = F,sep=&quot;\t&quot;)</code></pre>
+<pre class="bash"><code>python extractPhylop50up.py
+python extractPhylopextra50.py</code></pre>
+<pre class="r"><code>Phylo50up=read.table(&quot;../data/phylop/PAS_50upregions_phylop.txt&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;PAS&quot;,&quot;PAS_Phylop&quot;)) %&gt;% select(PAS, PAS_Phylop)
+
+PhyloControl=read.table(&quot;../data/phylop/PAS_extra50upregions_phylop.txt&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;, &quot;PAS&quot;,&quot;Control_Phylop&quot;)) %&gt;% select(PAS, Control_Phylop)
+
+BothPhylop=Phylo50up %&gt;% inner_join(PhyloControl,by=&quot;PAS&quot;) %&gt;%
+  separate(PAS, into = c(&quot;num&quot;,&quot;geneloc&quot;), sep=&quot;:&quot;) %&gt;%
+  separate(geneloc,into=c(&quot;gene&quot;,&#39;loc&#39;),sep=&quot;_&quot;) %&gt;% 
+  select(-num, -loc) %&gt;% 
+  group_by(gene) %&gt;% 
+  mutate(nPAS=n()) %&gt;% 
+  ungroup() %&gt;% 
+  gather(&quot;Set&quot;, &quot;Phylop&quot;, -gene, -nPAS)
+
+
+BothPhylop$nPAS=as.factor(BothPhylop$nPAS)
+ggplot(BothPhylop, aes(x=nPAS, y=Phylop, by=Set, fill=Set)) + geom_boxplot() + labs(x=&quot;Number of PAS&quot;, y=&quot;Phylop score for PAS&quot;, title=&quot;Region at PAS conservation vs region upstream&quot;) + scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>Warning: Removed 233 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="figure/ConservationPAS.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Do this where I take the mean per gene.</p>
+<pre class="r"><code>BothPhylopMean=Phylo50up %&gt;% inner_join(PhyloControl,by=&quot;PAS&quot;) %&gt;%
+  separate(PAS, into = c(&quot;num&quot;,&quot;geneloc&quot;), sep=&quot;:&quot;) %&gt;%
+  separate(geneloc,into=c(&quot;gene&quot;,&#39;loc&#39;),sep=&quot;_&quot;) %&gt;% 
+  select(-num, -loc) %&gt;% 
+  gather(&quot;Set&quot;, &quot;Phylop&quot;, -gene) %&gt;% 
+  group_by(gene, Set) %&gt;% 
+  summarise(meanPhylop=mean(Phylop),nPAS=n())
+
+BothPhylopMean$nPAS=as.factor(BothPhylopMean$nPAS)
+ggplot(BothPhylopMean, aes(x=nPAS, y=meanPhylop, by=Set, fill=Set)) + geom_boxplot() + labs(x=&quot;Number of PAS&quot;, y=&quot;Mean Phylop score for PAS in Gene&quot;, title=&quot;Region at PAS conservation vs region upstream&quot;) + scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>Warning: Removed 194 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="figure/ConservationPAS.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1289,7 +1572,7 @@ attached base packages:
 other attached packages:
  [1] ggpubr_0.2      magrittr_1.5    forcats_0.3.0   stringr_1.3.1  
  [5] dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1     tidyr_0.8.3    
- [9] tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.5.0
+ [9] tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.6.0
 
 loaded via a namespace (and not attached):
  [1] tidyselect_0.2.5   haven_1.1.2        lattice_0.20-38   
@@ -1310,6 +1593,7 @@ loaded via a namespace (and not attached):
 [46] rmarkdown_1.10     httr_1.3.1         rstudioapi_0.10   
 [49] R6_2.3.0           nlme_3.1-137       git2r_0.26.1      
 [52] compiler_3.5.1    </code></pre>
+</div>
 </div>
 
 
