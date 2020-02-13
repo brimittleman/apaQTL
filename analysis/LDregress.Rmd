@@ -235,19 +235,23 @@ PAS1000_snpsincluded=round(PAS1000res$Prop._SNPs[1],3) *100
 Plot the H2 explained: 
 
 ```{r}
-ggplot(PAS500res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS500_snpsincluded), x=10, y=.08)
+ggplot(PAS500res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS500_snpsincluded), x=10, y=.08) + geom_errorbar(aes(ymin=Prop._h2-Prop._h2_std_error, ymax=Prop._h2+Prop._h2_std_error), width=.2,position=position_dodge(.9))
 
 
-ggplot(PAS500res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS500_snpsincluded), x=10, y=12)
+ggplot(PAS500res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS500_snpsincluded), x=10, y=15) + geom_errorbar(aes(ymin=Enrichment-Enrichment_std_error, ymax=Enrichment+Enrichment_std_error), width=.2,position=position_dodge(.9)) + geom_hline(yintercept = 1, linetype="dotted")
+
+
+
 ```
 
 Plot the H2 explained: 
 
 ```{r}
-ggplot(PAS1000res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS1000_snpsincluded), x=10, y=.15)+labs(x="", title="LD scroe regressino results for 1000 BP around each PAS", y="% of heritability explained")
+ggplot(PAS1000res,aes(x=pheno, y=Prop._h2,fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS1000_snpsincluded), x=10, y=.15)+labs(x="", title="LD score regression results for 1000 BP around each PAS", y="% of heritability explained")+ geom_errorbar(aes(ymin=Prop._h2-Prop._h2_std_error, ymax=Prop._h2+Prop._h2_std_error), width=.2,position=position_dodge(.9))
 
 
-ggplot(PAS1000res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS1000_snpsincluded), x=10, y=12) +labs(x="", title="LD scroe regressino results for 1000 BP around each PAS")
+
+ggplot(PAS1000res,aes(x=pheno, y=Enrichment, fill=pheno)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position = "none") + annotate("text", label=paste("% of SNPs included", PAS1000_snpsincluded), x=10, y=12) +labs(x="", title="LD score regression results for 1000 BP around each PAS") + geom_errorbar(aes(ymin=Enrichment-Enrichment_std_error, ymax=Enrichment+Enrichment_std_error), width=.2,position=position_dodge(.9)) + geom_hline(yintercept = 1, linetype="dotted")
 ```
 
 
