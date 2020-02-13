@@ -14,6 +14,7 @@ I want to make sure my analysis are robust to misprimming if some still exists i
 ```{r}
 library(workflowr)
 library(tidyverse)
+library(RColorBrewer)
 ```
 
 ```{r}
@@ -23,7 +24,8 @@ dist=read.table("../data/AnnotatedPAS/DistanceMyPAS2Anno.bed", col.names = c("ch
 PAS_withmatch=dist %>% filter(abs(distance)<=10) %>% select(myPAS,anno) %>% unique() %>% separate(myPAS, into=c("pasNum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% select(pasNum)
 
 
-IntronicNoAnno= PAS %>% filter(loc=="intron") %>% anti_join(PAS_withmatch)
+IntronicNoAnno= PAS %>% filter(loc=="intron") %>% anti_join(PAS_withmatch) %>% mutate(PAS=paste("peak",pasNum, sep=""))
+UTRnoAnno=PAS %>% filter(loc=="utr3") %>% anti_join(PAS_withmatch) %>% mutate(PAS=paste("peak",pasNum, sep=""))
 
 
 PAS_filter= PAS %>% anti_join(IntronicNoAnno,by = c("chr", "start", "end", "pasNum", "gene", "loc", "score", "strand")) %>% mutate(PAS=paste("peak",pasNum, sep=""))
@@ -156,5 +158,51 @@ Expind_filt=Expind %>% filter(PAS_ID %in% PAS_filter$PAS)
 Expind_filt %>% select(SNP) %>% unique() %>% nrow()
 ```
 
+##Motif enrichement
 
+I will look at the signal site enrichment for the Intronic not in the database sites.  
+
+```{r}
+Loc_AATAAA= read.table("../data/SignalSiteFiles/Loc_AATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATAAA")
+Loc_AAAAAG= read.table("../data/SignalSiteFiles/Loc_AAAAAG_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AAAAAG")
+Loc_AATACA= read.table("../data/SignalSiteFiles/Loc_AATACA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATACA")
+Loc_AATAGA= read.table("../data/SignalSiteFiles/Loc_AATAGA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATAGA")
+Loc_AATATA= read.table("../data/SignalSiteFiles/Loc_AATATA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AATATA")
+Loc_ACTAAA= read.table("../data/SignalSiteFiles/Loc_ACTAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="ACTAAA")
+Loc_AGTAAA= read.table("../data/SignalSiteFiles/Loc_AGTAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AGTAAA")
+Loc_ATTAAA= read.table("../data/SignalSiteFiles/Loc_ATTAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="ATTAAA")
+Loc_CATAAA= read.table("../data/SignalSiteFiles/Loc_CATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="CATAAA")
+Loc_GATAAA= read.table("../data/SignalSiteFiles/Loc_GATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="GATAAA")
+Loc_TATAAA= read.table("../data/SignalSiteFiles/Loc_TATAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="TATAAA")
+Loc_AAAAAA= read.table("../data/SignalSiteFiles/Loc_AAAAAA_Distance2end.txt", header=F, col.names =c( "PAS", "Distance2PAS")) %>% mutate(Site="AAAAAA")
+
+AllsiteDF=as.data.frame(rbind(Loc_AATAAA,Loc_AAAAAG,Loc_AATACA,Loc_AATAGA,Loc_AATATA,Loc_ACTAAA,Loc_AGTAAA,Loc_ATTAAA, Loc_GATAAA,Loc_TATAAA,Loc_CATAAA, Loc_AAAAAA))
+
+colourCount = length(unique(AllsiteDF$Site))
+
+getPalette = colorRampPalette(brewer.pal(8, "Set1"))
+
+
+AllsiteDF_1per=read.table(file="../data/SignalSiteFiles/AllSignalSite_1perPAS.txt", col.names = colnames(AllsiteDF)) %>% mutate(NegCount=-1*as.integer(as.character(Distance2PAS))) %>% separate(PAS, into=c("peak", "geneloc"), sep=":") %>% mutate(PAS=paste("peak",peak ,sep="")) %>% semi_join(IntronicNoAnno, by="PAS")
+
+nrow(IntronicNoAnno)
+```
+
+Of the 9605, 2364 have a signal site. (2362/9605) 25%
+
+This is similar to the percentage overall in the data.
+
+```{r}
+ggplot(AllsiteDF_1per, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of intronic unannotated signal sites")  +  scale_fill_manual(values = getPalette(colourCount))
+```
+There are 3000 unannotated 3' UTR sites. 
+
+```{r}
+AllsiteDF_1perUTR=read.table(file="../data/SignalSiteFiles/AllSignalSite_1perPAS.txt", col.names = colnames(AllsiteDF)) %>% mutate(NegCount=-1*as.integer(as.character(Distance2PAS))) %>% separate(PAS, into=c("peak", "geneloc"), sep=":") %>% mutate(PAS=paste("peak",peak ,sep="")) %>% semi_join(UTRnoAnno, by="PAS")
+
+
+ggplot(AllsiteDF_1perUTR, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position="stack",bins=50 ) + labs(x="Distance from PAS", y="N annotated Sites", title="Location of 3' UTR unannotated signal sites")  +  scale_fill_manual(values = getPalette(colourCount))
+```
+
+1792 have signal sites.  (1792/3044) 60%
 
