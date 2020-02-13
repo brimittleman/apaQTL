@@ -121,3 +121,75 @@ x
 phyper(x,m,n,k,lower.tail=F)
 ```
 Exact same results.  
+
+
+##Conservation of regions 
+
+I will look at the region 50bp upstream of PAS. The upstream 50bp would contain the signal site. I will compare the regions 50upstream to 50 upstream of that. 
+
+I can look at genes by number of PAS.  
+
+Create the bed regions 
+
+upstream:
++ strand :subtract 50 from start
+
+- strand :add 50 to end 
+
+region higher:  
+
++ strand: 
+- strand: 
+```{r}
+pas50up=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% mutate(newStart=ifelse(strand=="+", start - 50, start), newEnd=ifelse(strand=="+", end, end +50)) %>% select(chr, newStart,newEnd, name, score, strand)
+
+
+write.table(pas50up,"../data/phylop/PAS_50upregions.bed",col.names = F,row.names = F,quote = F,sep="\t")
+
+pas100up=pas50up %>% mutate(start2=ifelse(strand=="+", newStart-50, newEnd), end2=ifelse(strand=="+", newStart, newEnd + 50)) %>% select(chr, start2,end2, name, score, strand)
+write.table(pas100up,"../data/phylop/PAS_extra50upregions.bed",col.names = F,row.names = F,quote = F,sep="\t")
+```
+
+
+
+```{bash,eval=F}
+python extractPhylop50up.py
+python extractPhylopextra50.py
+```
+
+```{r}
+Phylo50up=read.table("../data/phylop/PAS_50upregions_phylop.txt",stringsAsFactors = F, col.names = c("chr", "start","end", "PAS","PAS_Phylop")) %>% select(PAS, PAS_Phylop)
+
+PhyloControl=read.table("../data/phylop/PAS_extra50upregions_phylop.txt",stringsAsFactors = F, col.names = c("chr", "start","end", "PAS","Control_Phylop")) %>% select(PAS, Control_Phylop)
+
+BothPhylop=Phylo50up %>% inner_join(PhyloControl,by="PAS") %>%
+  separate(PAS, into = c("num","geneloc"), sep=":") %>%
+  separate(geneloc,into=c("gene",'loc'),sep="_") %>% 
+  select(-num, -loc) %>% 
+  group_by(gene) %>% 
+  mutate(nPAS=n()) %>% 
+  ungroup() %>% 
+  gather("Set", "Phylop", -gene, -nPAS)
+
+
+BothPhylop$nPAS=as.factor(BothPhylop$nPAS)
+ggplot(BothPhylop, aes(x=nPAS, y=Phylop, by=Set, fill=Set)) + geom_boxplot() + labs(x="Number of PAS", y="Phylop score for PAS", title="Region at PAS conservation vs region upstream") + scale_fill_brewer(palette = "Dark2")
+
+```
+
+Do this where I take the mean per gene.  
+
+
+```{r}
+BothPhylopMean=Phylo50up %>% inner_join(PhyloControl,by="PAS") %>%
+  separate(PAS, into = c("num","geneloc"), sep=":") %>%
+  separate(geneloc,into=c("gene",'loc'),sep="_") %>% 
+  select(-num, -loc) %>% 
+  gather("Set", "Phylop", -gene) %>% 
+  group_by(gene, Set) %>% 
+  summarise(meanPhylop=mean(Phylop),nPAS=n())
+
+BothPhylopMean$nPAS=as.factor(BothPhylopMean$nPAS)
+ggplot(BothPhylopMean, aes(x=nPAS, y=meanPhylop, by=Set, fill=Set)) + geom_boxplot() + labs(x="Number of PAS", y="Mean Phylop score for PAS in Gene", title="Region at PAS conservation vs region upstream") + scale_fill_brewer(palette = "Dark2")
+```
+

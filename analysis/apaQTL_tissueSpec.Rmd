@@ -9,6 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+##Number of tissues   
 I want to ask if genes with a apaQTL are more tissue specific. I will use the GTEX tissue data, similar to how I did for the number of PAS analysis.  
 
 
@@ -67,4 +69,39 @@ NuclearQTLTested_tissue_noapa= NuclearQTLTested_tissue %>% filter(apaQTL=="No")
 wilcox.test(NuclearQTLTested_tissue_apa$nTissue, NuclearQTLTested_tissue_noapa$nTissue)
 ```
 
-No difference in tissue expression.
+No difference in tissue expression.  
+
+##Variance in expresssion  
+
+I want to look at the variance in expression vs the number of PAS.  
+
+```{r}
+GTEXvar=read.table("../data/nPAS/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct", header = T, skip=2, sep = '\t',stringsAsFactors = F) %>% 
+  separate(Name,into=c("gene_id","extra"), sep="\\.") %>% 
+  inner_join(geneNames, by="gene_id") %>% 
+  select(-gene_id, -extra, -Description) %>% 
+  gather("Tissue", "TPM", -gene) %>%
+  group_by(gene) %>% 
+  summarise(TissueVar=var(TPM))
+
+
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",col.names = c("chr","start","end","name","score","strand")) %>% separate(name,into=c("pas", 'gene','loc'), sep=":") %>% group_by(gene) %>% summarise(nPAS=n()) %>% inner_join(GTEXvar, by="gene")
+```
+
+
+```{r}
+nrow(PAS)
+```
+
+```{r}
+ggplot(PAS,aes(x=nPAS, y=TissueVar))+ geom_point() + geom_smooth(method="lm") + geom_density2d(col="red")
+
+cor.test(PAS$nPAS,PAS$TissueVar)
+
+cor.test(PAS$nPAS,log10(PAS$TissueVar+1))
+```
+
+```{r}
+ggplot(PAS,aes(x=nPAS, y=log10(TissueVar+1)))+ geom_point() + geom_smooth(method="lm") + geom_density2d(col="red") + labs(x="Number of PAS", y="log10(GTEX TPM variance + 1)", title="Negative correlation between tissue expression variance and PAS number")
+```
+
