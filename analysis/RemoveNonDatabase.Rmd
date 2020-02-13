@@ -1,0 +1,160 @@
+---
+title: "Remove non-database intronic"
+author: "Briana Mittleman"
+date: "2/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to make sure my analysis are robust to misprimming if some still exists in the intronic PAS. To do this I will remove the intronic PAS that are not the PAS database.  
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+```{r}
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.bed", stringsAsFactors = F, col.names=c("chr","start","end","name","score", "strand")) %>% separate(name, into=c("pasNum","geneloc"),sep=":") %>% separate(geneloc,into=c("gene",'loc'), sep="_")
+ 
+dist=read.table("../data/AnnotatedPAS/DistanceMyPAS2Anno.bed", col.names = c("chr", "start","end","myPAS", "score","strand","chr2", "start2", "end2", "anno", "score2", "strand2", "distance"),stringsAsFactors = F)
+PAS_withmatch=dist %>% filter(abs(distance)<=10) %>% select(myPAS,anno) %>% unique() %>% separate(myPAS, into=c("pasNum", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"), sep="_") %>% select(pasNum)
+
+
+IntronicNoAnno= PAS %>% filter(loc=="intron") %>% anti_join(PAS_withmatch)
+
+
+PAS_filter= PAS %>% anti_join(IntronicNoAnno,by = c("chr", "start", "end", "pasNum", "gene", "loc", "score", "strand")) %>% mutate(PAS=paste("peak",pasNum, sep=""))
+```
+
+##eQTL and intronic correlation   
+
+```{r}
+eQTLeffect=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.GeneName_snploc.txt", stringsAsFactors = F, col.names = c("gene","snp","dist", "pval", "eQTL_es")) %>% select(gene, snp, eQTL_es)
+```
+
+```{r}
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+nuclearunex_all=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% filter(PASnum %in% PAS_filter$PAS)
+
+nuclearex_all=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>%  separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_")%>% filter(PASnum %in% PAS_filter$PAS)
+```
+
+
+```{r}
+alleQTLS_nuc=bind_rows(nuclearex_all, nuclearunex_all) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
+
+cor.test(alleQTLS_nuc$slope ,alleQTLS_nuc$eQTL_es, alternative="less")
+
+summary(lm(alleQTLS_nuc$slope ~alleQTLS_nuc$eQTL_es))
+  
+  
+
+```
+
+```{r}
+ggplot(alleQTLS_nuc,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm")+ geom_text(y=-1, x=-1.5, label="Correlation= -0.32, P= 3x10^-10") + labs(title="Nuclear apa effect sizes vs eQTL eqtl effect sizes removed non annotated", y="Nuclear apaQTL effect size",x="eQTL effect size")
+```
+
+
+##Proportion explained:  
+
+I need the total apa results as well. 
+```{r}
+totalapaUnexplained=read.table("../data/overlapeQTL_try2/apaTotal_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames)%>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>% mutate(nPeaks=n(), adjPval=pval* nPeaks)%>%  dplyr::slice(which.min(adjPval)) %>% filter(PASnum %in% PAS_filter$PAS)
+
+
+totalapaexplained=read.table("../data/overlapeQTL_try2/apaTotal_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval)) %>% filter(PASnum %in% PAS_filter$PAS)
+
+nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))%>% filter(PASnum %in% PAS_filter$PAS)
+
+nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))%>% filter(PASnum %in% PAS_filter$PAS)
+
+```
+
+```{r}
+prop_overlap=function(status, fraction, cutoff){
+  if (fraction=="Total"){
+    if (status=="Explained"){
+      file=totalapaexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
+    }else {
+      file=totalapaUnexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
+    }
+  } else{
+    if (status=="Explained"){
+      file=nuclearapaexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
+     }else {
+      file=nuclearapaUnexplained
+      sig=file %>% filter(adjPval<=cutoff)
+      proportion=round(nrow(sig)/nrow(file),digits=2)
+     }
+  }
+  return(proportion)
+}
+```
+
+```{r}
+cutoffs=c(0.001,0.01,0.02,0.03,0.04,0.05,0.1,0.2,0.3,0.4,0.5)
+
+TotalExplained_Proportions=c()
+for(i in cutoffs){
+  TotalExplained_Proportions=c( TotalExplained_Proportions, prop_overlap("Explained", "Total", i))
+}
+TotalExplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=TotalExplained_Proportions, Status=rep("Explained", 11), Fraction=rep("Total", 11)))
+
+TotalUnexplained_Proportions=c()
+for(i in cutoffs){
+  TotalUnexplained_Proportions=c(TotalUnexplained_Proportions, prop_overlap("Unexplained", "Total", i))
+}
+TotalUnexplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=TotalUnexplained_Proportions, Status=rep("Unexplained", 11), Fraction=rep("Total", 11)))
+
+NuclearExplained_Proportions=c()
+for(i in cutoffs){
+  NuclearExplained_Proportions=c( NuclearExplained_Proportions, prop_overlap("Explained", "Nuclear", i))
+}
+NuclearExplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=NuclearExplained_Proportions, Status=rep("Explained", 11), Fraction=rep("Nuclear", 11)))
+
+
+NuclearUnexplained_Proportions=c()
+for(i in cutoffs){
+  NuclearUnexplained_Proportions=c( NuclearUnexplained_Proportions, prop_overlap("Unexplained", "Nuclear", i))
+}
+NuclearUnexplained_ProportionsDF=as.data.frame(cbind(cutoffs,Prop=NuclearUnexplained_Proportions, Status=rep("Unexplained", 11), Fraction=rep("Nuclear", 11)))
+
+
+
+AllPropDF=bind_rows(TotalExplained_ProportionsDF,TotalUnexplained_ProportionsDF,NuclearExplained_ProportionsDF,NuclearUnexplained_ProportionsDF)
+
+AllPropDF$Prop=as.numeric(AllPropDF$Prop)
+```
+
+```{r}
+ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + labs(title="Proportion of eQTLs explained by apaQTLs remove Intronic PAS not in database", y="Proportion", "P-Value cut off") + scale_fill_manual(values=c("orange", "blue"))
+```
+
+
+##Prot independent   
+
+I will test if any of the expression independent are in these PAS  
+
+```{r}
+Expind=read.table("../data/ExpressionIndependentapaQTLs.txt",header= T) 
+
+Expind %>% select(SNP) %>% unique() %>% nrow()
+
+Expind_filt=Expind %>% filter(PAS_ID %in% PAS_filter$PAS)
+
+
+Expind_filt %>% select(SNP) %>% unique() %>% nrow()
+```
+
+
+
