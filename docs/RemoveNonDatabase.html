@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecc5a842dd88bceeb39f06aa625618c843ad0d5eetargetblankcc5a842a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/cc5a842dd88bceeb39f06aa625618c843ad0d5ee" target="_blank">cc5a842</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree78d7349e4a08c241a480a06fa084294aee2da52atargetblank78d7349a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/78d7349e4a08c241a480a06fa084294aee2da52a" target="_blank">78d7349</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecc5a842dd88bceeb39f06aa625618c843ad0d5eetargetblankcc5a842a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree78d7349e4a08c241a480a06fa084294aee2da52atargetblank78d7349a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1205,6 +1205,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/78d7349e4a08c241a480a06fa084294aee2da52a/analysis/RemoveNonDatabase.Rmd" target="_blank">78d7349</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+<td>
+add signal site distribution
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/77d21e0fd4f494a528c16139e4cd3a691b3f96fe/docs/RemoveNonDatabase.html" target="_blank">77d21e0</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/cc5a842dd88bceeb39f06aa625618c843ad0d5ee/analysis/RemoveNonDatabase.Rmd" target="_blank">cc5a842</a>
 </td>
 <td>
@@ -1237,13 +1271,16 @@ Run ?workflowr for help getting started</code></pre>
 <pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(RColorBrewer)</code></pre>
 <pre class="r"><code>PAS=read.table(&quot;../data/PAS/APAPAS_GeneLocAnno.5perc.bed&quot;, stringsAsFactors = F, col.names=c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;,&quot;name&quot;,&quot;score&quot;, &quot;strand&quot;)) %&gt;% separate(name, into=c(&quot;pasNum&quot;,&quot;geneloc&quot;),sep=&quot;:&quot;) %&gt;% separate(geneloc,into=c(&quot;gene&quot;,&#39;loc&#39;), sep=&quot;_&quot;)
  
 dist=read.table(&quot;../data/AnnotatedPAS/DistanceMyPAS2Anno.bed&quot;, col.names = c(&quot;chr&quot;, &quot;start&quot;,&quot;end&quot;,&quot;myPAS&quot;, &quot;score&quot;,&quot;strand&quot;,&quot;chr2&quot;, &quot;start2&quot;, &quot;end2&quot;, &quot;anno&quot;, &quot;score2&quot;, &quot;strand2&quot;, &quot;distance&quot;),stringsAsFactors = F)
 PAS_withmatch=dist %&gt;% filter(abs(distance)&lt;=10) %&gt;% select(myPAS,anno) %&gt;% unique() %&gt;% separate(myPAS, into=c(&quot;pasNum&quot;, &quot;geneID&quot;), sep=&quot;:&quot;) %&gt;% separate(geneID, into=c(&quot;gene&quot;, &quot;loc&quot;), sep=&quot;_&quot;) %&gt;% select(pasNum)
 
 
-IntronicNoAnno= PAS %&gt;% filter(loc==&quot;intron&quot;) %&gt;% anti_join(PAS_withmatch)</code></pre>
+IntronicNoAnno= PAS %&gt;% filter(loc==&quot;intron&quot;) %&gt;% anti_join(PAS_withmatch) %&gt;% mutate(PAS=paste(&quot;peak&quot;,pasNum, sep=&quot;&quot;))</code></pre>
+<pre><code>Joining, by = &quot;pasNum&quot;</code></pre>
+<pre class="r"><code>UTRnoAnno=PAS %&gt;% filter(loc==&quot;utr3&quot;) %&gt;% anti_join(PAS_withmatch) %&gt;% mutate(PAS=paste(&quot;peak&quot;,pasNum, sep=&quot;&quot;))</code></pre>
 <pre><code>Joining, by = &quot;pasNum&quot;</code></pre>
 <pre class="r"><code>PAS_filter= PAS %&gt;% anti_join(IntronicNoAnno,by = c(&quot;chr&quot;, &quot;start&quot;, &quot;end&quot;, &quot;pasNum&quot;, &quot;gene&quot;, &quot;loc&quot;, &quot;score&quot;, &quot;strand&quot;)) %&gt;% mutate(PAS=paste(&quot;peak&quot;,pasNum, sep=&quot;&quot;))</code></pre>
 <div id="eqtl-and-intronic-correlation" class="section level2">
@@ -1288,6 +1325,43 @@ Multiple R-squared:  0.1047,    Adjusted R-squared:  0.1021
 F-statistic: 40.58 on 1 and 347 DF,  p-value: 6e-10</code></pre>
 <pre class="r"><code>ggplot(alleQTLS_nuc,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = &quot;lm&quot;)+ geom_text(y=-1, x=-1.5, label=&quot;Correlation= -0.32, P= 3x10^-10&quot;) + labs(title=&quot;Nuclear apa effect sizes vs eQTL eqtl effect sizes removed non annotated&quot;, y=&quot;Nuclear apaQTL effect size&quot;,x=&quot;eQTL effect size&quot;)</code></pre>
 <p><img src="figure/RemoveNonDatabase.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/77d21e0fd4f494a528c16139e4cd3a691b3f96fe/docs/figure/RemoveNonDatabase.Rmd/unnamed-chunk-6-1.png" target="_blank">77d21e0</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="proportion-explained" class="section level2">
 <h2>Proportion explained:</h2>
@@ -1390,6 +1464,43 @@ coercing into character vector</code></pre>
 <pre class="r"><code>AllPropDF$Prop=as.numeric(AllPropDF$Prop)</code></pre>
 <pre class="r"><code>ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = &quot;dodge&quot;, stat=&quot;identity&quot;) + facet_grid(~Fraction) + labs(title=&quot;Proportion of eQTLs explained by apaQTLs remove Intronic PAS not in database&quot;, y=&quot;Proportion&quot;, &quot;P-Value cut off&quot;) + scale_fill_manual(values=c(&quot;orange&quot;, &quot;blue&quot;))</code></pre>
 <p><img src="figure/RemoveNonDatabase.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/77d21e0fd4f494a528c16139e4cd3a691b3f96fe/docs/figure/RemoveNonDatabase.Rmd/unnamed-chunk-10-1.png" target="_blank">77d21e0</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="prot-independent" class="section level2">
 <h2>Prot independent</h2>
@@ -1403,6 +1514,44 @@ Expind %&gt;% select(SNP) %&gt;% unique() %&gt;% nrow()</code></pre>
 
 Expind_filt %&gt;% select(SNP) %&gt;% unique() %&gt;% nrow()</code></pre>
 <pre><code>[1] 20</code></pre>
+</div>
+<div id="motif-enrichement" class="section level2">
+<h2>Motif enrichement</h2>
+<p>I will look at the signal site enrichment for the Intronic not in the database sites.</p>
+<pre class="r"><code>Loc_AATAAA= read.table(&quot;../data/SignalSiteFiles/Loc_AATAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AATAAA&quot;)
+Loc_AAAAAG= read.table(&quot;../data/SignalSiteFiles/Loc_AAAAAG_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AAAAAG&quot;)
+Loc_AATACA= read.table(&quot;../data/SignalSiteFiles/Loc_AATACA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AATACA&quot;)
+Loc_AATAGA= read.table(&quot;../data/SignalSiteFiles/Loc_AATAGA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AATAGA&quot;)
+Loc_AATATA= read.table(&quot;../data/SignalSiteFiles/Loc_AATATA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AATATA&quot;)
+Loc_ACTAAA= read.table(&quot;../data/SignalSiteFiles/Loc_ACTAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;ACTAAA&quot;)
+Loc_AGTAAA= read.table(&quot;../data/SignalSiteFiles/Loc_AGTAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AGTAAA&quot;)
+Loc_ATTAAA= read.table(&quot;../data/SignalSiteFiles/Loc_ATTAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;ATTAAA&quot;)
+Loc_CATAAA= read.table(&quot;../data/SignalSiteFiles/Loc_CATAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;CATAAA&quot;)
+Loc_GATAAA= read.table(&quot;../data/SignalSiteFiles/Loc_GATAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;GATAAA&quot;)
+Loc_TATAAA= read.table(&quot;../data/SignalSiteFiles/Loc_TATAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;TATAAA&quot;)
+Loc_AAAAAA= read.table(&quot;../data/SignalSiteFiles/Loc_AAAAAA_Distance2end.txt&quot;, header=F, col.names =c( &quot;PAS&quot;, &quot;Distance2PAS&quot;)) %&gt;% mutate(Site=&quot;AAAAAA&quot;)
+
+AllsiteDF=as.data.frame(rbind(Loc_AATAAA,Loc_AAAAAG,Loc_AATACA,Loc_AATAGA,Loc_AATATA,Loc_ACTAAA,Loc_AGTAAA,Loc_ATTAAA, Loc_GATAAA,Loc_TATAAA,Loc_CATAAA, Loc_AAAAAA))
+
+colourCount = length(unique(AllsiteDF$Site))
+
+getPalette = colorRampPalette(brewer.pal(8, &quot;Set1&quot;))
+
+
+AllsiteDF_1per=read.table(file=&quot;../data/SignalSiteFiles/AllSignalSite_1perPAS.txt&quot;, col.names = colnames(AllsiteDF)) %&gt;% mutate(NegCount=-1*as.integer(as.character(Distance2PAS))) %&gt;% separate(PAS, into=c(&quot;peak&quot;, &quot;geneloc&quot;), sep=&quot;:&quot;) %&gt;% mutate(PAS=paste(&quot;peak&quot;,peak ,sep=&quot;&quot;)) %&gt;% semi_join(IntronicNoAnno, by=&quot;PAS&quot;)
+
+nrow(IntronicNoAnno)</code></pre>
+<pre><code>[1] 9605</code></pre>
+<p>Of the 9605, 2364 have a signal site. (2362/9605) 25%</p>
+<p>This is similar to the percentage overall in the data.</p>
+<pre class="r"><code>ggplot(AllsiteDF_1per, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position=&quot;stack&quot;,bins=50 ) + labs(x=&quot;Distance from PAS&quot;, y=&quot;N annotated Sites&quot;, title=&quot;Location of intronic unannotated signal sites&quot;)  +  scale_fill_manual(values = getPalette(colourCount))</code></pre>
+<p><img src="figure/RemoveNonDatabase.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /> There are 3000 unannotated 3’ UTR sites.</p>
+<pre class="r"><code>AllsiteDF_1perUTR=read.table(file=&quot;../data/SignalSiteFiles/AllSignalSite_1perPAS.txt&quot;, col.names = colnames(AllsiteDF)) %&gt;% mutate(NegCount=-1*as.integer(as.character(Distance2PAS))) %&gt;% separate(PAS, into=c(&quot;peak&quot;, &quot;geneloc&quot;), sep=&quot;:&quot;) %&gt;% mutate(PAS=paste(&quot;peak&quot;,peak ,sep=&quot;&quot;)) %&gt;% semi_join(UTRnoAnno, by=&quot;PAS&quot;)
+
+
+ggplot(AllsiteDF_1perUTR, aes(group=Site, x=NegCount, fill=Site)) + geom_histogram(position=&quot;stack&quot;,bins=50 ) + labs(x=&quot;Distance from PAS&quot;, y=&quot;N annotated Sites&quot;, title=&quot;Location of 3&#39; UTR unannotated signal sites&quot;)  +  scale_fill_manual(values = getPalette(colourCount))</code></pre>
+<p><img src="figure/RemoveNonDatabase.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>1792 have signal sites. (1792/3044) 60%</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1430,9 +1579,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
- [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
- [9] tidyverse_1.2.1 workflowr_1.6.0
+ [1] RColorBrewer_1.1-2 forcats_0.3.0      stringr_1.3.1     
+ [4] dplyr_0.8.0.1      purrr_0.3.2        readr_1.3.1       
+ [7] tidyr_0.8.3        tibble_2.1.1       ggplot2_3.1.1     
+[10] tidyverse_1.2.1    workflowr_1.6.0   
 
 loaded via a namespace (and not attached):
  [1] tidyselect_0.2.5 reshape2_1.4.3   haven_1.1.2      lattice_0.20-38 
