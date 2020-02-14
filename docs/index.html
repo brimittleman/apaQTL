@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecc5a842dd88bceeb39f06aa625618c843ad0d5eetargetblankcc5a842a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/cc5a842dd88bceeb39f06aa625618c843ad0d5ee" target="_blank">cc5a842</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee5bd68fd311a7f69ddb830f6d24293c7ca88a262targetblanke5bd68fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e5bd68fd311a7f69ddb830f6d24293c7ca88a262" target="_blank">e5bd68f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreecc5a842dd88bceeb39f06aa625618c843ad0d5eetargetblankcc5a842a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee5bd68fd311a7f69ddb830f6d24293c7ca88a262targetblanke5bd68fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -318,6 +318,7 @@ Untracked files:
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
+    Untracked:  code/._ClosestTissuePAS.sh
     Untracked:  code/._DistPAS2Sig_RandomIntron.py
     Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
@@ -554,6 +555,7 @@ Untracked files:
     Untracked:  code/._tenBPupstreamPAS.py
     Untracked:  code/._test.pdf
     Untracked:  code/._testVerifyBam.sh
+    Untracked:  code/._tissuePAS2hg19.sh
     Untracked:  code/._totSeceffectsize.py
     Untracked:  code/._twentyBPupstreamPAS.py
     Untracked:  code/._utrdms2saf.py
@@ -590,6 +592,7 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions.out
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
+    Untracked:  code/ClosestTissuePAS.sh
     Untracked:  code/DistPAS2Sig_RandomIntron.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
@@ -654,6 +657,8 @@ Untracked files:
     Untracked:  code/TESplots150bp.out
     Untracked:  code/TESplots200bp.err
     Untracked:  code/TESplots200bp.out
+    Untracked:  code/Tissueclosestannotated.err
+    Untracked:  code/Tissueclosestannotated.out
     Untracked:  code/Total_example.err
     Untracked:  code/Total_example.out
     Untracked:  code/Untitled
@@ -700,6 +705,8 @@ Untracked files:
     Untracked:  code/intersectPAS_ssSNPS.out
     Untracked:  code/intersectVCFPAS.err
     Untracked:  code/intersectVCFPAS.out
+    Untracked:  code/liftoverPAShg38to19.err
+    Untracked:  code/liftoverPAShg38to19.out
     Untracked:  code/log/
     Untracked:  code/logs/
     Untracked:  code/merge53PRIMEbam.err
@@ -824,6 +831,7 @@ Untracked files:
     Untracked:  code/testFix.txt
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
+    Untracked:  code/tissuePAS2hg19.sh
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
     Untracked:  code/wrap_verifybam.err
@@ -875,6 +883,7 @@ Untracked files:
     Untracked:  data/TF_motifdisruption/
     Untracked:  data/TSS/
     Untracked:  data/ThirtyNineIndQtl_nominal/
+    Untracked:  data/TissueData/
     Untracked:  data/Version15bp6As/
     Untracked:  data/Version15bp7As/
     Untracked:  data/apaQTLNominal/
@@ -1039,6 +1048,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/e5bd68fd311a7f69ddb830f6d24293c7ca88a262/analysis/index.Rmd" target="_blank">e5bd68f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+<td>
+add other cell nuclear enriched
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/77d21e0fd4f494a528c16139e4cd3a691b3f96fe/docs/index.html" target="_blank">77d21e0</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -3785,6 +3828,7 @@ Start workflowr project.
 <li><p><a href="TotNucQTLeffect.html">Compare Effect Sizes for total and nuclear</a></p></li>
 <li><p><a href="mechEindepQTL.html">Mechanism for each expression independent apaQTL</a></p></li>
 <li><p><a href="RemoveNonDatabase.html">Test for result robustness to intronic PAS not in database</a></p></li>
+<li><p><a href="NuclearOtherCells.html">Nuclear enriched PAS in other cell lines</a></p></li>
 </ul>
 </div>
 
