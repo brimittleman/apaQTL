@@ -1,0 +1,127 @@
+---
+title: "Estimate Nuclear in other cell types"
+author: "Briana Mittleman"
+date: "2/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+To estimate the nuclear intronic reads in other cell types, I will get a set of our intronic Nuclear PAS and see if they are in other cell types. The intuition for this is for our nuclear enriched PAS with reads in total, these are nuclear but we see them in total mRNA because we have not seperated the nucleus out of the total. 
+
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+
+```{bash,eval=F}
+mkdir ../data/TissueData
+```
+
+
+```{r}
+
+
+sig=read.table("../data/DiffIso/TN_diff_isoform_AllChrom_cluster_significance.txt",sep="\t" ,col.names = c('status','loglr','df','p','cluster','p.adjust'),stringsAsFactors = F) %>% filter(status=="Success")  %>% separate(cluster, into=c("chr","gene"),sep=":") 
+
+sig$p.adjust=as.numeric(as.character(sig$p.adjust))
+sig= sig %>% filter(p.adjust <=.05)
+
+PAS=read.table("../data/peaks_5perc/APApeaks.ALLChrom.Filtered.Named.GeneLocAnnoPARSED.5percCov.bothfrac.SAF",stringsAsFactors = F,header = T) %>% separate(GeneID, into=c("num", "chr", "start", "end", "strand", "geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc"),sep="_") %>%  mutate(intron=paste("chr", Chr, ":", Start, ":", End, ":", gene,sep=""),strandFix=ifelse(strand=="+","-","+")) %>% select(num, loc, intron, strandFix)
+
+
+ES=read.table("../data/DiffIso/EffectSizes.txt", header = T) %>% inner_join(PAS, by="intron")
+
+ES_sig= ES %>% filter(abs(deltaPAU) > .2) %>% separate(intron,into=c("chr", "start","end","gene"),sep=":")%>% semi_join(sig,by="gene")
+
+ES_nuclearIntron=ES_sig %>% filter(loc=="intron", deltaPAU <0)
+
+
+PASnumbed=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed", col.names = c("chr", "start", "end","ID", "score", "strand"),stringsAsFactors = F) %>% separate(ID, into=c("pnum", "geneloc"),sep=":") %>% mutate(num=paste("peak", pnum,sep="")) %>% semi_join(ES_nuclearIntron,by="num") %>% mutate(ID=paste(num, geneloc, sep="_"),chrom=paste("chr", chr, sep="")) %>% select(chrom, start,end, ID, score, strand)
+
+
+write.table(PASnumbed, file="../data/TissueData/NuclearEnriched.bed", col.names = F,row.names = F, quote=F, sep="\t")
+nrow(ES_nuclearIntron)
+```
+
+There are 387 of these.
+
+
+```{bash, eval=F}
+sort -k1,1 -k2,2n ../data/TissueData/NuclearEnriched.bed > ../data/TissueData/NuclearEnriched_sort.bed
+```
+
+Download human tissue PAS from https://polyasite.unibas.ch/samples. 
+
+Brain, Muscle, Kidney, Liver, from Derti et al 2012.  
+
+Testes, breast, stem cell, ovary from Lianoglou, S. et al 2013
+
+
+I need to lift these from hg38 to hg19.  
+
+```{bash,eval=F}
+sbatch tissuePAS2hg19.sh
+sbatch ClosestTissuePAS.sh
+```
+
+Brain.DistanceMyPAS2Anno.bed   kidney.DistanceMyPAS2Anno.bed  muscle.DistanceMyPAS2Anno.bed  stemcell.DistanceMyPAS2Anno.bed
+breast.DistanceMyPAS2Anno.bed  liver.DistanceMyPAS2Anno.bed   ovary.DistanceMyPAS2Anno.bed   testes.DistanceMyPAS2Anno.bed
+
+filter out those with 0 in the sample of interest 
+
+```{r}
+resNames=c("chr1","start1","end1",'PAS', 'score', 'strand', 'chr2', 'start2', 'end2', 'anno', 'TPMsamp', 'st','dist')
+Brainres=read.table("../data/TissueData/Brain.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="Brain")
+
+kidneyres=read.table("../data/TissueData/kidney.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="kidney")
+
+muscleres=read.table("../data/TissueData/muscle.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="muscle")
+
+
+stemcellres=read.table("../data/TissueData/stemcell.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="stemcell")
+
+
+muscleres=read.table("../data/TissueData/muscle.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="muscle")
+
+
+breastres=read.table("../data/TissueData/breast.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="breast")
+
+
+liverres=read.table("../data/TissueData/liver.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="liver")
+
+
+ovaryres=read.table("../data/TissueData/ovary.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="ovary")
+
+testesres=read.table("../data/TissueData/testes.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="testes")
+
+
+Alltissues=Brainres %>% 
+  bind_rows(kidneyres) %>% 
+  bind_rows(muscleres) %>% 
+  bind_rows(breastres) %>% 
+  bind_rows(liverres) %>% 
+  bind_rows(ovaryres) %>%
+  bind_rows(testesres) %>% 
+  bind_rows(stemcellres)
+
+
+
+AlltissueProp=Alltissues %>% group_by(Tissue) %>% summarise(nOverlap=n(), percOver=nOverlap/387)
+```
+
+```{r}
+ggplot(AlltissueProp,aes(x=Tissue,fill=Tissue, y=nOverlap)) + geom_bar(stat="identity") + labs(title="Number of Intronic Nuclear enriched (n=387) Used in Other Tissues", y="Number of PAS")  + scale_fill_brewer(palette = "Dark2")
+```
+
+```{r}
+ggplot(AlltissueProp,aes(x=Tissue,fill=Tissue, y=percOver)) + geom_bar(stat="identity")+ labs(title="Percent of Intronic Nuclear enriched Used in Other Tissues", y="Percent of PAS") + scale_fill_brewer(palette = "Dark2")
+```
+
+
+
+
