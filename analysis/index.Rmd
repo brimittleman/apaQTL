@@ -192,5 +192,7 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Test for result robustness to intronic PAS not in database](RemoveNonDatabase.html)
 
-* [Nuclear enriched PAS in other cell lines](NuclearOtherCells.html)
+* [Nuclear enriched PAS in other cell lines](NuclearOtherCells.html)  
+
+* [Colocalization of Nuclear APA qtls and eQTLs using locuszoom](locusZoomStandalone.html)  
 
