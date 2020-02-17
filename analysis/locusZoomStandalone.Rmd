@@ -1,0 +1,185 @@
+---
+title: "Locus zoom plots"
+author: "Briana Mittleman"
+date: "2/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+The locuszoom package is in:  
+/scratch/midway2/brimittleman/locuszoom
+
+
+Run example in /example. Use /scratch/midway2/brimittleman/locuszoom/bin/locuszoom --metal Kathiresan_2009_HDL.txt --refgene FADS1 --pop AFR --build hg19 --source 1000G_March2012
+
+Modules to load:
+```{bash,eval=F}
+module load R
+module load plink
+module load htslib
+```
+
+File formats needed:  
+
+MarkerName	P-value	Weight
+
+This will be the snp and the nominal pvalues.   
+
+--refsnp <your snp> --flank 500kb  --metal 
+
+ title="My region" geneFontSize=1.1
+ 
+ I can do one then loop it.  
+ 
+ 
+```{bash,eval=F}
+mkdir ../data/LZ_both/ 
+mkdir ../data/LZ_both/NuclearAssoc
+mkdir ../data/LZ_both/RNAAssoc
+
+```
+ 
+ /scratch/midway2/brimittleman/locuszoom/
+ 
+ I need a file with all of the apaQTL associations for the PAS of interest. Instead of genes of interest I can work with PAS of interest.  
+ 
+```{r}
+NuclearQTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", head=T) %>% select(Peak) %>% unique()
+
+write.table(NuclearQTLs,"../data/apaQTLs/NuclearQTL_PAS.txt", col.names = F, row.names = F, quote = F)
+```
+ 
+Select these from  /project2/gilad/briana/apaQTL/data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Total.5perc.fc.gz.qqnorm_AllChrom.txt  
+
+I will have to do this seperatly in case there are snp overlaps.  
+ 
+Make the file rsid and pval for each. 
+
+Write a python script that will take in the PAS and write out the file. I need to do this by gene. I will do the genes with the apaQTL genes. 
+
+```{r}
+NucQ=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", head=T) %>% select(Peak, sid, Gene)  
+
+write.table(NucQ,"../data/apaQTLs/NuclearQTLs_PeakSNP.txt", quote=F, row.names = F, col.names = F)
+```
+
+
+```{bash,eval=F}
+ sbatch ExtractPASforLZ_run.sh 
+ #rna file
+ # ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.GeneName.txt
+ #filter this
+ sbatch extractGeneLZfiles.sh
+ 
+ 
+```
+
+
+Test one with RNA.  rs7076314
+
+Do this in ../data/LZ_both/ 
+/scratch/midway2/brimittleman/locuszoom/bin/locuszoom --metal  RNA_Res.txt --refsnp rs7076314 --flank 100kb title="rs7076314" geneFontSize=1.1 --pop AFR --build hg19 --source 1000G_March2012
+
+
+I need a file with the snp and PAS.  
+
+I can plot nuclear PAS  wit hthe --bed-tracks <your bed file>  
+
+```{r}
+NuclearPAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed",col.names = c("chr","start", "end", "name", "score", "strand")) %>% mutate(Col="PAS", score2=".") %>% select(chr, start,end, Col, score2, strand)
+
+write.table(NuclearPAS, "../data/LZ_both/NuclearPAS.bed", col.names = F, row.names = F, quote=F, sep="\t")
+```
+
+If I want to add GWAS, I can add --gwas-cat whole-cat_significant-only  
+
+
+Test 
+
+```{bash,eval=F}
+/scratch/midway2/brimittleman/locuszoom/bin/locuszoom --metal  RNAAssoc/ABTB1RNA_Res.txt --refsnp rs60645978 --flank 100kb title="rs60645978" geneFontSize=1.1 --pop AFR --build hg19 --source 1000G_March2012 --bed-tracks NuclearPAS.bed  theme="publication"
+
+#peak91979
+/scratch/midway2/brimittleman/locuszoom/bin/locuszoom --metal  NuclearAssoc/peak91979_NuclearResults4LZ.txt --refsnp rs60645978 --flank 100kb title="rs60645978" geneFontSize=1.1 --pop AFR --build hg19 --source 1000G_March2012 --bed-tracks NuclearPAS.bed  theme="publication"
+
+```
+
+Wrap all 
+run in the dir i want the data to come out
+```{bash,eval=F}
+cd ../data/LZ_both/RNAAssoc
+sbatch CreateRNALZnucAPAqtls.sh
+
+cd ../data/LZ_both/NuclearAssoc
+sbatch CreateAPALZnucAPAqtls.sh
+```
+
+All of the plots moved to 
+
+/project2/gilad/briana/apaQTL/data/LZ_both/Both_Plots
+
+
+They are named by the region.  
+
+I can look at these.  
+
+
+```{r}
+QTLs=read.table("../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.txt", head=T) 
+```
+
+By eye 41 colocalize: 
+
+rs74064859
+rs7523082
+rs72786277
+rs12468045
+rs7587301
+rs1859925
+rs2067987
+rs4974091
+rs142895723
+rs6785658
+rs3181141
+rs13327891
+rs62291862
+rs114653275
+rs568902
+rs2287371
+rs113268660
+rs73527330
+rs145898840
+rs12339205
+rs73251478
+rs7071284
+rs17112791
+rs7897454
+rs41291460
+rs41291462
+rs3740400
+rs7904973 (c10orf88) 
+rs10840038
+rs10891659
+rs6650507
+rs1956367
+rs448113
+rs10149617
+rs4902346
+rs75664871
+rs113727694
+rs115018779
+rs78139339
+rs6085202
+rs2184159  
+
+of 524 succesful  
+
+(41/524)
