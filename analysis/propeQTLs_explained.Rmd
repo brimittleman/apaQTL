@@ -335,7 +335,7 @@ nucQTL_unex
 Make a plot for KDELR2 7:6497501  
 
 
-```{r}
+```{r, eval=F}
 genohead=as.data.frame(read.table("../data/ExampleQTLPlots/genotypeHeader.txt", stringsAsFactors = F, header = F)[,10:128] %>% t())
 colnames(genohead)=c("header")
 genotype=as.data.frame(read.table("../data/ExampleQTLPlots/KDELR2_TotalPeaksGenotype.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
@@ -354,7 +354,7 @@ allRNA$genotype=as.factor(allRNA$genotype)
 ```
 
 Ref,T	Alt= G
-```{r}
+```{r,eval=F}
 ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "YlOrRd") + labs(title="Unexplained eQTL: KDELR2 - rs6962012")
 ```
 
@@ -388,10 +388,10 @@ Use locuszoom.org
 locus zoom plot for C10ofr88 variant in nuclear: 
 
 
-peak19881
+peak19682
 ```{bash,eval=F}
 
-grep peak19881  ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt > ../data/locusZoom/NuclearAPA.peak119699.C10ofr88.nomNuc.txt
+grep peak19682  ../data/apaQTLNominal_4pc/APApeak_Phenotype_GeneLocAnno.Nuclear.5perc.fc.gz.qqnorm_AllChrom.txt > ../data/locusZoom/NuclearAPA.peak19882.C10ofr88.nomNuc.txt
 
 grep ENSG00000119965 ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.txt > ../data/locusZoom/RNA.C10ofr88.txt
 
@@ -399,7 +399,8 @@ grep ENSG00000119965 ../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.
 
 
 ```{r}
-APATNuclear_orf_LZ=read.table("../data/locusZoom/NuclearAPA.peak119699.C10ofr88.nomNuc.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+APATNuclear_orf_LZ=read.table("../data/locusZoom/NuclearAPA.peak19882.C10ofr88.nomNuc.txt", stringsAsFactors = F, col.names = c("PeakID", "SNP", "Dist", "P","slope"))  %>% select( SNP, P)
+
 
 write.table(APATNuclear_orf_LZ,"../data/locusZoom/apaNuclearC10orf88_LZ.txt", col.names = T, row.names = F, quote = F)
 
@@ -407,3 +408,84 @@ RNA_orf_LZ=read.table("../data/locusZoom/RNA.C10ofr88.txt", stringsAsFactors = F
 
 write.table(RNA_orf_LZ,"../data/locusZoom/RNAC10orf88_LZ.txt", col.names = T, row.names = F, quote = F)
 ```
+
+
+
+###Locus zoom for all of the examples  
+
+
+```{bash,eval=F}
+module load R
+module load plink
+module load htslib
+
+mkdir ../data/eQTL_LZ
+mkdir ../data/eQTL_LZ/NuclearAssoc/
+mkdir ../data/eQTL_LZ/RNAAssoc/
+```
+
+
+I need to extract the PAS and genes from the nominal files. Do this for nuclear. The below dataframes come from looking at the original eQTL snp in the apa data. I choose the more sig PAS per gene. I will use these for this as well.  
+
+
+I need to get the RSIDs for these  
+```{r}
+
+RSID=read.table("/project2/gilad/briana/li_genotypes/RSID2snploc.txt",header = T, stringsAsFactors = F)
+
+AllNuclear_sig= nuclearapaexplained_sig %>% bind_rows(nuclearapaUnexplained_sig) %>% inner_join(RSID, by="snp") %>% ungroup() %>% select(gene, PASnum, RSID)
+
+write.table(AllNuclear_sig,"../data/eQTL_LZ/PasGENEsnpstoUse.txt", col.names = F, row.names = F, quote = F)
+
+```
+
+
+
+```{bash,eval=F}
+sbatch ExtractPAS4eQTLsLZ.sh 
+cd ../data/eQTL_LZ/NuclearAssoc
+sbatch CreateAPALZeQTLs.sh
+
+
+sbatch extractGeneLZfileseQTLs.sh
+cd ../data/eQTL_LZ/RNAAssoc
+sbatch CreateRNALZforeQTLs.sh
+
+
+```
+
+
+Looks like a lot of these do. I can use the snps for explained vs unexplained to copy them to seperate files.  
+
+```{r}
+explainedRS=nuclearapaexplained_sig  %>% inner_join(RSID, by="snp") %>% ungroup() %>% select(RSID)
+write.table(explainedRS, "../data/eQTL_LZ/explainedRS.txt", col.names = F, row.names = F, quote = F)
+
+UnexplainedRS=nuclearapaUnexplained_sig  %>% inner_join(RSID, by="snp") %>% ungroup() %>% select(RSID)
+write.table(UnexplainedRS, "../data/eQTL_LZ/UnexplainedRS.txt", col.names = F, row.names = F, quote = F)
+```
+
+I need a way to use these lists to move the correct plots to seperate places  
+SWITCH DIR
+```{bash,eval=F}
+mkdir UnexplainedeQTLs
+mkdir ExplainedeQTLs
+```
+
+I can do this in bash. 
+
+```{bash,eval=F}
+cat UnexplainedRS.txt | while read line
+do
+read -a strarr <<< $line
+cp NuclearAssoc/200217_${line}/*.pdf UnexplainedeQTLs
+done
+
+
+cat explainedRS.txt | while read line
+do
+read -a strarr <<< $line
+cp NuclearAssoc/200217_${line}/*.pdf ExplainedeQTLs
+done
+```
+
