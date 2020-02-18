@@ -325,7 +325,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -334,7 +334,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -343,10 +343,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-17
+<strong>Last updated:</strong> 2020-02-18
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>apaQTL/analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -422,22 +422,46 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed
+</td>
+<td style="text-align:left;">
+../data/intron_analysis/transcriptsMinusExons.sort.bed
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef4a296f6ca926e0f74d0c79eb3c7ac4cfb4c94e7targetblankf4a296fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f4a296f6ca926e0f74d0c79eb3c7ac4cfb4c94e7" target="_blank">f4a296f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefe3acb20790cb8883791f559f75d20de9599cf35targetblankfe3acb2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/fe3acb20790cb8883791f559f75d20de9599cf35" target="_blank">fe3acb2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef4a296f6ca926e0f74d0c79eb3c7ac4cfb4c94e7targetblankf4a296fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreefe3acb20790cb8883791f559f75d20de9599cf35targetblankfe3acb2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -523,6 +547,7 @@ Untracked files:
     Untracked:  code/._RBPdisrupt.sh
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._Randomsplicesite2fasta.py
     Untracked:  code/._Rplots.pdf
     Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
@@ -665,6 +690,7 @@ Untracked files:
     Untracked:  code/._parseBestbamid.py
     Untracked:  code/._parseLDRes.py
     Untracked:  code/._parseLDresBothPAS.sh
+    Untracked:  code/._parseRanodmSSres.py
     Untracked:  code/._parseSSres.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
@@ -834,6 +860,7 @@ Untracked files:
     Untracked:  code/RNABam2BW.out
     Untracked:  code/RNAseqDTPlotGeneRegions.err
     Untracked:  code/RNAseqDTPlotGeneRegions.out
+    Untracked:  code/Randomsplicesite2fasta.py
     Untracked:  code/Rplots.pdf
     Untracked:  code/TESplots100bp.err
     Untracked:  code/TESplots100bp.out
@@ -936,6 +963,7 @@ Untracked files:
     Untracked:  code/parseLDres.err
     Untracked:  code/parseLDres.out
     Untracked:  code/parseLDresBothPAS.sh
+    Untracked:  code/parseRanodmSSres.py
     Untracked:  code/parseSSres.py
     Untracked:  code/plink.log
     Untracked:  code/prxySNP.err
@@ -1253,6 +1281,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/fe3acb20790cb8883791f559f75d20de9599cf35/analysis/splicesitestrength.Rmd" target="_blank">fe3acb2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-18
+</td>
+<td>
+add res
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/0fde09f6e21ce88a147e74d3c7a6a3ca2b80eafa/docs/splicesitestrength.html" target="_blank">0fde09f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-17
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/f4a296f6ca926e0f74d0c79eb3c7ac4cfb4c94e7/analysis/splicesitestrength.Rmd" target="_blank">f4a296f</a>
 </td>
 <td>
@@ -1276,14 +1338,24 @@ add initial res for splice site
 <pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(ggpubr)</code></pre>
+<pre><code>Loading required package: magrittr</code></pre>
+<pre><code>
+Attaching package: &#39;magrittr&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:purrr&#39;:
+
+    set_names</code></pre>
+<pre><code>The following object is masked from &#39;package:tidyr&#39;:
+
+    extract</code></pre>
 <p>I will assess the 5’ splice site strength with maxentscore to see if this can tell us anything interesting about intronic polyadenylation.</p>
 <p><a href="http://hollywood.mit.edu/burgelab/maxent/Xmaxentscan_scoreseq.html" class="uri">http://hollywood.mit.edu/burgelab/maxent/Xmaxentscan_scoreseq.html</a></p>
 <p>How to use MaxEntScan::score5ss</p>
@@ -1355,12 +1427,176 @@ sample estimates:
 -0.03166605 </code></pre>
 <pre class="r"><code>ggplot(bothandres, aes(x=maxentscore, y=NuclearUsage)) + geom_point() + geom_density2d(col=&quot;red&quot;)</code></pre>
 <p><img src="figure/splicesitestrength.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/0fde09f6e21ce88a147e74d3c7a6a3ca2b80eafa/docs/figure/splicesitestrength.Rmd/unnamed-chunk-11-1.png" target="_blank">0fde09f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Filter usage higher (25%) and score above 0</p>
 <pre class="r"><code>bothandres_filt= bothandres %&gt;% filter(NuclearUsage&gt;0.25, maxentscore&gt;0)
 
 ggplot(bothandres_filt, aes(x=maxentscore, y=NuclearUsage)) + geom_point() + geom_density2d(col=&quot;red&quot;) + geom_smooth(method=&quot;lm&quot;)</code></pre>
 <p><img src="figure/splicesitestrength.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/0fde09f6e21ce88a147e74d3c7a6a3ca2b80eafa/docs/figure/splicesitestrength.Rmd/unnamed-chunk-12-1.png" target="_blank">0fde09f</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Does not look like there is a relationship here.</p>
+<p>Expectation is a stronger 5’ SS means lower intronic usage. I will compare top 10% usage and bottom 10% usage</p>
+<pre class="r"><code>quantile(bothandres$NuclearUsage,probs=c(.1,.9))</code></pre>
+<pre><code>       10%        90% 
+0.05653846 0.37990385 </code></pre>
+<pre class="r"><code>bothandres_topbottom = bothandres %&gt;% filter(NuclearUsage&lt;= 0.056 | NuclearUsage &gt;=0.38) %&gt;% mutate(Usage=ifelse(NuclearUsage &lt;=.15, &quot;Low&quot;,&quot;High&quot;))
+
+ggplot(bothandres_topbottom,aes(x=Usage, y=maxentscore))+ geom_boxplot()</code></pre>
+<p><img src="figure/splicesitestrength.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>bothandres_top=bothandres_topbottom %&gt;% filter(Usage==&quot;High&quot;)
+bothandres_bottom=bothandres_topbottom %&gt;% filter(Usage==&quot;Low&quot;)
+
+#x to the left of y  
+wilcox.test(bothandres_top$maxentscore, bothandres_bottom$maxentscore, alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  bothandres_top$maxentscore and bothandres_bottom$maxentscore
+W = 681970, p-value = 0.00136
+alternative hypothesis: true location shift is less than 0</code></pre>
+<p>top used have lower scores. This is in line with expectation.</p>
+<p>Compare to a random set of splice sites. Select 12536</p>
+<pre class="r"><code>chroms=c(&quot;chr1&quot;, &#39;chr2&#39;, &#39;chr3&#39;, &#39;chr4&#39;, &#39;chr5&#39;, &#39;chr6&#39;, &#39;chr7&#39;, &#39;chr8&#39;, &#39;chr9&#39;, &#39;chr10&#39;, &#39;chr11&#39;, &#39;chr12&#39;, &#39;chr13&#39;, &#39;chr14&#39;, &#39;chr15&#39;, &#39;chr16&#39;, &#39;chr17&#39;, &#39;chr18&#39;, &#39;chr19&#39;, &#39;chr20&#39;, &#39;chr21&#39;, &#39;chr22&#39;)
+allIntron=read.table(&quot;/project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed&quot;, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &#39;gene&#39;, &#39;score&#39;,&#39;strand&#39;),header = T, stringsAsFactors = F) %&gt;% filter(chr %in% chroms)
+
+#sampleIntron= allIntron %&gt;% sample_n(12536, replace = F)</code></pre>
+<p>Get the 5’ splice site for these:</p>
+<pre class="r"><code>#randPAS_5SS_pos= sampleIntron %&gt;% filter(strand==&quot;+&quot;) %&gt;% mutate(newStart=start-3, newEnd= start +6) %&gt;% select(chr, newStart,newEnd, gene,score, strand)
+
+
+
+#randPAS_5SS_neg=sampleIntron %&gt;% filter(strand==&quot;-&quot;) %&gt;% mutate(newStart=end-6, newEnd= end +3) %&gt;% select(chr, newStart,newEnd, gene,score, strand)
+
+
+#randPAS_both= randPAS_5SS_pos %&gt;% bind_rows(randPAS_5SS_neg)
+
+
+#write.table(randPAS_both,&quot;../data/splicesite/RandomIntronSS.bed&quot;,sep=&quot;\t&quot;, col.names = F, row.names = F, quote = F)</code></pre>
+<pre class="bash"><code>sort -k1,1 -k2,2n ../data/splicesite/RandomIntronSS.bed | sed &#39;s/^chr//&#39; &gt; ../data/splicesite/RandomIntronSS_noChr.bed
+
+
+
+#bedtools nuc
+
+bedtools nuc -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/splicesite/RandomIntronSS_noChr.bed -seq -s &gt; ../data/splicesite/RandomIntronSS_noChr.Nuc.bed
+
+
+python Randomsplicesite2fasta.py
+
+python parseRanodmSSres.py</code></pre>
+<p>Eval:</p>
+<pre class="r"><code>RandomSites=read.table(&quot;../data/splicesite/RandomIntronSS.bed&quot;,col.names = c(&#39;chr&#39;,&#39;start&#39;,&#39;end&#39;,&#39;name&#39;,&#39;score&#39;,&#39;strand&#39;))
+RandomRes= read.table(&quot;../data/splicesite/RandomSSMaxentParsed.txt&quot;, col.names = c(&quot;splicesite&quot;, &quot;maxentscore_cont&quot;), stringsAsFactors = F, header = F)
+
+RandomSitewRes=RandomSites %&gt;% bind_cols(RandomRes)</code></pre>
+<p>Compare these to the actual:</p>
+<pre class="r"><code>RealandCont=as.data.frame(cbind(Control=RandomSitewRes$maxentscore_cont, PAS=bothandres$maxentscore))
+RealandContG=RealandCont %&gt;%  gather(&quot;set&quot;, &quot;score&quot;)</code></pre>
+<pre class="r"><code>ggplot(RealandContG, aes(x=set, y = score,fill=set)) + geom_boxplot() + stat_compare_means()</code></pre>
+<p><img src="figure/splicesitestrength.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(RandomSitewRes$maxentscore_cont)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-45.450   7.070   8.620   7.477   9.800  11.810 </code></pre>
+<pre class="r"><code>summary(bothandres$maxentscore)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-47.350   7.298   8.760   6.872   9.990  11.810 </code></pre>
+<pre class="r"><code>wilcox.test(RandomSitewRes$maxentscore_cont,bothandres$maxentscore, alternative = &quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  RandomSitewRes$maxentscore_cont and bothandres$maxentscore
+W = 74942000, p-value = 1.133e-10
+alternative hypothesis: true location shift is less than 0</code></pre>
+<p>This is not as informative as the above analysis based on usage.</p>
+<p>Test if any of the QTLs fall in 5’ splice sites. For this I will look at the 5’ site for every intron:</p>
+<pre class="r"><code>allIntron_sspos= allIntron %&gt;% filter(strand==&quot;+&quot;) %&gt;% mutate(newStart=start-3, newEnd= start +6) %&gt;% select(chr, newStart,newEnd, gene,score, strand)
+allIntron_ssneg= allIntron  %&gt;% filter(strand==&quot;-&quot;) %&gt;% mutate(newStart=end-6, newEnd= end +3) %&gt;% select(chr, newStart,newEnd, gene,score, strand)
+
+AllIntron_both=allIntron_ssneg %&gt;% bind_rows(allIntron_sspos)
+
+write.table(AllIntron_both, &quot;../data/splicesite/AllIntron5primeSS.bed&quot;, col.names = F, row.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<p>sort and intersect with qtl snps.</p>
+<pre class="bash"><code>
+sort -k1,1 -k2,2n ../data/splicesite/AllIntron5primeSS.bed| sed &#39;s/^chr//&#39; &gt; ../data/splicesite/AllIntron5primeSS_sort.bed
+
+sort -k1,1 -k2,2n ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed | sed &#39;1d&#39; | head -n -1 &gt; ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.sort.bed
+
+bedtools intersect -wo -a ../data/splicesite/AllIntron5primeSS_sort.bed -b ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.sort.bed -s &gt; ../data/splicesite/QTLin5SS.txt
+</code></pre>
+<p>1 example.</p>
+<p>15 31229459 31229468 FAN1 . + 15 31229462 31229463 FAN1:peak42822:utr3 83 + 1</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1388,9 +1624,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
- [5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
- [9] tidyverse_1.2.1 workflowr_1.6.0
+ [1] ggpubr_0.2      magrittr_1.5    forcats_0.3.0   stringr_1.3.1  
+ [5] dplyr_0.8.0.1   purrr_0.3.2     readr_1.3.1     tidyr_0.8.3    
+ [9] tibble_2.1.1    ggplot2_3.1.1   tidyverse_1.2.1 workflowr_1.6.0
 
 loaded via a namespace (and not attached):
  [1] tidyselect_0.2.5 haven_1.1.2      lattice_0.20-38  colorspace_1.3-2
@@ -1398,11 +1634,11 @@ loaded via a namespace (and not attached):
  [9] later_0.7.5      pillar_1.3.1     glue_1.3.0       withr_2.1.2     
 [13] modelr_0.1.2     readxl_1.1.0     plyr_1.8.4       munsell_0.5.0   
 [17] gtable_0.2.0     cellranger_1.1.0 rvest_0.3.2      evaluate_0.12   
-[21] labeling_0.3     knitr_1.20       httpuv_1.4.5     broom_0.5.1     
-[25] Rcpp_1.0.2       promises_1.0.1   scales_1.0.0     backports_1.1.2 
-[29] jsonlite_1.6     fs_1.3.1         hms_0.4.2        digest_0.6.18   
-[33] stringi_1.2.4    grid_3.5.1       rprojroot_1.3-2  cli_1.1.0       
-[37] tools_3.5.1      magrittr_1.5     lazyeval_0.2.1   crayon_1.3.4    
+[21] labeling_0.3     knitr_1.20       httpuv_1.4.5     highr_0.7       
+[25] broom_0.5.1      Rcpp_1.0.2       promises_1.0.1   scales_1.0.0    
+[29] backports_1.1.2  jsonlite_1.6     fs_1.3.1         hms_0.4.2       
+[33] digest_0.6.18    stringi_1.2.4    grid_3.5.1       rprojroot_1.3-2 
+[37] cli_1.1.0        tools_3.5.1      lazyeval_0.2.1   crayon_1.3.4    
 [41] whisker_0.3-2    pkgconfig_2.0.2  MASS_7.3-51.1    xml2_1.2.0      
 [45] lubridate_1.7.4  assertthat_0.2.0 rmarkdown_1.10   httr_1.3.1      
 [49] rstudioapi_0.10  R6_2.3.0         nlme_3.1-137     git2r_0.26.1    
