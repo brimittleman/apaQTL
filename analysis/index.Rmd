@@ -196,3 +196,5 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Colocalization of Nuclear APA qtls and eQTLs using locuszoom](locusZoomStandalone.html)  
 
+* [Test strength of splice site with PAS usage](splicesitestrength.html)
+

@@ -1,0 +1,143 @@
+---
+title: "5' Splice site strength"
+author: "Briana Mittleman"
+date: "2/17/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(workflowr)
+library(tidyverse)
+```
+
+I will assess the 5' splice site strength with maxentscore to see if this can tell us anything interesting about intronic polyadenylation.  
+
+http://hollywood.mit.edu/burgelab/maxent/Xmaxentscan_scoreseq.html
+
+How to use MaxEntScan::score5ss
+
+Each sequence must be 9 bases long. [3 bases in exon][6 bases in intron] 
+Input sequences as a FastA file with one sequence per line (no linebreaks). Non-ACGT sequences will not be processed. 
+
+Example Fasta File 
+```{bash,eval=F}
+> dummy1
+cagGTAAGT
+> dummy2 
+gagGTAAGT
+> dummy3 
+taaATAAGT
+```
+
+
+I assigned PAS to introns. in https://brimittleman.github.io/apaQTL/nucintronicanalysis.html 
+
+```{r}
+pas2intron=read.table("../data/intron_analysis/IntronPeaksontoIntrons.bed",col.names = c("intronCHR", "intronStart", "intronEnd", "gene", "score", "strand", "peakCHR", "peakStart", "peakEnd", "PeakID", "meanUsage", "peakStrand")) 
+
+#%>% mutate(PASloc=ifelse(strand=="+", peakEnd, peakStart)) %>% dplyr::select(intronStart, intronEnd, gene, strand, PeakID, PASloc ,meanUsage) %>% mutate(intronLength=intronEnd-intronStart , distance2PAS= ifelse(strand=="+", PASloc-intronStart, intronEnd-PASloc), propIntron=distance2PAS/intronLength)
+```
+
+
+I need a file with the PAS and the 5' splice site. For negative strand the 5' is the end and postitive strand PAS it is the start.  
+
+
+postive:
+start= start-3
+end= start + 6 
+
+negative: 
+start= end -6
+end= end + 3
+```{bash,eval=F}
+mkdir ../data/splicesite
+```
+
+
+```{r}
+PAS_5SS_pos= pas2intron %>% filter(strand=="+") %>% mutate(start=intronStart-3, end= intronStart +6) %>% select(intronCHR, start,end, PeakID,meanUsage, strand)
+PAS_5SS_neg=pas2intron %>% filter(strand=="-") %>% mutate(start=intronEnd-6, end= intronEnd +3) %>% select(intronCHR, start,end, PeakID,meanUsage, strand)
+PAS_5SS_both= PAS_5SS_neg %>% bind_rows(PAS_5SS_pos)
+
+
+
+write.table(PAS_5SS_pos, "../data/splicesite/TestPosSS.bed", col.names = F, row.names = F, quote=F, sep="\t")
+
+write.table(PAS_5SS_neg, "../data/splicesite/TestNegSS.bed", col.names = F, row.names = F, quote=F, sep="\t")
+
+
+write.table(PAS_5SS_both, "../data/splicesite/AllPASSS.bed", col.names = F, row.names = F, quote=F, sep="\t")
+
+
+```
+
+
+Merge and sort these to get the nucleotides:  
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/splicesite/AllPASSS.bed > ../data/splicesite/AllPASSS.sort.bed
+
+
+#cut chr  
+
+sed 's/^chr//' ../data/splicesite/AllPASSS.sort.bed >  ../data/splicesite/AllPASSS.sort.noChr.bed
+
+
+#bedtools nuc
+
+bedtools nuc -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/splicesite/AllPASSS.sort.noChr.bed -seq -s > ../data/splicesite/AllPASSS.sort.Nuc.txt
+```
+
+This works and it flips the strand. the first 3 bases are the exon and the next 6 are the intron. 
+
+I need to turn this into a FA file. with the first 3 lower case and second 6 upper like the example.  I can do this in python. 
+
+For each PAS i will have the name then the bases in the next 
+
+```{bash,eval=F}
+python splicesite2fasta.py
+```
+Score online with site and use  Maximum Entropy Model.  
+
+splice result to keep every other line. Then I can join the reults with the initial bed.  
+
+```{bash,eval=F}
+python parseSSres.py
+```
+
+
+```{r}
+res=read.table("../data/splicesite/MaxIntResParsed.txt", col.names=c("splicesite", "maxentscore"), header=F, stringsAsFactors = F)
+
+bothSS=read.table("../data/splicesite/AllPASSS.sort.noChr.bed", header = F, col.names = c("chr", 'start','end','PAS', "NuclearUsage", 'strand'))
+
+
+bothandres=bothSS %>% bind_cols(res)
+```
+
+
+Plot usage and score:  
+```{r}
+cor.test(bothandres$NuclearUsage, bothandres$maxentscore)
+```
+
+```{r}
+ggplot(bothandres, aes(x=maxentscore, y=NuclearUsage)) + geom_point() + geom_density2d(col="red")
+```
+
+Filter usage higher (25%)  and score above 0 
+
+```{r}
+bothandres_filt= bothandres %>% filter(NuclearUsage>0.25, maxentscore>0)
+
+ggplot(bothandres_filt, aes(x=maxentscore, y=NuclearUsage)) + geom_point() + geom_density2d(col="red") + geom_smooth(method="lm")
+```
+
+
+Does not look like there is a relationship here.  
+
+
