@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(workflowr)
 library(tidyverse)
+library(ggpubr)
 ```
 
 I will assess the 5' splice site strength with maxentscore to see if this can tell us anything interesting about intronic polyadenylation.  
@@ -139,5 +140,139 @@ ggplot(bothandres_filt, aes(x=maxentscore, y=NuclearUsage)) + geom_point() + geo
 
 
 Does not look like there is a relationship here.  
+
+
+Expectation is a stronger 5' SS means lower intronic usage.  I will compare top 10% usage and bottom 10% usage
+
+
+
+```{r}
+
+quantile(bothandres$NuclearUsage,probs=c(.1,.9))
+
+
+bothandres_topbottom = bothandres %>% filter(NuclearUsage<= 0.056 | NuclearUsage >=0.38) %>% mutate(Usage=ifelse(NuclearUsage <=.15, "Low","High"))
+
+ggplot(bothandres_topbottom,aes(x=Usage, y=maxentscore))+ geom_boxplot()
+
+```
+
+
+```{r}
+bothandres_top=bothandres_topbottom %>% filter(Usage=="High")
+bothandres_bottom=bothandres_topbottom %>% filter(Usage=="Low")
+
+#x to the left of y  
+wilcox.test(bothandres_top$maxentscore, bothandres_bottom$maxentscore, alternative="less")
+```
+
+top used have lower scores. This is in line with expectation.  
+
+
+Compare to a random set of splice sites.
+Select 12536  
+```{r}
+
+chroms=c("chr1", 'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 'chr7', 'chr8', 'chr9', 'chr10', 'chr11', 'chr12', 'chr13', 'chr14', 'chr15', 'chr16', 'chr17', 'chr18', 'chr19', 'chr20', 'chr21', 'chr22')
+allIntron=read.table("/project2/gilad/briana/apaQTL/data/intron_analysis/transcriptsMinusExons.sort.bed", col.names = c("chr","start","end", 'gene', 'score','strand'),header = T, stringsAsFactors = F) %>% filter(chr %in% chroms)
+
+#sampleIntron= allIntron %>% sample_n(12536, replace = F)
+```
+
+Get the 5' splice site for these:  
+
+```{r}
+#randPAS_5SS_pos= sampleIntron %>% filter(strand=="+") %>% mutate(newStart=start-3, newEnd= start +6) %>% select(chr, newStart,newEnd, gene,score, strand)
+
+
+
+#randPAS_5SS_neg=sampleIntron %>% filter(strand=="-") %>% mutate(newStart=end-6, newEnd= end +3) %>% select(chr, newStart,newEnd, gene,score, strand)
+
+
+#randPAS_both= randPAS_5SS_pos %>% bind_rows(randPAS_5SS_neg)
+
+
+#write.table(randPAS_both,"../data/splicesite/RandomIntronSS.bed",sep="\t", col.names = F, row.names = F, quote = F)
+```
+
+```{bash,eval=F}
+sort -k1,1 -k2,2n ../data/splicesite/RandomIntronSS.bed | sed 's/^chr//' > ../data/splicesite/RandomIntronSS_noChr.bed
+
+
+
+#bedtools nuc
+
+bedtools nuc -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/splicesite/RandomIntronSS_noChr.bed -seq -s > ../data/splicesite/RandomIntronSS_noChr.Nuc.bed
+
+
+python Randomsplicesite2fasta.py
+
+python parseRanodmSSres.py
+```
+
+
+Eval: 
+```{r}
+RandomSites=read.table("../data/splicesite/RandomIntronSS.bed",col.names = c('chr','start','end','name','score','strand'))
+RandomRes= read.table("../data/splicesite/RandomSSMaxentParsed.txt", col.names = c("splicesite", "maxentscore_cont"), stringsAsFactors = F, header = F)
+
+RandomSitewRes=RandomSites %>% bind_cols(RandomRes)
+
+
+
+```
+
+Compare these to the actual:  
+
+```{r}
+RealandCont=as.data.frame(cbind(Control=RandomSitewRes$maxentscore_cont, PAS=bothandres$maxentscore))
+RealandContG=RealandCont %>%  gather("set", "score")
+
+```
+
+
+```{r}
+ggplot(RealandContG, aes(x=set, y = score,fill=set)) + geom_boxplot() + stat_compare_means()
+
+```
+
+```{r}
+summary(RandomSitewRes$maxentscore_cont)
+summary(bothandres$maxentscore)
+```
+
+```{r}
+wilcox.test(RandomSitewRes$maxentscore_cont,bothandres$maxentscore, alternative = "less")
+```
+This is not as informative as the above analysis based on usage.  
+
+Test if any of the QTLs fall in 5' splice sites.  For this I will look at the 5' site for every intron:  
+
+```{r}
+allIntron_sspos= allIntron %>% filter(strand=="+") %>% mutate(newStart=start-3, newEnd= start +6) %>% select(chr, newStart,newEnd, gene,score, strand)
+allIntron_ssneg= allIntron  %>% filter(strand=="-") %>% mutate(newStart=end-6, newEnd= end +3) %>% select(chr, newStart,newEnd, gene,score, strand)
+
+AllIntron_both=allIntron_ssneg %>% bind_rows(allIntron_sspos)
+
+write.table(AllIntron_both, "../data/splicesite/AllIntron5primeSS.bed", col.names = F, row.names = F, quote = F, sep="\t")
+```
+sort and intersect with qtl snps.  
+
+
+```{bash,eval=F}
+
+sort -k1,1 -k2,2n ../data/splicesite/AllIntron5primeSS.bed| sed 's/^chr//' > ../data/splicesite/AllIntron5primeSS_sort.bed
+
+sort -k1,1 -k2,2n ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.bed | sed '1d' | head -n -1 > ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.sort.bed
+
+bedtools intersect -wo -a ../data/splicesite/AllIntron5primeSS_sort.bed -b ../data/apaQTLs/Nuclear_apaQTLs4pc_5fdr.WITHSTRAND.sort.bed -s > ../data/splicesite/QTLin5SS.txt
+
+```
+
+1 example.  
+
+15	31229459	31229468	FAN1	.	+	15	31229462	31229463	FAN1:peak42822:utr3	83	+	1  
+
+
 
 
