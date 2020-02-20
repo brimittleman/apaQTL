@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d2056c138f58e53cebadb6e957b5138f8b654e89" target="_blank">d2056c1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef3472bbcc73d21e111af6eae0ef5108ed7680ceatargetblankf3472bba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/f3472bbcc73d21e111af6eae0ef5108ed7680cea" target="_blank">f3472bb</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreef3472bbcc73d21e111af6eae0ef5108ed7680ceatargetblankf3472bba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -481,6 +481,8 @@ Untracked files:
     Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._ClosestTissuePAS.sh
+    Untracked:  code/._ColocApAeQTL.sh
+    Untracked:  code/._Coloc_generalAPAeQTL.R
     Untracked:  code/._CreateRNALZforeQTLs.sh
     Untracked:  code/._CreateRNALZnucAPAqtls.sh
     Untracked:  code/._DistPAS2Sig_RandomIntron.py
@@ -773,6 +775,10 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/ClosestTissuePAS.sh
+    Untracked:  code/ColocApAeQTL.err
+    Untracked:  code/ColocApAeQTL.out
+    Untracked:  code/ColocApAeQTL.sh
+    Untracked:  code/Coloc_generalAPAeQTL.R
     Untracked:  code/CreateRNALZforeQTLs.sh
     Untracked:  code/CreateRNALZnucAPAqtls.sh
     Untracked:  code/DistPAS2Sig_RandomIntron.py
@@ -1261,6 +1267,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/f3472bbcc73d21e111af6eae0ef5108ed7680cea/analysis/coloc.Rmd" target="_blank">f3472bb</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+add coloc code and red
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/af310825be3f08c6d4b3df99280c8013ad3910b9/docs/coloc.html" target="_blank">af31082</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/d2056c138f58e53cebadb6e957b5138f8b654e89/analysis/coloc.Rmd" target="_blank">d2056c1</a>
 </td>
 <td>
@@ -1284,15 +1324,24 @@ add lcls, add coloc package, add 5’ss by decile
 <pre class="bash"><code>mkdir ../data/coloc
 wget http://eqtl.uchicago.edu/jointLCL/output_RNAseqGeuvadis_PC14.txt</code></pre>
 <pre class="r"><code>#install.packages(&quot;coloc&quot;)
+library(snpStats)</code></pre>
+<pre><code>Loading required package: survival</code></pre>
+<pre><code>Loading required package: Matrix</code></pre>
+<pre class="r"><code>library(data.table)
 library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::between()   masks data.table::between()
+✖ tidyr::expand()    masks Matrix::expand()
+✖ dplyr::filter()    masks stats::filter()
+✖ dplyr::first()     masks data.table::first()
+✖ dplyr::lag()       masks stats::lag()
+✖ dplyr::last()      masks data.table::last()
+✖ purrr::transpose() masks data.table::transpose()</code></pre>
 <pre class="r"><code>library(&quot;coloc&quot;)</code></pre>
 <p>First change the names of the rsid and gene.</p>
 <pre class="r"><code>geneNames=read.table(&quot;../../genome_anotation_data/ensemble_to_genename.txt&quot;, sep=&quot;\t&quot;, col.names = c(&#39;gene_id&#39;, &#39;GeneName&#39;, &#39;source&#39; ),stringsAsFactors = F, header = T)
@@ -1311,6 +1360,78 @@ PASgene_indata= PASgene_test %&gt;% inner_join(eQTLres_genesnp, by=&quot;test&qu
 
 PASgene_indata= PASgene_test %&gt;% anti_join(eQTLres_genesnp, by=&quot;test&quot;)</code></pre>
 <p>181 of the snp gene pairs are in this data.</p>
+<p>Test on one first. c10orf88</p>
+<p>Need:</p>
+<p>p values for each SNP each SNP’s minor allele frequency sample size</p>
+<p>C10orf88_rs7904973</p>
+<pre class="r"><code>PASgene_c10orf88= PASgene %&gt;% filter(GeneName==&quot;C10orf88&quot;)
+PASgene_c10orf88</code></pre>
+<pre><code>  GeneName       PAS      RSID
+1 C10orf88 peak19682 rs7904973</code></pre>
+<pre class="r"><code>PeakData=read.table(&quot;../data/eQTL_LZ/NuclearAssoc/peak19682_NuclearResults4LZ.txt&quot;,col.names = c(&quot;RSID&quot;,&quot;Pvalue_APA&quot;),stringsAsFactors = F) %&gt;% mutate(sampleSizeAPA=52)
+
+GeneData=eQTLres %&gt;% filter(GeneName==&quot;C10orf88&quot;)</code></pre>
+<p>Number of overlapping snps:</p>
+<pre class="r"><code>length(intersect(PeakData$RSID,GeneData$RSID ))</code></pre>
+<pre><code>[1] 123</code></pre>
+<pre class="r"><code>nrow(GeneData)</code></pre>
+<pre><code>[1] 123</code></pre>
+<pre class="r"><code>nrow(PeakData)</code></pre>
+<pre><code>[1] 2550</code></pre>
+<pre class="r"><code>ind=read.table(&quot;../data/molPhenos/RNAhead.txt&quot;, header = F)
+dim(ind)[2]-4</code></pre>
+<pre><code>[1] 69</code></pre>
+<pre class="r"><code>Genenomnames=c(&quot;gene&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;)
+c10orf88eqtl=read.table(&quot;../data/coloc/eQTL_c10orf88.txt&quot;,col.names = Genenomnames,stringsAsFactors = F) %&gt;% mutate(SampleSizeE=69) %&gt;% inner_join(RSID, by=&quot;snp&quot;)</code></pre>
+<p>Get freq for the snps in allChrom.dose.filt.vcf. these are the filtered snps from john. not the li snps but should include those i need and they have the same 119 ind.</p>
+<pre class="bash"><code>module load vcftools
+
+
+vcftools --vcf allChrom.dose.filt.vcf   --freq --out allChrom.dose.filt_freq
+</code></pre>
+<pre class="r"><code>snpmaf=fread(&quot;/project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt_freq.frq&quot;,skip = 1, col.names = c(&quot;chr&quot;, &quot;loc&quot;, &quot;nAlles&quot;, &quot;nchr&quot;, &quot;allele1&quot;, &quot;allele2&quot;)) %&gt;% mutate(snp=paste(chr, loc, sep=&quot;:&quot;)) %&gt;% separate(&quot;allele2&quot;, into=c(&quot;allele&quot;, &quot;MAF2&quot;), sep=&quot;:&quot;) %&gt;%separate(&quot;allele1&quot;, into=c(&quot;allele&quot;, &quot;MAF1&quot;), sep=&quot;:&quot;)  %&gt;% mutate(MAF= ifelse(MAF1 &lt; MAF2, MAF1, MAF2))%&gt;%  inner_join(RSID, by=&quot;snp&quot;) %&gt;% select(RSID, MAF)</code></pre>
+<pre class="r"><code>All= PeakData %&gt;% inner_join(snpmaf,by=&quot;RSID&quot;) %&gt;% inner_join(c10orf88eqtl, by=&quot;RSID&quot;)
+All$Pvalue=as.numeric(as.character(All$Pvalue))
+All$MAF=as.numeric(as.character(All$MAF))</code></pre>
+<p>Join with eQTL and apa</p>
+<pre class="r"><code>my.res &lt;- coloc.abf(dataset1=list(pvalues=All$Pvalue,N=52,type=&quot;quant&quot;),
+                    dataset2=list(pvalues=All$pval,N=69,type=&quot;quant&quot;),
+                    MAF=All$MAF)</code></pre>
+<pre><code>PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf 
+   0.5610    0.2080    0.1360    0.0506    0.0440 
+[1] &quot;PP abf for shared variant: 4.4%&quot;</code></pre>
+<pre class="r"><code>C10orf88= as.data.frame(t(my.res$summary ))%&gt;% mutate(gene=&quot;C10orf88&quot;)
+C10orf88</code></pre>
+<pre><code>  nsnps PP.H0.abf PP.H1.abf PP.H2.abf  PP.H3.abf  PP.H4.abf     gene
+1  2430 0.5607699 0.2084953 0.1361743 0.05058588 0.04397468 C10orf88</code></pre>
+<p>This isnt a great result but it works.</p>
+<p>I need to do this for all of them.</p>
+<p>Write MAF data:</p>
+<pre class="r"><code>write.table(snpmaf, &quot;../data/coloc/snpmaf.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
+<pre class="bash"><code>sbatch ColocApAeQTL.sh
+cat ../data/coloc/*colocRes.txt &gt; ../data/coloc/AllAssoccolocRes.txt</code></pre>
+<p>H0: neither trait has a genetic association in the region H1: only trait 1 has a genetic association in the region H2: only trait 2 has a genetic association in the region H3: both traits are associated, but with different causal variants H4: both traits are associated and share a single causal variant</p>
+<pre class="r"><code>ColocRES=read.table(&quot;../data/coloc/AllAssoccolocRes.txt&quot;, col.names = c(&quot;nsnp&quot;,&#39;Neither&#39;, &#39;apaQTL&#39;, &#39;eQTL&#39;, &#39;DifferentSnps&#39;, &#39;Coloc&#39;,&#39;gene&#39;),stringsAsFactors = F) %&gt;% select(-nsnp)
+
+
+Coloc_g=ColocRES %&gt;% gather(&quot;Hypothesis&quot;, &quot;ABF&quot;, -gene) 
+
+#Coloc_g$Hypothesis=as.factor(Coloc_g$Hypothesis)
+#levels(Coloc_g$Hypothesis)=c(&quot;Neither&quot;, &quot;apaQTL&quot;, &quot;eQTL&quot;, &quot;DifferentSnps&quot;, &quot;Coloc&quot;)</code></pre>
+<pre class="r"><code>ggplot(Coloc_g,aes(x=Hypothesis, y=ABF)) +geom_boxplot()</code></pre>
+<p><img src="figure/coloc.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>filter(ColocRES, Coloc &gt; .5 )</code></pre>
+<pre><code>       Neither       apaQTL         eQTL DifferentSnps     Coloc   gene
+1 3.527967e-10 0.0007467924 4.494307e-08    0.09422950 0.9050237 CHURC1
+2 8.986594e-03 0.0077172437 5.247701e-02    0.04417803 0.8866411 MRPL43
+3 9.279462e-02 0.0731388647 5.172012e-02    0.04002244 0.7423240   MTG2
+4 3.635061e-03 0.0020757222 2.297401e-01    0.13055408 0.6339950  SMDT1
+5 2.555142e-02 0.0308897658 1.393885e-01    0.16787399 0.6362964 ZSWIM7</code></pre>
+<p>CHURC1 peak39686 rs10133054</p>
+<p>MRPL43 peak18727 rs4919509</p>
+<p>MTG2 peak81886 rs2151511</p>
+<p>SMDT1 peak85767 rs4147638</p>
+<p>ZSWIM7 peak54045 rs114324818</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1338,35 +1459,36 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] coloc_3.2-1     forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1  
- [5] purrr_0.3.2     readr_1.3.1     tidyr_0.8.3     tibble_2.1.1   
- [9] ggplot2_3.1.1   tidyverse_1.2.1
+ [1] coloc_3.2-1       forcats_0.3.0     stringr_1.3.1    
+ [4] dplyr_0.8.0.1     purrr_0.3.2       readr_1.3.1      
+ [7] tidyr_0.8.3       tibble_2.1.1      ggplot2_3.1.1    
+[10] tidyverse_1.2.1   data.table_1.12.0 snpStats_1.32.0  
+[13] Matrix_1.2-15     survival_2.43-1  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.2          lubridate_1.7.4     mvtnorm_1.0-8      
+ [1] Rcpp_1.0.2          mvtnorm_1.0-8       lubridate_1.7.4    
  [4] lattice_0.20-38     assertthat_0.2.0    rprojroot_1.3-2    
  [7] digest_0.6.18       R6_2.3.0            cellranger_1.1.0   
-[10] plyr_1.8.4          backports_1.1.2     stats4_3.5.1       
-[13] pcaPP_1.9-73        evaluate_0.12       httr_1.3.1         
+[10] plyr_1.8.4          backports_1.1.2     pcaPP_1.9-73       
+[13] stats4_3.5.1        evaluate_0.12       httr_1.3.1         
 [16] pillar_1.3.1        zlibbioc_1.28.0     rlang_0.4.0        
 [19] lazyeval_0.2.1      readxl_1.1.0        rstudioapi_0.10    
-[22] whisker_0.3-2       Matrix_1.2-15       rmarkdown_1.10     
+[22] whisker_0.3-2       rmarkdown_1.10      labeling_0.3       
 [25] splines_3.5.1       munsell_0.5.0       broom_0.5.1        
 [28] compiler_3.5.1      httpuv_1.4.5        modelr_0.1.2       
-[31] BiocGenerics_0.28.0 pkgconfig_2.0.2     htmltools_0.3.6    
+[31] pkgconfig_2.0.2     BiocGenerics_0.28.0 htmltools_0.3.6    
 [34] tidyselect_0.2.5    workflowr_1.6.0     reshape_0.8.8      
-[37] BMA_3.18.11         crayon_1.3.4        rrcov_1.4-7        
+[37] BMA_3.18.11         rrcov_1.4-7         crayon_1.3.4       
 [40] withr_2.1.2         later_0.7.5         leaps_3.1          
 [43] grid_3.5.1          nlme_3.1-137        jsonlite_1.6       
 [46] gtable_0.2.0        git2r_0.26.1        magrittr_1.5       
 [49] scales_1.0.0        cli_1.1.0           stringi_1.2.4      
 [52] fs_1.3.1            promises_1.0.1      robustbase_0.93-3  
-[55] xml2_1.2.0          snpStats_1.32.0     generics_0.0.2     
-[58] tools_3.5.1         glue_1.3.0          DEoptimR_1.0-8     
-[61] hms_0.4.2           parallel_3.5.1      survival_2.43-1    
-[64] yaml_2.2.0          inline_0.3.15       colorspace_1.3-2   
-[67] cluster_2.0.7-1     rvest_0.3.2         knitr_1.20         
-[70] haven_1.1.2        </code></pre>
+[55] xml2_1.2.0          generics_0.0.2      tools_3.5.1        
+[58] glue_1.3.0          DEoptimR_1.0-8      hms_0.4.2          
+[61] parallel_3.5.1      yaml_2.2.0          inline_0.3.15      
+[64] colorspace_1.3-2    cluster_2.0.7-1     rvest_0.3.2        
+[67] knitr_1.20          haven_1.1.2        </code></pre>
 </div>
 
 
