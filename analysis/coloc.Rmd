@@ -18,6 +18,8 @@ wget http://eqtl.uchicago.edu/jointLCL/output_RNAseqGeuvadis_PC14.txt
 
 ```{r}
 #install.packages("coloc")
+library(snpStats)
+library(data.table)
 library(tidyverse)
 library("coloc")
 ```
@@ -51,3 +53,144 @@ PASgene_indata= PASgene_test %>% anti_join(eQTLres_genesnp, by="test")
 ```
 
 181 of the snp gene pairs are in this data.  
+
+Test on one first.  c10orf88 
+
+
+Need: 
+
+p values for each SNP
+each SNP’s minor allele frequency
+sample size
+
+C10orf88_rs7904973
+
+```{r}
+PASgene_c10orf88= PASgene %>% filter(GeneName=="C10orf88")
+PASgene_c10orf88
+```
+
+```{r}
+PeakData=read.table("../data/eQTL_LZ/NuclearAssoc/peak19682_NuclearResults4LZ.txt",col.names = c("RSID","Pvalue_APA"),stringsAsFactors = F) %>% mutate(sampleSizeAPA=52)
+
+GeneData=eQTLres %>% filter(GeneName=="C10orf88")
+```
+
+Number of overlapping snps:  
+
+```{r}
+length(intersect(PeakData$RSID,GeneData$RSID ))
+
+nrow(GeneData)
+nrow(PeakData)
+```
+
+```{r}
+ind=read.table("../data/molPhenos/RNAhead.txt", header = F)
+dim(ind)[2]-4
+```
+
+```{r}
+Genenomnames=c("gene", 'snp','dist', 'pval', 'slope')
+c10orf88eqtl=read.table("../data/coloc/eQTL_c10orf88.txt",col.names = Genenomnames,stringsAsFactors = F) %>% mutate(SampleSizeE=69) %>% inner_join(RSID, by="snp")
+
+
+```
+Get freq for the snps in allChrom.dose.filt.vcf. these are the filtered snps from john. not the li snps but should include those i need and they have the same 119 ind. 
+
+```{bash,eval=F}
+module load vcftools
+
+
+vcftools --vcf allChrom.dose.filt.vcf   --freq --out allChrom.dose.filt_freq
+
+```
+
+
+
+
+
+
+```{r}
+snpmaf=fread("/project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt_freq.frq",skip = 1, col.names = c("chr", "loc", "nAlles", "nchr", "allele1", "allele2")) %>% mutate(snp=paste(chr, loc, sep=":")) %>% separate("allele2", into=c("allele", "MAF2"), sep=":") %>%separate("allele1", into=c("allele", "MAF1"), sep=":")  %>% mutate(MAF= ifelse(MAF1 < MAF2, MAF1, MAF2))%>%  inner_join(RSID, by="snp") %>% select(RSID, MAF)
+```
+```{r}
+
+All= PeakData %>% inner_join(snpmaf,by="RSID") %>% inner_join(c10orf88eqtl, by="RSID")
+All$Pvalue=as.numeric(as.character(All$Pvalue))
+All$MAF=as.numeric(as.character(All$MAF))
+
+```
+
+Join with eQTL and apa  
+
+```{r}
+my.res <- coloc.abf(dataset1=list(pvalues=All$Pvalue,N=52,type="quant"),
+                    dataset2=list(pvalues=All$pval,N=69,type="quant"),
+                    MAF=All$MAF)
+
+C10orf88= as.data.frame(t(my.res$summary ))%>% mutate(gene="C10orf88")
+C10orf88
+```
+
+
+This isnt a great result but it works.   
+
+
+I need to do this for all of them. 
+
+
+Write MAF data:  
+
+```{r}
+write.table(snpmaf, "../data/coloc/snpmaf.txt", col.names = T, row.names = F, quote = F)
+```
+
+```{bash,eval=F}
+sbatch ColocApAeQTL.sh
+cat ../data/coloc/*colocRes.txt > ../data/coloc/AllAssoccolocRes.txt
+```
+
+H0: neither trait has a genetic association in the region
+H1: only trait 1 has a genetic association in the region
+H2: only trait 2 has a genetic association in the region
+H3: both traits are associated, but with different causal variants
+H4: both traits are associated and share a single causal variant
+
+```{r}
+ColocRES=read.table("../data/coloc/AllAssoccolocRes.txt", col.names = c("nsnp",'Neither', 'apaQTL', 'eQTL', 'DifferentSnps', 'Coloc','gene'),stringsAsFactors = F) %>% select(-nsnp)
+
+
+Coloc_g=ColocRES %>% gather("Hypothesis", "ABF", -gene) 
+
+#Coloc_g$Hypothesis=as.factor(Coloc_g$Hypothesis)
+#levels(Coloc_g$Hypothesis)=c("Neither", "apaQTL", "eQTL", "DifferentSnps", "Coloc")
+```
+
+```{r}
+ggplot(Coloc_g,aes(x=Hypothesis, y=ABF)) +geom_boxplot()
+```
+
+```{r}
+filter(ColocRES, Coloc > .5 )
+```
+
+CHURC1
+peak39686
+rs10133054
+
+MRPL43
+peak18727
+rs4919509
+
+MTG2
+peak81886
+rs2151511
+
+SMDT1
+peak85767
+rs4147638
+
+ZSWIM7
+peak54045
+rs114324818
