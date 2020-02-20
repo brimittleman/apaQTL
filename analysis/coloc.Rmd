@@ -19,6 +19,7 @@ wget http://eqtl.uchicago.edu/jointLCL/output_RNAseqGeuvadis_PC14.txt
 ```{r}
 #install.packages("coloc")
 library(snpStats)
+library(cowplot)
 library(data.table)
 library(tidyverse)
 library("coloc")
@@ -157,40 +158,64 @@ H2: only trait 2 has a genetic association in the region
 H3: both traits are associated, but with different causal variants
 H4: both traits are associated and share a single causal variant
 
+
+I think you should use PP4/(PP4+PP3)
+
+and count only when PP4+PP3 > 0.2
+
 ```{r}
-ColocRES=read.table("../data/coloc/AllAssoccolocRes.txt", col.names = c("nsnp",'Neither', 'apaQTL', 'eQTL', 'DifferentSnps', 'Coloc','gene'),stringsAsFactors = F) %>% select(-nsnp)
+ColocRES=read.table("../data/coloc/AllAssoccolocRes.txt", col.names = c("nsnp",'Neither', 'apaQTL', 'eQTL', 'DifferentSnps', 'Coloc','gene'),stringsAsFactors = F) %>% select(-nsnp) %>% mutate(three_four=DifferentSnps+Coloc, Prop=Coloc/three_four)
 
+ColocRES_filt=ColocRES %>% filter(three_four>.2)
+ColocRES_filt1=ColocRES %>% filter(three_four>.1)
+ColocRES_filt3=ColocRES %>% filter(three_four>.3)
+ColocRES_filt4=ColocRES %>% filter(three_four>.4)
 
-Coloc_g=ColocRES %>% gather("Hypothesis", "ABF", -gene) 
-
-#Coloc_g$Hypothesis=as.factor(Coloc_g$Hypothesis)
-#levels(Coloc_g$Hypothesis)=c("Neither", "apaQTL", "eQTL", "DifferentSnps", "Coloc")
 ```
 
 ```{r}
-ggplot(Coloc_g,aes(x=Hypothesis, y=ABF)) +geom_boxplot()
+all=ggplot(ColocRES,aes(x=Prop)) +geom_histogram(bins=50) + labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("All Genes ", nrow(ColocRES), sep=": "))
+
+one=ggplot(ColocRES_filt1,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .1 : ", nrow(ColocRES_filt1), "genes" , sep=" "))
+
+
+two=ggplot(ColocRES_filt,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .2 :", nrow(ColocRES_filt), "genes", sep=" "))
+
+
+three=ggplot(ColocRES_filt3,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .3 : ", nrow(ColocRES_filt3), "genes", sep=" "))
+
+four=ggplot(ColocRES_filt4,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .4 :", nrow(ColocRES_filt4), 'genes', sep=" "))
 ```
+
 
 ```{r}
-filter(ColocRES, Coloc > .5 )
+plot_grid(all, one, two, three, four)
 ```
 
-CHURC1
-peak39686
-rs10133054
+Try with a higher powered eQTL set.  
 
-MRPL43
-peak18727
-rs4919509
 
-MTG2
-peak81886
-rs2151511
+```{bash,eval=F}
+mkdir ../data/GeuvadiseQTL/
+cp  /project2/yangili1/zpmu/geuvadis/results/eqtl_new/YRI/nom_YRI_9phenoPC_*.txt.gz ../data/GeuvadiseQTL/
+gunzip ../data/GeuvadiseQTL/*
+cat ../data/GeuvadiseQTL/nom_YRI* > ../data/GeuvadiseQTL/nom_YRI_9phenoPCALL.txt
 
-SMDT1
-peak85767
-rs4147638
+```
 
-ZSWIM7
-peak54045
-rs114324818
+MAF for these data:  
+
+```{bash,eval=F}
+cp  /project2/yangili1/zpmu/geuvadis/data/new_fastqtl/chr*.dose.r2.nodup.filtered.recode.YRI.frq.gz ../data/GeuvadiseQTL/
+  
+gunzip ../data/GeuvadiseQTL/*.gz
+
+cat ../data/GeuvadiseQTL/*ose.r2.nodup.filtered.recode.YRI.frq > ../data/GeuvadiseQTL/allMAFRes.txt
+
+mkdir ../data/coloc_PM
+
+sbatch ColocApAeQTL_PM.sh
+```
+
+
+
