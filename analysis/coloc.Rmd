@@ -1,0 +1,53 @@
+---
+title: "Colocalization"
+author: "Briana Mittleman"
+date: "2/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Attempt a colocalziation analysis for the eQTLs and the snps in the nuclear QTL data.  
+
+```{bash,eval=F}
+mkdir ../data/coloc
+wget http://eqtl.uchicago.edu/jointLCL/output_RNAseqGeuvadis_PC14.txt
+```
+
+```{r}
+#install.packages("coloc")
+library(tidyverse)
+library("coloc")
+```
+First change the names of the rsid and gene. 
+```{r}
+
+geneNames=read.table("../../genome_anotation_data/ensemble_to_genename.txt", sep="\t", col.names = c('gene_id', 'GeneName', 'source' ),stringsAsFactors = F, header = T)
+RSID=read.table("/project2/gilad/briana/li_genotypes/RSID2snploc.txt",header = T, stringsAsFactors = F)
+#ed 's/^chr//' output_RNAseqGeuvadis_PC14.txt  > output_RNAseqGeuvadis_PC14.noChr.txt 
+
+eQTLres=read.table("../data/coloc/output_RNAseqGeuvadis_PC14.noChr.txt",header = T, stringsAsFactors = F)  %>% separate(snps,into=c("chr", "pos"), sep="\\.")%>% separate(gene,into=c("gene_id", "extra"), sep="\\.")  %>% mutate(snp=paste(chr,pos, sep=":")) %>% inner_join(RSID,by="snp") %>% inner_join(geneNames, by="gene_id") %>% select(RSID, GeneName,pvalue, beta)
+
+```
+I will be able to seperate these for the coloc analysis. I need the PAS gene pairs.  
+
+```{r}
+PASgene=read.table("../data/eQTL_LZ/PasGENEsnpstoUse.txt",stringsAsFactors = F, col.names = c("GeneName", "PAS", "RSID") ) 
+```
+
+Test if these are in the file above:  
+
+```{r}
+eQTLres_genesnp=eQTLres %>% mutate(test=paste(GeneName, RSID, sep="_")) %>% select(test)
+PASgene_test= PASgene %>%  mutate(test=paste(GeneName, RSID, sep="_")) %>% select(test)
+
+
+PASgene_indata= PASgene_test %>% inner_join(eQTLres_genesnp, by="test")
+
+PASgene_indata= PASgene_test %>% anti_join(eQTLres_genesnp, by="test")
+
+```
+
+181 of the snp gene pairs are in this data.  

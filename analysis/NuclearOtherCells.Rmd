@@ -59,7 +59,7 @@ Download human tissue PAS from https://polyasite.unibas.ch/samples.
 
 Brain, Muscle, Kidney, Liver, from Derti et al 2012.  
 
-Testes, breast, stem cell, ovary from Lianoglou, S. et al 2013
+Testes, breast, stem cell, ovary, LCL from Lianoglou, S. et al 2013
 
 
 I need to lift these from hg38 to hg19.  
@@ -76,28 +76,27 @@ filter out those with 0 in the sample of interest
 
 ```{r}
 resNames=c("chr1","start1","end1",'PAS', 'score', 'strand', 'chr2', 'start2', 'end2', 'anno', 'TPMsamp', 'st','dist')
-Brainres=read.table("../data/TissueData/Brain.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="Brain")
+Brainres=read.table("../data/TissueData/Brain.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="Brain", study="Derti")
 
-kidneyres=read.table("../data/TissueData/kidney.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="kidney")
+kidneyres=read.table("../data/TissueData/kidney.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="kidney", study="Derti")
 
-muscleres=read.table("../data/TissueData/muscle.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="muscle")
-
-
-stemcellres=read.table("../data/TissueData/stemcell.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="stemcell")
+muscleres=read.table("../data/TissueData/muscle.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="muscle", study="Derti")
 
 
-muscleres=read.table("../data/TissueData/muscle.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="muscle")
+stemcellres=read.table("../data/TissueData/stemcell.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="stemcell", study="Lianoglou")
 
 
-breastres=read.table("../data/TissueData/breast.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="breast")
+breastres=read.table("../data/TissueData/breast.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="breast", study="Lianoglou")
 
 
-liverres=read.table("../data/TissueData/liver.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="liver")
+liverres=read.table("../data/TissueData/liver.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="liver",study="Derti")
 
 
-ovaryres=read.table("../data/TissueData/ovary.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="ovary")
+ovaryres=read.table("../data/TissueData/ovary.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="ovary", study="Lianoglou")
 
-testesres=read.table("../data/TissueData/testes.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="testes")
+testesres=read.table("../data/TissueData/testes.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="testes",study="Lianoglou")
+
+LCLres=read.table("../data/TissueData/lcl.DistanceMyPAS2Anno.bed",col.names = resNames) %>% filter(abs(dist) <10, TPMsamp>0) %>% mutate(Tissue="LCL",study="Lianoglou")
 
 
 Alltissues=Brainres %>% 
@@ -107,19 +106,21 @@ Alltissues=Brainres %>%
   bind_rows(liverres) %>% 
   bind_rows(ovaryres) %>%
   bind_rows(testesres) %>% 
-  bind_rows(stemcellres)
+  bind_rows(stemcellres) %>% 
+  bind_rows(LCLres)
 
 
 
-AlltissueProp=Alltissues %>% group_by(Tissue) %>% summarise(nOverlap=n(), percOver=nOverlap/387)
+AlltissueProp=Alltissues %>% group_by(Tissue,study) %>% summarise(nOverlap=n(), percOver=(nOverlap/387) *100)
 ```
 
 ```{r}
-ggplot(AlltissueProp,aes(x=Tissue,fill=Tissue, y=nOverlap)) + geom_bar(stat="identity") + labs(title="Number of Intronic Nuclear enriched (n=387) Used in Other Tissues", y="Number of PAS")  + scale_fill_brewer(palette = "Dark2")
+ggplot(AlltissueProp,aes(x=Tissue,fill=study, y=nOverlap)) + geom_bar(stat="identity") + labs(title="Number of Intronic Nuclear enriched (n=387) Used in Other Tissues", y="Number of PAS") + scale_fill_brewer(palette = "Dark2")
 ```
 
 ```{r}
-ggplot(AlltissueProp,aes(x=Tissue,fill=Tissue, y=percOver)) + geom_bar(stat="identity")+ labs(title="Percent of Intronic Nuclear enriched Used in Other Tissues", y="Percent of PAS") + scale_fill_brewer(palette = "Dark2")
+ggplot(AlltissueProp,aes(x=Tissue,fill=study, y=percOver)) + geom_bar(stat="identity")+ labs(title="Percent of Intronic Nuclear enriched Used in Other Tissues", y="Percent of PAS") + scale_fill_brewer(palette = "Dark2")
+
 ```
 
 

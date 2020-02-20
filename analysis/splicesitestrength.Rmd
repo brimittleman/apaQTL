@@ -244,7 +244,6 @@ summary(bothandres$maxentscore)
 ```{r}
 wilcox.test(RandomSitewRes$maxentscore_cont,bothandres$maxentscore, alternative = "less")
 ```
-This is not as informative as the above analysis based on usage.  
 
 Test if any of the QTLs fall in 5' splice sites.  For this I will look at the 5' site for every intron:  
 
@@ -274,5 +273,75 @@ bedtools intersect -wo -a ../data/splicesite/AllIntron5primeSS_sort.bed -b ../da
 15	31229459	31229468	FAN1	.	+	15	31229462	31229463	FAN1:peak42822:utr3	83	+	1  
 
 
+##Intron by presence of intronic  
 
 
+Seperate the introns by splice site strength. First run the nuc on all of them  
+
+
+```{bash,eval=F}
+#../data/splicesite/AllIntron5primeSS_sort.bed
+
+
+
+#bedtools nuc
+
+bedtools nuc -fi /project2/gilad/briana/genome_anotation_data/genome/Homo_sapiens.GRCh37.75.dna_sm.all.fa -bed ../data/splicesite/AllIntron5primeSS_sort.bed -seq -s > ../data/splicesite/AllIntron5primeSS_sort_Nuc.bed
+
+
+python Allsplicesite2fasta.py
+
+python parseALLSSres.py
+```
+
+
+
+```{r}
+IntronSites=read.table("../data/splicesite/AllIntron5primeSS_sort.bed", col.names =c('chr','start','end','name','score','strand'))
+IntronRes=read.table("../data/splicesite/AllIntron_Parsed.txt", col.names=c("splicesite", "maxentscore") )
+
+bothandres_g= bothandres %>% mutate(intron=paste(chr,start,end,sep=":")) %>% group_by(intron) %>% summarise(nPAS=n())
+
+IntronSiteswRes=IntronSites %>% bind_cols(IntronRes) %>% mutate(intron=paste(chr,start,end,sep=":")) %>% full_join(bothandres_g,by="intron") %>% replace_na(list(nPAS = 0))
+```
+
+Now I need to decide the cutoffs: 
+
+```{r}
+ggplot(IntronSiteswRes, aes(x=maxentscore)) + geom_density()
+
+summary(IntronSiteswRes$maxentscore)
+
+quantile(IntronSiteswRes$maxentscore, seq(0,1, by=.1))
+```
+```{r}
+IntronSiteswRes_dec= IntronSiteswRes %>% mutate(decile_rank = ntile(IntronSiteswRes$maxentscore,10))
+
+IntronSiteswRes_decG= IntronSiteswRes_dec%>% group_by(decile_rank) %>% summarise(PAS=sum(nPAS))
+
+
+```
+
+```{r}
+ggplot(IntronSiteswRes_decG, aes(x=decile_rank, y=PAS)) +geom_bar(stat="identity") + labs(x="5' Splice Site strength Decile", y= "Number of Intronic PAS", title="Number of intronic PAS by 5' Splice site strength")
+```
+
+hypergeometric significance  
+
+```{r}
+x=2116
+m=IntronSiteswRes_dec %>% filter(decile_rank == 1) %>% nrow()
+n=IntronSiteswRes_dec %>% filter(decile_rank != 1) %>% nrow()
+k=sum(IntronSiteswRes_dec$nPAS)
+  
+
+#expected
+which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))
+
+x
+
+phyper(x, m, n, k,lower.tail=F)
+```
+
+
+This means there is significant enrichment for PAS in introns with the weakest 5' splice sites. 

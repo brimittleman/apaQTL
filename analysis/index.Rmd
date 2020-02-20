@@ -194,7 +194,8 @@ Revisions (Thank you to the reviewers for suggestions)
 
 * [Nuclear enriched PAS in other cell lines](NuclearOtherCells.html)  
 
-* [Colocalization of Nuclear APA qtls and eQTLs using locuszoom](locusZoomStandalone.html)  
+* [Visualize Nuclear APA qtls and eQTLs using locuszoom](locusZoomStandalone.html)  
+
+* [Colocalization of Nuclear APA qtls and eQTLs using Coloc](coloc.html)
 
 * [Test strength of splice site with PAS usage](splicesitestrength.html)
-
