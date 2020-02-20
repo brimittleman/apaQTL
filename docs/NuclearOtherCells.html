@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-13
+<strong>Last updated:</strong> 2020-02-20
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee5bd68fd311a7f69ddb830f6d24293c7ca88a262targetblanke5bd68fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e5bd68fd311a7f69ddb830f6d24293c7ca88a262" target="_blank">e5bd68f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d2056c138f58e53cebadb6e957b5138f8b654e89" target="_blank">d2056c1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee5bd68fd311a7f69ddb830f6d24293c7ca88a262targetblanke5bd68fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -476,13 +476,23 @@ Untracked files:
     Untracked:  apaQTL.Rproj
     Untracked:  checksumsfastq.txt.gz
     Untracked:  code/.NascentRNAdtPlotFirstintronicPAS.sh.swp
+    Untracked:  code/._Allsplicesite2fasta.py
     Untracked:  code/._ApaQTL_nominalNonnorm.sh
     Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._ClosestTissuePAS.sh
+    Untracked:  code/._CreateRNALZforeQTLs.sh
+    Untracked:  code/._CreateRNALZnucAPAqtls.sh
     Untracked:  code/._DistPAS2Sig_RandomIntron.py
     Untracked:  code/._EandPqtl_perm.sh
     Untracked:  code/._EandPqtls.sh
+    Untracked:  code/._ExtractGene4eQTLLZ.py
+    Untracked:  code/._ExtractGene4eQTLLZpy
+    Untracked:  code/._ExtractGeneRNAAssoc.py
+    Untracked:  code/._ExtractPAS4LZeQTLs.py
+    Untracked:  code/._ExtractPAS4eQTLsLZ.sh
+    Untracked:  code/._ExtractPASforLZ.py
+    Untracked:  code/._ExtractPASforLZ_run.sh
     Untracked:  code/._FC_NucintornUpandDown.sh
     Untracked:  code/._FC_UTR.sh
     Untracked:  code/._FC_intornUpandDownsteamPAS.sh
@@ -514,6 +524,7 @@ Untracked files:
     Untracked:  code/._RBPdisrupt.sh
     Untracked:  code/._RNAbam2bw.sh
     Untracked:  code/._RNAseqDTplot.sh
+    Untracked:  code/._Randomsplicesite2fasta.py
     Untracked:  code/._Rplots.pdf
     Untracked:  code/._RunRes2PAS.sh
     Untracked:  code/._SAF215upbed.py
@@ -572,10 +583,13 @@ Untracked files:
     Untracked:  code/._eQTLgenestestedapa.py
     Untracked:  code/._encodeRNADTplots.sh
     Untracked:  code/._extactPAS100meanphyloP.py
+    Untracked:  code/._extractGeneLZfiles.sh
+    Untracked:  code/._extractGeneLZfileseQTLs.sh
     Untracked:  code/._extractGenotypes.py
     Untracked:  code/._extractPACmeanPhyloP.py
     Untracked:  code/._extractPhylop50up.py
     Untracked:  code/._extractPhylopextra50.py
+    Untracked:  code/._extractRNApval4lz.py
     Untracked:  code/._extractseqfromqtlfastq.py
     Untracked:  code/._fc2leafphen.py
     Untracked:  code/._fc_filteredPAS6and7As.sh
@@ -650,9 +664,12 @@ Untracked files:
     Untracked:  code/._pQTLsotherdata.py
     Untracked:  code/._pacbioDT.sh
     Untracked:  code/._pacbioIntronicDT.sh
+    Untracked:  code/._parseALLSSres.py
     Untracked:  code/._parseBestbamid.py
     Untracked:  code/._parseLDRes.py
     Untracked:  code/._parseLDresBothPAS.sh
+    Untracked:  code/._parseRanodmSSres.py
+    Untracked:  code/._parseSSres.py
     Untracked:  code/._peak2PAS.py
     Untracked:  code/._peakFC.sh
     Untracked:  code/._pheno2countonly.R
@@ -694,6 +711,7 @@ Untracked files:
     Untracked:  code/._snakemakefiltPAS.batch
     Untracked:  code/._sortindexRNAbam.sh
     Untracked:  code/._specAPAinE.py
+    Untracked:  code/._splicesite2fasta.py
     Untracked:  code/._submit-snakemakePAS.sh
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subsetAPAnotEorPgene.py
@@ -745,6 +763,7 @@ Untracked files:
     Untracked:  code/APAqtl_permuted.out
     Untracked:  code/APAqtl_permuted_versions67.err
     Untracked:  code/APAqtl_permuted_versions67.out
+    Untracked:  code/Allsplicesite2fasta.py
     Untracked:  code/BothFracDTPlot1stintron.err
     Untracked:  code/BothFracDTPlot1stintron.out
     Untracked:  code/BothFracDTPlot4stintron.err
@@ -754,11 +773,20 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/ClosestTissuePAS.sh
+    Untracked:  code/CreateRNALZforeQTLs.sh
+    Untracked:  code/CreateRNALZnucAPAqtls.sh
     Untracked:  code/DistPAS2Sig_RandomIntron.py
     Untracked:  code/EandPqtl.err
     Untracked:  code/EandPqtl.out
     Untracked:  code/EncodeRNADTPlotGeneRegions.err
     Untracked:  code/EncodeRNADTPlotGeneRegions.out
+    Untracked:  code/ExtractGene4eQTLLZ.py
+    Untracked:  code/ExtractGene4eQTLLZpy
+    Untracked:  code/ExtractGeneRNAAssoc.py
+    Untracked:  code/ExtractPAS4LZeQTLs.py
+    Untracked:  code/ExtractPAS4eQTLsLZ.sh
+    Untracked:  code/ExtractPASforLZ.py
+    Untracked:  code/ExtractPASforLZ_run.sh
     Untracked:  code/FC_NucintronPASupandDown.err
     Untracked:  code/FC_NucintronPASupandDown.out
     Untracked:  code/FC_UTR.err
@@ -811,6 +839,7 @@ Untracked files:
     Untracked:  code/RNABam2BW.out
     Untracked:  code/RNAseqDTPlotGeneRegions.err
     Untracked:  code/RNAseqDTPlotGeneRegions.out
+    Untracked:  code/Randomsplicesite2fasta.py
     Untracked:  code/Rplots.pdf
     Untracked:  code/TESplots100bp.err
     Untracked:  code/TESplots100bp.out
@@ -849,9 +878,20 @@ Untracked files:
     Untracked:  code/dagPAS.pdf
     Untracked:  code/dagfiltPAS.pdf
     Untracked:  code/extactPAS100meanphyloP.py
+    Untracked:  code/extractGeneLZfiles.err
+    Untracked:  code/extractGeneLZfiles.out
+    Untracked:  code/extractGeneLZfiles.sh
+    Untracked:  code/extractGeneLZfileseQTLs.err
+    Untracked:  code/extractGeneLZfileseQTLs.out
+    Untracked:  code/extractGeneLZfileseQTLs.sh
     Untracked:  code/extractPACmeanPhyloP.py
+    Untracked:  code/extractPASLZfiles.err
+    Untracked:  code/extractPASLZfiles.out
+    Untracked:  code/extractPASLZfileseQTLs.err
+    Untracked:  code/extractPASLZfileseQTLs.out
     Untracked:  code/extractPhylop50up.py
     Untracked:  code/extractPhylopextra50.py
+    Untracked:  code/extractRNApval4lz.py
     Untracked:  code/fixExandUnexeQTL
     Untracked:  code/fixGWAS4Munge.py
     Untracked:  code/fix_randomIntron.py
@@ -898,10 +938,13 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nucspecinE.py
+    Untracked:  code/parseALLSSres.py
     Untracked:  code/parseLDRes.py
     Untracked:  code/parseLDres.err
     Untracked:  code/parseLDres.out
     Untracked:  code/parseLDresBothPAS.sh
+    Untracked:  code/parseRanodmSSres.py
+    Untracked:  code/parseSSres.py
     Untracked:  code/plink.log
     Untracked:  code/prxySNP.err
     Untracked:  code/prxySNP.out
@@ -972,6 +1015,7 @@ Untracked files:
     Untracked:  code/sortindexRNABam.err
     Untracked:  code/sortindexRNABam.out
     Untracked:  code/specAPAinE.py
+    Untracked:  code/splicesite2fasta.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
     Untracked:  code/subsetvcf_noSS.err
@@ -1022,6 +1066,7 @@ Untracked files:
     Untracked:  data/GeuvadisRNA/
     Untracked:  data/HMMqtls/
     Untracked:  data/LDSR_annotations/
+    Untracked:  data/LZ_both/
     Untracked:  data/Li_eQTLs/
     Untracked:  data/NMD/
     Untracked:  data/NascentRNA/
@@ -1066,7 +1111,9 @@ Untracked files:
     Untracked:  data/bothFrac_FC/
     Untracked:  data/bw/
     Untracked:  data/bw_norm/
+    Untracked:  data/coloc/
     Untracked:  data/eCLip/
+    Untracked:  data/eQTL_LZ/
     Untracked:  data/eQTLs/
     Untracked:  data/exampleQTLs/
     Untracked:  data/exosome/
@@ -1111,6 +1158,7 @@ Untracked files:
     Untracked:  data/sort/
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
+    Untracked:  data/splicesite/
     Untracked:  data/twoMech/
     Untracked:  data/vareQTLvarAPAqtl/
     Untracked:  data/verifyBAM/
@@ -1161,7 +1209,6 @@ Unstaged changes:
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
-    Modified:   analysis/propeQTLs_explained.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/DistPAS2Sig.py
     Modified:   code/Script4NuclearQTLexamples.sh
@@ -1214,6 +1261,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/d2056c138f58e53cebadb6e957b5138f8b654e89/analysis/NuclearOtherCells.Rmd" target="_blank">d2056c1</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+add lcls, add coloc package, add 5’ss by decile
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/c484ad54f70b17ec09602fa9b082937f071e2c50/docs/NuclearOtherCells.html" target="_blank">c484ad5</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/e5bd68fd311a7f69ddb830f6d24293c7ca88a262/analysis/NuclearOtherCells.Rmd" target="_blank">e5bd68f</a>
 </td>
 <td>
@@ -1238,12 +1319,12 @@ add other cell nuclear enriched
 <pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="bash"><code>mkdir ../data/TissueData</code></pre>
@@ -1273,35 +1354,34 @@ nrow(ES_nuclearIntron)</code></pre>
 <pre class="bash"><code>sort -k1,1 -k2,2n ../data/TissueData/NuclearEnriched.bed &gt; ../data/TissueData/NuclearEnriched_sort.bed</code></pre>
 <p>Download human tissue PAS from <a href="https://polyasite.unibas.ch/samples" class="uri">https://polyasite.unibas.ch/samples</a>.</p>
 <p>Brain, Muscle, Kidney, Liver, from Derti et al 2012.</p>
-<p>Testes, breast, stem cell, ovary from Lianoglou, S. et al 2013</p>
+<p>Testes, breast, stem cell, ovary, LCL from Lianoglou, S. et al 2013</p>
 <p>I need to lift these from hg38 to hg19.</p>
 <pre class="bash"><code>sbatch tissuePAS2hg19.sh
 sbatch ClosestTissuePAS.sh</code></pre>
 <p>Brain.DistanceMyPAS2Anno.bed kidney.DistanceMyPAS2Anno.bed muscle.DistanceMyPAS2Anno.bed stemcell.DistanceMyPAS2Anno.bed breast.DistanceMyPAS2Anno.bed liver.DistanceMyPAS2Anno.bed ovary.DistanceMyPAS2Anno.bed testes.DistanceMyPAS2Anno.bed</p>
 <p>filter out those with 0 in the sample of interest</p>
 <pre class="r"><code>resNames=c(&quot;chr1&quot;,&quot;start1&quot;,&quot;end1&quot;,&#39;PAS&#39;, &#39;score&#39;, &#39;strand&#39;, &#39;chr2&#39;, &#39;start2&#39;, &#39;end2&#39;, &#39;anno&#39;, &#39;TPMsamp&#39;, &#39;st&#39;,&#39;dist&#39;)
-Brainres=read.table(&quot;../data/TissueData/Brain.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;Brain&quot;)
+Brainres=read.table(&quot;../data/TissueData/Brain.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;Brain&quot;, study=&quot;Derti&quot;)
 
-kidneyres=read.table(&quot;../data/TissueData/kidney.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;kidney&quot;)
+kidneyres=read.table(&quot;../data/TissueData/kidney.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;kidney&quot;, study=&quot;Derti&quot;)
 
-muscleres=read.table(&quot;../data/TissueData/muscle.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;muscle&quot;)
-
-
-stemcellres=read.table(&quot;../data/TissueData/stemcell.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;stemcell&quot;)
+muscleres=read.table(&quot;../data/TissueData/muscle.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;muscle&quot;, study=&quot;Derti&quot;)
 
 
-muscleres=read.table(&quot;../data/TissueData/muscle.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;muscle&quot;)
+stemcellres=read.table(&quot;../data/TissueData/stemcell.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;stemcell&quot;, study=&quot;Lianoglou&quot;)
 
 
-breastres=read.table(&quot;../data/TissueData/breast.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;breast&quot;)
+breastres=read.table(&quot;../data/TissueData/breast.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;breast&quot;, study=&quot;Lianoglou&quot;)
 
 
-liverres=read.table(&quot;../data/TissueData/liver.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;liver&quot;)
+liverres=read.table(&quot;../data/TissueData/liver.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;liver&quot;,study=&quot;Derti&quot;)
 
 
-ovaryres=read.table(&quot;../data/TissueData/ovary.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;ovary&quot;)
+ovaryres=read.table(&quot;../data/TissueData/ovary.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;ovary&quot;, study=&quot;Lianoglou&quot;)
 
-testesres=read.table(&quot;../data/TissueData/testes.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;testes&quot;)
+testesres=read.table(&quot;../data/TissueData/testes.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;testes&quot;,study=&quot;Lianoglou&quot;)
+
+LCLres=read.table(&quot;../data/TissueData/lcl.DistanceMyPAS2Anno.bed&quot;,col.names = resNames) %&gt;% filter(abs(dist) &lt;10, TPMsamp&gt;0) %&gt;% mutate(Tissue=&quot;LCL&quot;,study=&quot;Lianoglou&quot;)
 
 
 Alltissues=Brainres %&gt;% 
@@ -1311,15 +1391,90 @@ Alltissues=Brainres %&gt;%
   bind_rows(liverres) %&gt;% 
   bind_rows(ovaryres) %&gt;%
   bind_rows(testesres) %&gt;% 
-  bind_rows(stemcellres)
+  bind_rows(stemcellres) %&gt;% 
+  bind_rows(LCLres)
 
 
 
-AlltissueProp=Alltissues %&gt;% group_by(Tissue) %&gt;% summarise(nOverlap=n(), percOver=nOverlap/387)</code></pre>
-<pre class="r"><code>ggplot(AlltissueProp,aes(x=Tissue,fill=Tissue, y=nOverlap)) + geom_bar(stat=&quot;identity&quot;) + labs(title=&quot;Number of Intronic Nuclear enriched (n=387) Used in Other Tissues&quot;, y=&quot;Number of PAS&quot;)  + scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+AlltissueProp=Alltissues %&gt;% group_by(Tissue,study) %&gt;% summarise(nOverlap=n(), percOver=(nOverlap/387) *100)</code></pre>
+<pre class="r"><code>ggplot(AlltissueProp,aes(x=Tissue,fill=study, y=nOverlap)) + geom_bar(stat=&quot;identity&quot;) + labs(title=&quot;Number of Intronic Nuclear enriched (n=387) Used in Other Tissues&quot;, y=&quot;Number of PAS&quot;) + scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
 <p><img src="figure/NuclearOtherCells.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggplot(AlltissueProp,aes(x=Tissue,fill=Tissue, y=percOver)) + geom_bar(stat=&quot;identity&quot;)+ labs(title=&quot;Percent of Intronic Nuclear enriched Used in Other Tissues&quot;, y=&quot;Percent of PAS&quot;) + scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/c484ad54f70b17ec09602fa9b082937f071e2c50/docs/figure/NuclearOtherCells.Rmd/unnamed-chunk-7-1.png" target="_blank">c484ad5</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>ggplot(AlltissueProp,aes(x=Tissue,fill=study, y=percOver)) + geom_bar(stat=&quot;identity&quot;)+ labs(title=&quot;Percent of Intronic Nuclear enriched Used in Other Tissues&quot;, y=&quot;Percent of PAS&quot;) + scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
 <p><img src="figure/NuclearOtherCells.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/c484ad54f70b17ec09602fa9b082937f071e2c50/docs/figure/NuclearOtherCells.Rmd/unnamed-chunk-8-1.png" target="_blank">c484ad5</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
