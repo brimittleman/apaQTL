@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-20
+<strong>Last updated:</strong> 2020-02-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree662a604fd34b67d3f9fc908392a0e3a3905a99b7targetblank662a604a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/662a604fd34b67d3f9fc908392a0e3a3905a99b7" target="_blank">662a604</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree67882340674c86d38fb1b1d08bf4134a17daa1cetargetblank6788234a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/67882340674c86d38fb1b1d08bf4134a17daa1ce" target="_blank">6788234</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree662a604fd34b67d3f9fc908392a0e3a3905a99b7targetblank662a604a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree67882340674c86d38fb1b1d08bf4134a17daa1cetargetblank6788234a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1278,6 +1278,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/67882340674c86d38fb1b1d08bf4134a17daa1ce/analysis/coloc.Rmd" target="_blank">6788234</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-21
+</td>
+<td>
+add PM res
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/1ca62a2b38e5c33c4650d6592c2135cabbc410c8/docs/coloc.html" target="_blank">1ca62a2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/662a604fd34b67d3f9fc908392a0e3a3905a99b7/analysis/coloc.Rmd" target="_blank">662a604</a>
 </td>
 <td>
@@ -1381,12 +1415,12 @@ Attaching package: &#39;cowplot&#39;</code></pre>
     ggsave</code></pre>
 <pre class="r"><code>library(data.table)
 library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ tibble  2.1.1       ✔ purrr   0.3.2  
 ✔ tidyr   0.8.3       ✔ dplyr   0.8.0.1
 ✔ readr   1.3.1       ✔ stringr 1.3.1  
 ✔ tibble  2.1.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::between()   masks data.table::between()
 ✖ tidyr::expand()    masks Matrix::expand()
 ✖ dplyr::filter()    masks stats::filter()
@@ -1485,6 +1519,43 @@ three=ggplot(ColocRES_filt3,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;
 four=ggplot(ColocRES_filt4,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .4 :&quot;, nrow(ColocRES_filt4), &#39;genes&#39;, sep=&quot; &quot;))</code></pre>
 <pre class="r"><code>plot_grid(all, one, two, three, four)</code></pre>
 <p><img src="figure/coloc.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/1ca62a2b38e5c33c4650d6592c2135cabbc410c8/docs/figure/coloc.Rmd/unnamed-chunk-19-1.png" target="_blank">1ca62a2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Try with a higher powered eQTL set.</p>
 <pre class="bash"><code>mkdir ../data/GeuvadiseQTL/
 cp  /project2/yangili1/zpmu/geuvadis/results/eqtl_new/YRI/nom_YRI_9phenoPC_*.txt.gz ../data/GeuvadiseQTL/
@@ -1500,7 +1571,56 @@ cat ../data/GeuvadiseQTL/*ose.r2.nodup.filtered.recode.YRI.frq &gt; ../data/Geuv
 
 mkdir ../data/coloc_PM
 
-sbatch ColocApAeQTL_PM.sh</code></pre>
+sbatch ColocApAeQTL_PM.sh
+
+cat ../data/coloc_PM/*colocRes.txt &gt; ../data/coloc_PM/AllAssoccolocResPM.txt</code></pre>
+<pre class="r"><code>ColocRESPM=read.table(&quot;../data/coloc_PM/AllAssoccolocResPM.txt&quot;, col.names = c(&quot;nsnp&quot;,&#39;Neither&#39;, &#39;apaQTL&#39;, &#39;eQTL&#39;, &#39;DifferentSnps&#39;, &#39;Coloc&#39;,&#39;gene&#39;),stringsAsFactors = F) %&gt;% select(-nsnp) %&gt;% mutate(three_four=DifferentSnps+Coloc, Prop=Coloc/three_four)
+
+ColocRESPM_filt=ColocRESPM %&gt;% filter(three_four&gt;.2)
+ColocRESPM_filt1=ColocRESPM %&gt;% filter(three_four&gt;.1)
+ColocRESPM_filt3=ColocRESPM %&gt;% filter(three_four&gt;.3)
+ColocRESPM_filt4=ColocRESPM %&gt;% filter(three_four&gt;.4)</code></pre>
+<pre class="r"><code>allPM=ggplot(ColocRESPM,aes(x=Prop)) +geom_histogram(bins=50) + labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;All Genes &quot;, nrow(ColocRESPM), sep=&quot;: &quot;))
+
+onePM=ggplot(ColocRESPM_filt1,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .1 : &quot;, nrow(ColocRESPM_filt1), &quot;genes&quot; , sep=&quot; &quot;))
+
+
+twoPM=ggplot(ColocRESPM_filt,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .2 :&quot;, nrow(ColocRESPM_filt), &quot;genes&quot;, sep=&quot; &quot;))
+
+
+threePM=ggplot(ColocRESPM_filt3,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .3 : &quot;, nrow(ColocRESPM_filt3), &quot;genes&quot;, sep=&quot; &quot;))
+
+fourPM=ggplot(ColocRESPM_filt4,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .4 :&quot;, nrow(ColocRESPM_filt4), &#39;genes&#39;, sep=&quot; &quot;))</code></pre>
+<pre class="r"><code>plot_grid(allPM, onePM, twoPM, threePM, fourPM)</code></pre>
+<p><img src="figure/coloc.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(ColocRESPM_filt,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;Colocalization results for apaQTLs and eQTLs \nPP3+PP4 &gt; .2 :&quot;, nrow(ColocRESPM_filt), &quot;genes&quot;, sep=&quot; &quot;))</code></pre>
+<p><img src="figure/coloc.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /> Which genes are these:</p>
+<pre class="r"><code>ColocRESPM_filt5= ColocRESPM_filt %&gt;% filter(Prop&gt;.5) 
+ColocRESPM_filt5$gene</code></pre>
+<pre><code> [1] &quot;AP3M2&quot;     &quot;BLOC1S2&quot;   &quot;CENPQ&quot;     &quot;CHURC1&quot;    &quot;COX11&quot;    
+ [6] &quot;ERAP2&quot;     &quot;GSTO1&quot;     &quot;HIBCH&quot;     &quot;HSD17B12&quot;  &quot;KDELR2&quot;   
+[11] &quot;LINC00476&quot; &quot;MB21D2&quot;    &quot;MRPL43&quot;    &quot;MTG2&quot;      &quot;PPP2R3C&quot;  
+[16] &quot;RAB31&quot;     &quot;SLFN5&quot;     &quot;SMDT1&quot;     &quot;TBC1D4&quot;    &quot;THEM4&quot;    
+[21] &quot;TMEM140&quot;   &quot;TMEM80&quot;    &quot;VRK3&quot;      &quot;ZC2HC1A&quot;   &quot;ZNRD1&quot;    
+[26] &quot;ZSWIM7&quot;   </code></pre>
+<pre class="r"><code>length(ColocRESPM_filt5$gene)</code></pre>
+<pre><code>[1] 26</code></pre>
+<p>Are these unexplained:</p>
+<pre class="r"><code>UexPe=read.table(&quot;../data/Li_eQTLs/UnexplainedEgenes.txt&quot;,col.names = &quot;GeneName&quot;) %&gt;% filter(GeneName %in% ColocRESPM_filt5$gene)
+UexPe</code></pre>
+<pre><code>    GeneName
+1      THEM4
+2    BLOC1S2
+3     MRPL43
+4     TMEM80
+5     ZSWIM7
+6      SMDT1
+7      ZNRD1
+8      CENPQ
+9     KDELR2
+10   TMEM140
+11   ZC2HC1A
+12 LINC00476</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
