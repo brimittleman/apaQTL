@@ -215,7 +215,53 @@ cat ../data/GeuvadiseQTL/*ose.r2.nodup.filtered.recode.YRI.frq > ../data/Geuvadi
 mkdir ../data/coloc_PM
 
 sbatch ColocApAeQTL_PM.sh
+
+cat ../data/coloc_PM/*colocRes.txt > ../data/coloc_PM/AllAssoccolocResPM.txt
+```
+
+```{r}
+ColocRESPM=read.table("../data/coloc_PM/AllAssoccolocResPM.txt", col.names = c("nsnp",'Neither', 'apaQTL', 'eQTL', 'DifferentSnps', 'Coloc','gene'),stringsAsFactors = F) %>% select(-nsnp) %>% mutate(three_four=DifferentSnps+Coloc, Prop=Coloc/three_four)
+
+ColocRESPM_filt=ColocRESPM %>% filter(three_four>.2)
+ColocRESPM_filt1=ColocRESPM %>% filter(three_four>.1)
+ColocRESPM_filt3=ColocRESPM %>% filter(three_four>.3)
+ColocRESPM_filt4=ColocRESPM %>% filter(three_four>.4)
+
+```
+
+```{r}
+allPM=ggplot(ColocRESPM,aes(x=Prop)) +geom_histogram(bins=50) + labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("All Genes ", nrow(ColocRESPM), sep=": "))
+
+onePM=ggplot(ColocRESPM_filt1,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .1 : ", nrow(ColocRESPM_filt1), "genes" , sep=" "))
+
+
+twoPM=ggplot(ColocRESPM_filt,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .2 :", nrow(ColocRESPM_filt), "genes", sep=" "))
+
+
+threePM=ggplot(ColocRESPM_filt3,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .3 : ", nrow(ColocRESPM_filt3), "genes", sep=" "))
+
+fourPM=ggplot(ColocRESPM_filt4,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("PP3+PP4 > .4 :", nrow(ColocRESPM_filt4), 'genes', sep=" "))
+```
+
+```{r}
+plot_grid(allPM, onePM, twoPM, threePM, fourPM)
 ```
 
 
+```{r}
+ggplot(ColocRESPM_filt,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y="Number of Genes", x="PP4/(PP3+PP4)", title=paste("Colocalization results for apaQTLs and eQTLs \nPP3+PP4 > .2 :", nrow(ColocRESPM_filt), "genes", sep=" "))
+```
+Which genes are these:  
+
+```{r}
+ColocRESPM_filt5= ColocRESPM_filt %>% filter(Prop>.5) 
+ColocRESPM_filt5$gene
+length(ColocRESPM_filt5$gene)
+```
+Are these unexplained:  
+
+```{r}
+UexPe=read.table("../data/Li_eQTLs/UnexplainedEgenes.txt",col.names = "GeneName") %>% filter(GeneName %in% ColocRESPM_filt5$gene)
+UexPe
+```
 
