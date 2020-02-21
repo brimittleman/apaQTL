@@ -12,7 +12,7 @@
 <meta name="author" content="Briana Mittleman" />
 
 
-<title>Colocalization</title>
+<title>RiboQTL QQplot</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -316,9 +316,9 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">Colocalization</h1>
+<h1 class="title toc-ignore">RiboQTL QQplot</h1>
 <h4 class="author"><em>Briana Mittleman</em></h4>
-<h4 class="date"><em>2/19/2020</em></h4>
+<h4 class="date"><em>2/20/2020</em></h4>
 
 </div>
 
@@ -1278,7 +1278,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/brimittleman/apaQTL/blob/662a604fd34b67d3f9fc908392a0e3a3905a99b7/analysis/coloc.Rmd" target="_blank">662a604</a>
+<a href="https://github.com/brimittleman/apaQTL/blob/662a604fd34b67d3f9fc908392a0e3a3905a99b7/analysis/riboQQplot.Rmd" target="_blank">662a604</a>
 </td>
 <td>
 brimittleman
@@ -1290,74 +1290,6 @@ brimittleman
 add riboqq and PM coloc
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/3c417f04b966f5134a0e4e67b881f95d930b47f8/docs/coloc.html" target="_blank">3c417f0</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2020-02-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/f3472bbcc73d21e111af6eae0ef5108ed7680cea/analysis/coloc.Rmd" target="_blank">f3472bb</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2020-02-20
-</td>
-<td>
-add coloc code and red
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/brimittleman/apaQTL/af310825be3f08c6d4b3df99280c8013ad3910b9/docs/coloc.html" target="_blank">af31082</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2020-02-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/brimittleman/apaQTL/blob/d2056c138f58e53cebadb6e957b5138f8b654e89/analysis/coloc.Rmd" target="_blank">d2056c1</a>
-</td>
-<td>
-brimittleman
-</td>
-<td>
-2020-02-20
-</td>
-<td>
-add lcls, add coloc package, add 5’ss by decile
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1365,142 +1297,119 @@ add lcls, add coloc package, add 5’ss by decile
 </div>
 </div>
 </div>
-<p>Attempt a colocalziation analysis for the eQTLs and the snps in the nuclear QTL data.</p>
-<pre class="bash"><code>mkdir ../data/coloc
-wget http://eqtl.uchicago.edu/jointLCL/output_RNAseqGeuvadis_PC14.txt</code></pre>
-<pre class="r"><code>#install.packages(&quot;coloc&quot;)
-library(snpStats)</code></pre>
-<pre><code>Loading required package: survival</code></pre>
-<pre><code>Loading required package: Matrix</code></pre>
-<pre class="r"><code>library(cowplot)</code></pre>
-<pre><code>Loading required package: ggplot2</code></pre>
-<pre><code>
-Attaching package: &#39;cowplot&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
-
-    ggsave</code></pre>
-<pre class="r"><code>library(data.table)
-library(tidyverse)</code></pre>
+<p>In the paper I have qqPlots where I took the apaQTL data and subset it by QTL sets. I never did this for riboQTLs. I will get the riboQTLs from Battle et al and remake the plot including these.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>── Attaching packages ────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>✔ tibble  2.1.1       ✔ purrr   0.3.2  
-✔ tidyr   0.8.3       ✔ dplyr   0.8.0.1
-✔ readr   1.3.1       ✔ stringr 1.3.1  
-✔ tibble  2.1.1       ✔ forcats 0.3.0  </code></pre>
+<pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
+✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
+✔ tidyr   0.8.3       ✔ stringr 1.3.1  
+✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
 <pre><code>── Conflicts ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::between()   masks data.table::between()
-✖ tidyr::expand()    masks Matrix::expand()
-✖ dplyr::filter()    masks stats::filter()
-✖ dplyr::first()     masks data.table::first()
-✖ cowplot::ggsave()  masks ggplot2::ggsave()
-✖ dplyr::lag()       masks stats::lag()
-✖ dplyr::last()      masks data.table::last()
-✖ purrr::transpose() masks data.table::transpose()</code></pre>
-<pre class="r"><code>library(&quot;coloc&quot;)</code></pre>
-<p>First change the names of the rsid and gene.</p>
-<pre class="r"><code>geneNames=read.table(&quot;../../genome_anotation_data/ensemble_to_genename.txt&quot;, sep=&quot;\t&quot;, col.names = c(&#39;gene_id&#39;, &#39;GeneName&#39;, &#39;source&#39; ),stringsAsFactors = F, header = T)
-RSID=read.table(&quot;/project2/gilad/briana/li_genotypes/RSID2snploc.txt&quot;,header = T, stringsAsFactors = F)
-#ed &#39;s/^chr//&#39; output_RNAseqGeuvadis_PC14.txt  &gt; output_RNAseqGeuvadis_PC14.noChr.txt 
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>geneNames=read.table(&quot;../../genome_anotation_data/ensemble_to_genename.txt&quot;, sep=&quot;\t&quot;, col.names = c(&#39;ENSG&#39;, &#39;GeneName&#39;, &#39;source&#39; ),stringsAsFactors = F, header = T)
 
-eQTLres=read.table(&quot;../data/coloc/output_RNAseqGeuvadis_PC14.noChr.txt&quot;,header = T, stringsAsFactors = F)  %&gt;% separate(snps,into=c(&quot;chr&quot;, &quot;pos&quot;), sep=&quot;\\.&quot;)%&gt;% separate(gene,into=c(&quot;gene_id&quot;, &quot;extra&quot;), sep=&quot;\\.&quot;)  %&gt;% mutate(snp=paste(chr,pos, sep=&quot;:&quot;)) %&gt;% inner_join(RSID,by=&quot;snp&quot;) %&gt;% inner_join(geneNames, by=&quot;gene_id&quot;) %&gt;% select(RSID, GeneName,pvalue, beta)</code></pre>
-<p>I will be able to seperate these for the coloc analysis. I need the PAS gene pairs.</p>
-<pre class="r"><code>PASgene=read.table(&quot;../data/eQTL_LZ/PasGENEsnpstoUse.txt&quot;,stringsAsFactors = F, col.names = c(&quot;GeneName&quot;, &quot;PAS&quot;, &quot;RSID&quot;) ) </code></pre>
-<p>Test if these are in the file above:</p>
-<pre class="r"><code>eQTLres_genesnp=eQTLres %&gt;% mutate(test=paste(GeneName, RSID, sep=&quot;_&quot;)) %&gt;% select(test)
-PASgene_test= PASgene %&gt;%  mutate(test=paste(GeneName, RSID, sep=&quot;_&quot;)) %&gt;% select(test)
+riboRes=read.table(&quot;../data/Battle_pQTL/riboQTLs_battle.txt&quot;, header = T,stringsAsFactors = F) %&gt;% inner_join(geneNames,by=&quot;ENSG&quot;) 
 
+exPe=read.table(&quot;../data/Li_eQTLs/explainedEgenes.txt&quot;, col.names = &quot;GeneName&quot;)
+UexPe=read.table(&quot;../data/Li_eQTLs/UnexplainedEgenes.txt&quot;,col.names = &quot;GeneName&quot;)
 
-PASgene_indata= PASgene_test %&gt;% inner_join(eQTLres_genesnp, by=&quot;test&quot;)
+allE=exPe %&gt;% full_join(UexPe,by=&quot;GeneName&quot;)</code></pre>
+<pre><code>Warning: Column `GeneName` joining factors with different levels, coercing
+to character vector</code></pre>
+<pre class="r"><code>riboRes$bh=p.adjust(riboRes$perm.p.values, method=&quot;fdr&quot;)
 
-PASgene_indata= PASgene_test %&gt;% anti_join(eQTLres_genesnp, by=&quot;test&quot;)</code></pre>
-<p>181 of the snp gene pairs are in this data.</p>
-<p>Test on one first. c10orf88</p>
-<p>Need:</p>
-<p>p values for each SNP each SNP’s minor allele frequency sample size</p>
-<p>C10orf88_rs7904973</p>
-<pre class="r"><code>PASgene_c10orf88= PASgene %&gt;% filter(GeneName==&quot;C10orf88&quot;)
-PASgene_c10orf88</code></pre>
-<pre><code>  GeneName       PAS      RSID
-1 C10orf88 peak19682 rs7904973</code></pre>
-<pre class="r"><code>PeakData=read.table(&quot;../data/eQTL_LZ/NuclearAssoc/peak19682_NuclearResults4LZ.txt&quot;,col.names = c(&quot;RSID&quot;,&quot;Pvalue_APA&quot;),stringsAsFactors = F) %&gt;% mutate(sampleSizeAPA=52)
+riboRes_sig= riboRes %&gt;% filter(-log10(bh)&gt;=1)
 
-GeneData=eQTLres %&gt;% filter(GeneName==&quot;C10orf88&quot;)</code></pre>
-<p>Number of overlapping snps:</p>
-<pre class="r"><code>length(intersect(PeakData$RSID,GeneData$RSID ))</code></pre>
-<pre><code>[1] 123</code></pre>
-<pre class="r"><code>nrow(GeneData)</code></pre>
-<pre><code>[1] 123</code></pre>
-<pre class="r"><code>nrow(PeakData)</code></pre>
-<pre><code>[1] 2550</code></pre>
-<pre class="r"><code>ind=read.table(&quot;../data/molPhenos/RNAhead.txt&quot;, header = F)
-dim(ind)[2]-4</code></pre>
-<pre><code>[1] 69</code></pre>
-<pre class="r"><code>Genenomnames=c(&quot;gene&quot;, &#39;snp&#39;,&#39;dist&#39;, &#39;pval&#39;, &#39;slope&#39;)
-c10orf88eqtl=read.table(&quot;../data/coloc/eQTL_c10orf88.txt&quot;,col.names = Genenomnames,stringsAsFactors = F) %&gt;% mutate(SampleSizeE=69) %&gt;% inner_join(RSID, by=&quot;snp&quot;)</code></pre>
-<p>Get freq for the snps in allChrom.dose.filt.vcf. these are the filtered snps from john. not the li snps but should include those i need and they have the same 119 ind.</p>
-<pre class="bash"><code>module load vcftools
+riboGenes=riboRes_sig %&gt;% select(GeneName) %&gt;% anti_join(allE)</code></pre>
+<pre><code>Joining, by = &quot;GeneName&quot;</code></pre>
+<pre class="r"><code>write.table(riboGenes, file=&quot;../data/Battle_pQTL/RiboQTLGeneNames.txt&quot;, row.names = F, col.names = F, quote = F, sep=&quot;\t&quot;)</code></pre>
+<pre class="bash"><code>mkdir ../data/ApaByRgene
 
+python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/RiboQTLGeneNames.txt Nuclear ../data/ApaByRgene/NuclearApaRGenes.txt
 
-vcftools --vcf allChrom.dose.filt.vcf   --freq --out allChrom.dose.filt_freq
-</code></pre>
-<pre class="r"><code>snpmaf=fread(&quot;/project2/gilad/briana/YRI_geno_hg19/allChrom.dose.filt_freq.frq&quot;,skip = 1, col.names = c(&quot;chr&quot;, &quot;loc&quot;, &quot;nAlles&quot;, &quot;nchr&quot;, &quot;allele1&quot;, &quot;allele2&quot;)) %&gt;% mutate(snp=paste(chr, loc, sep=&quot;:&quot;)) %&gt;% separate(&quot;allele2&quot;, into=c(&quot;allele&quot;, &quot;MAF2&quot;), sep=&quot;:&quot;) %&gt;%separate(&quot;allele1&quot;, into=c(&quot;allele&quot;, &quot;MAF1&quot;), sep=&quot;:&quot;)  %&gt;% mutate(MAF= ifelse(MAF1 &lt; MAF2, MAF1, MAF2))%&gt;%  inner_join(RSID, by=&quot;snp&quot;) %&gt;% select(RSID, MAF)</code></pre>
-<pre class="r"><code>All= PeakData %&gt;% inner_join(snpmaf,by=&quot;RSID&quot;) %&gt;% inner_join(c10orf88eqtl, by=&quot;RSID&quot;)
-All$Pvalue=as.numeric(as.character(All$Pvalue))
-All$MAF=as.numeric(as.character(All$MAF))</code></pre>
-<p>Join with eQTL and apa</p>
-<pre class="r"><code>my.res &lt;- coloc.abf(dataset1=list(pvalues=All$Pvalue,N=52,type=&quot;quant&quot;),
-                    dataset2=list(pvalues=All$pval,N=69,type=&quot;quant&quot;),
-                    MAF=All$MAF)</code></pre>
-<pre><code>PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf 
-   0.5610    0.2080    0.1360    0.0506    0.0440 
-[1] &quot;PP abf for shared variant: 4.4%&quot;</code></pre>
-<pre class="r"><code>C10orf88= as.data.frame(t(my.res$summary ))%&gt;% mutate(gene=&quot;C10orf88&quot;)
-C10orf88</code></pre>
-<pre><code>  nsnps PP.H0.abf PP.H1.abf PP.H2.abf  PP.H3.abf  PP.H4.abf     gene
-1  2430 0.5607699 0.2084953 0.1361743 0.05058588 0.04397468 C10orf88</code></pre>
-<p>This isnt a great result but it works.</p>
-<p>I need to do this for all of them.</p>
-<p>Write MAF data:</p>
-<pre class="r"><code>write.table(snpmaf, &quot;../data/coloc/snpmaf.txt&quot;, col.names = T, row.names = F, quote = F)</code></pre>
-<pre class="bash"><code>sbatch ColocApAeQTL.sh
-cat ../data/coloc/*colocRes.txt &gt; ../data/coloc/AllAssoccolocRes.txt</code></pre>
-<p>H0: neither trait has a genetic association in the region H1: only trait 1 has a genetic association in the region H2: only trait 2 has a genetic association in the region H3: both traits are associated, but with different causal variants H4: both traits are associated and share a single causal variant</p>
-<p>I think you should use PP4/(PP4+PP3)</p>
-<p>and count only when PP4+PP3 &gt; 0.2</p>
-<pre class="r"><code>ColocRES=read.table(&quot;../data/coloc/AllAssoccolocRes.txt&quot;, col.names = c(&quot;nsnp&quot;,&#39;Neither&#39;, &#39;apaQTL&#39;, &#39;eQTL&#39;, &#39;DifferentSnps&#39;, &#39;Coloc&#39;,&#39;gene&#39;),stringsAsFactors = F) %&gt;% select(-nsnp) %&gt;% mutate(three_four=DifferentSnps+Coloc, Prop=Coloc/three_four)
+python subsetpermAPAwithGenelist.py ../data/Battle_pQTL/RiboQTLGeneNames.txt Total ../data/ApaByRgene/TotalApaRGenes.txt
 
-ColocRES_filt=ColocRES %&gt;% filter(three_four&gt;.2)
-ColocRES_filt1=ColocRES %&gt;% filter(three_four&gt;.1)
-ColocRES_filt3=ColocRES %&gt;% filter(three_four&gt;.3)
-ColocRES_filt4=ColocRES %&gt;% filter(three_four&gt;.4)</code></pre>
-<pre class="r"><code>all=ggplot(ColocRES,aes(x=Prop)) +geom_histogram(bins=50) + labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;All Genes &quot;, nrow(ColocRES), sep=&quot;: &quot;))
+python subsetAPAnotEorR.py Nuclear ../data/ApaByRgene/NotRorE_nuclear.txt
+python subsetAPAnotEorR.py Total ../data/ApaByRgene/NotRorE_total.txt</code></pre>
+<pre class="r"><code>tot.notEorR=read.table(&quot;../data/ApaByRgene/NotRorE_total.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+tot.RS=read.table(&quot;../data/ApaByRgene/TotalApaRGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+tot.ES=read.table(&quot;../data/ApaByPgene/TotalApaESGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
+tot.ex=read.table(&quot;../data/ApaByEgene/TotalApaexplainedeGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+tot.un=read.table(&quot;../data/ApaByEgene/TotalApaUnexplainedeGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
 
-one=ggplot(ColocRES_filt1,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .1 : &quot;, nrow(ColocRES_filt1), &quot;genes&quot; , sep=&quot; &quot;))
+tot_allE=as.data.frame(rbind(tot.ex,tot.un))
+tot.RS=na.omit(tot.RS)
+tot.notEorR=na.omit(tot.notEorR)
+tot.ES=na.omit(tot.ES)
+tot.un=na.omit(tot.un)</code></pre>
+<pre class="r"><code>qqplot(-log10(runif(nrow(tot.notEorR))), -log10(tot.notEorR$bpval), xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(beta pval)&quot;, main=&quot;Total Apa&quot;)
+points(sort(-log10(runif(nrow(tot.RS)))), sort(-log10(tot.RS$bpval)),col= alpha(&quot;Red&quot;))
+points(sort(-log10(runif(nrow(tot_allE)))), sort(-log10(tot_allE$bpval)),col= alpha(&quot;blue&quot;))
+abline(0,1)
 
+legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor rGenes&quot;, &quot;rGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+<p><img src="figure/riboQQplot.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>wilcox.test(tot.RS$bpval,tot.notEorR$bpval,alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
 
-two=ggplot(ColocRES_filt,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .2 :&quot;, nrow(ColocRES_filt), &quot;genes&quot;, sep=&quot; &quot;))
+data:  tot.RS$bpval and tot.notEorR$bpval
+W = 9336600, p-value = 0.0001811
+alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>wilcox.test(tot_allE$bpval,tot.notEorR$bpval,alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
 
+data:  tot_allE$bpval and tot.notEorR$bpval
+W = 43090000, p-value = 1.878e-11
+alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>wilcox.test(tot.RS$bpval,tot_allE$bpval,alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
 
-three=ggplot(ColocRES_filt3,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .3 : &quot;, nrow(ColocRES_filt3), &quot;genes&quot;, sep=&quot; &quot;))
+data:  tot.RS$bpval and tot_allE$bpval
+W = 1554300, p-value = 0.3891
+alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>nuc.notEorR=read.table(&quot;../data/ApaByRgene/NotRorE_nuclear.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+nuc.RS=read.table(&quot;../data/ApaByRgene/NuclearApaRGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+nuc.ES=read.table(&quot;../data/ApaByPgene/NuclearApaESGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
+nuc.ex=read.table(&quot;../data/ApaByEgene/NuclearApaexplainedeGenes.txt&quot;,stringsAsFactors = F,col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;))
+nuc.un=read.table(&quot;../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
 
-four=ggplot(ColocRES_filt4,aes(x=Prop)) +geom_histogram(bins=50)+ labs(y=&quot;Number of Genes&quot;, x=&quot;PP4/(PP3+PP4)&quot;, title=paste(&quot;PP3+PP4 &gt; .4 :&quot;, nrow(ColocRES_filt4), &#39;genes&#39;, sep=&quot; &quot;))</code></pre>
-<pre class="r"><code>plot_grid(all, one, two, three, four)</code></pre>
-<p><img src="figure/coloc.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Try with a higher powered eQTL set.</p>
-<pre class="bash"><code>mkdir ../data/GeuvadiseQTL/
-cp  /project2/yangili1/zpmu/geuvadis/results/eqtl_new/YRI/nom_YRI_9phenoPC_*.txt.gz ../data/GeuvadiseQTL/
-gunzip ../data/GeuvadiseQTL/*
-cat ../data/GeuvadiseQTL/nom_YRI* &gt; ../data/GeuvadiseQTL/nom_YRI_9phenoPCALL.txt
-</code></pre>
-<p>MAF for these data:</p>
-<pre class="bash"><code>cp  /project2/yangili1/zpmu/geuvadis/data/new_fastqtl/chr*.dose.r2.nodup.filtered.recode.YRI.frq.gz ../data/GeuvadiseQTL/
-  
-gunzip ../data/GeuvadiseQTL/*.gz
+nuc.un=na.omit(nuc.un)
+nuc.RS=na.omit(nuc.RS)
+nuc.notEorR=na.omit(nuc.notEorR)
+nuc.ES=na.omit(nuc.ES)
+nuc_allE=as.data.frame(rbind(nuc.ex,nuc.un))</code></pre>
+<pre class="r"><code>qqplot(-log10(runif(nrow(nuc.notEorR))), -log10(nuc.notEorR$bpval), xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(beta pval)&quot;, main=&quot;Nuclear Apa&quot;)
+points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha(&quot;Red&quot;))
+points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha(&quot;blue&quot;))
+abline(0,1)
 
-cat ../data/GeuvadiseQTL/*ose.r2.nodup.filtered.recode.YRI.frq &gt; ../data/GeuvadiseQTL/allMAFRes.txt
+legend(&quot;topleft&quot;, legend=c(&quot;Neither eGenes nor rGenes&quot;, &quot;rGenes&quot;, &quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;blue&quot;,&quot;green&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+<p><img src="figure/riboQQplot.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>wilcox.test(nuc.RS$bpval,nuc.notEorR$bpval,alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
 
-mkdir ../data/coloc_PM
+data:  nuc.RS$bpval and nuc.notEorR$bpval
+W = 13007000, p-value = 0.01029
+alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>wilcox.test(nuc_allE$bpval,nuc.notEorR$bpval,alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
 
-sbatch ColocApAeQTL_PM.sh</code></pre>
+data:  nuc_allE$bpval and nuc.notEorR$bpval
+W = 57056000, p-value = 6.194e-13
+alternative hypothesis: true location shift is less than 0</code></pre>
+<pre class="r"><code>wilcox.test(nuc.RS$bpval,nuc_allE$bpval,alternative=&quot;less&quot;)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  nuc.RS$bpval and nuc_allE$bpval
+W = 2189300, p-value = 0.8658
+alternative hypothesis: true location shift is less than 0</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1528,36 +1437,24 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] coloc_3.2-1       forcats_0.3.0     stringr_1.3.1    
- [4] dplyr_0.8.0.1     purrr_0.3.2       readr_1.3.1      
- [7] tidyr_0.8.3       tibble_2.1.1      tidyverse_1.2.1  
-[10] data.table_1.12.0 cowplot_0.9.4     ggplot2_3.1.1    
-[13] snpStats_1.32.0   Matrix_1.2-15     survival_2.43-1  
+[1] forcats_0.3.0   stringr_1.3.1   dplyr_0.8.0.1   purrr_0.3.2    
+[5] readr_1.3.1     tidyr_0.8.3     tibble_2.1.1    ggplot2_3.1.1  
+[9] tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.2          mvtnorm_1.0-8       lubridate_1.7.4    
- [4] lattice_0.20-38     assertthat_0.2.0    rprojroot_1.3-2    
- [7] digest_0.6.18       R6_2.3.0            cellranger_1.1.0   
-[10] plyr_1.8.4          backports_1.1.2     pcaPP_1.9-73       
-[13] stats4_3.5.1        evaluate_0.12       httr_1.3.1         
-[16] pillar_1.3.1        zlibbioc_1.28.0     rlang_0.4.0        
-[19] lazyeval_0.2.1      readxl_1.1.0        rstudioapi_0.10    
-[22] whisker_0.3-2       rmarkdown_1.10      labeling_0.3       
-[25] splines_3.5.1       munsell_0.5.0       broom_0.5.1        
-[28] compiler_3.5.1      httpuv_1.4.5        modelr_0.1.2       
-[31] pkgconfig_2.0.2     BiocGenerics_0.28.0 htmltools_0.3.6    
-[34] tidyselect_0.2.5    workflowr_1.6.0     reshape_0.8.8      
-[37] BMA_3.18.11         rrcov_1.4-7         crayon_1.3.4       
-[40] withr_2.1.2         later_0.7.5         leaps_3.1          
-[43] grid_3.5.1          nlme_3.1-137        jsonlite_1.6       
-[46] gtable_0.2.0        git2r_0.26.1        magrittr_1.5       
-[49] scales_1.0.0        cli_1.1.0           stringi_1.2.4      
-[52] fs_1.3.1            promises_1.0.1      robustbase_0.93-3  
-[55] xml2_1.2.0          generics_0.0.2      tools_3.5.1        
-[58] glue_1.3.0          DEoptimR_1.0-8      hms_0.4.2          
-[61] parallel_3.5.1      yaml_2.2.0          inline_0.3.15      
-[64] colorspace_1.3-2    cluster_2.0.7-1     rvest_0.3.2        
-[67] knitr_1.20          haven_1.1.2        </code></pre>
+ [1] Rcpp_1.0.2       cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
+ [5] pillar_1.3.1     later_0.7.5      git2r_0.26.1     workflowr_1.6.0 
+ [9] tools_3.5.1      digest_0.6.18    lubridate_1.7.4  jsonlite_1.6    
+[13] evaluate_0.12    nlme_3.1-137     gtable_0.2.0     lattice_0.20-38 
+[17] pkgconfig_2.0.2  rlang_0.4.0      cli_1.1.0        rstudioapi_0.10 
+[21] yaml_2.2.0       haven_1.1.2      withr_2.1.2      xml2_1.2.0      
+[25] httr_1.3.1       knitr_1.20       hms_0.4.2        generics_0.0.2  
+[29] fs_1.3.1         rprojroot_1.3-2  grid_3.5.1       tidyselect_0.2.5
+[33] glue_1.3.0       R6_2.3.0         readxl_1.1.0     rmarkdown_1.10  
+[37] modelr_0.1.2     magrittr_1.5     whisker_0.3-2    backports_1.1.2 
+[41] scales_1.0.0     promises_1.0.1   htmltools_0.3.6  rvest_0.3.2     
+[45] assertthat_0.2.0 colorspace_1.3-2 httpuv_1.4.5     stringi_1.2.4   
+[49] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.1      crayon_1.3.4    </code></pre>
 </div>
 
 

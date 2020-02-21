@@ -273,10 +273,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d2056c138f58e53cebadb6e957b5138f8b654e89" target="_blank">d2056c1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree662a604fd34b67d3f9fc908392a0e3a3905a99b7targetblank662a604a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/662a604fd34b67d3f9fc908392a0e3a3905a99b7" target="_blank">662a604</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree662a604fd34b67d3f9fc908392a0e3a3905a99b7targetblank662a604a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -320,6 +320,10 @@ Untracked files:
     Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._ClosestTissuePAS.sh
+    Untracked:  code/._ColocApAeQTL.sh
+    Untracked:  code/._ColocApAeQTL_PM.sh
+    Untracked:  code/._Coloc_generalAPAeQTL.R
+    Untracked:  code/._Coloc_generalAPAeQTL_PM.R
     Untracked:  code/._CreateRNALZforeQTLs.sh
     Untracked:  code/._CreateRNALZnucAPAqtls.sh
     Untracked:  code/._DistPAS2Sig_RandomIntron.py
@@ -555,6 +559,7 @@ Untracked files:
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subsetAPAnotEorPgene.py
     Untracked:  code/._subsetAPAnotEorPgene_2versions.py
+    Untracked:  code/._subsetAPAnotEorR.py
     Untracked:  code/._subsetApanoteGene.py
     Untracked:  code/._subsetApanoteGene_2versions.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
@@ -612,6 +617,14 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/ClosestTissuePAS.sh
+    Untracked:  code/ColocApAeQTL.err
+    Untracked:  code/ColocApAeQTL.out
+    Untracked:  code/ColocApAeQTL.sh
+    Untracked:  code/ColocApAeQTLPM.err
+    Untracked:  code/ColocApAeQTLPM.out
+    Untracked:  code/ColocApAeQTL_PM.sh
+    Untracked:  code/Coloc_generalAPAeQTL.R
+    Untracked:  code/Coloc_generalAPAeQTL_PM.R
     Untracked:  code/CreateRNALZforeQTLs.sh
     Untracked:  code/CreateRNALZnucAPAqtls.sh
     Untracked:  code/DistPAS2Sig_RandomIntron.py
@@ -855,6 +868,7 @@ Untracked files:
     Untracked:  code/sortindexRNABam.out
     Untracked:  code/specAPAinE.py
     Untracked:  code/splicesite2fasta.py
+    Untracked:  code/subsetAPAnotEorR.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
     Untracked:  code/subsetvcf_noSS.err
@@ -887,6 +901,7 @@ Untracked files:
     Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
+    Untracked:  data/ApaByRgene/
     Untracked:  data/BadLines/
     Untracked:  data/BaseComp/
     Untracked:  data/Battle_pQTL/
@@ -903,6 +918,7 @@ Untracked files:
     Untracked:  data/FlaggedPAS/
     Untracked:  data/GWAS_overlap/
     Untracked:  data/GeuvadisRNA/
+    Untracked:  data/GeuvadiseQTL/
     Untracked:  data/HMMqtls/
     Untracked:  data/LDSR_annotations/
     Untracked:  data/LZ_both/
@@ -951,6 +967,7 @@ Untracked files:
     Untracked:  data/bw/
     Untracked:  data/bw_norm/
     Untracked:  data/coloc/
+    Untracked:  data/coloc_PM/
     Untracked:  data/eCLip/
     Untracked:  data/eQTL_LZ/
     Untracked:  data/eQTLs/
@@ -1095,6 +1112,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/662a604fd34b67d3f9fc908392a0e3a3905a99b7/analysis/index.Rmd" target="_blank">662a604</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+add riboqq and PM coloc
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/af310825be3f08c6d4b3df99280c8013ad3910b9/docs/index.html" target="_blank">af31082</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -3981,6 +4032,7 @@ Start workflowr project.
 <li><p><a href="locusZoomStandalone.html">Visualize Nuclear APA qtls and eQTLs using locuszoom</a></p></li>
 <li><p><a href="coloc.html">Colocalization of Nuclear APA qtls and eQTLs using Coloc</a></p></li>
 <li><p><a href="splicesitestrength.html">Test strength of splice site with PAS usage</a></p></li>
+<li><p><a href="riboQQplot.html">RiboQTL genes in apaQTL data</a></p></li>
 </ul>
 </div>
 
