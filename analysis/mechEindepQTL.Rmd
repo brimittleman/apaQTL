@@ -189,4 +189,9 @@ miRNAtargets_OtherNonconsite=  read.table("../data/miRNAbinding/Targets_CS_pctil
 
 miRNAtargets_OtherNonconsite
 ```
+Direction for ribo sig  
+
+```{r}
+QTLs %>% filter(ribo_pvalue <.05)%>% select(Gene,apa_EffectSize,protein_EffectSize, ribo_EffectSize)
+```
 
