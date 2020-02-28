@@ -86,12 +86,15 @@ wilcox.test(tot.RS$bpval,tot_allE$bpval,alternative="less")
 ```{r}
 nuc.notEorR=read.table("../data/ApaByRgene/NotRorE_nuclear.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.RS=read.table("../data/ApaByRgene/NuclearApaRGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
+nuc.P=read.table("../data/ApaByPgene/NuclearApaPSGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.ES=read.table("../data/ApaByPgene/NuclearApaESGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
 nuc.ex=read.table("../data/ApaByEgene/NuclearApaexplainedeGenes.txt",stringsAsFactors = F,col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval"))
 nuc.un=read.table("../data/ApaByEgene/NuclearApaUnexplainedeGenes.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
 
 nuc.un=na.omit(nuc.un)
 nuc.RS=na.omit(nuc.RS)
+#nuc.notERorP=na.omit(nuc.notERorP)
+nuc.P=na.omit(nuc.P)
 nuc.notEorR=na.omit(nuc.notEorR)
 nuc.ES=na.omit(nuc.ES)
 nuc_allE=as.data.frame(rbind(nuc.ex,nuc.un))
@@ -120,5 +123,41 @@ points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= al
 abline(0,1)
 
 legend("topleft", legend=c("Neither eGenes nor rGenes", "rGenes", "eGenes"),col=c("black", "red","blue","green"), pch=16,bty = 'n')
+
+```
+
+
+No QTL at all. 
+
+
+```{bash,eval=F}
+python subsetNootherQTL.py Nuclear ../data/ApaByRgene/NotANY_nuclear.txt
+```
+
+
+
+```{r}
+notany_nuc=read.table("../data/ApaByRgene/NotANY_nuclear.txt",stringsAsFactors = F, col.names = c("pid", "nvar", "shape1", "shape2", "dummy", "sid", "dist", "npval", "slope", "ppval", "bpval") )
+notany_nuc=na.omit(notany_nuc)
+```
+
+```{r}
+qqplot(-log10(runif(nrow(notany_nuc))), -log10(notany_nuc$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha("Green"))
+points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha("blue"))
+abline(0,1)
+
+legend("topleft", legend=c("No other QTL","rGenes", "pGenes","eGenes"),col=c("black", "red","Green","blue"), pch=16,bty = 'n')
+
+```
+```{r figure4riboandP, include=FALSE, dev="pdf", fig.height=6, fig.width=10, crop=FALSE}
+qqplot(-log10(runif(nrow(notany_nuc))), -log10(notany_nuc$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha("Green"))
+points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha("blue"))
+abline(0,1)
+
+legend("topleft", legend=c("No other QTL","rGenes", "pGenes","eGenes"),col=c("black", "red","Green","blue"), pch=16,bty = 'n')
 
 ```
