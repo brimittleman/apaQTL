@@ -112,5 +112,13 @@ wilcox.test(nuc.RS$bpval,nuc_allE$bpval,alternative="less")
 ```
 
 
+```{r figure4ribo, include=FALSE, dev="pdf", fig.height=6, fig.width=10, crop=FALSE}
 
+qqplot(-log10(runif(nrow(nuc.notEorR))), -log10(nuc.notEorR$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha("blue"))
+abline(0,1)
 
+legend("topleft", legend=c("Neither eGenes nor rGenes", "rGenes", "eGenes"),col=c("black", "red","blue","green"), pch=16,bty = 'n')
+
+```
