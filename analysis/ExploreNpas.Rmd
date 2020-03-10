@@ -76,6 +76,9 @@ PAS_wLength$nPAS=as.numeric(as.character(PAS_wLength$nPAS))
 PAS_wLength_apa= PAS_wLength %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
 
 ggplot(PAS_wLength_apa,aes(x=APA, y=log10(Genelength))) + geom_boxplot() + stat_compare_means()
+
+
+PAS_wLength_apa %>% group_by(APA) %>% summarise(meanL=median(Genelength))
 ```
 ###UTR length
 I also will look at length of the longest annotated 3' UTR:  
@@ -117,6 +120,8 @@ PAS_wUTRLength_apa= PAS_wUTRLength %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
 ggplot(PAS_wUTRLength_apa,aes(x=APA, y=log10(UTRlength))) + geom_boxplot() + stat_compare_means()
 
 ggplot(PAS_wUTRLength_apa,aes(by=APA, fill=APA, x=log10(UTRlength))) + geom_density(alpha=.5)
+
+
 ```
 
 Only the UTR pas:  
@@ -213,9 +218,71 @@ ggplot(PAS_wExpFilt_apa,aes(x=APA, y=MeanExp)) + geom_boxplot() + stat_compare_m
 
 
 ggplot(PAS_wExpFilt_apa,aes(by=APA, fill=APA, x=MeanExp)) + geom_density(alpha=.5)
+
+PAS_wExpFilt_apa %>% group_by(APA) %>% summarize(Mean=mean(MeanExp))
 ```
 
+
+
 It looks like there is a significant difference here between genes with APA and those without, but visualy it doesnt look like number of PAS is driven by expression.  
+
+
+Redo this analysis with Geuvadis TPM (easier to interpret)
+
+```{r}
+MetaExp=read.table("../data/Geuvadis/metadata.txt", stringsAsFactors = F, header = T) %>% filter(Characteristics.population.=="YRI")
+
+
+Gevadis=read.table("../data/Geuvadis/kallisto.txt.gz",header = T,stringsAsFactors = F) %>% select(gene,MetaExp$ENA_RUN) %>% separate(gene, into=c("base", 'transcript'), sep="-") %>% select(-transcript)
+
+
+Gevadis_gather=Gevadis %>% gather('indiv', 'TPM',-base) %>% group_by(base) %>% summarise(MeanTranscriptTPM=mean(TPM)) %>% rename('gene'=base)
+
+Gevadis_gatherFilt=Gevadis %>% gather('indiv', 'TPM',-base) %>% group_by(base) %>% summarise(MeanTranscriptTPM=mean(TPM)) %>% filter(MeanTranscriptTPM >=1)%>% rename('gene'=base)
+
+```
+
+```{r}
+PAS_wTPM= PAS %>% inner_join(Gevadis_gather, by="gene")
+
+PAS_wTPM$nPAS=as.factor(PAS_wTPM$nPAS)
+
+ggplot(PAS_wTPM, aes(x=nPAS,y=log10(MeanTranscriptTPM), fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Mean TPM", title="Relationship between expression and Number of PAS") 
+```
+```{r}
+
+PAS_wTPM$nPAS=as.numeric(as.character(PAS_wTPM$nPAS))
+PAS_wTPM_apa= PAS_wTPM %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_wTPM_apa,aes(x=APA, y=log10(MeanTranscriptTPM))) + geom_boxplot() + stat_compare_means()
+
+PAS_wTPM_apa %>% group_by(APA) %>% summarize(Mean=mean(MeanTranscriptTPM))
+```
+
+
+Filtered 1 tpm  
+
+```{r}
+
+PAS_wTPMFilt= PAS %>% inner_join(Gevadis_gatherFilt, by="gene")
+
+
+PAS_wTPMFilt_apa= PAS_wTPMFilt %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
+
+ggplot(PAS_wTPMFilt_apa,aes(x=APA, y=log10(MeanTranscriptTPM))) + geom_boxplot() + stat_compare_means()
+
+PAS_wTPMFilt_apa %>% group_by(APA) %>% summarize(Mean=mean(MeanTranscriptTPM))
+
+
+cor.test(PAS_wTPMFilt_apa$MeanTranscriptTPM, PAS_wTPMFilt_apa$nPAS)
+
+
+
+PAS_wTPMFilt_apa$nPAS=as.factor(PAS_wTPMFilt_apa$nPAS)
+
+ggplot(PAS_wTPMFilt_apa, aes(x=nPAS,y=log10(MeanTranscriptTPM), fill=nPAS)) + geom_boxplot() + labs(x="Number of PAS", y="Mean TPM", title="Relationship between expression and Number of PAS \n Genes with  >1 TPM ") 
+```
+
 
 
 ##Go terms  
@@ -343,6 +410,9 @@ PAS_tissue$nPAS=as.numeric(as.character(PAS_tissue$nPAS))
 PAS_tissue_apa= PAS_tissue %>% mutate(APA=ifelse(nPAS>1,"Yes","No"))
 
 ggplot(PAS_tissue_apa,aes(by=APA, x=nTissue,fill=APA)) + geom_density(alpha=.4)
+
+
+ggplot(PAS_tissue_apa,aes(by=APA, x=APA,y=nTissue)) + geom_boxplot() + stat_compare_means()
 ```
 
 
