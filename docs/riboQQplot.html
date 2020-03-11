@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-28
+<strong>Last updated:</strong> 2020-03-10
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee5dbb2fc0e30090ab10291f08bd4f16cf3fe1a86targetblanke5dbb2fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/e5dbb2fc0e30090ab10291f08bd4f16cf3fe1a86" target="_blank">e5dbb2f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6719a595aac6c36067fcb97cb36f4aa58eb7a399targetblank6719a59a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/6719a595aac6c36067fcb97cb36f4aa58eb7a399" target="_blank">6719a59</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreee5dbb2fc0e30090ab10291f08bd4f16cf3fe1a86targetblanke5dbb2fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree6719a595aac6c36067fcb97cb36f4aa58eb7a399targetblank6719a59a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -447,6 +447,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
     Ignored:    data/.DS_Store
     Ignored:    data/ProSeq/
     Ignored:    output/.DS_Store
@@ -742,6 +743,7 @@ Untracked files:
     Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._tissuePAS2hg19.sh
     Untracked:  code/._totSeceffectsize.py
+    Untracked:  code/._totspecinE.py
     Untracked:  code/._twentyBPupstreamPAS.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
@@ -1053,6 +1055,7 @@ Untracked files:
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
     Untracked:  code/tissuePAS2hg19.sh
+    Untracked:  code/totspecinE.py
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
     Untracked:  code/wrap_verifybam.err
@@ -1218,7 +1221,6 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/ExploreNpas.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
@@ -1230,6 +1232,7 @@ Unstaged changes:
     Modified:   analysis/nucSpecinEQTLs.Rmd
     Modified:   analysis/overlapapaqtlsandeqtls.Rmd
     Modified:   analysis/pQTLexampleplot.Rmd
+    Modified:   analysis/splicesitestrength.Rmd
     Modified:   analysis/version15bpfilter.Rmd
     Modified:   code/DistPAS2Sig.py
     Modified:   code/Script4NuclearQTLexamples.sh
@@ -1277,6 +1280,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/6719a595aac6c36067fcb97cb36f4aa58eb7a399/analysis/riboQQplot.Rmd" target="_blank">6719a59</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-10
+</td>
+<td>
+add mixed plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/71f66d26112bbd80dedac90c6cd2d472f08edcff/docs/riboQQplot.html" target="_blank">71f66d2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1405,12 +1442,12 @@ add riboqq and PM coloc
 </div>
 <p>In the paper I have qqPlots where I took the apaQTL data and subset it by QTL sets. I never did this for riboQTLs. I will get the riboQTLs from Battle et al and remake the plot including these.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>geneNames=read.table(&quot;../../genome_anotation_data/ensemble_to_genename.txt&quot;, sep=&quot;\t&quot;, col.names = c(&#39;ENSG&#39;, &#39;GeneName&#39;, &#39;source&#39; ),stringsAsFactors = F, header = T)
@@ -1598,12 +1635,11 @@ alternative hypothesis: true location shift is less than 0</code></pre>
 <pre class="r"><code>notany_nuc=read.table(&quot;../data/ApaByRgene/NotANY_nuclear.txt&quot;,stringsAsFactors = F, col.names = c(&quot;pid&quot;, &quot;nvar&quot;, &quot;shape1&quot;, &quot;shape2&quot;, &quot;dummy&quot;, &quot;sid&quot;, &quot;dist&quot;, &quot;npval&quot;, &quot;slope&quot;, &quot;ppval&quot;, &quot;bpval&quot;) )
 notany_nuc=na.omit(notany_nuc)</code></pre>
 <pre class="r"><code>qqplot(-log10(runif(nrow(notany_nuc))), -log10(notany_nuc$bpval), xlab=&quot;-log10(Uniform)&quot;, ylab=&quot;-log10(beta pval)&quot;, main=&quot;Nuclear Apa&quot;)
-points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha(&quot;blue&quot;))
 points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha(&quot;Red&quot;))
-points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha(&quot;Green&quot;))
+points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha(&quot;Blue&quot;))
 abline(0,1)
 
-legend(&quot;topleft&quot;, legend=c(&quot;No other QTL&quot;,&quot;rGenes&quot;, &quot;pGenes&quot;,&quot;eGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;Green&quot;,&quot;blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
+legend(&quot;topleft&quot;, legend=c(&quot;No Molecular QTL&quot;,&quot;rGenes&quot;, &quot;pGenes&quot;),col=c(&quot;black&quot;, &quot;red&quot;,&quot;Blue&quot;), pch=16,bty = &#39;n&#39;)</code></pre>
 <p><img src="figure/riboQQplot.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
@@ -1627,6 +1663,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/71f66d26112bbd80dedac90c6cd2d472f08edcff/docs/figure/riboQQplot.Rmd/unnamed-chunk-12-1.png" target="_blank">71f66d2</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-28
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/f19db642d8f0faa26cd09130de87f603d9321d3e/docs/figure/riboQQplot.Rmd/unnamed-chunk-12-1.png" target="_blank">f19db64</a>
