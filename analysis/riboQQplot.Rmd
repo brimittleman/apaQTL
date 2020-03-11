@@ -143,12 +143,11 @@ notany_nuc=na.omit(notany_nuc)
 
 ```{r}
 qqplot(-log10(runif(nrow(notany_nuc))), -log10(notany_nuc$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
-points(sort(-log10(runif(nrow(nuc_allE)))), sort(-log10(nuc_allE$bpval)),col= alpha("blue"))
 points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha("Red"))
-points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha("Green"))
+points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha("Blue"))
 abline(0,1)
 
-legend("topleft", legend=c("No other QTL","rGenes", "pGenes","eGenes"),col=c("black", "red","Green","blue"), pch=16,bty = 'n')
+legend("topleft", legend=c("No Molecular QTL","rGenes", "pGenes"),col=c("black", "red","Blue"), pch=16,bty = 'n')
 
 ```
 ```{r figure4riboandP, include=FALSE, dev="pdf", fig.height=6, fig.width=10, crop=FALSE}
@@ -161,3 +160,15 @@ abline(0,1)
 legend("topleft", legend=c("No other QTL","rGenes", "pGenes","eGenes"),col=c("black", "red","Green","blue"), pch=16,bty = 'n')
 
 ```
+
+
+```{r figure4riboandP_together, include=FALSE, dev="pdf", fig.height=6, fig.width=10, crop=FALSE}
+qqplot(-log10(runif(nrow(notany_nuc))), -log10(notany_nuc$bpval), xlab="-log10(Uniform)", ylab="-log10(beta pval)", main="Nuclear Apa")
+points(sort(-log10(runif(nrow(nuc.RS)))), sort(-log10(nuc.RS$bpval)),col= alpha("Red"))
+points(sort(-log10(runif(nrow(nuc.P)))), sort(-log10(nuc.P$bpval)),col= alpha("Blue"))
+abline(0,1)
+
+legend("topleft", legend=c("No Molecular QTL","rGenes", "pGenes"),col=c("black", "red","Blue"), pch=16,bty = 'n')
+
+```
+
