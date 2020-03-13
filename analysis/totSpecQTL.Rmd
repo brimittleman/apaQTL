@@ -1,0 +1,133 @@
+---
+title: "Explore Total specific"
+author: "Briana Mittleman"
+date: "3/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Explore the total specific apaQTLs [identified previously](QTL_inclusivePASset.html)
+
+
+We tested 75 of the 93 in expresion
+
+```{r}
+library(workflowr)
+library(tidyverse)
+library(ggpubr)
+```
+
+
+```{r}
+
+TotSepc=read.table("../data/QTLoverlap_inclusive/TotalSpecApaQTLinclusive.txt", header=T,stringsAsFactors = F)
+totspecinE=read.table("../data/QTLoverlap_inclusive/TotalSpecApaQTLinclusive_withE.txt", stringsAsFactors =F, col.names=c("peakID", 'snp','dist', 'pval', 'slope'))
+
+sigT=totspecinE %>% filter(pval<.05)
+
+nrow(sigT)
+
+sigT
+
+```
+
+
+Make the boxplots for these with nuclear data.  
+
+```{r}
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed",header = F,col.names = c("chr",'start','end','pasinfo','score','strand')) %>% separate(pasinfo, into=c("pasnum", 'geneloc'), sep=":") %>% mutate(pas=paste("peak",pasnum,sep="")) %>% select(pas, chr)
+TotSepc_chr= TotSepc %>% inner_join(PAS, by="pas")
+
+write.table(TotSepc_chr, "../data/QTLoverlap_inclusive/TotalSpecApaQTLinclusive_withCHR.txt",quote=F, row.names = F, col.names = F)
+```
+
+
+```{bash,eval=F}
+mkdir ../data/totSpecExampleQTLPlots/
+sbatch Totspec_example.sh
+```
+
+Remake these for total to directly prepare:  
+
+```{bash,eval=F}
+mkdir ../data/totSpecExampleQTLPlots_tot/
+#totspecqtlFacetBoxplotsTOT
+sbatch Totspec_exampleTOT.sh
+```
+
+
+```{r}
+PAS=read.table("../data/PAS/APAPAS_GeneLocAnno.5perc.sort.bed", header=F, stringsAsFactors = F, col.names = c("chr", "start", "end", "id", "score", "strand")) %>% separate(id, into=c("pasnum", "gene"), sep=":") %>% mutate(pas=paste("peak", pasnum, sep=""))%>% separate(gene, into=c("genename", "loc"), sep="_") %>% select(pas,loc)
+
+TotSpecLoc=TotSepc %>% inner_join(PAS,by="pas")
+
+ggplot(TotSpecLoc,aes(x=loc))+ geom_bar(stat="count")
+```
+
+
+###Difference in pvalue
+
+I will rank the total specific apaQTLs. I need the pvalues for the total and nuclear associations.  
+
+Total apa Nominal.  
+
+in total:  ../data/apaQTLNominal_inclusive/APApeak_Phenotype_GeneLocAnno.Total.fc.gz.qqnorm_allChr.txt  
+Subset this for the nuclear specific.  
+
+use a python scipt.  
+```{bash,eval=F}
+python nominavalfortotspec.py
+```
+
+
+
+```{r}
+totAPAinNuc=read.table("../data/QTLoverlap_inclusive/TotalQTLinNuclearNominal_inc.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "Nuclearpval", "Nuclearslope"))
+Totnominal=read.table("../data/QTLoverlap_inclusive/TotalSpecApaQTLtotalNomincalAssociation.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "Totalpval", "Totalslope") )
+TotinBoth= totAPAinNuc %>% inner_join(Totnominal, by=c('peakID', 'snp', 'dist')) %>% mutate(Totlog10= -log10(Totalpval),Nuclog10= -log10(Nuclearpval))
+
+
+
+ggplot(TotinBoth,aes(x=Totalpval,y=Nuclearpval))+ geom_point()+ geom_density2d(col='red')
+
+
+plot(TotinBoth$Totalpval)
+plot(TotinBoth$Nuclearpval)
+
+ggplot(TotinBoth,aes(x=Totlog10,y=Nuclog10))+ geom_point() + geom_density2d(col='red') + labs(x= "-log10(Total pvalue)",y="-log10(Nuclear pvalue")
+```
+
+I will color these by if they are eQTLs.  
+
+```{r}
+#10:14888911:14888997:HSPA14_utr3_-_peak14343  
+
+sigTID= sigT %>% mutate(ID=paste(peakID,snp,sep=":" ))
+
+
+TotinBoth_split= TotinBoth %>% separate(peakID, into=c("chr", 'start','end','geneid'),sep=":") %>% separate(geneid, into=c("gene", 'loc', 'strand', 'pas'), sep="_") %>% mutate(ID=paste(gene, snp,sep=":"), eQTL=ifelse(ID %in% sigTID$ID, "Yes", "No")) 
+
+
+ggplot(TotinBoth_split, aes(x=Totalpval,y=Nuclearpval, col=eQTL)) +geom_point(alpha=.3)
+
+ggplot(TotinBoth_split, aes(x=Totlog10,y=Nuclog10, col=eQTL)) +geom_point(alpha=.8) + labs(x="-log10(Total pvalue)", y="-log10(Nuclear pvalue")
+```
+
+Rank these by difference in -log10 pvalue:  
+
+```{r}
+TotinBoth_split_diff= TotinBoth_split %>% mutate(TotminusNuc=Totlog10-Nuclog10) %>% arrange(desc(TotminusNuc))
+
+ggplot(TotinBoth_split_diff, aes(x=eQTL, y=TotminusNuc))+ geom_violin() + geom_jitter() +stat_compare_means() + labs(y="Difference in -log10 Pvalue (total - nuclear)")
+```
+Do this but with difference in effect size.  
+
+```{r}
+TotinBoth_split_diffEffect= TotinBoth_split %>% mutate(TotminusNuc=abs(Totalslope)-abs(Nuclearslope))
+
+ggplot(TotinBoth_split_diffEffect, aes(x=eQTL, y=TotminusNuc))+ geom_violin() + geom_jitter() +stat_compare_means() + labs(y="Difference in absolute effect size")
+```
+
