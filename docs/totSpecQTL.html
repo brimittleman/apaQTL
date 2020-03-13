@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeff918e1ae5eab0926c3a9e6a5c5b4c8552b9c948targetblankff918e1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/ff918e1ae5eab0926c3a9e6a5c5b4c8552b9c948" target="_blank">ff918e1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea3272259ef3fee692bb72e8a8d42232ec84a2f61targetblanka327225a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/a3272259ef3fee692bb72e8a8d42232ec84a2f61" target="_blank">a327225</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeff918e1ae5eab0926c3a9e6a5c5b4c8552b9c948targetblankff918e1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreea3272259ef3fee692bb72e8a8d42232ec84a2f61targetblanka327225a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -665,6 +665,7 @@ Untracked files:
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
     Untracked:  code/._nominavalfortotspec.py
+    Untracked:  code/._noninalpval4alltot.py
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
@@ -965,6 +966,7 @@ Untracked files:
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
     Untracked:  code/nominavalfortotspec.py
+    Untracked:  code/noninalpval4alltot.py
     Untracked:  code/nucspecinE.py
     Untracked:  code/parseALLSSres.py
     Untracked:  code/parseLDRes.py
@@ -1306,6 +1308,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/a3272259ef3fee692bb72e8a8d42232ec84a2f61/analysis/totSpecQTL.Rmd" target="_blank">a327225</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+<td>
+add all qtl plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/totSpecQTL.html" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/ff918e1ae5eab0926c3a9e6a5c5b4c8552b9c948/analysis/totSpecQTL.Rmd" target="_blank">ff918e1</a>
 </td>
 <td>
@@ -1331,12 +1367,12 @@ add ranked pval difff
 <pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggpubr)</code></pre>
@@ -1385,6 +1421,43 @@ TotSpecLoc=TotSepc %&gt;% inner_join(PAS,by=&quot;pas&quot;)
 
 ggplot(TotSpecLoc,aes(x=loc))+ geom_bar(stat=&quot;count&quot;)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-6-1.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div id="difference-in-pvalue" class="section level3">
 <h3>Difference in pvalue</h3>
 <p>I will rank the total specific apaQTLs. I need the pvalues for the total and nuclear associations.</p>
@@ -1401,12 +1474,160 @@ TotinBoth= totAPAinNuc %&gt;% inner_join(Totnominal, by=c(&#39;peakID&#39;, &#39
 
 ggplot(TotinBoth,aes(x=Totalpval,y=Nuclearpval))+ geom_point()+ geom_density2d(col=&#39;red&#39;)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-8-1.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot(TotinBoth$Totalpval)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-2">
+Past versions of unnamed-chunk-8-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-8-2.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot(TotinBoth$Nuclearpval)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-8-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-3">
+Past versions of unnamed-chunk-8-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-8-3.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(TotinBoth,aes(x=Totlog10,y=Nuclog10))+ geom_point() + geom_density2d(col=&#39;red&#39;) + labs(x= &quot;-log10(Total pvalue)&quot;,y=&quot;-log10(Nuclear pvalue&quot;)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-8-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-4">
+Past versions of unnamed-chunk-8-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-8-4.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>I will color these by if they are eQTLs.</p>
 <pre class="r"><code>#10:14888911:14888997:HSPA14_utr3_-_peak14343  
 
@@ -1418,17 +1639,180 @@ TotinBoth_split= TotinBoth %&gt;% separate(peakID, into=c(&quot;chr&quot;, &#39;
 
 ggplot(TotinBoth_split, aes(x=Totalpval,y=Nuclearpval, col=eQTL)) +geom_point(alpha=.3)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-9-1.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ggplot(TotinBoth_split, aes(x=Totlog10,y=Nuclog10, col=eQTL)) +geom_point(alpha=.8) + labs(x=&quot;-log10(Total pvalue)&quot;, y=&quot;-log10(Nuclear pvalue&quot;)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-9-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-2">
+Past versions of unnamed-chunk-9-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-9-2.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Rank these by difference in -log10 pvalue:</p>
 <pre class="r"><code>TotinBoth_split_diff= TotinBoth_split %&gt;% mutate(TotminusNuc=Totlog10-Nuclog10) %&gt;% arrange(desc(TotminusNuc))
 
 ggplot(TotinBoth_split_diff, aes(x=eQTL, y=TotminusNuc))+ geom_violin() + geom_jitter() +stat_compare_means() + labs(y=&quot;Difference in -log10 Pvalue (total - nuclear)&quot;)</code></pre>
-<p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> Do this but with difference in effect size.</p>
+<p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-10-1.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Do this but with difference in effect size.</p>
 <pre class="r"><code>TotinBoth_split_diffEffect= TotinBoth_split %&gt;% mutate(TotminusNuc=abs(Totalslope)-abs(Nuclearslope))
 
 ggplot(TotinBoth_split_diffEffect, aes(x=eQTL, y=TotminusNuc))+ geom_violin() + geom_jitter() +stat_compare_means() + labs(y=&quot;Difference in absolute effect size&quot;)</code></pre>
 <p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/dc2f3011e0196bb43d9af711f45b6860d38ced22/docs/figure/totSpecQTL.Rmd/unnamed-chunk-11-1.png" target="_blank">dc2f301</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Make similar plots but with all of the total apaQTLs.</p>
+<pre class="r"><code>totalAPAqtls=read.table(&quot;../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt&quot;, header = T, stringsAsFactors = F) %&gt;% dplyr::select(Gene, Peak, sid)
+
+write.table(totalAPAqtls, &quot;../data/QTLoverlap_inclusive/AlltotalAPAqtls.txt&quot;, col.names = T, row.names=F, quote=F)</code></pre>
+<pre class="bash"><code>python noninalpval4alltot.py</code></pre>
+<pre class="r"><code>totnominal=read.table(&quot;../data/QTLoverlap_inclusive/AllTotalApaQTLtotalNomincalAssociation.txt&quot;, header = F, stringsAsFactors = F, col.names=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;, &quot;Totalpval&quot;, &quot;Totalslope&quot;))
+
+allAPAboth=totnominal %&gt;% inner_join(totAPAinNuc, by=c(&quot;peakID&quot;, &quot;snp&quot;, &quot;dist&quot;)) %&gt;% separate(peakID, into=c(&quot;chr&quot;, &#39;start&#39;,&#39;end&#39;,&#39;geneid&#39;),sep=&quot;:&quot;) %&gt;% separate(geneid, into=c(&quot;gene&quot;, &#39;loc&#39;, &#39;strand&#39;, &#39;pas&#39;), sep=&quot;_&quot;) %&gt;% mutate(ID=paste(gene, snp,sep=&quot;:&quot;), eQTL=ifelse(ID %in% sigTID$ID, &quot;Yes&quot;, &quot;No&quot;)) %&gt;% mutate(Totlog10= -log10(Totalpval),Nuclog10= -log10(Nuclearpval)) %&gt;% mutate(Total_Specific=ifelse(ID %in% TotinBoth_split_diff$ID, &quot;Yes&quot;, &quot;No&quot;))
+
+
+ggplot(allAPAboth, aes(x=Totlog10,y=Nuclog10, col=Total_Specific)) +geom_point(alpha=.3) + labs(x=&quot;-log10(Total pvalue)&quot;, y=&quot;-log10(Nuclear pvalue&quot;, title=&quot;All total apaQTLs colored by fraction specificity&quot;) +geom_density_2d() </code></pre>
+<p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(allAPAboth, aes(y=Totlog10, x=Total_Specific)) + geom_boxplot()+geom_jitter()  + stat_compare_means() + labs(y=&quot;-log10(Total Pvalue)&quot;)</code></pre>
+<p><img src="figure/totSpecQTL.Rmd/unnamed-chunk-14-2.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
