@@ -131,3 +131,29 @@ TotinBoth_split_diffEffect= TotinBoth_split %>% mutate(TotminusNuc=abs(Totalslop
 ggplot(TotinBoth_split_diffEffect, aes(x=eQTL, y=TotminusNuc))+ geom_violin() + geom_jitter() +stat_compare_means() + labs(y="Difference in absolute effect size")
 ```
 
+Make similar plots but with all of the total apaQTLs.  
+
+```{r}
+totalAPAqtls=read.table("../data/apaQTLs/Total_apaQTLs4pc_5fdr.txt", header = T, stringsAsFactors = F) %>% dplyr::select(Gene, Peak, sid)
+
+write.table(totalAPAqtls, "../data/QTLoverlap_inclusive/AlltotalAPAqtls.txt", col.names = T, row.names=F, quote=F)
+```
+
+```{bash,eval=F}
+python noninalpval4alltot.py
+```
+
+```{r}
+totnominal=read.table("../data/QTLoverlap_inclusive/AllTotalApaQTLtotalNomincalAssociation.txt", header = F, stringsAsFactors = F, col.names=c("peakID", "snp", "dist", "Totalpval", "Totalslope"))
+
+allAPAboth=totnominal %>% inner_join(totAPAinNuc, by=c("peakID", "snp", "dist")) %>% separate(peakID, into=c("chr", 'start','end','geneid'),sep=":") %>% separate(geneid, into=c("gene", 'loc', 'strand', 'pas'), sep="_") %>% mutate(ID=paste(gene, snp,sep=":"), eQTL=ifelse(ID %in% sigTID$ID, "Yes", "No")) %>% mutate(Totlog10= -log10(Totalpval),Nuclog10= -log10(Nuclearpval)) %>% mutate(Total_Specific=ifelse(ID %in% TotinBoth_split_diff$ID, "Yes", "No"))
+
+
+ggplot(allAPAboth, aes(x=Totlog10,y=Nuclog10, col=Total_Specific)) +geom_point(alpha=.3) + labs(x="-log10(Total pvalue)", y="-log10(Nuclear pvalue", title="All total apaQTLs colored by fraction specificity") +geom_density_2d() 
+
+
+ggplot(allAPAboth, aes(y=Totlog10, x=Total_Specific)) + geom_boxplot()+geom_jitter()  + stat_compare_means() + labs(y="-log10(Total Pvalue)")
+```
+
+
+
