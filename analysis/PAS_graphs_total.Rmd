@@ -18,6 +18,8 @@ require("dplyr")
 #install.packages("latticeExtra")
 require("tidyr")
 require(latticeExtra)
+library(reshape2)
+library(ggplot2)
 ```
 
 The current data frame has two columns - ID, and meanUsage. ID is a very long string containing a lot of currently irrelevant information. In this step, I am trying to solely get the type of the PAS from the ID column in the data frame along with its respective mean usage. To do this, I first read in the data frame. I then split the ID column into 5 columns, each for it's respective type of information. Though I only need "type" it is easier to access the other information if needed in the future. Then, I create a new data frame containing "type" and "mean usage".
@@ -345,4 +347,29 @@ doubleYScale(obj1, obj6,add.ylab2 =TRUE)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 
+
+```{r}
+Utr3propfixed = Utr3prop %>% dplyr::rename("UTR"=cutoff.numbers)
+intronpropfixed= intronprop %>% dplyr::rename("intron"=cutoff.numbers)
+utrandIntron=Utr3propfixed %>% inner_join(intronpropfixed,by="xval")
+
+utrandIntron_melt=melt(utrandIntron, id.vars = "xval", variable.name = "location", value.name = "prop")
+
+
+full=as.data.frame(cbind(cutoff_total, utrandIntron))
+
+
+full_g=full %>% gather("Location", "prop", -cutoff, -xval)
+mycolors <- c("data1"="purple")
+
+
+fixedplotfig1=ggplot(data=full_g, aes(x=xval))+ geom_line(aes(y=cutoff),col="purple",size=3)+ geom_line(aes(x=xval, y=prop*30000 , col=Location),size=3)+  scale_y_continuous(sec.axis = sec_axis( ~./30000 , name="Proportion of PAS")) + labs(y="Number of PAS",title="Intronic PAS are used at low frequencies in total fraction",x="Usage cutoff")+  scale_color_brewer(palette = "Dark2") +theme(axis.title.y.left = element_text(color = mycolors["data1"]), axis.text.y.left = element_text(color = mycolors["data1"]))
+
+
+```
+
+
+```{r}
+fixedplotfig1
+```
 
