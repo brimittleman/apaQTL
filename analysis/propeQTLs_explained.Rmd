@@ -241,7 +241,7 @@ AllPropDF$Prop=as.numeric(AllPropDF$Prop)
 Plot this:
 
 ```{r}
-ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + labs(title="Proportion of eQTLs explained by apaQTLs", y="Proportion", "P-Value cut off") + scale_fill_manual(values=c("orange", "blue"))
+ggplot(AllPropDF, aes(x=cutoffs, y=Prop, fill=Status)) + geom_bar(position = "dodge", stat="identity") + facet_grid(~Fraction) + labs(title="Proportion of eQTLs explained by apaQTLs", y="Proportion", "P-Value cut off") + scale_fill_manual(values=c("orange", "blue")) + theme(axis.text.x = element_text(angle = 90, hjust = .5))
 ```
 
 ##Concordance of directions for intronic pas usage and eQTL  

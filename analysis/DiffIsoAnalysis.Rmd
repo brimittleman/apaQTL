@@ -297,7 +297,7 @@ sum(effectsize_deltaPAU_nuclear_locProp$nlocnuclear)
 effectsize_deltaPAUProp_both_melt_sm=effectsize_deltaPAUProp_both_melt %>% filter(loc=="intron" | loc=="utr3")
 
 
-ggplot(effectsize_deltaPAUProp_both_melt_sm, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet")) + labs(title="Differencially Used PAS",x="", y="Proportion of All PAS at Location") +scale_x_discrete(labels = c('Intronic',"3' UTR")) +theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  theme(legend.position ="bottom", legend.direction = "horizontal") +  theme(panel.background = element_blank(),text = element_text(size=16), plot.title = element_text(size = 20, face = "bold"),axis.text.x = element_text(size=14),axis.text.y = element_text(size=14))
+ggplot(effectsize_deltaPAUProp_both_melt_sm, aes(x=loc, y=Proportion, by=Fraction, fill=Fraction)) + geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c("deepskyblue3","darkviolet"), labels=c("Nuclear", "Total mRNA")) + labs(title="Proportion of Intronic and 3' UTR \nPAS Differencially Used",x="", y="Proportion of PAS") +scale_x_discrete(labels = c('Intronic PAS',"3' UTR PAS")) +theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  theme(legend.position ="bottom", legend.direction = "horizontal") +  theme(panel.background = element_blank(),text = element_text(size=16), plot.title = element_text(size = 16, face = "bold"),axis.text.x = element_text(size=14),axis.text.y = element_text(size=14))
 ```
 
 

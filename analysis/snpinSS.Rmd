@@ -340,7 +340,7 @@ Total
 qqplot(-log10(runif(nrow(Total_NOSS))), -log10(Total_NOSS$pval), xlab="-log10(Uniform)", ylab="-log10(pval)", main="Total Apa")
 points(sort(-log10(runif(nrow(Total_SS)))), sort(-log10(Total_SS$pval)),col= alpha("Red"))
 abline(0,1)
-legend("topleft", legend=c("SNPs in UTR PAS Signal Sites", "SNPS not in Signal Sites"),col=c("red", "black"), pch=16,bty = 'n')
+legend("topleft", legend=c("apaQTLs in UTR PAS Signal Sites", "apaQLTs not in Signal Sites"),col=c("red", "black"), pch=16,bty = 'n')
 
 ```
 Nuclear:
@@ -350,7 +350,7 @@ qqplot(-log10(runif(nrow(Nuclear_NOSS))), -log10(Nuclear_NOSS$pval),xlab="-log10
 points(sort(-log10(runif(nrow(Nuclear_SS)))), sort(-log10(Nuclear_SS$pval)),col= alpha("Red"))
 abline(0,1)
 
-legend("topleft", legend=c("SNPs in UTR PAS Signal Sites", "SNPS not in Signal Sites"),col=c("red", "black"), pch=16,bty = 'n')
+legend("topleft", legend=c("apaQTLs in UTR PAS Signal Sites", "apaQTLs not in Signal Sites"),col=c("red", "black"), pch=16,bty = 'n')
 
 ```
 

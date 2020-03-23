@@ -161,7 +161,20 @@ covariate_pc_pve_heatmap <- function(pc_df, covariate_df, title) {
 ```{r}
 covariate_pc_pve_heatmap(pca_tot_df,metadata_tot, title="Total PCs")
 
+```
+```{r subfig, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+covariate_pc_pve_heatmap(pca_tot_df,metadata_tot, title="Total PCs")
+
+```
+
+
+
+```{r}
 covariate_pc_pve_heatmap(pca_nuc_df,metadata_nuc, title="Nuclear PCs")
 
 ```
 
+```{r subfig2, include=FALSE, dev="pdf", fig.height=9, fig.width=9, crop=FALSE}
+covariate_pc_pve_heatmap(pca_nuc_df,metadata_nuc, title="Nuclear PCs")
+
+```
