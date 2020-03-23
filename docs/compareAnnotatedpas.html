@@ -434,10 +434,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb93e5d647d5181aed4311300c32a30a1ebf20ae5targetblankb93e5d6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/b93e5d647d5181aed4311300c32a30a1ebf20ae5" target="_blank">b93e5d6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeefdc398c121ec48d8824867d0ba5d584d2322f67targetblankefdc398a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/efdc398c121ec48d8824867d0ba5d584d2322f67" target="_blank">efdc398</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeb93e5d647d5181aed4311300c32a30a1ebf20ae5targetblankb93e5d6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreeefdc398c121ec48d8824867d0ba5d584d2322f67targetblankefdc398a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1247,7 +1247,6 @@ Unstaged changes:
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/TSS.Rmd
-    Modified:   analysis/apaQTLoverlap.Rmd
     Modified:   analysis/apabyeQTLstatus.Rmd
     Modified:   analysis/decayAndStability.Rmd
     Modified:   analysis/miRNAdisrupt.Rmd
@@ -1305,6 +1304,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/compareAnnotatedpas.html" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1694,6 +1710,43 @@ brimittleman
 
 ggplot(allMyPAS_group, aes(x=Loctot,col=loc, y=nAnno )) + geom_point(size=3) + labs(x=&quot;Number of PAS&quot;, y=&quot;PAS in Database&quot;,color=&quot;Location&quot;, title=&quot;Number of Identified PAS in the database&quot;) + scale_color_discrete(labels=c(&quot;Coding&quot;, &quot;5KB downstream&quot;, &quot;Intronic&quot;, &quot;3&#39; UTR&quot;, &quot;5&#39; UTR&quot;)) </code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-9-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Look at total and nuclear seperatly.</p>
 <pre class="bash"><code>python NuclearPAS_5per.bed.py
 
@@ -1712,6 +1765,43 @@ sort -k1,1 -k2,2n ../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.bed &gt; ../
 ggplot(Totaldist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)</code></pre>
 <pre><code>Warning: Removed 11926 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-12-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Totaldist_withAnno=Totaldist %&gt;% filter(abs(distance)&lt;=10) %&gt;% select(myPAS,anno) %&gt;% unique() %&gt;% separate(myPAS, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;)
 
 allTotalPAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Total.5perc.sort.bed&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;PASID&quot;, &quot;score&quot;,&quot;strand&quot;))  %&gt;% separate(PASID, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(withAnno=ifelse(pasNum %in% Totaldist_withAnno$pasNum, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
@@ -1740,6 +1830,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-14-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-14-1.png" target="_blank">74d7b8d</a>
@@ -1774,6 +1875,43 @@ brimittleman
 ggplot(Nucleardist,aes(x=distance))+ geom_histogram(bins=300) + xlim(-25, 25)</code></pre>
 <pre><code>Warning: Removed 17008 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-15-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>Nucleardist_withAnno=Nucleardist %&gt;% filter(abs(distance)&lt;=10) %&gt;% select(myPAS,anno) %&gt;% unique() %&gt;% separate(myPAS, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;)
 
 allNuclearPAS=read.table(&quot;../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.sort.bed&quot;,stringsAsFactors = F, col.names = c(&quot;chr&quot;,&quot;start&quot;,&quot;end&quot;, &quot;PASID&quot;, &quot;score&quot;,&quot;strand&quot;))  %&gt;% separate(PASID, into=c(&quot;pasNum&quot;, &quot;geneID&quot;, &quot;loc&quot;), sep=&quot;:&quot;) %&gt;% mutate(withAnno=ifelse(pasNum %in% Nucleardist_withAnno$pasNum, &quot;Yes&quot;,&quot;No&quot;))</code></pre>
@@ -1802,6 +1940,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-17-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/74d7b8dfdbd7d43cf1b803821d9773d4455fedd2/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-17-1.png" target="_blank">74d7b8d</a>
@@ -1856,6 +2005,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-18-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/e2df41e2f5765bf76c063d29c5437237f230322c/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-18-1.png" target="_blank">e2df41e</a>
@@ -1922,6 +2082,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-19-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/brimittleman/apaQTL/blob/e2df41e2f5765bf76c063d29c5437237f230322c/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-19-1.png" target="_blank">e2df41e</a>
 </td>
 <td>
@@ -1964,6 +2135,43 @@ brimittleman
 ggplot(TotalSpec,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;Total  Specific PAS by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-21-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Used more in nuclear:</p>
 </div>
 <div id="by-usage" class="section level2">
@@ -2004,6 +2212,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-22-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/brimittleman/apaQTL/blob/e2df41e2f5765bf76c063d29c5437237f230322c/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-22-1.png" target="_blank">e2df41e</a>
@@ -2049,6 +2268,43 @@ allNuclearPAS_50= allNuclearPAS %&gt;% mutate(PAS=paste(&quot;peak&quot;, pasNum
 ggplot(allNuclearPAS_50,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;Nuclear PAS 50% by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;) </code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-22-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-2">
+Past versions of unnamed-chunk-22-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-22-2.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>NuclearMeanUsage_75= NuclearMeanUsage %&gt;% filter(meanUsage &gt;.75)
 
 
@@ -2057,6 +2313,43 @@ allNuclearPAS_75= allNuclearPAS %&gt;% mutate(PAS=paste(&quot;peak&quot;, pasNum
 ggplot(allNuclearPAS_75,aes(x=loc,fill=withAnno)) + geom_histogram(stat=&quot;count&quot;) + labs(title = &quot;Nuclear PAS 75% by annotated PAS within 10bp&quot;) +scale_fill_brewer(palette = &quot;Dark2&quot;) </code></pre>
 <pre><code>Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-22-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-3">
+Past versions of unnamed-chunk-22-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-22-3.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Proportion of previosly identified:</p>
 <pre class="r"><code>allNuclearPAS %&gt;% group_by(withAnno) %&gt;% summarise(All=n()) %&gt;% ungroup() %&gt;% mutate(Prop=All/sum(All))</code></pre>
 <pre><code># A tibble: 2 x 3
@@ -2121,6 +2414,43 @@ AllCuttoff=as.data.frame(cbind(cutoff=cutoffs,Nuclear=propYes, Total=propYesTot)
 
 ggplot(AllCuttoff_melt, aes(x=cutoff, col=Fraction, y= PropwithAnno)) + geom_line(size=2) + scale_color_brewer(palette = &quot;Dark2&quot;) + labs(title=&quot;Cumulative proportion of PAS in annotation \n by usage filter&quot;, y=&quot;Proportion in Annotation&quot;, x=&quot;Usage Filter&quot;)</code></pre>
 <p><img src="figure/compareAnnotatedpas.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
+Past versions of unnamed-chunk-25-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-25-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/ae6e107c939e5f1aedcbe1e5c89f31186153af40/docs/figure/compareAnnotatedpas.Rmd/unnamed-chunk-25-1.png" target="_blank">ae6e107</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
