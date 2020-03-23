@@ -58,9 +58,9 @@ total_combination$type <- factor(total_combination$type, levels=c("total_none", 
 
 Finally, I create my graphs, one for nuclear and the other for total. geom_col allows me to make bar graphs based off of heights in the data, instead of frequency, which geom_bar does. I stacked the bar plots using three proportions - mapped with mispriming, mapped without mispriming, and unmapped. 
 ```{r pressure, echo=FALSE}
-ggplot(data = nuc_combination, aes(x = nuc_lines, y = count, fill = type)) + geom_col() + theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + xlab("lines") + ylab("proportions") + scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP")) +  ggtitle("nuclear lines vs. proportion")
+ggplot(data = nuc_combination, aes(x = nuc_lines, y = count, fill = type)) + geom_col() + theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + xlab("lines") + ylab("proportion of reads") + scale_fill_brewer(palette="Dark2", name = "", labels = c("unmapped", "Mapped", "Clean Mapped")) +  ggtitle("Proportion of reads mapped by Nuclear Library")
 
-ggplot(data = total_combination, aes(x = total_lines, y = count, fill = type)) + geom_col() + theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + xlab("lines") + ylab("proportions") + scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP")) +  ggtitle("total lines vs. proportion")
+ggplot(data = total_combination, aes(x = total_lines, y = count, fill = type)) + geom_col() + theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + xlab("lines") + ylab("proportion of reads") + scale_fill_brewer(palette="Dark2", name = "", labels = c("unmapped", "Mapped", "Clean Mapped")) +  ggtitle("Proportion of reads mapped by Total mRNA library")
 
 
 ```
@@ -77,7 +77,7 @@ nuclear_melt=melt(nuclear,id.vars = c("fraction", "line"), variable.name = "read
 ```{r}
 
 
-ggplot(nuclear_melt, aes(x=line, y=Number, fill=read))+ geom_bar(stat="identity")+ scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP"))+  theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + labs(x="lines", y="Number of Reads", title="Nuclear Fraction")  
+ggplot(nuclear_melt, aes(x=line, y=Number, fill=read))+ geom_bar(stat="identity")+ scale_fill_brewer(palette="Dark2", name = "", labels = c("unmapped", "Mapped", "Clean Mapped"))+  theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + labs(x="lines", y="Number of Reads", title="Number of reads mapped in Nuclear libraries")  
 ```
 ```{r}
 total_melt=melt(total,id.vars = c("fraction", "line"), variable.name = "read", value.name = "Number")
@@ -88,5 +88,5 @@ total_melt=melt(total,id.vars = c("fraction", "line"), variable.name = "read", v
 ```{r}
 
 
-ggplot(total_melt, aes(x=line, y=Number, fill=read))+ geom_bar(stat="identity")+ scale_fill_brewer(palette="Dark2", name = "type of read:", labels = c("unmapped", "mapped + MP", "mapped + noMP"))+  theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + labs(x="lines", y="Number of Reads", title="Total Fraction")  
+ggplot(total_melt, aes(x=line, y=Number, fill=read))+ geom_bar(stat="identity")+ scale_fill_brewer(palette="Dark2", name = "", labels = c("unmapped", "Mapped", "Clean Mapped"))+  theme(axis.text.x = element_text( hjust = 0,vjust = 1, size = 6, angle = 90)) + labs(x="lines", y="Number of Reads", title="Number of reads mapped in Total mRNA library")  
 ```
