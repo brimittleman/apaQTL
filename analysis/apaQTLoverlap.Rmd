@@ -85,8 +85,8 @@ summary(lm(log10(TotBoth$slope) ~ log10(TotBoth$Originalslope)))
 
 ```
 
-```{r}
-ggplot(TotBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method="lm") + labs(title="Total apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total") + geom_density_2d(col="red")
+```{r, supfig1}
+ggplot(TotBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method="lm") + labs(title="Total mRNA apaQTL effect sizes", x="Effect size in Nuclear",y="Effect size in Total mRNA") + geom_density_2d(col="red")
 ```
 
 ```{r}
@@ -94,7 +94,7 @@ NucBoth= nucAPAinTot %>% inner_join(nucAPAinNuc,by=c("peakID", "snp"))
 summary(lm(log10(NucBoth$slope) ~ log10(NucBoth$Originalslope)))
 ```
 
-```{r}
-ggplot(NucBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total",y="Effect size in Nuclear") + geom_density_2d(col="red")
+```{r, supfig2}
+ggplot(NucBoth, aes(x=log10(Originalslope), y=log10(slope)))+geom_point() + geom_smooth(method="lm") + labs(title="Nuclear apaQTL effect sizes", x="Effect size in Total mRNA",y="Effect size in Nuclear") + geom_density_2d(col="red")
 ```
 
