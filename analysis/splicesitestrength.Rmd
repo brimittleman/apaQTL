@@ -323,7 +323,7 @@ IntronSiteswRes_decG= IntronSiteswRes_dec%>% group_by(decile_rank) %>% summarise
 ```
 
 ```{r}
-ggplot(IntronSiteswRes_decG, aes(x=decile_rank, y=PAS)) +geom_bar(stat="identity") + labs(x="5' Splice Site strength Decile", y= "Number of Intronic PAS", title="Number of intronic PAS by 5' Splice site strength")
+ggplot(IntronSiteswRes_decG, aes(x=decile_rank, y=PAS)) +geom_bar(stat="identity") + labs(x="5’ splice site strength (MaxEntScore) decile of introns", y= "Number of Intronic PAS", title="Number of intronic PAS by 5' Splice site strength")
 ```
 
 hypergeometric significance  
@@ -345,3 +345,30 @@ phyper(x, m, n, k,lower.tail=F)
 
 
 This means there is significant enrichment for PAS in introns with the weakest 5' splice sites. 
+
+
+Enrichment:  
+(b/n) / (B/N)
+
+Enrichment (N, B, n, b) is defined as follows:
+N - is the total number of genes
+B - is the total number of genes associated with a specific GO term
+n - is the number of genes in the top of the user's input list or in the target set when appropriate
+b - is the number of genes in the intersection
+Enrichment = (b/n) / (B/N)
+
+
+N= number of introns 
+B= number of introns in top decile
+n=number of PAS 
+b= number of PAS in top decile 
+```{r}
+N=nrow(IntronSiteswRes)
+B= nrow(IntronSiteswRes_dec %>% filter(decile_rank==1))
+n= sum(IntronSiteswRes_dec$nPAS)
+b=2116
+
+(b/n)/(B/N)
+```
+
+¸
