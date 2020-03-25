@@ -343,7 +343,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-20
+<strong>Last updated:</strong> 2020-03-25
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -458,10 +458,10 @@ relative
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/d2056c138f58e53cebadb6e957b5138f8b654e89" target="_blank">d2056c1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree15396143af316bbc3dead711e6bfc71e7e08518dtargetblank1539614a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/brimittleman/apaQTL/tree/15396143af316bbc3dead711e6bfc71e7e08518d" target="_blank">1539614</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtreed2056c138f58e53cebadb6e957b5138f8b654e89targetblankd2056c1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcombrimittlemanapaQTLtree15396143af316bbc3dead711e6bfc71e7e08518dtargetblank1539614a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -471,6 +471,7 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    code/.Rhistory
     Ignored:    data/.DS_Store
     Ignored:    data/ProSeq/
     Ignored:    output/.DS_Store
@@ -505,6 +506,10 @@ Untracked files:
     Untracked:  code/._BothFracDTPlotGeneRegions.sh
     Untracked:  code/._BothFracDTPlotGeneRegions_normalized.sh
     Untracked:  code/._ClosestTissuePAS.sh
+    Untracked:  code/._ColocApAeQTL.sh
+    Untracked:  code/._ColocApAeQTL_PM.sh
+    Untracked:  code/._Coloc_generalAPAeQTL.R
+    Untracked:  code/._Coloc_generalAPAeQTL_PM.R
     Untracked:  code/._CreateRNALZforeQTLs.sh
     Untracked:  code/._CreateRNALZnucAPAqtls.sh
     Untracked:  code/._DistPAS2Sig_RandomIntron.py
@@ -558,6 +563,8 @@ Untracked files:
     Untracked:  code/._TESplots150bp.sh
     Untracked:  code/._TESplots200bp.sh
     Untracked:  code/._TotalPAS_5perc.bed.py
+    Untracked:  code/._Totspec_example.sh
+    Untracked:  code/._Totspec_exampleTOT.sh
     Untracked:  code/._Untitled
     Untracked:  code/._ZipandTabPheno.sh
     Untracked:  code/._aAPAqtl_nominal39ind.sh
@@ -681,6 +688,8 @@ Untracked files:
     Untracked:  code/._namePeaks.py
     Untracked:  code/._netseqDTplot1stIntron.sh
     Untracked:  code/._netseqFC.sh
+    Untracked:  code/._nominavalfortotspec.py
+    Untracked:  code/._noninalpval4alltot.py
     Untracked:  code/._nucQTLGWAS.py
     Untracked:  code/._nucSpecQTLineData.py
     Untracked:  code/._nucSpeceffectsize.py
@@ -740,8 +749,10 @@ Untracked files:
     Untracked:  code/._submit-snakemakefiltPAS.sh
     Untracked:  code/._subsetAPAnotEorPgene.py
     Untracked:  code/._subsetAPAnotEorPgene_2versions.py
+    Untracked:  code/._subsetAPAnotEorR.py
     Untracked:  code/._subsetApanoteGene.py
     Untracked:  code/._subsetApanoteGene_2versions.py
+    Untracked:  code/._subsetNootherQTL.py
     Untracked:  code/._subsetUnexplainedeQTLs.py
     Untracked:  code/._subsetVCF_SS.sh
     Untracked:  code/._subsetVCF_noSSregions.sh
@@ -760,6 +771,9 @@ Untracked files:
     Untracked:  code/._testVerifyBam.sh
     Untracked:  code/._tissuePAS2hg19.sh
     Untracked:  code/._totSeceffectsize.py
+    Untracked:  code/._totspecinE.py
+    Untracked:  code/._totspecqtlFacetBoxplots.sh
+    Untracked:  code/._totspecqtlFacetBoxplotsTOT.sh
     Untracked:  code/._twentyBPupstreamPAS.py
     Untracked:  code/._utrdms2saf.py
     Untracked:  code/._vcf2bed.py
@@ -797,6 +811,14 @@ Untracked files:
     Untracked:  code/BothFracDTPlotGeneRegions_norm.err
     Untracked:  code/BothFracDTPlotGeneRegions_norm.out
     Untracked:  code/ClosestTissuePAS.sh
+    Untracked:  code/ColocApAeQTL.err
+    Untracked:  code/ColocApAeQTL.out
+    Untracked:  code/ColocApAeQTL.sh
+    Untracked:  code/ColocApAeQTLPM.err
+    Untracked:  code/ColocApAeQTLPM.out
+    Untracked:  code/ColocApAeQTL_PM.sh
+    Untracked:  code/Coloc_generalAPAeQTL.R
+    Untracked:  code/Coloc_generalAPAeQTL_PM.R
     Untracked:  code/CreateRNALZforeQTLs.sh
     Untracked:  code/CreateRNALZnucAPAqtls.sh
     Untracked:  code/DistPAS2Sig_RandomIntron.py
@@ -875,6 +897,12 @@ Untracked files:
     Untracked:  code/Tissueclosestannotated.out
     Untracked:  code/Total_example.err
     Untracked:  code/Total_example.out
+    Untracked:  code/Totspec_example.err
+    Untracked:  code/Totspec_example.out
+    Untracked:  code/Totspec_example.sh
+    Untracked:  code/Totspec_exampleTOT.err
+    Untracked:  code/Totspec_exampleTOT.out
+    Untracked:  code/Totspec_exampleTOT.sh
     Untracked:  code/Untitled
     Untracked:  code/YRI_LCL.vcf.gz
     Untracked:  code/YRI_LCL_chr1.vcf.gz.log
@@ -961,6 +989,8 @@ Untracked files:
     Untracked:  code/netseqFC.err
     Untracked:  code/netseqFC.out
     Untracked:  code/neyDTPlot4thintron.err
+    Untracked:  code/nominavalfortotspec.py
+    Untracked:  code/noninalpval4alltot.py
     Untracked:  code/nucspecinE.py
     Untracked:  code/parseALLSSres.py
     Untracked:  code/parseLDRes.py
@@ -1040,6 +1070,8 @@ Untracked files:
     Untracked:  code/sortindexRNABam.out
     Untracked:  code/specAPAinE.py
     Untracked:  code/splicesite2fasta.py
+    Untracked:  code/subsetAPAnotEorR.py
+    Untracked:  code/subsetNootherQTL.py
     Untracked:  code/subsetvcf_SS.err
     Untracked:  code/subsetvcf_SS.out
     Untracked:  code/subsetvcf_noSS.err
@@ -1061,6 +1093,13 @@ Untracked files:
     Untracked:  code/test_verifybam.err
     Untracked:  code/test_verifybam.out
     Untracked:  code/tissuePAS2hg19.sh
+    Untracked:  code/totspecinE.py
+    Untracked:  code/totspecqtlFacetBoxplots.err
+    Untracked:  code/totspecqtlFacetBoxplots.out
+    Untracked:  code/totspecqtlFacetBoxplots.sh
+    Untracked:  code/totspecqtlFacetBoxplotsTOT.err
+    Untracked:  code/totspecqtlFacetBoxplotsTOT.out
+    Untracked:  code/totspecqtlFacetBoxplotsTOT.sh
     Untracked:  code/vcf_keepsnps.err
     Untracked:  code/vcf_keepsnps.out
     Untracked:  code/wrap_verifybam.err
@@ -1072,6 +1111,7 @@ Untracked files:
     Untracked:  data/AnnotatedPAS/
     Untracked:  data/ApaByEgene/
     Untracked:  data/ApaByPgene/
+    Untracked:  data/ApaByRgene/
     Untracked:  data/BadLines/
     Untracked:  data/BaseComp/
     Untracked:  data/Battle_pQTL/
@@ -1087,7 +1127,9 @@ Untracked files:
     Untracked:  data/FiveMergedBam/
     Untracked:  data/FlaggedPAS/
     Untracked:  data/GWAS_overlap/
+    Untracked:  data/Geuvadis/
     Untracked:  data/GeuvadisRNA/
+    Untracked:  data/GeuvadiseQTL/
     Untracked:  data/HMMqtls/
     Untracked:  data/LDSR_annotations/
     Untracked:  data/LZ_both/
@@ -1136,6 +1178,7 @@ Untracked files:
     Untracked:  data/bw/
     Untracked:  data/bw_norm/
     Untracked:  data/coloc/
+    Untracked:  data/coloc_PM/
     Untracked:  data/eCLip/
     Untracked:  data/eQTL_LZ/
     Untracked:  data/eQTLs/
@@ -1183,6 +1226,8 @@ Untracked files:
     Untracked:  data/sort_clean/
     Untracked:  data/sort_waspfilter/
     Untracked:  data/splicesite/
+    Untracked:  data/totSpecExampleQTLPlots/
+    Untracked:  data/totSpecExampleQTLPlots_tot/
     Untracked:  data/twoMech/
     Untracked:  data/vareQTLvarAPAqtl/
     Untracked:  data/verifyBAM/
@@ -1222,11 +1267,11 @@ Untracked files:
     Untracked:  run_verifybam517N.out
 
 Unstaged changes:
-    Modified:   analysis/ExploreNpas.Rmd
     Modified:   analysis/NuclearSpecIncludeNotTested.Rmd
     Modified:   analysis/PASdescriptiveplots.Rmd
     Modified:   analysis/Readdistagainstfeatures.Rmd
     Modified:   analysis/TSS.Rmd
+    Modified:   analysis/apabyeQTLstatus.Rmd
     Modified:   analysis/decayAndStability.Rmd
     Modified:   analysis/miRNAdisrupt.Rmd
     Modified:   analysis/nascenttranscription.Rmd
@@ -1238,6 +1283,7 @@ Unstaged changes:
     Modified:   code/Script4NuclearQTLexamples.sh
     Modified:   code/Script4TotalQTLexamples.sh
     Modified:   code/apaQTLsnake.err
+    Modified:   code/apaqtlfacetboxplots.R
     Modified:   code/environment.yaml
     Modified:   code/run_qtlFacetBoxplots.sh
     Deleted:    code/test.txt
@@ -1280,6 +1326,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/15396143af316bbc3dead711e6bfc71e7e08518d/analysis/splicesitestrength.Rmd" target="_blank">1539614</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-03-25
+</td>
+<td>
+fix x axis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/brimittleman/apaQTL/af310825be3f08c6d4b3df99280c8013ad3910b9/docs/splicesitestrength.html" target="_blank">af31082</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1376,12 +1456,12 @@ add initial res for splice site
 <pre><code>This is workflowr version 1.6.0
 Run ?workflowr for help getting started</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>── Attaching packages ───────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>✔ ggplot2 3.1.1       ✔ purrr   0.3.2  
 ✔ tibble  2.1.1       ✔ dplyr   0.8.0.1
 ✔ tidyr   0.8.3       ✔ stringr 1.3.1  
 ✔ readr   1.3.1       ✔ forcats 0.3.0  </code></pre>
-<pre><code>── Conflicts ───────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>── Conflicts ──────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggpubr)</code></pre>
@@ -1732,6 +1812,43 @@ IntronSiteswRes=IntronSites %&gt;% bind_cols(IntronRes) %&gt;% mutate(intron=pas
 <p>Now I need to decide the cutoffs:</p>
 <pre class="r"><code>ggplot(IntronSiteswRes, aes(x=maxentscore)) + geom_density()</code></pre>
 <p><img src="figure/splicesitestrength.Rmd/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-27-1">
+Past versions of unnamed-chunk-27-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-27-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/af310825be3f08c6d4b3df99280c8013ad3910b9/docs/figure/splicesitestrength.Rmd/unnamed-chunk-27-1.png" target="_blank">af31082</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(IntronSiteswRes$maxentscore)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 -48.470   7.130   8.680   7.514   9.800  11.810 </code></pre>
@@ -1743,8 +1860,45 @@ IntronSiteswRes=IntronSites %&gt;% bind_cols(IntronRes) %&gt;% mutate(intron=pas
 <pre class="r"><code>IntronSiteswRes_dec= IntronSiteswRes %&gt;% mutate(decile_rank = ntile(IntronSiteswRes$maxentscore,10))
 
 IntronSiteswRes_decG= IntronSiteswRes_dec%&gt;% group_by(decile_rank) %&gt;% summarise(PAS=sum(nPAS))</code></pre>
-<pre class="r"><code>ggplot(IntronSiteswRes_decG, aes(x=decile_rank, y=PAS)) +geom_bar(stat=&quot;identity&quot;) + labs(x=&quot;5&#39; Splice Site strength Decile&quot;, y= &quot;Number of Intronic PAS&quot;, title=&quot;Number of intronic PAS by 5&#39; Splice site strength&quot;)</code></pre>
+<pre class="r"><code>ggplot(IntronSiteswRes_decG, aes(x=decile_rank, y=PAS)) +geom_bar(stat=&quot;identity&quot;) + labs(x=&quot;5’ splice site strength (MaxEntScore) decile of introns&quot;, y= &quot;Number of Intronic PAS&quot;, title=&quot;Number of intronic PAS by 5&#39; Splice site strength&quot;)</code></pre>
 <p><img src="figure/splicesitestrength.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-29-1">
+Past versions of unnamed-chunk-29-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-29-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/brimittleman/apaQTL/blob/af310825be3f08c6d4b3df99280c8013ad3910b9/docs/figure/splicesitestrength.Rmd/unnamed-chunk-29-1.png" target="_blank">af31082</a>
+</td>
+<td>
+brimittleman
+</td>
+<td>
+2020-02-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>hypergeometric significance</p>
 <pre class="r"><code>x=2116
 m=IntronSiteswRes_dec %&gt;% filter(decile_rank == 1) %&gt;% nrow()
@@ -1760,6 +1914,18 @@ which(grepl(max(dhyper(1:x, m, n, k)), dhyper(1:x, m, n, k)))</code></pre>
 <pre class="r"><code>phyper(x, m, n, k,lower.tail=F)</code></pre>
 <pre><code>[1] 8.065256e-87</code></pre>
 <p>This means there is significant enrichment for PAS in introns with the weakest 5’ splice sites.</p>
+<p>Enrichment:<br />
+(b/n) / (B/N)</p>
+<p>Enrichment (N, B, n, b) is defined as follows: N - is the total number of genes B - is the total number of genes associated with a specific GO term n - is the number of genes in the top of the user’s input list or in the target set when appropriate b - is the number of genes in the intersection Enrichment = (b/n) / (B/N)</p>
+<p>N= number of introns B= number of introns in top decile n=number of PAS b= number of PAS in top decile</p>
+<pre class="r"><code>N=nrow(IntronSiteswRes)
+B= nrow(IntronSiteswRes_dec %&gt;% filter(decile_rank==1))
+n= sum(IntronSiteswRes_dec$nPAS)
+b=2116
+
+(b/n)/(B/N)</code></pre>
+<pre><code>[1] 1.510936</code></pre>
+<p>¸</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
