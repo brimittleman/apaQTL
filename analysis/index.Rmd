@@ -201,3 +201,5 @@ Revisions (Thank you to the reviewers for suggestions)
 * [Test strength of splice site with PAS usage](splicesitestrength.html)
 
 * [RiboQTL genes in apaQTL data](riboQQplot.html)
+
+* [double check effect size direction](intronicapaexamples.html)

@@ -1,0 +1,172 @@
+---
+title: "Example intronic APA qtls and eQTLs"
+author: "Briana Mittleman"
+date: "5/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+
+```
+
+
+Check to make sure effect size are the same direction. Check top examples from the eQTL vs intronic apaQTL plot.  
+
+```{r}
+eQTLeffect=read.table("../data/molQTLs/fastqtl_qqnorm_RNAseq_phase2.fixed.nominal.AllNomRes.GeneName_snploc.txt", stringsAsFactors = F, col.names = c("gene","snp","dist", "pval", "eQTL_es")) %>% select(gene, snp, eQTL_es)
+
+```
+
+```{r}
+nomnames=c("peakID", 'snp','dist', 'pval', 'slope')
+nuclearapaUnexplained=read.table("../data/overlapeQTL_try2/apaNuclear_unexplainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp)  %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>% dplyr::slice(which.min(adjPval))
+
+nuclearapaexplained=read.table("../data/overlapeQTL_try2/apaNuclear_explainedQTLs.txt", stringsAsFactors = F, col.names = nomnames) %>% separate(peakID, into=c("chr","start","end","geneID"), sep=":") %>% separate(geneID, into=c("gene", "loc", "strand", "PASnum"), sep="_") %>% group_by(gene, snp) %>%  mutate(nPeaks=n(), adjPval=pval* nPeaks) %>%  dplyr::slice(which.min(adjPval))
+
+
+alleQTLS_nuclear=bind_rows(nuclearapaUnexplained,nuclearapaexplained) %>% filter(loc=="intron") %>% inner_join(eQTLeffect, by=c("gene","snp"))
+
+```
+
+```{r}
+ggplot(alleQTLS_nuclear,aes(x=eQTL_es, y=slope)) + geom_point() + geom_smooth(method = "lm") + geom_text(aes(label=gene), nudge_y = .1)
+```
+Number of PAS per gene: 
+
+```{r}
+PAS=read.table("../data/PAS/APApeak_Peaks_GeneLocAnno.Nuclear.5perc.bed",col.names = c("chr", "start", "end", "name", "score", "strand"), stringsAsFactors = F) %>% separate(name, into=c('num', 'gene', 'loc'),sep=":" ) 
+
+PASscore= PAS %>% select(num, score) %>% mutate(PASnum=paste("peak", num, sep=""))
+
+PASgene=PAS %>% group_by(gene) %>% summarise(nPAS=n())
+```
+
+
+```{r}
+alleQTLS_nuclear_genenum= alleQTLS_nuclear %>% inner_join(PASgene, by="gene")
+
+alleQTLS_nuclear_score= alleQTLS_nuclear %>% inner_join(PASscore, by="PASnum")
+```
+
+
+```{r}
+ggplot(alleQTLS_nuclear_genenum,aes(x=eQTL_es, y=slope,col=nPAS)) + geom_point() + geom_smooth(method = "lm") + geom_text(aes(label=gene), nudge_y = .1) 
+
+
+ggplot(alleQTLS_nuclear_score,aes(x=eQTL_es, y=slope,col=score)) + geom_point() + geom_smooth(method = "lm") + geom_text(aes(label=gene), nudge_y = .1) 
+```
+```{r}
+PAS %>% filter(gene=="MTHFSD")
+
+PAS %>% filter(gene=="TMEM156")
+```
+
+plot expression and apa:
+
+```{r}
+genohead=as.data.frame(read.table("../data/ExampleQTLPlots/genotypeHeader.txt", stringsAsFactors = F, header = F)[,10:128] %>% t()) %>% rename("Ind"=V1)
+
+genotype=as.data.frame(read.table("../data/ExampleQTLPlots/TMEM156_NuclearPeaksGenotype.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
+```
+
+ENSG00000121895	TMEM156
+
+rs2711981
+
+ref = c 
+t=alt
+```{r}
+RNAhead=as.data.frame(read.table("../data/molPhenos/RNAhead.txt", stringsAsFactors = F, header = F)[,5:73] %>% t())
+
+RNApheno=as.data.frame(read.table("../data/molPhenos/RNA_TMEM156.txt", stringsAsFactors = F, header = F) [,5:73] %>% t())
+```
+
+
+```{r}
+
+full_geno=bind_cols(Ind=genohead$Ind, dose=genotype$V1) %>% mutate(numdose=round(dose), genotype=ifelse(numdose==0, "CC", ifelse(numdose==1, "CT", "TT")))
+
+
+full_pheno=bind_cols(Ind=RNAhead$V1, Expression=RNApheno$V1)
+
+allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
+
+```
+```{r}
+allRNA$genotype=as.factor(allRNA$genotype)
+
+ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="") + theme(legend.position = "bottom")
+
+summary(lm(data=allRNA, Expression~genotype))
+```
+
+ KCTD21 11 rs138463614 peak24232 
+ 
+ ENSG00000188997
+ 
+ 
+C is ref
+T is alt 
+```{r}
+genotype=as.data.frame(read.table("../data/ExampleQTLPlots/KCTD21_NuclearPeaksGenotype.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
+
+RNApheno=as.data.frame(read.table("../data/molPhenos/RNA_KCTD21.txt", stringsAsFactors = F, header = F) [,5:73] %>% t())
+
+
+full_geno=bind_cols(Ind=genohead$Ind, dose=genotype$V1) %>% mutate(numdose=round(dose), genotype=ifelse(numdose==0, "CC", ifelse(numdose==1, "CT", "TT")))
+
+full_pheno=bind_cols(Ind=RNAhead$V1, Expression=RNApheno$V1)
+
+allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
+
+allRNA$genotype=as.factor(allRNA$genotype)
+
+ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="") + theme(legend.position = "bottom")
+
+summary(lm(data=allRNA, Expression~genotype))
+```
+ not a great example. expression effect size isnt strong.. but the diection is in the correct direction. increased expression with T. 
+ 
+ 
+ filter to find another example: 
+ 
+```{r}
+
+alleQTLS_nuclear_scorefilt= alleQTLS_nuclear_score %>% filter(eQTL_es <1)
+ggplot(alleQTLS_nuclear_scorefilt,aes(x=eQTL_es, y=slope,col=score)) + geom_point()  + geom_text(aes(label=gene), nudge_y = .1)  
+```
+ 
+C10orf88 (ex in paper) 
+peak 19682
+
+rs7904973 
+
+ref =g 
+alt = t   
+
+ENSG00000119965
+
+```{r}
+genotype=as.data.frame(read.table("../data/ExampleQTLPlots/KCTD21_NuclearPeaksGenotype.txt", stringsAsFactors = F, header = F) [,10:128] %>% t())
+
+RNApheno=as.data.frame(read.table("../data/molPhenos/RNA_c10orf88.txt", stringsAsFactors = F, header = F) [,5:73] %>% t())
+
+
+full_geno=bind_cols(Ind=genohead$Ind, dose=genotype$V1) %>% mutate(numdose=round(dose), genotype=ifelse(numdose==0, "GG", ifelse(numdose==1, "GT", "TT")))
+
+full_pheno=bind_cols(Ind=RNAhead$V1, Expression=RNApheno$V1)
+
+allRNA=full_geno %>% inner_join(full_pheno, by="Ind")
+
+allRNA$genotype=as.factor(allRNA$genotype)
+
+ggplot(allRNA, aes(x=genotype, y=Expression,group=genotype, fill=genotype)) + geom_boxplot() + geom_jitter()+scale_fill_brewer(palette = "Dark2") + labs(title="") + theme(legend.position = "bottom")
+
+summary(lm(data=allRNA, Expression~genotype))
+```
+same situation with not a great effect size effect but again we see the correct direction.  
