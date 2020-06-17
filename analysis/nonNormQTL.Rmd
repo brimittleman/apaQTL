@@ -168,6 +168,21 @@ grideffectplot
 ```
 
 ```{r}
+NucBothwSpec_onlyboth=NucBothwSpec %>% filter(set=="Both")
+```
+
+```{r}
+nucspecplot2=ggplot(NucBothwSpec_onlyboth, aes(x=Originalslope, y=slope))+geom_point(col="#1B9E77") + geom_smooth(method="lm") + labs( x="Effect size in Nuclear",y="Effect size in Total") + theme(text = element_text(size=16), legend.position = "bottom") + geom_abline(slope = 1)
+
+nucspecplot2
+```
+
+```{r figure2D_nuconly, include=FALSE, dev="pdf", fig.height=8, fig.width=8, crop=FALSE}
+nucspecplot2
+```
+
+
+```{r}
 
 TotBothwSpec %>% filter(set=="Specific") %>% nrow()
 NucBothwSpec %>% filter(set=="Specific") %>% nrow()
