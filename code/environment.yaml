@@ -79,3 +79,4 @@ dependencies:
     #- r-biocmanager
     #- bioconductor-motifbreakr
     - r-ggpubr
+    - plink
